@@ -1,0 +1,93 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+                    xmlns:local="clr-namespace:Sifaw.WPF.CCL">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="Shared.xaml" />
+        <ResourceDictionary Source="TextField.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <!-- 
+       • SearchTextBox 
+    -->
+    <Style TargetType="{x:Type local:SearchTextField}"
+           BasedOn="{StaticResource {x:Type local:TextField}}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:SearchTextField}">
+                    <!-- Árbol visual -->
+                    <Border x:Name="Border"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                        <Grid x:Name="LayoutGrid">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="16" />
+                            </Grid.ColumnDefinitions>
+                            <ScrollViewer x:Name="PART_ContentHost" 
+                                          Grid.Column="0" />
+                            <Label x:Name="PART_Placeholder"
+                                   Grid.Column="0" />
+                            <Border x:Name="PART_SearchButton"
+                                    Grid.Column="1"
+                                    BorderThickness="1"
+                                    CornerRadius="3"
+                                    Margin="1"
+                                    Height="16"
+                                    BorderBrush="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Background}"
+                                    Background="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Background}">
+                                <Image x:Name="PART_SearchIcon"
+                                       Stretch="None"
+                                       Width="15"
+                                       Height="15"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       Source="/Sifaw.WPF.CCL;component/Themes/Images/Search.png"/>
+                            </Border>
+                        </Grid>
+                    </Border>
+                    <!-- Triggers -->
+                    <ControlTemplate.Triggers>
+                        <!-- Gestión de IsEnabled -->
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter TargetName="Border" Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"/>
+                            <Setter TargetName="PART_SearchButton" Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"/>
+                            <Setter TargetName="PART_SearchButton" Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"/>
+                            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                        </Trigger>
+                        <!-- Clear icon -->
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                               <Condition Property="HasText" Value="true"/>
+                               <Condition Property="SearchMode" Value="Instant" />
+                            </MultiTrigger.Conditions> 
+                            <Setter TargetName="PART_SearchIcon" Property="Source" Value="/Sifaw.WPF.CCL;component/Themes/Images/Clear.png"/>
+                        </MultiTrigger>
+                        <!-- MouseOver icon -->
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="HasText" Value="true"/>
+                                <Condition SourceName="PART_SearchButton" Property="IsMouseOver" Value="true"/>
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="PART_SearchButton" Property="BorderBrush" Value="{StaticResource Button_Border_MouseOver}" />
+                            <Setter TargetName="PART_SearchButton" Property="Background" Value="{StaticResource Button_Background_MouseOver}"/>
+                        </MultiTrigger>
+                        <!-- MouseDown icon -->
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="HasText" Value="true"/>
+                                <Condition SourceName="PART_SearchButton" Property="IsMouseOver" Value="True" />
+                                <Condition SourceName="PART_SearchButton" Property="IsMouseCaptured" Value="True" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="PART_SearchButton" Property="BorderBrush" Value="{StaticResource Button_Border_MouseDown}" />
+                            <Setter TargetName="PART_SearchButton" Property="Background" Value="{StaticResource Button_Background_MouseDown}"/>
+                        </MultiTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

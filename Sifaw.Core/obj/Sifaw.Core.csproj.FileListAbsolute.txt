@@ -1,0 +1,10 @@
+C:\sifaWake\SWManagementStudio\Sifaw.Lib\bin\Debug\Sifaw.Core.dll
+C:\sifaWake\SWManagementStudio\Sifaw.Lib\bin\Debug\Sifaw.Core.pdb
+C:\sifaWake\SWManagementStudio\Sifaw.Lib\obj\Debug\ResolveAssemblyReference.cache
+C:\sifaWake\SWManagementStudio\Sifaw.Lib\obj\Debug\Sifaw.Core.dll
+C:\sifaWake\SWManagementStudio\Sifaw.Lib\obj\Debug\Sifaw.Core.pdb
+C:\sifaWake\SWManagementStudio\Sifaw.Core\bin\Debug\Sifaw.Core.dll
+C:\sifaWake\SWManagementStudio\Sifaw.Core\bin\Debug\Sifaw.Core.pdb
+C:\sifaWake\SWManagementStudio\Sifaw.Core\obj\Debug\ResolveAssemblyReference.cache
+C:\sifaWake\SWManagementStudio\Sifaw.Core\obj\Debug\Sifaw.Core.dll
+C:\sifaWake\SWManagementStudio\Sifaw.Core\obj\Debug\Sifaw.Core.pdb

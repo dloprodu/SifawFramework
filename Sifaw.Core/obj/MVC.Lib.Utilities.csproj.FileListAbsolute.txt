@@ -1,0 +1,5 @@
+C:\sifaWake\SWManagementStudio\MVC.Lib.Utilities\bin\Debug\SWManagementStudio.dll
+C:\sifaWake\SWManagementStudio\MVC.Lib.Utilities\bin\Debug\SWManagementStudio.pdb
+C:\sifaWake\SWManagementStudio\MVC.Lib.Utilities\obj\Debug\ResolveAssemblyReference.cache
+C:\sifaWake\SWManagementStudio\MVC.Lib.Utilities\obj\Debug\SWManagementStudio.dll
+C:\sifaWake\SWManagementStudio\MVC.Lib.Utilities\obj\Debug\SWManagementStudio.pdb

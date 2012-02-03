@@ -1,0 +1,99 @@
+﻿<UserControl x:Class="Sifaw.WPF.AssistantControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:my="clr-namespace:Sifaw.WPF.CCL;assembly=Sifaw.WPF.CCL"
+             MinWidth="300"
+             MinHeight="300"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="364" FontWeight="Normal">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources\Shared.xaml" />
+                <ResourceDictionary Source="Resources\RoundLabel.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" MaxHeight="60" />
+            <RowDefinition Height="2"/>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="2"/>
+            <RowDefinition Height="42" />
+        </Grid.RowDefinitions>
+        <my:AssistantProgressBar 
+            Grid.Row="0"
+            Name="assistantProgressBar" 
+            Arrow="12"
+            Margin="8"
+            Height="28" 
+            Opacity="1" 
+            PreviousStepBorderBrush="LightSteelBlue" 
+            FollowingStepBorderBrush="Gray" 
+            FontSize="14" FontWeight="Bold">
+            <my:AssistantProgressBar.PreviousStepBrush>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="White" Offset="0" />
+                    <GradientStop Color="#FF9CBDF8" Offset="1" />
+                    <GradientStop Color="#FFCDD6E2" Offset="0.1" />
+                    <GradientStop Color="#FFCDD6E2" Offset="0.9" />
+                </LinearGradientBrush>
+            </my:AssistantProgressBar.PreviousStepBrush>
+            <my:AssistantProgressBar.CurrentStepBrush>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="White" Offset="0" />
+                    <GradientStop Color="SteelBlue" Offset="1" />
+                    <GradientStop Color="CornflowerBlue" Offset="0.1" />
+                    <GradientStop Color="CornflowerBlue" Offset="0.9" />
+                </LinearGradientBrush>
+            </my:AssistantProgressBar.CurrentStepBrush>
+            <my:AssistantProgressBar.FollowingStepBrush>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="White" Offset="0" />
+                    <GradientStop Color="DarkGray" Offset="1" />
+                    <GradientStop Color="WhiteSmoke" Offset="0.1" />
+                    <GradientStop Color="WhiteSmoke" Offset="0.9" />
+                </LinearGradientBrush>
+            </my:AssistantProgressBar.FollowingStepBrush>
+        </my:AssistantProgressBar>
+        <DockPanel Grid.Row="1"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <Label Name="labelStep" Style="{StaticResource RoundLabelStyle}" Margin="12,0,0,0" DockPanel.Dock="Left" FontSize="24" FontWeight="Bold" Foreground="CornflowerBlue" Width="42" Height="42">1</Label>
+            <TextBlock DockPanel.Dock="Right" Margin="12,0,12,0" Name="textBlockTitle" TextTrimming="CharacterEllipsis" TextAlignment="Justify" VerticalAlignment="Center" FontSize="15" FontStretch="Normal" TextWrapping="Wrap" FontWeight="Bold">Título</TextBlock>
+        </DockPanel>
+        <TextBlock Grid.Row="2" Margin="12,0,12,0" Name="textBlockDescription" TextTrimming="CharacterEllipsis" TextAlignment="Justify" VerticalAlignment="Center" TextWrapping="Wrap">Descripción</TextBlock>
+        <Grid Grid.Row="3">
+            <Grid.Background>
+                <LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">
+                    <GradientStop Color="WhiteSmoke" Offset="0" />
+                    <GradientStop Color="WhiteSmoke" Offset="1" />
+                    <GradientStop Color="LightSteelBlue" Offset="0.8" />
+                    <GradientStop Color="LightSteelBlue" Offset="0.2" />
+                </LinearGradientBrush>
+            </Grid.Background>
+        </Grid>
+        <Grid Background="LightGray" Grid.Row="4" Name="gridContent"></Grid>
+        <Grid Grid.Row="5">
+            <Grid.Background>
+                <LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">
+                    <GradientStop Color="WhiteSmoke" Offset="0" />
+                    <GradientStop Color="WhiteSmoke" Offset="1" />
+                    <GradientStop Color="LightSteelBlue" Offset="0.8" />
+                    <GradientStop Color="LightSteelBlue" Offset="0.2" />
+                </LinearGradientBrush>
+            </Grid.Background>
+        </Grid>
+        <DockPanel Grid.Row="6">
+            <Button Name="buttonCancelar" Margin="12,6" DockPanel.Dock="Left" Click="buttonCancelar_Click">Cancelar</Button>
+            <StackPanel DockPanel.Dock="Right" FlowDirection="RightToLeft" Orientation="Horizontal">
+                <Button Name="buttonAceptar" Margin="12,6,6,6" Click="buttonAceptar_Click">Aceptar</Button>
+                <Button Name="buttonSiguiente" Margin="0,6" Content="&lt; Siguiente" Click="buttonSiguiente_Click"></Button>
+                <Button Name="buttonAnterior" Margin="6" Content="Anterior &gt;" Click="buttonAnterior_Click"></Button>
+            </StackPanel>
+        </DockPanel>        
+    </Grid>
+</UserControl>

@@ -106,9 +106,13 @@ namespace Sifaw.WPF.CCL
 		#endregion
 	}
 
+	#region Estructuras auxiliares
+
 	public enum SearchMode
 	{
 		Instant,
 		Delayed,
 	}
+
+	#endregion
 }

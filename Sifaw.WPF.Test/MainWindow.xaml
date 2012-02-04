@@ -99,7 +99,7 @@
         </my:AssistantProgressBar>
         <TextBox Name="textBox1" Width="120" IsReadOnly="False" IsEnabled="True" />
         <my:TextField Name="textField1" Margin="3" Width="120" Placeholder="dd-MM-yyyy" IsEnabled="True" />
-        <my:SearchTextField Name="searchTextBox1" Width="120" VerticalContentAlignment="Center" Background="Bisque" Placeholder="Buscar ..." PlaceholderStyle="Italic" IsEnabled="True" />
+        <my:SearchTextField Name="searchTextBox1" Width="120" VerticalContentAlignment="Center" Background="White" Placeholder="Buscar ..." PlaceholderStyle="Italic" IsEnabled="True" />
         <ProgressBar Template="{StaticResource templateSpeedometer}"
                      Minimum="0" Maximum="100" Margin="50" 
                      Value="{Binding ElementName=scroll, Path=Value}" />

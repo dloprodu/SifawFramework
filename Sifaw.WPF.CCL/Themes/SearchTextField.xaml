@@ -78,8 +78,7 @@
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="HasText" Value="true"/>
-                                <Condition SourceName="PART_SearchButton" Property="IsMouseOver" Value="True" />
-                                <Condition SourceName="PART_SearchButton" Property="IsMouseCaptured" Value="True" />
+                                <Condition Property="IsSearchButtonTouched" Value="True" />
                             </MultiTrigger.Conditions>
                             <Setter TargetName="PART_SearchButton" Property="BorderBrush" Value="{StaticResource Button_Border_MouseDown}" />
                             <Setter TargetName="PART_SearchButton" Property="Background" Value="{StaticResource Button_Background_MouseDown}"/>

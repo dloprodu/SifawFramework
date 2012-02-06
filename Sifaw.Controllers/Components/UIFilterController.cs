@@ -31,22 +31,18 @@ namespace Sifaw.Controllers.Components
 	/// <summary>
 	/// Controladora que da soporte a la implementación de filtros.
 	/// </summary>
-	/// <typeparam name="TInput">Tipo para establecer los parámetros de inicio de la controladora.</typeparam>
-	/// <typeparam name="TOutput">Tipo para establcer los parametros de retorno cuando finaliza la controladora.</typeparam>
 	/// <typeparam name="TFilter">Tipo para establecer los datos de filtro que devolverá la controladora.</typeparam>
 	/// <typeparam name="TUISettings">Tipo para establecer el proxy encargado de establecer los ajustes al elemento de interfaz de usuario.</typeparam>
 	/// <typeparam name="TComponent">Tipo del componente de UI del controlador.</typeparam>
-	public abstract class UIFilterController<TInput, TOutput, TFilter, TUISettings, TComponent> : UIComponentController
-		< TInput
-		, TOutput
+	public abstract class UIFilterController<TFilter, TUISettings, TComponent> : UIComponentController
+		< UIFilterController<TFilter, TUISettings, TComponent>.Input
+		, UIFilterController<TFilter, TUISettings, TComponent>.Output
 		, TUISettings
 		, TComponent>
-		where TInput      : UIFilterController<TInput, TOutput, TFilter, TUISettings, TComponent>.Input
-		where TOutput     : UIFilterController<TInput, TOutput, TFilter, TUISettings, TComponent>.Output
-		where TFilter     : IComparable, IComparable<TFilter>, IEquatable<TFilter>
-		where TUISettings : UIFilterController<TInput, TOutput, TFilter, TUISettings, TComponent>.UISettingsContainer<TComponent>
+		//where TFilter     : IComparable, IComparable<TFilter>, IEquatable<TFilter>
+		where TUISettings : UIFilterController<TFilter, TUISettings, TComponent>.UISettingsContainer<TComponent>
 						  , new()
-		where TComponent  : FilterComponent<TFilter>
+		where TComponent  : ComponentFilter<TFilter>
 	{
 		#region Parametros de inicio / finalización
 
@@ -54,9 +50,9 @@ namespace Sifaw.Controllers.Components
 		/// Parámetros de entrada de la controladora.
 		/// </summary>
 		[Serializable]
-		public new abstract class Input : UIComponentController
-			< TInput
-			, TOutput
+		public new class Input : UIComponentController
+			< Input
+			, Output
 			, TUISettings
 			, TComponent>.Input
 		{
@@ -90,9 +86,9 @@ namespace Sifaw.Controllers.Components
 		/// Parámetros de retorno de la controladora.
 		/// </summary>
 		[Serializable]
-		public new abstract class Output : UIComponentController
-			< TInput
-			, TOutput
+		public new class Output : UIComponentController
+			< Input
+			, Output
 			, TUISettings
 			, TComponent>.Output
 		{
@@ -132,8 +128,8 @@ namespace Sifaw.Controllers.Components
 
 		[Serializable]
 		public new class UISettingsContainer<TUI> : UIComponentController
-			< TInput
-			, TOutput
+			< Input
+			, Output
 			, TUISettings
 			, TComponent>.UISettingsContainer<TUI>
 			where TUI : TComponent
@@ -216,11 +212,32 @@ namespace Sifaw.Controllers.Components
 
 		#endregion
 
+		#region Default input / output
+
+		public override Input GetResetInput()
+		{
+			return new Input(UIElement.Filter);
+		}
+
+		protected override Output GetDefaultOutput()
+		{
+			return new Output(UIElement.Filter);
+		}
+
+		#endregion
+
 		#region StartController
 
 		protected override void OnBeforeStartController()
 		{
 			base.OnBeforeStartController();
+
+			UIElement.Filter = Parameters.Filter;
+		}
+
+		protected override void OnBeforeResetController()
+		{
+			base.OnBeforeResetController();
 
 			UIElement.Filter = Parameters.Filter;
 		}

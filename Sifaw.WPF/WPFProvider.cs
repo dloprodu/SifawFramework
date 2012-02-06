@@ -50,14 +50,25 @@ namespace Sifaw.WPF
 
 		public void Get(out FiltersGroupComponent ui)
 		{
+			// TODO: FiltersGroupComponent
 			throw new NotImplementedException();
 		}
 
-		public void Get(out FilterComponent<string> ui)
+		public void Get(out ComponentFilter<string> ui)
+		{
+			ui = new TextFilter();
+		}
+
+		public void Get(out ComponentFilter<bool> ui)
+		{
+			ui = new BoolFilter();
+		}
+
+		public void Get(out ComponentFilter<IList<IFilterable>> ui)
 		{
 			throw new NotImplementedException();
 		}
-
+		
 		#endregion
 
 		#region Vistas

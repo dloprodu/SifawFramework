@@ -58,8 +58,9 @@
     <Compile Include="BackgroundWorkerControl.xaml.cs">
       <DependentUpon>BackgroundWorkerControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="BoolFilter.cs" />
     <Compile Include="Commands\DelegateCommand.cs" />
-    <Compile Include="FilterText.cs" />
+    <Compile Include="TextFilter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -131,9 +132,7 @@
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Filters\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

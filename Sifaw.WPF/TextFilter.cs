@@ -1,4 +1,23 @@
-﻿using System;
+﻿///////////////////////////////////////////////////////////////////////////////////////////////////
+/// <sumary>
+/// TextFilter.cs
+/// 
+/// Diseñador: David López Rguez
+/// Programador: David López Rguez
+/// </sumary>
+/// <remarks>
+/// ===============================================================================================
+/// Historial de versiones:
+///   - 06/02/2012: Creación de controladora.
+/// 
+/// ===============================================================================================
+/// Observaciones:
+/// </remarks>
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,7 +42,7 @@ namespace Sifaw.WPF
 	/// Representa un control que puede ser usado para mostrar o editar texto sin formato
 	/// con el que ejecutar filtros o búsquedas.
 	/// </summary>
-	public class FilterText : SearchTextField, FilterComponent<string>
+	public class TextFilter : SearchTextField, ComponentFilter<string>
 	{
 		#region Variables
 
@@ -33,20 +52,20 @@ namespace Sifaw.WPF
 
 		#region Constructor
 
-		static FilterText()
+		static TextFilter()
 		{
-			DefaultStyleKeyProperty.OverrideMetadata(typeof(FilterText), new FrameworkPropertyMetadata(typeof(FilterText)));
+			DefaultStyleKeyProperty.OverrideMetadata(typeof(TextFilter), new FrameworkPropertyMetadata(typeof(TextFilter)));
 		}
 
 		#endregion
 
 		#region Métodos sobreescritos
 
-		protected override void OnSearch()
+		protected override void OnSearch(RoutedEventArgs e)
 		{
-			base.OnSearch();
-
-			OnFilterChanged(new UIFilterChangedEventArgs<string>(LastFilter, LastFilter = Text));
+			base.OnSearch(e);
+		
+			OnFilterChanged(new UIFilterChangedEventArgs<string>(LastFilter, LastFilter = Filter));
 		}
 
 		#endregion
@@ -63,7 +82,7 @@ namespace Sifaw.WPF
 		private void OnFilterChanged(UIFilterChangedEventArgs<string> e)
 		{
 			if (FilterChanged != null)
-				FilterChanged(this as FilterComponent<string>, e);
+				FilterChanged(this as ComponentFilter<string>, e);
 		}
 
 		#endregion

@@ -8,8 +8,17 @@
         <ResourceDictionary Source="/Sifaw.WPF.CCL;component/Themes/SearchTextField.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
-    <Style TargetType="{x:Type local:FilterText}"
+    <Style TargetType="{x:Type local:TextFilter}"
            BasedOn="{StaticResource {x:Type ccl:SearchTextField}}">
+
+        <!-- Empty -->
+
+    </Style>
+
+    <Style TargetType="{x:Type local:BoolFilter}"
+           BasedOn="{StaticResource {x:Type CheckBox}}">        
+        
+        <!-- Empty -->
         
     </Style>
 </ResourceDictionary>

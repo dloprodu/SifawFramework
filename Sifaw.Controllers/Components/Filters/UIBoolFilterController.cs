@@ -1,6 +1,6 @@
 ﻿///////////////////////////////////////////////////////////////////////////////////////////////////
 /// <sumary>
-/// Controladora que permite realizar filtros de texto.
+/// Controladora que permite realizar un filtro booleano.
 /// 
 /// Diseñador: David López Rguez
 /// Programador: David López Rguez
@@ -8,7 +8,7 @@
 /// <remarks>
 /// ===============================================================================================
 /// Historial de versiones:
-///   - 27/01/2012: Creación de controladora.
+///   - 06/02/2012: Creación de controladora.
 /// 
 /// ===============================================================================================
 /// Observaciones:
@@ -28,21 +28,21 @@ using Sifaw.Views.Components;
 namespace Sifaw.Controllers.Components.Filters
 {
 	/// <summary>
-	/// Controladora que permite realizar filtros de cadenas de texto mediante una interfaz
+	/// Controladora que permite realizar filtros booleanos mediante una interfaz
 	/// de usuario.
 	/// </summary>
-	public class UITextFilterController : UIFilterController
-		< string
-		, UITextFilterController.UISettingsContainer
-		, ComponentFilter<string>>
+	public class UIBoolFilterController : UIFilterController
+		< bool
+		, UIBoolFilterController.UISettingsContainer
+		, ComponentFilter<bool>>
 	{
 		#region Settings
 
 		[Serializable]
 		public class UISettingsContainer : UIFilterController
-			< string
+			< bool
 			, UISettingsContainer
-			, ComponentFilter<string>>.UISettingsContainer<ComponentFilter<string>>
+			, ComponentFilter<bool>>.UISettingsContainer<ComponentFilter<bool>>
 		{
 			#region Constructor
 
@@ -67,12 +67,12 @@ namespace Sifaw.Controllers.Components.Filters
 
 		#region Constructor
 
-		public UITextFilterController()
+		public UIBoolFilterController()
 			: base()
 		{
 		}
 
-		public UITextFilterController(AbstractUILinker<ComponentFilter<string>> linker)
+		public UIBoolFilterController(AbstractUILinker<ComponentFilter<bool>> linker)
 			: base(linker)
 		{
 		}
@@ -83,7 +83,7 @@ namespace Sifaw.Controllers.Components.Filters
 
 		public override Input GetDefaultInput()
 		{
-			return new Input(string.Empty);
+			return new Input(false);
 		}
 
 		#endregion

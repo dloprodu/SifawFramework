@@ -163,10 +163,9 @@ namespace Sifaw.WPF.CCL
 			remove { RemoveHandler(SearchEvent, value); }
 		}
 
-		protected virtual void OnSearch()
+		protected virtual void OnSearch(RoutedEventArgs e)
 		{
-			RoutedEventArgs args = new RoutedEventArgs(SearchEvent);
-			RaiseEvent(args);
+			RaiseEvent(e);
 		}
 
 		#endregion
@@ -247,7 +246,7 @@ namespace Sifaw.WPF.CCL
 
 				case SearchMode.Delayed:
 					if (e.Key == Key.Return || e.Key == Key.Enter)
-						OnSearch();
+						OnSearch(new RoutedEventArgs(SearchEvent));
 					break;
 			}
 		}
@@ -304,7 +303,7 @@ namespace Sifaw.WPF.CCL
 
 				case SearchMode.Delayed:
 					if (HasText)
-						OnSearch();
+						OnSearch(new RoutedEventArgs(SearchEvent));
 					break;
 			}
 
@@ -319,7 +318,7 @@ namespace Sifaw.WPF.CCL
 		private void instantSearchTimer_Tick(object o, EventArgs e)
 		{
 			instantSearchTimer.Stop();
-			OnSearch();
+			OnSearch(new RoutedEventArgs(SearchEvent));
 		}
 
 		#endregion

@@ -19,6 +19,7 @@
 
 
 using System;
+using System.Collections.Generic;
 
 using Sifaw.Controllers.Components;
 using Sifaw.Controllers.Test;
@@ -46,7 +47,9 @@ namespace Sifaw.Controllers
 		: AbstractUILinker<BackgroundWorkerComponent>
 		, AbstractUILinker<AssistantComponent>
 		, AbstractUILinker<FiltersGroupComponent>
-		, AbstractUILinker<FilterComponent<string>>
+		, AbstractUILinker<ComponentFilter<string>>
+		, AbstractUILinker<ComponentFilter<bool>>
+		, AbstractUILinker<ComponentFilter<IList<IFilterable>>>
 		
 		/* 
 		 * Vistas 

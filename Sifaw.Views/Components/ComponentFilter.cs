@@ -30,7 +30,7 @@ namespace Sifaw.Views.Components
 	/// Representa un componente para realizar filtros de tipo <see cref="TFiler"/>.
 	/// </summary>
 	/// <typeparam name="TFiler">Tipo del filtro del componente.</typeparam>
-	public interface FilterComponent<TFilter> : UIComponent
+	public interface ComponentFilter<TFilter> : UIComponent
 	{
 		#region Propiedades
 
@@ -49,5 +49,23 @@ namespace Sifaw.Views.Components
 		event UIFilterChangedEventHandler<TFilter> FilterChanged;
 
 		#endregion
+	}
+
+	/// <summary>
+	/// Define un método generalizado, que implementa una clase o tipo de valor con
+	/// el fin de crear un método específico del tipo para realizar filtros sobre
+	/// colecciones.
+	/// </summary>
+	public interface IFilterable : IComparable, IComparable<IFilterable>
+	{
+		/// <summary>
+		/// Obtiene la denominación del item <see cref="IFilterable"/>.
+		/// </summary>
+		string DisplayFilter { get; }
+
+		/// <summary>
+		/// Obtiene el valor real del item <see cref="IFilterable"/>.
+		/// </summary>
+		object ValueFilter { get; }
 	}
 }

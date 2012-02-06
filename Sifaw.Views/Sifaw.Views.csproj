@@ -56,7 +56,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Components\FilterComponent.cs" />
+    <Compile Include="Components\ComponentFilter.cs" />
     <Compile Include="Components\FiltersGroupComponent.cs" />
     <Compile Include="LibEvents.cs" />
     <Compile Include="UIComponent.cs" />

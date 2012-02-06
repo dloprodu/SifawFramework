@@ -1,0 +1,15 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:Sifaw.WPF"
+    xmlns:ccl="clr-namespace:Sifaw.WPF.CCL;assembly=Sifaw.WPF.CCL">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/Sifaw.WPF.CCL;component/Themes/SearchTextField.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <Style TargetType="{x:Type local:FilterText}"
+           BasedOn="{StaticResource {x:Type ccl:SearchTextField}}">
+        
+    </Style>
+</ResourceDictionary>

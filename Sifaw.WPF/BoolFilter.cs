@@ -33,6 +33,7 @@ using System.Windows.Shapes;
 
 using Sifaw.Views.Components;
 using Sifaw.Views;
+using Sifaw.Views.Components.Filters;
 
 
 namespace Sifaw.WPF
@@ -40,7 +41,7 @@ namespace Sifaw.WPF
 	/// <summary>
 	/// Representa un control que puede ser usado para filtrar un valor de tipo booleano.
 	/// </summary>
-	public class BoolFilter : CheckBox, ComponentFilter<bool>
+	public class BoolFilter : CheckBox, BoolComponentFilter
 	{
 		#region Constructor
 
@@ -81,7 +82,7 @@ namespace Sifaw.WPF
 		private void OnFilterChanged(UIFilterChangedEventArgs<bool> e)
 		{
 			if (FilterChanged != null)
-				FilterChanged(this as ComponentFilter<bool>, e);
+				FilterChanged(this as ComponentFilterBase<bool>, e);
 		}
 
 		#endregion

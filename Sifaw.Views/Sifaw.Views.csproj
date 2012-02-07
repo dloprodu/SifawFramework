@@ -56,8 +56,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Components\ComponentFilter.cs" />
+    <Compile Include="Components\ComponentFilterBase.cs" />
+    <Compile Include="Components\ComponentListFilterBase.cs" />
     <Compile Include="Components\FiltersGroupComponent.cs" />
+    <Compile Include="Components\Filters\BoolComponentFilter.cs" />
+    <Compile Include="Components\Filters\DropDownListComponentFilter.cs" />
+    <Compile Include="Components\Filters\ListComponentFilter.cs" />
+    <Compile Include="Components\Filters\TextComponentFilter.cs" />
+    <Compile Include="Components\Filters\EnumComponentFilter.cs" />
     <Compile Include="LibEvents.cs" />
     <Compile Include="UIComponent.cs" />
     <Compile Include="UIElement.cs" />

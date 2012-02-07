@@ -1,6 +1,7 @@
 ﻿///////////////////////////////////////////////////////////////////////////////////////////////////
 /// <sumary>
-/// Controladora que permite realizar filtros sobre una lista.
+/// Controladora que permite realizar filtros sobre una lista devolviendo sublistas de la lista
+/// original.
 /// 
 /// Diseñador: David López Rguez
 /// Programador: David López Rguez
@@ -23,26 +24,29 @@ using System.Linq;
 using System.Text;
 
 using Sifaw.Views.Components;
+using Sifaw.Views.Components.Filters;
 
 
 namespace Sifaw.Controllers.Components.Filters
 {
 	/// <summary>
-	/// Controladora que permite realizar filtros sobre una lista de objetos mediante una interfaz
-	/// de usuario.
+	/// Controladora que permite realizar filtros sobre una lista de objetos, devolviendo como
+	/// filtro una sublista.
 	/// </summary>
-	public class UIListFilterController : UIFilterController
+	public class UIListFilterController : UIListFilterBaseController
 		< IList<IFilterable>
+		, IList<IFilterable>
 		, UIListFilterController.UISettingsContainer
-		, ComponentFilter<IList<IFilterable>>>
+		, ListComponentFilter>
 	{
 		#region Settings
 
 		[Serializable]
-		public class UISettingsContainer : UIFilterController
+		public class UISettingsContainer : UIListFilterBaseController
 			< IList<IFilterable>
+			, IList<IFilterable>
 			, UISettingsContainer
-			, ComponentFilter<IList<IFilterable>>>.UISettingsContainer<ComponentFilter<IList<IFilterable>>>
+			, ListComponentFilter>.UISettingsContainer<ListComponentFilter>
 		{
 			#region Constructor
 
@@ -72,7 +76,7 @@ namespace Sifaw.Controllers.Components.Filters
 		{
 		}
 
-		public UIListFilterController(AbstractUILinker<ComponentFilter<IList<IFilterable>>> linker)
+		public UIListFilterController(AbstractUILinker<ListComponentFilter> linker)
 			: base(linker)
 		{
 		}

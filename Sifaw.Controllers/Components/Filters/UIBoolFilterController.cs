@@ -23,26 +23,27 @@ using System.Linq;
 using System.Text;
 
 using Sifaw.Views.Components;
+using Sifaw.Views.Components.Filters;
 
 
 namespace Sifaw.Controllers.Components.Filters
 {
 	/// <summary>
-	/// Controladora que permite realizar filtros booleanos mediante una interfaz
-	/// de usuario.
+	/// Controladora que permite realizar filtros sobre un campo booleanos, devolviendo como
+	/// filtro <see cref="true"/> o <see cref="false"/>.
 	/// </summary>
-	public class UIBoolFilterController : UIFilterController
+	public class UIBoolFilterController : UIFilterBaseController
 		< bool
 		, UIBoolFilterController.UISettingsContainer
-		, ComponentFilter<bool>>
+		, BoolComponentFilter>
 	{
 		#region Settings
 
 		[Serializable]
-		public class UISettingsContainer : UIFilterController
+		public class UISettingsContainer : UIFilterBaseController
 			< bool
 			, UISettingsContainer
-			, ComponentFilter<bool>>.UISettingsContainer<ComponentFilter<bool>>
+			, BoolComponentFilter>.UISettingsContainer<BoolComponentFilter>
 		{
 			#region Constructor
 
@@ -72,7 +73,7 @@ namespace Sifaw.Controllers.Components.Filters
 		{
 		}
 
-		public UIBoolFilterController(AbstractUILinker<ComponentFilter<bool>> linker)
+		public UIBoolFilterController(AbstractUILinker<BoolComponentFilter> linker)
 			: base(linker)
 		{
 		}

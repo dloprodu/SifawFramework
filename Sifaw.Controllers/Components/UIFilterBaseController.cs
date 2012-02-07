@@ -31,18 +31,17 @@ namespace Sifaw.Controllers.Components
 	/// <summary>
 	/// Controladora que da soporte a la implementación de filtros.
 	/// </summary>
-	/// <typeparam name="TFilter">Tipo para establecer los datos de filtro que devolverá la controladora.</typeparam>
+	/// <typeparam name="TFilter">Tipo del filtro que devolverá la controladora.</typeparam>
 	/// <typeparam name="TUISettings">Tipo para establecer el proxy encargado de establecer los ajustes al elemento de interfaz de usuario.</typeparam>
 	/// <typeparam name="TComponent">Tipo del componente de UI del controlador.</typeparam>
-	public abstract class UIFilterController<TFilter, TUISettings, TComponent> : UIComponentController
-		< UIFilterController<TFilter, TUISettings, TComponent>.Input
-		, UIFilterController<TFilter, TUISettings, TComponent>.Output
+	public abstract class UIFilterBaseController<TFilter, TUISettings, TComponent> : UIComponentController
+		< UIFilterBaseController<TFilter, TUISettings, TComponent>.Input
+		, UIFilterBaseController<TFilter, TUISettings, TComponent>.Output
 		, TUISettings
 		, TComponent>
-		//where TFilter     : IComparable, IComparable<TFilter>, IEquatable<TFilter>
-		where TUISettings : UIFilterController<TFilter, TUISettings, TComponent>.UISettingsContainer<TComponent>
+		where TUISettings : UIFilterBaseController<TFilter, TUISettings, TComponent>.UISettingsContainer<TComponent>
 						  , new()
-		where TComponent  : ComponentFilter<TFilter>
+		where TComponent  : ComponentFilterBase<TFilter>
 	{
 		#region Parametros de inicio / finalización
 
@@ -188,12 +187,12 @@ namespace Sifaw.Controllers.Components
 
 		#region Constructor
 
-		protected UIFilterController()
+		protected UIFilterBaseController()
 			: base()
 		{
 		}
 
-		protected UIFilterController(AbstractUILinker<TComponent> linker)
+		protected UIFilterBaseController(AbstractUILinker<TComponent> linker)
 			: base(linker)
 		{
 		}

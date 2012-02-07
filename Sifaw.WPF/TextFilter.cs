@@ -34,6 +34,7 @@ using System.Windows.Shapes;
 using Sifaw.WPF.CCL;
 using Sifaw.Views.Components;
 using Sifaw.Views;
+using Sifaw.Views.Components.Filters;
 
 
 namespace Sifaw.WPF
@@ -42,7 +43,7 @@ namespace Sifaw.WPF
 	/// Representa un control que puede ser usado para mostrar o editar texto sin formato
 	/// con el que ejecutar filtros o búsquedas.
 	/// </summary>
-	public class TextFilter : SearchTextField, ComponentFilter<string>
+	public class TextFilter : SearchTextField, TextComponentFilter
 	{
 		#region Variables
 
@@ -82,7 +83,7 @@ namespace Sifaw.WPF
 		private void OnFilterChanged(UIFilterChangedEventArgs<string> e)
 		{
 			if (FilterChanged != null)
-				FilterChanged(this as ComponentFilter<string>, e);
+				FilterChanged(this as ComponentFilterBase<string>, e);
 		}
 
 		#endregion

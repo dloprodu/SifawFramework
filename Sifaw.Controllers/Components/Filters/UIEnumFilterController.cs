@@ -1,6 +1,7 @@
 ﻿///////////////////////////////////////////////////////////////////////////////////////////////////
 /// <sumary>
-/// Controladora que permite realizar filtros sobre un enumerado.
+/// Controladora que permite realizar filtros sobre una lista devolviendo solo uno item de la lista
+/// original.
 /// 
 /// Diseñador: David López Rguez
 /// Programador: David López Rguez
@@ -8,7 +9,7 @@
 /// <remarks>
 /// ===============================================================================================
 /// Historial de versiones:
-///   - 06/02/2012: Creación de controladora.
+///   - 07/02/2012: Creación de controladora.
 /// 
 /// ===============================================================================================
 /// Observaciones:
@@ -23,26 +24,34 @@ using System.Linq;
 using System.Text;
 
 using Sifaw.Views.Components;
+using Sifaw.Views.Components.Filters;
 
 
 namespace Sifaw.Controllers.Components.Filters
 {
 	/// <summary>
-	/// Controladora que permite realizar filtros sobre un enumerado mediante una interfaz
-	/// de usuario.
+	/// Controladora que permite realizar filtros sobre una lista de objetos, devolviendo como
+	/// filtro el item <see cref="IFilterable"/> seleccionado.
 	/// </summary>
-	public class UIEnumFilterController : UIFilterController
-		< Enum
+	/// <remarks>
+	/// La controladora usa un componente que muestra toda la lista de filtro al usuario. 
+	/// Si la lista de filtro tiene demasiados items es mejor usar un componente mas
+	/// adecuado como <see cref="UIDropDownListFilterController"/>.
+	/// </remarks>
+	public class UIEnumFilterController : UIListFilterBaseController
+		< IFilterable
+		, IList<IFilterable>
 		, UIEnumFilterController.UISettingsContainer
-		, ComponentFilter<Enum>>
+		, EnumComponentFilter>
 	{
 		#region Settings
 
 		[Serializable]
-		public class UISettingsContainer : UIFilterController
-			< Enum
+		public class UISettingsContainer : UIListFilterBaseController
+			< IFilterable
+			, IList<IFilterable>
 			, UISettingsContainer
-			, ComponentFilter<Enum>>.UISettingsContainer<ComponentFilter<Enum>>
+			, EnumComponentFilter>.UISettingsContainer<EnumComponentFilter>
 		{
 			#region Constructor
 
@@ -72,7 +81,7 @@ namespace Sifaw.Controllers.Components.Filters
 		{
 		}
 
-		public UIEnumFilterController(AbstractUILinker<ComponentFilter<Enum>> linker)
+		public UIEnumFilterController(AbstractUILinker<EnumComponentFilter> linker)
 			: base(linker)
 		{
 		}

@@ -93,7 +93,11 @@ namespace Sifaw.Controllers
 		#region Settings
 
 		[Serializable]
-		public new class UISettingsContainer<TUI> : UIElementController<TInput, TOutput, TUISettings, TComponent>.UISettingsContainer<TUI>
+		public new class UISettingsContainer<TUI> : UIElementController
+			< TInput
+			, TOutput
+			, TUISettings
+			, TComponent>.UISettingsContainer<TUI>
 			where TUI : TComponent
 		{
 			#region Constructor

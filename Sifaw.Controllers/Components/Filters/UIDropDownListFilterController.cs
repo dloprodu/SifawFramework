@@ -1,6 +1,7 @@
 ﻿///////////////////////////////////////////////////////////////////////////////////////////////////
 /// <sumary>
-/// Controladora que permite realizar filtros de texto.
+/// Controladora que permite realizar filtros sobre una lista devolviendo solo uno item de la lista
+/// original.
 /// 
 /// Diseñador: David López Rguez
 /// Programador: David López Rguez
@@ -8,7 +9,7 @@
 /// <remarks>
 /// ===============================================================================================
 /// Historial de versiones:
-///   - 27/01/2012: Creación de controladora.
+///   - 07/02/2012: Creación de controladora.
 /// 
 /// ===============================================================================================
 /// Observaciones:
@@ -18,6 +19,7 @@
 
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -29,21 +31,23 @@ using Sifaw.Views.Components.Filters;
 namespace Sifaw.Controllers.Components.Filters
 {
 	/// <summary>
-	/// Controladora que permite realizar filtros de texto, devolviendo como
-	/// filtro el texto introducido por el usuario.
+	/// Controladora que permite realizar filtros sobre una lista de objetos, devolviendo como
+	/// filtro el item <see cref="IFilterable"/> seleccionado.
 	/// </summary>
-	public class UITextFilterController : UIFilterBaseController
-		< string
-		, UITextFilterController.UISettingsContainer
-		, TextComponentFilter>
+	public class UIDropDownListFilterController : UIListFilterBaseController
+		< IFilterable
+		, IList<IFilterable>
+		, UIDropDownListFilterController.UISettingsContainer
+		, DropDownListComponentFilter>
 	{
 		#region Settings
 
 		[Serializable]
-		public class UISettingsContainer : UIFilterBaseController
-			< string
+		public class UISettingsContainer : UIListFilterBaseController
+			< IFilterable
+			, IList<IFilterable>
 			, UISettingsContainer
-			, TextComponentFilter>.UISettingsContainer<TextComponentFilter>
+			, DropDownListComponentFilter>.UISettingsContainer<DropDownListComponentFilter>
 		{
 			#region Constructor
 
@@ -68,12 +72,12 @@ namespace Sifaw.Controllers.Components.Filters
 
 		#region Constructor
 
-		public UITextFilterController()
+		public UIDropDownListFilterController()
 			: base()
 		{
 		}
 
-		public UITextFilterController(AbstractUILinker<TextComponentFilter> linker)
+		public UIDropDownListFilterController(AbstractUILinker<DropDownListComponentFilter> linker)
 			: base(linker)
 		{
 		}
@@ -84,7 +88,7 @@ namespace Sifaw.Controllers.Components.Filters
 
 		public override Input GetDefaultInput()
 		{
-			return new Input(string.Empty);
+			return new Input(null);
 		}
 
 		#endregion

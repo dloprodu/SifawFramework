@@ -26,6 +26,7 @@ using System.Text;
 using Sifaw.Controllers;
 using Sifaw.Views.Components;
 using Sifaw.Views;
+using Sifaw.Views.Components.Filters;
 
 
 namespace Sifaw.WPF
@@ -54,18 +55,31 @@ namespace Sifaw.WPF
 			throw new NotImplementedException();
 		}
 
-		public void Get(out ComponentFilter<string> ui)
+		public void Get(out TextComponentFilter ui)
 		{
 			ui = new TextFilter();
 		}
 
-		public void Get(out ComponentFilter<bool> ui)
+		public void Get(out BoolComponentFilter ui)
 		{
 			ui = new BoolFilter();
 		}
 
-		public void Get(out ComponentFilter<IList<IFilterable>> ui)
+		public void Get(out ListComponentFilter ui)
 		{
+			// TODO: ListComponentFilter
+			throw new NotImplementedException();
+		}
+
+		public void Get(out EnumComponentFilter ui)
+		{
+			// TODO: EnumComponentFilter
+			throw new NotImplementedException();
+		}
+
+		public void Get(out DropDownListComponentFilter ui)
+		{
+			// TODO: DropDownListComponentFilter
 			throw new NotImplementedException();
 		}
 		

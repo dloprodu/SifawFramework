@@ -26,33 +26,6 @@ using System.Text;
 
 namespace Sifaw.Views
 {
-	#region Miscelanea
-
-	/// <summary>
-	/// Almacena un par de valores que indican el nombre de una propiedad
-	/// de la vista y su valor.
-	/// </summary>
-	public struct UISetting
-	{
-		public static readonly UISetting Empty;
-
-		public string Key;
-		public object Value;
-
-		static UISetting()
-		{
-			Empty = new UISetting(string.Empty, null);
-		}
-
-		public UISetting(string key, object value)
-		{
-			Key = key;
-			Value = value;
-		}
-	}
-
-	#endregion
-
 	/// <summary>
 	/// Define métodos, propiedades y eventos que ha de tener cualquier elemento
 	/// de interfaz de usuario.

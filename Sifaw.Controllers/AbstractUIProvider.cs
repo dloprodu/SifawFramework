@@ -26,6 +26,7 @@ using Sifaw.Controllers.Test;
 
 using Sifaw.Views.Components;
 using Sifaw.Views;
+using Sifaw.Views.Components.Filters;
 
 
 namespace Sifaw.Controllers
@@ -47,9 +48,11 @@ namespace Sifaw.Controllers
 		: AbstractUILinker<BackgroundWorkerComponent>
 		, AbstractUILinker<AssistantComponent>
 		, AbstractUILinker<FiltersGroupComponent>
-		, AbstractUILinker<ComponentFilter<string>>
-		, AbstractUILinker<ComponentFilter<bool>>
-		, AbstractUILinker<ComponentFilter<IList<IFilterable>>>
+		, AbstractUILinker<TextComponentFilter>
+		, AbstractUILinker<BoolComponentFilter>
+		, AbstractUILinker<ListComponentFilter>
+		, AbstractUILinker<EnumComponentFilter>
+		, AbstractUILinker<DropDownListComponentFilter>
 		
 		/* 
 		 * Vistas 

@@ -1,6 +1,6 @@
 ﻿///////////////////////////////////////////////////////////////////////////////////////////////////
 /// <summary> 
-/// FiltersComponent.cs
+/// ComponentFilterBase.cs
 /// 
 /// Diseñador:   David López Rodríguez
 /// Programador: David López Rodríguez
@@ -27,10 +27,10 @@ using System.Text;
 namespace Sifaw.Views.Components
 {
 	/// <summary>
-	/// Representa un componente para realizar filtros de tipo <see cref="TFiler"/>.
+	/// Representa un componente base para realizar filtros de tipo <see cref="TFiler"/>.
 	/// </summary>
 	/// <typeparam name="TFiler">Tipo del filtro del componente.</typeparam>
-	public interface ComponentFilter<TFilter> : UIComponent
+	public interface ComponentFilterBase<TFilter> : UIComponent
 	{
 		#region Propiedades
 
@@ -53,8 +53,7 @@ namespace Sifaw.Views.Components
 
 	/// <summary>
 	/// Define un método generalizado, que implementa una clase o tipo de valor con
-	/// el fin de crear un método específico del tipo para realizar filtros sobre
-	/// colecciones.
+	/// el fin de crear un método para realizar filtros sobre listas.
 	/// </summary>
 	public interface IFilterable : IComparable, IComparable<IFilterable>
 	{

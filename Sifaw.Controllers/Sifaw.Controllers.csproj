@@ -90,12 +90,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Components\UIListFilterBaseController.cs" />
+    <Compile Include="Components\Filters\UIDropDownListFilterController.cs" />
     <Compile Include="Components\Filters\UIBoolFilterController.cs" />
     <Compile Include="Components\Filters\UIEnumFilterController.cs" />
     <Compile Include="Components\Filters\UIListFilterController.cs" />
     <Compile Include="Components\Filters\UITextFilterController.cs" />
     <Compile Include="Components\UIBackgroundWorkerViewController.cs" />
-    <Compile Include="Components\UIFilterController.cs" />
+    <Compile Include="Components\UIFilterBaseController.cs" />
     <Compile Include="Components\UIFiltersGroupController.cs" />
     <Compile Include="IUIComponentController.cs" />
     <Compile Include="IController.cs" />

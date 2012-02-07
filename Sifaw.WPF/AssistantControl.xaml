@@ -11,8 +11,8 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Resources\Shared.xaml" />
-                <ResourceDictionary Source="Resources\RoundLabel.xaml" />
+                <ResourceDictionary Source="Themes\Shared.xaml" />
+                <ResourceDictionary Source="Themes\RoundLabel.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>

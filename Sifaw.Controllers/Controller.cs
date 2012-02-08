@@ -664,7 +664,7 @@ namespace Sifaw.Controllers
 
 		#endregion
 
-		#region IController
+		#region StartController
 
 		/// <summary>
 		/// Devuelve un valor que indica si la controladora se puede inicar.

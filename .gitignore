@@ -42,8 +42,10 @@
 *.tlh
 *.tmp
 *.vspscc
+\build.log
 .builds
 [Bb]in
+[Oo]bj
 [Dd]ebug*/
 [Rr]elease*/
 [Bb]uild/

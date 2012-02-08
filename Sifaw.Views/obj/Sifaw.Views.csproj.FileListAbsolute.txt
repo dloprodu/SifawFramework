@@ -1,7 +1,0 @@
-C:\sifaWake\SWManagementStudio\Sifaw.Views\bin\Debug\Sifaw.Views.dll
-C:\sifaWake\SWManagementStudio\Sifaw.Views\bin\Debug\Sifaw.Views.pdb
-C:\sifaWake\SWManagementStudio\Sifaw.Views\obj\Debug\ResolveAssemblyReference.cache
-C:\sifaWake\SWManagementStudio\Sifaw.Views\obj\Debug\Sifaw.Views.dll
-C:\sifaWake\SWManagementStudio\Sifaw.Views\obj\Debug\Sifaw.Views.pdb
-C:\sifaWake\SWManagementStudio\Sifaw.Views\bin\Debug\Sifaw.Core.dll
-C:\sifaWake\SWManagementStudio\Sifaw.Views\bin\Debug\Sifaw.Core.pdb

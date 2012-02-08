@@ -1,14 +1,14 @@
-/////////////////////////////////////////////////////////////
+ï»¿/////////////////////////////////////////////////////////////
 /// <summary>
 /// AbstractViewLink.cs
 /// 
-/// Diseñador:     David López Rguez
-/// Programadores: David López Rguez
+/// DiseÃ±ador:     David LÃ³pez Rguez
+/// Programadores: David LÃ³pez Rguez
 /// </summary>
 /// <remarks>
 /// ========================================================
 /// Historial de versiones:
-///   - 14/12/2011 -- Creación de la clase.
+///   - 14/12/2011 -- CreaciÃ³n de la clase.
 /// 
 /// ========================================================
 /// Observaciones:
@@ -24,8 +24,8 @@ using System.Collections.Generic;
 using Sifaw.Controllers.Components;
 using Sifaw.Controllers.Test;
 
-using Sifaw.Views.Components;
 using Sifaw.Views;
+using Sifaw.Views.Components;
 using Sifaw.Views.Components.Filters;
 
 
@@ -36,15 +36,14 @@ namespace Sifaw.Controllers
 	/// con vistas.
 	/// </summary>
 	/// <remarks>
-	/// Sigue el patrón de diseño 'Abstract Factory (Fábrica abstractra)' para crear
-	/// interfaces gráficas.
+	/// Sigue el patrÃ³n de diseÃ±o 'Abstract Factory (FÃ¡brica abstractra)' para crear
+	/// interfaces grÃ¡ficas.
 	/// </remarks>
 	public interface AbstractUIProvider 
-		/* Lista de linker´s de controladoras con vistas y componentes. */
-
-		/* 
-		 * Componentes 
-		 */
+		/****************************************************************/
+		/* Lista de linkerÂ´s de controladoras con vistas y componentes. */
+		/****************************************************************/	
+		// â€¢ Componentes 
 		: AbstractUILinker<BackgroundWorkerComponent>
 		, AbstractUILinker<AssistantComponent>
 		, AbstractUILinker<FiltersGroupComponent>
@@ -53,10 +52,8 @@ namespace Sifaw.Controllers
 		, AbstractUILinker<ListComponentFilter>
 		, AbstractUILinker<EnumComponentFilter>
 		, AbstractUILinker<DropDownListComponentFilter>
-		
-		/* 
-		 * Vistas 
-		 */
+				
+		// â€¢ Vistas 		 
 		, AbstractUILinker<UIShellView>
 	{
 		/* Empty */

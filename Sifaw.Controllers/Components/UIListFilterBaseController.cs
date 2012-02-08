@@ -8,7 +8,7 @@
 /// <remarks>
 /// ===============================================================================================
 /// Historial de versiones:
-///   - 27/01/2012: Creación de controladora.
+///   - 08/02/2012: Creación de controladora.
 /// 
 /// ===============================================================================================
 /// Observaciones:
@@ -37,13 +37,13 @@ namespace Sifaw.Controllers.Components
 	/// <typeparam name="TUISettings">Tipo para establecer el proxy encargado de establecer los ajustes al elemento de interfaz de usuario.</typeparam>
 	/// <typeparam name="TComponent">Tipo del componente de UI del controlador.</typeparam>
 	public abstract class UIListFilterBaseController<TFilter, TSource, TUISettings, TComponent> : UIFilterBaseController
-		< TFilter
+		<TFilter
 		, TUISettings
 		, TComponent>
-		where TSource     : IList<IFilterable>
+		where TSource : IList<IFilterable>
 		where TUISettings : UIListFilterBaseController<TFilter, TSource, TUISettings, TComponent>.UISettingsContainer<TComponent>
 						  , new()
-		where TComponent  : ComponentListFilterBase<TFilter, TSource>
+		where TComponent : ComponentListFilterBase<TFilter, TSource>
 	{
 		#region Settings
 
@@ -68,15 +68,15 @@ namespace Sifaw.Controllers.Components
 			public TSource Source
 			{
 				get { return _source; }
-				set 
+				set
 				{
 					_source = (TSource)(new List<IFilterable>() as IList<IFilterable>);
-					
+
 					if (value != null)
 					{
 						(_source as List<IFilterable>).AddRange(value);
 						(_source as List<IFilterable>).Sort();
-					}					
+					}
 				}
 			}
 
@@ -96,7 +96,7 @@ namespace Sifaw.Controllers.Components
 			public override void Apply()
 			{
 				base.Apply();
-								
+
 				UIElement.Add(Source);
 			}
 

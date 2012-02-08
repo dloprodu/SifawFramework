@@ -31,9 +31,15 @@ using Sifaw.Views.Components.Filters;
 namespace Sifaw.Controllers.Components.Filters
 {
 	/// <summary>
-	/// Controladora que permite realizar filtros sobre una lista de objetos, devolviendo como
-	/// filtro el item <see cref="IFilterable"/> seleccionado.
+	/// Controladora que permite realizar filtros sobre una lista de objetos <see cref="IFilterable"/>, 
+	/// devolviendo como filtro el item seleccionado.
 	/// </summary>
+	/// <remarks>
+	/// <para>
+	/// El componente muestra el elemento <see cref="IFilterable"/> seleccionado pudiendo 
+	/// desplegar la lista y cambiar la selección.
+	/// </para>
+	/// </remarks>
 	public class UIDropDownListFilterController : UIListFilterBaseController
 		< IFilterable
 		, IList<IFilterable>

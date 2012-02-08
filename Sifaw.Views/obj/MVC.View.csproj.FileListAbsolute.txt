@@ -1,7 +1,0 @@
-C:\sifaWake\SWManagementStudio\MVC.View\bin\Debug\MVC.View.dll
-C:\sifaWake\SWManagementStudio\MVC.View\bin\Debug\MVC.View.pdb
-C:\sifaWake\SWManagementStudio\MVC.View\obj\Debug\ResolveAssemblyReference.cache
-C:\sifaWake\SWManagementStudio\MVC.View\obj\Debug\MVC.View.dll
-C:\sifaWake\SWManagementStudio\MVC.View\obj\Debug\MVC.View.pdb
-C:\sifaWake\SWManagementStudio\MVC.View\bin\Debug\MVC.Lib.dll
-C:\sifaWake\SWManagementStudio\MVC.View\bin\Debug\MVC.Lib.pdb

@@ -36,9 +36,10 @@ namespace Sifaw.Views.Components.Filters
 	/// elegir un solo elemento.
 	/// </para>
 	/// <para>
-	/// El componente ha de mostrar en todo momento todos los elementos de la lista.
+	/// El componente ha de mostrar todos los elementos de la lista.
 	/// Si la lista de filtro tiene demasiados items es mejor usar un componente mas
-	/// adecuado como <see cref="DropDownListComponentFilter"/>.
+	/// adecuado como <see cref="DropDownListComponentFilter"/> que solo muestra
+	/// el elemento seleccionado.
 	/// </para>
 	/// </remarks>
 	public interface EnumComponentFilter : ComponentListFilterBase<IFilterable, IList<IFilterable>>

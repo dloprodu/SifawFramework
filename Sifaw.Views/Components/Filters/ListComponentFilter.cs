@@ -32,8 +32,10 @@ namespace Sifaw.Views.Components.Filters
 	/// seleccionados.
 	/// </summary>
 	/// <remarks>
+	/// <para>
 	/// Este componente ha de exponer la lista de filtro de forma que permita
 	/// elegir uno o varios elementos de la lista.
+	/// </para>
 	/// </remarks>
 	public interface ListComponentFilter : ComponentListFilterBase<IList<IFilterable>, IList<IFilterable>>
 	{

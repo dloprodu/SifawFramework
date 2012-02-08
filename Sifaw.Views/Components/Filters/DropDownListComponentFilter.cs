@@ -36,7 +36,8 @@ namespace Sifaw.Views.Components.Filters
 	/// elegir un solo elemento.
 	/// </para>
 	/// <para>
-	/// El componente solo muestra el item seleccionado.
+	/// El componente muestra el elemento <see cref="IFilterable"/> seleccionado pudiendo 
+	/// desplegar la lista y cambiar la selección.
 	/// </para>
 	/// </remarks>
 	public interface DropDownListComponentFilter : ComponentListFilterBase<IFilterable, IList<IFilterable>>

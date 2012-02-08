@@ -1,5 +1,0 @@
-C:\sifaWake\SWManagementStudio\SW.Lib.Utilities\bin\Debug\SWManagementStudio.dll
-C:\sifaWake\SWManagementStudio\SW.Lib.Utilities\bin\Debug\SWManagementStudio.pdb
-C:\sifaWake\SWManagementStudio\SW.Lib.Utilities\obj\Debug\ResolveAssemblyReference.cache
-C:\sifaWake\SWManagementStudio\SW.Lib.Utilities\obj\Debug\SWManagementStudio.dll
-C:\sifaWake\SWManagementStudio\SW.Lib.Utilities\obj\Debug\SWManagementStudio.pdb

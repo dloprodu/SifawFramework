@@ -1,7 +1,0 @@
-C:\sifaWake\SWManagementStudio\Sifaw.Model\bin\Debug\Sifaw.Model.dll
-C:\sifaWake\SWManagementStudio\Sifaw.Model\bin\Debug\Sifaw.Model.pdb
-C:\sifaWake\SWManagementStudio\Sifaw.Model\obj\Debug\ResolveAssemblyReference.cache
-C:\sifaWake\SWManagementStudio\Sifaw.Model\obj\Debug\Sifaw.Model.dll
-C:\sifaWake\SWManagementStudio\Sifaw.Model\obj\Debug\Sifaw.Model.pdb
-C:\sifaWake\SWManagementStudio\Sifaw.Model\bin\Debug\Sifaw.Core.dll
-C:\sifaWake\SWManagementStudio\Sifaw.Model\bin\Debug\Sifaw.Core.pdb

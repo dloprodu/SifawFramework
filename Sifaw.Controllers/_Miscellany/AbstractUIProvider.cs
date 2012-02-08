@@ -1,6 +1,6 @@
 ﻿/////////////////////////////////////////////////////////////
 /// <summary>
-/// AbstractViewLink.cs
+/// AbstractUIProvider.cs
 /// 
 /// Diseñador:     David López Rguez
 /// Programadores: David López Rguez

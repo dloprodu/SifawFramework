@@ -1,6 +1,6 @@
 ﻿///////////////////////////////////////////////////////////////////////////////////////////////////
 /// <summary>
-/// Librería de eventos de Sifaw.Core.
+/// Librería de eventos de Sifaw.Controllers.
 /// 
 /// Diseñador:     David López Rguez
 /// Programadores: David López Rguez
@@ -24,30 +24,30 @@ using System.Linq;
 using System.Text;
 
 
-namespace Sifaw.Core
+namespace Sifaw.Controllers
 {
 	/*
-	 * Argumento y manejador para los eventos que comunican el una excepción.
+	 * Argumento y manejador para los eventos que comunican el estado de una controladora.
 	 */
 
 	/// <summary>
-	/// Proporciona datos para eventos que informan de una excepción.
+	/// Proporciona datos para un evento que comunica el estado de una controladora.
 	/// </summary>
-	public class ExceptionEventArgs : EventArgs
+	public class CLSatesEventArgs : EventArgs
 	{
-		public readonly Exception Exception;
+		public readonly CLStates State;
 
-		public ExceptionEventArgs(Exception ex)
+		public CLSatesEventArgs(CLStates state)
 			: base()
 		{
-			this.Exception = ex;
+			this.State = state;
 		}
 	}
 
 	/// <summary>
-	/// Representa el método que maneja el evento que informan de una excepción.
+	/// Representa el método que controla un evento que comunica el estado de una controladora.
 	/// </summary>
 	/// <param name="sender">Origen del evento.</param>
-	/// <param name="e"><see cref="ExceptionEventArgs"/> que contiene los datos de eventos.</param>
-	public delegate void ExceptionEventHandler(object sender, ExceptionEventArgs e);
+	/// <param name="e"><see cref="CLSatesEventArgs"/> que contiene los datos de eventos.</param>
+	public delegate void CLStatesEventHandler(object sender, CLSatesEventArgs e);
 }

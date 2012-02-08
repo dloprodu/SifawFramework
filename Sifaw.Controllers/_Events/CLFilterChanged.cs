@@ -1,6 +1,6 @@
 ﻿///////////////////////////////////////////////////////////////////////////////////////////////////
 /// <summary>
-/// Librería de eventos de Sifaw.Views.
+/// Librería de eventos de Sifaw.Controllers.
 /// 
 /// Diseñador:     David López Rguez
 /// Programadores: David López Rguez
@@ -9,7 +9,7 @@
 /// <remarks>
 /// ===============================================================================================
 /// Historial de versiones:
-///   - 26/01/2012 -- Creación de la clase.
+///   - 14/12/2011 -- Creación de la clase.
 /// ===============================================================================================
 /// Observaciones:
 /// 
@@ -23,8 +23,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using Sifaw.Core;
 
-namespace Sifaw.Views
+
+namespace Sifaw.Controllers
 {
 	/*
 	 * Argumento y manejador para los eventos FilterChanged.
@@ -33,22 +35,22 @@ namespace Sifaw.Views
 	/// <summary>
 	/// Proporciona datos para un evento FilterChanged.
 	/// </summary>
-	public class UIFilterChangedEventArgs<TFilter> : Sifaw.Core.CancelEventArgs
+	public class CLFilterChangedEventArgs<TFilter> : SFCancelEventArgs
 	{
 		/// <summary>
 		/// Valor anterior del filtro.
 		/// </summary>
-		public readonly TFilter OldValue;
+		public readonly TFilter OlderValue;
 
 		/// <summary>
 		/// Valor actual del filtro.
 		/// </summary>
 		public readonly TFilter NewValue;
 
-		public UIFilterChangedEventArgs(TFilter oldValue, TFilter newValue)
+		public CLFilterChangedEventArgs(TFilter olderValue, TFilter newValue)
 			: base()
 		{
-			OldValue = oldValue;
+			OlderValue = olderValue;
 			NewValue = newValue;
 		}
 	}
@@ -57,6 +59,6 @@ namespace Sifaw.Views
 	/// Representa el método que controla un evento FilterChanged.
 	/// </summary>
 	/// <param name="sender">Origen del evento.</param>
-	/// <param name="e"><see cref="UIFilterChangedEventArgs"/> que contiene los datos de eventos.</param>
-	public delegate void UIFilterChangedEventHandler<TFiler>(object sender, UIFilterChangedEventArgs<TFiler> e);
+	/// <param name="e"><see cref="CtrlFilterChangedEventArgs"/> que contiene los datos de eventos.</param>
+	public delegate void CLFilterChangedEventHandler<TFiler>(object sender, CLFilterChangedEventArgs<TFiler> e);
 }

@@ -33,11 +33,11 @@ namespace Sifaw.Controllers
 	/// <summary>
 	/// Proporciona datos para un evento de finalización de controladora.
 	/// </summary>
-	public class CtrlFinishedEventArgs<T> : EventArgs
+	public class CLFinishedEventArgs<T> : EventArgs
 	{
 		public readonly T Output;
 
-		public CtrlFinishedEventArgs(T output)
+		public CLFinishedEventArgs(T output)
 			: base()
 		{
 			this.Output = output;
@@ -49,5 +49,5 @@ namespace Sifaw.Controllers
 	/// </summary>
 	/// <param name="sender">Origen del evento.</param>
 	/// <param name="e"><see cref="CtrlFinishedEventArgs"/> que contiene los datos de eventos.</param>
-	public delegate void CtrlFinishedEventHandler<T>(object sender, CtrlFinishedEventArgs<T> e);
+	public delegate void CLFinishedEventHandler<T>(object sender, CLFinishedEventArgs<T> e);
 }

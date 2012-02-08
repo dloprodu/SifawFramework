@@ -161,8 +161,8 @@ namespace Sifaw.Controllers.Components
 		 *  • Solo son lanzados por la controladora padre.
 		 */
 		
-		public event CtrlFilterChangedEventHandler<TFilter> FilterChanged;
-		private void OnFilterChanged(CtrlFilterChangedEventArgs<TFilter> e)
+		public event CLFilterChangedEventHandler<TFilter> FilterChanged;
+		private void OnFilterChanged(CLFilterChangedEventArgs<TFilter> e)
 		{
 			if (FilterChanged != null)
 				FilterChanged(this, e);

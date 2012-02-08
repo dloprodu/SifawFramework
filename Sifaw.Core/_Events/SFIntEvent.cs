@@ -27,27 +27,27 @@ using System.Text;
 namespace Sifaw.Core
 {
 	/*
-	 * Argumento y manejador para los eventos que comunican un valor string.
+	 * Argumento y manejador para los eventos que comunican el un valor entero.
 	 */
 
 	/// <summary>
-	/// Proporciona datos para eventos que comunican un valor string.
+	/// Proporciona datos para eventos que comunican un valor entero.
 	/// </summary>
-	public class StringEventArgs : EventArgs
+	public class SFIntEventArgs : EventArgs
 	{
-		public readonly string Value = string.Empty;
+		public readonly int Value;
 
-		public StringEventArgs(string value)
+		public SFIntEventArgs(int value)
 			: base()
 		{
-			Value = value;
+			this.Value = value;
 		}
 	}
 
 	/// <summary>
-	/// Representa el método que maneja el evento que comunica un valor string.
+	/// Representa el método que maneja el evento que comunica un valor entero.
 	/// </summary>
 	/// <param name="sender">Origen del evento.</param>
-	/// <param name="e"><see cref="StringEventArgs"/> que contiene los datos de eventos.</param>
-	public delegate void StringEventHandler(object sender, StringEventArgs e);
+	/// <param name="e"><see cref="SFIntEventArgs"/> que contiene los datos de eventos.</param>
+	public delegate void SFIntEventHandler(object sender, SFIntEventArgs e);
 }

@@ -17,6 +17,7 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
 
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,30 +27,27 @@ using System.Text;
 namespace Sifaw.Core
 {
 	/*
-	 * Argumento y manejador para los eventos que solicitan una confirmación sobre
-	 * alguna acción.
+	 * Argumento y manejador para los eventos que comunican un valor string.
 	 */
 
 	/// <summary>
-	/// Proporciona datos para eventos que solicitan una confirmación sobre
-	/// alguna acción.
+	/// Proporciona datos para eventos que comunican un valor string.
 	/// </summary>
-	public class ConfirmMessageEventArgs : StringEventArgs
+	public class SFStringEventArgs : EventArgs
 	{
-		public bool Confirmed = false;
+		public readonly string Value = string.Empty;
 
-		public ConfirmMessageEventArgs(string message)
-			: base(message)
+		public SFStringEventArgs(string value)
+			: base()
 		{
-			Confirmed = false;
+			Value = value;
 		}
 	}
 
 	/// <summary>
-	/// Representa el método que maneja el evento que solicita una confirmación sobre
-	/// alguna acción.
+	/// Representa el método que maneja el evento que comunica un valor string.
 	/// </summary>
 	/// <param name="sender">Origen del evento.</param>
-	/// <param name="e"><see cref="ConfirmMessageEventArgs"/> que contiene los datos de eventos.</param>
-	public delegate void ConfirmMessageEventHandler(object sender, ConfirmMessageEventArgs e);
+	/// <param name="e"><see cref="SFStringEventArgs"/> que contiene los datos de eventos.</param>
+	public delegate void SFStringEventHandler(object sender, SFStringEventArgs e);
 }

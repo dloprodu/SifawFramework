@@ -64,17 +64,19 @@
     <Compile Include="Components\Filters\ListComponentFilter.cs" />
     <Compile Include="Components\Filters\TextComponentFilter.cs" />
     <Compile Include="Components\Filters\EnumComponentFilter.cs" />
-    <Compile Include="Miscellany\UILengthModes.cs" />
-    <Compile Include="Events\UIFilterChangedEvent.cs" />
-    <Compile Include="Events\UIFinishRequestEvent.cs" />
-    <Compile Include="Miscellany\UIShellRow.cs" />
-    <Compile Include="Miscellany\UIShellRowCell.cs" />
+    <Compile Include="_Attributes\Empty.cs" />
+    <Compile Include="_Exceptions\Empty.cs" />
+    <Compile Include="_Miscellany\UILengthModes.cs" />
+    <Compile Include="_Events\UIFilterChangedEvent.cs" />
+    <Compile Include="_Events\UIFinishRequestEvent.cs" />
+    <Compile Include="_Miscellany\UIShellRow.cs" />
+    <Compile Include="_Miscellany\UIShellRowCell.cs" />
     <Compile Include="UIComponent.cs" />
     <Compile Include="UIElement.cs" />
     <Compile Include="UIShellView.cs" />
     <Compile Include="UIView.cs" />
-    <Compile Include="Miscellany\MenuCommandManager.cs" />
-    <Compile Include="Miscellany\MenuCommand.cs" />
+    <Compile Include="_Miscellany\MenuCommandManager.cs" />
+    <Compile Include="_Miscellany\MenuCommand.cs" />
     <Compile Include="Components\BackgroundWorkerComponent.cs" />
     <Compile Include="Components\AssistantComponent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -102,10 +104,7 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Attributes\" />
-    <Folder Include="Exceptions\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

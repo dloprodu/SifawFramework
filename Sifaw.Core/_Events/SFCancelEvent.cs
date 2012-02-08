@@ -33,14 +33,14 @@ namespace Sifaw.Core
 	/// <summary>
 	/// Proporciona datos para un evento cancelable.
 	/// </summary>
-	public class CancelEventArgs : EventArgs
+	public class SFCancelEventArgs : EventArgs
 	{
 		/// <summary>
 		/// Obtiene o establece un valor que indica si se debe cancelar el evento.
 		/// </summary>
 		public bool Cancel = false;
 
-		public CancelEventArgs()
+		public SFCancelEventArgs()
 		{
 			Cancel = false;
 		}
@@ -50,6 +50,6 @@ namespace Sifaw.Core
 	/// Representa el método que controla un evento cancelable.
 	/// </summary>
 	/// <param name="sender">Origen del evento.</param>
-	/// <param name="e"><see cref="CancelEventArgs"/> que contiene los datos de eventos.</param>
-	public delegate void CancelEventHandler(object sender, CancelEventArgs e);
+	/// <param name="e"><see cref="SFCancelEventArgs"/> que contiene los datos de eventos.</param>
+	public delegate void SFCancelEventHandler(object sender, SFCancelEventArgs e);
 }

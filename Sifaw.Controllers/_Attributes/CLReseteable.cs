@@ -30,7 +30,7 @@ namespace Sifaw.Controllers
 	/// una controladora.
     /// </summary>
     [AttributeUsage(AttributeTargets.Field, Inherited = true, AllowMultiple = true)]
-    public class CtrlReseteable : Attribute
+    public class CLReseteable : Attribute
     {
         #region Constantes
 
@@ -65,7 +65,7 @@ namespace Sifaw.Controllers
         /// Atributo para identificar las variables de la controladora que se quieren resetear
         /// </summary>
         /// <param name="value">Valor quie se asignará al realizar un reset</param>
-        public CtrlReseteable(object value)
+        public CLReseteable(object value)
             : base()
         {
             this._value = value;
@@ -74,7 +74,7 @@ namespace Sifaw.Controllers
         /// <summary>
         /// Atributo para identificar las variables de la controladora que se quieren resetear
         /// </summary>
-        public CtrlReseteable(Type valueType, object value)
+        public CLReseteable(Type valueType, object value)
             : base()
         {
 			// TODO: Implementar un método de conversión mas intuitivo ...

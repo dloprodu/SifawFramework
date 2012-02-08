@@ -33,14 +33,14 @@ namespace Sifaw.Controllers
 	/// <summary>
 	/// Proporciona datos para un evento que solicita el inicio de una controladora.
 	/// </summary>
-	public class CtrlEventArgs : EventArgs
+	public class CLEventArgs : EventArgs
 	{
-		public readonly Type CtrlType = null;
+		public readonly Type CLType = null;
 		public readonly object[] Parameters = null;
 
-		public CtrlEventArgs(Type ctrlType, params object[] parameters)
+		public CLEventArgs(Type clType, params object[] parameters)
 		{
-			CtrlType = ctrlType;
+			CLType = clType;
 			Parameters = parameters;
 		}
 	}
@@ -49,6 +49,6 @@ namespace Sifaw.Controllers
 	/// Representa el método que controla un evento que solicita el inicio de una controladora.
 	/// </summary>
 	/// <param name="sender">Origen del evento.</param>
-	/// <param name="e"><see cref="CtrlEventArgs"/> que contiene los datos de eventos.</param>
-	public delegate void CtrlEventHandler(object sender, CtrlEventArgs e);
+	/// <param name="e"><see cref="CLEventArgs"/> que contiene los datos de eventos.</param>
+	public delegate void CLEventHandler(object sender, CLEventArgs e);
 }

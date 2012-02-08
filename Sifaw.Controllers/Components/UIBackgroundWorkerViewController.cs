@@ -212,7 +212,7 @@ namespace Sifaw.Controllers.Components
 				if (_uiBackgroundWorkerController == null)
 				{
 					_uiBackgroundWorkerController = new UIBackgroundWorkerController();
-					_uiBackgroundWorkerController.Finished += new CtrlFinishedEventHandler<Components.UIBackgroundWorkerController.Output>(_uiBackgroundWorkerController_Finished);
+					_uiBackgroundWorkerController.Finished += new CLFinishedEventHandler<Components.UIBackgroundWorkerController.Output>(_uiBackgroundWorkerController_Finished);
 				}
 
 				return _uiBackgroundWorkerController;
@@ -333,7 +333,7 @@ namespace Sifaw.Controllers.Components
 
 		#region Gestión de eventos de inclusiones
 
-		private void _uiBackgroundWorkerController_Finished(object sender, CtrlFinishedEventArgs<UIBackgroundWorkerController.Output> e)
+		private void _uiBackgroundWorkerController_Finished(object sender, CLFinishedEventArgs<UIBackgroundWorkerController.Output> e)
 		{
 			FinishController(new Output(e.Output.Result, e.Output.Cancelled));
 		}

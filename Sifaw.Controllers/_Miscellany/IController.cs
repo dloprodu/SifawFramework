@@ -39,12 +39,12 @@ namespace Sifaw.Controllers
 		/// <summary>
 		/// Devuelve el estado en el que se encuentra  una controladora.
 		/// </summary>
-		CtrlStates State { get; }
+		CLStates State { get; }
 
 		/// <summary>
 		/// Devuelve la información que describe a una controladora.
 		/// </summary>
-		CtrlInformation Information { get; }
+		CLInformation Information { get; }
 
 		#endregion
 
@@ -72,35 +72,35 @@ namespace Sifaw.Controllers
 		/// <summary>
 		/// Evento para cominicar un cambio de estado.
 		/// </summary>
-		event CtrlStatesEventHandler StateChanged;
+		event CLStatesEventHandler StateChanged;
 
 		/// <summary>
 		/// Evento para indicar que se está iniciando una controladora. 
 		/// Se puede indicar que se cancele el proceso de inicio.
 		/// </summary>
-		event CancelEventHandler Starting;
+		event SFCancelEventHandler Starting;
 
 		/// <summary>
 		/// Evento para indicar que se está finalizando una controladora. 
 		/// Se puede indicar que se cancele el proceso de finalización.
 		/// </summary>
-		event CancelEventHandler Finishing;
+		event SFCancelEventHandler Finishing;
 
 		/// <summary>
 		/// Evento para comunicar el progreso de un proceso
 		/// de la controladora.
 		/// </summary>
-		event IntEventHandler ProgressChanged;
+		event SFIntEventHandler ProgressChanged;
 
 		/// <summary>
 		/// Evento para comunicar el mensaje de progreso del proceso.
 		/// </summary>
-		event StringEventHandler ProgressMessageChanged;
+		event SFStringEventHandler ProgressMessageChanged;
 
 		/// <summary>
 		/// Evento para comunicar que se debe iniciar una controladora.
 		/// </summary>
-		event CtrlEventHandler ThrowCtrl;
+		event CLEventHandler ThrowCtrl;
 
 		#endregion
 	}
@@ -131,67 +131,8 @@ namespace Sifaw.Controllers
 		/// <summary>
 		/// Evento para comunicar que la controladora ha finalizado.
 		/// </summary>
-		event CtrlFinishedEventHandler<TOutput> Finished;
+		event CLFinishedEventHandler<TOutput> Finished;
 
 		#endregion
 	}
-
-	#region Miscelanea
-
-	/// <summary>
-	/// Estados de una controladora.
-	/// </summary>
-	[Flags()]
-	public enum CtrlStates : byte
-	{
-		/// <summary>
-		/// Estado que indica que la controladora no está iniciada.
-		/// </summary>
-		NotStarted,
-
-		/// <summary>
-		/// Estado que indica que la controladora está iniciada.
-		/// </summary>
-		Started,
-	}
-
-	/// <summary>
-	/// Almacena la descripción de una controladora.
-	/// </summary>
-	[Serializable]
-	public class CtrlInformation
-	{
-		#region Variables
-
-		public readonly static CtrlInformation Empty;
-
-		/// <summary>
-		/// Devuelve el nombre de la controladora.
-		/// </summary>
-		public readonly string Name;
-
-		/// <summary>
-		/// Devuelve la descripción de la controladora.
-		/// </summary>
-		public readonly string Description;
-
-		#endregion
-
-		#region Constructor
-
-		static CtrlInformation()
-		{
-			Empty = new CtrlInformation(string.Empty, string.Empty);
-		}
-
-		public CtrlInformation(string name, string description)
-		{
-			Name = name;
-			Description = description;
-		}
-
-		#endregion
-	}
-
-	#endregion
 }

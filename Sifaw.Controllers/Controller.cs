@@ -26,7 +26,6 @@ using System.Diagnostics.Contracts;
 
 using Sifaw.Core;
 using Sifaw.Core.Utilities;
-using Sifaw.Views;
 
 
 namespace Sifaw.Controllers
@@ -92,10 +91,10 @@ namespace Sifaw.Controllers
 		 */
 
 		// Indica el estado de la controladora.
-		private CtrlStates _state;
+		private CLStates _state;
 
 		// Información básica de la controladora.
-		protected CtrlInformation _information;
+		protected CLInformation _information;
 
 		// Conjunto de reglas rotas para las precondiciones de la controladora.
 		private BrokenRules _brokenPreconditions;
@@ -123,10 +122,10 @@ namespace Sifaw.Controllers
 		 * Reseteables
 		 */
 
-		[CtrlReseteable(null)]
+		[CLReseteable(null)]
 		private TInput _parameters;
 
-		[CtrlReseteable(null)]
+		[CLReseteable(null)]
 		private TInput _input;
 
 		#endregion
@@ -141,8 +140,8 @@ namespace Sifaw.Controllers
 		/// <summary>
 		/// Evento para cominicar un cambio de estado.
 		/// </summary>
-		public event CtrlStatesEventHandler StateChanged;
-		private void OnStateChanged(CtrlSatesEventArgs e)
+		public event CLStatesEventHandler StateChanged;
+		private void OnStateChanged(CLSatesEventArgs e)
 		{
 			if (StateChanged != null)
 				StateChanged(this, e);
@@ -152,8 +151,8 @@ namespace Sifaw.Controllers
 		/// Evento para indicar que se está iniciando una controladora. 
 		/// Se puede indicar que se cancele el proceso de inicio.
 		/// </summary>
-		public event CancelEventHandler Starting;
-		private void OnStarting(CancelEventArgs e)
+		public event SFCancelEventHandler Starting;
+		private void OnStarting(SFCancelEventArgs e)
 		{
 			if (Starting != null)
 				Starting(this, e);
@@ -163,8 +162,8 @@ namespace Sifaw.Controllers
 		/// Evento para indicar que se está finalizando una controladora. 
 		/// Se puede indicar que se cancele el proceso de finalización.
 		/// </summary>
-		public event CancelEventHandler Finishing;
-		private void OnFinishing(CancelEventArgs e)
+		public event SFCancelEventHandler Finishing;
+		private void OnFinishing(SFCancelEventArgs e)
 		{
 			if (Finishing != null)
 				Finishing(this, e);
@@ -173,8 +172,8 @@ namespace Sifaw.Controllers
 		/// <summary>
 		/// Evento para comunicar que la controladora ha finalizado.
 		/// </summary>
-		public event CtrlFinishedEventHandler<TOutput> Finished;
-		private void OnFinished(CtrlFinishedEventArgs<TOutput> e)
+		public event CLFinishedEventHandler<TOutput> Finished;
+		private void OnFinished(CLFinishedEventArgs<TOutput> e)
 		{
 			if (Finished != null)
 				Finished(this, e);
@@ -188,8 +187,8 @@ namespace Sifaw.Controllers
 		/// <summary>
 		/// Evento para comunicar el progreso del proceso.
 		/// </summary>
-		public event IntEventHandler ProgressChanged;
-		protected void OnProgressChanged(IntEventArgs e)
+		public event SFIntEventHandler ProgressChanged;
+		protected void OnProgressChanged(SFIntEventArgs e)
 		{
 			if (ProgressChanged != null)
 				ProgressChanged(this, e);
@@ -198,8 +197,8 @@ namespace Sifaw.Controllers
 		/// <summary>
 		/// Evento para comunicar el mensaje de progreso del proceso.
 		/// </summary>
-		public event StringEventHandler ProgressMessageChanged;
-		protected void OnProgressMessageChanged(StringEventArgs e)
+		public event SFStringEventHandler ProgressMessageChanged;
+		protected void OnProgressMessageChanged(SFStringEventArgs e)
 		{
 			if (ProgressMessageChanged != null)
 				ProgressMessageChanged(this, e);
@@ -208,8 +207,8 @@ namespace Sifaw.Controllers
 		/// <summary>
 		/// Evento para comunicar que se debe iniciar una controladora.
 		/// </summary>
-		public event CtrlEventHandler ThrowCtrl;
-		protected void OnThrowCtrl(CtrlEventArgs e)
+		public event CLEventHandler ThrowCtrl;
+		protected void OnThrowCtrl(CLEventArgs e)
 		{
 			if (ThrowCtrl != null)
 				ThrowCtrl(this, e);
@@ -354,7 +353,7 @@ namespace Sifaw.Controllers
 		/// <summary>
 		/// Obtiene o establece el el estado de la controladora.
 		/// </summary>
-		public CtrlStates State
+		public CLStates State
 		{
 			get { return _state; }
 			private set
@@ -362,7 +361,7 @@ namespace Sifaw.Controllers
 				if (_state != value)
 				{
 					_state = value;
-					OnStateChanged(new CtrlSatesEventArgs(_state));
+					OnStateChanged(new CLSatesEventArgs(_state));
 				}
 			}
 		}
@@ -370,7 +369,7 @@ namespace Sifaw.Controllers
 		/// <summary>
 		/// Obtiene la información básica de la controladora.
 		/// </summary>
-		public CtrlInformation Information
+		public CLInformation Information
 		{
 			get { return _information; }
 		}
@@ -406,10 +405,10 @@ namespace Sifaw.Controllers
 			_brokenPreconditions = new BrokenRules();
 
 			// Iniciamos la información de la controladora.
-			_information = CtrlInformation.Empty;
+			_information = CLInformation.Empty;
 
 			// Estado de la controladora.
-			_state = CtrlStates.NotStarted;
+			_state = CLStates.NotStarted;
 
 			CheckPreconditions(BR_INSTANCE);
 		}
@@ -424,7 +423,7 @@ namespace Sifaw.Controllers
 		/// Comprueba el estado de la controladora. 
 		/// </summary>
 		/// <param name="estado">Estado de la controladora deseado</param>
-		protected void CheckState(CtrlStates state)
+		protected void CheckState(CLStates state)
 		{
 			if (State != state)
 				throw new NotValidCtrlStateException();
@@ -565,9 +564,9 @@ namespace Sifaw.Controllers
 
 			try
 			{
-				CheckState(CtrlStates.Started);
+				CheckState(CLStates.Started);
 
-				CancelEventArgs cEventArgs = new CancelEventArgs();
+				SFCancelEventArgs cEventArgs = new SFCancelEventArgs();
 				OnFinishing(cEventArgs);
 
 				if (cEventArgs.Cancel)
@@ -577,31 +576,31 @@ namespace Sifaw.Controllers
 				List<IController> children = GetControllers(fields);
 
 				// Finalizamos inclusiones ...			
-				OnProgressChanged(new IntEventArgs(5));
+				OnProgressChanged(new SFIntEventArgs(5));
 				OnBeforeFinishControllers(children);
 
-				OnProgressChanged(new IntEventArgs(20));
+				OnProgressChanged(new SFIntEventArgs(20));
 				FinishControllers(children);
 
-				OnProgressChanged(new IntEventArgs(35));
+				OnProgressChanged(new SFIntEventArgs(35));
 				OnAfterFinishControllers(children);
 
 				// Reseteamos campos ...			
-				OnProgressChanged(new IntEventArgs(50));
+				OnProgressChanged(new SFIntEventArgs(50));
 				OnBeforeResetFields(fields);
 
-				OnProgressChanged(new IntEventArgs(65));
+				OnProgressChanged(new SFIntEventArgs(65));
 				ResetFields(fields);
 
-				OnProgressChanged(new IntEventArgs(80));
+				OnProgressChanged(new SFIntEventArgs(80));
 				OnAfterResetFields(fields);
 
 				// Retornamos la salida de la controladroa ...
-				OnProgressChanged(new IntEventArgs(95));
-				State = CtrlStates.NotStarted;
+				OnProgressChanged(new SFIntEventArgs(95));
+				State = CLStates.NotStarted;
 
-				OnProgressChanged(new IntEventArgs(100));
-				OnFinished(new CtrlFinishedEventArgs<TOutput>(output));
+				OnProgressChanged(new SFIntEventArgs(100));
+				OnFinished(new CLFinishedEventArgs<TOutput>(output));
 			}
 			catch (Exception e)
 			{
@@ -619,7 +618,7 @@ namespace Sifaw.Controllers
 		private void FinishControllers(List<IController> children)
 		{
 			foreach (IController child in children)
-				if (child.State.Equals(CtrlStates.Started))
+				if (child.State.Equals(CLStates.Started))
 					child.Finish();
 		}
 
@@ -628,7 +627,7 @@ namespace Sifaw.Controllers
 		/// </summary>
 		/// <param name="fields">Lista de campos de la controladora.</param>
 		/// <remarks>
-		/// Resetea los campos marcados con el atributo <see cref="CtrlReseteable"/>
+		/// Resetea los campos marcados con el atributo <see cref="CLReseteable"/>
 		/// y las controladoras embebidas e incluidas.
 		/// </remarks>
 		private void ResetFields(List<FieldInfo> fields)
@@ -652,9 +651,9 @@ namespace Sifaw.Controllers
 
 					foreach (Attribute atribute in atributes)
 					{
-						if (atribute is CtrlReseteable)
+						if (atribute is CLReseteable)
 						{
-							field.SetValue(this, ((CtrlReseteable)atribute).Value);
+							field.SetValue(this, ((CLReseteable)atribute).Value);
 							break;
 						}
 					}
@@ -711,10 +710,10 @@ namespace Sifaw.Controllers
 			bool success = false;
 
 			// Comprobamos que la controladora se encuentra en un estado correcto
-			CheckState(CtrlStates.NotStarted);
+			CheckState(CLStates.NotStarted);
 
 			// Lanzamos el evento para comunicar el inicio y esperamos confirmación de cancelación
-			CancelEventArgs cEventArgs = new CancelEventArgs();
+			SFCancelEventArgs cEventArgs = new SFCancelEventArgs();
 			OnStarting(cEventArgs);
 
 			if (!cEventArgs.Cancel)
@@ -732,7 +731,7 @@ namespace Sifaw.Controllers
 					throw new NotCanStartException();
 
 				// Establecemos el estado de inicio
-				State = CtrlStates.Started;
+				State = CLStates.Started;
 				OnBeforeStartController();
 				StartController();
 				OnAfterStartController();
@@ -776,7 +775,7 @@ namespace Sifaw.Controllers
 			bool success = false;
 
 			// Comprobamos que la controladora se encuentra en un estado correcto
-			CheckState(CtrlStates.Started);
+			CheckState(CLStates.Started);
 
 			// Establecemos los parámetros de reinicio de la controladora
 			_parameters = UtilIO.Clone<TInput>(input);
@@ -818,7 +817,7 @@ namespace Sifaw.Controllers
 			// --------------------------------------------------------------
 			// Comunicación del éxito o fracaso de la operación
 			// --------------------------------------------------------------
-			return State == CtrlStates.NotStarted;
+			return State == CLStates.NotStarted;
 		}
 
 		#endregion

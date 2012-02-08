@@ -110,7 +110,7 @@ namespace Sifaw.Controllers.Test
 				if (_uiAssistantTestController == null)
 				{
 					_uiAssistantTestController = new UIAssistantTestController();
-					_uiAssistantTestController.Finished += new CtrlFinishedEventHandler<Test.UIAssistantTestController.Output>(_uiAssistantTestController_Finished);
+					_uiAssistantTestController.Finished += new CLFinishedEventHandler<Test.UIAssistantTestController.Output>(_uiAssistantTestController_Finished);
 				}
 
 				return _uiAssistantTestController;
@@ -215,7 +215,7 @@ namespace Sifaw.Controllers.Test
 
 		#region Gestión de eventos de inclusiones
 
-		private void _uiAssistantTestController_Finished(object sender, CtrlFinishedEventArgs<UIAssistantTestController.Output> e)
+		private void _uiAssistantTestController_Finished(object sender, CLFinishedEventArgs<UIAssistantTestController.Output> e)
 		{
 			FinishController(new Output(e.Output.Cancelled));
 		}

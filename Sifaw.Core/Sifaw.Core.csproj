@@ -57,15 +57,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BrokenRules.cs" />
+    <Compile Include="_Attributes\Empty.cs" />
+    <Compile Include="_Exceptions\Empty.cs" />
+    <Compile Include="_Miscellany\BrokenRules.cs" />
     <Compile Include="Drawing\ColorExtensions.cs" />
     <Compile Include="Drawing\GraphicsExtensions.cs" />
     <Compile Include="Drawing\HSLColor.cs" />
-    <Compile Include="Events\CancelEvent.cs" />
-    <Compile Include="Events\ConfirmMessageEvent.cs" />
-    <Compile Include="Events\ExceptionEvent.cs" />
-    <Compile Include="Events\IntEvent.cs" />
-    <Compile Include="Events\StringEvent.cs" />
+    <Compile Include="_Events\SFCancelEvent.cs" />
+    <Compile Include="_Events\SFExceptionEvent.cs" />
+    <Compile Include="_Events\SFIntEvent.cs" />
+    <Compile Include="_Events\SFStringEvent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities\StopWatch.cs" />
     <Compile Include="Utilities\UtilColor.cs" />
@@ -90,10 +91,7 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Attributes\" />
-    <Folder Include="Exceptions\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

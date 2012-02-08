@@ -17,37 +17,41 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using Sifaw.Core;
 
-namespace Sifaw.Core
+
+namespace Sifaw.Controllers
 {
 	/*
-	 * Argumento y manejador para los eventos que comunican el un valor entero.
+	 * Argumento y manejador para los eventos que solicitan una confirmación sobre
+	 * alguna acción.
 	 */
 
 	/// <summary>
-	/// Proporciona datos para eventos que comunican un valor entero.
+	/// Proporciona datos para eventos que solicitan una confirmación sobre
+	/// alguna acción.
 	/// </summary>
-	public class IntEventArgs : EventArgs
+	public class CLConfirmMessageEventArgs : SFStringEventArgs
 	{
-		public readonly int Value;
+		public bool Confirmed = false;
 
-		public IntEventArgs(int value)
-			: base()
+		public CLConfirmMessageEventArgs(string message)
+			: base(message)
 		{
-			this.Value = value;
+			Confirmed = false;
 		}
 	}
 
 	/// <summary>
-	/// Representa el método que maneja el evento que comunica un valor entero.
+	/// Representa el método que maneja el evento que solicita una confirmación sobre
+	/// alguna acción.
 	/// </summary>
 	/// <param name="sender">Origen del evento.</param>
-	/// <param name="e"><see cref="IntEventArgs"/> que contiene los datos de eventos.</param>
-	public delegate void IntEventHandler(object sender, IntEventArgs e);
+	/// <param name="e"><see cref="CLConfirmMessageEventArgs"/> que contiene los datos de eventos.</param>
+	public delegate void CLConfirmMessageEventHandler(object sender, CLConfirmMessageEventArgs e);
 }

@@ -223,7 +223,7 @@ namespace Sifaw.Controllers
 
 		#region Fields
 
-		[CtrlReseteable(false)]
+		[CLReseteable(false)]
 		private bool autoClosing = false;
 
 		#endregion
@@ -332,7 +332,7 @@ namespace Sifaw.Controllers
 		/// <exception cref="NotValidCtrlStateException">La controladora no está iniciada.</exception>
 		public void Show()
 		{
-			CheckState(CtrlStates.Started);
+			CheckState(CLStates.Started);
 			UISettings.Apply();
 			UIElement.Show();
 		}
@@ -363,10 +363,10 @@ namespace Sifaw.Controllers
 			{
 				if (controller is IUIComponentController)
 				{
-					(controller as IUIComponentController).ShowMessage += new StringEventHandler(UIComponentController_ShowMessage);
-					(controller as IUIComponentController).ShowWarning += new StringEventHandler(UIComponentController_ShowWarning);
-					(controller as IUIComponentController).ShowError += new ExceptionEventHandler(UIComponentController_ShowError);
-					(controller as IUIComponentController).ConfirmMessage += new ConfirmMessageEventHandler(UIComponentController_ConfirmMessage);
+					(controller as IUIComponentController).ShowMessage += new SFStringEventHandler(UIComponentController_ShowMessage);
+					(controller as IUIComponentController).ShowWarning += new SFStringEventHandler(UIComponentController_ShowWarning);
+					(controller as IUIComponentController).ShowError += new SFExceptionEventHandler(UIComponentController_ShowError);
+					(controller as IUIComponentController).ConfirmMessage += new CLConfirmMessageEventHandler(UIComponentController_ConfirmMessage);
 				}
 			}
 		}
@@ -428,22 +428,22 @@ namespace Sifaw.Controllers
 		
 		#region Gestión de eventos de componentes embebidos
 
-		private void UIComponentController_ConfirmMessage(object sender, ConfirmMessageEventArgs e)
+		private void UIComponentController_ConfirmMessage(object sender, CLConfirmMessageEventArgs e)
 		{
 			e.Confirmed = UIElement.ConfirmMessage(e.Value);			
 		}
 
-		private void UIComponentController_ShowMessage(object sender, StringEventArgs e)
+		private void UIComponentController_ShowMessage(object sender, SFStringEventArgs e)
 		{
 			UIElement.ShowMessage(e.Value);
 		}
 
-		private void UIComponentController_ShowWarning(object sender, StringEventArgs e)
+		private void UIComponentController_ShowWarning(object sender, SFStringEventArgs e)
 		{
 			UIElement.ShowWarning(e.Value);
 		}
 
-		private void UIComponentController_ShowError(object sender, ExceptionEventArgs e)
+		private void UIComponentController_ShowError(object sender, SFExceptionEventArgs e)
 		{
 			UIElement.ShowError(e.Exception.Message);
 		}

@@ -19,6 +19,7 @@
 
 
 using System;
+
 using Sifaw.Core;
 
 
@@ -152,12 +153,12 @@ namespace Sifaw.Views
 		/// </para>
 		/// <para>
 		/// Si la vista tiene la capacidad de cerrarse automáticamente tras la generación de este evento se ha de 
-		/// establecer la propiedad IsClosing del <see cref="CancelEventArgs"/> en true para evitar que la controladora
+		/// establecer la propiedad IsClosing del <see cref="SFCancelEventArgs"/> en true para evitar que la controladora
 		/// la cierre de forma explicita. En caso contrario, se podría producir alguna excepción.
 		/// </para>
 		/// <para>
 		/// Si se cancela este evento, la controladora permanece iniciada. Para cancelar la finalización, establezca 
-		/// la propiedad Cancel del <see cref="CancelEventArgs"/> que se pasa al controlador de eventos en true.
+		/// la propiedad Cancel del <see cref="SFCancelEventArgs"/> que se pasa al controlador de eventos en true.
 		/// </para>
 		/// </remarks>		
 		event UIFinishRequestEventHandler BeforeClose;

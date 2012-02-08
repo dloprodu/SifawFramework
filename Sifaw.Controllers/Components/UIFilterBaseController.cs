@@ -161,8 +161,8 @@ namespace Sifaw.Controllers.Components
 		 *  • Solo son lanzados por la controladora padre.
 		 */
 
-		public event CtrlFilterChangedEventHandler<TFilter> FilterChanged;
-		private void OnFilterChanged(CtrlFilterChangedEventArgs<TFilter> e)
+		public event CLFilterChangedEventHandler<TFilter> FilterChanged;
+		private void OnFilterChanged(CLFilterChangedEventArgs<TFilter> e)
 		{
 			if (FilterChanged != null)
 				FilterChanged(this, e);
@@ -247,7 +247,7 @@ namespace Sifaw.Controllers.Components
 
 		private void UIElement_FilterChanged(object sender, Views.UIFilterChangedEventArgs<TFilter> e)
 		{
-			CtrlFilterChangedEventArgs<TFilter> args = new CtrlFilterChangedEventArgs<TFilter>(e.OldValue, e.NewValue);
+			CLFilterChangedEventArgs<TFilter> args = new CLFilterChangedEventArgs<TFilter>(e.OldValue, e.NewValue);
 
 			OnFilterChanged(args);
 

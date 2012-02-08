@@ -31,22 +31,22 @@ namespace Sifaw.Controllers
 		/// <summary>
 		/// Evento para comunicar que se debe mostrar un mensaje.
 		/// </summary>
-		event StringEventHandler ShowMessage;
+		event SFStringEventHandler ShowMessage;
 
 		/// <summary>
 		/// Evento para comunicar que se debe mostrar una advertencia.
 		/// </summary>
-		event StringEventHandler ShowWarning;
+		event SFStringEventHandler ShowWarning;
 
 		/// <summary>
 		/// Evento para comunicar un error producido por excepción.
 		/// </summary>
-		event ExceptionEventHandler ShowError;
+		event SFExceptionEventHandler ShowError;
 
 		/// <summary>
 		/// Evento para solicitar una confirmación para un mensaje dado.
 		/// </summary>
-		event ConfirmMessageEventHandler ConfirmMessage;
+		event CLConfirmMessageEventHandler ConfirmMessage;
 
 		#endregion
 	}

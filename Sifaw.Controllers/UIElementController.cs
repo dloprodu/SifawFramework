@@ -25,26 +25,12 @@ using System.Text;
 using System.Reflection;
 using System.Diagnostics.Contracts;
 
-using Sifaw.Views;
 using Sifaw.Core;
+using Sifaw.Views;
 
 
 namespace Sifaw.Controllers
 {
-	/// <summary>
-	/// Define el método para enlazar el componente de interfaz de usuario con su correspondiente instancia
-	/// en la capa de presentación.
-	/// </summary>
-	/// <remarks>
-	/// Sigue el patrón de diseño 'Abstract Factory (Fábrica abstractra)' para crear
-	/// interfaces gráficas.
-	/// </remarks>
-	public interface AbstractUILinker<TUIElement>
-		where TUIElement : UIElement
-	{
-		void Get(out TUIElement ui);
-	}
-
 	/// <summary>
 	/// Controladora base que provee de un patrón y funcionalidad para aquellos casos de uso
 	/// donde intervienen elementos de interfaz de usuario.
@@ -267,7 +253,7 @@ namespace Sifaw.Controllers
 		private TUIElement _uiElement = default(TUIElement);
 
 		// Contenedor de configuración de la vista.
-		[CtrlReseteable(null)]
+		[CLReseteable(null)]
 		private TUISettings _uiSettings = default(TUISettings);
 
 		#endregion
@@ -449,7 +435,7 @@ namespace Sifaw.Controllers
 		/// <exception cref="NotValidCtrlStateException">La controladora no está iniciada.</exception>
 		public void SetLikeActive()
 		{
-			CheckState(CtrlStates.Started);
+			CheckState(CLStates.Started);
 			UIElement.SetLikeActive();
 		}
 

@@ -141,7 +141,7 @@ namespace Sifaw.Controllers.Components
 
 		#region Variables
 
-		[CtrlReseteable(null)]
+		[CLReseteable(null)]
 		private Stack<UIComponent> _stack = null;
 
 		#endregion

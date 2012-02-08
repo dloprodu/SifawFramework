@@ -148,19 +148,19 @@ namespace Sifaw.Controllers.Components
 		/// <summary>
 		/// Comunicador de procesos
 		/// </summary>
-		[CtrlReseteable(null)]
+		[CLReseteable(null)]
 		private System.ComponentModel.BackgroundWorker worker = null;
 		
 		#endregion
 
 		#region Eventos
 
-		public event CancelEventHandler BeforeBackgroundWorker = null;
+		public event SFCancelEventHandler BeforeBackgroundWorker = null;
 
 		/// <summary>
 		/// Permite ejecutar operaciones antes de iniciar el proceso pesado.
 		/// </summary>
-		protected virtual void OnBeforeBackgroundWorker(CancelEventArgs e)
+		protected virtual void OnBeforeBackgroundWorker(SFCancelEventArgs e)
 		{
 			if (BeforeBackgroundWorker != null)
 				BeforeBackgroundWorker(this, e);
@@ -351,11 +351,11 @@ namespace Sifaw.Controllers.Components
 		/// </summary>
 		public void RunWorker()
 		{
-			CheckState(CtrlStates.Started);
+			CheckState(CLStates.Started);
 						
 			if (!worker.IsBusy)
 			{
-				CancelEventArgs eArgs = new CancelEventArgs();
+				SFCancelEventArgs eArgs = new SFCancelEventArgs();
 
 				OnBeforeBackgroundWorker(eArgs);
 
@@ -368,7 +368,7 @@ namespace Sifaw.Controllers.Components
 
 		public void CancelWorker()
 		{
-			CheckState(CtrlStates.Started);
+			CheckState(CLStates.Started);
 
 			UIElement_Cancel(UIElement, EventArgs.Empty);
 		}

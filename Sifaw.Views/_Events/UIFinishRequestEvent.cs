@@ -35,7 +35,7 @@ namespace Sifaw.Views
 	/// Proporciona datos para un evento que solicitan la finalización de una controladora desde
 	/// la vista asociada a la controladora.
 	/// </summary>
-	public class UIFinishRequestEventArgs : Sifaw.Core.CancelEventArgs
+	public class UIFinishRequestEventArgs : Sifaw.Core.SFCancelEventArgs
 	{
 		/// <summary>
 		/// Valor que indica si la vista se cerrará por si sola.

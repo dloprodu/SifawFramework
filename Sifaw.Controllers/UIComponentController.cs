@@ -138,8 +138,8 @@ namespace Sifaw.Controllers
 		/// <summary>
 		/// Evento para comunicar un error producido por excepción.
 		/// </summary>
-		public event ExceptionEventHandler ShowError;
-		protected void OnShowError(ExceptionEventArgs e)
+		public event SFExceptionEventHandler ShowError;
+		protected void OnShowError(SFExceptionEventArgs e)
 		{
 			if (ShowError != null)
 				ShowError(this, e);
@@ -148,8 +148,8 @@ namespace Sifaw.Controllers
 		/// <summary>
 		/// Evento para comunicar que se debe mostrar una advertencia.
 		/// </summary>
-		public event StringEventHandler ShowWarning;
-		protected void OnShowWarning(StringEventArgs e)
+		public event SFStringEventHandler ShowWarning;
+		protected void OnShowWarning(SFStringEventArgs e)
 		{
 			if (ShowWarning != null)
 				ShowWarning(this, e);
@@ -158,8 +158,8 @@ namespace Sifaw.Controllers
 		/// <summary>
 		/// Evento para comunicar que se debe mostrar un mensaje.
 		/// </summary>
-		public event StringEventHandler ShowMessage;
-		protected void OnShowMessage(StringEventArgs e)
+		public event SFStringEventHandler ShowMessage;
+		protected void OnShowMessage(SFStringEventArgs e)
 		{
 			if (ShowMessage != null)
 				ShowMessage(this, e);
@@ -168,8 +168,8 @@ namespace Sifaw.Controllers
 		/// <summary>
 		/// Evento para solicitar una confirmación para un mensaje dado.
 		/// </summary>
-		public event ConfirmMessageEventHandler ConfirmMessage;
-		protected void OnConfirmMessage(ConfirmMessageEventArgs e)
+		public event CLConfirmMessageEventHandler ConfirmMessage;
+		protected void OnConfirmMessage(CLConfirmMessageEventArgs e)
 		{
 			if (ConfirmMessage != null)
 				ConfirmMessage(this, e);
@@ -228,10 +228,10 @@ namespace Sifaw.Controllers
 			{
 				if (controller is IUIComponentController)
 				{
-					(controller as IUIComponentController).ShowMessage += new StringEventHandler(UIComponentController_ShowMessage);
-					(controller as IUIComponentController).ShowWarning += new StringEventHandler(UIComponentController_ShowWarning);
-					(controller as IUIComponentController).ShowError += new ExceptionEventHandler(UIComponentController_ShowError);
-					(controller as IUIComponentController).ConfirmMessage += new ConfirmMessageEventHandler(UIComponentController_ConfirmMessage);
+					(controller as IUIComponentController).ShowMessage += new SFStringEventHandler(UIComponentController_ShowMessage);
+					(controller as IUIComponentController).ShowWarning += new SFStringEventHandler(UIComponentController_ShowWarning);
+					(controller as IUIComponentController).ShowError += new SFExceptionEventHandler(UIComponentController_ShowError);
+					(controller as IUIComponentController).ConfirmMessage += new CLConfirmMessageEventHandler(UIComponentController_ConfirmMessage);
 				}
 			}
 		}
@@ -240,22 +240,22 @@ namespace Sifaw.Controllers
 
 		#region Gestión de eventos de componentes embebidos
 
-		private void UIComponentController_ConfirmMessage(object sender, ConfirmMessageEventArgs e)
+		private void UIComponentController_ConfirmMessage(object sender, CLConfirmMessageEventArgs e)
 		{
 			OnConfirmMessage(e);
 		}
 
-		private void UIComponentController_ShowMessage(object sender, StringEventArgs e)
+		private void UIComponentController_ShowMessage(object sender, SFStringEventArgs e)
 		{
 			OnShowMessage(e);
 		}
 
-		private void UIComponentController_ShowWarning(object sender, StringEventArgs e)
+		private void UIComponentController_ShowWarning(object sender, SFStringEventArgs e)
 		{
 			OnShowWarning(e);
 		}
 
-		private void UIComponentController_ShowError(object sender, ExceptionEventArgs e)
+		private void UIComponentController_ShowError(object sender, SFExceptionEventArgs e)
 		{
 			OnShowError(e);
 		}

@@ -367,7 +367,7 @@ namespace Sifaw.WPF.CCL
 				fText.SetFontWeight(step == Value ? FontWeights.Bold : FontWeight);
 				// Limitamos el texto a una linea.
 				fText.MaxLineCount = 1;
-				fText.LineHeight = ActualHeight * 0.75;
+                fText.LineHeight = ActualHeight * 0.75;
 								
 				// X = Posición de inicio de la región del texto mas el error producido al añadir la flecha de
 				//     dirección a la región.

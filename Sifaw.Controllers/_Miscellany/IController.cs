@@ -72,7 +72,7 @@ namespace Sifaw.Controllers
 		/// <summary>
 		/// Evento para cominicar un cambio de estado.
 		/// </summary>
-		event CLStatesEventHandler StateChanged;
+		event CLStateChangedEventHandler StateChanged;
 
 		/// <summary>
 		/// Evento para indicar que se está iniciando una controladora. 
@@ -90,17 +90,12 @@ namespace Sifaw.Controllers
 		/// Evento para comunicar el progreso de un proceso
 		/// de la controladora.
 		/// </summary>
-		event SFIntEventHandler ProgressChanged;
-
-		/// <summary>
-		/// Evento para comunicar el mensaje de progreso del proceso.
-		/// </summary>
-		event SFStringEventHandler ProgressMessageChanged;
+        event CLProgressChangedEventHandler ProgressChanged;
 
 		/// <summary>
 		/// Evento para comunicar que se debe iniciar una controladora.
 		/// </summary>
-		event CLEventHandler ThrowCtrl;
+		event CLThrowEventHandler ThrowCtrl;
 
 		#endregion
 	}

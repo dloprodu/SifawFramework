@@ -116,6 +116,9 @@ namespace Sifaw.WPF
 
 		public void SetCurrentUIComponent(UIComponent component, byte step)
 		{
+            if (gridContent.Children.Contains(component as System.Windows.UIElement))
+                return;
+
 			(component as FrameworkElement).VerticalAlignment = VerticalAlignment.Stretch;
 			(component as FrameworkElement).HorizontalAlignment = HorizontalAlignment.Stretch;
 			(component as FrameworkElement).Margin = new Thickness(0);

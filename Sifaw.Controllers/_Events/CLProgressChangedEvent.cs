@@ -23,31 +23,41 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using Sifaw.Core;
+
 
 namespace Sifaw.Controllers
 {
 	/*
-	 * Argumento y manejador para los eventos que comunican el estado de una controladora.
+	 * Argumento y manejador para los eventos ProgressChanged.
 	 */
 
 	/// <summary>
-	/// Proporciona datos para un evento que comunica el estado de una controladora.
+	/// Proporciona datos para un evento ProgressChanged.
 	/// </summary>
-	public class CLSatesEventArgs : EventArgs
+	public class CLProgressChangedEventArgs : SFByteEventArgs
 	{
-		public readonly CLStates State;
+        public readonly string Message;
 
-		public CLSatesEventArgs(CLStates state)
-			: base()
+        public CLProgressChangedEventArgs(byte progress)
+            : this(progress, string.Empty)
+        {
+        }
+
+        public CLProgressChangedEventArgs(byte progress, string message)
+			: base(progress)
 		{
-			this.State = state;
+            if (progress > 100)
+                throw new ArgumentException("progress ha de ser un número entre 0 y 100.", "progress");
+
+            Message = message;
 		}
 	}
 
 	/// <summary>
-	/// Representa el método que controla un evento que comunica el estado de una controladora.
+    /// Representa el método que controla un evento ProgressChanged.
 	/// </summary>
 	/// <param name="sender">Origen del evento.</param>
-	/// <param name="e"><see cref="CLSatesEventArgs"/> que contiene los datos de eventos.</param>
-	public delegate void CLStatesEventHandler(object sender, CLSatesEventArgs e);
+	/// <param name="e"><see cref="CtrlFilterChangedEventArgs"/> que contiene los datos de eventos.</param>
+	public delegate void CLProgressChangedEventHandler(object sender, CLProgressChangedEventArgs e);
 }

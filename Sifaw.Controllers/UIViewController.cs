@@ -230,7 +230,21 @@ namespace Sifaw.Controllers
 
 		#region Eventos
 
-		/*
+        /*
+		 * Desencadenadores privados.
+		 *  • Solo son lanzados por la controladora padre.
+		 */
+
+        /* Empty */
+        
+        /*
+		 * Desencadenadores protegidos.
+		 *  • Pueden ser lanzados por controladoras hijas.
+		 */
+		
+        /* Empty */
+        
+        /*
 		 * Desencadenadores protegidos virtuales sin manejadores asociados.
 		 *  • Pueden ser sobreescritos por controladoras hijas para
 		 *    completar funcionalidad.
@@ -363,9 +377,9 @@ namespace Sifaw.Controllers
 			{
 				if (controller is IUIComponentController)
 				{
-					(controller as IUIComponentController).ShowMessage += new SFStringEventHandler(UIComponentController_ShowMessage);
-					(controller as IUIComponentController).ShowWarning += new SFStringEventHandler(UIComponentController_ShowWarning);
-					(controller as IUIComponentController).ShowError += new SFExceptionEventHandler(UIComponentController_ShowError);
+                    (controller as IUIComponentController).ShowMessage += new CLShowInfoEventHandler(UIComponentController_ShowMessage);
+                    (controller as IUIComponentController).ShowWarning += new CLShowWarningEventHandler(UIComponentController_ShowWarning);
+                    (controller as IUIComponentController).ShowError += new CLShowErrorEventHandler(UIComponentController_ShowError);
 					(controller as IUIComponentController).ConfirmMessage += new CLConfirmMessageEventHandler(UIComponentController_ConfirmMessage);
 				}
 			}
@@ -433,19 +447,19 @@ namespace Sifaw.Controllers
 			e.Confirmed = UIElement.ConfirmMessage(e.Value);			
 		}
 
-		private void UIComponentController_ShowMessage(object sender, SFStringEventArgs e)
+		private void UIComponentController_ShowMessage(object sender, CLShowInfoEventArgs e)
 		{
 			UIElement.ShowMessage(e.Value);
 		}
 
-		private void UIComponentController_ShowWarning(object sender, SFStringEventArgs e)
+		private void UIComponentController_ShowWarning(object sender, CLShowWarningEventArgs e)
 		{
 			UIElement.ShowWarning(e.Value);
 		}
 
-		private void UIComponentController_ShowError(object sender, SFExceptionEventArgs e)
+		private void UIComponentController_ShowError(object sender, CLShowErrorEventArgs e)
 		{
-			UIElement.ShowError(e.Exception.Message);
+			UIElement.ShowError(e.Value);
 		}
 
 		#endregion

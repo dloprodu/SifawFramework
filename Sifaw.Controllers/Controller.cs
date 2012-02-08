@@ -140,8 +140,8 @@ namespace Sifaw.Controllers
 		/// <summary>
 		/// Evento para cominicar un cambio de estado.
 		/// </summary>
-		public event CLStatesEventHandler StateChanged;
-		private void OnStateChanged(CLSatesEventArgs e)
+		public event CLStateChangedEventHandler StateChanged;
+		private void OnStateChanged(CLSateChangedEventArgs e)
 		{
 			if (StateChanged != null)
 				StateChanged(this, e);
@@ -187,28 +187,18 @@ namespace Sifaw.Controllers
 		/// <summary>
 		/// Evento para comunicar el progreso del proceso.
 		/// </summary>
-		public event SFIntEventHandler ProgressChanged;
-		protected void OnProgressChanged(SFIntEventArgs e)
+        public event CLProgressChangedEventHandler ProgressChanged;
+        protected void OnProgressChanged(CLProgressChangedEventArgs e)
 		{
 			if (ProgressChanged != null)
 				ProgressChanged(this, e);
 		}
 
 		/// <summary>
-		/// Evento para comunicar el mensaje de progreso del proceso.
-		/// </summary>
-		public event SFStringEventHandler ProgressMessageChanged;
-		protected void OnProgressMessageChanged(SFStringEventArgs e)
-		{
-			if (ProgressMessageChanged != null)
-				ProgressMessageChanged(this, e);
-		}
-
-		/// <summary>
 		/// Evento para comunicar que se debe iniciar una controladora.
 		/// </summary>
-		public event CLEventHandler ThrowCtrl;
-		protected void OnThrowCtrl(CLEventArgs e)
+		public event CLThrowEventHandler ThrowCtrl;
+		protected void OnThrowCtrl(CLThrowEventArgs e)
 		{
 			if (ThrowCtrl != null)
 				ThrowCtrl(this, e);
@@ -361,7 +351,7 @@ namespace Sifaw.Controllers
 				if (_state != value)
 				{
 					_state = value;
-					OnStateChanged(new CLSatesEventArgs(_state));
+					OnStateChanged(new CLSateChangedEventArgs(_state));
 				}
 			}
 		}
@@ -576,30 +566,30 @@ namespace Sifaw.Controllers
 				List<IController> children = GetControllers(fields);
 
 				// Finalizamos inclusiones ...			
-				OnProgressChanged(new SFIntEventArgs(5));
+                OnProgressChanged(new CLProgressChangedEventArgs(5, "Finalizando inclusiones..."));
 				OnBeforeFinishControllers(children);
 
-				OnProgressChanged(new SFIntEventArgs(20));
+                OnProgressChanged(new CLProgressChangedEventArgs(20, "Finalizando inclusiones..."));
 				FinishControllers(children);
 
-				OnProgressChanged(new SFIntEventArgs(35));
+                OnProgressChanged(new CLProgressChangedEventArgs(35, "Finalizando inclusiones..."));
 				OnAfterFinishControllers(children);
 
 				// Reseteamos campos ...			
-				OnProgressChanged(new SFIntEventArgs(50));
+                OnProgressChanged(new CLProgressChangedEventArgs(50, "Reseteando campos..."));
 				OnBeforeResetFields(fields);
 
-				OnProgressChanged(new SFIntEventArgs(65));
+                OnProgressChanged(new CLProgressChangedEventArgs(65, "Reseteando campos..."));
 				ResetFields(fields);
 
-				OnProgressChanged(new SFIntEventArgs(80));
+                OnProgressChanged(new CLProgressChangedEventArgs(80, "Reseteando campos..."));
 				OnAfterResetFields(fields);
 
 				// Retornamos la salida de la controladroa ...
-				OnProgressChanged(new SFIntEventArgs(95));
+                OnProgressChanged(new CLProgressChangedEventArgs(95, "Actualizando estado..."));
 				State = CLStates.NotStarted;
 
-				OnProgressChanged(new SFIntEventArgs(100));
+                OnProgressChanged(new CLProgressChangedEventArgs(100));
 				OnFinished(new CLFinishedEventArgs<TOutput>(output));
 			}
 			catch (Exception e)

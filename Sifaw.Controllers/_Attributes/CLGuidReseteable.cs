@@ -9,7 +9,7 @@
 /// <remarks>
 /// ===============================================================================================
 /// Historial de versiones:
-///   - 14/12/2011 -- Creación de la clase.
+///   - 08/02/2012 -- Creación de la clase.
 /// ===============================================================================================
 /// Observaciones:
 /// 
@@ -26,40 +26,22 @@ using System.Text;
 namespace Sifaw.Controllers
 {
     /// <summary>
-    /// Atributo que permite establecer un valor de reseteo a los campos de una controladora cuando ésta
-    /// se finaliza.
+    /// Atributo que permite establecer un valor de reseteo a los campos de tipo Guid de una controladora cuando es
+    /// finalizada.
     /// </summary>
     [AttributeUsage(AttributeTargets.Field, Inherited = true, AllowMultiple = true)]
-    public class CLReseteable : Attribute
+    public class CLGuidReseteable : CLReseteable
     {
-        #region Variables
-
-        protected object _value;
-
-        #endregion
-
-        #region Propiedades
-
-        /// <summary>
-        /// Devuelve el valor que se quiere asignar al reiniciar un campo.
-        /// </summary>
-        public object Value
-        {
-            get { return _value; }
-        }
-
-        #endregion
-
         #region Constructores
 
-        /// <summary>
-        /// Atributo para identificar las variables de la controladora que se quieren resetear.
-        /// </summary>
-        /// <param name="value">Valor que se asignará a un campo al finalizar la controladora.</param>
-        public CLReseteable(object value)
-            : base()
+        public CLGuidReseteable()
+            : base(Guid.Empty)
         {
-            this._value = value;
+        }
+
+        public CLGuidReseteable(string guid)
+            : base(new Guid(guid))
+        {
         }
 
         #endregion

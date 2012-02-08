@@ -1,6 +1,6 @@
 ﻿///////////////////////////////////////////////////////////////////////////////////////////////////
 /// <summary>
-/// Librería de eventos de Sifaw.Controllers.
+/// Librería de eventos de Sifaw.Core.
 /// 
 /// Diseñador:     David López Rguez
 /// Programadores: David López Rguez
@@ -24,31 +24,30 @@ using System.Linq;
 using System.Text;
 
 
-namespace Sifaw.Controllers
+namespace Sifaw.Core
 {
 	/*
-	 * Argumento y manejador para los eventos que solicitan el inicio de una controladora.
+	 * Argumento y manejador para los eventos que comunican el un valor entero de 8 bits sin signo.
 	 */
 
 	/// <summary>
-	/// Proporciona datos para un evento que solicita el inicio de una controladora.
+    /// Proporciona datos para eventos que comunican un valor entero de 8 bits sin signo.
 	/// </summary>
-	public class CLEventArgs : EventArgs
+	public class SFByteEventArgs : EventArgs
 	{
-		public readonly Type CLType = null;
-		public readonly object[] Parameters = null;
+		public readonly byte Value;
 
-		public CLEventArgs(Type clType, params object[] parameters)
+        public SFByteEventArgs(byte value)
+			: base()
 		{
-			CLType = clType;
-			Parameters = parameters;
+			this.Value = value;
 		}
 	}
 
 	/// <summary>
-	/// Representa el método que controla un evento que solicita el inicio de una controladora.
+    /// Representa el método que maneja el evento que comunica un valor entero de 8 bits sin signo.
 	/// </summary>
 	/// <param name="sender">Origen del evento.</param>
-	/// <param name="e"><see cref="CLEventArgs"/> que contiene los datos de eventos.</param>
-	public delegate void CLEventHandler(object sender, CLEventArgs e);
+	/// <param name="e"><see cref="SFIntEventArgs"/> que contiene los datos de eventos.</param>
+	public delegate void SFByteEventHandler(object sender, SFByteEventArgs e);
 }

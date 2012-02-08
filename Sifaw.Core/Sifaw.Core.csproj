@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="_Attributes\Empty.cs" />
+    <Compile Include="_Events\SFByteEvent.cs" />
     <Compile Include="_Exceptions\Empty.cs" />
     <Compile Include="_Miscellany\BrokenRules.cs" />
     <Compile Include="Drawing\ColorExtensions.cs" />

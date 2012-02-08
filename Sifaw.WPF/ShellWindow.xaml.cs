@@ -157,9 +157,9 @@ namespace Sifaw.WPF
 			return MessageBox.Show(this, message, "Mensaje", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes;
 		}
 
-		public bool ConfirmMessage(string titulo, string message)
+        public bool ConfirmMessage(string title, string message)
 		{
-			return MessageBox.Show(this, message, titulo, MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes;
+            return MessageBox.Show(this, message, title, MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes;
 		}
 
 		#endregion

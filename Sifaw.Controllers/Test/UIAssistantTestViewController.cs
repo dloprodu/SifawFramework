@@ -183,16 +183,16 @@ namespace Sifaw.Controllers.Test
 			return 1;
 		}
 
-		protected override void GetRowSettings(uint row, out double height, out Views.UIShellGridLengthModes mode)
+		protected override void GetRowSettings(uint row, out double height, out Views.UILengthModes mode)
 		{
 			height = 400;
-			mode = Views.UIShellGridLengthModes.WeightedProportion;
+			mode = Views.UILengthModes.WeightedProportion;
 		}
 
-		protected override void GetCellSettings(uint row, uint cell, out double width, out Views.UIShellGridLengthModes mode, out Views.UIComponent component)
+		protected override void GetCellSettings(uint row, uint cell, out double width, out Views.UILengthModes mode, out Views.UIComponent component)
 		{
 			width = 400;
-			mode = Views.UIShellGridLengthModes.WeightedProportion;
+			mode = Views.UILengthModes.WeightedProportion;
 			component = UIAssistantTestController.GetUIComponent();
 		}
 

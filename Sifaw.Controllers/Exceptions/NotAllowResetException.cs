@@ -1,15 +1,15 @@
 ﻿///////////////////////////////////////////////////////////////////////////////////////////////////
-/// <summary> 
-/// BoolComponentFilter.cs
+/// <summary>
+/// Librería de excepciones de Sifaw.Controllers.
 /// 
-/// Diseñador:   David López Rodríguez
-/// Programador: David López Rodríguez
+/// Diseñador:     David López Rguez
+/// Programadores: David López Rguez
+///	
 /// </summary>
 /// <remarks>
 /// ===============================================================================================
 /// Historial de versiones:
-///   - 07/02/2012: Creación de la interfaz.
-/// 
+///   - 14/12/2011 -- Creación de la clase.
 /// ===============================================================================================
 /// Observaciones:
 /// 
@@ -24,17 +24,16 @@ using System.Linq;
 using System.Text;
 
 
-namespace Sifaw.Views.Components.Filters
+namespace Sifaw.Controllers
 {
 	/// <summary>
-	/// Representa un componente para realizar filtros sobre un campo
-	/// booleano.
+	/// Excepción producida cuando la controladora no da soporte al reinicio.
 	/// </summary>
-	public interface BoolComponentFilter : ComponentFilterBase<bool>
+	public class NotAllowResetException : Exception
 	{
-		/// <summary>
-		/// Establece el texto que mostrará el componente.
-		/// </summary>
-		string Text { set; }
+		public NotAllowResetException()
+			: base("La controladora no soporta el reinicio.")
+		{
+		}
 	}
 }

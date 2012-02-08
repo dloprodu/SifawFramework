@@ -1,6 +1,6 @@
 ﻿///////////////////////////////////////////////////////////////////////////////////////////////////
 /// <sumary>
-/// BoolFilter.cs
+/// DropDownFilter.cs
 /// 
 /// Diseñador: David López Rguez
 /// Programador: David López Rguez
@@ -31,23 +31,23 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-using Sifaw.Views.Components;
 using Sifaw.Views;
+using Sifaw.Views.Components;
 using Sifaw.Views.Components.Filters;
 
 
 namespace Sifaw.WPF
 {
 	/// <summary>
-	/// Representa un control que implementa el componente <see cref="BoolComponentFilter"/>.
+	/// Representa un control que implementa el componente <see cref="DropDownListComponentFilter"/>.
 	/// </summary>
-	public class BoolFilter : CheckBox, BoolComponentFilter
+	public class DropDownListFilter : ComboBox, DropDownListComponentFilter
 	{
 		#region Constructor
 
-		static BoolFilter()
+		static DropDownListFilter()
 		{
-			DefaultStyleKeyProperty.OverrideMetadata(typeof(BoolFilter), new FrameworkPropertyMetadata(typeof(BoolFilter)));
+			DefaultStyleKeyProperty.OverrideMetadata(typeof(DropDownListFilter), new FrameworkPropertyMetadata(typeof(DropDownListFilter)));
 		}
 
 		#endregion
@@ -70,12 +70,17 @@ namespace Sifaw.WPF
 		}
 
 		#endregion
+		
+		#region Override Methods
 
-		#region Métodos sobreescritos
+		/// <summary>
+		/// Último filtro válido aplicado.
+		/// </summary>
+		private IFilterable LastFilter = null;
 
-		protected override void OnChecked(RoutedEventArgs e)
+		protected override void OnSelectionChanged(SelectionChangedEventArgs e)
 		{
-			base.OnChecked(e);
+			base.OnSelectionChanged(e);
 
 			if (!filtering)
 			{
@@ -83,40 +88,14 @@ namespace Sifaw.WPF
 
 				try
 				{
-					UIFilterChangedEventArgs<bool> args = new UIFilterChangedEventArgs<bool>(false, true);
+					UIFilterChangedEventArgs<IFilterable> args = new UIFilterChangedEventArgs<IFilterable>(LastFilter, Filter);
 
 					OnFilterChanged(args);
 
 					if (args.Cancel)
-						Filter = false;
-				}
-				catch (Exception ex)
-				{
-					throw ex;
-				}
-				finally
-				{
-					EndFilter();
-				}
-			}
-		}
-
-		protected override void OnUnchecked(RoutedEventArgs e)
-		{
-			base.OnUnchecked(e);
-
-			if (!filtering)
-			{
-				BeginFilter();
-
-				try
-				{
-					UIFilterChangedEventArgs<bool> args = new UIFilterChangedEventArgs<bool>(true, false);
-
-					OnFilterChanged(args);
-
-					if (args.Cancel)
-						Filter = true;
+						Filter = LastFilter;
+					else
+						LastFilter = Filter;
 				}
 				catch (Exception ex)
 				{
@@ -131,28 +110,29 @@ namespace Sifaw.WPF
 
 		#endregion
 
-		#region BoolComponentFilter Members
+		#region ComponentListFilterBase<IFilterable,IList<IFilterable>> Members
 
-		public string Text
+		public void Add(IList<IFilterable> source)
 		{
-			set { Content = value; }
+			this.ItemsSource = source;
+			this.DisplayMemberPath = "DisplayFilter";
 		}
 
 		#endregion
 
-		#region ComponentFilter<bool> Members
+		#region ComponentFilterBase<IFilterable> Members
 
-		public bool Filter
+		public IFilterable Filter
 		{
-			get { return IsChecked.HasValue ? IsChecked.Value : false; }
-			set { IsChecked = value; }
+			get { return SelectedItem as IFilterable; }
+			set	{ SelectedItem = value;	}
 		}
 
-		public event UIFilterChangedEventHandler<bool> FilterChanged;
-		private void OnFilterChanged(UIFilterChangedEventArgs<bool> e)
+		public event UIFilterChangedEventHandler<IFilterable> FilterChanged;
+		private void OnFilterChanged(UIFilterChangedEventArgs<IFilterable> e)
 		{
 			if (FilterChanged != null)
-				FilterChanged(this as ComponentFilterBase<bool>, e);
+				FilterChanged(this as ListComponentFilter, e);
 		}
 
 		#endregion
@@ -186,7 +166,7 @@ namespace Sifaw.WPF
 
 		public void Reset()
 		{
-			/* Emtpy */
+			ItemsSource = null;
 		}
 
 		public void SetLikeActive()

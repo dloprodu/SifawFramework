@@ -1,6 +1,6 @@
 ﻿///////////////////////////////////////////////////////////////////////////////////////////////////
 /// <sumary>
-/// TextFilter.cs
+/// EnumControl.cs
 /// 
 /// Diseñador: David López Rguez
 /// Programador: David López Rguez
@@ -8,7 +8,7 @@
 /// <remarks>
 /// ===============================================================================================
 /// Historial de versiones:
-///   - 06/02/2012: Creación de controladora.
+///   - 08/02/2012: Creación de controladora.
 /// 
 /// ===============================================================================================
 /// Observaciones:
@@ -31,99 +31,64 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-using Sifaw.WPF.CCL;
-using Sifaw.Views.Components;
 using Sifaw.Views;
+using Sifaw.Views.Components;
 using Sifaw.Views.Components.Filters;
 
 
 namespace Sifaw.WPF
 {
 	/// <summary>
-	/// Representa un control que implementa el componente <see cref="TextComponentFilter"/>.
+	/// Representa un control que implementa el componente <see cref=""/>.
 	/// </summary>
-	public class TextFilter : SearchTextField, TextComponentFilter
+	public partial class EnumControl : UserControl, EnumComponentFilter
 	{
 		#region Constructor
 
-		static TextFilter()
+		public EnumControl()
 		{
-			DefaultStyleKeyProperty.OverrideMetadata(typeof(TextFilter), new FrameworkPropertyMetadata(typeof(TextFilter)));
+			InitializeComponent();
 		}
 
 		#endregion
+		
+		#region ComponentListFilterBase<IFilterable,IList<IFilterable>> Members
 
-		#region Helpers
-
-		/// <summary>
-		/// Flag que indica si se está aplicando un filtro.
-		/// </summary>
-		private bool filtering = false;
-
-		private void BeginFilter()
+		public void Add(IList<IFilterable> source)
 		{
-			filtering = true;
-		}
+			UIShellRow[] rows = new UIShellRow[source.Count];
 
-		private void EndFilter()
-		{
-			filtering = false;
-		}
-
-		#endregion
-
-		#region Overrides Methods
-
-		/// <summary>
-		/// Último filtro válido aplicado.
-		/// </summary>
-		private string LastFilter = string.Empty;
-
-		protected override void OnSearch(RoutedEventArgs e)
-		{
-			base.OnSearch(e);
-
-			if (!filtering)
+			for (int i = 0; i < source.Count; i++)
 			{
-				BeginFilter();
+				//UIShellRowCell cell = new UIShellRowCell(
 
-				try
-				{
-					UIFilterChangedEventArgs<string> args = new UIFilterChangedEventArgs<string>(LastFilter, Filter);
+				rows[i] = new UIShellRow(double.NaN, UILengthModes.Auto, null);
+			}
 
-					OnFilterChanged(args);
+			shell.SetSettings(rows);
+		}
 
-					if (args.Cancel)
-						Filter = LastFilter;
-					else
-						LastFilter = Filter;
-				}
-				catch (Exception ex)
-				{
-					throw ex;
-				}
-				finally
-				{
-					EndFilter();
-				}
+		#endregion
+
+		#region ComponentFilterBase<IFilterable> Members
+
+		public IFilterable Filter
+		{
+			get
+			{
+				throw new NotImplementedException();
+			}
+			set
+			{
+				throw new NotImplementedException();
 			}
 		}
 
-		#endregion
-
-		#region FilterComponent<string> Members
-
-		public string Filter
-		{
-			get { return Text; }
-			set { Text = value; }
-		}
-
-		public event UIFilterChangedEventHandler<string> FilterChanged;
-		private void OnFilterChanged(UIFilterChangedEventArgs<string> e)
+		public event UIFilterChangedEventHandler<IFilterable> FilterChanged;
+		private void OnFilterChanged(UIFilterChangedEventArgs<IFilterable> e)
 		{
 			if (FilterChanged != null)
-				FilterChanged(this as ComponentFilterBase<string>, e);
+				FilterChanged(this as ComponentFilterBase<IFilterable>, e);
 		}
 
 		#endregion
@@ -157,12 +122,12 @@ namespace Sifaw.WPF
 
 		public void Reset()
 		{
-			Text = string.Empty;
+			/* Emtpy */
 		}
 
 		public void SetLikeActive()
 		{
-			Focus();
+			shell.Focus();
 		}
 
 		#endregion

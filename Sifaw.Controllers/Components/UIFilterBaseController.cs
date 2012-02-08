@@ -247,7 +247,11 @@ namespace Sifaw.Controllers.Components
 
 		private void UIElement_FilterChanged(object sender, Views.UIFilterChangedEventArgs<TFilter> e)
 		{
-			OnFilterChanged(new CtrlFilterChangedEventArgs<TFilter>(e.OldValue, e.NewValue));
+			CtrlFilterChangedEventArgs<TFilter> args = new CtrlFilterChangedEventArgs<TFilter>(e.OldValue, e.NewValue);
+
+			OnFilterChanged(args);
+
+			e.Cancel = args.Cancel;
 		}
 
 		#endregion

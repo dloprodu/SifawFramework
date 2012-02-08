@@ -1,24 +1,13 @@
 <ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="clr-namespace:Sifaw.WPF"
-    xmlns:ccl="clr-namespace:Sifaw.WPF.CCL;assembly=Sifaw.WPF.CCL">
+    xmlns:local="clr-namespace:Sifaw.WPF">
 
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="/Sifaw.WPF.CCL;component/Themes/SearchTextField.xaml" />
+        <ResourceDictionary Source="/Sifaw.WPF;component/Themes/TextFilter.xaml" />
+        <ResourceDictionary Source="/Sifaw.WPF;component/Themes/BoolFilter.xaml" />
+        <ResourceDictionary Source="/Sifaw.WPF;component/Themes/ListFilter.xaml" />
+        <ResourceDictionary Source="/Sifaw.WPF;component/Themes/DropDownListFilter.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
-    <Style TargetType="{x:Type local:TextFilter}"
-           BasedOn="{StaticResource {x:Type ccl:SearchTextField}}">
-
-        <!-- Empty -->
-
-    </Style>
-
-    <Style TargetType="{x:Type local:BoolFilter}"
-           BasedOn="{StaticResource {x:Type CheckBox}}">        
-        
-        <!-- Empty -->
-        
-    </Style>
 </ResourceDictionary>

@@ -1,6 +1,6 @@
 ﻿///////////////////////////////////////////////////////////////////////////////////////////////////
 /// <summary>
-/// Contiene la librería de excepciones de Sifaw.Core.
+/// Librería de eventos de Sifaw.Core.
 /// 
 /// Diseñador:     David López Rguez
 /// Programadores: David López Rguez
@@ -26,5 +26,30 @@ using System.Text;
 
 namespace Sifaw.Core
 {
-	/* Empty */
+	/*
+	 * Argumento y manejador para los eventos cancelables.
+	 */
+
+	/// <summary>
+	/// Proporciona datos para un evento cancelable.
+	/// </summary>
+	public class CancelEventArgs : EventArgs
+	{
+		/// <summary>
+		/// Obtiene o establece un valor que indica si se debe cancelar el evento.
+		/// </summary>
+		public bool Cancel = false;
+
+		public CancelEventArgs()
+		{
+			Cancel = false;
+		}
+	}
+
+	/// <summary>
+	/// Representa el método que controla un evento cancelable.
+	/// </summary>
+	/// <param name="sender">Origen del evento.</param>
+	/// <param name="e"><see cref="CancelEventArgs"/> que contiene los datos de eventos.</param>
+	public delegate void CancelEventHandler(object sender, CancelEventArgs e);
 }

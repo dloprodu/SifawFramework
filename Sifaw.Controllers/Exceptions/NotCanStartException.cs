@@ -1,6 +1,6 @@
 ﻿///////////////////////////////////////////////////////////////////////////////////////////////////
 /// <summary>
-/// Contiene la librería de atributos de Sifaw.Core.
+/// Librería de excepciones de Sifaw.Controllers.
 /// 
 /// Diseñador:     David López Rguez
 /// Programadores: David López Rguez
@@ -24,7 +24,17 @@ using System.Linq;
 using System.Text;
 
 
-namespace Sifaw.Core
+namespace Sifaw.Controllers
 {
-	/* Empty */
+	/// <summary>
+	/// Excepción producida por no cumplirse las condiciones necesarias para que se 
+	/// inicie una controladora.
+	/// </summary>
+	public class NotCanStartException : Exception
+	{
+		public NotCanStartException()
+			: base("La controladora no cumple las condiciones necesarias para su inicio.")
+		{
+		}
+	}
 }

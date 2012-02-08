@@ -102,7 +102,6 @@
         <my:SearchTextField Name="searchTextField1" Width="120" Mode="Instant" Placeholder="Instant ..." PlaceholderStyle="Italic" IsEnabled="True" />
         <my:SearchTextField Name="searchTextField2" Margin="3" Width="120" Mode="Delayed" Placeholder="Delayed ..." PlaceholderStyle="Italic" IsEnabled="True"/>
         <my1:TextFilter Height="23" Name="filterText1" Width="120" Placeholder="Filter text ..."/>
-        <CheckBox Content="texto del check" Height="17" Name="checkBox1" />
         <ProgressBar Template="{StaticResource templateSpeedometer}"
                      Minimum="0" Maximum="100" Margin="50" 
                      Value="{Binding ElementName=scroll, Path=Value}" />

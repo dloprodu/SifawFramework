@@ -1,6 +1,6 @@
 ﻿///////////////////////////////////////////////////////////////////////////////////////////////////
 /// <summary>
-/// Librería de estructuras y clases miscelaneas de Sifaw.View.
+/// Librería de eventos de Sifaw.Core.
 /// 
 /// Diseñador:     David López Rguez
 /// Programadores: David López Rguez
@@ -9,7 +9,7 @@
 /// <remarks>
 /// ===============================================================================================
 /// Historial de versiones:
-///   - 09/01/2012 -- Creación de la clase.
+///   - 14/12/2011 -- Creación de la clase.
 /// ===============================================================================================
 /// Observaciones:
 /// 
@@ -24,25 +24,30 @@ using System.Linq;
 using System.Text;
 
 
-namespace Sifaw.Views
+namespace Sifaw.Core
 {
+	/*
+	 * Argumento y manejador para los eventos que comunican el un valor entero.
+	 */
+
 	/// <summary>
-	/// <para>
-	/// Representa un vista tipo shell, con layout configurable, que
-	/// permite alojar elementos <see cref="UIComponent"/>.
-	/// </para>
+	/// Proporciona datos para eventos que comunican un valor entero.
 	/// </summary>
-	public interface UIShellView : UIView
+	public class IntEventArgs : EventArgs
 	{
-		#region Métodos
+		public readonly int Value;
 
-		/// <summary>
-		/// Permite establecer la configuración y contenido 
-		/// de la shell.
-		/// </summary>
-		/// <param name="rows">Array de filas de la Shell.</param>
-		void SetSettings(UIShellRow[] rows);
-
-		#endregion
+		public IntEventArgs(int value)
+			: base()
+		{
+			this.Value = value;
+		}
 	}
+
+	/// <summary>
+	/// Representa el método que maneja el evento que comunica un valor entero.
+	/// </summary>
+	/// <param name="sender">Origen del evento.</param>
+	/// <param name="e"><see cref="IntEventArgs"/> que contiene los datos de eventos.</param>
+	public delegate void IntEventHandler(object sender, IntEventArgs e);
 }

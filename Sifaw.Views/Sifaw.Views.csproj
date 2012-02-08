@@ -64,13 +64,17 @@
     <Compile Include="Components\Filters\ListComponentFilter.cs" />
     <Compile Include="Components\Filters\TextComponentFilter.cs" />
     <Compile Include="Components\Filters\EnumComponentFilter.cs" />
-    <Compile Include="LibEvents.cs" />
+    <Compile Include="Miscellany\UILengthModes.cs" />
+    <Compile Include="Events\UIFilterChangedEvent.cs" />
+    <Compile Include="Events\UIFinishRequestEvent.cs" />
+    <Compile Include="Miscellany\UIShellRow.cs" />
+    <Compile Include="Miscellany\UIShellRowCell.cs" />
     <Compile Include="UIComponent.cs" />
     <Compile Include="UIElement.cs" />
     <Compile Include="UIShellView.cs" />
     <Compile Include="UIView.cs" />
-    <Compile Include="MenuCommandManager.cs" />
-    <Compile Include="MenuCommand.cs" />
+    <Compile Include="Miscellany\MenuCommandManager.cs" />
+    <Compile Include="Miscellany\MenuCommand.cs" />
     <Compile Include="Components\BackgroundWorkerComponent.cs" />
     <Compile Include="Components\AssistantComponent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -97,6 +101,10 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Attributes\" />
+    <Folder Include="Exceptions\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -7,9 +7,8 @@
         WindowStartupLocation="CenterScreen" 
         Loaded="Window_Loaded"
         Closing="Window_Closing"
-        Closed="Window_Closed">  
-    <Grid Name="grid"       
-          HorizontalAlignment="Stretch" 
-          VerticalAlignment="Stretch">       
+        Closed="Window_Closed" xmlns:my="clr-namespace:Sifaw.WPF">  
+    <Grid>
+        <my:ShellControl x:Name="shell" />
     </Grid>
 </Window>

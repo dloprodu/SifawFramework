@@ -1,15 +1,15 @@
 ﻿///////////////////////////////////////////////////////////////////////////////////////////////////
-/// <summary> 
-/// BoolComponentFilter.cs
+/// <summary>
+/// Contiene la librería de estructuras de Sifaw.Views.
 /// 
-/// Diseñador:   David López Rodríguez
-/// Programador: David López Rodríguez
+/// Diseñador:     David López Rguez
+/// Programadores: David López Rguez
+///	
 /// </summary>
 /// <remarks>
 /// ===============================================================================================
 /// Historial de versiones:
-///   - 07/02/2012: Creación de la interfaz.
-/// 
+///   - 08/02/2012 -- Creación de la clase.
 /// ===============================================================================================
 /// Observaciones:
 /// 
@@ -24,17 +24,26 @@ using System.Linq;
 using System.Text;
 
 
-namespace Sifaw.Views.Components.Filters
+namespace Sifaw.Views
 {
 	/// <summary>
-	/// Representa un componente para realizar filtros sobre un campo
-	/// booleano.
+	/// Modos de ajuste de un elemento de interfaz de usuario.
 	/// </summary>
-	public interface BoolComponentFilter : ComponentFilterBase<bool>
+	public enum UILengthModes
 	{
 		/// <summary>
-		/// Establece el texto que mostrará el componente.
+		/// Indica que el elemento ha de ajustarse a la longitud indicada en pixels.
 		/// </summary>
-		string Text { set; }
+		Pixel,
+
+		/// <summary>
+		/// Indica que el elemento ha de ajustarse a su contenido.
+		/// </summary>
+		Auto,
+
+		/// <summary>
+		/// Indica que el elemento ha de ajustarse como proporción ponderada de espacio disponible.
+		/// </summary>
+		WeightedProportion
 	}
 }

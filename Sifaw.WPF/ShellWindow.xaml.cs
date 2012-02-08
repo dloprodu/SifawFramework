@@ -1,6 +1,6 @@
 ﻿///////////////////////////////////////////////////////////////////////////////////////////////////
 /// <summary>
-/// Shell.xaml.cs.
+/// ShellWindow.xaml.cs.
 /// 
 /// Diseñador:     David López Rguez
 /// Programadores: David López Rguez
@@ -50,36 +50,6 @@ namespace Sifaw.WPF
 
 		#endregion
 
-		#region Métodos auxiliares
-
-		private GridLength GetGridLength(double length, UIShellGridLengthModes mode)
-		{
-			GridLength gLength;
-
-			switch (mode)
-			{
-				case UIShellGridLengthModes.Auto:
-					gLength = GridLength.Auto;
-					break;
-
-				case UIShellGridLengthModes.Pixel:
-					gLength = new GridLength(length, GridUnitType.Pixel);
-					break;
-
-				case UIShellGridLengthModes.WeightedProportion:
-					gLength = new GridLength(length, GridUnitType.Star);
-					break;
-
-				default:
-					gLength = GridLength.Auto;
-					break;
-			}
-
-			return gLength;
-		}
-
-		#endregion
-
 		#region Gestión de eventos
 		
 		private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -108,46 +78,7 @@ namespace Sifaw.WPF
 
 		public void SetSettings(UIShellRow[] rows)
 		{
-			Reset();
-
-			// Para que se ajuste a su contenido (Auto).
-			grid.Width = double.NaN;
-			grid.Height = double.NaN;
-
-			for (int row = 0; row < rows.Length; row++)
-			{
-				RowDefinition rDefinition = new RowDefinition();
-				rDefinition.Height = GetGridLength(rows[row].Height, rows[row].Mode);
-				grid.RowDefinitions.Add(rDefinition);
-
-				Grid gCells = new Grid();
-				gCells.HorizontalAlignment = HorizontalAlignment.Stretch;
-				gCells.VerticalAlignment = VerticalAlignment.Stretch;
-
-				// Para que se ajuste a su contenido (Auto).
-				gCells.Width = double.NaN;
-				gCells.Height = double.NaN;
-
-				for (int cell = 0; cell < rows[row].Cells.Length; cell++)
-				{
-					ColumnDefinition cDefinition = new ColumnDefinition();
-					cDefinition.Width = GetGridLength(rows[row].Cells[cell].Width, rows[row].Cells[cell].Mode);
-					gCells.ColumnDefinitions.Add(cDefinition);
-
-					if (rows[row].Cells[cell].Content != null)
-					{
-						FrameworkElement content = (rows[row].Cells[cell].Content as FrameworkElement);
-						content.HorizontalAlignment = HorizontalAlignment.Stretch;
-						content.VerticalAlignment = VerticalAlignment.Stretch;
-
-						Grid.SetColumn(content, cell);
-						gCells.Children.Add(content);
-					}
-				}
-
-				Grid.SetRow(gCells, row);
-				grid.Children.Add(gCells);
-			}
+			shell.SetSettings(rows);
 		}
 
 		#endregion
@@ -296,14 +227,12 @@ namespace Sifaw.WPF
 
 		public void Reset()
 		{
-			grid.Children.Clear();
-			grid.RowDefinitions.Clear();
-			grid.ColumnDefinitions.Clear();
+			shell.Reset();
 		}
 
 		public void SetLikeActive()
 		{
-			grid.Focus();
+			shell.Focus();
 		}
 
 		#endregion

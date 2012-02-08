@@ -146,7 +146,7 @@ namespace Sifaw.Controllers
 		/// <param name="row">Fila</param>
 		/// <param name="height">Aultura de la fila.</param>
 		/// <param name="heighthMode">Mode de ajuste de la fila.</param>
-		protected abstract void GetRowSettings(uint row, out double height, out UIShellGridLengthModes mode);
+		protected abstract void GetRowSettings(uint row, out double height, out UILengthModes mode);
 
 		/// <summary>
 		/// Devuelve la configuracion de una celda de la shell.
@@ -156,7 +156,7 @@ namespace Sifaw.Controllers
 		/// <param name="width">Ancho de la celda.</param>
 		/// <param name="widthMode">Modo de ajuste de la celda.</param>
 		/// <param name="component">Contenido de la celda.</param>
-		protected abstract void GetCellSettings(uint row, uint cell, out double width, out UIShellGridLengthModes mode, out UIComponent component);
+		protected abstract void GetCellSettings(uint row, uint cell, out double width, out UILengthModes mode, out UIComponent component);
 
 		#endregion
 
@@ -171,7 +171,7 @@ namespace Sifaw.Controllers
 			for (uint row = 0; row < rows.Length; row++)
 			{
 				double height = 0.0f;
-				UIShellGridLengthModes heightMode = UIShellGridLengthModes.Auto;
+				UILengthModes heightMode = UILengthModes.Auto;
 				GetRowSettings(row, out height, out heightMode);
 
 				UIShellRowCell[] columns = new UIShellRowCell[Math.Max(1, GetNumberOfCellsAt(row))];
@@ -179,7 +179,7 @@ namespace Sifaw.Controllers
 				for (uint column = 0; column < columns.Length; column++)
 				{
 					double width = 0.0f;
-					UIShellGridLengthModes widthMode = UIShellGridLengthModes.Auto;
+					UILengthModes widthMode = UILengthModes.Auto;
 					UIComponent component = null;
 
 					GetCellSettings(row, column, out width, out widthMode, out component);

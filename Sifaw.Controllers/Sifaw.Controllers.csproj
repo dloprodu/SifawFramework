@@ -99,25 +99,31 @@
     <Compile Include="Components\UIBackgroundWorkerViewController.cs" />
     <Compile Include="Components\UIFilterBaseController.cs" />
     <Compile Include="Components\UIFiltersGroupController.cs" />
-    <Compile Include="IUIComponentController.cs" />
-    <Compile Include="IController.cs" />
-    <Compile Include="AbstractUIProvider.cs" />
+    <Compile Include="Events\CtrlEvent.cs" />
+    <Compile Include="Events\CtrlFilterChanged.cs" />
+    <Compile Include="Events\CtrlFinishedEvent.cs" />
+    <Compile Include="Events\CtrlSatesEvent.cs" />
+    <Compile Include="Exceptions\AbstractUILinkerNullException.cs" />
+    <Compile Include="Exceptions\NotAllowResetException.cs" />
+    <Compile Include="Exceptions\NotCanStartException.cs" />
+    <Compile Include="Exceptions\NotValidCtrlStateException.cs" />
+    <Compile Include="Miscellany\IUIComponentController.cs" />
+    <Compile Include="Miscellany\IController.cs" />
+    <Compile Include="Miscellany\AbstractUIProvider.cs" />
     <Compile Include="Controller.cs" />
-    <Compile Include="IUIElementController.cs" />
-    <Compile Include="IUIViewController.cs" />
+    <Compile Include="Miscellany\IUIElementController.cs" />
+    <Compile Include="Miscellany\IUIViewController.cs" />
     <Compile Include="Test\UIAssistantTestController.cs" />
     <Compile Include="Test\UIAssistantTestViewController.cs" />
     <Compile Include="UIShellViewController.cs" />
     <Compile Include="UIComponentController.cs" />
     <Compile Include="UIElementController.cs" />
     <Compile Include="UIViewController.cs" />
-    <Compile Include="LibAttributes.cs" />
-    <Compile Include="LibEvents.cs" />
-    <Compile Include="LibExceptions.cs" />
+    <Compile Include="Attributes\CtrlReseteable.cs" />
     <Compile Include="Components\UIAssistantController.cs" />
     <Compile Include="Components\UIBackgroundWorkerController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="AbstractUIProviderManager.cs" />
+    <Compile Include="Miscellany\AbstractUIProviderManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Sifaw.Core\Sifaw.Core.csproj">
@@ -146,6 +152,7 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

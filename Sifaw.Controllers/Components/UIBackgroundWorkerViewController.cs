@@ -301,16 +301,16 @@ namespace Sifaw.Controllers.Components
 			return 1;
 		}
 
-		protected override void GetRowSettings(uint row, out double height, out Views.UIShellGridLengthModes mode)
+		protected override void GetRowSettings(uint row, out double height, out Views.UILengthModes mode)
 		{
 			height = 0;
-			mode = Views.UIShellGridLengthModes.Auto;
+			mode = Views.UILengthModes.Auto;
 		}
 
-		protected override void GetCellSettings(uint row, uint cell, out double width, out Views.UIShellGridLengthModes mode, out Views.UIComponent component)
+		protected override void GetCellSettings(uint row, uint cell, out double width, out Views.UILengthModes mode, out Views.UIComponent component)
 		{
 			width = 0;
-			mode = Views.UIShellGridLengthModes.Auto;
+			mode = Views.UILengthModes.Auto;
 			component = UIBackgroundWorkerController.GetUIComponent();
 		}
 

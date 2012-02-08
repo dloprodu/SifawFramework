@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 /// <summary>
-/// Contiene la librería atributos
+/// Librería de atributos de Sifaw.Controllers.
 /// 
 /// Diseñador:     David López Rguez
 /// Programadores: David López Rguez
@@ -25,33 +25,6 @@ using System.Text;
 
 namespace Sifaw.Controllers
 {
-    /// <summary>
-    /// Atributo para identificar la modalidad de la controladora.
-	/// </summary>
-	/// <remarks>
-	/// <para>
-	/// Se distinguen dos modos de instanciar controladoras: Las controladoras
-	/// 'Embebidas' y las 'No embebidas'.
-	/// </para>
-	/// <para>
-	/// Las controladoras 'Embebidas' son incluidas en una controladora padre 
-	/// para completar su funcionalidad siendo iniciadas normalmente
-	/// cuando se inicia el padre. Por lo tanto su ciclo de vida suele ser el 
-	/// mismo que el de la controladora que la embebe.
-	/// </para>
-	/// <para>
-	/// Las controladoras 'No embebidas' extienden la funcionalidad de otra controladora
-	/// ya iniciada siendo su ciclo de vida mas corto que el de la controladora que la
-	/// extiende.
-	/// </para>
-	/// <para>
-	/// La diferenciación es importante puesto que las controladoras 'Embebidas'
-	/// son finalizadas de forma automática por la controladora base.
-	/// </para>
-	/// </remarks>
-	//[AttributeUsage(AttributeTargets.Field, Inherited = true, AllowMultiple = true)]
-	//public class CtrlMode : Attribute ...
-
     /// <summary>
     /// Atributo para identificar las variables de la controladora que se quieren resetear al finalizar
 	/// una controladora.

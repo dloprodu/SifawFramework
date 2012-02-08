@@ -1,15 +1,15 @@
 ﻿///////////////////////////////////////////////////////////////////////////////////////////////////
-/// <summary> 
-/// BoolComponentFilter.cs
+/// <summary>
+/// Librería de estructuras y clases miscelaneas de Sifaw.View.
 /// 
-/// Diseñador:   David López Rodríguez
-/// Programador: David López Rodríguez
+/// Diseñador:     David López Rguez
+/// Programadores: David López Rguez
+///	
 /// </summary>
 /// <remarks>
 /// ===============================================================================================
 /// Historial de versiones:
-///   - 07/02/2012: Creación de la interfaz.
-/// 
+///   - 09/01/2012 -- Creación de la clase.
 /// ===============================================================================================
 /// Observaciones:
 /// 
@@ -24,17 +24,22 @@ using System.Linq;
 using System.Text;
 
 
-namespace Sifaw.Views.Components.Filters
+namespace Sifaw.Views
 {
 	/// <summary>
-	/// Representa un componente para realizar filtros sobre un campo
-	/// booleano.
+	/// Almacena la altura, modo de ajuste y celdas de una fila de una vista <see cref="UIShellView"/>.
 	/// </summary>
-	public interface BoolComponentFilter : ComponentFilterBase<bool>
+	public struct UIShellRow
 	{
-		/// <summary>
-		/// Establece el texto que mostrará el componente.
-		/// </summary>
-		string Text { set; }
+		public readonly double Height;
+		public readonly UILengthModes Mode;
+		public readonly UIShellRowCell[] Cells;
+
+		public UIShellRow(double height, UILengthModes mode, UIShellRowCell[] cells)
+		{
+			Height = height;
+			Mode = mode;
+			Cells = cells;
+		}
 	}
 }

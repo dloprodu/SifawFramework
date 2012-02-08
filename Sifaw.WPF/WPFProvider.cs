@@ -24,8 +24,9 @@ using System.Linq;
 using System.Text;
 
 using Sifaw.Controllers;
-using Sifaw.Views.Components;
+
 using Sifaw.Views;
+using Sifaw.Views.Components;
 using Sifaw.Views.Components.Filters;
 
 
@@ -33,7 +34,7 @@ namespace Sifaw.WPF
 {
 	/// <summary>
 	/// Implementación WPF del proveedor de componentes y vistas 
-	/// <see cref="AbstractUIProvider"/>  para Sifaw Framework.
+	/// <see cref="AbstractUIProvider"/> para Sifaw Framework.
 	/// </summary>
 	public class WPFProvider : AbstractUIProvider
 	{
@@ -67,8 +68,7 @@ namespace Sifaw.WPF
 
 		public void Get(out ListComponentFilter ui)
 		{
-			// TODO: ListComponentFilter
-			throw new NotImplementedException();
+			ui = new ListFilter();
 		}
 
 		public void Get(out EnumComponentFilter ui)
@@ -79,8 +79,7 @@ namespace Sifaw.WPF
 
 		public void Get(out DropDownListComponentFilter ui)
 		{
-			// TODO: DropDownListComponentFilter
-			throw new NotImplementedException();
+			ui = new DropDownListFilter();
 		}
 		
 		#endregion

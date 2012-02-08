@@ -1,0 +1,12 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:Sifaw.WPF">
+
+    <Style TargetType="{x:Type local:DropDownListFilter}"
+           BasedOn="{StaticResource {x:Type ComboBox}}">
+        
+        <!-- Empty -->
+        
+    </Style>
+
+</ResourceDictionary>

@@ -1,11 +1,11 @@
 ## Datos Generales
-Proyecto    : **Sifaw Framework**
+Proyecto: **Sifaw Framework**
 
-Plataforma  : **Microsoft .Net 4**
+Plataforma: **Microsoft .Net 4**
 
-Autor       : **[David López Rguez](http://www.facebook.com/davidlopezrguez)**
+Autor: **[David López Rguez](http://www.facebook.com/davidlopezrguez)**
               *dloprodu@gmail.com*
 
-Descripción : **Framework MVC para para Visual C#.**
+Descripción: **Framework MVC para para Visual C#.**
 
-Estado      : En desarrollo ...
+Estado: En desarrollo ...

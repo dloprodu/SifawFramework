@@ -90,6 +90,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Components\Filters\TODO.cs" />
     <Compile Include="Components\UIListFilterBaseController.cs" />
     <Compile Include="Components\Filters\UIDropDownListFilterController.cs" />
     <Compile Include="Components\Filters\UIBoolFilterController.cs" />
@@ -113,7 +114,7 @@
     <Compile Include="_Exceptions\AbstractUILinkerNullException.cs" />
     <Compile Include="_Exceptions\NotAllowResetException.cs" />
     <Compile Include="_Exceptions\NotCanStartException.cs" />
-    <Compile Include="_Exceptions\NotValidCtrlStateException.cs" />
+    <Compile Include="_Exceptions\NotValidStateException.cs" />
     <Compile Include="_Miscellany\AbstractUILinker.cs" />
     <Compile Include="_Miscellany\CLInformation.cs" />
     <Compile Include="_Miscellany\CLStates.cs" />

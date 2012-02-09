@@ -123,7 +123,7 @@ namespace Sifaw.WPF
 		private void OnFilterChanged(UIFilterChangedEventArgs<string> e)
 		{
 			if (FilterChanged != null)
-				FilterChanged(this as ComponentFilterBase<string>, e);
+				FilterChanged(this as TextComponentFilter, e);
 		}
 
 		#endregion

@@ -72,9 +72,8 @@ namespace Sifaw.WPF
 		}
 
 		public void Get(out EnumComponentFilter ui)
-		{
-			// TODO: EnumComponentFilter
-			throw new NotImplementedException();
+		{			
+			ui = new EnumFilter();
 		}
 
 		public void Get(out DropDownListComponentFilter ui)

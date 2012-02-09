@@ -10,10 +10,8 @@ namespace Sifaw.Controllers
 	/// Almacena la descripción de una controladora.
 	/// </summary>
 	[Serializable]
-	public class CLInformation
+	public struct CLInformation
 	{
-		#region Variables
-
 		public readonly static CLInformation Empty;
 
 		/// <summary>
@@ -25,8 +23,6 @@ namespace Sifaw.Controllers
 		/// Devuelve la descripción de la controladora.
 		/// </summary>
 		public readonly string Description;
-
-		#endregion
 
 		#region Constructor
 

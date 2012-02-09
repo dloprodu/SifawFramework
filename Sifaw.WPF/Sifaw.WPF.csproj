@@ -61,9 +61,7 @@
     <Compile Include="BoolFilter.cs" />
     <Compile Include="Commands\DelegateCommand.cs" />
     <Compile Include="DropDownListFilter.cs" />
-    <Compile Include="EnumControl.xaml.cs">
-      <DependentUpon>EnumControl.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="EnumFilter.cs" />
     <Compile Include="ListFilter.cs" />
     <Compile Include="ShellControl.xaml.cs">
       <DependentUpon>ShellControl.xaml</DependentUpon>
@@ -123,10 +121,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="EnumControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="ShellControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -136,6 +130,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Themes\DropDownListFilter.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\EnumFilter.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

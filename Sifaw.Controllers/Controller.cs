@@ -416,7 +416,7 @@ namespace Sifaw.Controllers
 		protected void CheckState(CLStates state)
 		{
 			if (State != state)
-				throw new NotValidCtrlStateException();
+				throw new NotValidStateException();
 		}
 
 		#endregion
@@ -671,7 +671,7 @@ namespace Sifaw.Controllers
 		/// <summary>
 		/// Inicia la controladora con los parámetros por defecto
 		/// </summary>
-		/// <exception cref="NotValidCtrlStateException">La controladora ya está iniciada.</exception>
+		/// <exception cref="NotValidStateException">La controladora ya está iniciada.</exception>
 		/// <exception cref="ArgumentNullException">input es null.</exception>
 		/// <exception cref="ArgumentException">input no es serializable.</exception>
 		/// <exception cref="NotCanStartException">input no contiene los parámetros esperados para el inicio.</exception>
@@ -685,7 +685,7 @@ namespace Sifaw.Controllers
 		/// <summary>
 		/// Inicia la controladora.
 		/// </summary>
-		/// <exception cref="NotValidCtrlStateException">La controladora ya está iniciada.</exception>
+		/// <exception cref="NotValidStateException">La controladora ya está iniciada.</exception>
 		/// <exception cref="ArgumentNullException">input es null.</exception>
 		/// <exception cref="ArgumentException">input no es serializable.</exception>
 		/// <exception cref="NotCanStartException">input no contiene los parámetros esperados para el inicio.</exception>
@@ -734,7 +734,7 @@ namespace Sifaw.Controllers
 		/// <summary>
 		/// Reinicia la controladora con los parámetros por defecto
 		/// </summary>
-		/// <exception cref="NotValidCtrlStateException">La controladora no está iniciada.</exception>
+		/// <exception cref="NotValidStateException">La controladora no está iniciada.</exception>
 		/// <exception cref="NotAllowResetException">La controladora no soporta el reinicio.</exception>
 		/// <exception cref="ArgumentNullException">input es null.</exception>
 		/// <exception cref="ArgumentException">input no es serializable.</exception>
@@ -749,7 +749,7 @@ namespace Sifaw.Controllers
 		/// <summary>
 		/// Reinicia la controladora.
 		/// </summary>
-		/// <exception cref="NotValidCtrlStateException">La controladora no está iniciada.</exception>
+		/// <exception cref="NotValidStateException">La controladora no está iniciada.</exception>
 		/// <exception cref="NotAllowResetException">La controladora no soporta el reinicio.</exception>
 		/// <exception cref="ArgumentNullException">input es null.</exception>
 		/// <exception cref="ArgumentException">input no es serializable.</exception>
@@ -795,7 +795,7 @@ namespace Sifaw.Controllers
 		/// <summary>
 		/// Termina la ejecución de la controladora.
 		/// </summary>
-		/// <exception cref="NotValidCtrlStateException">La controladora no está iniciada.</exception>
+		/// <exception cref="NotValidStateException">La controladora no está iniciada.</exception>
 		/// <returns>Valor que indica si la controladora se finalizó correctamente.</returns>
 		public bool Finish()
 		{

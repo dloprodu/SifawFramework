@@ -132,7 +132,7 @@ namespace Sifaw.WPF
 		private void OnFilterChanged(UIFilterChangedEventArgs<IFilterable> e)
 		{
 			if (FilterChanged != null)
-				FilterChanged(this as ListComponentFilter, e);
+				FilterChanged(this as DropDownListComponentFilter, e);
 		}
 
 		#endregion

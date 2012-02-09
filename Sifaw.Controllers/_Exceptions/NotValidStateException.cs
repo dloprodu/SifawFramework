@@ -29,9 +29,9 @@ namespace Sifaw.Controllers
 	/// <summary>
 	/// Excepción producida por incoherencia en el estado de la controladora.
 	/// </summary>
-	public class NotValidCtrlStateException : Exception
+	public class NotValidStateException : Exception
 	{
-		public NotValidCtrlStateException()
+		public NotValidStateException()
 			: base("La controladora se encuentra en un estado incorrecto.")
 		{
 		}

@@ -7,7 +7,9 @@
         <ResourceDictionary Source="/Sifaw.WPF;component/Themes/TextFilter.xaml" />
         <ResourceDictionary Source="/Sifaw.WPF;component/Themes/BoolFilter.xaml" />
         <ResourceDictionary Source="/Sifaw.WPF;component/Themes/ListFilter.xaml" />
+        <ResourceDictionary Source="/Sifaw.WPF;component/Themes/EnumFilter.xaml" />
         <ResourceDictionary Source="/Sifaw.WPF;component/Themes/DropDownListFilter.xaml" />
     </ResourceDictionary.MergedDictionaries>
+
 
 </ResourceDictionary>

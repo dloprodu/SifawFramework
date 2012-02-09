@@ -23,15 +23,15 @@ namespace Sifaw.WPF.Test
 			: base()
 		{
 			AbstractUIProviderManager<AbstractUIProvider>.SetUIElementLinker(new WPFProvider());
-			
-			//(new MainWindow()).Show();			
+
+			(new MainWindow()).Show();			
 			
 			//UIBackgroundWorkerViewController workerController = new UIBackgroundWorkerViewController(null);
 			//workerController.UISettings.AllowCancel = true;
 			//workerController.Start(new UIBackgroundWorkerViewController.Input(new BackgroundWorkerPack(TestBackGroundWorker, null)));
 
-			UIAssistantTestViewController assistantTest = new UIAssistantTestViewController();
-			assistantTest.Start();
+			//UIAssistantTestViewController assistantTest = new UIAssistantTestViewController();
+			//assistantTest.Start();
 		}
 
 		#endregion

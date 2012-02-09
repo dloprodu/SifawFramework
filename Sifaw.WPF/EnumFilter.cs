@@ -1,6 +1,6 @@
 ﻿///////////////////////////////////////////////////////////////////////////////////////////////////
 /// <sumary>
-/// BoolFilter.cs
+/// EnumFilter.cs
 /// 
 /// Diseñador: David López Rguez
 /// Programador: David López Rguez
@@ -8,7 +8,7 @@
 /// <remarks>
 /// ===============================================================================================
 /// Historial de versiones:
-///   - 06/02/2012: Creación de controladora.
+///   - 09/02/2012: Creación de controladora.
 /// 
 /// ===============================================================================================
 /// Observaciones:
@@ -31,23 +31,48 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-using Sifaw.Views.Components;
 using Sifaw.Views;
+using Sifaw.Views.Components;
 using Sifaw.Views.Components.Filters;
 
 
 namespace Sifaw.WPF
 {
 	/// <summary>
-	/// Representa un control que implementa el componente <see cref="BoolComponentFilter"/>.
+	/// Representa un control que implementa el componente EnumComponentFilter
 	/// </summary>
-	public class BoolFilter : CheckBox, BoolComponentFilter
+	public class EnumFilter : ListBox, EnumComponentFilter
 	{
+		#region Dependecy Properties
+
+		public static readonly DependencyProperty OrientationProperty =
+		   DependencyProperty.Register(
+			   "Orientation",
+			   typeof(Orientation),
+			   typeof(EnumFilter),
+			   new PropertyMetadata(Orientation.Vertical));
+
+		#endregion
+
+		#region Propiedades
+
+		/// <summary>
+		/// Obtiene o establece un valor que indica la orientación horizontal o vertical del
+		/// contenido.
+		/// </summary>
+		public Orientation Orientation
+		{
+			get { return (Orientation)GetValue(OrientationProperty); }
+			set { SetValue(OrientationProperty, value); }
+		}
+
+		#endregion
+
 		#region Constructor
 
-		static BoolFilter()
+		static EnumFilter()
 		{
-			DefaultStyleKeyProperty.OverrideMetadata(typeof(BoolFilter), new FrameworkPropertyMetadata(typeof(BoolFilter)));
+			DefaultStyleKeyProperty.OverrideMetadata(typeof(EnumFilter), new FrameworkPropertyMetadata(typeof(EnumFilter)));
 		}
 
 		#endregion
@@ -71,11 +96,16 @@ namespace Sifaw.WPF
 
 		#endregion
 
-		#region Métodos sobreescritos
+		#region Override Methods
 
-		protected override void OnChecked(RoutedEventArgs e)
+		/// <summary>
+		/// Último filtro válido aplicado.
+		/// </summary>
+		private IFilterable LastFilter = null;
+
+		protected override void OnSelectionChanged(SelectionChangedEventArgs e)
 		{
-			base.OnChecked(e);
+			base.OnSelectionChanged(e);
 
 			if (!filtering)
 			{
@@ -83,40 +113,14 @@ namespace Sifaw.WPF
 
 				try
 				{
-					UIFilterChangedEventArgs<bool> args = new UIFilterChangedEventArgs<bool>(false, true);
+					UIFilterChangedEventArgs<IFilterable> args = new UIFilterChangedEventArgs<IFilterable>(LastFilter, Filter);
 
 					OnFilterChanged(args);
 
 					if (args.Cancel)
-						Filter = false;
-				}
-				catch (Exception ex)
-				{
-					throw ex;
-				}
-				finally
-				{
-					EndFilter();
-				}
-			}
-		}
-
-		protected override void OnUnchecked(RoutedEventArgs e)
-		{
-			base.OnUnchecked(e);
-
-			if (!filtering)
-			{
-				BeginFilter();
-
-				try
-				{
-					UIFilterChangedEventArgs<bool> args = new UIFilterChangedEventArgs<bool>(true, false);
-
-					OnFilterChanged(args);
-
-					if (args.Cancel)
-						Filter = true;
+						Filter = LastFilter;
+					else
+						LastFilter = Filter;
 				}
 				catch (Exception ex)
 				{
@@ -131,28 +135,30 @@ namespace Sifaw.WPF
 
 		#endregion
 
-		#region BoolComponentFilter Members
+		#region ComponentListFilterBase<IFilterable,IList<IFilterable>> Members
 
-		public string Text
+		public void Add(IList<IFilterable> source)
 		{
-			set { Content = value; }
+			this.SelectionMode = SelectionMode.Single;
+			this.ItemsSource = source;
+			this.DisplayMemberPath = "DisplayFilter";
 		}
 
 		#endregion
 
-		#region ComponentFilter<bool> Members
+		#region ComponentFilterBase<IFilterable> Members
 
-		public bool Filter
+		public IFilterable Filter
 		{
-			get { return IsChecked.HasValue ? IsChecked.Value : false; }
-			set { IsChecked = value; }
+			get { return SelectedItem as IFilterable; }
+			set { SelectedItem = value; }
 		}
 
-		public event UIFilterChangedEventHandler<bool> FilterChanged;
-		private void OnFilterChanged(UIFilterChangedEventArgs<bool> e)
+		public event UIFilterChangedEventHandler<IFilterable> FilterChanged;
+		private void OnFilterChanged(UIFilterChangedEventArgs<IFilterable> e)
 		{
 			if (FilterChanged != null)
-				FilterChanged(this as BoolComponentFilter, e);
+				FilterChanged(this as EnumComponentFilter, e);
 		}
 
 		#endregion
@@ -186,7 +192,7 @@ namespace Sifaw.WPF
 
 		public void Reset()
 		{
-			/* Emtpy */
+			ItemsSource = null;
 		}
 
 		public void SetLikeActive()

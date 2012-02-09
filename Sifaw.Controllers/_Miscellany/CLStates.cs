@@ -7,7 +7,7 @@ using System.Text;
 namespace Sifaw.Controllers
 {
 	/// <summary>
-	/// Estados de una controladora.
+	/// Define los esstados de una controladora.
 	/// </summary>
 	[Flags()]
 	public enum CLStates : byte

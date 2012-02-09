@@ -2,6 +2,10 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:Sifaw.WPF">
 
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="Shared.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+    
     <Style TargetType="{x:Type local:ListFilter}"           
            BasedOn="{StaticResource {x:Type ListBox}}">
 

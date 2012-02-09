@@ -343,7 +343,7 @@ namespace Sifaw.Controllers
 		/// Para invocar este método la controladora ha de estar iniciada, 
 		/// en otro caso, devolverá una excepcion.
 		/// </summary>
-		/// <exception cref="NotValidCtrlStateException">La controladora no está iniciada.</exception>
+		/// <exception cref="NotValidStateException">La controladora no está iniciada.</exception>
 		public void Show()
 		{
 			CheckState(CLStates.Started);

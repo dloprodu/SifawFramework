@@ -6,7 +6,7 @@
         <ResourceDictionary Source="Shared.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
-    <Style TargetType="{x:Type local:DropDownListFilter}"
+    <Style TargetType="{x:Type local:DropDownListFilterControl}"
            BasedOn="{StaticResource {x:Type ComboBox}}">
         
         <!-- Empty -->

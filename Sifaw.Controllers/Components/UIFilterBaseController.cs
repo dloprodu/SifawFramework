@@ -41,7 +41,7 @@ namespace Sifaw.Controllers.Components
 		, TComponent>
 		where TUISettings : UIFilterBaseController<TFilter, TUISettings, TComponent>.UISettingsContainer<TComponent>
 						  , new()
-		where TComponent  : ComponentFilterBase<TFilter>
+		where TComponent  : FilterBaseComponent<TFilter>
 	{
 		#region Parametros de inicio / finalización
 

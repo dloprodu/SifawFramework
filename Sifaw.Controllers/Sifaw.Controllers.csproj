@@ -100,7 +100,13 @@
     <Compile Include="Components\UIBackgroundWorkerViewController.cs" />
     <Compile Include="Components\UIFilterBaseController.cs" />
     <Compile Include="Components\UIFiltersGroupController.cs" />
+    <Compile Include="UIShellComponentController.cs" />
     <Compile Include="_Attributes\CLGuidReseteable.cs" />
+    <Compile Include="_Delegates\GetCellSettingsShellCallback.cs" />
+    <Compile Include="_Delegates\GetNumberOfCellsAtShellCallback.cs" />
+    <Compile Include="_Delegates\GetNumberOfRowsShellCallback.cs" />
+    <Compile Include="_Delegates\GetRowSettingsShellCallback.cs" />
+    <Compile Include="_Delegates\SetSettingsShellCallback.cs" />
     <Compile Include="_Events\CLShowMessageEvent.cs" />
     <Compile Include="_Events\CLThrowEvent.cs" />
     <Compile Include="_Events\CLFilterChangedEvent.cs" />
@@ -135,6 +141,7 @@
     <Compile Include="Components\UIBackgroundWorkerController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="_Miscellany\AbstractUIProviderManager.cs" />
+    <Compile Include="_Miscellany\ShellManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Sifaw.Core\Sifaw.Core.csproj">
@@ -163,6 +170,7 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

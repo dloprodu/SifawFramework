@@ -58,15 +58,15 @@
     <Compile Include="BackgroundWorkerControl.xaml.cs">
       <DependentUpon>BackgroundWorkerControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="BoolFilter.cs" />
+    <Compile Include="BoolFilterControl.cs" />
     <Compile Include="Commands\DelegateCommand.cs" />
-    <Compile Include="DropDownListFilter.cs" />
-    <Compile Include="EnumFilter.cs" />
-    <Compile Include="ListFilter.cs" />
+    <Compile Include="DropDownListFilterControl.cs" />
+    <Compile Include="EnumFilterControl.cs" />
+    <Compile Include="ListFilterControl.cs" />
     <Compile Include="ShellControl.xaml.cs">
       <DependentUpon>ShellControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="TextFilter.cs" />
+    <Compile Include="TextFilterControl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -125,19 +125,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Themes\BoolFilter.xaml">
+    <Page Include="Themes\BoolFilterControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Themes\DropDownListFilter.xaml">
+    <Page Include="Themes\DropDownListFilterControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Themes\EnumFilter.xaml">
+    <Page Include="Themes\EnumFilterControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Themes\ListFilter.xaml">
+    <Page Include="Themes\ListFilterControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -157,7 +157,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Themes\TextFilter.xaml">
+    <Page Include="Themes\TextFilterControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

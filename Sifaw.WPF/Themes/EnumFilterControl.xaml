@@ -6,7 +6,7 @@
         <ResourceDictionary Source="Shared.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
-    <Style TargetType="{x:Type local:EnumFilter}"           
+    <Style TargetType="{x:Type local:EnumFilterControl}"           
            BasedOn="{StaticResource {x:Type ListBox}}">
 
         <Setter Property="Background" Value="Transparent"/>        
@@ -14,7 +14,7 @@
             <Setter.Value>
                 <ItemsPanelTemplate>
                     <VirtualizingStackPanel Background="Transparent" 
-                                            Orientation="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:EnumFilter}}, Path=Orientation}"/>
+                                            Orientation="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:EnumFilterControl}}, Path=Orientation}"/>
                 </ItemsPanelTemplate>
             </Setter.Value>
         </Setter>        

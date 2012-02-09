@@ -48,11 +48,11 @@ namespace Sifaw.Controllers
     public abstract class UIComponentController<TInput, TOutput, TUISettings, TComponent>
         : UIElementController<TInput, TOutput, TUISettings, TComponent>
         , IUIComponentController
-        where TInput : UIComponentController<TInput, TOutput, TUISettings, TComponent>.Input
-        where TOutput : UIComponentController<TInput, TOutput, TUISettings, TComponent>.Output
+        where TInput      : UIComponentController<TInput, TOutput, TUISettings, TComponent>.Input
+        where TOutput     : UIComponentController<TInput, TOutput, TUISettings, TComponent>.Output
         where TUISettings : UIComponentController<TInput, TOutput, TUISettings, TComponent>.UISettingsContainer<TComponent>
                           , new()
-        where TComponent : UIComponent
+        where TComponent  : UIComponent
     {
         #region Entrada / Salida
 
@@ -94,7 +94,7 @@ namespace Sifaw.Controllers
 
         [Serializable]
         public new class UISettingsContainer<TUI> : UIElementController
-            <TInput
+            < TInput
             , TOutput
             , TUISettings
             , TComponent>.UISettingsContainer<TUI>

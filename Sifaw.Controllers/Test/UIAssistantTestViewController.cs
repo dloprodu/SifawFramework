@@ -12,7 +12,8 @@ namespace Sifaw.Controllers.Test
 		: UIShellViewController
 		< UIAssistantTestViewController.Input
 		, UIAssistantTestViewController.Output
-		, UIAssistantTestViewController.UISettingsContainer>
+		, UIAssistantTestViewController.UISettingsContainer
+		, UIComponent>
 	{
 		#region Entrada / Salida
 
@@ -20,7 +21,7 @@ namespace Sifaw.Controllers.Test
 		/// Parámetros de entrada de las controladora.
 		/// </summary>
 		[Serializable]
-		public new class Input : UIShellViewController<Input, Output, UISettingsContainer>.Input
+		public new class Input : UIShellViewController<Input, Output, UISettingsContainer, UIComponent>.Input
 		{
 			#region Constructor
 
@@ -41,7 +42,7 @@ namespace Sifaw.Controllers.Test
 		/// Parámetros de retorno de la controladora.
 		/// </summary>
 		[Serializable]
-		public new class Output : UIShellViewController<Input, Output, UISettingsContainer>.Output
+		public new class Output : UIShellViewController<Input, Output, UISettingsContainer, UIComponent>.Output
 		{
 			#region Variables
 
@@ -77,7 +78,11 @@ namespace Sifaw.Controllers.Test
 		#region Settings
 
 		[Serializable]
-		public new class UISettingsContainer : UIShellViewController<Input, Output, UISettingsContainer>.UISettingsContainer
+		public new class UISettingsContainer : UIShellViewController
+			< Input
+			, Output
+			, UISettingsContainer
+			, UIComponent>.UISettingsContainer
 		{
 			#region Constructor
 
@@ -126,7 +131,7 @@ namespace Sifaw.Controllers.Test
 		{
 		}
 
-		public UIAssistantTestViewController(AbstractUILinker<UIShellView> linker)
+		public UIAssistantTestViewController(AbstractUILinker<ShellView> linker)
 			: base(linker)
 		{
 		}

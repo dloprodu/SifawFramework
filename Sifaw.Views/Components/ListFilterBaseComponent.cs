@@ -31,7 +31,7 @@ namespace Sifaw.Views.Components
 	/// Representa un componente base para realizar filtros sobre listas de objetos <see cref="TFiler"/>.
 	/// </summary>
 	/// <typeparam name="TFiler">Tipo del filtro del componente.</typeparam>
-	public interface ComponentListFilterBase<TFilter, TSource> : ComponentFilterBase<TFilter>
+	public interface ListFilterBaseComponent<TFilter, TSource> : FilterBaseComponent<TFilter>
 		where TSource : IList<IFilterable>
 	{
 		#region Métodos

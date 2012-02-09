@@ -35,7 +35,7 @@ namespace Sifaw.Controllers.Components.Filters
 	public class UIBoolFilterController : UIFilterBaseController
 		< bool
 		, UIBoolFilterController.UISettingsContainer
-		, BoolComponentFilter>
+		, BoolFilterComponent>
 	{
 		#region Settings
 
@@ -43,7 +43,7 @@ namespace Sifaw.Controllers.Components.Filters
 		public class UISettingsContainer : UIFilterBaseController
 			< bool
 			, UISettingsContainer
-			, BoolComponentFilter>.UISettingsContainer<BoolComponentFilter>
+			, BoolFilterComponent>.UISettingsContainer<BoolFilterComponent>
 		{
 			#region Variables
 
@@ -91,7 +91,7 @@ namespace Sifaw.Controllers.Components.Filters
 		{
 		}
 
-		public UIBoolFilterController(AbstractUILinker<BoolComponentFilter> linker)
+		public UIBoolFilterController(AbstractUILinker<BoolFilterComponent> linker)
 			: base(linker)
 		{
 		}

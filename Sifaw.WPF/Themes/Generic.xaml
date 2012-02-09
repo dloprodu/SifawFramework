@@ -4,11 +4,11 @@
     xmlns:local="clr-namespace:Sifaw.WPF">
 
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="/Sifaw.WPF;component/Themes/TextFilter.xaml" />
-        <ResourceDictionary Source="/Sifaw.WPF;component/Themes/BoolFilter.xaml" />
-        <ResourceDictionary Source="/Sifaw.WPF;component/Themes/ListFilter.xaml" />
-        <ResourceDictionary Source="/Sifaw.WPF;component/Themes/EnumFilter.xaml" />
-        <ResourceDictionary Source="/Sifaw.WPF;component/Themes/DropDownListFilter.xaml" />
+        <ResourceDictionary Source="/Sifaw.WPF;component/Themes/TextFilterControl.xaml" />
+        <ResourceDictionary Source="/Sifaw.WPF;component/Themes/BoolFilterControl.xaml" />
+        <ResourceDictionary Source="/Sifaw.WPF;component/Themes/ListFilterControl.xaml" />
+        <ResourceDictionary Source="/Sifaw.WPF;component/Themes/EnumFilterControl.xaml" />
+        <ResourceDictionary Source="/Sifaw.WPF;component/Themes/DropDownListFilterControl.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
 

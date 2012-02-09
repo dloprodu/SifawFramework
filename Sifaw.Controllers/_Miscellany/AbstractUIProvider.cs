@@ -44,17 +44,17 @@ namespace Sifaw.Controllers
 		/* Lista de linker´s de controladoras con vistas y componentes. */
 		/****************************************************************/	
 		// • Componentes 
-		: AbstractUILinker<BackgroundWorkerComponent>
+		: AbstractUILinker<ShellComponent>
+		, AbstractUILinker<BackgroundWorkerComponent>
 		, AbstractUILinker<AssistantComponent>
-		, AbstractUILinker<FiltersGroupComponent>
-		, AbstractUILinker<TextComponentFilter>
-		, AbstractUILinker<BoolComponentFilter>
-		, AbstractUILinker<ListComponentFilter>
-		, AbstractUILinker<EnumComponentFilter>
-		, AbstractUILinker<DropDownListComponentFilter>
+		, AbstractUILinker<TextFilterComponent>
+		, AbstractUILinker<BoolFilterComponent>
+		, AbstractUILinker<ListFilterComponent>
+		, AbstractUILinker<EnumFilterComponent>
+		, AbstractUILinker<DropDownListFilterComponent>
 				
 		// • Vistas 		 
-		, AbstractUILinker<UIShellView>
+		, AbstractUILinker<ShellView>
 	{
 		/* Empty */
 	}

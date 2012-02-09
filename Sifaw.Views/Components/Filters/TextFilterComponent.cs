@@ -30,7 +30,7 @@ namespace Sifaw.Views.Components.Filters
 	/// Representa un componente para realizar filtros sobre un campo 
 	/// de texto.
 	/// </summary>
-	public interface TextComponentFilter : ComponentFilterBase<string>
+	public interface TextFilterComponent : FilterBaseComponent<string>
 	{
 		/* Empty */
 	}

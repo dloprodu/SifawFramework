@@ -43,7 +43,7 @@ namespace Sifaw.Controllers.Components.Filters
 		< IList<IFilterable>
 		, IList<IFilterable>
 		, UIListFilterController.UISettingsContainer
-		, ListComponentFilter>
+		, ListFilterComponent>
 	{
 		#region Settings
 
@@ -52,7 +52,7 @@ namespace Sifaw.Controllers.Components.Filters
 			< IList<IFilterable>
 			, IList<IFilterable>
 			, UISettingsContainer
-			, ListComponentFilter>.UISettingsContainer<ListComponentFilter>
+			, ListFilterComponent>.UISettingsContainer<ListFilterComponent>
 		{
 			#region Constructor
 
@@ -82,7 +82,7 @@ namespace Sifaw.Controllers.Components.Filters
 		{
 		}
 
-		public UIListFilterController(AbstractUILinker<ListComponentFilter> linker)
+		public UIListFilterController(AbstractUILinker<ListFilterComponent> linker)
 			: base(linker)
 		{
 		}

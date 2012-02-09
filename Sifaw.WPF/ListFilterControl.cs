@@ -1,6 +1,6 @@
 ﻿///////////////////////////////////////////////////////////////////////////////////////////////////
 /// <sumary>
-/// EnumFilter.cs
+/// ListFilter.cs
 /// 
 /// Diseñador: David López Rguez
 /// Programador: David López Rguez
@@ -8,7 +8,7 @@
 /// <remarks>
 /// ===============================================================================================
 /// Historial de versiones:
-///   - 09/02/2012: Creación de controladora.
+///   - 06/02/2012: Creación de controladora.
 /// 
 /// ===============================================================================================
 /// Observaciones:
@@ -39,40 +39,15 @@ using Sifaw.Views.Components.Filters;
 namespace Sifaw.WPF
 {
 	/// <summary>
-	/// Representa un control que implementa el componente EnumComponentFilter
+	/// Representa un control que implementa el componente <see cref="ListFilterComponent"/>.
 	/// </summary>
-	public class EnumFilter : ListBox, EnumComponentFilter
+	public class ListFilterControl : ListBox, ListFilterComponent
 	{
-		#region Dependecy Properties
+		#region Constructores
 
-		public static readonly DependencyProperty OrientationProperty =
-		   DependencyProperty.Register(
-			   "Orientation",
-			   typeof(Orientation),
-			   typeof(EnumFilter),
-			   new PropertyMetadata(Orientation.Vertical));
-
-		#endregion
-
-		#region Propiedades
-
-		/// <summary>
-		/// Obtiene o establece un valor que indica la orientación horizontal o vertical del
-		/// contenido.
-		/// </summary>
-		public Orientation Orientation
+		static ListFilterControl()
 		{
-			get { return (Orientation)GetValue(OrientationProperty); }
-			set { SetValue(OrientationProperty, value); }
-		}
-
-		#endregion
-
-		#region Constructor
-
-		static EnumFilter()
-		{
-			DefaultStyleKeyProperty.OverrideMetadata(typeof(EnumFilter), new FrameworkPropertyMetadata(typeof(EnumFilter)));
+			DefaultStyleKeyProperty.OverrideMetadata(typeof(ListFilterControl), new FrameworkPropertyMetadata(typeof(ListFilterControl)));
 		}
 
 		#endregion
@@ -95,13 +70,13 @@ namespace Sifaw.WPF
 		}
 
 		#endregion
-
+		
 		#region Override Methods
 
 		/// <summary>
 		/// Último filtro válido aplicado.
 		/// </summary>
-		private IFilterable LastFilter = null;
+		private IList<IFilterable> LastFilter = new IFilterable[] { /* Empty */ };
 
 		protected override void OnSelectionChanged(SelectionChangedEventArgs e)
 		{
@@ -113,14 +88,14 @@ namespace Sifaw.WPF
 
 				try
 				{
-					UIFilterChangedEventArgs<IFilterable> args = new UIFilterChangedEventArgs<IFilterable>(LastFilter, Filter);
+					UIFilterChangedEventArgs<IList<IFilterable>> args = new UIFilterChangedEventArgs<IList<IFilterable>>(LastFilter, Filter);
 
 					OnFilterChanged(args);
 
 					if (args.Cancel)
 						Filter = LastFilter;
 					else
-						LastFilter = Filter;
+						LastFilter = new List<IFilterable>(Filter);
 				}
 				catch (Exception ex)
 				{
@@ -135,30 +110,30 @@ namespace Sifaw.WPF
 
 		#endregion
 
-		#region ComponentListFilterBase<IFilterable,IList<IFilterable>> Members
+		#region ComponentListFilterBase<IList<IFilterable>,IList<IFilterable>> Members
 
 		public void Add(IList<IFilterable> source)
 		{
-			this.SelectionMode = SelectionMode.Single;
+			this.SelectionMode = SelectionMode.Multiple;
 			this.ItemsSource = source;
 			this.DisplayMemberPath = "DisplayFilter";
 		}
 
 		#endregion
 
-		#region ComponentFilterBase<IFilterable> Members
+		#region ComponentFilterBase<IList<IFilterable>> Members
 
-		public IFilterable Filter
+		public IList<IFilterable> Filter
 		{
-			get { return SelectedItem as IFilterable; }
-			set { SelectedItem = value; }
+			get	{ return SelectedItems as IList<IFilterable>; }
+			set	{ SetSelectedItems(value);	}
 		}
 
-		public event UIFilterChangedEventHandler<IFilterable> FilterChanged;
-		private void OnFilterChanged(UIFilterChangedEventArgs<IFilterable> e)
+		public event UIFilterChangedEventHandler<IList<IFilterable>> FilterChanged;
+		private void OnFilterChanged(UIFilterChangedEventArgs<IList<IFilterable>> e)
 		{
 			if (FilterChanged != null)
-				FilterChanged(this as EnumComponentFilter, e);
+				FilterChanged(this as ListFilterComponent, e);
 		}
 
 		#endregion

@@ -47,7 +47,7 @@ namespace Sifaw.Controllers.Components.Filters
 		< IFilterable
 		, IList<IFilterable>
 		, UIEnumFilterController.UISettingsContainer
-		, EnumComponentFilter>
+		, EnumFilterComponent>
 	{
 		#region Settings
 
@@ -56,7 +56,7 @@ namespace Sifaw.Controllers.Components.Filters
 			< IFilterable
 			, IList<IFilterable>
 			, UISettingsContainer
-			, EnumComponentFilter>.UISettingsContainer<EnumComponentFilter>
+			, EnumFilterComponent>.UISettingsContainer<EnumFilterComponent>
 		{
 			#region Constructor
 
@@ -86,7 +86,7 @@ namespace Sifaw.Controllers.Components.Filters
 		{
 		}
 
-		public UIEnumFilterController(AbstractUILinker<EnumComponentFilter> linker)
+		public UIEnumFilterController(AbstractUILinker<EnumFilterComponent> linker)
 			: base(linker)
 		{
 		}

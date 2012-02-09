@@ -43,7 +43,7 @@ namespace Sifaw.Controllers.Components
 		where TSource : IList<IFilterable>
 		where TUISettings : UIListFilterBaseController<TFilter, TSource, TUISettings, TComponent>.UISettingsContainer<TComponent>
 						  , new()
-		where TComponent : ComponentListFilterBase<TFilter, TSource>
+		where TComponent : ListFilterBaseComponent<TFilter, TSource>
 	{
 		#region Settings
 

@@ -39,7 +39,7 @@ namespace Sifaw.WPF
 	/// <summary>
 	/// Interaction logic for Shell.xaml
 	/// </summary>
-	public partial class ShellWindow : Window, UIShellView
+	public partial class ShellWindow : Window, ShellView
 	{
 		#region Constructor
 
@@ -170,28 +170,28 @@ namespace Sifaw.WPF
 		private void OnBeforeShow(EventArgs e)
 		{
 			if (BeforeShow != null)
-				BeforeShow(this as UIShellView, e);
+				BeforeShow(this as ShellView, e);
 		}
 
 		public event EventHandler AfterShow;
 		private void OnAfterShow(EventArgs e)
 		{
 			if (AfterShow != null)
-				AfterShow(this as UIShellView, e);
+				AfterShow(this as ShellView, e);
 		}
 
 		public event UIFinishRequestEventHandler BeforeClose;
 		private void OnBeforeClose(UIFinishRequestEventArgs e)
 		{
 			if (BeforeClose != null)
-				BeforeClose(this as UIShellView, e);
+				BeforeClose(this as ShellView, e);
 		}
 
 		public event EventHandler AfterClose;
 		private void OnAfterClose(EventArgs e)
 		{
 			if (AfterClose != null)
-				AfterClose(this as UIShellView, e);
+				AfterClose(this as ShellView, e);
 		}
 
 		#endregion

@@ -9,7 +9,7 @@
 /// <remarks>
 /// ===============================================================================================
 /// Historial de versiones:
-///   - 09/01/2012 -- Creación de la clase.
+///   - 09/02/2012 -- Creación de la clase.
 /// ===============================================================================================
 /// Observaciones:
 /// 
@@ -28,11 +28,11 @@ namespace Sifaw.Views
 {
 	/// <summary>
 	/// <para>
-	/// Representa un vista tipo shell, con layout configurable, que
+	/// Representa un componente tipo shell, con layout configurable, que
 	/// permite alojar elementos <see cref="UIComponent"/>.
 	/// </para>
 	/// </summary>
-	public interface UIShellView : UIView
+	public interface ShellComponent : UIComponent
 	{
 		#region Métodos
 

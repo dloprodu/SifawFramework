@@ -39,15 +39,15 @@ using Sifaw.Views.Components.Filters;
 namespace Sifaw.WPF
 {
 	/// <summary>
-	/// Representa un control que implementa el componente <see cref="DropDownListComponentFilter"/>.
+	/// Representa un control que implementa el componente <see cref="DropDownListFilterComponent"/>.
 	/// </summary>
-	public class DropDownListFilter : ComboBox, DropDownListComponentFilter
+	public class DropDownListFilterControl : ComboBox, DropDownListFilterComponent
 	{
 		#region Constructor
 
-		static DropDownListFilter()
+		static DropDownListFilterControl()
 		{
-			DefaultStyleKeyProperty.OverrideMetadata(typeof(DropDownListFilter), new FrameworkPropertyMetadata(typeof(DropDownListFilter)));
+			DefaultStyleKeyProperty.OverrideMetadata(typeof(DropDownListFilterControl), new FrameworkPropertyMetadata(typeof(DropDownListFilterControl)));
 		}
 
 		#endregion
@@ -132,7 +132,7 @@ namespace Sifaw.WPF
 		private void OnFilterChanged(UIFilterChangedEventArgs<IFilterable> e)
 		{
 			if (FilterChanged != null)
-				FilterChanged(this as DropDownListComponentFilter, e);
+				FilterChanged(this as DropDownListFilterComponent, e);
 		}
 
 		#endregion

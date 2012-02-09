@@ -22,8 +22,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using Sifaw.Views.Components;
 using Sifaw.Core.Utilities;
+
+using Sifaw.Views;
+using Sifaw.Views.Components;
 
 
 namespace Sifaw.Controllers.Components
@@ -34,11 +36,11 @@ namespace Sifaw.Controllers.Components
 	/// <typeparam name="TInput">Tipo para establecer los parámetros de inicio de la controladora.</typeparam>
 	/// <typeparam name="TOutput">Tipo para establcer los parametros de retorno cuando finaliza la controladora.</typeparam>
 	/// <typeparam name="TFilter">Tipo para establecer los datos de filtro que devolverá la controladora.</typeparam>
-	public abstract class UIFiltersGroupController<TInput, TOutput, TFilter> : UIComponentController
+	public abstract class UIFiltersGroupController<TInput, TOutput, TFilter> : UIShellComponentController
 		< TInput
 		, TOutput
 		, UIFiltersGroupController<TInput, TOutput, TFilter>.UISettingsContainer
-		, FiltersGroupComponent>
+		, UIComponent>
 		where TInput  : UIFiltersGroupController<TInput, TOutput, TFilter>.Input
 		where TOutput : UIFiltersGroupController<TInput, TOutput, TFilter>.Output
 		where TFilter : UIFiltersGroupController<TInput, TOutput, TFilter>.Filter
@@ -49,15 +51,15 @@ namespace Sifaw.Controllers.Components
 		/// Parámetros de entrada de la controladora.
 		/// </summary>
 		[Serializable]
-		public new abstract class Input : UIComponentController
+		public new abstract class Input : UIShellComponentController
 			< TInput
 			, TOutput
 			, UISettingsContainer
-			, FiltersGroupComponent>.Input
+			, UIComponent>.Input
 		{
 			#region Variables
 
-			TFilter _filter;
+			private TFilter _filter;
 
 			#endregion
 
@@ -85,11 +87,11 @@ namespace Sifaw.Controllers.Components
 		/// Parámetros de retorno de la controladora.
 		/// </summary>
 		[Serializable]
-		public new abstract class Output : UIComponentController
+		public new abstract class Output : UIShellComponentController
 			< TInput
 			, TOutput
 			, UISettingsContainer
-			, FiltersGroupComponent>.Output
+			, UIComponent>.Output
 		{
 			#region Constructor
 
@@ -127,11 +129,11 @@ namespace Sifaw.Controllers.Components
 		#region Settings
 
 		[Serializable]
-		public class UISettingsContainer : UIComponentController
+		public new class UISettingsContainer : UIShellComponentController
 			< TInput
 			, TOutput
 			, UISettingsContainer
-			, FiltersGroupComponent>.UISettingsContainer<FiltersGroupComponent>
+			, UIComponent>.UISettingsContainer
 		{
 			#region Constructor
 
@@ -192,7 +194,7 @@ namespace Sifaw.Controllers.Components
 		{
 		}
 
-		protected UIFiltersGroupController(AbstractUILinker<FiltersGroupComponent> linker)
+		protected UIFiltersGroupController(AbstractUILinker<ShellComponent> linker)
 			: base(linker)
 		{
 		}
@@ -205,7 +207,7 @@ namespace Sifaw.Controllers.Components
 		{
 			base.OnAfterUIElementLoad();
 
-			/* Empty */
+			/* Subscripción a eventos del componente... */		
 		}
 
 		#endregion
@@ -217,6 +219,7 @@ namespace Sifaw.Controllers.Components
 			base.OnBeforeStartController();
 
 			// TODO: Obtener filtros
+			//       Layout ?
 
 			// TODO: Cargar filtros en componente
 

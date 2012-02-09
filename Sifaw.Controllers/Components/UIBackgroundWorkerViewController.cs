@@ -1,9 +1,29 @@
-﻿using System;
+﻿///////////////////////////////////////////////////////////////////////////////////////////////////
+/// <summary> 
+/// 
+/// Diseñador: David López Rguez
+/// Programador: David López Rguez
+/// </summary>
+/// <remarks>
+/// ===============================================================================================
+/// Historial de versiones:
+///   - 15/12/2011: Creación de la controladora.
+/// 
+/// ===============================================================================================
+/// Observaciones:
+/// 
+/// </remarks>
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
 using Sifaw.Views;
+using Sifaw.Views.Components;
 
 
 namespace Sifaw.Controllers.Components
@@ -12,7 +32,8 @@ namespace Sifaw.Controllers.Components
 		: UIShellViewController
 		< UIBackgroundWorkerViewController.Input
 		, UIBackgroundWorkerViewController.Output
-		, UIBackgroundWorkerViewController.UISettingsContainer>
+		, UIBackgroundWorkerViewController.UISettingsContainer
+		, BackgroundWorkerComponent>
 	{
 		#region Entrada / Salida
 
@@ -20,7 +41,7 @@ namespace Sifaw.Controllers.Components
 		/// Parámetros de entrada de las controladora.
 		/// </summary>
 		[Serializable]
-		public new class Input : UIShellViewController<Input, Output, UISettingsContainer>.Input
+		public new class Input : UIShellViewController<Input, Output, UISettingsContainer, BackgroundWorkerComponent>.Input
 		{
 			#region Variables
 
@@ -61,7 +82,7 @@ namespace Sifaw.Controllers.Components
 		/// Parámetros de retorno de la controladora.
 		/// </summary>
 		[Serializable]
-		public new class Output : UIShellViewController<Input, Output, UISettingsContainer>.Output
+		public new class Output : UIShellViewController<Input, Output, UISettingsContainer, BackgroundWorkerComponent>.Output
 		{
 			#region Variables
 
@@ -107,7 +128,11 @@ namespace Sifaw.Controllers.Components
 		#region Settings
 
 		[Serializable]
-		public new class UISettingsContainer : UIShellViewController<Input, Output, UISettingsContainer>.UISettingsContainer
+		public new class UISettingsContainer : UIShellViewController
+			< Input
+			, Output
+			, UISettingsContainer
+			, BackgroundWorkerComponent>.UISettingsContainer
 		{
 			#region Variables
 
@@ -228,7 +253,7 @@ namespace Sifaw.Controllers.Components
 		{
 		}
 
-		public UIBackgroundWorkerViewController(AbstractUILinker<UIShellView> linker)
+		public UIBackgroundWorkerViewController(AbstractUILinker<ShellView> linker)
 			: base(linker)
 		{
 		}
@@ -307,12 +332,16 @@ namespace Sifaw.Controllers.Components
 			mode = Views.UILengthModes.Auto;
 		}
 
-		protected override void GetCellSettings(uint row, uint cell, out double width, out Views.UILengthModes mode, out Views.UIComponent component)
+		protected override void GetCellSettings(uint row, uint cell, out double width, out UILengthModes mode, out BackgroundWorkerComponent component)
 		{
 			width = 0;
 			mode = Views.UILengthModes.Auto;
-			component = UIBackgroundWorkerController.GetUIComponent();
+			component = UIBackgroundWorkerController.GetUIComponent() as BackgroundWorkerComponent;
 		}
+
+		#endregion
+
+		#region Controller Membres
 
 		protected override void StartController()
 		{

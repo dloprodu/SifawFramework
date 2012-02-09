@@ -1,7 +1,7 @@
 ﻿///////////////////////////////////////////////////////////////////////////////////////////////////
 /// <sumary>
 /// Controladora base que provee de un patrón e infraestructura común a aquellos casos de uso
-/// con vistas tipo shell.
+/// con componentes tipo shell.
 /// 
 /// Diseñador:     David López Rguez
 /// Programadores: David López Rguez
@@ -30,21 +30,20 @@ namespace Sifaw.Controllers
 {
 	/// <summary>
 	/// Controladora base que provee de un patrón e infraestructura común a aquellos casos de uso
-	/// donde intervienen vistas tipo shell que actuan como contenedores de componentes.
+	/// donde intervienen componentes tipo shell que actuan como contenedores de otros componentes.
 	/// </summary>
 	/// <typeparam name="TInput">Tipo para establecer los parámetros de inicio de la controladora.</typeparam>
 	/// <typeparam name="TOutput">Tipo para establcer los parametros de retorno cuando finaliza la controladora.</typeparam>
 	/// <typeparam name="TUISettings">Tipo para establecer el proxy encargado de establecer los ajustes al elemento de interfaz de usuario.</typeparam>
-	/// <typeparam name="TGuest">Tipo de los componentes que puede alojar la shell.</typeparam>
-	public abstract class UIShellViewController<TInput, TOutput, TUISettings, TGuest>
-		: UIViewController
+	public abstract class UIShellComponentController<TInput, TOutput, TUISettings, TGuest>
+		: UIComponentController
 		< TInput
 		, TOutput
 		, TUISettings
-		, ShellView>
-		where TInput      : UIShellViewController<TInput, TOutput, TUISettings, TGuest>.Input
-		where TOutput     : UIShellViewController<TInput, TOutput, TUISettings, TGuest>.Output
-		where TUISettings : UIShellViewController<TInput, TOutput, TUISettings, TGuest>.UISettingsContainer<ShellView>
+		, ShellComponent>
+		where TInput      : UIShellComponentController<TInput, TOutput, TUISettings, TGuest>.Input
+		where TOutput     : UIShellComponentController<TInput, TOutput, TUISettings, TGuest>.Output
+		where TUISettings : UIShellComponentController<TInput, TOutput, TUISettings, TGuest>.UISettingsContainer<ShellComponent>
 						  , new()
 		where TGuest      : UIComponent
 	{
@@ -54,17 +53,12 @@ namespace Sifaw.Controllers
 		/// Parámetros de entrada de las controladora.
 		/// </summary>
 		[Serializable]
-		public abstract new class Input : UIViewController<TInput, TOutput, TUISettings, ShellView>.Input
+		public abstract new class Input : UIComponentController<TInput, TOutput, TUISettings, ShellComponent>.Input
 		{
 			#region Constructor
 
 			protected Input()
-				: this(true)
-			{
-			}
-
-			protected Input(bool showView)
-				: base(showView:showView)
+				: base()
 			{
 			}
 
@@ -75,7 +69,7 @@ namespace Sifaw.Controllers
 		/// Parámetros de retorno de la controladora.
 		/// </summary>
 		[Serializable]
-		public abstract new class Output : UIViewController<TInput, TOutput, TUISettings, ShellView>.Output
+		public abstract new class Output : UIComponentController<TInput, TOutput, TUISettings, ShellComponent>.Output
 		{
 			#region Constructor
 
@@ -92,11 +86,11 @@ namespace Sifaw.Controllers
 		#region Settings
 
 		[Serializable]
-		public class UISettingsContainer : UIViewController
+		public class UISettingsContainer : UIComponentController
 			< TInput
 			, TOutput
 			, TUISettings
-			, ShellView>.UISettingsContainer<ShellView>
+			, ShellComponent>.UISettingsContainer<ShellComponent>
 		{
 			#region Constructor
 
@@ -121,19 +115,19 @@ namespace Sifaw.Controllers
 
 		#region Constructor
 
-		protected UIShellViewController()
+		protected UIShellComponentController()
 			: base()
 		{
 		}
 
-		protected UIShellViewController(AbstractUILinker<ShellView> linker)
+		protected UIShellComponentController(AbstractUILinker<ShellComponent> linker)
 			: base(linker)
 		{
 		}
 
 		#endregion
 
-		#region Mëtodos abstractos
+		#region Métodos abstractos
 
 		/// <summary>
 		/// Deuvelve el número de filas de la shell.
@@ -172,7 +166,7 @@ namespace Sifaw.Controllers
 		protected override void OnBeforeStartController()
 		{
 			base.OnBeforeStartController();
-			
+
 			ShellManager.SetSettings<TGuest>(
 				  GetNumberOfRows
 				, GetNumberOfCellsAt

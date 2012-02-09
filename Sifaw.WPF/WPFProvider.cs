@@ -40,6 +40,11 @@ namespace Sifaw.WPF
 	{
 		#region Controles
 
+		public void Get(out ShellComponent ui)
+		{
+			ui = new ShellControl();
+		}
+
 		public void Get(out BackgroundWorkerComponent ui)
 		{
 			ui = new BackgroundWorkerControl();
@@ -50,42 +55,36 @@ namespace Sifaw.WPF
 			ui = new AssistantControl();
 		}
 
-		public void Get(out FiltersGroupComponent ui)
+		public void Get(out TextFilterComponent ui)
 		{
-			// TODO: FiltersGroupComponent
-			throw new NotImplementedException();
+			ui = new TextFilterControl();
 		}
 
-		public void Get(out TextComponentFilter ui)
+		public void Get(out BoolFilterComponent ui)
 		{
-			ui = new TextFilter();
+			ui = new BoolFilterControl();
 		}
 
-		public void Get(out BoolComponentFilter ui)
+		public void Get(out ListFilterComponent ui)
 		{
-			ui = new BoolFilter();
+			ui = new ListFilterControl();
 		}
 
-		public void Get(out ListComponentFilter ui)
-		{
-			ui = new ListFilter();
-		}
-
-		public void Get(out EnumComponentFilter ui)
+		public void Get(out EnumFilterComponent ui)
 		{			
-			ui = new EnumFilter();
+			ui = new EnumFilterControl();
 		}
 
-		public void Get(out DropDownListComponentFilter ui)
+		public void Get(out DropDownListFilterComponent ui)
 		{
-			ui = new DropDownListFilter();
+			ui = new DropDownListFilterControl();
 		}
 		
 		#endregion
 
 		#region Vistas
 
-		public void Get(out UIShellView ui)
+		public void Get(out ShellView ui)
 		{
 			ui = new ShellWindow();
 		}

@@ -37,7 +37,7 @@ namespace Sifaw.Views.Components.Filters
 	/// elegir uno o varios elementos de la lista.
 	/// </para>
 	/// </remarks>
-	public interface ListComponentFilter : ComponentListFilterBase<IList<IFilterable>, IList<IFilterable>>
+	public interface ListFilterComponent : ListFilterBaseComponent<IList<IFilterable>, IList<IFilterable>>
 	{
 		/* Empty */
 	}

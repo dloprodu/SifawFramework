@@ -35,7 +35,7 @@ namespace Sifaw.Controllers.Components.Filters
 	public class UITextFilterController : UIFilterBaseController
 		< string
 		, UITextFilterController.UISettingsContainer
-		, TextComponentFilter>
+		, TextFilterComponent>
 	{
 		#region Settings
 
@@ -43,7 +43,7 @@ namespace Sifaw.Controllers.Components.Filters
 		public class UISettingsContainer : UIFilterBaseController
 			< string
 			, UISettingsContainer
-			, TextComponentFilter>.UISettingsContainer<TextComponentFilter>
+			, TextFilterComponent>.UISettingsContainer<TextFilterComponent>
 		{
 			#region Constructor
 
@@ -73,7 +73,7 @@ namespace Sifaw.Controllers.Components.Filters
 		{
 		}
 
-		public UITextFilterController(AbstractUILinker<TextComponentFilter> linker)
+		public UITextFilterController(AbstractUILinker<TextFilterComponent> linker)
 			: base(linker)
 		{
 		}

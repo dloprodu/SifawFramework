@@ -40,7 +40,7 @@ namespace Sifaw.WPF
 	/// <summary>
 	/// Representa un control que permite definir una shell personalizada.
 	/// </summary>
-	public partial class ShellControl : UserControl
+	public partial class ShellControl : UserControl, ShellComponent
 	{
 		#region Constructor
 
@@ -127,12 +127,48 @@ namespace Sifaw.WPF
 			}
 		}
 
+		#endregion
+
+		#region UIElement Members
+
+		#region Propiedades
+
+		private string _denomination = string.Empty;
+		public string Denomination
+		{
+			get { return _denomination; }
+			set { _denomination = value; }
+		}
+
+		private string _description = string.Empty;
+		public string Description
+		{
+			get { return _description; }
+			set { _description = value; }
+		}
+
+		#endregion
+
+		#region Métodos
+
+		public void Refresh()
+		{
+			/* Empty */
+		}
+
 		public void Reset()
 		{
 			grid.Children.Clear();
 			grid.RowDefinitions.Clear();
 			grid.ColumnDefinitions.Clear();
 		}
+
+		public void SetLikeActive()
+		{
+			grid.Focus();
+		}
+
+		#endregion
 
 		#endregion
 	}

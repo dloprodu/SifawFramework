@@ -44,7 +44,7 @@ namespace Sifaw.Controllers.Components.Filters
 		< IFilterable
 		, IList<IFilterable>
 		, UIDropDownListFilterController.UISettingsContainer
-		, DropDownListComponentFilter>
+		, DropDownListFilterComponent>
 	{
 		#region Settings
 
@@ -53,7 +53,7 @@ namespace Sifaw.Controllers.Components.Filters
 			< IFilterable
 			, IList<IFilterable>
 			, UISettingsContainer
-			, DropDownListComponentFilter>.UISettingsContainer<DropDownListComponentFilter>
+			, DropDownListFilterComponent>.UISettingsContainer<DropDownListFilterComponent>
 		{
 			#region Constructor
 
@@ -83,7 +83,7 @@ namespace Sifaw.Controllers.Components.Filters
 		{
 		}
 
-		public UIDropDownListFilterController(AbstractUILinker<DropDownListComponentFilter> linker)
+		public UIDropDownListFilterController(AbstractUILinker<DropDownListFilterComponent> linker)
 			: base(linker)
 		{
 		}

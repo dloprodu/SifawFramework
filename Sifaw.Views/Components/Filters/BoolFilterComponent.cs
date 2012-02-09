@@ -1,6 +1,6 @@
 ﻿///////////////////////////////////////////////////////////////////////////////////////////////////
 /// <summary> 
-/// EnumComponentFilter.cs
+/// BoolComponentFilter.cs
 /// 
 /// Diseñador:   David López Rodríguez
 /// Programador: David López Rodríguez
@@ -27,23 +27,14 @@ using System.Text;
 namespace Sifaw.Views.Components.Filters
 {
 	/// <summary>
-	/// Representa un componente para realizar filtros sobre una lista
-	/// de <see cref="IFilterable"/> devolviendo el item seleccionado.
+	/// Representa un componente para realizar filtros sobre un campo
+	/// booleano.
 	/// </summary>
-	/// <remarks>
-	/// <para>
-	/// Este componente ha de exponer la lista de filtro de forma que permita
-	/// elegir un solo elemento.
-	/// </para>
-	/// <para>
-	/// El componente ha de mostrar todos los elementos de la lista.
-	/// Si la lista de filtro tiene demasiados items es mejor usar un componente mas
-	/// adecuado como <see cref="DropDownListComponentFilter"/> que solo muestra
-	/// el elemento seleccionado.
-	/// </para>
-	/// </remarks>
-	public interface EnumComponentFilter : ComponentListFilterBase<IFilterable, IList<IFilterable>>
+	public interface BoolFilterComponent : FilterBaseComponent<bool>
 	{
-		/* Empty */
+		/// <summary>
+		/// Establece el texto que mostrará el componente.
+		/// </summary>
+		string Text { set; }
 	}
 }

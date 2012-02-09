@@ -32,7 +32,7 @@ namespace Sifaw.Views.Components
 	/// Representa un componente base para realizar filtros de tipo <see cref="TFiler"/>.
 	/// </summary>
 	/// <typeparam name="TFiler">Tipo del filtro del componente.</typeparam>
-	public interface ComponentFilterBase<TFilter> : UIComponent
+	public interface FilterBaseComponent<TFilter> : UIComponent
 	{
 		#region Propiedades
 

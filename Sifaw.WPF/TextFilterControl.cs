@@ -1,6 +1,6 @@
 ﻿///////////////////////////////////////////////////////////////////////////////////////////////////
 /// <sumary>
-/// BoolFilter.cs
+/// TextFilter.cs
 /// 
 /// Diseñador: David López Rguez
 /// Programador: David López Rguez
@@ -31,6 +31,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using Sifaw.WPF.CCL;
 using Sifaw.Views.Components;
 using Sifaw.Views;
 using Sifaw.Views.Components.Filters;
@@ -39,15 +40,15 @@ using Sifaw.Views.Components.Filters;
 namespace Sifaw.WPF
 {
 	/// <summary>
-	/// Representa un control que implementa el componente <see cref="BoolComponentFilter"/>.
+	/// Representa un control que implementa el componente <see cref="TextFilterComponent"/>.
 	/// </summary>
-	public class BoolFilter : CheckBox, BoolComponentFilter
+	public class TextFilterControl : SearchTextField, TextFilterComponent
 	{
 		#region Constructor
 
-		static BoolFilter()
+		static TextFilterControl()
 		{
-			DefaultStyleKeyProperty.OverrideMetadata(typeof(BoolFilter), new FrameworkPropertyMetadata(typeof(BoolFilter)));
+			DefaultStyleKeyProperty.OverrideMetadata(typeof(TextFilterControl), new FrameworkPropertyMetadata(typeof(TextFilterControl)));
 		}
 
 		#endregion
@@ -71,11 +72,16 @@ namespace Sifaw.WPF
 
 		#endregion
 
-		#region Métodos sobreescritos
+		#region Overrides Methods
 
-		protected override void OnChecked(RoutedEventArgs e)
+		/// <summary>
+		/// Último filtro válido aplicado.
+		/// </summary>
+		private string LastFilter = string.Empty;
+
+		protected override void OnSearch(RoutedEventArgs e)
 		{
-			base.OnChecked(e);
+			base.OnSearch(e);
 
 			if (!filtering)
 			{
@@ -83,40 +89,14 @@ namespace Sifaw.WPF
 
 				try
 				{
-					UIFilterChangedEventArgs<bool> args = new UIFilterChangedEventArgs<bool>(false, true);
+					UIFilterChangedEventArgs<string> args = new UIFilterChangedEventArgs<string>(LastFilter, Filter);
 
 					OnFilterChanged(args);
 
 					if (args.Cancel)
-						Filter = false;
-				}
-				catch (Exception ex)
-				{
-					throw ex;
-				}
-				finally
-				{
-					EndFilter();
-				}
-			}
-		}
-
-		protected override void OnUnchecked(RoutedEventArgs e)
-		{
-			base.OnUnchecked(e);
-
-			if (!filtering)
-			{
-				BeginFilter();
-
-				try
-				{
-					UIFilterChangedEventArgs<bool> args = new UIFilterChangedEventArgs<bool>(true, false);
-
-					OnFilterChanged(args);
-
-					if (args.Cancel)
-						Filter = true;
+						Filter = LastFilter;
+					else
+						LastFilter = Filter;
 				}
 				catch (Exception ex)
 				{
@@ -131,28 +111,19 @@ namespace Sifaw.WPF
 
 		#endregion
 
-		#region BoolComponentFilter Members
+		#region FilterComponent<string> Members
 
-		public string Text
+		public string Filter
 		{
-			set { Content = value; }
+			get { return Text; }
+			set { Text = value; }
 		}
 
-		#endregion
-
-		#region ComponentFilter<bool> Members
-
-		public bool Filter
-		{
-			get { return IsChecked.HasValue ? IsChecked.Value : false; }
-			set { IsChecked = value; }
-		}
-
-		public event UIFilterChangedEventHandler<bool> FilterChanged;
-		private void OnFilterChanged(UIFilterChangedEventArgs<bool> e)
+		public event UIFilterChangedEventHandler<string> FilterChanged;
+		private void OnFilterChanged(UIFilterChangedEventArgs<string> e)
 		{
 			if (FilterChanged != null)
-				FilterChanged(this as BoolComponentFilter, e);
+				FilterChanged(this as TextFilterComponent, e);
 		}
 
 		#endregion
@@ -186,7 +157,7 @@ namespace Sifaw.WPF
 
 		public void Reset()
 		{
-			/* Emtpy */
+			Text = string.Empty;
 		}
 
 		public void SetLikeActive()

@@ -1,15 +1,15 @@
 ﻿///////////////////////////////////////////////////////////////////////////////////////////////////
-/// <summary> 
-/// BoolComponentFilter.cs
+/// <summary>
+/// Librería de estructuras y clases miscelaneas de Sifaw.View.
 /// 
-/// Diseñador:   David López Rodríguez
-/// Programador: David López Rodríguez
+/// Diseñador:     David López Rguez
+/// Programadores: David López Rguez
+///	
 /// </summary>
 /// <remarks>
 /// ===============================================================================================
 /// Historial de versiones:
-///   - 07/02/2012: Creación de la interfaz.
-/// 
+///   - 09/01/2012 -- Creación de la clase.
 /// ===============================================================================================
 /// Observaciones:
 /// 
@@ -24,17 +24,25 @@ using System.Linq;
 using System.Text;
 
 
-namespace Sifaw.Views.Components.Filters
+namespace Sifaw.Views
 {
 	/// <summary>
-	/// Representa un componente para realizar filtros sobre un campo
-	/// booleano.
+	/// <para>
+	/// Representa un vista tipo shell, con layout configurable, que
+	/// permite alojar elementos <see cref="UIComponent"/>.
+	/// </para>
 	/// </summary>
-	public interface BoolComponentFilter : ComponentFilterBase<bool>
+	public interface ShellView : UIView
 	{
+		#region Métodos
+
 		/// <summary>
-		/// Establece el texto que mostrará el componente.
+		/// Permite establecer la configuración y contenido 
+		/// de la shell.
 		/// </summary>
-		string Text { set; }
+		/// <param name="rows">Array de filas de la Shell.</param>
+		void SetSettings(UIShellRow[] rows);
+
+		#endregion
 	}
 }

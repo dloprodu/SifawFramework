@@ -236,16 +236,16 @@ namespace Sifaw.Controllers.Components
 
 		#region Start Methods
 
-		protected override void OnBeforeStartController()
-		{
-			base.OnBeforeStartController();
+        protected override void OnAfterStartController()
+        {
+            base.OnAfterStartController();
 
-			UIElement.Filter = Parameters.Filter;
-		}
+            UIElement.Filter = Parameters.Filter;
+        }
 
-		protected override void OnBeforeResetController()
+        protected override void OnAfterResetController()
 		{
-			base.OnBeforeResetController();
+            base.OnAfterResetController();
 
 			UIElement.Filter = Parameters.Filter;
 		}

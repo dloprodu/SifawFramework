@@ -93,9 +93,9 @@ namespace Sifaw.WPF
 					OnFilterChanged(args);
 
 					if (args.Cancel)
-						Filter = Former;
-					else
-						Former = new List<IFilterable>(Filter);
+						Filter = new List<IFilterable>(Former != null ? Former : new IFilterable[] {});
+					else 
+						Former = new List<IFilterable>(Filter != null ? Filter : new IFilterable[] {});
 				}
 				catch (Exception ex)
 				{
@@ -114,7 +114,7 @@ namespace Sifaw.WPF
 
 		public void Add(IList<IFilterable> source)
 		{
-			this.SelectionMode = SelectionMode.Multiple;
+			this.SelectionMode = SelectionMode.Extended;
 			this.ItemsSource = source;
 			this.DisplayMemberPath = "DisplayFilter";
 		}

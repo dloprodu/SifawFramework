@@ -33,21 +33,20 @@ namespace Sifaw.Controllers
 	public static class ShellManager
 	{
 		/// <summary>
-		/// Método que dado los correspondientes métodos callback aplica la configuración
-		/// a una Shell.
+		/// Método que dado los correspondientes métodos callback devuelve la configuración
+		/// ha aplicar a la shell por fila.
 		/// </summary>
 		/// <typeparam name="TGuest">Tipo de los componentes que puede alojar la shell.</typeparam>
 		/// <param name="getNumberOfRows">Callbak invocado cuando se solicita el número de filas.</param>
 		/// <param name="getNumberOfCellsAt">Callbak invocado cuando se solicita el número de celdas de una fila.</param>
 		/// <param name="getRowSettings">Callbak invocado cuando se solicita la configuración de una fila de la shell.</param>
-		/// <param name="getCellSettings">Callbak invocado cuando se solicita la configuración de una celda de la shell.</param>
+		/// <param name="getRowCellSettings">Callbak invocado cuando se solicita la configuración de una celda de la shell.</param>
 		/// <param name="setSettings">Callbak invocado cuando se solicita que se aplique la configuración.</param>
-		public static void SetSettings<TGuest>(
+		public static UIShellRow[] GetSettings<TGuest>(
 			  GetNumberOfRowsShellCallback getNumberOfRows
 			, GetNumberOfCellsAtShellCallback getNumberOfCellsAt
 			, GetRowSettingsShellCallback getRowSettings
-			, GetCellSettingsShellCallback<TGuest> getCellSettings
-			, SetSettingsShellCallback setSettings)
+			, GetRowCellSettingsShellCallback<TGuest> getRowCellSettings)
 			where TGuest : UIComponent
 		{
 			UIShellRow[] rows = new UIShellRow[Math.Max(1, getNumberOfRows())];
@@ -66,7 +65,7 @@ namespace Sifaw.Controllers
 					UILengthModes widthMode = UILengthModes.Auto;
 					TGuest component = default(TGuest);
 
-					getCellSettings(row, column, out width, out widthMode, out component);
+					getRowCellSettings(row, column, out width, out widthMode, out component);
 
 					columns[column] = new UIShellRowCell(width, widthMode, component);
 				}
@@ -74,7 +73,7 @@ namespace Sifaw.Controllers
 				rows[row] = new UIShellRow(height, heightMode, columns);
 			}
 
-			setSettings(rows);
+			return rows;
 		}
 	}
 }

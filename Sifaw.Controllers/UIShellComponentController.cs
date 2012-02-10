@@ -19,6 +19,7 @@
 
 
 using System;
+using System.Collections.ObjectModel;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -113,6 +114,13 @@ namespace Sifaw.Controllers
 
 		#endregion
 
+		#region Variables
+
+		[CLReseteable(null)]
+		protected ReadOnlyCollection<TGuest> GuestComponentes = null;
+
+		#endregion
+
 		#region Constructor
 
 		protected UIShellComponentController()
@@ -157,7 +165,7 @@ namespace Sifaw.Controllers
 		/// <param name="width">Ancho de la celda.</param>
 		/// <param name="widthMode">Modo de ajuste de la celda.</param>
 		/// <param name="component">Contenido de la celda.</param>
-		protected abstract void GetCellSettings(uint row, uint cell, out double width, out UILengthModes mode, out TGuest guest);
+		protected abstract void GetRowCellSettings(uint row, uint cell, out double width, out UILengthModes mode, out TGuest guest);
 
 		#endregion
 
@@ -167,12 +175,26 @@ namespace Sifaw.Controllers
 		{
 			base.OnBeforeStartController();
 
-			ShellManager.SetSettings<TGuest>(
+			UIShellRow[] rows = ShellManager.GetSettings<TGuest>(
 				  GetNumberOfRows
 				, GetNumberOfCellsAt
 				, GetRowSettings
-				, GetCellSettings
-				, UIElement.SetSettings);
+				, GetRowCellSettings);
+
+			List<TGuest> guests = new List<TGuest>();
+
+			foreach (UIShellRow row in rows)
+			{
+				foreach (UIShellRowCell cell in row.Cells)
+				{
+					if (cell.Content != null)
+						guests.Add((TGuest)cell.Content);
+				}
+			}
+
+			GuestComponentes = guests.AsReadOnly();
+			
+			UIElement.SetSettings(rows);
 		}
 
 		#endregion

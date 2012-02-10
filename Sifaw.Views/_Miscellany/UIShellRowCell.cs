@@ -27,7 +27,8 @@ using System.Text;
 namespace Sifaw.Views
 {
 	/// <summary>
-	/// Almacena el ancho, modo de ajuste y el contenido de una celda de una vista <see cref="ShellView"/>.
+	/// Almacena el ancho, modo de ajuste y el contenido de una celda de un 
+	/// <see cref="ShellComponent"/> o <see cref="ShellView"/>.
 	/// </summary>
 	public struct UIShellRowCell
 	{

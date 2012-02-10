@@ -76,7 +76,7 @@ namespace Sifaw.WPF
 		/// <summary>
 		/// Último filtro válido aplicado.
 		/// </summary>
-		private IList<IFilterable> LastFilter = new IFilterable[] { /* Empty */ };
+		private IList<IFilterable> Former = new IFilterable[] { /* Empty */ };
 
 		protected override void OnSelectionChanged(SelectionChangedEventArgs e)
 		{
@@ -88,14 +88,14 @@ namespace Sifaw.WPF
 
 				try
 				{
-					UIFilterChangedEventArgs<IList<IFilterable>> args = new UIFilterChangedEventArgs<IList<IFilterable>>(LastFilter, Filter);
+					UIFilterChangedEventArgs args = new UIFilterChangedEventArgs();
 
 					OnFilterChanged(args);
 
 					if (args.Cancel)
-						Filter = LastFilter;
+						Filter = Former;
 					else
-						LastFilter = new List<IFilterable>(Filter);
+						Former = new List<IFilterable>(Filter);
 				}
 				catch (Exception ex)
 				{
@@ -129,11 +129,11 @@ namespace Sifaw.WPF
 			set	{ SetSelectedItems(value);	}
 		}
 
-		public event UIFilterChangedEventHandler<IList<IFilterable>> FilterChanged;
-		private void OnFilterChanged(UIFilterChangedEventArgs<IList<IFilterable>> e)
+		public event UIFilterChangedEventHandler FilterChanged;
+		private void OnFilterChanged(UIFilterChangedEventArgs e)
 		{
 			if (FilterChanged != null)
-				FilterChanged(this as ListFilterComponent, e);
+				FilterChanged(this as TextFilterComponent, e);
 		}
 
 		#endregion

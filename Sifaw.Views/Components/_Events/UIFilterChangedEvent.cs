@@ -23,8 +23,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using Sifaw.Core;
 
-namespace Sifaw.Views
+
+namespace Sifaw.Views.Components
 {
 	/*
 	 * Argumento y manejador para los eventos FilterChanged.
@@ -33,23 +35,11 @@ namespace Sifaw.Views
 	/// <summary>
 	/// Proporciona datos para un evento FilterChanged.
 	/// </summary>
-	public class UIFilterChangedEventArgs<TFilter> : Sifaw.Core.SFCancelEventArgs
+	public class UIFilterChangedEventArgs : SFCancelEventArgs
 	{
-		/// <summary>
-		/// Valor anterior del filtro.
-		/// </summary>
-		public readonly TFilter OldValue;
-
-		/// <summary>
-		/// Valor actual del filtro.
-		/// </summary>
-		public readonly TFilter NewValue;
-
-		public UIFilterChangedEventArgs(TFilter oldValue, TFilter newValue)
+		public UIFilterChangedEventArgs()
 			: base()
 		{
-			OldValue = oldValue;
-			NewValue = newValue;
 		}
 	}
 
@@ -58,5 +48,5 @@ namespace Sifaw.Views
 	/// </summary>
 	/// <param name="sender">Origen del evento.</param>
 	/// <param name="e"><see cref="UIFilterChangedEventArgs"/> que contiene los datos de eventos.</param>
-	public delegate void UIFilterChangedEventHandler<TFiler>(object sender, UIFilterChangedEventArgs<TFiler> e);
+	public delegate void UIFilterChangedEventHandler(object sender, UIFilterChangedEventArgs e);
 }

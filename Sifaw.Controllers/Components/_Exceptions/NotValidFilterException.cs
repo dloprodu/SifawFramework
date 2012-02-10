@@ -1,6 +1,6 @@
 ﻿///////////////////////////////////////////////////////////////////////////////////////////////////
 /// <summary>
-/// Librería de estructuras y clases miscelaneas de Sifaw.View.
+/// Librería de excepciones de Sifaw.Controllers.Components
 /// 
 /// Diseñador:     David López Rguez
 /// Programadores: David López Rguez
@@ -9,7 +9,7 @@
 /// <remarks>
 /// ===============================================================================================
 /// Historial de versiones:
-///   - 09/01/2012 -- Creación de la clase.
+///   - 10/02/2012 -- Creación de la clase.
 /// ===============================================================================================
 /// Observaciones:
 /// 
@@ -24,23 +24,16 @@ using System.Linq;
 using System.Text;
 
 
-namespace Sifaw.Views
+namespace Sifaw.Controllers.Components
 {
 	/// <summary>
-	/// Almacena la altura, modo de ajuste y celdas de una fila de un 
-	/// <see cref="ShellComponent"/> o <see cref="ShellView"/>.
+	/// Excepción producida por incoherencia al tratar un <see cref="UIComponent"/> como un <see cref="FilterBaseComponent"/>.
 	/// </summary>
-	public struct UIShellRow
+	public class NotValidFilterException : Exception
 	{
-		public readonly double Height;
-		public readonly UILengthModes Mode;
-		public readonly UIShellRowCell[] Cells;
-
-		public UIShellRow(double height, UILengthModes mode, UIShellRowCell[] cells)
+		public NotValidFilterException()
+			: base("El componente no es un filtro válido.")
 		{
-			Height = height;
-			Mode = mode;
-			Cells = cells;
 		}
 	}
 }

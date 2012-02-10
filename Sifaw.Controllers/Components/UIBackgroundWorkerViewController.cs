@@ -332,7 +332,7 @@ namespace Sifaw.Controllers.Components
 			mode = Views.UILengthModes.Auto;
 		}
 
-		protected override void GetCellSettings(uint row, uint cell, out double width, out UILengthModes mode, out BackgroundWorkerComponent component)
+		protected override void GetRowCellSettings(uint row, uint cell, out double width, out UILengthModes mode, out BackgroundWorkerComponent component)
 		{
 			width = 0;
 			mode = Views.UILengthModes.Auto;

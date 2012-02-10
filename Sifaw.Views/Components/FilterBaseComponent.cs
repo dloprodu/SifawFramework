@@ -48,7 +48,7 @@ namespace Sifaw.Views.Components
 		/// <summary>
 		/// Se produce cuando cambia el valor de la propiedad <see cref="Filter"/>.
 		/// </summary>
-		event UIFilterChangedEventHandler<TFilter> FilterChanged;
+		event UIFilterChangedEventHandler FilterChanged;
 
 		#endregion
 	}

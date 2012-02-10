@@ -77,7 +77,7 @@ namespace Sifaw.WPF
 		/// <summary>
 		/// Último filtro válido aplicado.
 		/// </summary>
-		private string LastFilter = string.Empty;
+		private string Former = string.Empty;
 
 		protected override void OnSearch(RoutedEventArgs e)
 		{
@@ -89,14 +89,14 @@ namespace Sifaw.WPF
 
 				try
 				{
-					UIFilterChangedEventArgs<string> args = new UIFilterChangedEventArgs<string>(LastFilter, Filter);
+					UIFilterChangedEventArgs args = new UIFilterChangedEventArgs();
 
 					OnFilterChanged(args);
 
 					if (args.Cancel)
-						Filter = LastFilter;
+						Filter = Former;
 					else
-						LastFilter = Filter;
+						Former = Filter;
 				}
 				catch (Exception ex)
 				{
@@ -119,8 +119,8 @@ namespace Sifaw.WPF
 			set { Text = value; }
 		}
 
-		public event UIFilterChangedEventHandler<string> FilterChanged;
-		private void OnFilterChanged(UIFilterChangedEventArgs<string> e)
+		public event UIFilterChangedEventHandler FilterChanged;
+		private void OnFilterChanged(UIFilterChangedEventArgs e)
 		{
 			if (FilterChanged != null)
 				FilterChanged(this as TextFilterComponent, e);

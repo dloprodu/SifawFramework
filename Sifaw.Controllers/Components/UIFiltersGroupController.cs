@@ -31,19 +31,23 @@ using Sifaw.Views.Components;
 namespace Sifaw.Controllers.Components
 {
 	/// <summary>
-	/// Controladora encargada de presentar un grupo de filtros.
+	/// Controladora de tipo shell encargada de presentar un grupo de filtros.
 	/// </summary>
-	/// <typeparam name="TInput">Tipo para establecer los parámetros de inicio de la controladora.</typeparam>
-	/// <typeparam name="TOutput">Tipo para establcer los parametros de retorno cuando finaliza la controladora.</typeparam>
+	/// <remarks>
+	/// <para>
+	/// Los componentes usados han de implementar el evento <see cref="FilterChanged"/> para ser
+	/// considerados filtros válidos. Ejemplos de componentes que implementan este evento son todos aquellos
+	/// que deriven de <see cref="FilterBaseComponent"/>.
+	/// </para>
+	/// </remarks>
+	/// <exception cref="NotValidFilterException">Alguno de los componentes no implementa el evento <see cref="FilterChanged"/>.</exception>
 	/// <typeparam name="TFilter">Tipo para establecer los datos de filtro que devolverá la controladora.</typeparam>
-	public abstract class UIFiltersGroupController<TInput, TOutput, TFilter> : UIShellComponentController
-		< TInput
-		, TOutput
-		, UIFiltersGroupController<TInput, TOutput, TFilter>.UISettingsContainer
+	public abstract class UIFiltersGroupController<TFilter> : UIShellComponentController
+		< UIFiltersGroupController<TFilter>.Input
+		, UIFiltersGroupController<TFilter>.Output
+		, UIFiltersGroupController<TFilter>.UISettingsContainer
 		, UIComponent>
-		where TInput  : UIFiltersGroupController<TInput, TOutput, TFilter>.Input
-		where TOutput : UIFiltersGroupController<TInput, TOutput, TFilter>.Output
-		where TFilter : UIFiltersGroupController<TInput, TOutput, TFilter>.Filter
+		where TFilter : UIFiltersGroupController<TFilter>.Filter
 	{
 		#region Parametros de inicio / finalización
 
@@ -51,9 +55,9 @@ namespace Sifaw.Controllers.Components
 		/// Parámetros de entrada de la controladora.
 		/// </summary>
 		[Serializable]
-		public new abstract class Input : UIShellComponentController
-			< TInput
-			, TOutput
+		public new class Input : UIShellComponentController
+			< Input
+			, Output
 			, UISettingsContainer
 			, UIComponent>.Input
 		{
@@ -87,24 +91,40 @@ namespace Sifaw.Controllers.Components
 		/// Parámetros de retorno de la controladora.
 		/// </summary>
 		[Serializable]
-		public new abstract class Output : UIShellComponentController
-			< TInput
-			, TOutput
+		public new class Output : UIShellComponentController
+			< Input
+			, Output
 			, UISettingsContainer
 			, UIComponent>.Output
 		{
+			#region Variables
+
+			private TFilter _filter;
+
+			#endregion
+
+			#region Propiedades
+
+			public TFilter Filter
+			{
+				get { return _filter; }
+			}
+
+			#endregion
+
 			#region Constructor
 
 			/// <summary>
 			/// Clase que engloba los parámetros de finalización de la controladora de procesos pesados
 			/// </summary>
-			/// <param name="cancelado">Indica si el proceso fue cancelado</param>
-			public Output()
+			/// <param name="filter">Filtro al finalizar la controladora.</param>
+			public Output(TFilter filter)
 				: base()
 			{
+				_filter = filter;
 			}
 
-			#endregion
+			#endregion		
 		}
 
 		#endregion
@@ -130,8 +150,8 @@ namespace Sifaw.Controllers.Components
 
 		[Serializable]
 		public new class UISettingsContainer : UIShellComponentController
-			< TInput
-			, TOutput
+			< Input
+			, Output
 			, UISettingsContainer
 			, UIComponent>.UISettingsContainer
 		{
@@ -212,18 +232,56 @@ namespace Sifaw.Controllers.Components
 
 		#endregion
 
-		#region StartController
+		#region Métodos abstractos
+
+		/// <summary>
+		/// Devuelve el filtro actualmente aplicado.
+		/// </summary>
+		/// <returns>Filtro.</returns>
+		protected abstract TFilter GetFilter();
+		
+		#endregion
+
+		#region Start Methods
+
+		[CLReseteable(null)]
+		private Delegate[] FilterChangedCallbaks = null;
 
 		protected override void OnBeforeStartController()
 		{
 			base.OnBeforeStartController();
 
-			// TODO: Obtener filtros
-			//       Layout ?
+			if (GuestComponentes != null)
+			{
+				FilterChangedCallbaks = new Delegate[GuestComponentes.Count];
 
-			// TODO: Cargar filtros en componente
+				for (int i = 0; i < GuestComponentes.Count; i++)
+				{
+					try
+					{
+						UtilReflection.SubscribeToEvent(
+							  GuestComponentes[i]
+							, "FilterChanged"
+							, this
+							, typeof(UIFiltersGroupController<TFilter>)
+							, "GuestComponentes_FilterChanged"
+							, FilterChangedCallbaks[i]);
+					}
+					catch
+					{
+						throw new NotValidFilterException();
+					}
+				}
+			}
+		}
 
-			// TODO: Enganchar eventos filtros
+		#endregion
+
+		#region Gestión de eventos de componentes
+
+		private void GuestComponentes_FilterChanged(object sender, EventArgs e)
+		{
+			OnFilterChanged(new CLFilterChangedEventArgs<TFilter>(GetFilter()));
 		}
 
 		#endregion

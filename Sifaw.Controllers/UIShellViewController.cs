@@ -163,7 +163,7 @@ namespace Sifaw.Controllers
 		/// <param name="width">Ancho de la celda.</param>
 		/// <param name="widthMode">Modo de ajuste de la celda.</param>
 		/// <param name="component">Contenido de la celda.</param>
-		protected abstract void GetCellSettings(uint row, uint cell, out double width, out UILengthModes mode, out TGuest guest);
+		protected abstract void GetRowCellSettings(uint row, uint cell, out double width, out UILengthModes mode, out TGuest guest);
 
 		#endregion
 
@@ -173,12 +173,11 @@ namespace Sifaw.Controllers
 		{
 			base.OnBeforeStartController();
 			
-			ShellManager.SetSettings<TGuest>(
+			UIElement.SetSettings(ShellManager.GetSettings<TGuest>(
 				  GetNumberOfRows
 				, GetNumberOfCellsAt
 				, GetRowSettings
-				, GetCellSettings
-				, UIElement.SetSettings);
+				, GetRowCellSettings));
 		}
 
 		#endregion

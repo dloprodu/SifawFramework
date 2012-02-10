@@ -102,11 +102,10 @@
     <Compile Include="Components\UIFiltersGroupController.cs" />
     <Compile Include="UIShellComponentController.cs" />
     <Compile Include="_Attributes\CLGuidReseteable.cs" />
-    <Compile Include="_Delegates\GetCellSettingsShellCallback.cs" />
+    <Compile Include="_Delegates\GetRowCellSettingsShellCallback.cs" />
     <Compile Include="_Delegates\GetNumberOfCellsAtShellCallback.cs" />
     <Compile Include="_Delegates\GetNumberOfRowsShellCallback.cs" />
     <Compile Include="_Delegates\GetRowSettingsShellCallback.cs" />
-    <Compile Include="_Delegates\SetSettingsShellCallback.cs" />
     <Compile Include="_Events\CLShowMessageEvent.cs" />
     <Compile Include="_Events\CLThrowEvent.cs" />
     <Compile Include="_Events\CLFilterChangedEvent.cs" />
@@ -118,6 +117,7 @@
     <Compile Include="_Events\CLShowErrorEvent.cs" />
     <Compile Include="_Events\CLProgressChangedEvent.cs" />
     <Compile Include="_Exceptions\AbstractUILinkerNullException.cs" />
+    <Compile Include="Components\_Exceptions\NotValidFilterException.cs" />
     <Compile Include="_Exceptions\NotAllowResetException.cs" />
     <Compile Include="_Exceptions\NotCanStartException.cs" />
     <Compile Include="_Exceptions\NotValidStateException.cs" />

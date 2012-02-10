@@ -83,7 +83,7 @@ namespace Sifaw.WPF
 
 				try
 				{
-					UIFilterChangedEventArgs<bool> args = new UIFilterChangedEventArgs<bool>(false, true);
+					UIFilterChangedEventArgs args = new UIFilterChangedEventArgs();
 
 					OnFilterChanged(args);
 
@@ -111,7 +111,7 @@ namespace Sifaw.WPF
 
 				try
 				{
-					UIFilterChangedEventArgs<bool> args = new UIFilterChangedEventArgs<bool>(true, false);
+					UIFilterChangedEventArgs args = new UIFilterChangedEventArgs();
 
 					OnFilterChanged(args);
 
@@ -148,11 +148,11 @@ namespace Sifaw.WPF
 			set { IsChecked = value; }
 		}
 
-		public event UIFilterChangedEventHandler<bool> FilterChanged;
-		private void OnFilterChanged(UIFilterChangedEventArgs<bool> e)
+		public event UIFilterChangedEventHandler FilterChanged;
+		private void OnFilterChanged(UIFilterChangedEventArgs e)
 		{
 			if (FilterChanged != null)
-				FilterChanged(this as BoolFilterComponent, e);
+				FilterChanged(this as TextFilterComponent, e);
 		}
 
 		#endregion

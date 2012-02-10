@@ -57,7 +57,7 @@ namespace Sifaw.Controllers.Components
 		{
 			#region Variables
 
-			TFilter _filter;
+			private TFilter _filter;
 
 			#endregion
 
@@ -93,7 +93,7 @@ namespace Sifaw.Controllers.Components
 		{
 			#region Variables
 
-			TFilter _filter;
+			private TFilter _filter;
 
 			#endregion
 
@@ -206,7 +206,7 @@ namespace Sifaw.Controllers.Components
 			base.OnAfterUIElementLoad();
 
 			/* Subscripción a eventos del componente... */
-			UIElement.FilterChanged += new Views.UIFilterChangedEventHandler<TFilter>(UIElement_FilterChanged);
+			UIElement.FilterChanged += new UIFilterChangedEventHandler(UIElement_FilterChanged);
 		}
 
 		#endregion
@@ -245,9 +245,9 @@ namespace Sifaw.Controllers.Components
 
 		#region Gestión de eventos del componente
 
-		private void UIElement_FilterChanged(object sender, Views.UIFilterChangedEventArgs<TFilter> e)
+		private void UIElement_FilterChanged(object sender, UIFilterChangedEventArgs e)
 		{
-			CLFilterChangedEventArgs<TFilter> args = new CLFilterChangedEventArgs<TFilter>(e.OldValue, e.NewValue);
+			CLFilterChangedEventArgs<TFilter> args = new CLFilterChangedEventArgs<TFilter>(UIElement.Filter);
 
 			OnFilterChanged(args);
 

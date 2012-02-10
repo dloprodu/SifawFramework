@@ -128,8 +128,14 @@ namespace Sifaw.Core.Utilities
 		/// <param name="eventListener">Objeto que escucha el evento.</param>
 		/// <param name="eventListenerType">Tipo del objeto que escucha el evento. Se debe de indicar el tipo que contiene al manejador.</param>
 		/// <param name="handler">Nombre del método que manejará el evento.</param>
-		/// <param name="delegado">Delegado del evento.</param>
-		public static void SubscribeToEvent(object eventSource, string eventName, object eventListener, Type eventListenerType, string handler, Delegate delegado)
+		/// <param name="delegade">Delegado del evento.</param>
+		public static void SubscribeToEvent(
+			  object eventSource
+			, string eventName
+			, object eventListener
+			, Type eventListenerType
+			, string handler
+			, Delegate delegade)
 		{
 			// Se obtiene información sobre el evento al que se le quiere enlazar un manejador mediante un método dinámico.
 			EventInfo eventInfo = eventSource.GetType().GetEvent(eventName, BindingFlags.Public | BindingFlags.Instance);
@@ -168,8 +174,8 @@ namespace Sifaw.Core.Utilities
 			ilgDynamicCodeEvent.Emit(OpCodes.Ret);
 
 			// Por último, se enlaza el manejador.
-			delegado = dynamicHandlerEvent.CreateDelegate(eventHandlerType, eventListener);
-			eventInfo.AddEventHandler(eventSource, delegado);
+			delegade = dynamicHandlerEvent.CreateDelegate(eventHandlerType, eventListener);
+			eventInfo.AddEventHandler(eventSource, delegade);
 		}
 	}
 }

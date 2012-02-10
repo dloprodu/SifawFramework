@@ -194,7 +194,7 @@ namespace Sifaw.Controllers.Test
 			mode = Views.UILengthModes.WeightedProportion;
 		}
 
-		protected override void GetCellSettings(uint row, uint cell, out double width, out Views.UILengthModes mode, out Views.UIComponent component)
+		protected override void GetRowCellSettings(uint row, uint cell, out double width, out Views.UILengthModes mode, out Views.UIComponent component)
 		{
 			width = 400;
 			mode = Views.UILengthModes.WeightedProportion;

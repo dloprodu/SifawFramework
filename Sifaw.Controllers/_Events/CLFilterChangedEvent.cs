@@ -38,20 +38,14 @@ namespace Sifaw.Controllers
 	public class CLFilterChangedEventArgs<TFilter> : SFCancelEventArgs
 	{
 		/// <summary>
-		/// Valor anterior del filtro.
-		/// </summary>
-		public readonly TFilter OlderValue;
-
-		/// <summary>
 		/// Valor actual del filtro.
 		/// </summary>
-		public readonly TFilter NewValue;
+		public readonly TFilter Filter;
 
-		public CLFilterChangedEventArgs(TFilter olderValue, TFilter newValue)
+		public CLFilterChangedEventArgs(TFilter filter)
 			: base()
 		{
-			OlderValue = olderValue;
-			NewValue = newValue;
+			Filter = filter;
 		}
 	}
 

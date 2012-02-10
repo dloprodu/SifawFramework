@@ -142,7 +142,8 @@ namespace Sifaw.WPF.CCL
 
 		protected override void OnTextChanged(TextChangedEventArgs e)
 		{
-			placeHolderLabel.Visibility = string.IsNullOrEmpty(Text) ? Visibility.Visible : Visibility.Collapsed;
+			if (placeHolderLabel != null)
+				placeHolderLabel.Visibility = string.IsNullOrEmpty(Text) ? Visibility.Visible : Visibility.Collapsed;
 
 			base.OnTextChanged(e);
 		}

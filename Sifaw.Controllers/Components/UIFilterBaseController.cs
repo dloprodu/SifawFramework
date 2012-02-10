@@ -185,6 +185,15 @@ namespace Sifaw.Controllers.Components
 
 		#endregion
 
+		#region Propiedades
+
+		public TFilter Filter
+		{
+			get { return UIElement.Filter; }
+		}
+
+		#endregion
+
 		#region Constructor
 
 		protected UIFilterBaseController()
@@ -215,12 +224,12 @@ namespace Sifaw.Controllers.Components
 
 		public override Input GetResetInput()
 		{
-			return new Input(UIElement.Filter);
+			return new Input(Filter);
 		}
 
 		protected override Output GetDefaultOutput()
 		{
-			return new Output(UIElement.Filter);
+			return new Output(Filter);
 		}
 
 		#endregion

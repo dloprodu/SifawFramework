@@ -173,7 +173,7 @@ namespace Sifaw.Controllers
 		{
 			base.OnBeforeStartController();
 			
-			UIElement.SetSettings(ShellManager.GetSettings<TGuest>(
+			UIElement.SetSettings(ShellOperationsManager.GetSettings<TGuest>(
 				  GetNumberOfRows
 				, GetNumberOfCellsAt
 				, GetRowSettings

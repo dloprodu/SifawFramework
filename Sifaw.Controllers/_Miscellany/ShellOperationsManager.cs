@@ -30,7 +30,7 @@ namespace Sifaw.Controllers
 	/// <summary>
 	/// Provee de métodos para la administración de un componente tipo Shell.
 	/// </summary>
-	public static class ShellManager
+	public static class ShellOperationsManager
 	{
 		/// <summary>
 		/// Método que dado los correspondientes métodos callback devuelve la configuración

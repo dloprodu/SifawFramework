@@ -26,7 +26,7 @@ using System.Text;
 using Sifaw.Core;
 
 
-namespace Sifaw.Controllers
+namespace Sifaw.Controllers.Components
 {
 	/*
 	 * Argumento y manejador para los eventos FilterChanged.

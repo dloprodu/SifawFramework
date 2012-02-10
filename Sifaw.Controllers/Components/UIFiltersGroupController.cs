@@ -242,6 +242,20 @@ namespace Sifaw.Controllers.Components
 		
 		#endregion
 
+		#region Gestión de parámetros
+
+		public override Input GetResetInput()
+		{
+			return GetDefaultInput();
+		}
+
+		protected override Output GetDefaultOutput()
+		{
+			return new Output(GetFilter());
+		}
+
+		#endregion
+
 		#region Start Methods
 
 		[CLReseteable(null)]

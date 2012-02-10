@@ -175,7 +175,7 @@ namespace Sifaw.Controllers
 		{
 			base.OnBeforeStartController();
 
-			UIShellRow[] rows = ShellManager.GetSettings<TGuest>(
+			UIShellRow[] rows = ShellOperationsManager.GetSettings<TGuest>(
 				  GetNumberOfRows
 				, GetNumberOfCellsAt
 				, GetRowSettings

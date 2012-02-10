@@ -45,11 +45,28 @@ namespace Sifaw.Controllers.Components.Filters
 			, UISettingsContainer
 			, TextFilterComponent>.UISettingsContainer<TextFilterComponent>
 		{
+			#region Variables
+
+			private string _placeholder = string.Empty;
+
+			#endregion
+
+			#region Propiedades
+
+			public string Placeholder
+			{
+				get { return _placeholder; }
+				set { _placeholder = value; }
+			}
+
+			#endregion
+
 			#region Constructor
 
 			public UISettingsContainer()
 				: base()
 			{
+				this._placeholder = "Buscar...";
 			}
 
 			#endregion
@@ -59,6 +76,8 @@ namespace Sifaw.Controllers.Components.Filters
 			public override void Apply()
 			{
 				base.Apply();
+
+				UIElement.Placeholder = Placeholder;
 			}
 
 			#endregion

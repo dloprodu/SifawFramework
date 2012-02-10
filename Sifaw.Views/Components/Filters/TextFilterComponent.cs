@@ -32,6 +32,9 @@ namespace Sifaw.Views.Components.Filters
 	/// </summary>
 	public interface TextFilterComponent : FilterBaseComponent<string>
 	{
-		/* Empty */
+		/// <summary>
+		/// Texto a mostrar como punto de entrada del componente.
+		/// </summary>
+		string Placeholder { get; set; }
 	}
 }

@@ -36,10 +36,5 @@ namespace Sifaw.Views.Components
 		/// Obtiene la denominación del item <see cref="IFilterable"/>.
 		/// </summary>
 		string DisplayFilter { get; }
-
-		/// <summary>
-		/// Obtiene el valor real del item <see cref="IFilterable"/>.
-		/// </summary>
-		object ValueFilter { get; }
 	}
 }

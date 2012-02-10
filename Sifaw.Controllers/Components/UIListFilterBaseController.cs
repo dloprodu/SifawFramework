@@ -37,7 +37,7 @@ namespace Sifaw.Controllers.Components
 	/// <typeparam name="TUISettings">Tipo para establecer el proxy encargado de establecer los ajustes al elemento de interfaz de usuario.</typeparam>
 	/// <typeparam name="TComponent">Tipo del componente de UI del controlador.</typeparam>
 	public abstract class UIListFilterBaseController<TFilter, TSource, TUISettings, TComponent> : UIFilterBaseController
-		<TFilter
+		< TFilter
 		, TUISettings
 		, TComponent>
 		where TSource : IList<IFilterable>

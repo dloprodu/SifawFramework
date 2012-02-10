@@ -45,13 +45,13 @@ namespace Sifaw.Controllers.Components.Filters
 			, UISettingsContainer
 			, TextFilterComponent>.UISettingsContainer<TextFilterComponent>
 		{
-			#region Variables
+			#region Fields
 
 			private string _placeholder = string.Empty;
 
 			#endregion
 
-			#region Propiedades
+			#region Properties
 
 			public string Placeholder
 			{
@@ -61,7 +61,7 @@ namespace Sifaw.Controllers.Components.Filters
 
 			#endregion
 
-			#region Constructor
+			#region Constructors
 
 			public UISettingsContainer()
 				: base()
@@ -71,7 +71,7 @@ namespace Sifaw.Controllers.Components.Filters
 
 			#endregion
 
-			#region Métodos públicos
+			#region Public Methods
 
 			public override void Apply()
 			{
@@ -85,7 +85,7 @@ namespace Sifaw.Controllers.Components.Filters
 
 		#endregion
 
-		#region Constructor
+		#region Constructors
 
 		public UITextFilterController()
 			: base()
@@ -108,7 +108,7 @@ namespace Sifaw.Controllers.Components.Filters
 
 		#endregion
 
-		#region StartController
+		#region Start Methods
 
 		protected override void StartController()
 		{

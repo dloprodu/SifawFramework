@@ -35,7 +35,7 @@ namespace Sifaw.Controllers
 	/// </summary>
 	public interface IUIViewController : IUIElementController
 	{
-		#region Métodos
+		#region Methods
 
 		/// <summary>
 		/// Muestra la vista.

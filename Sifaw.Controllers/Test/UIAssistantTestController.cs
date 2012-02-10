@@ -34,7 +34,7 @@ namespace Sifaw.Controllers.Test
 
 		#endregion
 
-		#region Inclusiones
+		#region Inclusions
 
 		private UIBackgroundWorkerController _controller1 = null;
 		private UIBackgroundWorkerController Controller1
@@ -80,7 +80,7 @@ namespace Sifaw.Controllers.Test
 
 		#endregion
 
-		#region Constructor
+		#region Constructors
 
 		public UIAssistantTestController()
 			: base()
@@ -94,7 +94,7 @@ namespace Sifaw.Controllers.Test
 
 		#endregion
 
-		#region Gestión de parámetros
+		#region Default Input / Output
 
 		public override UIAssistantTestController.Input GetDefaultInput()
 		{
@@ -113,7 +113,7 @@ namespace Sifaw.Controllers.Test
 
 		#endregion
 
-		#region UIAssistenteController
+		#region UIAssistente Methods
 
 		protected override byte GetNumberOfComponents()
 		{
@@ -145,14 +145,22 @@ namespace Sifaw.Controllers.Test
 			finish = true;
 		}
 
-		public void RunWorker()
+        #endregion
+
+        #region Public Methods
+
+        public void RunWorker()
 		{
 			this.Controller1.RunWorker();
 			this.Controller2.RunWorker();
 			this.Controller3.RunWorker();
 		}
 
-		protected override void StartController()
+        #endregion
+
+        #region Start Methods
+
+        protected override void StartController()
 		{
 			Controller1.UISettings.Denomination = "Vista 1...";
 			Controller1.UISettings.Description = "Descripción Vista 1 Descripción Vista 1 Descripción Vista 1 Descripción Vista 1 Descripción Vista 1 Descripción Vista 1 Descripción Vista 1 Descripción Vista 1 Descripción Vista 1 Descripción Vista 1 Descripción Vista 1 Descripción Vista 1 Descripción Vista 1...";

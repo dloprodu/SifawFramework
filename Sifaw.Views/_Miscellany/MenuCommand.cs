@@ -31,7 +31,7 @@ namespace Sifaw.Views
     /// </summary>
     public class MenuCommand
     {
-        #region Variables
+        #region Fields
         
         /// <summary>
         /// Identificador usado para agrupar en conjuntos de comandos.
@@ -50,7 +50,7 @@ namespace Sifaw.Views
         
         #endregion
 
-        #region Constructor
+        #region Constructors
 
         public MenuCommand(int idGroup, int idCommand, string command)
         {

@@ -54,13 +54,13 @@ namespace Sifaw.Controllers.Components
 			, TComponent>.UISettingsContainer<TUI>
 			where TUI : TComponent
 		{
-			#region Variables
+			#region Fields
 
 			private TSource _source;
 
 			#endregion
 
-			#region Propiedades
+			#region Properties
 
 			/// <summary>
 			/// Obtiene o establece la lista sobre la que se realizará el filtro.
@@ -82,7 +82,7 @@ namespace Sifaw.Controllers.Components
 
 			#endregion
 
-			#region Constructor
+			#region Constructors
 
 			public UISettingsContainer()
 				: base()
@@ -91,7 +91,7 @@ namespace Sifaw.Controllers.Components
 
 			#endregion
 
-			#region Métodos públicos
+			#region Public Methods
 
 			public override void Apply()
 			{
@@ -105,7 +105,7 @@ namespace Sifaw.Controllers.Components
 
 		#endregion
 
-		#region Constructor
+		#region Constructors
 
 		protected UIListFilterBaseController()
 			: base()

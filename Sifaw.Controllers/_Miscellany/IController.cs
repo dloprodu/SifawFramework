@@ -34,7 +34,7 @@ namespace Sifaw.Controllers
 	/// </summary>
 	public interface IController
 	{
-		#region Popiedades
+		#region Properties
 
 		/// <summary>
 		/// Devuelve el estado en el que se encuentra  una controladora.
@@ -48,7 +48,7 @@ namespace Sifaw.Controllers
 
 		#endregion
 
-		#region Métodos
+		#region Methods
 
 		/// <summary>
 		/// Inicia la controladora.
@@ -67,7 +67,7 @@ namespace Sifaw.Controllers
 
 		#endregion
 
-		#region Eventos
+		#region Events
 
 		/// <summary>
 		/// Evento para cominicar un cambio de estado.
@@ -107,7 +107,7 @@ namespace Sifaw.Controllers
 	/// </summary>
 	public interface IController<TInput, TOutput> : IController
 	{
-		#region Métodos
+		#region Methods
 
 		/// <summary>
 		/// Inicia la controladora.
@@ -121,7 +121,7 @@ namespace Sifaw.Controllers
 
 		#endregion
 
-		#region Eventos
+		#region Events
 
 		/// <summary>
 		/// Evento para comunicar que la controladora ha finalizado.

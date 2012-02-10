@@ -17,7 +17,7 @@ namespace Sifaw.WPF.Test
 	/// </summary>
 	public partial class App : Application
 	{
-		#region Constructor
+		#region Constructors
 
 		public App()
 			: base()
@@ -39,7 +39,7 @@ namespace Sifaw.WPF.Test
 
 		#endregion
 
-		#region Métodos auxiliares
+		#region Methods auxiliares
 
 		public static object TestBackGroundWorker(BackgroundWorkerCommunicator com, object[] args)
 		{

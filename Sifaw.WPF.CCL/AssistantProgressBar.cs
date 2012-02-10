@@ -188,7 +188,7 @@ namespace Sifaw.WPF.CCL
 
 		#endregion
 
-		#region Propiedades
+		#region Properties
 
 		[Category("Behavior")]
 		public byte Minimum
@@ -313,7 +313,7 @@ namespace Sifaw.WPF.CCL
 
 		#endregion
 
-		#region Constructores
+		#region Constructors
 
 		static AssistantProgressBar()
 		{
@@ -322,7 +322,7 @@ namespace Sifaw.WPF.CCL
 
 		#endregion
 
-		#region Métodos sobrescritos
+		#region Override Methods
 
 		protected override void OnRender(DrawingContext dC)
 		{
@@ -395,7 +395,7 @@ namespace Sifaw.WPF.CCL
 
 		#endregion
 
-		#region Métodos virtuales
+		#region Virtual Methods
 
 		private void OnMinimumChanged(byte oldValue, byte newValue)
 		{
@@ -449,7 +449,7 @@ namespace Sifaw.WPF.CCL
 
 		#endregion
 
-		#region Mëtodos de factoria
+		#region Factory Methods
 
 		#region Coerce
 

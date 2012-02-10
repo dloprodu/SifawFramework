@@ -13,7 +13,7 @@ namespace Sifaw.Core.Drawing
 	/// </summary>
 	public static class GraphicsExtensions
 	{
-		#region Métodos de trazado de rectángulos
+		#region Methods de trazado de rectángulos
 
 		public static void DrawRoundedRectangle(
 			this Graphics graphics,
@@ -162,7 +162,7 @@ namespace Sifaw.Core.Drawing
 
 		#endregion
 
-		#region Métodos de relleno de rectángulos
+		#region Methods de relleno de rectángulos
 
 		public static void FillRoundedRectangle(
 			this Graphics graphics,
@@ -379,7 +379,7 @@ namespace Sifaw.Core.Drawing
 
 		#endregion
 
-		#region Métodos privados
+		#region Methods privados
 
 		/// <summary>
 		/// Devuelve el objeto GraphicsPath con la definición del rectángulo con las esquinas en forma de arco.

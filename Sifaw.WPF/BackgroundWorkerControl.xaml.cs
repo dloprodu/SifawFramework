@@ -44,7 +44,7 @@ namespace Sifaw.WPF
 	/// </summary>
 	public partial class BackgroundWorkerControl : UserControl, BackgroundWorkerComponent
 	{
-		#region Constructor
+		#region Constructors
 
 		public BackgroundWorkerControl()
 		{
@@ -53,7 +53,7 @@ namespace Sifaw.WPF
 
 		#endregion
 
-		#region Métodos auxiliares
+		#region Methods auxiliares
 
 		private double Rango(int value, ProgressBar barra)
 		{
@@ -68,7 +68,7 @@ namespace Sifaw.WPF
 
 		#endregion
 
-		#region Gestión de eventos
+		#region Events Handlers
 
 		private void buttonCancelar_Click(object sender, RoutedEventArgs e)
 		{
@@ -79,7 +79,7 @@ namespace Sifaw.WPF
 
 		#region BackgroundWorkerManagerComponent Members
 
-		#region Propiedades
+		#region Properties
 
 		public bool WithControl
 		{
@@ -119,7 +119,7 @@ namespace Sifaw.WPF
 
 		#endregion
 
-		#region Métodos
+		#region Methods
 
 		public void UpdateProgress(string message)
 		{
@@ -141,7 +141,7 @@ namespace Sifaw.WPF
 
 		#endregion
 
-		#region Eventos
+		#region Events
 
 		public event EventHandler Cancel;
 		private void OnCancel(EventArgs e)
@@ -156,7 +156,7 @@ namespace Sifaw.WPF
 
 		#region UIElement Members
 
-		#region Propiedades
+		#region Properties
 
 		private string _denomination = string.Empty;
 		public string Denomination
@@ -174,7 +174,7 @@ namespace Sifaw.WPF
 
 		#endregion
 
-		#region Métodos
+		#region Methods
 
 		public void Refresh()
 		{

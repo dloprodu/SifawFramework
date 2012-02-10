@@ -31,7 +31,7 @@ namespace Sifaw.Views.Components
 	/// </summary>
 	public interface AssistantComponent : UIComponent
 	{
-		#region Propiedades
+		#region Properties
 
 		byte NumComponents { get; set; }
 		bool PreviousEnabled { get; set; }
@@ -41,7 +41,7 @@ namespace Sifaw.Views.Components
 
 		#endregion
 
-		#region Métodos
+		#region Methods
 
 		/// <summary>
 		/// Establece el componente de interfaz de usuario a mostrar.
@@ -51,7 +51,7 @@ namespace Sifaw.Views.Components
 
 		#endregion
 
-		#region Eventos
+		#region Events
 
 		event EventHandler Next;
 		event EventHandler Previous;

@@ -54,7 +54,7 @@ namespace Sifaw.WPF
 
 		#endregion
 
-		#region Propiedades
+		#region Properties
 
 		/// <summary>
 		/// Obtiene o establece un valor que indica la orientación horizontal o vertical del
@@ -68,7 +68,7 @@ namespace Sifaw.WPF
 
 		#endregion
 
-		#region Constructor
+		#region Constructors
 
 		static EnumFilterControl()
 		{
@@ -165,7 +165,7 @@ namespace Sifaw.WPF
 
 		#region UIElement Members
 
-		#region Propiedades
+		#region Properties
 
 		private string _denomination = string.Empty;
 		public string Denomination
@@ -183,7 +183,7 @@ namespace Sifaw.WPF
 
 		#endregion
 
-		#region Métodos
+		#region Methods
 
 		public void Refresh()
 		{

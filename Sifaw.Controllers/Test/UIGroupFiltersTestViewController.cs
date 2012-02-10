@@ -14,7 +14,7 @@ namespace Sifaw.Controllers.Test
 		, UIGroupFiltersTestViewController.UISettingsContainer
 		, ShellComponent>
 	{
-		#region Inclusiones
+		#region Inclusions
 
 		private UIGroupFiltersTestController _groupFilterTest = null;
 		private UIGroupFiltersTestController GroupFilterTest
@@ -32,7 +32,7 @@ namespace Sifaw.Controllers.Test
 
 		#endregion
 
-		#region Entrada / Salida
+		#region Input / Output
 
 		/// <summary>
 		/// Parámetros de entrada de las controladora.
@@ -40,7 +40,7 @@ namespace Sifaw.Controllers.Test
 		[Serializable]
 		public new class Input : UIShellViewController<Input, Output, UISettingsContainer, ShellComponent>.Input
 		{
-			#region Constructor
+			#region Constructors
 
 			public Input()
 				: this(true)
@@ -61,7 +61,7 @@ namespace Sifaw.Controllers.Test
 		[Serializable]
 		public new class Output : UIShellViewController<Input, Output, UISettingsContainer, ShellComponent>.Output
 		{
-			#region Constructor
+			#region Constructors
 
 			public Output()
 				: base()
@@ -82,7 +82,7 @@ namespace Sifaw.Controllers.Test
 			, UISettingsContainer
 			, ShellComponent>.UISettingsContainer
 		{
-			#region Constructor
+			#region Constructors
 
 			public UISettingsContainer()
 				: base()
@@ -91,7 +91,7 @@ namespace Sifaw.Controllers.Test
 
 			#endregion
 
-			#region Métodos públicos
+			#region Public Methods
 
 			public override void Apply()
 			{
@@ -103,7 +103,7 @@ namespace Sifaw.Controllers.Test
 
 		#endregion
 
-		#region Constructor
+		#region Constructors
 
 		public UIGroupFiltersTestViewController()
 			: base()
@@ -117,7 +117,7 @@ namespace Sifaw.Controllers.Test
 
 		#endregion
 
-		#region Shell Members
+		#region Shell Methods
 
 		protected override uint GetNumberOfRows()
 		{
@@ -144,7 +144,7 @@ namespace Sifaw.Controllers.Test
 
 		#endregion
 
-		#region Input / Output
+		#region Default Input / Output
 
 		public override Input GetDefaultInput()
 		{
@@ -163,7 +163,7 @@ namespace Sifaw.Controllers.Test
 
 		#endregion
 
-		#region Start Members
+		#region Start Methods
 
 		protected override void StartController()
 		{

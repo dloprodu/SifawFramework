@@ -32,13 +32,13 @@ namespace Sifaw.Controllers
 	public static class AbstractUIProviderManager<TLinker> 
 		where TLinker : AbstractUIProvider
 	{
-		#region Variables
+		#region Fields
 
 		private static TLinker _linker = default(TLinker);
 
 		#endregion
 
-		#region Propiedades
+		#region Properties
 
 		/// <summary>
 		/// Devuelve el enlazador de vistas establecido por defecto para
@@ -51,7 +51,7 @@ namespace Sifaw.Controllers
 
 		#endregion
 
-		#region Metodos
+		#region Methods
 
 		/// <summary>
 		/// Establece el enlazador de elementos de interfaz de usuario.

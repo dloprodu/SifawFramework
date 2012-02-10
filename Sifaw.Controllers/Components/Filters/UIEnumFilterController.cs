@@ -58,7 +58,7 @@ namespace Sifaw.Controllers.Components.Filters
 			, UISettingsContainer
 			, EnumFilterComponent>.UISettingsContainer<EnumFilterComponent>
 		{
-			#region Constructor
+			#region Constructors
 
 			public UISettingsContainer()
 				: base()
@@ -67,7 +67,7 @@ namespace Sifaw.Controllers.Components.Filters
 
 			#endregion
 
-			#region Métodos públicos
+			#region Public Methods
 
 			public override void Apply()
 			{
@@ -79,7 +79,7 @@ namespace Sifaw.Controllers.Components.Filters
 
 		#endregion
 
-		#region Constructor
+		#region Constructors
 
 		public UIEnumFilterController()
 			: base()
@@ -102,7 +102,7 @@ namespace Sifaw.Controllers.Components.Filters
 
 		#endregion
 
-		#region StartController
+		#region Start Methods
 
 		protected override void StartController()
 		{

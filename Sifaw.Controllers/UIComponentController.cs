@@ -54,7 +54,7 @@ namespace Sifaw.Controllers
                           , new()
         where TComponent  : UIComponent
     {
-        #region Entrada / Salida
+        #region Input / Output
 
         /// <summary>
         /// Parámetros de entrada de las controladoras
@@ -62,7 +62,7 @@ namespace Sifaw.Controllers
         [Serializable]
         public new abstract class Input : UIElementController<TInput, TOutput, TUISettings, TComponent>.Input
         {
-            #region Constructor
+            #region Constructors
 
             protected Input()
                 : base()
@@ -78,7 +78,7 @@ namespace Sifaw.Controllers
         [Serializable]
         public new abstract class Output : UIElementController<TInput, TOutput, TUISettings, TComponent>.Output
         {
-            #region Constructor
+            #region Constructors
 
             protected Output()
                 : base()
@@ -100,7 +100,7 @@ namespace Sifaw.Controllers
             , TComponent>.UISettingsContainer<TUI>
             where TUI : TComponent
         {
-            #region Constructor
+            #region Constructors
 
             public UISettingsContainer()
                 : base()
@@ -109,7 +109,7 @@ namespace Sifaw.Controllers
 
             #endregion
 
-            #region Métodos públicos
+            #region Public Methods
 
             public override void Apply()
             {
@@ -121,7 +121,7 @@ namespace Sifaw.Controllers
 
         #endregion
 
-        #region Eventos
+        #region Events
 
         /*
 		 * Desencadenadores privados.
@@ -185,7 +185,7 @@ namespace Sifaw.Controllers
 
         #endregion
 
-        #region Constructor
+        #region Constructors
 
         protected UIComponentController()
             : base()
@@ -199,7 +199,7 @@ namespace Sifaw.Controllers
 
         #endregion
 
-        #region Métodos públicos
+        #region Public Methods
 
         public UIComponent GetUIComponent()
         {
@@ -208,7 +208,7 @@ namespace Sifaw.Controllers
 
         #endregion
 
-        #region Métodos sobreescritos
+        #region UIElement Methods
 
         protected override void OnAfterUIElementLoad()
         {
@@ -216,6 +216,10 @@ namespace Sifaw.Controllers
 
             /* Subscripción a eventos del componente... */
         }
+
+        #endregion
+
+        #region Start Methods
 
         protected override void OnBeforeStartController()
         {
@@ -238,7 +242,7 @@ namespace Sifaw.Controllers
 
         #endregion
 
-        #region Gestión de eventos de componentes embebidos
+        #region Inclusions Events Handlers
 
         private void UIComponentController_ConfirmMessage(object sender, CLConfirmMessageEventArgs e)
         {

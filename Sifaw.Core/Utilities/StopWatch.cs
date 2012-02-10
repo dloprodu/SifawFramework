@@ -27,13 +27,13 @@ namespace Sifaw.Core.Utilities
 	/// </summary>
 	public class StopWatch
 	{
-		#region Variables privadas
+		#region Fields
 
 		long startCount = 0;
 
 		#endregion
 
-		#region Métodos estáticos
+		#region Factory Methods
 
 		[System.Runtime.InteropServices.DllImport("Kernel32.dll")]
 		public static extern bool QueryPerformanceCounter(out long perfcount);
@@ -57,7 +57,7 @@ namespace Sifaw.Core.Utilities
 
 		#endregion
 
-		#region Métodos públicos
+		#region Public Methods
 
 		public void StartCounter()
 		{

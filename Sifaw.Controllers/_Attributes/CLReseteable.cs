@@ -32,13 +32,13 @@ namespace Sifaw.Controllers
     [AttributeUsage(AttributeTargets.Field, Inherited = true, AllowMultiple = true)]
     public class CLReseteable : Attribute
     {
-        #region Variables
+        #region Fields
 
         protected object _value;
 
         #endregion
 
-        #region Propiedades
+        #region Properties
 
         /// <summary>
         /// Devuelve el valor que se quiere asignar al reiniciar un campo.
@@ -50,7 +50,7 @@ namespace Sifaw.Controllers
 
         #endregion
 
-        #region Constructores
+        #region Constructors
 
         /// <summary>
         /// Atributo para identificar las variables de la controladora que se quieren resetear.

@@ -32,7 +32,7 @@ namespace Sifaw.Views
 	/// </summary>
 	public interface UIElement
 	{
-		#region Propiedades
+		#region Properties
 
 		/// <summary>
 		/// Establece o devuelve la denominación del <see cref="UIElement"/>.
@@ -66,7 +66,7 @@ namespace Sifaw.Views
 
 		#endregion
 
-		#region Métodos
+		#region Methods
 
 		/// <summary>
 		/// Refresca el elemento UI.

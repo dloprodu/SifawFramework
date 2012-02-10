@@ -41,7 +41,7 @@ namespace Sifaw.WPF
 	/// </summary>
 	public partial class ShellWindow : Window, ShellView
 	{
-		#region Constructor
+		#region Constructors
 
 		public ShellWindow()
 		{
@@ -50,7 +50,7 @@ namespace Sifaw.WPF
 
 		#endregion
 
-		#region Gestión de eventos
+		#region Events Handlers
 		
 		private void Window_Loaded(object sender, RoutedEventArgs e)
 		{
@@ -85,7 +85,7 @@ namespace Sifaw.WPF
 
 		#region UIView Members
 
-		#region Propiedades
+		#region Properties
 
 		public string Header
 		{
@@ -105,7 +105,7 @@ namespace Sifaw.WPF
 
 		#endregion
 
-		#region Métodos
+		#region Methods
 
 		public new void Show()
 		{
@@ -164,7 +164,7 @@ namespace Sifaw.WPF
 
 		#endregion
 
-		#region Eventos
+		#region Events
 
 		public event EventHandler BeforeShow;
 		private void OnBeforeShow(EventArgs e)
@@ -200,7 +200,7 @@ namespace Sifaw.WPF
 
 		#region UIElement Members
 
-		#region Propiedades
+		#region Properties
 
 		private string _denomination = string.Empty;
 		public string Denomination
@@ -218,7 +218,7 @@ namespace Sifaw.WPF
 
 		#endregion
 
-		#region Métodos
+		#region Methods
 
 		public void Refresh()
 		{

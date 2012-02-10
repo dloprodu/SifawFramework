@@ -38,7 +38,7 @@ namespace Sifaw.Controllers.Components
 		, UIBackgroundWorkerController.UISettingsContainer
 		, BackgroundWorkerComponent>
 	{
-		#region Parametros de inicio / finalización
+		#region Input / Output
 
 		/// <summary>
 		/// Clase que engloba los parámetros de inicio de la controladora de procesos pesados
@@ -50,13 +50,13 @@ namespace Sifaw.Controllers.Components
 			, UISettingsContainer
 			, BackgroundWorkerComponent>.Input
 		{
-			#region Variables
+			#region Fields
 
 			private BackgroundWorkerPack _workerPack;
 
 			#endregion
 
-			#region Propiedades
+			#region Properties
 
 			/// <summary>
 			/// Paquete de ejecución
@@ -69,7 +69,7 @@ namespace Sifaw.Controllers.Components
 
 			#endregion
 
-			#region Constructor
+			#region Constructors
 
 			/// <summary>
 			/// Clase que engloba los parámetros de inicio de la controladora de procesos pesados
@@ -95,14 +95,14 @@ namespace Sifaw.Controllers.Components
 			, UISettingsContainer
 			, BackgroundWorkerComponent>.Output
 		{
-			#region Variables
+			#region Fields
 
 			private object _result;
 			private bool _cancelled;
 
 			#endregion
 
-			#region Propiedades
+			#region Properties
 
 			/// <summary>
 			/// Resultado del proceso
@@ -122,7 +122,7 @@ namespace Sifaw.Controllers.Components
 
 			#endregion
 
-			#region Constructor
+			#region Constructors
 
 			/// <summary>
 			/// Clase que engloba los parámetros de finalización de la controladora de procesos pesados
@@ -141,7 +141,7 @@ namespace Sifaw.Controllers.Components
 
 		#endregion
 
-		#region Variables
+		#region Fields
 
 		// TODO: Mover el BackgroundWorker a la vista puesto que es un componente de System.Components o implementar un componente similar.
 
@@ -153,7 +153,7 @@ namespace Sifaw.Controllers.Components
 		
 		#endregion
 
-		#region Eventos
+		#region Events
 
 		public event SFCancelEventHandler BeforeBackgroundWorker = null;
 
@@ -188,7 +188,7 @@ namespace Sifaw.Controllers.Components
 			, UISettingsContainer
 			, BackgroundWorkerComponent>.UISettingsContainer<BackgroundWorkerComponent>
 		{
-			#region Variables
+			#region Fields
 
 			private bool _withControl = true;
 			private bool _allowCancel = false;
@@ -198,7 +198,7 @@ namespace Sifaw.Controllers.Components
 
 			#endregion
 
-			#region Propiedades
+			#region Properties
 
 			/// <summary>
 			/// Establece o devuelve un valor que indica si el proceso
@@ -250,7 +250,7 @@ namespace Sifaw.Controllers.Components
 
 			#endregion
 
-			#region Constructor
+			#region Constructors
 
 			public UISettingsContainer()
 				: base()
@@ -264,7 +264,7 @@ namespace Sifaw.Controllers.Components
 
 			#endregion
 
-			#region Métodos públicos
+			#region Public Methods
 
 			public override void Apply()
 			{
@@ -282,7 +282,7 @@ namespace Sifaw.Controllers.Components
 
 		#endregion
 
-		#region Constructor
+		#region Constructors
 
 		public UIBackgroundWorkerController()
 			: base()
@@ -296,7 +296,7 @@ namespace Sifaw.Controllers.Components
 
 		#endregion
 
-		#region Component
+		#region UIElement Methods
 
 		protected override void OnAfterUIElementLoad()
 		{
@@ -307,7 +307,7 @@ namespace Sifaw.Controllers.Components
 
 		#endregion
 
-		#region Chequeo de precondiciones
+		#region Check Preconditions
 
 		protected override void OnCheckPreconditions(string preconditionName)
 		{
@@ -324,7 +324,7 @@ namespace Sifaw.Controllers.Components
 
 		#endregion
 
-		#region Gestión de parámetros
+		#region Default Input / Output
 
 		protected override Output GetDefaultOutput()
 		{
@@ -343,7 +343,7 @@ namespace Sifaw.Controllers.Components
 
 		#endregion
 
-		#region Métodos públicos
+		#region Public Methods
 
 		/// <summary>
 		/// Ejecuta el proceso pesado. Antes de ejecutar el proceso se lanza el evento <see cref="BeforeBackgroundWorker"/>
@@ -375,7 +375,7 @@ namespace Sifaw.Controllers.Components
 
 		#endregion
 
-		#region IController
+		#region Start Methods
 
 		protected override void StartController()
 		{
@@ -402,7 +402,7 @@ namespace Sifaw.Controllers.Components
 
 		#endregion
 
-		#region Gestión de la finalización
+		#region Finish Methods
 
 		protected override void OnBeforeFinishControllers(List<IController> children)
 		{
@@ -418,7 +418,7 @@ namespace Sifaw.Controllers.Components
 
 		#endregion
 
-		#region Gestión de eventos
+		#region Events Handlers
 
 		protected override void OnUISettingsApplied()
 		{
@@ -430,7 +430,7 @@ namespace Sifaw.Controllers.Components
 
 		#endregion
 
-		#region Gestión de eventos del componente
+		#region UIElement Events Handlers
 
 		private void UIElement_Cancel(object sender, EventArgs e)
 		{
@@ -444,7 +444,7 @@ namespace Sifaw.Controllers.Components
 
 		#endregion
 
-		#region Gestión de eventos del Worker
+		#region Worker Events Handlers 
 
 		private void worker_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
 		{
@@ -467,32 +467,32 @@ namespace Sifaw.Controllers.Components
 
 		private void worker_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
 		{
-			Tuple<ReportProgressCommand, string> argumentos = (Tuple<ReportProgressCommand, string>)e.UserState;
+			Tuple<ReportProgressCommands, string> argumentos = (Tuple<ReportProgressCommands, string>)e.UserState;
 			
 			switch (argumentos.Item1)
 			{
-				case ReportProgressCommand.TextChanged:
+				case ReportProgressCommands.TextChanged:
 					UIElement.UpdateProgress(argumentos.Item2);
 					break;
 
-				case ReportProgressCommand.ProgressAndTextChanged:
+				case ReportProgressCommands.ProgressAndTextChanged:
 					if (UISettings.WithControl)
 						UIElement.UpdateProgress(e.ProgressPercentage);
 					
 					UIElement.UpdateProgress(argumentos.Item2);
 					break;
 
-				case ReportProgressCommand.ProgressChanged:
+				case ReportProgressCommands.ProgressChanged:
 					if (UISettings.WithControl)
 						UIElement.UpdateProgress(e.ProgressPercentage);
 					break;
 
-				case ReportProgressCommand.MaximumProgressChanged:
+				case ReportProgressCommands.MaximumProgressChanged:
 					if (UISettings.WithControl)
 						UIElement.MaxProgressPercentage = e.ProgressPercentage;
 					break;
 
-				case ReportProgressCommand.WithControlChanged:
+				case ReportProgressCommands.WithControlChanged:
 					UIElement.WithControl = !UIElement.WithControl;
 					break;
 			}
@@ -500,175 +500,4 @@ namespace Sifaw.Controllers.Components
 
 		#endregion
 	}
-
-	#region Miscelanea
-
-	/// <summary>
-	/// Define los comandos que puede enviar un proceso pesado a la controladora
-	/// para actualizar la información mostrada al usuario.
-	/// </summary>
-	public enum ReportProgressCommand
-	{
-		ProgressAndTextChanged,
-		TextChanged,
-		ProgressChanged,
-		MaximumProgressChanged,
-		WithControlChanged
-	}
-
-	[Serializable]
-	public delegate object BackgroundWorkerDelegate(BackgroundWorkerCommunicator comunicador, object[] arg);
-
-	/// <summary>
-	/// Representa un paquete de ejecucion de una tarea de fondo.
-	/// </summary>
-	[Serializable]
-	public class BackgroundWorkerPack
-	{
-		#region Variables
-
-		private BackgroundWorkerDelegate _method = null;
-		private object[] _arguments = null;
-		private object _result = null;
-
-		#endregion
-
-		#region Propiedades
-
-		public BackgroundWorkerDelegate Method
-		{
-			get { return _method; }
-		}
-
-		public object Result
-		{
-			get { return _result; }
-		}
-
-		#endregion
-
-		#region Constructor
-
-		/// <summary>
-		/// Construye el paquete de información para ejecutar un proceso pesado
-		/// </summary>
-		/// <param name="method">Delegado que contiene el código a ejecutar.</param>
-		/// <param name="arguments">Lista de argumentos que se necesitan para ejecutar el delegado.</param>
-		public BackgroundWorkerPack(BackgroundWorkerDelegate method, object[] arguments)
-		{
-			_method = method;
-			_arguments = arguments;
-		}
-
-		#endregion
-
-		#region Metodos
-
-		public void Start(BackgroundWorkerCommunicator communicator)
-		{
-			try
-			{
-				_result = _method.DynamicInvoke(new object[] { communicator, _arguments });
-			}
-			catch (Exception)
-			{
-				_result = null;
-			}
-		}
-
-		#endregion
-	}
-
-	/// <summary>
-	/// Provee de soporte a la comunicación con procesos pesados que se ejecutan 
-	/// en hilos.
-	/// </summary>
-	[Serializable]
-	public class BackgroundWorkerCommunicator
-	{
-		#region Variables
-
-		private System.ComponentModel.BackgroundWorker Worker = null;
-
-		#endregion
-
-		#region Propiedades
-
-		/// <summary>
-		/// Indica si el usuario ha solicitado la cancelación del proceso
-		/// </summary>
-		public bool CancellationPending
-		{
-			get { return Worker.CancellationPending; }
-		}
-
-		#endregion
-
-		#region Constructor
-
-		public BackgroundWorkerCommunicator(System.ComponentModel.BackgroundWorker worker)
-		{
-			Worker = worker;
-		}
-
-		#endregion
-
-		#region Metodos para el progreso primario
-
-		/// <summary>
-		/// Indica al gestor de procesos pesados, el progreso y el texto a mostrar en el progreso.
-		/// Si se ha iniciado el proceso en modo sin control, este método no hace nada.
-		/// </summary>
-		public void Progress(int progess, string text)
-		{
-			Worker.ReportProgress(progess, new Tuple<ReportProgressCommand, string>( ReportProgressCommand.ProgressAndTextChanged, text ));
-		}
-
-		/// <summary>
-		/// Indica al gestor de procesos pesados el texto a mostrar en el progreso.
-		/// </summary>
-		public void Progress(string text)
-		{
-			Worker.ReportProgress(0, new Tuple<ReportProgressCommand, string>( ReportProgressCommand.TextChanged, text ));
-		}
-
-		/// <summary>
-		/// Incrementa en una unidad el progreso indicado, según el máximo indicado.
-		/// Si se ha iniciado el proceso en modo SinControl, este método no hace nada.
-		/// </summary>
-		public void Increment(string text)
-		{
-			Worker.ReportProgress(1, new Tuple<ReportProgressCommand, string>( ReportProgressCommand.ProgressAndTextChanged, text ));
-		}
-
-		/// <summary>
-		/// Incrementa en una unidad el progreso indicado, según el máximo indicado.
-		/// Si se ha iniciado el proceso en modo sin control, este método no hace nada.
-		/// </summary>
-		public void Increment()
-		{
-			Worker.ReportProgress(1, new Tuple<ReportProgressCommand, string>(ReportProgressCommand.ProgressChanged, string.Empty));
-		}
-
-		/// <summary>
-		/// Cambia el máximo predeterminado del progreso.
-		/// Si se ha iniciado el proceso en modo sin control, este método no hace nada.
-		/// </summary>
-		public void ChangeMaxProgress(int value)
-		{
-			Worker.ReportProgress(value, new Tuple<ReportProgressCommand, string>(  ReportProgressCommand.MaximumProgressChanged, string.Empty ));
-		}
-
-		/// <summary>
-		/// Modifica el modo de la carga del proceso pesado.
-		/// </summary>
-		public void ChangeWithControl(bool value)
-		{
-			Worker.ReportProgress(0, new Tuple<ReportProgressCommand, string>( ReportProgressCommand.WithControlChanged, "" ));
-		}
-
-		#endregion
-	}
-
-	#endregion
 }

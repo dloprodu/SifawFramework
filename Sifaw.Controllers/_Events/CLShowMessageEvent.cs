@@ -38,7 +38,7 @@ namespace Sifaw.Controllers
     /// </summary>
     public class CLShowMessageEventArgs : SFStringEventArgs
     {
-        #region Estructuras auxiliares
+        #region Auxiliary structures
 
         /// <summary>
         /// Define los tipos de mensajes contemplados.

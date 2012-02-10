@@ -34,7 +34,7 @@ namespace Sifaw.Views.Components
 	/// <typeparam name="TFiler">Tipo del filtro del componente.</typeparam>
 	public interface FilterBaseComponent<TFilter> : UIComponent
 	{
-		#region Propiedades
+		#region Properties
 
 		/// <summary>
 		/// Obtiene o establece el filtro del componente.
@@ -43,7 +43,7 @@ namespace Sifaw.Views.Components
 
 		#endregion
 
-		#region Eventos
+		#region Events
 
 		/// <summary>
 		/// Se produce cuando cambia el valor de la propiedad <see cref="Filter"/>.

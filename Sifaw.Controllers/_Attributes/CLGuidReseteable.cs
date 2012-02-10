@@ -32,7 +32,7 @@ namespace Sifaw.Controllers
     [AttributeUsage(AttributeTargets.Field, Inherited = true, AllowMultiple = true)]
     public class CLGuidReseteable : CLReseteable
     {
-        #region Constructores
+        #region Constructors
 
         public CLGuidReseteable()
             : base(Guid.Empty)

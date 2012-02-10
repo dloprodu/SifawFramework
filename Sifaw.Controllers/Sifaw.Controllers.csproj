@@ -100,6 +100,10 @@
     <Compile Include="Components\UIBackgroundWorkerViewController.cs" />
     <Compile Include="Components\UIFilterBaseController.cs" />
     <Compile Include="Components\UIFiltersGroupController.cs" />
+    <Compile Include="Components\_Delegates\BackgroundWorkerDelegate.cs" />
+    <Compile Include="Components\_Miscellany\BackgroundWorkerCommunicator.cs" />
+    <Compile Include="Components\_Miscellany\BackgroundWorkerPack.cs" />
+    <Compile Include="Components\_Miscellany\ReportProgressCommand.cs" />
     <Compile Include="Test\UIGroupFiltersTestController.cs" />
     <Compile Include="Test\UIGroupFiltersTestViewController.cs" />
     <Compile Include="UIShellComponentController.cs" />

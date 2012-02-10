@@ -34,7 +34,7 @@ namespace Sifaw.Controllers
 	/// </summary>
 	public interface IUIElementController : IController
 	{
-		#region Métodos
+		#region Methods
 
 		/// <summary>
 		/// Activa la vista de la controladora proporcionandole

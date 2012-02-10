@@ -40,7 +40,7 @@ namespace Sifaw.Core
 		[Serializable()]
 		public struct Rule : IEquatable<Rule>
 		{
-			#region Variables
+			#region Fields
 
 			string _name;
 			string _description;
@@ -48,7 +48,7 @@ namespace Sifaw.Core
 
 			#endregion
 
-			#region Propiedades
+			#region Properties
 
 			/// <summary>
 			/// Provides access to the name of the broken rule.
@@ -111,7 +111,7 @@ namespace Sifaw.Core
 
 			#endregion
 
-			#region Constructor
+			#region Constructors
 
 			internal Rule(string name, string description, RuleSeverity severity)
 			{
@@ -170,7 +170,7 @@ namespace Sifaw.Core
 		[Serializable()]
 		public class RulesCollection : CollectionBase
 		{
-			#region Variables
+			#region Fields
 
 			int _errorCount = 0;
 			int _warningCount = 0;
@@ -178,7 +178,7 @@ namespace Sifaw.Core
 
 			#endregion
 
-			#region Propiedades
+			#region Properties
 
 			/// <summary>
 			/// Returns a <see cref="T:Sifaw.BrokenRules.Rule" /> object
@@ -219,7 +219,7 @@ namespace Sifaw.Core
 
 			#endregion
 
-			#region Constructor
+			#region Constructors
 
 			internal RulesCollection()
 			{
@@ -227,7 +227,7 @@ namespace Sifaw.Core
 
 			#endregion
 
-			#region Métodos públicos / internos
+			#region Public Methods / internos
 
 			internal void Add(string name, string description, RuleSeverity severity)
 			{			
@@ -331,7 +331,7 @@ namespace Sifaw.Core
 
 			#endregion
 
-			#region Métodos auxiliares
+			#region Methods auxiliares
 
 			private void IncrementCount(Rule rule)
 			{
@@ -400,13 +400,13 @@ namespace Sifaw.Core
 
 		#endregion
 
-		#region Variables
+		#region Fields
 
 		RulesCollection _rules = new RulesCollection();
 
 		#endregion
 
-		#region Propiedades
+		#region Properties
 
 		/// <summary>
 		/// Returns a value indicating whether there are any broken rules
@@ -439,7 +439,7 @@ namespace Sifaw.Core
 
 		#endregion
 
-		#region Métodos públicos
+		#region Public Methods
 
 		/// <summary>
 		/// This method is called by business logic within a business class to

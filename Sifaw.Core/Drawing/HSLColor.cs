@@ -35,7 +35,7 @@ namespace Sifaw.Core.Drawing
 	{
 		public static readonly HSLColor Empty;
 
-		#region Variables
+		#region Fields
 
 		private float h;
 		private float s;
@@ -43,7 +43,7 @@ namespace Sifaw.Core.Drawing
 
 		#endregion
 
-		#region Propiedades
+		#region Properties
 
 		public float Hue
 		{
@@ -79,7 +79,7 @@ namespace Sifaw.Core.Drawing
 
 		#endregion
 
-		#region Constructores
+		#region Constructors
 
 		static HSLColor()
 		{
@@ -95,7 +95,7 @@ namespace Sifaw.Core.Drawing
 
 		#endregion
 
-		#region Métodos de factoria
+		#region Methods de factoria
 
 		public static Color ToRGB(HSLColor color)
 		{

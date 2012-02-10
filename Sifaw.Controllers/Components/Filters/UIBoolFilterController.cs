@@ -45,13 +45,13 @@ namespace Sifaw.Controllers.Components.Filters
 			, UISettingsContainer
 			, BoolFilterComponent>.UISettingsContainer<BoolFilterComponent>
 		{
-			#region Variables
+			#region Fields
 
 			private string _text;
 
 			#endregion
 
-			#region Propiedades
+			#region Properties
 
 			public string Text
 			{
@@ -61,7 +61,7 @@ namespace Sifaw.Controllers.Components.Filters
 
 			#endregion
 
-			#region Constructor
+			#region Constructors
 
 			public UISettingsContainer()
 				: base()
@@ -70,7 +70,7 @@ namespace Sifaw.Controllers.Components.Filters
 
 			#endregion
 
-			#region Métodos públicos
+			#region Public Methods
 
 			public override void Apply()
 			{
@@ -84,7 +84,7 @@ namespace Sifaw.Controllers.Components.Filters
 
 		#endregion
 
-		#region Constructor
+		#region Constructors
 
 		public UIBoolFilterController()
 			: base()
@@ -107,7 +107,7 @@ namespace Sifaw.Controllers.Components.Filters
 
 		#endregion
 
-		#region StartController
+		#region Start Methods
 
 		protected override void StartController()
 		{

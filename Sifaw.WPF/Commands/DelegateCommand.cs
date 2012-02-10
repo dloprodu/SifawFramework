@@ -29,14 +29,14 @@ namespace Sifaw.WPF.Commands
 {
 	public class DelegateCommand : ICommand
 	{
-		#region Variables
+		#region Fields
 
 		private readonly Action actionMethod;
 		private readonly Func<bool> canExecuteMethod;
 
 		#endregion
 
-		#region Constructor
+		#region Constructors
 
 		public DelegateCommand(Action action)
 			: this(action, null)
@@ -77,14 +77,14 @@ namespace Sifaw.WPF.Commands
 
 	public class DelegateCommand<T> : ICommand
 	{
-		#region Variables
+		#region Fields
 
 		private readonly Action<T> actionMethod;
 		private readonly Func<T, bool> canExecuteMethod;
 
 		#endregion
 
-		#region Constructor
+		#region Constructors
 
 		public DelegateCommand(Action<T> action)
 			: this(action, null)

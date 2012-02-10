@@ -34,7 +34,7 @@ namespace Sifaw.Views.Components
 	public interface ListFilterBaseComponent<TFilter, TSource> : FilterBaseComponent<TFilter>
 		where TSource : IList<IFilterable>
 	{
-		#region Métodos
+		#region Methods
 
 		void Add(TSource source);
 

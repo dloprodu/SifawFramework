@@ -16,7 +16,7 @@ namespace Sifaw.Controllers
 	/// </summary>
 	public interface IUIComponentController : IUIElementController
 	{
-		#region Métodos
+		#region Methods
 
 		/// <summary>
 		/// Devuelve una referencia al componente UI de la controladora.
@@ -26,7 +26,7 @@ namespace Sifaw.Controllers
 
 		#endregion
 
-		#region Eventos
+		#region Events
 
 		/// <summary>
 		/// Evento para comunicar que se debe mostrar un mensaje.

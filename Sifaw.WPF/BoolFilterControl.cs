@@ -43,7 +43,7 @@ namespace Sifaw.WPF
 	/// </summary>
 	public class BoolFilterControl : CheckBox, BoolFilterComponent
 	{
-		#region Constructor
+		#region Constructors
 
 		static BoolFilterControl()
 		{
@@ -71,7 +71,7 @@ namespace Sifaw.WPF
 
 		#endregion
 
-		#region Métodos sobreescritos
+		#region Methods sobreescritos
 
 		protected override void OnChecked(RoutedEventArgs e)
 		{
@@ -159,7 +159,7 @@ namespace Sifaw.WPF
 
 		#region UIElement Members
 
-		#region Propiedades
+		#region Properties
 
 		private string _denomination = string.Empty;
 		public string Denomination
@@ -177,7 +177,7 @@ namespace Sifaw.WPF
 
 		#endregion
 
-		#region Métodos
+		#region Methods
 
 		public void Refresh()
 		{

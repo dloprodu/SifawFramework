@@ -33,7 +33,7 @@ namespace Sifaw.Views
 	/// </summary>
 	public interface UIView : UIElement
 	{
-		#region Propiedades
+		#region Properties
 
 		/// <summary>
 		/// Establece o devuelve la cabecera de la vista.
@@ -57,7 +57,7 @@ namespace Sifaw.Views
 
 		#endregion
 
-		#region Métodos
+		#region Methods
 
 		/// <summary>
 		/// Muestra la vista.
@@ -131,7 +131,7 @@ namespace Sifaw.Views
 
 		#endregion
 
-		#region Eventos
+		#region Events
 
 		/// <summary>
 		/// Tiene lugar antes de que la vista sea mostrada.

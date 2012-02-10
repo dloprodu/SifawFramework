@@ -54,7 +54,7 @@ namespace Sifaw.Controllers.Components.Filters
 			, UISettingsContainer
 			, ListFilterComponent>.UISettingsContainer<ListFilterComponent>
 		{
-			#region Constructor
+			#region Constructors
 
 			public UISettingsContainer()
 				: base()
@@ -63,7 +63,7 @@ namespace Sifaw.Controllers.Components.Filters
 
 			#endregion
 
-			#region Métodos públicos
+			#region Public Methods
 
 			public override void Apply()
 			{
@@ -75,7 +75,7 @@ namespace Sifaw.Controllers.Components.Filters
 
 		#endregion
 
-		#region Constructor
+		#region Constructors
 
 		public UIListFilterController()
 			: base()
@@ -98,7 +98,7 @@ namespace Sifaw.Controllers.Components.Filters
 
 		#endregion
 
-		#region StartController
+		#region Start Methods
 
 		protected override void StartController()
 		{

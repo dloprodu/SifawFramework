@@ -43,7 +43,7 @@ namespace Sifaw.WPF
 	/// </summary>
 	public partial class AssistantControl : UserControl, AssistantComponent
 	{
-		#region Constructor
+		#region Constructors
 
 		public AssistantControl()
 		{
@@ -52,7 +52,7 @@ namespace Sifaw.WPF
 
 		#endregion
 
-		#region Gestión de eventos
+		#region Events Handlers
 
 		private void buttonAnterior_Click(object sender, RoutedEventArgs e)
 		{
@@ -78,7 +78,7 @@ namespace Sifaw.WPF
 
 		#region AssistantManagerComponent Members
 
-		#region Propiedades
+		#region Properties
 
 		public byte NumComponents
 		{
@@ -112,7 +112,7 @@ namespace Sifaw.WPF
 
 		#endregion
 
-		#region Métodos
+		#region Methods
 
 		public void SetCurrentUIComponent(UIComponent component, byte step)
 		{
@@ -139,7 +139,7 @@ namespace Sifaw.WPF
 
 		#endregion
 
-		#region Eventos
+		#region Events
 
 		public event EventHandler Next;
 		private void OnNext(EventArgs e)
@@ -175,7 +175,7 @@ namespace Sifaw.WPF
 
 		#region UIElement Members
 
-		#region Propiedades
+		#region Properties
 
 		private string _denomination = string.Empty;
 		public string Denomination
@@ -193,7 +193,7 @@ namespace Sifaw.WPF
 
 		#endregion
 
-		#region Métodos
+		#region Methods
 
 		public void Refresh()
 		{

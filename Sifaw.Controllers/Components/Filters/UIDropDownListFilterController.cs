@@ -55,7 +55,7 @@ namespace Sifaw.Controllers.Components.Filters
 			, UISettingsContainer
 			, DropDownListFilterComponent>.UISettingsContainer<DropDownListFilterComponent>
 		{
-			#region Constructor
+			#region Constructors
 
 			public UISettingsContainer()
 				: base()
@@ -64,7 +64,7 @@ namespace Sifaw.Controllers.Components.Filters
 
 			#endregion
 
-			#region Métodos públicos
+			#region Public Methods
 
 			public override void Apply()
 			{
@@ -76,7 +76,7 @@ namespace Sifaw.Controllers.Components.Filters
 
 		#endregion
 
-		#region Constructor
+		#region Constructors
 
 		public UIDropDownListFilterController()
 			: base()
@@ -99,7 +99,7 @@ namespace Sifaw.Controllers.Components.Filters
 
 		#endregion
 
-		#region StartController
+		#region Start Methods
 
 		protected override void StartController()
 		{

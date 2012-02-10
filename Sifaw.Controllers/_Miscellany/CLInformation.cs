@@ -24,7 +24,7 @@ namespace Sifaw.Controllers
 		/// </summary>
 		public readonly string Description;
 
-		#region Constructor
+		#region Constructors
 
 		static CLInformation()
 		{

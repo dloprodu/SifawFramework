@@ -42,7 +42,7 @@ namespace Sifaw.Controllers.Components
 		where TInput  : UIAssistantController<TInput, TOutput>.Input
 		where TOutput : UIAssistantController<TInput, TOutput>.Output
 	{
-		#region Parametros de inicio / finalización
+		#region Input / Output
 
 		/// <summary>
 		/// Clase que engloba los parámetros de inicio de la controladora de gestión de asistentes.
@@ -54,7 +54,7 @@ namespace Sifaw.Controllers.Components
 			, UISettingsContainer
 			, AssistantComponent>.Input
 		{
-			#region Constructor
+			#region Constructors
 
 			public Input()
 				: base()
@@ -74,13 +74,13 @@ namespace Sifaw.Controllers.Components
 			, UISettingsContainer
 			, AssistantComponent>.Output
 		{
-			#region Variables
+			#region Fields
 
 			private bool _cancelled;
 
 			#endregion
 
-			#region Propiedades
+			#region Properties
 
 			/// <summary>
 			/// Indica si el proceso fue cancelado
@@ -93,7 +93,7 @@ namespace Sifaw.Controllers.Components
 
 			#endregion
 
-			#region Constructor
+			#region Constructors
 
 			/// <summary>
 			/// Clase que engloba los parámetros de finalización de la controladora de procesos pesados
@@ -118,7 +118,7 @@ namespace Sifaw.Controllers.Components
 			, UISettingsContainer
 			, AssistantComponent>.UISettingsContainer<AssistantComponent>
 		{
-			#region Constructor
+			#region Constructors
 
 			public UISettingsContainer()
 				: base()
@@ -127,7 +127,7 @@ namespace Sifaw.Controllers.Components
 
 			#endregion
 
-			#region Métodos públicos
+			#region Public Methods
 
 			public override void Apply()
 			{
@@ -139,14 +139,14 @@ namespace Sifaw.Controllers.Components
 		
 		#endregion
 
-		#region Variables
+		#region Fields
 
 		[CLReseteable(null)]
 		private Stack<UIComponent> _stack = null;
 
 		#endregion
 
-		#region Eventos
+		#region Events
 
 		/*
 		 * Desencadenadores protegidos virtuales sin manejadores asociados.
@@ -197,7 +197,7 @@ namespace Sifaw.Controllers.Components
 
 		#endregion
 
-		#region Propiedades
+		#region Properties
 
 		public Stack<UIComponent> StackComponents
 		{
@@ -212,7 +212,7 @@ namespace Sifaw.Controllers.Components
 
 		#endregion
 
-		#region Constructor
+		#region Constructors
 
 		protected UIAssistantController()
 			: base()
@@ -226,7 +226,7 @@ namespace Sifaw.Controllers.Components
 
 		#endregion
 
-		#region Componente
+		#region UIElement Methods
 
 		protected override void OnAfterUIElementLoad()
 		{
@@ -241,7 +241,7 @@ namespace Sifaw.Controllers.Components
 
 		#endregion
 
-		#region Métodos auxiliares
+		#region Helpers
 
 		private void UpdateAssistant()
 		{
@@ -261,7 +261,7 @@ namespace Sifaw.Controllers.Components
 
 		#endregion
 
-		#region Métodos abstractos
+		#region Abstract Methods
 
 		/// <summary>		
 		/// Devuelve el número total de componentes que presentará el asistente al usuario.
@@ -303,7 +303,7 @@ namespace Sifaw.Controllers.Components
 
 		#endregion
 
-		#region Chequeo de precondiciones
+		#region Check Preconditions
 
 		/// <summary>
 		/// Para chequear las precondiciones de la controladora del caso de uso
@@ -316,7 +316,7 @@ namespace Sifaw.Controllers.Components
 
 		#endregion
 
-		#region Caso de uso
+		#region Start Methods
 
 		protected override void OnAfterStartController()
 		{
@@ -339,7 +339,7 @@ namespace Sifaw.Controllers.Components
 
 		#endregion
 
-		#region Gestión de eventos de la vista
+		#region UIElement Events Handlers
 
 		private void UIElement_Accept(object sender, EventArgs e)
 		{

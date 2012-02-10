@@ -40,15 +40,15 @@ namespace Sifaw.Controllers
 		, IController<TInput, TOutput>
 		where TInput  : Controller<TInput, TOutput>.Input
 		where TOutput : Controller<TInput, TOutput>.Output
-	{
-		#region Constantes
+    {
+        #region Constants
 
-		protected const string BR_START = "StartRules";
+        protected const string BR_START = "StartRules";
 		protected const string BR_INSTANCE = "InstanceRules";
 
 		#endregion
 
-		#region Entrada / Salida
+		#region Input / Output
 
 		/// <summary>
 		/// Parámetros de entrada de la controladora.
@@ -84,7 +84,7 @@ namespace Sifaw.Controllers
 
 		#endregion
 
-		#region Variables
+		#region Fields
 
 		/*
 		 * No Reseteables
@@ -130,7 +130,7 @@ namespace Sifaw.Controllers
 
 		#endregion
 
-		#region Eventos
+		#region Events
 
 		/*
 		 * Desencadenadores privados.
@@ -334,9 +334,9 @@ namespace Sifaw.Controllers
 
 		#endregion
 
-		#region Propiedades
+        #region Properties
 
-		/*
+        /*
 		 * Públicas
 		 */
 
@@ -386,9 +386,9 @@ namespace Sifaw.Controllers
 
 		#endregion
 
-		#region Constructor
+        #region Constructors
 
-		protected Controller()
+        protected Controller()
 			: base()
 		{
 			// Instanciamos el objeto que controla las precondiciones.
@@ -405,23 +405,9 @@ namespace Sifaw.Controllers
 
 		#endregion
 
-		#region Métodos protegidos
+		#region Helpers
 
-		#region Control de estados
-
-		/// <summary>
-		/// Comprueba el estado de la controladora. 
-		/// </summary>
-		/// <param name="estado">Estado de la controladora deseado</param>
-		protected void CheckState(CLStates state)
-		{
-			if (State != state)
-				throw new NotValidStateException();
-		}
-
-		#endregion
-
-		#region Chequeo de precondiciones
+		#region Check Preconditions
 
 		/// <summary>
 		/// Fuerza el chequeo de la preciondición indicada
@@ -443,7 +429,17 @@ namespace Sifaw.Controllers
 
 		#endregion
 
-		#region Metodos auxiliares
+        #region Miscellany
+
+        /// <summary>
+        /// Comprueba el estado de la controladora. 
+        /// </summary>
+        /// <param name="estado">Estado de la controladora deseado</param>
+        protected void CheckState(CLStates state)
+        {
+            if (State != state)
+                throw new NotValidStateException();
+        }
 
 		/// <summary>
 		/// Devuelve una copia del estado inicial de los parámetros.
@@ -502,7 +498,7 @@ namespace Sifaw.Controllers
 
 		#endregion
 
-		#region Gestión de input / output
+		#region Default Input / Output
 
 		/// <summary>
 		/// Devuelve los parámetros por defecto de inicio.
@@ -520,27 +516,186 @@ namespace Sifaw.Controllers
 		protected abstract TOutput GetDefaultOutput();
 
 		#endregion
+        
+		#region Start Methods
 
-		#region Gestión de inicio
-
-		/// <summary>
-		/// Ejecuta los comandos de inicio de la controladora.
-		/// </summary>
-		protected abstract void StartController();
-
-		/// <summary>
-		/// Devuleve un valor que indica si la controladora se puede reiniciar.
-		/// </summary>
-		protected abstract bool AllowReset();
+        /// <summary>
+        /// Ejecuta los comandos de inicio de la controladora.
+        /// </summary>
+        protected abstract void StartController();
 
 		/// <summary>
-		/// Ejecuta las operaciones de reinicio de la controladora.
+		/// Devuelve un valor que indica si la controladora se puede inicar.
 		/// </summary>
-		protected abstract void ResetController();
+		protected virtual bool CanStart()
+		{
+			// -------------------------------------------------------------
+			// Comprobamos las reglas de inicio de la controladora
+			// -------------------------------------------------------------
+			CheckPreconditions(BR_START);
 
+			return BrokenPreconditions.IsValid;
+		}
+
+		/// <summary>
+		/// Inicia la controladora con los parámetros por defecto
+		/// </summary>
+		/// <exception cref="NotValidStateException">La controladora ya está iniciada.</exception>
+		/// <exception cref="ArgumentNullException">input es null.</exception>
+		/// <exception cref="ArgumentException">input no es serializable.</exception>
+		/// <exception cref="NotCanStartException">input no contiene los parámetros esperados para el inicio.</exception>
+		/// <exception cref="Exception">Excepción internal de la controladora.</exception>
+		/// <returns>Valor que indica si la controladora se inició correctamente.</returns>
+		public bool Start()
+		{
+			return Start(GetDefaultInput());
+		}
+
+		/// <summary>
+		/// Inicia la controladora.
+		/// </summary>
+		/// <exception cref="NotValidStateException">La controladora ya está iniciada.</exception>
+		/// <exception cref="ArgumentNullException">input es null.</exception>
+		/// <exception cref="ArgumentException">input no es serializable.</exception>
+		/// <exception cref="NotCanStartException">input no contiene los parámetros esperados para el inicio.</exception>
+		/// <exception cref="Exception">Excepción interna de la controladora.</exception>
+		/// <param name="input">Parámetros de inicio de la controladora</param>
+		/// <returns>Valor que indica si la controladora se inició correctamente.</returns>
+		public bool Start(TInput input)
+		{
+			if (!typeof(TInput).IsSerializable)
+				throw new ArgumentException();
+
+			bool success = false;
+
+			// Comprobamos que la controladora se encuentra en un estado correcto
+			CheckState(CLStates.NotStarted);
+
+			// Lanzamos el evento para comunicar el inicio y esperamos confirmación de cancelación
+			SFCancelEventArgs cEventArgs = new SFCancelEventArgs();
+			OnStarting(cEventArgs);
+
+			if (!cEventArgs.Cancel)
+			{
+				// Establecemos los parámetros de inicio de la controladora.
+				_parameters = UtilIO.Clone<TInput>(input);
+				_parameters = _parameters ?? GetDefaultInput();
+				// Guardamos una copia de los parametros de entrada que no podrá ser modificada.
+				_input = UtilIO.Clone<TInput>(_parameters);
+
+				if (_parameters == null)
+					throw new ArgumentNullException();
+
+				if (!CanStart())
+					throw new NotCanStartException();
+
+				// Establecemos el estado de inicio
+				State = CLStates.Started;
+				OnBeforeStartController();
+				StartController();
+				OnAfterStartController();
+				success = true;
+			}
+
+			return success;
+		}
+        		
 		#endregion
 
-		#region Gestión de finalización
+        #region Reset Methods
+
+        /// <summary>
+        /// Devuleve un valor que indica si la controladora se puede reiniciar.
+        /// </summary>
+        protected abstract bool AllowReset();
+
+        /// <summary>
+        /// Ejecuta las operaciones de reinicio de la controladora.
+        /// </summary>
+        protected abstract void ResetController();
+
+        /// <summary>
+        /// Reinicia la controladora con los parámetros por defecto
+        /// </summary>
+        /// <exception cref="NotValidStateException">La controladora no está iniciada.</exception>
+        /// <exception cref="NotAllowResetException">La controladora no soporta el reinicio.</exception>
+        /// <exception cref="ArgumentNullException">input es null.</exception>
+        /// <exception cref="ArgumentException">input no es serializable.</exception>
+        /// <exception cref="NotCanStartException">input no contiene los parámetros esperados para el inicio.</exception>
+        /// <exception cref="Exception">Excepción interna de la controladora.</exception>
+        /// <returns>Valor que indica si la controladora se reinició correctamente.</returns>
+        public bool Reset()
+        {
+            return Reset(GetResetInput());
+        }
+
+        /// <summary>
+        /// Reinicia la controladora.
+        /// </summary>
+        /// <exception cref="NotValidStateException">La controladora no está iniciada.</exception>
+        /// <exception cref="NotAllowResetException">La controladora no soporta el reinicio.</exception>
+        /// <exception cref="ArgumentNullException">input es null.</exception>
+        /// <exception cref="ArgumentException">input no es serializable.</exception>
+        /// <exception cref="NotCanStartException">input no contiene los parámetros esperados para el inicio.</exception>
+        /// <exception cref="Exception">Excepción interna de la controladora.</exception>
+        /// <param name="input">Parámetros de la controladora para realizar el reinicio</param>
+        /// <returns>Valor que indica si la controladora se reinició correctamente.</returns>
+        public bool Reset(TInput input)
+        {
+            if (!typeof(TInput).IsSerializable)
+                throw new ArgumentException();
+
+            bool success = false;
+
+            // Comprobamos que la controladora se encuentra en un estado correcto
+            CheckState(CLStates.Started);
+
+            // Establecemos los parámetros de reinicio de la controladora
+            _parameters = UtilIO.Clone<TInput>(input);
+            _parameters = _parameters ?? GetResetInput();
+            _parameters = _parameters ?? GetDefaultInput();
+            // Guardamos una copia de los parametros de entrada que no podrá ser modificada.
+            _input = UtilIO.Clone<TInput>(_parameters);
+
+            if (!AllowReset())
+                throw new NotAllowResetException();
+
+            if (_parameters == null)
+                throw new ArgumentNullException();
+
+            if (!CanStart())
+                throw new NotCanStartException();
+
+            // Ejecutamos los comando de reinicio de la controladora
+            OnBeforeResetController();
+            ResetController();
+            OnAfterResetController();
+            success = true;
+
+            return success;
+        }
+
+        #endregion
+
+		#region Finish Methods
+
+        /// <summary>
+        /// Termina la ejecución de la controladora.
+        /// </summary>
+        /// <exception cref="NotValidStateException">La controladora no está iniciada.</exception>
+        /// <returns>Valor que indica si la controladora se finalizó correctamente.</returns>
+        public bool Finish()
+        {
+            // --------------------------------------------------------------
+            // Finalizamos las controladora
+            // --------------------------------------------------------------
+            FinishController(GetDefaultOutput());
+
+            // --------------------------------------------------------------
+            // Comunicación del éxito o fracaso de la operación
+            // --------------------------------------------------------------
+            return State == CLStates.NotStarted;
+        }
 
 		/// <summary>
 		/// Realizar la finalización de la controladora.
@@ -652,164 +807,5 @@ namespace Sifaw.Controllers
 		}
 
 		#endregion
-
-		#region StartController
-
-		/// <summary>
-		/// Devuelve un valor que indica si la controladora se puede inicar.
-		/// </summary>
-		protected virtual bool CanStart()
-		{
-			// -------------------------------------------------------------
-			// Comprobamos las reglas de inicio de la controladora
-			// -------------------------------------------------------------
-			CheckPreconditions(BR_START);
-
-			return BrokenPreconditions.IsValid;
-		}
-
-		/// <summary>
-		/// Inicia la controladora con los parámetros por defecto
-		/// </summary>
-		/// <exception cref="NotValidStateException">La controladora ya está iniciada.</exception>
-		/// <exception cref="ArgumentNullException">input es null.</exception>
-		/// <exception cref="ArgumentException">input no es serializable.</exception>
-		/// <exception cref="NotCanStartException">input no contiene los parámetros esperados para el inicio.</exception>
-		/// <exception cref="Exception">Excepción internal de la controladora.</exception>
-		/// <returns>Valor que indica si la controladora se inició correctamente.</returns>
-		public bool Start()
-		{
-			return Start(GetDefaultInput());
-		}
-
-		/// <summary>
-		/// Inicia la controladora.
-		/// </summary>
-		/// <exception cref="NotValidStateException">La controladora ya está iniciada.</exception>
-		/// <exception cref="ArgumentNullException">input es null.</exception>
-		/// <exception cref="ArgumentException">input no es serializable.</exception>
-		/// <exception cref="NotCanStartException">input no contiene los parámetros esperados para el inicio.</exception>
-		/// <exception cref="Exception">Excepción interna de la controladora.</exception>
-		/// <param name="input">Parámetros de inicio de la controladora</param>
-		/// <returns>Valor que indica si la controladora se inició correctamente.</returns>
-		public bool Start(TInput input)
-		{
-			if (!typeof(TInput).IsSerializable)
-				throw new ArgumentException();
-
-			bool success = false;
-
-			// Comprobamos que la controladora se encuentra en un estado correcto
-			CheckState(CLStates.NotStarted);
-
-			// Lanzamos el evento para comunicar el inicio y esperamos confirmación de cancelación
-			SFCancelEventArgs cEventArgs = new SFCancelEventArgs();
-			OnStarting(cEventArgs);
-
-			if (!cEventArgs.Cancel)
-			{
-				// Establecemos los parámetros de inicio de la controladora.
-				_parameters = UtilIO.Clone<TInput>(input);
-				_parameters = _parameters ?? GetDefaultInput();
-				// Guardamos una copia de los parametros de entrada que no podrá ser modificada.
-				_input = UtilIO.Clone<TInput>(_parameters);
-
-				if (_parameters == null)
-					throw new ArgumentNullException();
-
-				if (!CanStart())
-					throw new NotCanStartException();
-
-				// Establecemos el estado de inicio
-				State = CLStates.Started;
-				OnBeforeStartController();
-				StartController();
-				OnAfterStartController();
-				success = true;
-			}
-
-			return success;
-		}
-
-		/// <summary>
-		/// Reinicia la controladora con los parámetros por defecto
-		/// </summary>
-		/// <exception cref="NotValidStateException">La controladora no está iniciada.</exception>
-		/// <exception cref="NotAllowResetException">La controladora no soporta el reinicio.</exception>
-		/// <exception cref="ArgumentNullException">input es null.</exception>
-		/// <exception cref="ArgumentException">input no es serializable.</exception>
-		/// <exception cref="NotCanStartException">input no contiene los parámetros esperados para el inicio.</exception>
-		/// <exception cref="Exception">Excepción interna de la controladora.</exception>
-		/// <returns>Valor que indica si la controladora se reinició correctamente.</returns>
-		public bool Reset()
-		{
-			return Reset(GetResetInput());
-		}
-
-		/// <summary>
-		/// Reinicia la controladora.
-		/// </summary>
-		/// <exception cref="NotValidStateException">La controladora no está iniciada.</exception>
-		/// <exception cref="NotAllowResetException">La controladora no soporta el reinicio.</exception>
-		/// <exception cref="ArgumentNullException">input es null.</exception>
-		/// <exception cref="ArgumentException">input no es serializable.</exception>
-		/// <exception cref="NotCanStartException">input no contiene los parámetros esperados para el inicio.</exception>
-		/// <exception cref="Exception">Excepción interna de la controladora.</exception>
-		/// <param name="input">Parámetros de la controladora para realizar el reinicio</param>
-		/// <returns>Valor que indica si la controladora se reinició correctamente.</returns>
-		public bool Reset(TInput input)
-		{
-			if (!typeof(TInput).IsSerializable)
-				throw new ArgumentException();
-
-			bool success = false;
-
-			// Comprobamos que la controladora se encuentra en un estado correcto
-			CheckState(CLStates.Started);
-
-			// Establecemos los parámetros de reinicio de la controladora
-			_parameters = UtilIO.Clone<TInput>(input);
-			_parameters = _parameters ?? GetResetInput();
-			_parameters = _parameters ?? GetDefaultInput();
-			// Guardamos una copia de los parametros de entrada que no podrá ser modificada.
-			_input = UtilIO.Clone<TInput>(_parameters);
-
-			if (!AllowReset())
-				throw new NotAllowResetException();
-
-			if (_parameters == null)
-				throw new ArgumentNullException();
-
-			if (!CanStart())
-				throw new NotCanStartException();
-
-			// Ejecutamos los comando de reinicio de la controladora
-			OnBeforeResetController();
-			ResetController();
-			OnAfterResetController();
-			success = true;
-
-			return success;
-		}
-
-		/// <summary>
-		/// Termina la ejecución de la controladora.
-		/// </summary>
-		/// <exception cref="NotValidStateException">La controladora no está iniciada.</exception>
-		/// <returns>Valor que indica si la controladora se finalizó correctamente.</returns>
-		public bool Finish()
-		{
-			// --------------------------------------------------------------
-			// Finalizamos las controladora
-			// --------------------------------------------------------------
-			FinishController(GetDefaultOutput());
-
-			// --------------------------------------------------------------
-			// Comunicación del éxito o fracaso de la operación
-			// --------------------------------------------------------------
-			return State == CLStates.NotStarted;
-		}
-
-		#endregion
-	}
+    }
 }

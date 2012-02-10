@@ -28,7 +28,7 @@ namespace Sifaw.Views.Components
 	/// </summary>
 	public interface BackgroundWorkerComponent : UIComponent
 	{
-		#region Propiedades
+		#region Properties
 		
 		/// <summary>
 		/// Establece o devuelve un valor que indica si el proceso
@@ -65,7 +65,7 @@ namespace Sifaw.Views.Components
 
 		#endregion
 
-		#region Métodos
+		#region Methods
 
 		void UpdateProgress(string message);
 		void UpdateProgress(string message, bool isCancelled);
@@ -73,7 +73,7 @@ namespace Sifaw.Views.Components
 
 		#endregion
 
-		#region Eventos
+		#region Events
 
 		event EventHandler Cancel;
 

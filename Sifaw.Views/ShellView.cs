@@ -34,7 +34,7 @@ namespace Sifaw.Views
 	/// </summary>
 	public interface ShellView : UIView
 	{
-		#region Métodos
+		#region Methods
 
 		/// <summary>
 		/// Permite establecer la configuración y contenido 

@@ -43,7 +43,7 @@ namespace Sifaw.Controllers.Components
 						  , new()
 		where TComponent  : FilterBaseComponent<TFilter>
 	{
-		#region Parametros de inicio / finalización
+		#region Input / Output
 
 		/// <summary>
 		/// Parámetros de entrada de la controladora.
@@ -55,13 +55,13 @@ namespace Sifaw.Controllers.Components
 			, TUISettings
 			, TComponent>.Input
 		{
-			#region Variables
+			#region Fields
 
 			private TFilter _filter;
 
 			#endregion
 
-			#region Propiedades
+			#region Properties
 
 			public TFilter Filter
 			{
@@ -70,7 +70,7 @@ namespace Sifaw.Controllers.Components
 
 			#endregion
 
-			#region Constructor
+			#region Constructors
 
 			public Input(TFilter filter)
 				: base()
@@ -91,13 +91,13 @@ namespace Sifaw.Controllers.Components
 			, TUISettings
 			, TComponent>.Output
 		{
-			#region Variables
+			#region Fields
 
 			private TFilter _filter;
 
 			#endregion
 
-			#region Propiedades
+			#region Properties
 
 			public TFilter Filter
 			{
@@ -106,7 +106,7 @@ namespace Sifaw.Controllers.Components
 
 			#endregion
 
-			#region Constructor
+			#region Constructors
 
 			/// <summary>
 			/// Clase que engloba los parámetros de finalización de la controladora de procesos pesados
@@ -133,7 +133,7 @@ namespace Sifaw.Controllers.Components
 			, TComponent>.UISettingsContainer<TUI>
 			where TUI : TComponent
 		{
-			#region Constructor
+			#region Constructors
 
 			public UISettingsContainer()
 				: base()
@@ -142,7 +142,7 @@ namespace Sifaw.Controllers.Components
 
 			#endregion
 
-			#region Métodos públicos
+			#region Public Methods
 
 			public override void Apply()
 			{
@@ -154,7 +154,7 @@ namespace Sifaw.Controllers.Components
 
 		#endregion
 
-		#region Eventos
+		#region Events
 
 		/*
 		 * Desencadenadores privados.
@@ -185,7 +185,7 @@ namespace Sifaw.Controllers.Components
 
 		#endregion
 
-		#region Propiedades
+		#region Properties
 
 		public TFilter Filter
 		{
@@ -194,7 +194,7 @@ namespace Sifaw.Controllers.Components
 
 		#endregion
 
-		#region Constructor
+		#region Constructors
 
 		protected UIFilterBaseController()
 			: base()
@@ -208,7 +208,7 @@ namespace Sifaw.Controllers.Components
 
 		#endregion
 
-		#region Componente
+		#region UIElement Methods
 
 		protected override void OnAfterUIElementLoad()
 		{
@@ -220,9 +220,9 @@ namespace Sifaw.Controllers.Components
 
 		#endregion
 
-		#region Default input / output
+        #region Default Input / Output
 
-		public override Input GetResetInput()
+        public override Input GetResetInput()
 		{
 			return new Input(Filter);
 		}
@@ -234,7 +234,7 @@ namespace Sifaw.Controllers.Components
 
 		#endregion
 
-		#region StartController
+		#region Start Methods
 
 		protected override void OnBeforeStartController()
 		{
@@ -252,7 +252,7 @@ namespace Sifaw.Controllers.Components
 
 		#endregion
 
-		#region Gestión de eventos del componente
+		#region UIElement Events Handler
 
 		private void UIElement_FilterChanged(object sender, UIFilterChangedEventArgs e)
 		{

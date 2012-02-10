@@ -82,7 +82,7 @@ namespace Sifaw.Controllers
 						  , new()
 		where TView       : UIView
 	{
-		#region Entrada / Salida
+		#region Input / Output
 
 		/// <summary>
 		/// Parámetros de entrada de la controladora.
@@ -90,13 +90,13 @@ namespace Sifaw.Controllers
 		[Serializable]
 		public new abstract class Input : UIElementController<TInput, TOutput, TUISettings, TView>.Input
 		{
-			#region Variables
+			#region Fields
 
 			private bool _showView = true;
 
 			#endregion
 
-			#region Propiedades
+			#region Properties
 
 			/// <summary>
 			/// Devuelve un valor que indica si se ha de mostrar la vista
@@ -109,7 +109,7 @@ namespace Sifaw.Controllers
 
 			#endregion
 
-			#region Constructor
+			#region Constructors
 
 			protected Input()
 				: this(true)
@@ -131,7 +131,7 @@ namespace Sifaw.Controllers
 		[Serializable]
 		public new abstract class Output : UIElementController<TInput, TOutput, TUISettings, TView>.Output
 		{
-			#region Constructor
+			#region Constructors
 
 			protected Output()
 				: base()
@@ -149,7 +149,7 @@ namespace Sifaw.Controllers
 		public new class UISettingsContainer<TUI> : UIElementController<TInput, TOutput, TUISettings, TView>.UISettingsContainer<TUI>
 			where TUI : TView
 		{
-			#region Variables
+			#region Fields
 
 			private string _header;
 			private double _width;
@@ -158,7 +158,7 @@ namespace Sifaw.Controllers
 
 			#endregion
 
-			#region Propiedades
+			#region Properties
 
 			public string Header
 			{
@@ -186,7 +186,7 @@ namespace Sifaw.Controllers
 
 			#endregion
 
-			#region Constructor
+			#region Constructors
 
 			public UISettingsContainer()
 				: base()
@@ -199,7 +199,7 @@ namespace Sifaw.Controllers
 
 			#endregion
 
-			#region Métodos públicos
+			#region Public Methods
 
 			public override void Apply()
 			{
@@ -228,7 +228,7 @@ namespace Sifaw.Controllers
 
 		#endregion
 
-		#region Eventos
+		#region Events
 
         /*
 		 * Desencadenadores privados.
@@ -321,7 +321,7 @@ namespace Sifaw.Controllers
 
 		#endregion
 
-		#region Constructor
+		#region Constructors
 
 		protected UIViewController()
 			: base()
@@ -335,25 +335,25 @@ namespace Sifaw.Controllers
 
 		#endregion
 
-		#region Métodos públicos
+		#region Public Methods
 
 		/// <summary>
 		/// Muestra la vista.
-		/// 
-		/// Para invocar este método la controladora ha de estar iniciada, 
-		/// en otro caso, devolverá una excepcion.
 		/// </summary>
+        /// <remarks>
+        /// Para invocar este método la controladora ha de estar iniciada, 
+        /// en otro caso, devolverá una excepcion.
+        /// </remarks>
 		/// <exception cref="NotValidStateException">La controladora no está iniciada.</exception>
 		public void Show()
 		{
 			CheckState(CLStates.Started);
-			UISettings.Apply();
 			UIElement.Show();
 		}
 
 		#endregion
 
-		#region Métodos sobreescritos
+		#region UIElement Methods
 
 		protected override void OnAfterUIElementLoad()
 		{
@@ -366,7 +366,11 @@ namespace Sifaw.Controllers
 			UIElement.AfterClose += new EventHandler(UIElement_AfterClose);
 		}
 
-		protected override void OnBeforeStartController()
+        #endregion
+
+        #region Start Methods
+
+        protected override void OnBeforeStartController()
 		{
 			base.OnBeforeStartController();
 
@@ -390,15 +394,12 @@ namespace Sifaw.Controllers
 			base.OnAfterStartController();
 
 			if (Parameters.ShowView)
-			{
-				UISettings.Apply();
 				UIElement.Show();
-			}
 		}
 
 		#endregion
 
-		#region Gestión de finalización
+		#region Finish Methods
 
 		protected override void OnBeforeFinishControllers(List<IController> children)
 		{
@@ -410,9 +411,9 @@ namespace Sifaw.Controllers
 
 		#endregion
 
-		#region Gestión de eventos de la vista
+        #region UIElement Events Handlers
 
-		private void UIElement_BeforeShow(object sender, EventArgs e)
+        private void UIElement_BeforeShow(object sender, EventArgs e)
 		{
 			OnBeforeUIShow();
 		}
@@ -439,10 +440,10 @@ namespace Sifaw.Controllers
 		}
 
 		#endregion
-		
-		#region Gestión de eventos de componentes embebidos
 
-		private void UIComponentController_ConfirmMessage(object sender, CLConfirmMessageEventArgs e)
+        #region Controllers Events Handler
+
+        private void UIComponentController_ConfirmMessage(object sender, CLConfirmMessageEventArgs e)
 		{
 			e.Confirmed = UIElement.ConfirmMessage(e.Value);			
 		}

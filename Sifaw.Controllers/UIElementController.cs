@@ -54,7 +54,7 @@ namespace Sifaw.Controllers
 						  , new()
 		where TUIElement  : UIElement
 	{
-		#region Entrada / Salida
+		#region Input / Output
 
 		/// <summary>
 		/// Parámetros de entrada de la controladora.
@@ -62,7 +62,7 @@ namespace Sifaw.Controllers
 		[Serializable]
 		public new abstract class Input : Controller<TInput, TOutput>.Input
 		{
-			#region Constructor
+			#region Constructors
 
 			protected Input()
 				: base()
@@ -78,7 +78,7 @@ namespace Sifaw.Controllers
 		[Serializable]
 		public new abstract class Output : Controller<TInput, TOutput>.Output
 		{
-			#region Constructor
+			#region Constructors
 
 			protected Output()
 				: base()
@@ -125,7 +125,7 @@ namespace Sifaw.Controllers
 			/// </summary>
 			protected TUI UIElement = default(TUI);
 
-			#region Variables
+			#region Fields
 
 			private string _denomination;
 			private string _description;
@@ -136,7 +136,7 @@ namespace Sifaw.Controllers
 
 			#endregion
 
-			#region Propiedades
+			#region Properties
 
 			public string Denomination
 			{
@@ -176,7 +176,7 @@ namespace Sifaw.Controllers
 
 			#endregion
 
-			#region Eventos
+			#region Events
 
 			public event EventHandler UISettingsApplied = null;
 			private void OnUISettingsApplied(EventArgs e)
@@ -187,7 +187,7 @@ namespace Sifaw.Controllers
 
 			#endregion
 
-			#region Constructor
+			#region Constructors
 
 			public UISettingsContainer()
 			{
@@ -201,7 +201,7 @@ namespace Sifaw.Controllers
 
 			#endregion
 
-			#region Métodos públicos
+			#region Public Methods
 
 			protected internal void SetUIElement(TUI uiElement)
 			{
@@ -233,24 +233,23 @@ namespace Sifaw.Controllers
 
 		#endregion
 
-		#region Variables
+		#region Fields
 
 		/*
 		 * No reseteables
 		 */
 
 		// Enlazador para la carga de la vista.
+        // No es un campo reseteable.
 		private readonly AbstractUILinker<TUIElement> _linker = null;
 
 		/*
 		 * Reseteables
 		 */
 
-		// Vista de la controladora.
-		// No hace falta marcarlos como CtrlReseteable porque
-		// la controladora resetea automaticamente todas las vistas
-		// declaradas.
-		private TUIElement _uiElement = default(TUIElement);
+		// Elemento de UI
+        [CLReseteable(null)]
+        private TUIElement _uiElement = default(TUIElement);
 
 		// Contenedor de configuración de la vista.
 		[CLReseteable(null)]
@@ -258,7 +257,7 @@ namespace Sifaw.Controllers
 
 		#endregion
 
-		#region Eventos
+		#region Events
 
 		/*
 		 * Desencadenadores privados.
@@ -350,7 +349,7 @@ namespace Sifaw.Controllers
 
 		#endregion
 
-		#region UIElement
+		#region Properties
 
 		/// <summary>
 		/// Devuelve el elemento UI de la controladora.
@@ -408,7 +407,7 @@ namespace Sifaw.Controllers
 
 		#endregion
 
-		#region Constructor
+		#region Constructors
 
 		protected UIElementController()
 			: this((AbstractUILinker<TUIElement>)null)
@@ -423,25 +422,37 @@ namespace Sifaw.Controllers
 
 		#endregion
 
-		#region Métodos públicos
+        #region Public Methods
 
-		/// <summary>
-		/// Activa el elemento de UI de la controladora proporcionandole
-		/// el foco.
-		/// 
-		/// Para invocar este método la controladora ha de estar iniciada, 
-		/// en otro caso, devolverá una excepcion.
-		/// </remarks>
-		/// <exception cref="NotValidCtrlStateException">La controladora no está iniciada.</exception>
-		public void SetLikeActive()
-		{
-			CheckState(CLStates.Started);
-			UIElement.SetLikeActive();
-		}
+        /// <summary>
+        /// Activa el elemento de UI de la controladora proporcionandole
+        /// el foco.
+        /// 
+        /// Para invocar este método la controladora ha de estar iniciada, 
+        /// en otro caso, devolverá una excepcion.
+        /// </remarks>
+        /// <exception cref="NotValidCtrlStateException">La controladora no está iniciada.</exception>
+        public void SetLikeActive()
+        {
+            CheckState(CLStates.Started);
+            UIElement.SetLikeActive();
+        }
 
-		#endregion
+        #endregion
 
-		#region Gestión de finalización
+        #region Start Methods
+
+        protected override void OnAfterStartController()
+        {
+            base.OnAfterStartController();
+
+            // Se aplica la configuración inicial despues de iniciar el componente.
+            UISettings.Apply();
+        }
+
+        #endregion
+
+		#region Finish Methods
 
 		protected override void OnBeforeFinishControllers(List<IController> children)
 		{
@@ -453,18 +464,15 @@ namespace Sifaw.Controllers
 		protected override void OnBeforeResetFields(List<FieldInfo> fields)
 		{
 			base.OnBeforeResetFields(fields);
-
-			_uiElement = default(TUIElement);
-
 			// No se permite mas de un elemento de UI por
 			// controladora
 		}
 
 		#endregion
 
-		#region Gestión de eventos
+        #region UISettings Events Handlers
 
-		private void _uiSettings_UISettingsApplied(object sender, EventArgs e)
+        private void _uiSettings_UISettingsApplied(object sender, EventArgs e)
 		{
 			OnUISettingsApplied();
 		}

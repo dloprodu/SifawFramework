@@ -44,7 +44,7 @@ namespace Sifaw.WPF.CCL
 	[TemplatePart(Name = "PART_SearchIcon", Type = typeof(Image))]
 	public class SearchTextField : TextField
 	{
-		#region Estructuras auxiliares
+		#region Auxiliary structures
 
 		/// <summary>
 		/// Define los modos de búsqueda de un <see cref="SearchTextField"/>.
@@ -104,7 +104,7 @@ namespace Sifaw.WPF.CCL
 
 		#endregion
 
-		#region Propiedades
+		#region Properties
 
 		/// <summary>
 		/// Obtiene o establece un valor que indica el módo en el que se ejecutan las búsquedas.
@@ -148,7 +148,7 @@ namespace Sifaw.WPF.CCL
 
 		#endregion
 
-		#region Eventos
+		#region Events
 
 		public static readonly RoutedEvent SearchEvent =
 			EventManager.RegisterRoutedEvent(
@@ -178,7 +178,7 @@ namespace Sifaw.WPF.CCL
 
 		#endregion
 
-		#region Constructores
+		#region Constructors
 
 		public SearchTextField()
 			: base()
@@ -195,7 +195,7 @@ namespace Sifaw.WPF.CCL
 
 		#endregion
 
-		#region Métodos de factoria
+		#region Methods de factoria
 
 		private static void OnInstantSearchTimeDelayChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
 		{
@@ -280,7 +280,7 @@ namespace Sifaw.WPF.CCL
 
 		#endregion
 
-		#region Gestión de eventos
+		#region Events Handlers
 
 		private void searchButtonBorder_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
 		{

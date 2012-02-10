@@ -35,7 +35,7 @@ namespace Sifaw.Controllers.Components
 		, UIBackgroundWorkerViewController.UISettingsContainer
 		, BackgroundWorkerComponent>
 	{
-		#region Entrada / Salida
+		#region Input / Output
 
 		/// <summary>
 		/// Parámetros de entrada de las controladora.
@@ -43,13 +43,13 @@ namespace Sifaw.Controllers.Components
 		[Serializable]
 		public new class Input : UIShellViewController<Input, Output, UISettingsContainer, BackgroundWorkerComponent>.Input
 		{
-			#region Variables
+			#region Fields
 
 			private BackgroundWorkerPack _worker;
 
 			#endregion
 
-			#region Propiedades
+			#region Properties
 
 			/// <summary>
 			/// Paquete de ejecución
@@ -62,7 +62,7 @@ namespace Sifaw.Controllers.Components
 
 			#endregion
 
-			#region Constructor
+			#region Constructors
 
 			public Input(BackgroundWorkerPack worker)
 				: this(worker, true)
@@ -84,14 +84,14 @@ namespace Sifaw.Controllers.Components
 		[Serializable]
 		public new class Output : UIShellViewController<Input, Output, UISettingsContainer, BackgroundWorkerComponent>.Output
 		{
-			#region Variables
+			#region Fields
 
 			private object _result;
 			private bool _cancelled;
 
 			#endregion
 
-			#region Propiedades
+			#region Properties
 
 			/// <summary>
 			/// Resultado del proceso
@@ -111,7 +111,7 @@ namespace Sifaw.Controllers.Components
 
 			#endregion
 
-			#region Constructor
+			#region Constructors
 
 			public Output(object result, bool cancelled)
 				: base()
@@ -134,7 +134,7 @@ namespace Sifaw.Controllers.Components
 			, UISettingsContainer
 			, BackgroundWorkerComponent>.UISettingsContainer
 		{
-			#region Variables
+			#region Fields
 
 			private bool _withControl = true;
 			private bool _allowCancel = false;
@@ -144,7 +144,7 @@ namespace Sifaw.Controllers.Components
 
 			#endregion
 
-			#region Propiedades
+			#region Properties
 
 			/// <summary>
 			/// Establece o devuelve un valor que indica si el proceso
@@ -196,7 +196,7 @@ namespace Sifaw.Controllers.Components
 
 			#endregion
 
-			#region Constructor
+			#region Constructors
 
 			public UISettingsContainer()
 				: base()
@@ -215,7 +215,7 @@ namespace Sifaw.Controllers.Components
 
 			#endregion
 
-			#region Métodos públicos
+			#region Public Methods
 
 			public override void Apply()
 			{
@@ -227,9 +227,9 @@ namespace Sifaw.Controllers.Components
 
 		#endregion
 
-		#region Inclusiones
+        #region Inclusions
 
-		private UIBackgroundWorkerController _uiBackgroundWorkerController = null;
+        private UIBackgroundWorkerController _uiBackgroundWorkerController = null;
 		private UIBackgroundWorkerController UIBackgroundWorkerController
 		{
 			get
@@ -246,7 +246,7 @@ namespace Sifaw.Controllers.Components
 
 		#endregion
 
-		#region Constructor
+		#region Constructors
 
 		public UIBackgroundWorkerViewController()
 			: base()
@@ -260,7 +260,7 @@ namespace Sifaw.Controllers.Components
 
 		#endregion
 
-		#region Gestión de parámetros
+		#region Default Input / Output
 
 		protected override Output GetDefaultOutput()
 		{
@@ -279,7 +279,7 @@ namespace Sifaw.Controllers.Components
 
 		#endregion
 
-		#region Métodos sobreescritos
+		#region UIElement Methods
 
 		protected override void OnUISettingsApplied()
 		{
@@ -305,7 +305,7 @@ namespace Sifaw.Controllers.Components
 			UIBackgroundWorkerController.CancelWorker();
 		}
 
-		protected override void  OnAfterUIShow()
+		protected override void OnAfterUIShow()
 		{
 			base.OnAfterUIShow();
 
@@ -314,7 +314,7 @@ namespace Sifaw.Controllers.Components
 
 		#endregion
 
-		#region UIShellController Members
+		#region UIShell Methods
 		
 		protected override uint GetNumberOfRows()
 		{
@@ -341,7 +341,7 @@ namespace Sifaw.Controllers.Components
 
 		#endregion
 
-		#region Controller Membres
+		#region Start Methods
 
 		protected override void StartController()
 		{
@@ -360,7 +360,7 @@ namespace Sifaw.Controllers.Components
 
 		#endregion
 
-		#region Gestión de eventos de inclusiones
+		#region Inclusions Events Handlers
 
 		private void _uiBackgroundWorkerController_Finished(object sender, CLFinishedEventArgs<UIBackgroundWorkerController.Output> e)
 		{

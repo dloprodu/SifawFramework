@@ -75,7 +75,7 @@ namespace Sifaw.WPF.CCL
 
 		#endregion
 
-		#region Propiedades
+		#region Properties
 
 		/// <summary>
 		/// Obtiene o establece el texto que se muesta cuando la propiedad Text no tiene valor definido.
@@ -129,7 +129,7 @@ namespace Sifaw.WPF.CCL
 
 		#endregion
 
-		#region Constructor
+		#region Constructors
 
 		static TextField()
 		{

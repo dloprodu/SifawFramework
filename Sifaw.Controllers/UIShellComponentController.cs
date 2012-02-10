@@ -48,7 +48,7 @@ namespace Sifaw.Controllers
 						  , new()
 		where TGuest      : UIComponent
 	{
-		#region Entrada / Salida
+		#region Input / Output
 
 		/// <summary>
 		/// Parámetros de entrada de las controladora.
@@ -56,7 +56,7 @@ namespace Sifaw.Controllers
 		[Serializable]
 		public abstract new class Input : UIComponentController<TInput, TOutput, TUISettings, ShellComponent>.Input
 		{
-			#region Constructor
+			#region Constructors
 
 			protected Input()
 				: base()
@@ -72,7 +72,7 @@ namespace Sifaw.Controllers
 		[Serializable]
 		public abstract new class Output : UIComponentController<TInput, TOutput, TUISettings, ShellComponent>.Output
 		{
-			#region Constructor
+			#region Constructors
 
 			protected Output()
 				: base()
@@ -93,7 +93,7 @@ namespace Sifaw.Controllers
 			, TUISettings
 			, ShellComponent>.UISettingsContainer<ShellComponent>
 		{
-			#region Constructor
+			#region Constructors
 
 			public UISettingsContainer()
 				: base()
@@ -102,7 +102,7 @@ namespace Sifaw.Controllers
 
 			#endregion
 
-			#region Métodos públicos
+			#region Public Methods
 
 			public override void Apply()
 			{
@@ -114,14 +114,14 @@ namespace Sifaw.Controllers
 
 		#endregion
 
-		#region Variables
+		#region Fields
 
 		[CLReseteable(null)]
 		protected ReadOnlyCollection<TGuest> GuestComponentes = null;
 
 		#endregion
 
-		#region Constructor
+		#region Constructors
 
 		protected UIShellComponentController()
 			: base()
@@ -135,7 +135,7 @@ namespace Sifaw.Controllers
 
 		#endregion
 
-		#region Métodos abstractos
+		#region Abstract Methods
 
 		/// <summary>
 		/// Deuvelve el número de filas de la shell.
@@ -169,7 +169,7 @@ namespace Sifaw.Controllers
 
 		#endregion
 
-		#region Métodos sobreescritos
+		#region Start Methods
 
 		protected override void OnBeforeStartController()
 		{

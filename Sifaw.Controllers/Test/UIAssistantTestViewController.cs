@@ -15,7 +15,7 @@ namespace Sifaw.Controllers.Test
 		, UIAssistantTestViewController.UISettingsContainer
 		, UIComponent>
 	{
-		#region Entrada / Salida
+		#region Input / Output
 
 		/// <summary>
 		/// Parámetros de entrada de las controladora.
@@ -23,7 +23,7 @@ namespace Sifaw.Controllers.Test
 		[Serializable]
 		public new class Input : UIShellViewController<Input, Output, UISettingsContainer, UIComponent>.Input
 		{
-			#region Constructor
+			#region Constructors
 
 			public Input()
 				: this(true)
@@ -44,13 +44,13 @@ namespace Sifaw.Controllers.Test
 		[Serializable]
 		public new class Output : UIShellViewController<Input, Output, UISettingsContainer, UIComponent>.Output
 		{
-			#region Variables
+			#region Fields
 
 			private bool _cancelled;
 
 			#endregion
 
-			#region Propiedades
+			#region Properties
 
 			/// <summary>
 			/// Indica si el proceso fue cancelado
@@ -62,7 +62,7 @@ namespace Sifaw.Controllers.Test
 
 			#endregion
 
-			#region Constructor
+			#region Constructors
 
 			public Output(bool cancelled)
 				: base()
@@ -84,7 +84,7 @@ namespace Sifaw.Controllers.Test
 			, UISettingsContainer
 			, UIComponent>.UISettingsContainer
 		{
-			#region Constructor
+			#region Constructors
 
 			public UISettingsContainer()
 				: base()
@@ -93,7 +93,7 @@ namespace Sifaw.Controllers.Test
 
 			#endregion
 
-			#region Métodos públicos
+			#region Public Methods
 
 			public override void Apply()
 			{
@@ -105,7 +105,7 @@ namespace Sifaw.Controllers.Test
 
 		#endregion
 
-		#region Inclusiones
+		#region Inclusions
 
 		private UIAssistantTestController _uiAssistantTestController = null;
 		private UIAssistantTestController UIAssistantTestController
@@ -124,7 +124,7 @@ namespace Sifaw.Controllers.Test
 
 		#endregion
 
-		#region Constructor
+		#region Constructors
 
 		public UIAssistantTestViewController()
 			: base()
@@ -138,7 +138,7 @@ namespace Sifaw.Controllers.Test
 
 		#endregion
 
-		#region Gestión de parámetros
+		#region Default Input / Output
 
 		protected override Output GetDefaultOutput()
 		{
@@ -157,7 +157,7 @@ namespace Sifaw.Controllers.Test
 
 		#endregion
 
-		#region Métodos sobreescritos
+		#region UIElement Methods
 
 		protected override void OnUISettingsApplied()
 		{
@@ -176,7 +176,7 @@ namespace Sifaw.Controllers.Test
 
 		#endregion
 
-		#region UIShellController Members
+		#region UIShell Methods
 		
 		protected override uint GetNumberOfRows()
 		{
@@ -218,7 +218,7 @@ namespace Sifaw.Controllers.Test
 
 		#endregion
 
-		#region Gestión de eventos de inclusiones
+		#region Inclusions Events Handlers
 
 		private void _uiAssistantTestController_Finished(object sender, CLFinishedEventArgs<UIAssistantTestController.Output> e)
 		{

@@ -15,7 +15,7 @@ namespace Sifaw.Controllers.Test
 {
 	public class UIGroupFiltersTestController : UIFiltersGroupController<UIGroupFiltersTestController.Filter>
 	{
-		#region Inclusiones
+		#region Inclusions
 
 		private UITextFilterController _textFilter = null;
 		private UITextFilterController TextFilter
@@ -117,7 +117,7 @@ namespace Sifaw.Controllers.Test
 		{
 			private string Value;
 
-			#region Constructor
+			#region Constructors
 
 			public Filterable(string value)
 			{
@@ -172,7 +172,7 @@ namespace Sifaw.Controllers.Test
 
 		#endregion
 
-		#region Constructor
+		#region Constructors
 
 		public UIGroupFiltersTestController()
 			: base()

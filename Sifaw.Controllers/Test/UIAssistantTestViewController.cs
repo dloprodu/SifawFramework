@@ -92,15 +92,6 @@ namespace Sifaw.Controllers.Test
 			}
 
 			#endregion
-
-			#region Public Methods
-
-			public override void Apply()
-			{
-				base.Apply();
-			}
-
-			#endregion
 		}
 
 		#endregion
@@ -159,13 +150,19 @@ namespace Sifaw.Controllers.Test
 
 		#region UIElement Methods
 
-		protected override void OnUISettingsApplied()
+		protected override void OnApplyUISettings()
 		{
-			base.OnUISettingsApplied();
-
-			// Aplicamos configuración a componentes internos ...
-			UIAssistantTestController.UISettings.Apply();
+			base.OnApplyUISettings();			
 		}
+
+        protected override void OnAfterApplyUISettings()
+        {
+            base.OnAfterApplyUISettings();
+
+            // Aplicamos configuración a componentes internos ...
+            //   - Se aplica al iniciar la controladora
+            //UIAssistantTestController.UISettings.Apply();
+        }
 
 		protected override void OnAfterUIShow()
 		{
@@ -201,7 +198,11 @@ namespace Sifaw.Controllers.Test
 			component = UIAssistantTestController.GetUIComponent();
 		}
 
-		protected override void StartController()
+        #endregion
+
+        #region Start Methods
+
+        protected override void StartController()
 		{			
 			UIAssistantTestController.Start();
 		}

@@ -44,7 +44,7 @@ namespace Sifaw.Controllers
 		, ShellView>
 		where TInput      : UIShellViewController<TInput, TOutput, TUISettings, TGuest>.Input
 		where TOutput     : UIShellViewController<TInput, TOutput, TUISettings, TGuest>.Output
-		where TUISettings : UIShellViewController<TInput, TOutput, TUISettings, TGuest>.UISettingsContainer<ShellView>
+		where TUISettings : UIShellViewController<TInput, TOutput, TUISettings, TGuest>.UISettingsContainer
 						  , new()
 		where TGuest      : UIComponent
 	{
@@ -92,11 +92,11 @@ namespace Sifaw.Controllers
 		#region Settings
 
 		[Serializable]
-		public class UISettingsContainer : UIViewController
+		public new class UISettingsContainer : UIViewController
 			< TInput
 			, TOutput
 			, TUISettings
-			, ShellView>.UISettingsContainer<ShellView>
+			, ShellView>.UISettingsContainer
 		{
 			#region Constructors
 
@@ -106,16 +106,7 @@ namespace Sifaw.Controllers
 			}
 
 			#endregion
-
-			#region Public Methods
-
-			public override void Apply()
-			{
-				base.Apply();
-			}
-
-			#endregion
-		}
+        }
 
 		#endregion
 
@@ -166,10 +157,19 @@ namespace Sifaw.Controllers
 		protected abstract void GetRowCellSettings(uint row, uint cell, out double width, out UILengthModes mode, out TGuest guest);
 
 		#endregion
+        
+        #region UIElement Methods
 
-		#region Start Methods
+        protected override void OnApplyUISettings()
+        {
+            base.OnApplyUISettings();
+        }
 
-		protected override void OnBeforeStartController()
+        #endregion
+
+        #region Start Methods
+
+        protected override void OnBeforeStartController()
 		{
 			base.OnBeforeStartController();
 			

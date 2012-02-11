@@ -48,26 +48,17 @@ namespace Sifaw.Controllers.Components.Filters
 		#region Settings
 
 		[Serializable]
-		public class UISettingsContainer : UIListFilterBaseController
+		public new class UISettingsContainer : UIListFilterBaseController
 			< IList<IFilterable>
 			, IList<IFilterable>
 			, UISettingsContainer
-			, ListFilterComponent>.UISettingsContainer<ListFilterComponent>
+			, ListFilterComponent>.UISettingsContainer
 		{
 			#region Constructors
 
 			public UISettingsContainer()
 				: base()
 			{
-			}
-
-			#endregion
-
-			#region Public Methods
-
-			public override void Apply()
-			{
-				base.Apply();
 			}
 
 			#endregion
@@ -97,6 +88,15 @@ namespace Sifaw.Controllers.Components.Filters
 		}
 
 		#endregion
+
+        #region UIElement Methods
+
+        protected override void OnApplyUISettings()
+        {
+            base.OnApplyUISettings();
+        }
+
+        #endregion
 
 		#region Start Methods
 

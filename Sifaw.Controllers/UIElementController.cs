@@ -50,7 +50,7 @@ namespace Sifaw.Controllers
 		, IUIElementController
 		where TInput      : UIElementController<TInput, TOutput, TUISettings, TUIElement>.Input
 		where TOutput     : UIElementController<TInput, TOutput, TUISettings, TUIElement>.Output
-		where TUISettings : UIElementController<TInput, TOutput, TUISettings, TUIElement>.UISettingsContainer<TUIElement>
+		where TUISettings : UIElementController<TInput, TOutput, TUISettings, TUIElement>.UISettingsContainer
 						  , new()
 		where TUIElement  : UIElement
 	{
@@ -117,14 +117,8 @@ namespace Sifaw.Controllers
 		/// </para>
 		/// </remarks>
 		[Serializable]
-		public class UISettingsContainer<TUI>
-			where TUI : TUIElement
+		public class UISettingsContainer
 		{
-			/// <summary>
-			/// Referencia a la vista de la controladora.
-			/// </summary>
-			protected TUI UIElement = default(TUI);
-
 			#region Fields
 
 			private string _denomination;
@@ -178,11 +172,11 @@ namespace Sifaw.Controllers
 
 			#region Events
 
-			public event EventHandler UISettingsApplied = null;
-			private void OnUISettingsApplied(EventArgs e)
+			public event EventHandler ApplyUISettings = null;
+            private void OnApplyUISettings(EventArgs e)
 			{
-				if (UISettingsApplied != null)
-					UISettingsApplied(this, e);
+                if (ApplyUISettings != null)
+                    ApplyUISettings(this, e);
 			}
 
 			#endregion
@@ -203,29 +197,9 @@ namespace Sifaw.Controllers
 
 			#region Public Methods
 
-			protected internal void SetUIElement(TUI uiElement)
+			public void Apply()
 			{
-				UIElement = uiElement;
-			}
-
-			public virtual void Apply()
-			{
-				OnUISettingsApplied(EventArgs.Empty);
-
-				this.UIElement.Denomination = Denomination;
-				this.UIElement.Description = Description;
-				
-				if (MinWidth >= 0.0f)
-					this.UIElement.MinWidth = MinWidth;
-				
-				if (MaxHeight >= 0.0f)
-					this.UIElement.MaxWidth = MaxWidth;
-				
-				if (MinHeight >= 0.0f)
-					this.UIElement.MinHeight = MinHeight;
-				
-				if (MaxHeight >= 0.0f)
-					this.UIElement.MaxHeight = MaxHeight;
+                OnApplyUISettings(EventArgs.Empty);
 			}
 
 			#endregion
@@ -325,27 +299,86 @@ namespace Sifaw.Controllers
 			/* Empty */
 		}
 
-		/// <summary>
+        /// <summary>
+        /// <para>
+        /// Se llama al método <see cref="OnBeforeApplyUISettings"/> antes de aplicar la 
+        /// configuración al elemento de interfaz <see cref="UIElement"/>. 
+        /// El método permite que las clases derivadas controlen el evento sin asociar un delegado.
+        /// </para>
+        /// <para>
+        /// Este métodos permite que las clases derivadas realicen operaciones de 
+        /// configuración tales como suscribirse a eventos de la vista.
+        /// </para>
+        /// </summary>
+        /// <remarks>
+        /// <para>
+        /// Al reemplazar <see cref="OnBeforeApplyUISettings"/> en una clase derivada, asegúrese de llamar al
+        /// método <see cref="OnBeforeApplyUISettings"/> de la clase base para que los delegados registrados 
+        /// reciban el evento.
+        /// </para>
+        /// </remarks>
+        protected virtual void OnBeforeApplyUISettings()
+        {
+            /* Empty */
+        }
+
+        /// <summary>
+        /// <para>
+        /// Se llama al método <see cref="OnApplyUISettings"/> cuando se aplican los ajustes establecidos
+        /// al elemento de interfaz de usuario.
+        /// </para>
+        /// <para>
+        /// El método permite aplicar los ajustes de <see cref="UISettings"/> a la interfaz de usuario y a 
+        /// elementos de interfaz de usuario de controladoras embebidas.
+        /// </para>
+        /// </summary>
+        /// <remarks>
+        /// <para>
+        /// Al reemplazar <see cref="OnApplyUISettings"/> en una clase derivada, asegúrese de llamar al
+        /// método <see cref="OnApplyUISettings"/> de la clase base para que los delegados registrados 
+        /// reciban el evento.
+        /// </para>
+        /// </remarks>
+        protected virtual void OnApplyUISettings()
+        {
+            this.UIElement.Denomination = UISettings.Denomination;
+            this.UIElement.Description = UISettings.Description;
+
+            if (UISettings.MinWidth >= 0.0f)
+                this.UIElement.MinWidth = UISettings.MinWidth;
+
+            if (UISettings.MaxHeight >= 0.0f)
+                this.UIElement.MaxWidth = UISettings.MaxWidth;
+
+            if (UISettings.MinHeight >= 0.0f)
+                this.UIElement.MinHeight = UISettings.MinHeight;
+
+            if (UISettings.MaxHeight >= 0.0f)
+                this.UIElement.MaxHeight = UISettings.MaxHeight;
+        }
+
+        /// <summary>
 		/// <para>
-		/// Se llama al método <see cref="OnUISettingsApplied"/> cuando se aplican los ajustes establecidos
-		/// al elemento de interfaz de usuario.
+        /// Se llama al método <see cref="OnAfterApplyUISettings"/> después de aplicar la 
+        /// configuración al elemento de interfaz <see cref="UIElement"/>. 
+        /// El método permite que las clases derivadas controlen el evento sin asociar un delegado.
 		/// </para>
 		/// <para>
-		/// El método permite aplicar estos ajustes a elementos de interfaz
-		/// de usuario de controladoras incluidas.
+		/// Este métodos permite que las clases derivadas realicen operaciones de 
+		/// configuración tales como suscribirse a eventos de la vista.
 		/// </para>
 		/// </summary>
 		/// <remarks>
 		/// <para>
-		/// Al reemplazar <see cref="OnUISettingsApplied"/> en una clase derivada, asegúrese de llamar al
-		/// método <see cref="OnUISettingsApplied"/> de la clase base para que los delegados registrados 
+        /// Al reemplazar <see cref="OnAfterApplyUISettings"/> en una clase derivada, asegúrese de llamar al
+        /// método <see cref="OnAfterApplyUISettings"/> de la clase base para que los delegados registrados 
 		/// reciban el evento.
 		/// </para>
 		/// </remarks>
-		protected virtual void OnUISettingsApplied()
-		{
-			/* Empty */
-		}
+		protected virtual void OnAfterApplyUISettings()
+        {
+            /* Empty */
+        }
 
 		#endregion
 
@@ -388,8 +421,7 @@ namespace Sifaw.Controllers
 				if (_uiSettings == null)
 				{
 					_uiSettings = new TUISettings();
-					_uiSettings.SetUIElement(UIElement);
-					_uiSettings.UISettingsApplied += new EventHandler(_uiSettings_UISettingsApplied);
+					_uiSettings.ApplyUISettings += new EventHandler(_uiSettings_ApplyUISettings);
 				}
 
 				return _uiSettings;
@@ -427,7 +459,8 @@ namespace Sifaw.Controllers
         /// <summary>
         /// Activa el elemento de UI de la controladora proporcionandole
         /// el foco.
-        /// 
+        /// </summary>
+        /// <remarks>
         /// Para invocar este método la controladora ha de estar iniciada, 
         /// en otro caso, devolverá una excepcion.
         /// </remarks>
@@ -472,9 +505,11 @@ namespace Sifaw.Controllers
 
         #region UISettings Events Handlers
 
-        private void _uiSettings_UISettingsApplied(object sender, EventArgs e)
+        private void _uiSettings_ApplyUISettings(object sender, EventArgs e)
 		{
-			OnUISettingsApplied();
+            OnBeforeApplyUISettings();
+			OnApplyUISettings();
+            OnAfterApplyUISettings();
 		}
 
 		#endregion

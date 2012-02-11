@@ -112,26 +112,17 @@ namespace Sifaw.Controllers.Components
 		#region Settings
 
 		[Serializable]
-		public class UISettingsContainer : UIComponentController
+		public new class UISettingsContainer : UIComponentController
 			< TInput
 			, TOutput
 			, UISettingsContainer
-			, AssistantComponent>.UISettingsContainer<AssistantComponent>
+			, AssistantComponent>.UISettingsContainer
 		{
 			#region Constructors
 
 			public UISettingsContainer()
 				: base()
 			{
-			}
-
-			#endregion
-
-			#region Public Methods
-
-			public override void Apply()
-			{
-				base.Apply();
 			}
 
 			#endregion
@@ -238,6 +229,11 @@ namespace Sifaw.Controllers.Components
 			UIElement.Previous += new EventHandler(UIElement_Previous);
 			UIElement.Next += new EventHandler(UIElement_Next);
 		}
+
+        protected override void OnApplyUISettings()
+        {
+            base.OnApplyUISettings();
+        }
 
 		#endregion
 

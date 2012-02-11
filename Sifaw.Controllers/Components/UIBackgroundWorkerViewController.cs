@@ -214,15 +214,6 @@ namespace Sifaw.Controllers.Components
 			}
 
 			#endregion
-
-			#region Public Methods
-
-			public override void Apply()
-			{
-				base.Apply();
-			}
-
-			#endregion
 		}
 
 		#endregion
@@ -281,9 +272,9 @@ namespace Sifaw.Controllers.Components
 
 		#region UIElement Methods
 
-		protected override void OnUISettingsApplied()
-		{
-			base.OnUISettingsApplied();
+		protected override void OnAfterApplyUISettings()
+        {
+            base.OnAfterApplyUISettings();
 
 			// Aplicamos configuración a componentes internos ...
 			UIBackgroundWorkerController.UISettings.AllowCancel = UISettings.AllowCancel;

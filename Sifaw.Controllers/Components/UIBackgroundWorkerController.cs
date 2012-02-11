@@ -182,11 +182,11 @@ namespace Sifaw.Controllers.Components
 		#region Settings
 
 		[Serializable]
-		public class UISettingsContainer : UIComponentController
+		public new class UISettingsContainer : UIComponentController
 			< Input
 			, Output
 			, UISettingsContainer
-			, BackgroundWorkerComponent>.UISettingsContainer<BackgroundWorkerComponent>
+			, BackgroundWorkerComponent>.UISettingsContainer
 		{
 			#region Fields
 
@@ -263,21 +263,6 @@ namespace Sifaw.Controllers.Components
 			}
 
 			#endregion
-
-			#region Public Methods
-
-			public override void Apply()
-			{
-				base.Apply();
-
-				UIElement.Summary = Summary;
-				UIElement.ProcessDescription = ProcessDescription;
-				UIElement.AllowCancel = AllowCancel;
-				UIElement.WithControl = WithControl;
-				UIElement.Progress = Progress;
-			}
-
-			#endregion
 		}		
 
 		#endregion
@@ -304,6 +289,25 @@ namespace Sifaw.Controllers.Components
 
 			UIElement.Cancel += new EventHandler(UIElement_Cancel);
 		}
+
+        protected override void OnApplyUISettings()
+		{
+			base.OnApplyUISettings();
+
+            UIElement.Summary = UISettings.Summary;
+            UIElement.ProcessDescription = UISettings.ProcessDescription;
+            UIElement.AllowCancel = UISettings.AllowCancel;
+            UIElement.WithControl = UISettings.WithControl;
+            UIElement.Progress = UISettings.Progress;
+		}
+
+        protected override void OnAfterApplyUISettings()
+        {
+            base.OnAfterApplyUISettings();
+
+            if (worker != null)
+                worker.WorkerSupportsCancellation = UISettings.AllowCancel;
+        }
 
 		#endregion
 
@@ -375,9 +379,9 @@ namespace Sifaw.Controllers.Components
 
 		#endregion
 
-		#region Start Methods
+        #region Start Methods
 
-		protected override void StartController()
+        protected override void StartController()
 		{
 			// Establecemos la configuración del componente.
 			UISettings.Apply();		
@@ -414,18 +418,6 @@ namespace Sifaw.Controllers.Components
 				worker.Dispose();
 				worker = null;
 			}
-		}
-
-		#endregion
-
-		#region Events Handlers
-
-		protected override void OnUISettingsApplied()
-		{
-			base.OnUISettingsApplied();
-
-			if (worker != null)
-				worker.WorkerSupportsCancellation = UISettings.AllowCancel;
 		}
 
 		#endregion

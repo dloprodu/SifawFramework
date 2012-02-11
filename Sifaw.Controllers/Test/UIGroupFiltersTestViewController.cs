@@ -90,15 +90,6 @@ namespace Sifaw.Controllers.Test
 			}
 
 			#endregion
-
-			#region Public Methods
-
-			public override void Apply()
-			{
-				base.Apply();
-			}
-
-			#endregion
 		}
 
 		#endregion
@@ -116,7 +107,7 @@ namespace Sifaw.Controllers.Test
 		}
 
 		#endregion
-
+        
 		#region Shell Methods
 
 		protected override uint GetNumberOfRows()

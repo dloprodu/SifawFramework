@@ -40,10 +40,10 @@ namespace Sifaw.Controllers.Components.Filters
 		#region Settings
 
 		[Serializable]
-		public class UISettingsContainer : UIFilterBaseController
+		public new class UISettingsContainer : UIFilterBaseController
 			< string
 			, UISettingsContainer
-			, TextFilterComponent>.UISettingsContainer<TextFilterComponent>
+			, TextFilterComponent>.UISettingsContainer
 		{
 			#region Fields
 
@@ -67,17 +67,6 @@ namespace Sifaw.Controllers.Components.Filters
 				: base()
 			{
 				this._placeholder = "Buscar...";
-			}
-
-			#endregion
-
-			#region Public Methods
-
-			public override void Apply()
-			{
-				base.Apply();
-
-				UIElement.Placeholder = Placeholder;
 			}
 
 			#endregion
@@ -107,6 +96,17 @@ namespace Sifaw.Controllers.Components.Filters
 		}
 
 		#endregion
+
+        #region UIElement Methods
+
+        protected override void OnApplyUISettings()
+        {
+            base.OnApplyUISettings();
+
+            UIElement.Placeholder = UISettings.Placeholder;
+        }
+
+        #endregion
 
 		#region Start Methods
 

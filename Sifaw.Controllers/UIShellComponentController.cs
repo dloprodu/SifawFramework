@@ -44,7 +44,7 @@ namespace Sifaw.Controllers
 		, ShellComponent>
 		where TInput      : UIShellComponentController<TInput, TOutput, TUISettings, TGuest>.Input
 		where TOutput     : UIShellComponentController<TInput, TOutput, TUISettings, TGuest>.Output
-		where TUISettings : UIShellComponentController<TInput, TOutput, TUISettings, TGuest>.UISettingsContainer<ShellComponent>
+		where TUISettings : UIShellComponentController<TInput, TOutput, TUISettings, TGuest>.UISettingsContainer
 						  , new()
 		where TGuest      : UIComponent
 	{
@@ -87,26 +87,17 @@ namespace Sifaw.Controllers
 		#region Settings
 
 		[Serializable]
-		public class UISettingsContainer : UIComponentController
+		public new class UISettingsContainer : UIComponentController
 			< TInput
 			, TOutput
 			, TUISettings
-			, ShellComponent>.UISettingsContainer<ShellComponent>
+			, ShellComponent>.UISettingsContainer
 		{
 			#region Constructors
 
 			public UISettingsContainer()
 				: base()
 			{
-			}
-
-			#endregion
-
-			#region Public Methods
-
-			public override void Apply()
-			{
-				base.Apply();
 			}
 
 			#endregion
@@ -169,9 +160,18 @@ namespace Sifaw.Controllers
 
 		#endregion
 
-		#region Start Methods
+        #region UIElement Methods
 
-		protected override void OnBeforeStartController()
+        protected override void OnApplyUISettings()
+        {
+            base.OnApplyUISettings();
+        }
+
+        #endregion
+
+        #region Start Methods
+
+        protected override void OnBeforeStartController()
 		{
 			base.OnBeforeStartController();
 

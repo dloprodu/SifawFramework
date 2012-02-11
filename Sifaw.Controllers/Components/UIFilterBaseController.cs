@@ -39,7 +39,7 @@ namespace Sifaw.Controllers.Components
 		, UIFilterBaseController<TFilter, TUISettings, TComponent>.Output
 		, TUISettings
 		, TComponent>
-		where TUISettings : UIFilterBaseController<TFilter, TUISettings, TComponent>.UISettingsContainer<TComponent>
+		where TUISettings : UIFilterBaseController<TFilter, TUISettings, TComponent>.UISettingsContainer
 						  , new()
 		where TComponent  : FilterBaseComponent<TFilter>
 	{
@@ -126,27 +126,17 @@ namespace Sifaw.Controllers.Components
 		#region Settings
 
 		[Serializable]
-		public new class UISettingsContainer<TUI> : UIComponentController
+		public new class UISettingsContainer : UIComponentController
 			< Input
 			, Output
 			, TUISettings
-			, TComponent>.UISettingsContainer<TUI>
-			where TUI : TComponent
+			, TComponent>.UISettingsContainer
 		{
 			#region Constructors
 
 			public UISettingsContainer()
 				: base()
 			{
-			}
-
-			#endregion
-
-			#region Public Methods
-
-			public override void Apply()
-			{
-				base.Apply();
 			}
 
 			#endregion
@@ -217,6 +207,11 @@ namespace Sifaw.Controllers.Components
 			/* Subscripción a eventos del componente... */
 			UIElement.FilterChanged += new UIFilterChangedEventHandler(UIElement_FilterChanged);
 		}
+
+        protected override void OnApplyUISettings()
+        {
+            base.OnApplyUISettings();
+        }
 
 		#endregion
 

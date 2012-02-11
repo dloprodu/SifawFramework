@@ -50,7 +50,7 @@ namespace Sifaw.Controllers
         , IUIComponentController
         where TInput      : UIComponentController<TInput, TOutput, TUISettings, TComponent>.Input
         where TOutput     : UIComponentController<TInput, TOutput, TUISettings, TComponent>.Output
-        where TUISettings : UIComponentController<TInput, TOutput, TUISettings, TComponent>.UISettingsContainer<TComponent>
+        where TUISettings : UIComponentController<TInput, TOutput, TUISettings, TComponent>.UISettingsContainer
                           , new()
         where TComponent  : UIComponent
     {
@@ -93,27 +93,17 @@ namespace Sifaw.Controllers
         #region Settings
 
         [Serializable]
-        public new class UISettingsContainer<TUI> : UIElementController
+        public new class UISettingsContainer : UIElementController
             < TInput
             , TOutput
             , TUISettings
-            , TComponent>.UISettingsContainer<TUI>
-            where TUI : TComponent
+            , TComponent>.UISettingsContainer
         {
             #region Constructors
 
             public UISettingsContainer()
                 : base()
             {
-            }
-
-            #endregion
-
-            #region Public Methods
-
-            public override void Apply()
-            {
-                base.Apply();
             }
 
             #endregion
@@ -215,6 +205,11 @@ namespace Sifaw.Controllers
             base.OnAfterUIElementLoad();
 
             /* Subscripción a eventos del componente... */
+        }
+
+        protected override void OnApplyUISettings()
+        {
+            base.OnApplyUISettings();
         }
 
         #endregion

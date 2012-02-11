@@ -41,18 +41,17 @@ namespace Sifaw.Controllers.Components
 		, TUISettings
 		, TComponent>
 		where TSource : IList<IFilterable>
-		where TUISettings : UIListFilterBaseController<TFilter, TSource, TUISettings, TComponent>.UISettingsContainer<TComponent>
+		where TUISettings : UIListFilterBaseController<TFilter, TSource, TUISettings, TComponent>.UISettingsContainer
 						  , new()
 		where TComponent : ListFilterBaseComponent<TFilter, TSource>
 	{
 		#region Settings
 
 		[Serializable]
-		public new class UISettingsContainer<TUI> : UIFilterBaseController
+		public new class UISettingsContainer : UIFilterBaseController
 			< TFilter
 			, TUISettings
-			, TComponent>.UISettingsContainer<TUI>
-			where TUI : TComponent
+			, TComponent>.UISettingsContainer
 		{
 			#region Fields
 
@@ -90,17 +89,6 @@ namespace Sifaw.Controllers.Components
 			}
 
 			#endregion
-
-			#region Public Methods
-
-			public override void Apply()
-			{
-				base.Apply();
-
-				UIElement.Add(Source);
-			}
-
-			#endregion
 		}
 
 		#endregion
@@ -118,5 +106,16 @@ namespace Sifaw.Controllers.Components
 		}
 
 		#endregion
-	}
+
+        #region UIElement Methods
+
+        protected override void OnApplyUISettings()
+        {
+            base.OnApplyUISettings();
+
+            UIElement.Add(UISettings.Source);
+        }
+
+        #endregion
+    }
 }

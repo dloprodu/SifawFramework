@@ -163,15 +163,6 @@ namespace Sifaw.Controllers.Components
 			}
 
 			#endregion
-
-			#region Public Methods
-
-			public override void Apply()
-			{
-				base.Apply();
-			}
-
-			#endregion
 		}
 
 		#endregion
@@ -239,6 +230,11 @@ namespace Sifaw.Controllers.Components
 
 			/* Subscripción a eventos del componente... */		
 		}
+
+        protected override void OnApplyUISettings()
+        {
+            base.OnApplyUISettings();
+        }
 
 		#endregion
 

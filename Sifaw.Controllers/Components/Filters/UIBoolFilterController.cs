@@ -40,10 +40,10 @@ namespace Sifaw.Controllers.Components.Filters
 		#region Settings
 
 		[Serializable]
-		public class UISettingsContainer : UIFilterBaseController
+		public new class UISettingsContainer : UIFilterBaseController
 			< bool
 			, UISettingsContainer
-			, BoolFilterComponent>.UISettingsContainer<BoolFilterComponent>
+			, BoolFilterComponent>.UISettingsContainer
 		{
 			#region Fields
 
@@ -66,17 +66,6 @@ namespace Sifaw.Controllers.Components.Filters
 			public UISettingsContainer()
 				: base()
 			{
-			}
-
-			#endregion
-
-			#region Public Methods
-
-			public override void Apply()
-			{
-				base.Apply();
-
-				UIElement.Text = Text;
 			}
 
 			#endregion
@@ -107,9 +96,20 @@ namespace Sifaw.Controllers.Components.Filters
 
 		#endregion
 
-		#region Start Methods
+        #region UIElement Methods
 
-		protected override void StartController()
+        protected override void OnApplyUISettings()
+        {
+            base.OnApplyUISettings();
+
+            UIElement.Text = UISettings.Text;
+        }
+
+        #endregion
+
+        #region Start Methods
+
+        protected override void StartController()
 		{
 			/* Empty */
 		}

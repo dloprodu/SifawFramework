@@ -89,7 +89,7 @@ namespace Sifaw.Controllers.Test
 
 		#endregion
 
-		#region Filtro
+		#region Filter
 
 		[Serializable]
 		public new class Filter : UIFiltersGroupController<Filter>.Filter

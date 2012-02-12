@@ -1,20 +1,16 @@
-﻿///////////////////////////////////////////////////////////////////////////////////////////////////
-/// <sumary>
-/// Controladora que permite realizar filtros sobre una lista devolviendo solo uno item de la lista
-/// original.
-/// 
-/// Diseñador: David López Rguez
-/// Programador: David López Rguez
-/// </sumary>
-/// <remarks>
-/// ===============================================================================================
-/// Historial de versiones:
-///   - 07/02/2012: Creación de controladora.
-/// 
-/// ===============================================================================================
-/// Observaciones:
-/// </remarks>
-///////////////////////////////////////////////////////////////////////////////////////////////////
+﻿/*
+ * Sifaw.Controllers.Components.Filters
+ * 
+ * Diseñador:   David López Rguez
+ * Programador: David López Rguez
+ * 
+ * ===============================================================================================
+ * Historial de versiones:
+ *   - 08/02/2012: Creación de la clase.
+ * ===============================================================================================
+ * Observaciones:
+ * 
+ */
 
 
 

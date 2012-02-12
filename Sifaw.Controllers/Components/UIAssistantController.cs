@@ -1,19 +1,16 @@
-///////////////////////////////////////////////////////////////////////////////////////////////////
-/// <sumary>
-/// Controladora encargada de presentar una serie de vistas de forma secuencial a modo de asistente.
-/// 
-/// Diseñador: David López Rguez
-/// Programador: David López Rguez
-/// </sumary>
-/// <remarks>
-/// ===============================================================================================
-/// Historial de versiones:
-///   - 19/12/2011: Creación de controladora.
-/// 
-/// ===============================================================================================
-/// Observaciones:
-/// </remarks>
-///////////////////////////////////////////////////////////////////////////////////////////////////
+/*
+ * Sifaw.Controllers.Components
+ * 
+ * Diseñador:   David López Rguez
+ * Programador: David López Rguez
+ * 
+ * ===============================================================================================
+ * Historial de versiones:
+ *   - 08/02/2012: Creación de la clase.
+ * ===============================================================================================
+ * Observaciones:
+ * 
+ */
 
 
 

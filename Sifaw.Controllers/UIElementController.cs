@@ -1,20 +1,16 @@
-﻿///////////////////////////////////////////////////////////////////////////////////////////////////
-/// <sumary>
-/// Controladora base que provee de un patrón e infraestructura común a aquellos casos de uso
-/// con que interactuan con un elemento de interfaz de usuario.
-/// 
-/// Diseñador:     David López Rguez
-/// Programadores: David López Rguez
-/// </sumary>
-/// <remarks>
-/// ===============================================================================================
-/// Historial de versiones:
-///   - 20/12/2011: Creación de controladora.
-/// 
-/// ===============================================================================================
-/// Observaciones:
-/// </remarks>
-///////////////////////////////////////////////////////////////////////////////////////////////////
+﻿/*
+ * Sifaw.Controllers
+ * 
+ * Diseñador:   David López Rguez
+ * Programador: David López Rguez
+ * 
+ * ===============================================================================================
+ * Historial de versiones:
+ *   - 14/12/2011: Creación de la clase.
+ * ===============================================================================================
+ * Observaciones:
+ * 
+ */
 
 
 
@@ -32,15 +28,9 @@ using Sifaw.Views;
 namespace Sifaw.Controllers
 {
 	/// <summary>
-	/// Controladora base que provee de un patrón y funcionalidad para aquellos casos de uso
-	/// donde intervienen elementos de interfaz de usuario.
+    /// Controladora base que provee de un patrón e infraestructura común para aquellas controladoras
+    /// donde interviene un elemento de interfaz de usuario.
 	/// </summary>
-	/// <remarks>
-	/// <para>
-	/// La controladora al finalizar reseteará automáticamente los elementos de
-	/// interfaz de usuario.
-	/// </para>
-	/// </remarks>
 	/// <typeparam name="TInput">Tipo para establecer los parámetros de inicio de la controladora. Ha de ser serializable.</typeparam>
 	/// <typeparam name="TOutput">Tipo para establcer los parametros de retorno cuando finaliza la controladora. Ha de ser serializable.</typeparam>
 	/// <typeparam name="TUISettings">Tipo para establecer el proxy encargado de establecer los ajustes al elemento de interfaz de usuario.</typeparam>

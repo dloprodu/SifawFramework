@@ -1,12 +1,12 @@
 ﻿/*
- * Sifaw.Controllers
+ * Sifaw.Core.Drawing
  * 
  * Diseñador:   David López Rguez
  * Programador: David López Rguez
  * 
  * ===============================================================================================
  * Historial de versiones:
- *   - 08/02/2012: Creación de la clase.
+ *   - 14/12/2011: Creación de la clase.
  * ===============================================================================================
  * Observaciones:
  * 
@@ -20,12 +20,18 @@ using System.Linq;
 using System.Text;
 
 
-namespace Sifaw.Controllers
+namespace Sifaw.Core.Drawing
 {
-	/// <summary>
-	/// Representa el callbak que es invocado cuando se solicita desde una 
-	/// shell el número de filas.
-	/// </summary>
-	/// <returns>Número de filas de la shell.</returns>
-	public delegate uint GetNumberOfRowsShellCallback();
+    [Flags()]
+    public enum RoundedEdgeFilters
+    {
+        None = 0,
+        TopLeft = 1,
+        TopRight = 2,
+        BottomLeft = 4,
+        BottomRight = 8,
+        TopLeftAndRight = TopLeft | TopRight,
+        BottonLeftAndRight = BottomLeft | BottomRight,
+        All = TopLeftAndRight | BottonLeftAndRight
+    }
 }

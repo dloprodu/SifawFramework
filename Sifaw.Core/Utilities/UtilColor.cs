@@ -1,19 +1,16 @@
-﻿///////////////////////////////////////////////////////////////////////////////////////////////////
-/// <sumary>
-/// Fichero contenedor de tipos de datos miscelaneos y funciones de utilidad.
-/// 
-/// Diseñador: David López Rguez
-/// Programador: David López Rguez
-/// </sumary>
-/// <remarks>
-/// ===============================================================================================
-/// Historial de versiones:
-///   - 27/12/2011 Creación del fichero
-/// 
-/// ===============================================================================================
-/// Observaciones:
-/// </remarks>
-///////////////////////////////////////////////////////////////////////////////////////////////////
+﻿/*
+ * Sifaw.Core.Utilities
+ * 
+ * Diseñador:   David López Rguez
+ * Programador: David López Rguez
+ * 
+ * ===============================================================================================
+ * Historial de versiones:
+ *   - 14/12/2011: Creación de la clase.
+ * ===============================================================================================
+ * Observaciones:
+ * 
+ */
 
 
 
@@ -22,6 +19,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Drawing;
+using System.Globalization;
 
 using Sifaw.Core.Drawing;
 
@@ -47,7 +45,7 @@ namespace Sifaw.Core.Utilities
 		{
 			try
 			{
-				int iargb = Int32.Parse(argb, System.Globalization.NumberStyles.HexNumber);
+				int iargb = Int32.Parse(argb, NumberStyles.HexNumber);
 				return (Color.FromArgb(iargb));
 			}
 			catch

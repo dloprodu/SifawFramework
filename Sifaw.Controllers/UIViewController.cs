@@ -1,20 +1,16 @@
-///////////////////////////////////////////////////////////////////////////////////////////////////
-/// <sumary>
-/// Controladora base que provee de un patrón e infraestructura común a aquellos casos de uso
-/// con vistas.
-/// 
-/// Diseñador:     David López Rguez
-/// Programadores: David López Rguez
-/// </sumary>
-/// <remarks>
-/// ===============================================================================================
-/// Historial de versiones:
-///   - 20/12/2011: Creación de controladora.
-/// 
-/// ===============================================================================================
-/// Observaciones:
-/// </remarks>
-///////////////////////////////////////////////////////////////////////////////////////////////////
+/*
+ * Sifaw.Controllers
+ * 
+ * Diseñador:   David López Rguez
+ * Programador: David López Rguez
+ * 
+ * ===============================================================================================
+ * Historial de versiones:
+ *   - 14/12/2011: Creación de la clase.
+ * ===============================================================================================
+ * Observaciones:
+ * 
+ */
 
 
 
@@ -55,8 +51,8 @@ namespace Sifaw.Controllers
 
 
     /// <summary>
-    /// Controladora base que provee de un patrón e infraestructura común a aquellos casos de uso
-    /// donde intervienen vistas.
+    /// Controladora base que provee de un patrón e infraestructura común a aquellas controladoras
+    /// donde intervienen una vista.
     /// </summary>
     /// <remarks>
     /// <para>

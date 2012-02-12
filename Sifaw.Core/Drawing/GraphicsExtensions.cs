@@ -1,4 +1,20 @@
-﻿using System;
+﻿/*
+ * Sifaw.Core.Drawing
+ * 
+ * Diseñador:   David López Rguez
+ * Programador: David López Rguez
+ * 
+ * ===============================================================================================
+ * Historial de versiones:
+ *   - 14/12/2011: Creación de la clase.
+ * ===============================================================================================
+ * Observaciones:
+ * 
+ */
+
+
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,7 +25,7 @@ using System.Drawing.Drawing2D;
 namespace Sifaw.Core.Drawing
 {
 	/// <summary>
-	/// Exntensión de la clase Graphics.
+	/// Exntensión de la clase <see cref="Graphics"/>.
 	/// </summary>
 	public static class GraphicsExtensions
 	{
@@ -23,7 +39,7 @@ namespace Sifaw.Core.Drawing
 			float width,
 			float height,
 			float radius,
-			RectangleRoundedEdgeFilter filter)
+			RoundedEdgeFilters filter)
 		{
 			RectangleF rectangle = new RectangleF(x, y, width, height);
 
@@ -52,7 +68,7 @@ namespace Sifaw.Core.Drawing
 				width,
 				height,
 				radius,
-				RectangleRoundedEdgeFilter.All);
+				RoundedEdgeFilters.All);
 		}
 
 		public static void DrawRoundedRectangle(
@@ -63,7 +79,7 @@ namespace Sifaw.Core.Drawing
 			int width,
 			int height,
 			int radius,
-			RectangleRoundedEdgeFilter filter)
+			RoundedEdgeFilters filter)
 		{
 			graphics.DrawRoundedRectangle(
 				pen,
@@ -91,7 +107,7 @@ namespace Sifaw.Core.Drawing
 				Convert.ToSingle(width),
 				Convert.ToSingle(height),
 				Convert.ToSingle(radius),
-				RectangleRoundedEdgeFilter.All);
+				RoundedEdgeFilters.All);
 		}
 
 		public static void DrawRoundedRectangle(
@@ -99,7 +115,7 @@ namespace Sifaw.Core.Drawing
 			Pen pen,
 			Rectangle rectangle,
 			int radius,
-			RectangleRoundedEdgeFilter filter)
+			RoundedEdgeFilters filter)
 		{
 			graphics.DrawRoundedRectangle(
 				pen,
@@ -124,7 +140,7 @@ namespace Sifaw.Core.Drawing
 				rectangle.Width,
 				rectangle.Height,
 				radius,
-				RectangleRoundedEdgeFilter.All);
+				RoundedEdgeFilters.All);
 		}
 
 		public static void DrawRoundedRectangle(
@@ -132,7 +148,7 @@ namespace Sifaw.Core.Drawing
 			Pen pen,
 			RectangleF rectangle,
 			int radius,
-			RectangleRoundedEdgeFilter filter)
+			RoundedEdgeFilters filter)
 		{
 			graphics.DrawRoundedRectangle(
 				pen,
@@ -157,7 +173,7 @@ namespace Sifaw.Core.Drawing
 				rectangle.Width,
 				rectangle.Height,
 				radius,
-				RectangleRoundedEdgeFilter.All);
+				RoundedEdgeFilters.All);
 		}
 
 		#endregion
@@ -172,7 +188,7 @@ namespace Sifaw.Core.Drawing
 			float width,
 			float height,
 			float radius,
-			RectangleRoundedEdgeFilter filter)
+			RoundedEdgeFilters filter)
 		{
 			RectangleF rectangle = new RectangleF(x, y, width, height);
 
@@ -201,7 +217,7 @@ namespace Sifaw.Core.Drawing
 				width,
 				height,
 				radius,
-				RectangleRoundedEdgeFilter.All);
+				RoundedEdgeFilters.All);
 		}
 
 		public static void FillRoundedRectangle(
@@ -220,7 +236,7 @@ namespace Sifaw.Core.Drawing
 				Convert.ToSingle(width),
 				Convert.ToSingle(height),
 				Convert.ToSingle(radius),
-				RectangleRoundedEdgeFilter.All);
+				RoundedEdgeFilters.All);
 		}
 
 		public static void FillRoundedRectangle(
@@ -228,7 +244,7 @@ namespace Sifaw.Core.Drawing
 			Brush brush,
 			Rectangle rectangle,
 			int radius,
-			RectangleRoundedEdgeFilter filter)
+			RoundedEdgeFilters filter)
 		{
 			graphics.FillRoundedRectangle(
 				brush,
@@ -253,7 +269,7 @@ namespace Sifaw.Core.Drawing
 				rectangle.Width,
 				rectangle.Height,
 				radius,
-				RectangleRoundedEdgeFilter.All);
+				RoundedEdgeFilters.All);
 		}
 
 		public static void FillRoundedRectangle(
@@ -261,7 +277,7 @@ namespace Sifaw.Core.Drawing
 			Brush brush,
 			RectangleF rectangle,
 			int radius,
-			RectangleRoundedEdgeFilter filter)
+			RoundedEdgeFilters filter)
 		{
 			graphics.FillRoundedRectangle(
 				brush,
@@ -286,7 +302,7 @@ namespace Sifaw.Core.Drawing
 				rectangle.Width,
 				rectangle.Height,
 				radius,
-				RectangleRoundedEdgeFilter.All);
+				RoundedEdgeFilters.All);
 		}
 
 		#endregion
@@ -300,7 +316,7 @@ namespace Sifaw.Core.Drawing
 			this Graphics graphics,
 			Rectangle rectangle,
 			int radius,
-			RectangleRoundedEdgeFilter filter,
+			RoundedEdgeFilters filter,
 			Color color,
 			int alpha)
 		{
@@ -320,7 +336,7 @@ namespace Sifaw.Core.Drawing
 			this Graphics graphics,
 			Rectangle rectangle,
 			int radius,
-			RectangleRoundedEdgeFilter filter,
+			RoundedEdgeFilters filter,
 			Color color1,
 			Color color2,
 			int alpha)
@@ -349,7 +365,7 @@ namespace Sifaw.Core.Drawing
 			this Graphics graphics,
 			Rectangle rectangle,
 			int radius,
-			RectangleRoundedEdgeFilter filter,
+			RoundedEdgeFilters filter,
 			Color color1,
 			Color color2,
 			Color reflexColor1,
@@ -379,7 +395,7 @@ namespace Sifaw.Core.Drawing
 
 		#endregion
 
-		#region Methods privados
+		#region Helpers
 
 		/// <summary>
 		/// Devuelve el objeto GraphicsPath con la definición del rectángulo con las esquinas en forma de arco.
@@ -388,9 +404,9 @@ namespace Sifaw.Core.Drawing
 				this Graphics graphics,
 				RectangleF rectangle,
 				float radius,
-				RectangleRoundedEdgeFilter filter)
+				RoundedEdgeFilters filter)
 		{
-			if (radius <= 0.0F || filter == RectangleRoundedEdgeFilter.None)
+			if (radius <= 0.0F || filter == RoundedEdgeFilters.None)
 			{
 				GraphicsPath path = new GraphicsPath();
 				path.StartFigure();
@@ -410,7 +426,7 @@ namespace Sifaw.Core.Drawing
 				SizeF sizeF = new SizeF(diameter, diameter);
 				RectangleF arc = new RectangleF(rectangle.Location, sizeF);
 
-				if ((RectangleRoundedEdgeFilter.TopLeft & filter) == RectangleRoundedEdgeFilter.TopLeft)
+				if ((RoundedEdgeFilters.TopLeft & filter) == RoundedEdgeFilters.TopLeft)
 					path.AddArc(arc, 180, 90);
 				else
 				{
@@ -420,7 +436,7 @@ namespace Sifaw.Core.Drawing
 
 				arc.X = rectangle.Right - diameter;
 
-				if ((RectangleRoundedEdgeFilter.TopRight & filter) == RectangleRoundedEdgeFilter.TopRight)
+				if ((RoundedEdgeFilters.TopRight & filter) == RoundedEdgeFilters.TopRight)
 					path.AddArc(arc, 270, 90);
 				else
 				{
@@ -430,7 +446,7 @@ namespace Sifaw.Core.Drawing
 
 				arc.Y = rectangle.Bottom - diameter;
 
-				if ((RectangleRoundedEdgeFilter.BottomRight & filter) == RectangleRoundedEdgeFilter.BottomRight)
+				if ((RoundedEdgeFilters.BottomRight & filter) == RoundedEdgeFilters.BottomRight)
 					path.AddArc(arc, 0, 90);
 				else
 				{
@@ -440,7 +456,7 @@ namespace Sifaw.Core.Drawing
 
 				arc.X = rectangle.Left;
 
-				if ((RectangleRoundedEdgeFilter.BottomLeft & filter) == RectangleRoundedEdgeFilter.BottomLeft)
+				if ((RoundedEdgeFilters.BottomLeft & filter) == RoundedEdgeFilters.BottomLeft)
 					path.AddArc(arc, 90, 90);
 				else
 				{
@@ -491,21 +507,4 @@ namespace Sifaw.Core.Drawing
 
 		#endregion
 	}
-
-	#region Miscelanea
-
-	[Flags()]
-	public enum RectangleRoundedEdgeFilter
-	{
-		None = 0,
-		TopLeft = 1,
-		TopRight = 2,
-		BottomLeft = 4,
-		BottomRight = 8,
-		TopLeftAndRight = TopLeft | TopRight,
-		BottonLeftAndRight = BottomLeft | BottomRight,
-		All = TopLeftAndRight | BottonLeftAndRight
-	}
-
-	#endregion
 }

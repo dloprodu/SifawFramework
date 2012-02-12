@@ -1,26 +1,23 @@
-///////////////////////////////////////////////////////////////////////////////////////////////////
-/// <sumary>
-/// StopWatch.cs
-/// 
-/// Diseñador:   David López Rguez
-/// Programador: David López Rguez
-/// </sumary>
-/// <remarks>
-/// ===============================================================================================
-/// Historial de versiones:
-///   - 14/12/2011: Creación de la clase.
-/// 
-/// ===============================================================================================
-/// Observaciones:
-/// </remarks>
-///////////////////////////////////////////////////////////////////////////////////////////////////
+/*
+ * Sifaw.Core
+ * 
+ * Diseñador:   David López Rguez
+ * Programador: David López Rguez
+ * 
+ * ===============================================================================================
+ * Historial de versiones:
+ *   - 14/12/2011: Creación de la clase.
+ * ===============================================================================================
+ * Observaciones:
+ * 
+ */
 
 
 
 using System;
 
 
-namespace Sifaw.Core.Utilities
+namespace Sifaw.Core
 {
 	/// <summary>
 	/// Permite la medición de tiempos con alta precisión.

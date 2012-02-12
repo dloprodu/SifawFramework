@@ -1,20 +1,16 @@
-///////////////////////////////////////////////////////////////////////////////////////////////////
-/// <summary>
-/// Controladora base de casos de uso
-/// 
-/// Diseñador:     David López Rguez
-/// Programadores: David López Rguez
-///	
-/// </summary>
-/// <remarks>
-/// ===============================================================================================
-/// Historial de versiones:
-///   - 14/12/2011 -- Creación de la clase.
-/// ===============================================================================================
-/// Observaciones:
-/// 
-/// </remarks>
-///////////////////////////////////////////////////////////////////////////////////////////////////
+/*
+ * Sifaw.Controllers
+ * 
+ * Diseñador:   David López Rguez
+ * Programador: David López Rguez
+ * 
+ * ===============================================================================================
+ * Historial de versiones:
+ *   - 14/12/2011: Creación de la clase.
+ * ===============================================================================================
+ * Observaciones:
+ * 
+ */
 
 
 
@@ -31,10 +27,35 @@ using Sifaw.Core.Utilities;
 namespace Sifaw.Controllers
 {
 	/// <summary>
-	/// Controladora base que provee de un patrón y funcionalidad para los casos de uso.
+    /// Controladora base que provee de un patrón e infraestructura común para el resto de controladoras que derivan de ella.
 	/// </summary>
-	/// <typeparam name="TInput">Tipo para establecer los parámetros de inicio de la controladora. Ha de ser serializable.</typeparam>
-	/// <typeparam name="TOutput">Tipo para establcer los parametros de retorno cuando finaliza la controladora. Ha de ser serializable.</typeparam>
+    /// <remarks>
+    /// <para>
+    /// Las controladoras <see cref="Controller"/> implementan un ciclo de vida que permiten su inicio,
+    /// reseteo o finalización asi como de un sistema de chequeo de reglas que permite definir en que estados se permite iniciar
+    /// o reiniciar una controladora.
+    /// </para>
+    /// <para>
+    /// Eventos como <see cref="StateChanged"/>, <see cref="Starting"/> o <see cref="Finishing"/>, entre otros, informan sobre la transición 
+    /// de un estado a otro.
+    /// </para>
+    /// <para>
+    /// Las controladoras <see cref="Controller<TInput, TOutput>"/> implementa un patrón 'Before / After Action' que ayuda a las controladoras
+    /// derivadas completar funcionalidad en cualquier punto del ciclo de vida de la controladora.
+    /// </para>
+    /// <para>
+    /// Además las controladoras han de definir los parametros que recibirán como entrada cuando son iniciadas (<see cref="TInput"/>)
+    /// y aquellos que retornarán cuando finalicen (<see cref="TOutput"/>).
+    /// </para>
+    /// </remarks>
+	/// <typeparam name="TInput">
+    /// Tipo para establecer los parámetros de inicio de la controladora. Ha de ser serializable y 
+    /// derivar de <see cref="Controller<TInput, TOutput>.Input"/>.
+    /// </typeparam>
+	/// <typeparam name="TOutput">
+    /// Tipo para establcer los parametros de retorno cuando finaliza la controladora. Ha de ser serializable y 
+    /// derivar de <see cref="Controller<TInput, TOutput>.Output"/>.
+    /// </typeparam>
 	public abstract class Controller<TInput, TOutput>
 		: IController
 		, IController<TInput, TOutput>
@@ -405,8 +426,6 @@ namespace Sifaw.Controllers
 
 		#endregion
 
-		#region Helpers
-
 		#region Check Preconditions
 
 		/// <summary>
@@ -429,8 +448,8 @@ namespace Sifaw.Controllers
 
 		#endregion
 
-        #region Miscellany
-
+		#region Helpers
+                
         /// <summary>
         /// Comprueba el estado de la controladora. 
         /// </summary>
@@ -493,8 +512,6 @@ namespace Sifaw.Controllers
 			// Retornamos la lista
 			return list;
 		}
-
-		#endregion
 
 		#endregion
 

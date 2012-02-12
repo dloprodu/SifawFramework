@@ -1,19 +1,16 @@
-///////////////////////////////////////////////////////////////////////////////////////////////////
-/// <sumary>
-/// Clase para la gestión de las reglas rotas.
-/// 
-/// Diseñador:   David López Rguez
-/// Programador: David López Rguez
-/// </sumary>
-/// <remarks>
-/// ===============================================================================================
-/// Historial de versiones:
-///   - 16/12/2011 : Creación de la clase a partir del framework original
-///                     
-/// ===============================================================================================
-/// Observaciones:
-/// </remarks>
-///////////////////////////////////////////////////////////////////////////////////////////////////
+/*
+ * Sifaw.Core
+ * 
+ * Diseñador:   David López Rguez
+ * Programador: David López Rguez
+ * 
+ * ===============================================================================================
+ * Historial de versiones:
+ *   - 14/12/2011: Creación de la clase.
+ * ===============================================================================================
+ * Observaciones:
+ * 
+ */
 
 
 
@@ -25,7 +22,7 @@ using System.Text;
 namespace Sifaw.Core
 {
 	/// <summary>
-	/// Tracks the business rules broken within a business object.
+	/// Clase que gestiona el registro de reglas rotas de un objeto.
 	/// </summary>
 	[Serializable()]
 	public class BrokenRules

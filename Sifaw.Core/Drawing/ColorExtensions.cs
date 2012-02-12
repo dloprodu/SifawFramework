@@ -1,4 +1,20 @@
-﻿using System;
+﻿/*
+ * Sifaw.Core.Drawing
+ * 
+ * Diseñador:   David López Rguez
+ * Programador: David López Rguez
+ * 
+ * ===============================================================================================
+ * Historial de versiones:
+ *   - 14/12/2011: Creación de la clase.
+ * ===============================================================================================
+ * Observaciones:
+ * 
+ */
+
+
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +24,7 @@ using System.Drawing;
 namespace Sifaw.Core.Drawing
 {
 	/// <summary>
-	/// Extensión del struct Color.
+    /// Extensión del struct <see cref="Color"/>.
 	/// </summary>
 	public static class ColorExtensions
 	{

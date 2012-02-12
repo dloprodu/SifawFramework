@@ -1,20 +1,16 @@
-///////////////////////////////////////////////////////////////////////////////////////////////////
-/// <sumary>
-/// Contiene la clase base a partir de la cual se deben implementar los gestores de menús de los
-/// buscadores encargados de proporcionar los comandos ejecutables.
-/// 
-/// Diseñador:     David López Rguez
-/// Programadores: David López Rguez
-/// </sumary>
-/// <remarks>
-/// ===============================================================================================
-/// Historial de versiones:
-///   - 14/12/2011 -- Creación de la clase.
-/// 
-/// ===============================================================================================
-/// Observaciones:
-/// </remarks>
-///////////////////////////////////////////////////////////////////////////////////////////////////
+/*
+ * Sifaw.Views
+ * 
+ * Diseñador:   David López Rguez
+ * Programador: David López Rguez
+ * 
+ * ===============================================================================================
+ * Historial de versiones:
+ *   - 09/02/2012: Creación de la clase.
+ * ===============================================================================================
+ * Observaciones:
+ * 
+ */
 
 
 

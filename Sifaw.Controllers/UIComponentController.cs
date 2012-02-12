@@ -1,20 +1,16 @@
-﻿///////////////////////////////////////////////////////////////////////////////////////////////////
-/// <sumary>
-/// Controladora base que provee de un patrón e infraestructura común a aquellos casos de uso
-/// que trabajan con componentes de interfaz de usuario.
-/// 
-/// Diseñador:     David López Rguez
-/// Programadores: David López Rguez
-/// </sumary>
-/// <remarks>
-/// ===============================================================================================
-/// Historial de versiones:
-///   - 20/12/2011: Creación de controladora.
-/// 
-/// ===============================================================================================
-/// Observaciones:
-/// </remarks>
-///////////////////////////////////////////////////////////////////////////////////////////////////
+﻿/*
+ * Sifaw.Controllers
+ * 
+ * Diseñador:   David López Rguez
+ * Programador: David López Rguez
+ * 
+ * ===============================================================================================
+ * Historial de versiones:
+ *   - 14/12/2011: Creación de la clase.
+ * ===============================================================================================
+ * Observaciones:
+ * 
+ */
 
 
 
@@ -31,12 +27,12 @@ using Sifaw.Core;
 namespace Sifaw.Controllers
 {
     /// <summary>
-    /// Controladora base que provee de un patrón e infraestructura común a aquellos casos de uso
-    /// donde intervienen componentes de interfaz de usuario.
+    /// Controladora base que provee de un patrón e infraestructura común a aquellas controladoras
+    /// donde interviene un componente de interfaz de usuario.
     /// </summary>
     /// <remarks>
     /// <para>
-    /// Un <see cref="UIComponentController<TInput, TOutput, TComponent>"/> implementa un caso de uso
+    /// Un <see cref="UIComponentController"/> implementa un caso de uso
     /// donde interviene un componente de UI. El componente de UI no puede mostrarse por si solo, en su lugar,
     /// ha de ser usado en un <see cref="UIViewController"/>.
     /// </para>

@@ -1,19 +1,16 @@
-﻿///////////////////////////////////////////////////////////////////////////////////////////////////
-/// <sumary>
-/// Fichero contenedor de tipos de datos miscelaneos y funciones de utilidad.
-/// 
-/// Diseñador: David López Rguez
-/// Programador: David López Rguez
-/// </sumary>
-/// <remarks>
-/// ===============================================================================================
-/// Historial de versiones:
-///   - 27/12/2011 Creación del fichero
-/// 
-/// ===============================================================================================
-/// Observaciones:
-/// </remarks>
-///////////////////////////////////////////////////////////////////////////////////////////////////
+﻿/*
+ * Sifaw.Core.Drawing
+ * 
+ * Diseñador:   David López Rguez
+ * Programador: David López Rguez
+ * 
+ * ===============================================================================================
+ * Historial de versiones:
+ *   - 14/12/2011: Creación de la clase.
+ * ===============================================================================================
+ * Observaciones:
+ * 
+ */
 
 
 
@@ -95,7 +92,7 @@ namespace Sifaw.Core.Drawing
 
 		#endregion
 
-		#region Methods de factoria
+		#region Factory Methods
 
 		public static Color ToRGB(HSLColor color)
 		{

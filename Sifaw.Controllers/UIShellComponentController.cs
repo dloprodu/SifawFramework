@@ -1,20 +1,16 @@
-﻿///////////////////////////////////////////////////////////////////////////////////////////////////
-/// <sumary>
-/// Controladora base que provee de un patrón e infraestructura común a aquellos casos de uso
-/// con componentes tipo shell.
-/// 
-/// Diseñador:     David López Rguez
-/// Programadores: David López Rguez
-/// </sumary>
-/// <remarks>
-/// ===============================================================================================
-/// Historial de versiones:
-///   - 09/01/2012: Creación de controladora.
-/// 
-/// ===============================================================================================
-/// Observaciones:
-/// </remarks>
-///////////////////////////////////////////////////////////////////////////////////////////////////
+﻿/*
+ * Sifaw.Controllers
+ * 
+ * Diseñador:   David López Rguez
+ * Programador: David López Rguez
+ * 
+ * ===============================================================================================
+ * Historial de versiones:
+ *   - 14/12/2011: Creación de la clase.
+ * ===============================================================================================
+ * Observaciones:
+ * 
+ */
 
 
 
@@ -30,8 +26,8 @@ using Sifaw.Views;
 namespace Sifaw.Controllers
 {
 	/// <summary>
-	/// Controladora base que provee de un patrón e infraestructura común a aquellos casos de uso
-	/// donde intervienen componentes tipo shell que actuan como contenedores de otros componentes.
+	/// Controladora base que provee de un patrón e infraestructura común a aquellas controladoras
+	/// donde interviene un componente tipo shell que actúa como contenedor de otros componentes.
 	/// </summary>
 	/// <typeparam name="TInput">Tipo para establecer los parámetros de inicio de la controladora.</typeparam>
 	/// <typeparam name="TOutput">Tipo para establcer los parametros de retorno cuando finaliza la controladora.</typeparam>

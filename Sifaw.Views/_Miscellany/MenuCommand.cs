@@ -1,20 +1,16 @@
-///////////////////////////////////////////////////////////////////////////////////////////////////
-/// <sumary>
-/// Contiene el conjunto de estructuras encargadas de dar soporte a la generación dinámica de 
-/// opciones de menús en los buscadores/selectores.
-/// 
-/// Diseñador:     David López Rguez
-/// Programadores: David López Rguez
-/// </sumary>
-/// <remarks>
-/// ===============================================================================================
-/// Historial de versiones:
-///   - 14/12/2011 -- Creación de la clase.
-/// 
-/// ===============================================================================================
-/// Observaciones:
-/// </remarks>
-///////////////////////////////////////////////////////////////////////////////////////////////////
+/*
+ * Sifaw.Views
+ * 
+ * Diseñador:   David López Rguez
+ * Programador: David López Rguez
+ * 
+ * ===============================================================================================
+ * Historial de versiones:
+ *   - 09/02/2012: Creación de la clase.
+ * ===============================================================================================
+ * Observaciones:
+ * 
+ */
 
 
 

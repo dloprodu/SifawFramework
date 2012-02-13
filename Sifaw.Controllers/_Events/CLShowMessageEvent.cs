@@ -65,16 +65,26 @@ namespace Sifaw.Controllers
         #endregion
 
         /// <summary>
-        /// Indica el nivel del mensaje a mostrar.
+        /// Devuelve el nivel del mensaje a mostrar.
         /// </summary>
         public readonly MessagesLevels Level;
+
+		/// <summary>
+		/// Devuelve el título del mensaje.
+		/// </summary>
         public readonly string Title;
 
+		/// <summary>
+		/// Inicializa una nueva instancia de la clase <see cref="CLShowMessageEventArgs"/>, estableciendo el tipo de mensaje y el mensaje.
+		/// </summary>
         public CLShowMessageEventArgs(MessagesLevels level, string message)
             : this(level, level.ToString(), message)
         {
         }
 
+		/// <summary>
+		/// Inicializa una nueva instancia de la clase <see cref="CLShowMessageEventArgs"/>, estableciendo el tipo de mensaje, un título y el mensaje.
+		/// </summary>
         public CLShowMessageEventArgs(MessagesLevels level, string title, string message)
             : base(message)
         {

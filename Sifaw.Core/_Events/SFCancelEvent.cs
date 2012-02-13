@@ -37,6 +37,10 @@ namespace Sifaw.Core
 		/// </summary>
 		public bool Cancel = false;
 
+		/// <summary>
+		/// Inicializa una nueva instancia de la clase <see cref="SFCancelEventArgs"/>, estableciendo un valor a la propiedad <see cref="Cancel"/>
+		/// en <c>false</c>.
+		/// </summary>
 		public SFCancelEventArgs()
 		{
 			Cancel = false;

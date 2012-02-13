@@ -31,16 +31,9 @@ namespace Sifaw.Core.Utilities
 	/// </summary>
 	public static class UtilColor
 	{
-		public static Color SlightDark(Color color)
-		{
-			return color.SlightDark();
-		}
-
-		public static Color SlightDark(Color color, float factor)
-		{
-			return color.SlightDark(factor);
-		}
-
+		/// <summary>
+		/// Crea una estructura <see cref="T:System.Drawing.Color"/> a partir de los cuatro valores de los componentes ARGB de 8 bits (alfa, rojo, verde y azul).
+		/// </summary>
 		public static Color FromARGB(string argb)
 		{
 			try
@@ -54,19 +47,13 @@ namespace Sifaw.Core.Utilities
 			}
 		}
 
+		/// <summary>
+		/// Crea una estructura <see cref="T:System.Drawing.Color"/> a partir de los cuatro valores de los componentes ARGB de 8 bits (alfa, rojo, verde y azul).
+		/// </summary>
 		public static Color FromARGB(string a, string r, string g, string b)
 		{
 			string argb = a + r + g + b;
 			return FromARGB(argb);
-		}
-
-		/// <summary>
-		/// Transforma un color en formato RGB a su correspondiente en escala de grises según la función
-		/// Y = 0.299*R + 0.587*G + 0.114*B.
-		/// </summary>
-		public static Color ToBN(Color color)
-		{
-			return color.ToBN();
-		}		
+		}	
 	}
 }

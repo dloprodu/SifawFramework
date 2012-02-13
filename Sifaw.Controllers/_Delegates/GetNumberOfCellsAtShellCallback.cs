@@ -27,6 +27,6 @@ namespace Sifaw.Controllers
 	/// shell el número de celdas de una fila.
 	/// </summary>
 	/// <param name="row">Fila.</param>
-	/// <returns>Número de celdas de la fila <see cref="row"/>.</returns>
+	/// <returns>Número de celdas de la fila.</returns>
 	public delegate uint GetNumberOfCellsAtShellCallback(uint row);
 }

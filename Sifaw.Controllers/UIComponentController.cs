@@ -32,16 +32,26 @@ namespace Sifaw.Controllers
     /// </summary>
     /// <remarks>
     /// <para>
-    /// Un <see cref="UIComponentController"/> implementa un caso de uso
-    /// donde interviene un componente de UI. El componente de UI no puede mostrarse por si solo, en su lugar,
-    /// ha de ser usado en un <see cref="UIViewController"/>.
+	/// Un componente de interfaz de usuario no puede mostrarse por si solo, en su lugar,
+	/// ha de ser embebido por un <see cref="UIViewController{TInput, TOutput, TUISettings, TView}"/>.
     /// </para>
     /// </remarks>
-    /// <typeparam name="TInput">Tipo para establecer los parámetros de inicio de la controladora.</typeparam>
-    /// <typeparam name="TOutput">Tipo para establcer los parametros de retorno cuando finaliza la controladora.</typeparam>
-    /// <typeparam name="TUISettings">Tipo para establecer el proxy encargado de establecer los ajustes al elemento de interfaz de usuario.</typeparam>
-    /// <typeparam name="TComponent">Tipo del componente de UI del controlador.</typeparam>
-    public abstract class UIComponentController<TInput, TOutput, TUISettings, TComponent>
+	/// <typeparam name="TInput">
+	/// Tipo para establecer los parámetros de inicio de la controladora. Ha de ser serializable y 
+	/// derivar de <see cref="UIComponentController{TInput, TOutput, TUISettings, TComponent}.Input"/>.
+	/// </typeparam>
+	/// <typeparam name="TOutput">
+	/// Tipo para establcer los parametros de retorno cuando finaliza la controladora. Ha de ser serializable y 
+	/// derivar de <see cref="UIComponentController{TInput, TOutput, TUISettings, TComponent}.Output"/>.
+	/// </typeparam>
+	/// <typeparam name="TUISettings">
+	/// Tipo para establecer el proxy encargado de establecer los ajustes en el elemento de interfaz de usuario. Ha de
+	/// ser serializable, proveer de consturctor público y derivar de <see cref="UIComponentController{TInput, TOutput, TUISettings, TComponent}.UISettingsContainer"/>.
+	/// </typeparam>
+	/// <typeparam name="TComponent">
+	/// Tipo para establecer el elemento de interfaz de usuario de la controladora. Ha de implementar <see cref="UIComponent"/>.
+	/// </typeparam>
+	public abstract class UIComponentController<TInput, TOutput, TUISettings, TComponent>
         : UIElementController<TInput, TOutput, TUISettings, TComponent>
         , IUIComponentController
         where TInput      : UIComponentController<TInput, TOutput, TUISettings, TComponent>.Input
@@ -58,14 +68,7 @@ namespace Sifaw.Controllers
         [Serializable]
         public new abstract class Input : UIElementController<TInput, TOutput, TUISettings, TComponent>.Input
         {
-            #region Constructors
-
-            protected Input()
-                : base()
-            {
-            }
-
-            #endregion
+            /* Empty */
         }
 
         /// <summary>
@@ -74,20 +77,16 @@ namespace Sifaw.Controllers
         [Serializable]
         public new abstract class Output : UIElementController<TInput, TOutput, TUISettings, TComponent>.Output
         {
-            #region Constructors
-
-            protected Output()
-                : base()
-            {
-            }
-
-            #endregion
-        }
+			/* Empty */
+		}
 
         #endregion
 
         #region Settings
 
+		/// <summary>
+		/// Contenedor de ajustes de <see cref="UIComponentController{TInput, TOutput, TUISettings, TComponent}"/>.
+		/// </summary>
         [Serializable]
         public new class UISettingsContainer : UIElementController
             < TInput
@@ -95,14 +94,7 @@ namespace Sifaw.Controllers
             , TUISettings
             , TComponent>.UISettingsContainer
         {
-            #region Constructors
-
-            public UISettingsContainer()
-                : base()
-            {
-            }
-
-            #endregion
+            /* Empty */
         }
 
         #endregion
@@ -122,40 +114,60 @@ namespace Sifaw.Controllers
          */
 
         /// <summary>
-        /// Evento para comunicar que se debe mostrar un mensaje.
+        /// Se produce cuando la controladora solicita mostrar un mensaje al usuario.
         /// </summary>
         public event CLShowInfoEventHandler ShowMessage;
-        protected void OnShowMessage(CLShowInfoEventArgs e)
+
+		/// <summary>
+		/// Provoca el evento <see cref="ShowMessage"/>.
+		/// </summary>
+		/// <param name="e"><see cref="T:Sifaw.Controllers.CLShowInfoEventArgs"/> que contiene los datos del evento.</param>
+		protected void OnShowMessage(CLShowInfoEventArgs e)
         {
             if (ShowMessage != null)
                 ShowMessage(this, e);
         }
 
         /// <summary>
-        /// Evento para comunicar que se debe mostrar una advertencia.
+        /// Se produce cuando la controladora solicita mostrar una advertencia al usuario.
         /// </summary>
         public event CLShowWarningEventHandler ShowWarning;
-        protected void OnShowWarning(CLShowWarningEventArgs e)
+
+		/// <summary>
+		/// Provoca el evento <see cref="ShowWarning"/>.
+		/// </summary>
+		/// <param name="e"><see cref="T:Sifaw.Controllers.CLShowWarningEventArgs"/> que contiene los datos del evento.</param>
+		protected void OnShowWarning(CLShowWarningEventArgs e)
         {
             if (ShowWarning != null)
                 ShowWarning(this, e);
         }
 
         /// <summary>
-        /// Evento para comunicar un error.
+        /// Se produce cuando la controladora solicita mostrar un error al usuario.
         /// </summary>
         public event CLShowErrorEventHandler ShowError;
-        protected void OnShowError(CLShowErrorEventArgs e)
+
+		/// <summary>
+		/// Provoca el evento <see cref="ShowError"/>.
+		/// </summary>
+		/// <param name="e"><see cref="T:Sifaw.Controllers.CLShowErrorEventArgs"/> que contiene los datos del evento.</param>
+		protected void OnShowError(CLShowErrorEventArgs e)
         {
             if (ShowError != null)
                 ShowError(this, e);
         }
 
         /// <summary>
-        /// Evento para solicitar una confirmación para un mensaje dado.
+        /// Se produce cuando la controladora solicita una confirmación al usuario.
         /// </summary>
         public event CLConfirmMessageEventHandler ConfirmMessage;
-        protected void OnConfirmMessage(CLConfirmMessageEventArgs e)
+
+		/// <summary>
+		/// Provoca el evento <see cref="ConfirmMessage"/>.
+		/// </summary>
+		/// <param name="e"><see cref="T:Sifaw.Controllers.CLConfirmMessageEventArgs"/> que contiene los datos del evento.</param>
+		protected void OnConfirmMessage(CLConfirmMessageEventArgs e)
         {
             if (ConfirmMessage != null)
                 ConfirmMessage(this, e);
@@ -173,11 +185,20 @@ namespace Sifaw.Controllers
 
         #region Constructors
 
+		/// <summary>
+		/// Inicializa una nueva instancia de la clase <see cref="UIComponentController{TInput, TOutput, TUISettings, TComponent}"/>.
+		/// Establece como <see cref="AbstractUILinker{TUIElement}"/> aquel establecido por defecto a través de 
+		/// <see cref="AbstractUIProviderManager{TLinker}"/>.
+		/// </summary>
         protected UIComponentController()
             : base()
         {
         }
 
+		/// <summary>
+		/// Inicializa una nueva instancia de la clase <see cref="UIComponentController{TInput, TOutput, TUISettings, TComponent}"/>, 
+		/// estableciendo un valor en la propiedad <see cref="Sifaw.Controllers.UIElementController{TInput, TOutput, TUISettings, TUIElement}.Linker"/>.
+		/// </summary>
         protected UIComponentController(AbstractUILinker<TComponent> linker)
             : base(linker)
         {
@@ -187,6 +208,9 @@ namespace Sifaw.Controllers
 
         #region Public Methods
 
+		/// <summary>
+		/// Devuelve una referencia del <see cref="UIComponent"/> de la controladora.
+		/// </summary>
         public UIComponent GetUIComponent()
         {
             return UIElement as UIComponent;
@@ -196,6 +220,9 @@ namespace Sifaw.Controllers
 
         #region UIElement Methods
 
+		/// <summary>
+		/// Invoca al método sobrescirto <see cref="UIElementController{TInput, TOutput, TUISettings, TComponent}.OnAfterUIElementLoad()"/>.
+		/// </summary>
         protected override void OnAfterUIElementLoad()
         {
             base.OnAfterUIElementLoad();
@@ -203,6 +230,11 @@ namespace Sifaw.Controllers
             /* Subscripción a eventos del componente... */
         }
 
+		/// <summary>
+		/// Invoca al método sobrescirto <see cref="UIElementController{TInput, TOutput, TUISettings, TComponent}.OnApplyUISettings()"/> y
+		/// posteriormente aplica la configuración al elemento <see cref="UIElementController{TInput, TOutput, TUISettings, TView}.UIElement"/> 
+		/// del tipo <see cref="UIComponent"/>.
+		/// </summary>
         protected override void OnApplyUISettings()
         {
             base.OnApplyUISettings();
@@ -212,6 +244,10 @@ namespace Sifaw.Controllers
 
         #region Start Methods
 
+		/// <summary>
+		/// Invoca al método sobrescirto <see cref="Controller{TInput, TOutput}.OnBeforeStartController()"/> y
+		/// posteriormente se subscribe a eventos genéricos de componentes embebidos.
+		/// </summary>
         protected override void OnBeforeStartController()
         {
             base.OnBeforeStartController();

@@ -31,9 +31,19 @@ namespace Sifaw.Controllers
 	/// </summary>
 	public class CLThrowEventArgs : EventArgs
 	{
+		/// <summary>
+		/// Devuelve el tipo de la controladora que se va a iniciar.
+		/// </summary>
 		public readonly Type CLType = null;
+
+		/// <summary>
+		/// Devuelve los parámetros de inicio de la controladora que se va a iniciar.
+		/// </summary>
 		public readonly object[] Parameters = null;
 
+		/// <summary>
+		/// Inicializa una nueva instancia de la clase <see cref="CLThrowEventArgs"/>.
+		/// </summary>
 		public CLThrowEventArgs(Type clType, params object[] parameters)
 		{
 			CLType = clType;

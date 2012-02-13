@@ -28,6 +28,9 @@ namespace Sifaw.Controllers
 	/// </summary>
 	public class NotCanStartException : Exception
 	{
+		/// <summary>
+		/// Inicializa una nueva instancia de la clase <see cref="NotCanStartException"/>.
+		/// </summary>
 		public NotCanStartException()
 			: base("La controladora no cumple las condiciones necesarias para su inicio.")
 		{

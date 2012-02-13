@@ -27,7 +27,7 @@ namespace Sifaw.Controllers.Components.Filters
 {
 	/// <summary>
 	/// Controladora que permite realizar filtros sobre un campo booleanos, devolviendo como
-	/// filtro <see cref="true"/> o <see cref="false"/>.
+	/// filtro <c>true</c> o <c>false</c>.
 	/// </summary>
 	public class UIBoolFilterController : UIFilterBaseController
 		< bool

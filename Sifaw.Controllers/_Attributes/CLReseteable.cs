@@ -30,6 +30,9 @@ namespace Sifaw.Controllers
     {
         #region Fields
 
+		/// <summary>
+		/// Valor de reseteo.
+		/// </summary>
         protected object _value;
 
         #endregion
@@ -49,7 +52,7 @@ namespace Sifaw.Controllers
         #region Constructors
 
         /// <summary>
-        /// Atributo para identificar las variables de la controladora que se quieren resetear.
+		/// Inicializa una nueva instancia de la clase <see cref="CLReseteable"/>.
         /// </summary>
         /// <param name="value">Valor que se asignará a un campo al finalizar la controladora.</param>
         public CLReseteable(object value)

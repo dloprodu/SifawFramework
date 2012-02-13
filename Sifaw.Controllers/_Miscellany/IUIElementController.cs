@@ -18,7 +18,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Sifaw.Core;
 
 
 namespace Sifaw.Controllers
@@ -35,11 +34,12 @@ namespace Sifaw.Controllers
 		/// <summary>
 		/// Activa la vista de la controladora proporcionandole
 		/// el foco.
-		/// 
+		/// </summary>
+		/// <remarks>
 		/// Para invocar este método la controladora ha de estar iniciada, 
 		/// en otro caso, devolverá una excepcion.
 		/// </remarks>
-		/// <exception cref="NotValidCtrlStateException">La controladora no está iniciada.</exception>
+		/// <exception cref="NotValidStateException">La controladora no está iniciada.</exception>
 		void SetLikeActive();
 
 		#endregion

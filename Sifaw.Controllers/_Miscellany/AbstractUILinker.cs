@@ -35,6 +35,10 @@ namespace Sifaw.Controllers
 	public interface AbstractUILinker<TUIElement>
 		where TUIElement : UIElement
 	{
+		/// <summary>
+		/// Devuelve una representación concreta para el componente abstracto <c>TUIElement</c>.
+		/// </summary>
+		/// <param name="ui">Elemento de interfaz de usuario.</param>
 		void Get(out TUIElement ui);
 	}
 }

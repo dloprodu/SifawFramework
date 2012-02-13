@@ -30,11 +30,17 @@ namespace Sifaw.Core.Drawing
 	{
 		private const float SLIGHTDARK_FACTOR = 0.15F;
 
+		/// <summary>
+		/// Devuelve una representación levemente oscurecida del color especificado.
+		/// </summary>
 		public static Color SlightDark(this Color color)
 		{		
 			return color.SlightDark(SLIGHTDARK_FACTOR);
 		}
 
+		/// <summary>
+		/// Devuelve una representación oscurecida del color especificado en base a un factor.
+		/// </summary>
 		public static Color SlightDark(this Color color, float factor)
 		{
 			return Color.FromArgb((int)(color.R * (1 - factor)), (int)(color.G * (1 - factor)), (int)(color.B * (1 - factor)));
@@ -50,6 +56,11 @@ namespace Sifaw.Core.Drawing
 			return Color.FromArgb(color.A , y, y, y);
 		}
 
+		/// <summary>
+		/// Devuelve una representación <see cref="HSLColor"/> de color.
+		/// </summary>
+		/// <param name="color">Color que se va representar en formato HSL.</param>
+		/// <returns>Representación HSL.</returns>
 		public static HSLColor ToHSL(this Color color)
 		{
 			return new HSLColor(color.GetHue(), color.GetSaturation(), color.GetBrightness());

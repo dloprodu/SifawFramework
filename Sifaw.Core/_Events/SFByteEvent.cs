@@ -31,8 +31,14 @@ namespace Sifaw.Core
 	/// </summary>
 	public class SFByteEventArgs : EventArgs
 	{
+		/// <summary>
+		/// Devuelve un valor entero de 8 bits sin signo.
+		/// </summary>
 		public readonly byte Value;
 
+		/// <summary>
+		/// Inicializa una nueva instancia de la clase <see cref="SFByteEventArgs"/>, estableciendo un valor a la propiedad <see cref="Value"/>.
+		/// </summary>
         public SFByteEventArgs(byte value)
 			: base()
 		{

@@ -38,11 +38,17 @@ namespace Sifaw.Controllers.Components
 
         #region Properties
 
+		/// <summary>
+		/// Delegado del método que se ejecutara de fondo.
+		/// </summary>
         public BackgroundWorkerDelegate Method
         {
             get { return _method; }
         }
 
+		/// <summary>
+		/// Devuelve el resultado del método.
+		/// </summary>
         public object Result
         {
             get { return _result; }
@@ -53,7 +59,7 @@ namespace Sifaw.Controllers.Components
         #region Constructors
 
         /// <summary>
-        /// Construye el paquete de información para ejecutar un proceso pesado
+		/// Inicializa una nueva instancia de la clase <see cref="BackgroundWorkerPack"/>.
         /// </summary>
         /// <param name="method">Delegado que contiene el código a ejecutar.</param>
         /// <param name="arguments">Lista de argumentos que se necesitan para ejecutar el delegado.</param>
@@ -67,6 +73,10 @@ namespace Sifaw.Controllers.Components
 
         #region Methods
 
+		/// <summary>
+		/// Inica el proceso de fondo.
+		/// </summary>
+		/// <param name="communicator">Comunicador del proceso de fondo.</param>
         public void Start(BackgroundWorkerCommunicator communicator)
         {
             try

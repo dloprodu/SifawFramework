@@ -30,6 +30,9 @@ namespace Sifaw.Core.Drawing
 	/// </summary>
 	public struct HSLColor
 	{
+		/// <summary>
+		/// Representa un <see cref="HSLColor"/> vacío. Este campo es de solo lectura.
+		/// </summary>
 		public static readonly HSLColor Empty;
 
 		#region Fields
@@ -42,6 +45,9 @@ namespace Sifaw.Core.Drawing
 
 		#region Properties
 
+		/// <summary>
+		/// Obtiene o establece el tono del color.
+		/// </summary>
 		public float Hue
 		{
 			get	{ return h; }
@@ -51,6 +57,9 @@ namespace Sifaw.Core.Drawing
 			}
 		}
 
+		/// <summary>
+		/// Obtiene o establece la saturación del color.
+		/// </summary>
 		public float Saturation
 		{
 			get { return s; }
@@ -60,6 +69,9 @@ namespace Sifaw.Core.Drawing
 			}
 		}
 
+		/// <summary>
+		/// Obtiene o establece la luminosidad del color.
+		/// </summary>
 		public float Luminance
 		{
 			get	{ return l; }
@@ -69,6 +81,9 @@ namespace Sifaw.Core.Drawing
 			}
 		}
 
+		/// <summary>
+		/// Devuelve una representación RGB del color.
+		/// </summary>
 		public Color RGB
 		{
 			get { return ToRGB(Hue, Saturation, Luminance); }
@@ -83,6 +98,13 @@ namespace Sifaw.Core.Drawing
 			Empty = new HSLColor(0.0f, 0.0f, 0.0f);
 		}
 
+		/// <summary>
+		/// Inicializa una nueva instancia de la clase <see cref="HSLColor"/>, estableciendo los valores de 
+		/// las propiedades <see cref="Hue"/>, <see cref="Saturation"/> y <see cref="Luminance"/>.
+		/// </summary>
+		/// <param name="hue">Tono.</param>
+		/// <param name="saturation">Saturación</param>
+		/// <param name="luminance">Luminosidad.</param>
 		public HSLColor(float hue, float saturation, float luminance)
 		{
 			h = hue;
@@ -94,11 +116,17 @@ namespace Sifaw.Core.Drawing
 
 		#region Factory Methods
 
+		/// <summary>
+		/// Devuelve una representación RGB del color especificado.
+		/// </summary>
 		public static Color ToRGB(HSLColor color)
 		{
 			return ToRGB(color.Hue, color.Saturation, color.Luminance);
 		}
 
+		/// <summary>
+		/// Devuelve una representación RGB del color especificado.
+		/// </summary>
 		public static Color ToRGB(float hue, float saturacion, float luminosidad)
 		{
 			double r = 0, g = 0, b = 0;
@@ -155,11 +183,17 @@ namespace Sifaw.Core.Drawing
 			return Color.FromArgb((int)(255 * r), (int)(255 * g), (int)(255 * b));
 		}
 
+		/// <summary>
+		/// Devuelve una representación HSL del color especificado.
+		/// </summary>
 		public static HSLColor FromRGB(byte red, byte green, byte blue)
 		{
 			return FromRGB(Color.FromArgb(red, green, blue));
 		}
 
+		/// <summary>
+		/// Devuelve una representación HSL del color especificado.
+		/// </summary>
 		public static HSLColor FromRGB(Color color)
 		{
 			return new HSLColor(color.GetHue(), color.GetSaturation(), color.GetBrightness());

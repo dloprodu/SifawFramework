@@ -76,6 +76,7 @@
     <Compile Include="Utilities\UtilFile.cs" />
     <Compile Include="Utilities\UtilIO.cs" />
     <Compile Include="Utilities\UtilReflection.cs" />
+    <Compile Include="_Miscellany\RuleSeverities.cs" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">

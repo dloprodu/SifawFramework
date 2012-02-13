@@ -38,7 +38,7 @@ namespace Sifaw.Controllers.Components
         #region Properties
 
         /// <summary>
-        /// Indica si el usuario ha solicitado la cancelación del proceso
+        /// Devuelve un valor que indica si el usuario ha solicitado la cancelación del proceso
         /// </summary>
         public bool CancellationPending
         {
@@ -49,6 +49,10 @@ namespace Sifaw.Controllers.Components
 
         #region Constructors
 
+		/// <summary>
+		/// Inicializa una instancia de la clase <see cref="BackgroundWorkerCommunicator"/>.
+		/// </summary>
+		/// <param name="worker"><see cref="T:System.ComponentModel.BackgroundWorker"/> que usará el comunicador para informar el progreso.</param>
         public BackgroundWorkerCommunicator(System.ComponentModel.BackgroundWorker worker)
         {
             Worker = worker;

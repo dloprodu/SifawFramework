@@ -33,11 +33,17 @@ namespace Sifaw.Controllers
     /// </summary>
     public class CLShowWarningEventArgs : CLShowMessageEventArgs
     {
+		/// <summary>
+		/// Inicializa una nueva instancia de la clase <see cref="CLShowWarningEventArgs"/>, estableciendo un mensaje de advertencia.
+		/// </summary>
         public CLShowWarningEventArgs(string message)
             : base(MessagesLevels.Warning, message)
         {
         }
 
+		/// <summary>
+		/// Inicializa una nueva instancia de la clase <see cref="CLShowWarningEventArgs"/>, estableciendo un título y un mensaje de advertencia.
+		/// </summary>
         public CLShowWarningEventArgs(string title, string message)
             : base(MessagesLevels.Warning, title, message)
         {

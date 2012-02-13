@@ -35,11 +35,19 @@ namespace Sifaw.Controllers
 	/// </summary>
 	public class CLConfirmMessageEventArgs : SFStringEventArgs
 	{
+		/// <summary>
+		/// Obtiene o establece un valor que indica si se ha confirmado la acción expuesta por
+		/// por la propiedad <c>Value</c>.
+		/// </summary>
 		public bool Confirmed = false;
 
+		/// <summary>
+		/// Inicializa una nueva instancia de la clase <see cref="CLConfirmMessageEventArgs"/>, estableciendo la propiedad <see cref="Confirmed"/> en false.
+		/// </summary>
+		/// <param name="message">Mensaje que ha de confirmar el usuario.</param>
 		public CLConfirmMessageEventArgs(string message)
 			: base(message)
-		{
+		{			
 			Confirmed = false;
 		}
 	}

@@ -28,6 +28,9 @@ namespace Sifaw.Controllers
 	[Serializable]
 	public struct CLInformation
 	{
+		/// <summary>
+		/// Representa un <see cref="CLInformation"/> vacío.
+		/// </summary>
 		public readonly static CLInformation Empty;
 
 		/// <summary>
@@ -47,6 +50,11 @@ namespace Sifaw.Controllers
 			Empty = new CLInformation(string.Empty, string.Empty);
 		}
 
+		/// <summary>
+		/// Inicializa una instancia de la estructura <see cref="CLInformation"/>.
+		/// </summary>
+		/// <param name="name">Nombre de la controladora.</param>
+		/// <param name="description">Descripción de la controladora.</param>
 		public CLInformation(string name, string description)
 		{
 			Name = name;

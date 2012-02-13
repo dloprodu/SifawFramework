@@ -27,6 +27,9 @@ namespace Sifaw.Controllers
 	/// </summary>
 	public class NotValidStateException : Exception
 	{
+		/// <summary>
+		/// Inicializa una nueva instancia de la clase <see cref="NotValidStateException"/>.
+		/// </summary>
 		public NotValidStateException()
 			: base("La controladora se encuentra en un estado incorrecto.")
 		{

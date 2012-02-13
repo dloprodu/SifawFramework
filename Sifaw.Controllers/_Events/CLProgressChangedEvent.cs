@@ -33,13 +33,22 @@ namespace Sifaw.Controllers
 	/// </summary>
 	public class CLProgressChangedEventArgs : SFByteEventArgs
 	{
+		/// <summary>
+		/// Devuelve una cadena de texto con la descripción del progreso.
+		/// </summary>
         public readonly string Message;
 
+		/// <summary>
+		/// Inicializa una nueva instancia de la clase <see cref="CLProgressChangedEventArgs"/>, estableciendo un valor de progreso.
+		/// </summary>
         public CLProgressChangedEventArgs(byte progress)
             : this(progress, string.Empty)
         {
         }
 
+		/// <summary>
+		/// Inicializa una nueva instancia de la clase <see cref="CLProgressChangedEventArgs"/>, estableciendo un valor de progreso junto a una descripción.
+		/// </summary>
         public CLProgressChangedEventArgs(byte progress, string message)
 			: base(progress)
 		{
@@ -54,6 +63,6 @@ namespace Sifaw.Controllers
     /// Representa el método que controla un evento ProgressChanged.
 	/// </summary>
 	/// <param name="sender">Origen del evento.</param>
-	/// <param name="e"><see cref="CtrlFilterChangedEventArgs"/> que contiene los datos de eventos.</param>
+	/// <param name="e"><see cref="CLProgressChangedEventArgs"/> que contiene los datos de eventos.</param>
 	public delegate void CLProgressChangedEventHandler(object sender, CLProgressChangedEventArgs e);
 }

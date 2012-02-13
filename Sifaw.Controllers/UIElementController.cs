@@ -31,10 +31,32 @@ namespace Sifaw.Controllers
     /// Controladora base que provee de un patrón e infraestructura común para aquellas controladoras
     /// donde interviene un elemento de interfaz de usuario.
 	/// </summary>
-	/// <typeparam name="TInput">Tipo para establecer los parámetros de inicio de la controladora. Ha de ser serializable.</typeparam>
-	/// <typeparam name="TOutput">Tipo para establcer los parametros de retorno cuando finaliza la controladora. Ha de ser serializable.</typeparam>
-	/// <typeparam name="TUISettings">Tipo para establecer el proxy encargado de establecer los ajustes al elemento de interfaz de usuario.</typeparam>
-	/// <typeparam name="TUIElement">Tipo para establecer el elemento de UI de la controladora.</typeparam>
+	/// <remarks>
+	/// <para>
+	/// La controladora obtiene la instancia de su elemento de interfaz de usuario a través de la interfaz
+	/// <see cref="AbstractUILinker{TUIElement}"/>. Este enlazador de elementos de interfaz se le pasa a la 
+	/// controladora cuando es instanciada.
+	/// </para>
+	/// <para>
+	/// Los ajustes sobre el elemento de interfaz de usuario se establecen mediante la propiedad <see cref="UISettings"/> que actúa a
+	/// modo de proxy entre la controladora y el <see cref="UIElement"/>.
+	/// </para>
+	/// </remarks>
+	/// <typeparam name="TInput">
+	/// Tipo para establecer los parámetros de inicio de la controladora. Ha de ser serializable y 
+	/// derivar de <see cref="UIElementController{TInput, TOutput, TUISettings, TUIElement}.Input"/>.
+	/// </typeparam>
+	/// <typeparam name="TOutput">
+	/// Tipo para establcer los parametros de retorno cuando finaliza la controladora. Ha de ser serializable y 
+	/// derivar de <see cref="UIElementController{TInput, TOutput, TUISettings, TUIElement}.Output"/>.
+	/// </typeparam>
+	/// <typeparam name="TUISettings">
+	/// Tipo para establecer el proxy encargado de establecer los ajustes en el elemento de interfaz de usuario. Ha de
+	/// ser serializable, proveer de consturctor público y derivar de <see cref="UIElementController{TInput, TOutput, TUISettings, TUIElement}.UISettingsContainer"/>.
+	/// </typeparam>
+	/// <typeparam name="TUIElement">
+	/// Tipo para establecer el elemento de interfaz de usuario de la controladora. Ha de implementar <see cref="UIElement"/>.
+	/// </typeparam>
 	public abstract class UIElementController<TInput, TOutput, TUISettings, TUIElement> 
 		: Controller<TInput, TOutput>
 		, IUIElementController
@@ -52,14 +74,7 @@ namespace Sifaw.Controllers
 		[Serializable]
 		public new abstract class Input : Controller<TInput, TOutput>.Input
 		{
-			#region Constructors
-
-			protected Input()
-				: base()
-			{
-			}
-
-			#endregion
+			/* Empty */
 		}
 
 		/// <summary>
@@ -68,14 +83,7 @@ namespace Sifaw.Controllers
 		[Serializable]
 		public new abstract class Output : Controller<TInput, TOutput>.Output
 		{
-			#region Constructors
-
-			protected Output()
-				: base()
-			{
-			}
-
-			#endregion
+			/* Empty */
 		}
 
 		#endregion
@@ -98,7 +106,7 @@ namespace Sifaw.Controllers
 		/// </para>
 		/// <para>
 		/// En este contenedor se han de publicar aquellas propiedades
-		/// del <see cref="TUIElement"/> que se quiere que sean visibles desde fuera
+		/// del <see cref="UIElement"/> que se quiere que sean visibles desde fuera
 		/// de la controladora.
 		/// </para>
 		/// <para>
@@ -122,36 +130,54 @@ namespace Sifaw.Controllers
 
 			#region Properties
 
+			/// <summary>
+			/// Obtiene o establece una denominación al componente.
+			/// </summary>
 			public string Denomination
 			{
 				get { return _denomination; }
 				set { _denomination = value; }
 			}
 
+			/// <summary>
+			/// Obtiene o establece una descripción al componente.
+			/// </summary>
 			public string Description
 			{
 				get { return _description; }
 				set { _description = value; }
 			}
 
+			/// <summary>
+			/// Obtiene o establece el ancho mínimo del componente.
+			/// </summary>
 			public double MinWidth
 			{
 				get { return _minWidth; }
 				set { _minWidth = value; }
 			}
 
+			/// <summary>
+			/// Obtiene o establece el ancho máximo del componente.
+			/// </summary>
 			public double MaxWidth
 			{
 				get { return _maxWidth; }
 				set { _maxWidth = value; }
 			}
 
+			/// <summary>
+			/// Obtiene o establece el alto mínimo del componente.
+			/// </summary>
 			public double MinHeight
 			{
 				get { return _minHeight; }
 				set { _minHeight = value; }
 			}
 
+			/// <summary>
+			/// Obtiene o establece el alto máximo del componente.
+			/// </summary>
 			public double MaxHeight
 			{
 				get { return _maxHeight; }
@@ -162,6 +188,9 @@ namespace Sifaw.Controllers
 
 			#region Events
 
+			/// <summary>
+			/// Se produce cuando se llama al método <see cref="UIElementController{TInput, TOutput, TUISettings, TUIElement}.UISettingsContainer.Apply()"/>
+			/// </summary>
 			public event EventHandler ApplyUISettings = null;
             private void OnApplyUISettings(EventArgs e)
 			{
@@ -173,6 +202,9 @@ namespace Sifaw.Controllers
 
 			#region Constructors
 
+			/// <summary>
+			/// Inicializa una nueva instancia de <see cref="UIElementController{TInput, TOutput, TUISettings, TUIElement}.UISettingsContainer"/>.
+			/// </summary>
 			public UISettingsContainer()
 			{
 				this._denomination = string.Empty;
@@ -187,6 +219,9 @@ namespace Sifaw.Controllers
 
 			#region Public Methods
 
+			/// <summary>
+			/// Inicializa una nueva instancia de la clase <see cref="UIElementController{TInput, TOutput, TUISettings, TUIElement}.UISettingsContainer"/>.
+			/// </summary>
 			public void Apply()
 			{
                 OnApplyUISettings(EventArgs.Empty);
@@ -229,7 +264,7 @@ namespace Sifaw.Controllers
 		 */
 
 		/// <summary>
-		/// Evento lanzado cuando se carga la vista por primera vez.
+		/// Se produce cuando <see cref="UIElement"/> se ha cargado.
 		/// </summary>
 		public event EventHandler UIElementLoaded;
 		private void OnUIElementLoaded(EventArgs e)
@@ -375,7 +410,7 @@ namespace Sifaw.Controllers
 		#region Properties
 
 		/// <summary>
-		/// Devuelve el elemento UI de la controladora.
+		/// Devuelve el elemento de interfaz de usuario de la controladora.
 		/// </summary>
 		protected TUIElement UIElement
 		{
@@ -419,8 +454,8 @@ namespace Sifaw.Controllers
 		}
 
 		/// <summary>
-		/// Devuelve una instancia de <see cref="AbstractUIElementLinker"/> a través de la cual
-		/// se carga la vista.
+		/// Devuelve una instancia de <see cref="AbstractUILinker{TUIElement}"/> a través de la cual
+		/// se carga la propiedad <see cref="UIElement"/>.
 		/// </summary>
 		protected AbstractUILinker<TUIElement> Linker
 		{
@@ -431,11 +466,20 @@ namespace Sifaw.Controllers
 
 		#region Constructors
 
+		/// <summary>
+		/// Inicializa una nueva instancia de la clase <see cref="UIElementController{TInput, TOutput, TUISettings, TUIElement}"/>.
+		/// Establece como <see cref="AbstractUILinker{TUIElement}"/> aquel establecido por defecto a través de 
+		/// <see cref="AbstractUIProviderManager{TLinker}"/>.
+		/// </summary>
 		protected UIElementController()
 			: this((AbstractUILinker<TUIElement>)null)
 		{
 		}
 
+		/// <summary>
+		/// Inicializa una nueva instancia de la clase <see cref="UIElementController{TInput, TOutput, TUISettings, TUIElement}"/>, 
+		/// estableciendo un valor en la propiedad <see cref="Linker"/>.
+		/// </summary>
 		protected UIElementController(AbstractUILinker<TUIElement> linker)
 			: base()
 		{
@@ -454,7 +498,7 @@ namespace Sifaw.Controllers
         /// Para invocar este método la controladora ha de estar iniciada, 
         /// en otro caso, devolverá una excepcion.
         /// </remarks>
-        /// <exception cref="NotValidCtrlStateException">La controladora no está iniciada.</exception>
+		/// <exception cref="NotValidStateException">La controladora no está iniciada.</exception>
         public void SetLikeActive()
         {
             CheckState(CLStates.Started);
@@ -465,6 +509,11 @@ namespace Sifaw.Controllers
 
         #region Start Methods
 
+		/// <summary>
+		/// Invoca al método sobrescirto <see cref="Controller{TInput, TOutput}.OnAfterStartController()"/>
+		/// y posteriormente al método <see cref="UISettingsContainer.Apply()"/> del contenedor de ajustes
+		/// <see cref="UISettings"/> applicando la configuración sobre <see cref="UIElement"/>.
+		/// </summary>
         protected override void OnAfterStartController()
         {
             base.OnAfterStartController();
@@ -477,6 +526,10 @@ namespace Sifaw.Controllers
 
 		#region Finish Methods
 
+		/// <summary>
+		/// Invoca al método sobrescirto <see cref="Controller{TInput, TOutput}.OnBeforeFinishControllers(List{IController})"/>
+		/// y posteriormente al método <see cref="Sifaw.Views.UIElement.Reset()"/> de <see cref="UIElement"/>.
+		/// </summary>
 		protected override void OnBeforeFinishControllers(List<IController> children)
 		{
 			base.OnBeforeFinishControllers(children);
@@ -484,9 +537,13 @@ namespace Sifaw.Controllers
 			UIElement.Reset();
 		}
 
+		/// <summary>
+		/// Invoca al método sobrescirto <see cref="Controller{TInput, TOutput}.OnBeforeResetFields(List{FieldInfo})"/>.
+		/// </summary>
 		protected override void OnBeforeResetFields(List<FieldInfo> fields)
 		{
 			base.OnBeforeResetFields(fields);
+			
 			// No se permite mas de un elemento de UI por
 			// controladora
 		}

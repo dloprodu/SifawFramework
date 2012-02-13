@@ -32,7 +32,7 @@ namespace Sifaw.Core
 		#region Rule structure
 
 		/// <summary>
-		/// Stores details about a specific broken business rule.
+		/// Almacena información sobre una regla rota específica.
 		/// </summary>
 		[Serializable()]
 		public struct Rule : IEquatable<Rule>
@@ -41,7 +41,7 @@ namespace Sifaw.Core
 
 			string _name;
 			string _description;
-			RuleSeverity _severity;
+			RuleSeverities _severity;
 
 			#endregion
 
@@ -95,7 +95,7 @@ namespace Sifaw.Core
 			/// <remarks>
 			/// </remarks>
 			/// <value>The severity level of the rule.</value>
-			public RuleSeverity Severity
+			public RuleSeverities Severity
 			{
 				get { return _severity; }
 				set
@@ -110,7 +110,7 @@ namespace Sifaw.Core
 
 			#region Constructors
 
-			internal Rule(string name, string description, RuleSeverity severity)
+			internal Rule(string name, string description, RuleSeverities severity)
 			{
 				_name = name;
 				_description = description;
@@ -178,24 +178,33 @@ namespace Sifaw.Core
 			#region Properties
 
 			/// <summary>
-			/// Returns a <see cref="T:Sifaw.BrokenRules.Rule" /> object
-			/// containing details about a specific broken business rule.
+			/// Devuelve el objeto <see cref="T:Sifaw.BrokenRules.Rule"/> 
+			/// que contiene el detalle sobre la regla especificada.
 			/// </summary>
 			public Rule this[int index]
 			{
 				get { return (Rule)List[index]; }
 			}
 
+			/// <summary>
+			/// Devuelve el número de reglas rotas.
+			/// </summary>
 			public int ErrorCount
 			{
 				get { return _errorCount; }
 			}
 
+			/// <summary>
+			/// Devuelve el número de reglas rotas de nivel de advertencia.
+			/// </summary>
 			public int WarningCount
 			{
 				get { return _warningCount; }
 			}
 
+			/// <summary>
+			/// Devuelve el número de reglas rotas de nivel informativas.
+			/// </summary>
 			public int InformationCount
 			{
 				get { return _infoCount; }
@@ -226,7 +235,7 @@ namespace Sifaw.Core
 
 			#region Public Methods / internos
 
-			internal void Add(string name, string description, RuleSeverity severity)
+			internal void Add(string name, string description, RuleSeverities severity)
 			{			
 				Remove(name);
 				Rule rule = new Rule(name, description, severity);
@@ -264,7 +273,7 @@ namespace Sifaw.Core
 			/// include in the result.</param>
 			/// <returns>The text of all broken rule descriptions
 			/// matching the specified severtiy.</returns>
-			public string ToString(RuleSeverity severity)
+			public string ToString(RuleSeverities severity)
 			{
 				StringBuilder result = new StringBuilder();
 
@@ -294,22 +303,22 @@ namespace Sifaw.Core
 				return description;
 			}
 
-			public string[] ToArray(RuleSeverity severity)
+			public string[] ToArray(RuleSeverities severity)
 			{
 				string[] description = null;
 				int count = 0;
 
 				switch (severity)
 				{
-					case RuleSeverity.Error:
+					case RuleSeverities.Error:
 						count = this.ErrorCount;
 						break;
 
-					case RuleSeverity.Warning:
+					case RuleSeverities.Warning:
 						count = this.WarningCount;
 						break;
 
-					case RuleSeverity.Information:
+					case RuleSeverities.Information:
 						count = this.InformationCount;
 						break;
 				}
@@ -334,15 +343,15 @@ namespace Sifaw.Core
 			{
 				switch (rule.Severity)
 				{
-					case RuleSeverity.Error:
+					case RuleSeverities.Error:
 						_errorCount++;
 						break;
 
-					case RuleSeverity.Warning:
+					case RuleSeverities.Warning:
 						_warningCount++;
 						break;
 
-					case RuleSeverity.Information:
+					case RuleSeverities.Information:
 						_infoCount++;
 						break;
 				}
@@ -352,15 +361,15 @@ namespace Sifaw.Core
 			{
 				switch (rule.Severity)
 				{
-					case RuleSeverity.Error:
+					case RuleSeverities.Error:
 						_errorCount--;
 						break;
 
-					case RuleSeverity.Warning:
+					case RuleSeverities.Warning:
 						_warningCount--;
 						break;
 
-					case RuleSeverity.Information:
+					case RuleSeverities.Information:
 						_infoCount--;
 						break;
 				}
@@ -399,7 +408,7 @@ namespace Sifaw.Core
 
 		#region Fields
 
-		RulesCollection _rules = new RulesCollection();
+		private RulesCollection _rules = new RulesCollection();
 
 		#endregion
 
@@ -451,12 +460,12 @@ namespace Sifaw.Core
 		/// <param name="Rule">The name of the business rule.</param>
 		/// <param name="Description">The description of the business rule.</param>
 		/// <param name="IsBroken">True if the value is broken, False if it is not broken.</param>
-		public void Assert(string name, string description, bool isBroken)
+		public void Assert(string rule, string description, bool isBroken)
 		{
 			if (isBroken)
-				_rules.Add(name, description, RuleSeverity.Error);
+				_rules.Add(rule, description, RuleSeverities.Error);
 			else
-				_rules.Remove(name);
+				_rules.Remove(rule);
 		}
 
 		/// <summary>
@@ -472,13 +481,13 @@ namespace Sifaw.Core
 		/// <param name="Rule">The name of the business rule.</param>
 		/// <param name="Description">The description of the business rule.</param>
 		/// <param name="IsBroken">True if the value is broken, False if it is not broken.</param>
-		/// <param name="RuleSeverity">It specifies the severity level.</param>
-		public void Assert(string name, string description, bool isBroken, RuleSeverity severity)
+		/// <param name="RuleSeverities">It specifies the severity level.</param>
+		public void Assert(string rule, string description, bool isBroken, RuleSeverities severity)
 		{
 			if (isBroken)
-				_rules.Add(name, description, severity);
+				_rules.Add(rule, description, severity);
 			else
-				_rules.Remove(name);
+				_rules.Remove(rule);
 		}
 
 		/// <summary>
@@ -487,48 +496,13 @@ namespace Sifaw.Core
 		/// </summary>
 		/// <param name="Rule">The name of the rule to check.</param>
 		/// <returns>A value indicating whether the rule is currently broken.</returns>
-		public bool IsBroken(string name)
+		public bool IsBroken(string rule)
 		{
 			// Sólo se interpretarán como rotas aquellas reglas con gravedad tipo Error.
-			int index = _rules.IndexOf(name);
-			return ((index > -1) && (_rules[index].Severity == RuleSeverity.Error));
+			int index = _rules.IndexOf(rule);
+			return ((index > -1) && (_rules[index].Severity == RuleSeverities.Error));
 		}
 
 		#endregion
 	}
-
-	#region Miscelanea
-
-	/// <summary>
-	/// Values for validation rule severities.
-	/// </summary>
-	public enum RuleSeverity
-	{
-		/// <summary>
-		/// Represents a serious
-		/// business rule violation that
-		/// should cause an object to
-		/// be considered invalid.
-		/// </summary>
-		Error,
-
-		/// <summary>
-		/// Represents a business rule
-		/// violation that should be
-		/// displayed to the user, but which
-		/// should not make an object be
-		/// invalid.
-		/// </summary>
-		Warning,
-
-		/// <summary>
-		/// Represents a business rule
-		/// result that should be displayed
-		/// to the user, but which is less
-		/// severe than a warning.
-		/// </summary>
-		Information
-	}
-
-	#endregion
 }

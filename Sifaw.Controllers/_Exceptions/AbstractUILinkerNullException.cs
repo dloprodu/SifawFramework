@@ -28,6 +28,9 @@ namespace Sifaw.Controllers
 	/// </summary>
 	public class AbstractUILinkerNullException : Exception
 	{
+		/// <summary>
+		/// Inicializa una nueva instancia de la clase <see cref="AbstractUILinkerNullException"/>.
+		/// </summary>
 		public AbstractUILinkerNullException()
 			: base("El AbstractUILinker no ha devuelto una instancia válida para el elemento de la interfaz de usuario.")
 		{

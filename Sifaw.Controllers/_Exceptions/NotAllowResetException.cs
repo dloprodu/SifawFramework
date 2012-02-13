@@ -27,6 +27,9 @@ namespace Sifaw.Controllers
 	/// </summary>
 	public class NotAllowResetException : Exception
 	{
+		/// <summary>
+		/// Inicializa una nueva instancia de la clase <see cref="NotAllowResetException"/>.
+		/// </summary>
 		public NotAllowResetException()
 			: base("La controladora no soporta el reinicio.")
 		{

@@ -31,8 +31,15 @@ namespace Sifaw.Core
 	/// </summary>
 	public class SFStringEventArgs : EventArgs
 	{
+		/// <summary>
+		/// Devuelve una cadena de texto.
+		/// </summary>
 		public readonly string Value = string.Empty;
 
+		/// <summary>
+		/// Inicializa una nueva instancia de la clase <see cref="SFStringEventArgs"/>, estableciendo un valor a la propiedad <see cref="Value"/>.
+		/// </summary>
+		/// <param name="value">Cadena de texto.</param>
 		public SFStringEventArgs(string value)
 			: base()
 		{

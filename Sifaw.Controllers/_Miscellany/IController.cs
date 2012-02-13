@@ -28,7 +28,7 @@ namespace Sifaw.Controllers
 	/// crear un patrón generalizado que han de cumplir las controladoras
 	/// del framework.
 	/// </summary>
-	public interface IController
+	public interface IController 
 	{
 		#region Properties
 

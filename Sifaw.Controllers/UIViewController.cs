@@ -8,8 +8,28 @@
  * Historial de versiones:
  *   - 14/12/2011: Creación de la clase.
  * ===============================================================================================
+ * 
  * Observaciones:
  * 
+ * Temas a considerar:
+ *  1. Gestionar pila de vistas activas. <=> ¿Controladora ppal?
+ *  
+ *  2. Mecanismo para asegurar que las vistas (UI Controls) se abren y cierran en el hilo
+ *     principal. Por si un subropceso lanza una UIViewController.
+ *      • Implementar un ViewDispatcher que proporciones servicios para administrar mensajes 
+ *        de las vistas en el proceso principal.
+ *        
+ *	3. ¿Como gestionar lo vistas modales, empotradas? 
+ *	   ¿Seguir el esquema de 3 niveles (1º ppal, 2º sub, 3º edición)?
+ *	    • En eKade ...
+ *	      If TopLevel 
+ *	         if Modal -> Cuadro de dialogo que no permite la interacción con otra vista
+ *	            Show(vistaActiva)
+ *	         else -> Si no es modal lo obligamos
+ *	            ShowDialog(vistaActiva)
+ *	      else -> No es un form de nivel superior
+ *	         Show(vistaActiva)
+ *	    • En Sifaw ...
  */
 
 
@@ -27,49 +47,36 @@ using Sifaw.Core;
 
 namespace Sifaw.Controllers
 {
-    /*
-     * Temas a considerar:
-     *  1. Gestionar pila de vistas activas. <=> ¿Controladora ppal?
-     *  
-     *  2. Mecanismo para asegurar que las vistas (UI Controls) se abren y cierran en el hilo
-     *     principal. Por si un subropceso lanza una UIViewController.
-     *      • Implementar un ViewDispatcher que proporciones servicios para administrar mensajes 
-     *        de las vistas en el proceso principal.
-     *        
-     *	3. ¿Como gestionar lo vistas modales, empotradas? 
-     *	   ¿Seguir el esquema de 3 niveles (1º ppal, 2º sub, 3º edición)?
-     *	    • En eKade ...
-     *	      If TopLevel 
-     *	         if Modal -> Cuadro de dialogo que no permite la interacción con otra vista
-     *	            Show(vistaActiva)
-     *	         else -> Si no es modal lo obligamos
-     *	            ShowDialog(vistaActiva)
-     *	      else -> No es un form de nivel superior
-     *	         Show(vistaActiva)
-     *	    • En Sifaw ...
-     */
-
-
     /// <summary>
     /// Controladora base que provee de un patrón e infraestructura común a aquellas controladoras
     /// donde intervienen una vista.
     /// </summary>
     /// <remarks>
     /// <para>
-    /// Un <see cref="UIViewController"/> implementa un caso de uso donde interviene
-    /// una vista. La vistas solo deben de actuar a modo de contenedor de componentes <see cref="UIComponentController"/>
+	/// La vistas solo deben de actuar a modo de contenedor de componentes <see cref="UIComponentController{TInput, TOutput, TUISettings, TComponent}"/>
     /// </para>
     /// <para>
-    /// Esto implica que un <see cref="UIViewController"/> actúa a modo de shell
-    /// sobre uno o varios componentes <see cref="UIComponentController"/> que se comunican entre si para
-    /// componer un caso de uso mas complejo.
+	/// Esto implica que un <see cref="UIViewController{TInput, TOutput, TUISettings, TView}"/> actúa a modo de shell
+	/// sobre uno o varios componentes <see cref="UIComponentController{TInput, TOutput, TUISettings, TComponent}"/> que se comunican entre si para
+    /// dar forma a un componente mas complejo.
     /// </para>
     /// </remarks>
-    /// <typeparam name="TInput">Tipo para establecer los parámetros de inicio de la controladora.</typeparam>
-    /// <typeparam name="TOutput">Tipo para establcer los parametros de retorno cuando finaliza la controladora.</typeparam>
-    /// <typeparam name="TUISettings">Tipo para establecer el proxy encargado de establecer los ajustes al elemento de interfaz de usuario.</typeparam>
-    /// <typeparam name="TView">Tipo de la vista del controlador.</typeparam>
-    public abstract class UIViewController<TInput, TOutput, TUISettings, TView>
+	/// <typeparam name="TInput">
+	/// Tipo para establecer los parámetros de inicio de la controladora. Ha de ser serializable y 
+	/// derivar de <see cref="UIViewController{TInput, TOutput, TUISettings, TView}.Input"/>.
+	/// </typeparam>
+	/// <typeparam name="TOutput">
+	/// Tipo para establcer los parametros de retorno cuando finaliza la controladora. Ha de ser serializable y 
+	/// derivar de <see cref="UIViewController{TInput, TOutput, TUISettings, TView}.Output"/>.
+	/// </typeparam>
+	/// <typeparam name="TUISettings">
+	/// Tipo para establecer el proxy encargado de establecer los ajustes en el elemento de interfaz de usuario. Ha de
+	/// ser serializable, proveer de consturctor público y derivar de <see cref="UIViewController{TInput, TOutput, TUISettings, TView}.UISettingsContainer"/>.
+	/// </typeparam>
+	/// <typeparam name="TView">
+	/// Tipo para establecer el elemento de interfaz de usuario de la controladora. Ha de implementar <see cref="UIView"/>.
+	/// </typeparam>
+	public abstract class UIViewController<TInput, TOutput, TUISettings, TView>
         : UIElementController<TInput, TOutput, TUISettings, TView>
         , IUIViewController
         where TInput      : UIViewController<TInput, TOutput, TUISettings, TView>.Input
@@ -107,11 +114,17 @@ namespace Sifaw.Controllers
 
             #region Constructors
 
+			/// <summary>
+			/// Inicializa una nueva instancia de <see cref="Input"/>, estableciendo la propiedad <see cref="ShowView"/> a <c>true</c>.
+			/// </summary>
             protected Input()
                 : this(true)
             {
             }
 
+			/// <summary>
+			/// Inicializa una nueva instancia de <see cref="Input"/>, estableciendo un valor a la propiedad <see cref="ShowView"/>.
+			/// </summary>
             protected Input(bool showView)
                 : base()
             {
@@ -127,20 +140,16 @@ namespace Sifaw.Controllers
         [Serializable]
         public new abstract class Output : UIElementController<TInput, TOutput, TUISettings, TView>.Output
         {
-            #region Constructors
-
-            protected Output()
-                : base()
-            {
-            }
-
-            #endregion
+            /* Empty */
         }
 
         #endregion
 
         #region Settings
 
+		/// <summary>
+		/// Contenedor de ajustes de <see cref="UIViewController{TInput, TOutput, TUISettings, TView}"/>.
+		/// </summary>
         [Serializable]
         public new class UISettingsContainer : UIElementController<TInput, TOutput, TUISettings, TView>.UISettingsContainer
         {
@@ -155,24 +164,37 @@ namespace Sifaw.Controllers
 
             #region Properties
 
+			/// <summary>
+			/// Obtiene o establece una cabecera a la vista.
+			/// </summary>
             public string Header
             {
                 get { return _header; }
                 set { _header = value; }
             }
 
+			/// <summary>
+			/// Obtiene o establece el ancho de la vista.
+			/// </summary>
             public double Width
             {
                 get { return _width; }
                 set { _width = value; }
             }
 
+			/// <summary>
+			/// Obtiene o establece el alto de la vista.
+			/// </summary>
             public double Height
             {
                 get { return _height; }
                 set { _height = value; }
             }
 
+			/// <summary>
+			/// Obtiene o establece un valor que indica si la vista
+			/// se ajusta a su contenido.
+			/// </summary>
             public bool SizeToContent
             {
                 get { return _sizeToContent; }
@@ -183,6 +205,9 @@ namespace Sifaw.Controllers
 
             #region Constructors
 
+			/// <summary>
+			/// Inicializa una nueva instancia de la clase <see cref="UIViewController{TInput, TOutput, TUISettings, TView}.UISettingsContainer"/>.
+			/// </summary>
             public UISettingsContainer()
                 : base()
             {
@@ -299,11 +324,20 @@ namespace Sifaw.Controllers
 
         #region Constructors
 
+		/// <summary>
+		/// Inicializa una nueva instancia de la clase <see cref="UIViewController{TInput, TOutput, TUISettings, TView}"/>.
+		/// Establece como <see cref="AbstractUILinker{TUIElement}"/> aquel establecido por defecto a través de 
+		/// <see cref="AbstractUIProviderManager{TLinker}"/>.
+		/// </summary>
         protected UIViewController()
             : base()
         {
         }
 
+		/// <summary>
+		/// Inicializa una nueva instancia de la clase <see cref="UIViewController{TInput, TOutput, TUISettings, TView}"/>, 
+		/// estableciendo un valor en la propiedad <see cref="Sifaw.Controllers.UIElementController{TInput, TOutput, TUISettings, TUIElement}.Linker"/>.
+		/// </summary>
         protected UIViewController(AbstractUILinker<TView> linker)
             : base(linker)
         {
@@ -331,6 +365,10 @@ namespace Sifaw.Controllers
 
         #region UIElement Methods
 
+		/// <summary>
+		/// Invoca al método sobrescirto <see cref="UIElementController{TInput, TOutput, TUISettings, TView}.OnAfterUIElementLoad()"/> y
+		/// posteriormente se subscribe a eventos de <see cref="UIView"/>.
+		/// </summary>
         protected override void OnAfterUIElementLoad()
         {
             base.OnAfterUIElementLoad();
@@ -342,6 +380,11 @@ namespace Sifaw.Controllers
             UIElement.AfterClose += new EventHandler(UIElement_AfterClose);
         }
 
+		/// <summary>
+		/// Invoca al método sobrescirto <see cref="UIElementController{TInput, TOutput, TUISettings, TView}.OnApplyUISettings()"/> y
+		/// posteriormente aplica la configuración al elemento <see cref="UIElementController{TInput, TOutput, TUISettings, TView}.UIElement"/> 
+		/// del tipo <see cref="UIView"/>.
+		/// </summary>
         protected override void OnApplyUISettings()
         {
             base.OnApplyUISettings();
@@ -361,6 +404,10 @@ namespace Sifaw.Controllers
 
         #region Start Methods
 
+		/// <summary>
+		/// Invoca al método sobrescirto <see cref="Controller{TInput, TOutput}.OnBeforeStartController()"/> y
+		/// posteriormente se subscribe a eventos genéricos de componentes embebidos.
+		/// </summary>
         protected override void OnBeforeStartController()
         {
             base.OnBeforeStartController();
@@ -380,6 +427,11 @@ namespace Sifaw.Controllers
             }
         }
 
+		/// <summary>
+		/// Invoca al método sobrescirto <see cref="Controller{TInput, TOutput}.OnAfterStartController()"/> y
+		/// posteriormente muestra la vistá si <see cref="UIViewController{TInput, TOutput, TUISettings, TView}.Input.ShowView"/> 
+		/// es <c>true</c>.
+		/// </summary>
         protected override void OnAfterStartController()
         {
             base.OnAfterStartController();
@@ -392,6 +444,10 @@ namespace Sifaw.Controllers
 
         #region Finish Methods
 
+		/// <summary>
+		/// Invoca al método sobrescirto <see cref="Controller{TInput, TOutput}.OnBeforeFinishControllers(List{IController})"/> y
+		/// posteriormente, si no ha sido cerrada ya, cierra la vista.
+		/// </summary>
         protected override void OnBeforeFinishControllers(List<IController> children)
         {
             base.OnBeforeFinishControllers(children);

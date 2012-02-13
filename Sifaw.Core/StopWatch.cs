@@ -26,18 +26,27 @@ namespace Sifaw.Core
 	{
 		#region Fields
 
-		long startCount = 0;
+		private long startCount = 0;
 
 		#endregion
 
 		#region Factory Methods
 
+		/// <summary>
+		/// Recupera el valor actual del contador de rendimiento de alta resolución.
+		/// </summary>
 		[System.Runtime.InteropServices.DllImport("Kernel32.dll")]
 		public static extern bool QueryPerformanceCounter(out long perfcount);
 
+		/// <summary>
+		/// Recupera la frecuencia del contador de rendimiento de alta resolución, si existe. La frecuencia no puede cambiar mientras el sistema está funcionando.
+		/// </summary>
 		[System.Runtime.InteropServices.DllImport("Kernel32.dll")]
 		public static extern bool QueryPerformanceFrequency(out long freq);
 
+		/// <summary>
+		/// Recupera el valor actual del contador de rendimiento de alta resolución.
+		/// </summary>
 		public static long QueryPerformanceCounter()
 		{
 			long perfcount;
@@ -45,6 +54,10 @@ namespace Sifaw.Core
 			return perfcount;
 		}
 
+		/// <summary>
+		/// Recupera la frecuencia del contador de rendimiento de alta resolución, si existe.
+		/// La frecuencia no puede cambiar mientras el sistema está funcionando.
+		/// </summary>
 		public static long QueryPerformanceFrequency()
 		{
 			long freq;
@@ -56,11 +69,17 @@ namespace Sifaw.Core
 
 		#region Public Methods
 
+		/// <summary>
+		/// Inicializa una nueva medición.
+		/// </summary>
 		public void StartCounter()
 		{
 			startCount = QueryPerformanceCounter();
 		}
 
+		/// <summary>
+		/// Obtiene los segundos pasados desde el inicio de la medición.
+		/// </summary>
 		public double GetElapsedSeconds()
 		{
 			long stopCount = QueryPerformanceCounter();

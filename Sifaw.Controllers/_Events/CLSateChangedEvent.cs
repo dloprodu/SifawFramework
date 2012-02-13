@@ -31,8 +31,14 @@ namespace Sifaw.Controllers
 	/// </summary>
 	public class CLSateChangedEventArgs : EventArgs
 	{
+		/// <summary>
+		/// Devuelve el estado de la controladora.
+		/// </summary>
 		public readonly CLStates State;
 
+		/// <summary>
+		/// Inicializa una nueva instancia de la clase <see cref="CLSateChangedEventArgs"/>, estableciendo un valor en la propiedad <see cref="State"/>.
+		/// </summary>
 		public CLSateChangedEventArgs(CLStates state)
 			: base()
 		{

@@ -31,8 +31,15 @@ namespace Sifaw.Core
 	/// </summary>
 	public class SFIntEventArgs : EventArgs
 	{
+		/// <summary>
+		/// Devuelve un valor entero de 32 bits con signo.
+		/// </summary>
 		public readonly int Value;
 
+		/// <summary>
+		/// Inicializa una nueva instancia de la clase <see cref="SFIntEventArgs"/>, estableciendo un valor a la propiedad <see cref="Value"/>.
+		/// </summary>
+		/// <param name="value">Entero de 32 bits.</param>
 		public SFIntEventArgs(int value)
 			: base()
 		{

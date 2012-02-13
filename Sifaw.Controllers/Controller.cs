@@ -31,7 +31,7 @@ namespace Sifaw.Controllers
 	/// </summary>
     /// <remarks>
     /// <para>
-    /// Las controladoras <see cref="Controller"/> implementan un ciclo de vida que permiten su inicio,
+	/// Las controladoras <see cref="Controller{TInput, TOutput}"/> implementan un ciclo de vida que permiten su inicio,
     /// reseteo o finalización asi como de un sistema de chequeo de reglas que permite definir en que estados se permite iniciar
     /// o reiniciar una controladora.
     /// </para>
@@ -40,21 +40,21 @@ namespace Sifaw.Controllers
     /// de un estado a otro.
     /// </para>
     /// <para>
-    /// Las controladoras <see cref="Controller<TInput, TOutput>"/> implementa un patrón 'Before / After Action' que ayuda a las controladoras
+	/// Las controladoras <see cref="Controller{TInput, TOutput}"/> implementa un patrón 'Before / After Action' que ayuda a las controladoras
     /// derivadas completar funcionalidad en cualquier punto del ciclo de vida de la controladora.
     /// </para>
     /// <para>
-    /// Además las controladoras han de definir los parametros que recibirán como entrada cuando son iniciadas (<see cref="TInput"/>)
-    /// y aquellos que retornarán cuando finalicen (<see cref="TOutput"/>).
+	/// Además las controladoras han de definir los parametros que recibirán como entrada cuando son iniciadas (<see cref="Controller{TInput, TOutput}.Input"/>)
+	/// y aquellos que retornarán cuando finalicen (<see cref="Controller{TInput, TOutput}.Output"/>).
     /// </para>
     /// </remarks>
 	/// <typeparam name="TInput">
     /// Tipo para establecer los parámetros de inicio de la controladora. Ha de ser serializable y 
-    /// derivar de <see cref="Controller<TInput, TOutput>.Input"/>.
+	/// derivar de <see cref="Controller{TInput, TOutput}.Input"/>.
     /// </typeparam>
 	/// <typeparam name="TOutput">
     /// Tipo para establcer los parametros de retorno cuando finaliza la controladora. Ha de ser serializable y 
-    /// derivar de <see cref="Controller<TInput, TOutput>.Output"/>.
+	/// derivar de <see cref="Controller{TInput, TOutput}.Output"/>.
     /// </typeparam>
 	public abstract class Controller<TInput, TOutput>
 		: IController
@@ -64,7 +64,14 @@ namespace Sifaw.Controllers
     {
         #region Constants
 
+		/// <summary>
+		/// Identificador para las reglas que se han de chequedar cuando se inicia la controladora.
+		/// </summary>
         protected const string BR_START = "StartRules";
+
+		/// <summary>
+		/// Identificador para las reglas que se han de chequear cuando se instancia la controladora.
+		/// </summary>
 		protected const string BR_INSTANCE = "InstanceRules";
 
 		#endregion
@@ -79,6 +86,9 @@ namespace Sifaw.Controllers
 		{
 			#region ICloneable Members
 
+			/// <summary>
+			/// Devuelve una copia de los parámetros de entrada de la controladora.
+			/// </summary>
 			public object Clone()
 			{
 				return UtilIO.Clone<TInput>(this as TInput);
@@ -95,6 +105,9 @@ namespace Sifaw.Controllers
 		{
 			#region ICloneable Members
 
+			/// <summary>
+			/// Devuelve una copia de los parámetros de retorno de la controladora.
+			/// </summary>
 			public object Clone()
 			{
 				return UtilIO.Clone<TOutput>(this as TOutput);
@@ -114,7 +127,9 @@ namespace Sifaw.Controllers
 		// Indica el estado de la controladora.
 		private CLStates _state;
 
-		// Información básica de la controladora.
+		/// <summary>
+		/// Información básica de la controladora.
+		/// </summary>
 		protected CLInformation _information;
 
 		// Conjunto de reglas rotas para las precondiciones de la controladora.
@@ -134,7 +149,7 @@ namespace Sifaw.Controllers
 		/// No llegaa entrar en un bucle de finalización porque en la segunda llamda ya sus controladoras hijas están finalizadas.
 		/// </para>
 		/// <para>
-		/// Con el flag <see cref="isFinish"/> ignoramos esta posible segunda llamada.
+		/// Con el flag <see cref="isFinishing"/> ignoramos esta posible segunda llamada.
 		/// </para>
 		/// </remarks>
 		private bool isFinishing = false;
@@ -159,7 +174,7 @@ namespace Sifaw.Controllers
 		 */
 
 		/// <summary>
-		/// Evento para cominicar un cambio de estado.
+		/// Se produce cuando cambia el valor de la propiedad <see cref="State"/>.
 		/// </summary>
 		public event CLStateChangedEventHandler StateChanged;
 		private void OnStateChanged(CLSateChangedEventArgs e)
@@ -169,8 +184,7 @@ namespace Sifaw.Controllers
 		}
 
 		/// <summary>
-		/// Evento para indicar que se está iniciando una controladora. 
-		/// Se puede indicar que se cancele el proceso de inicio.
+		/// Se produce cuando se va a iniciar la controladora.
 		/// </summary>
 		public event SFCancelEventHandler Starting;
 		private void OnStarting(SFCancelEventArgs e)
@@ -180,8 +194,7 @@ namespace Sifaw.Controllers
 		}
 
 		/// <summary>
-		/// Evento para indicar que se está finalizando una controladora. 
-		/// Se puede indicar que se cancele el proceso de finalización.
+		/// Se produce cuando se va a finalizar la controladora.
 		/// </summary>
 		public event SFCancelEventHandler Finishing;
 		private void OnFinishing(SFCancelEventArgs e)
@@ -191,7 +204,7 @@ namespace Sifaw.Controllers
 		}
 
 		/// <summary>
-		/// Evento para comunicar que la controladora ha finalizado.
+		/// Se produce cuando ha finalizado la controladora.
 		/// </summary>
 		public event CLFinishedEventHandler<TOutput> Finished;
 		private void OnFinished(CLFinishedEventArgs<TOutput> e)
@@ -206,19 +219,29 @@ namespace Sifaw.Controllers
 		 */
 
 		/// <summary>
-		/// Evento para comunicar el progreso del proceso.
+		/// Se produce cuando cambia el progreso del proceso.
 		/// </summary>
-        public event CLProgressChangedEventHandler ProgressChanged;
-        protected void OnProgressChanged(CLProgressChangedEventArgs e)
+        public event CLProgressChangedEventHandler ProgressChanged;        
+		
+		/// <summary>
+		/// Provoca el evento <see cref="ProgressChanged"/>.
+		/// </summary>
+		/// <param name="e"><see cref="T:Sifaw.Controllers.CLProgressChangedEventArgs"/> que contiene los datos del evento.</param>
+		protected void OnProgressChanged(CLProgressChangedEventArgs e)
 		{
 			if (ProgressChanged != null)
 				ProgressChanged(this, e);
 		}
 
 		/// <summary>
-		/// Evento para comunicar que se debe iniciar una controladora.
+		/// Se produce cuando se solicita el inicio de una controladora.
 		/// </summary>
 		public event CLThrowEventHandler ThrowCtrl;
+
+		/// <summary>
+		/// Provoca el evento <see cref="ThrowCtrl"/>.
+		/// </summary>
+		/// <param name="e"><see cref="T:Sifaw.Controllers.CLThrowEventArgs"/> que contiene los datos del evento.</param>
 		protected void OnThrowCtrl(CLThrowEventArgs e)
 		{
 			if (ThrowCtrl != null)
@@ -232,14 +255,14 @@ namespace Sifaw.Controllers
 		 */
 
 		/// <summary>
-		/// Se llama al método <see cref="OnBeforeFinishController"/> antes de finalizar las
+		/// Se llama al método <see cref="OnBeforeFinishControllers"/> antes de finalizar las
 		/// controladoras embebidas. El método permite que las clases derivadas controlen
 		/// el evento sin asociar un delegado.
 		/// </summary>
 		/// <param name="children">Lista de controladoras hijas.</param>
 		/// <remarks>
-		/// Al reemplazar <see cref="OnBeforeFinishController"/> en una clase derivada, asegúrese de llamar al
-		/// método <see cref="OnBeforeFinishController"/> de la clase base para que los delegados registrados 
+		/// Al reemplazar <see cref="OnBeforeFinishControllers"/> en una clase derivada, asegúrese de llamar al
+		/// método <see cref="OnBeforeFinishControllers"/> de la clase base para que los delegados registrados 
 		/// reciban el evento.
 		/// </remarks>
 		protected virtual void OnBeforeFinishControllers(List<IController> children)
@@ -248,14 +271,14 @@ namespace Sifaw.Controllers
 		}
 
 		/// <summary>
-		/// Se llama al método <see cref="OnAfterFinishController"/> después de finalizar las
+		/// Se llama al método <see cref="OnAfterFinishControllers"/> después de finalizar las
 		/// controladoras embebidas. El método permite que las clases derivadas controlen 
 		/// el evento sin asociar un delegado.
 		/// </summary>
 		/// <param name="children">Lista de controladoras hijas.</param>
 		/// <remarks>
-		/// Al reemplazar <see cref="OnAfterFinishController"/> en una clase derivada, asegúrese de llamar al
-		/// método <see cref="OnAfterFinishController"/> de la clase base para que los delegados registrados
+		/// Al reemplazar <see cref="OnAfterFinishControllers"/> en una clase derivada, asegúrese de llamar al
+		/// método <see cref="OnAfterFinishControllers"/> de la clase base para que los delegados registrados
 		/// reciban el evento.
 		/// </remarks>
 		protected virtual void OnAfterFinishControllers(List<IController> children)
@@ -294,7 +317,7 @@ namespace Sifaw.Controllers
 		}
 
 		/// <summary>
-		/// Se llama al método <see cref="OnBeforeStartController"/></summary> antes de iniciar la
+		/// Se llama al método <see cref="OnBeforeStartController"/> antes de iniciar la
 		/// controladora. El método permite que las clases derivadas controlen 
 		/// el evento sin asociar un delegado.
 		/// </summary>
@@ -309,7 +332,7 @@ namespace Sifaw.Controllers
 		}
 
 		/// <summary>
-		/// Se llama al método <see cref="OnAfterStartController"/></summary> después de iniciar la
+		/// Se llama al método <see cref="OnAfterStartController"/> después de iniciar la
 		/// controladora. El método permite que las clases derivadas controlen 
 		/// el evento sin asociar un delegado.
 		/// </summary>
@@ -362,7 +385,7 @@ namespace Sifaw.Controllers
 		 */
 
 		/// <summary>
-		/// Obtiene o establece el el estado de la controladora.
+		/// Devuelve el el estado de la controladora.
 		/// </summary>
 		public CLStates State
 		{
@@ -378,7 +401,7 @@ namespace Sifaw.Controllers
 		}
 
 		/// <summary>
-		/// Obtiene la información básica de la controladora.
+		/// Devuelve información descriptiva de la controladora.
 		/// </summary>
 		public CLInformation Information
 		{
@@ -398,7 +421,7 @@ namespace Sifaw.Controllers
 		}
 
 		/// <summary>
-		/// Obtiene las reglas rotas de la controladora.
+		/// Devuelve las reglas rotas de la controladora.
 		/// </summary>
 		protected BrokenRules BrokenPreconditions
 		{
@@ -409,6 +432,9 @@ namespace Sifaw.Controllers
 
         #region Constructors
 
+		/// <summary>
+		/// Inicializa una nueva instancia de la clase <see cref="Controller{TInput, TOutput}"/>.
+		/// </summary>
         protected Controller()
 			: base()
 		{
@@ -453,7 +479,7 @@ namespace Sifaw.Controllers
         /// <summary>
         /// Comprueba el estado de la controladora. 
         /// </summary>
-        /// <param name="estado">Estado de la controladora deseado</param>
+		/// <param name="state">Estado de la controladora deseado</param>
         protected void CheckState(CLStates state)
         {
             if (State != state)
@@ -485,7 +511,6 @@ namespace Sifaw.Controllers
 		/// <summary>
 		/// Devuelve las controladoras instanciadas.
 		/// </summary>
-		/// <param name="modalidad">Modalidad de controladoras a obtener</param>
 		protected List<IController> GetControllers()
 		{
 			return GetControllers(GetAllFilds());

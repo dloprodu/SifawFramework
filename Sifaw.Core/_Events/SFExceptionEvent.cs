@@ -31,8 +31,15 @@ namespace Sifaw.Core
 	/// </summary>
 	public class SFExceptionEventArgs : EventArgs
 	{
+		/// <summary>
+		/// Devuelve una excepción.
+		/// </summary>
 		public readonly Exception Exception;
 
+		/// <summary>
+		/// Inicializa una nueva instancia de la clase <see cref="SFExceptionEventArgs"/>, estableciendo un valor a la propiedad <see cref="Exception"/>.
+		/// </summary>
+		/// <param name="ex">Excepción.</param>
 		public SFExceptionEventArgs(Exception ex)
 			: base()
 		{

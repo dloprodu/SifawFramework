@@ -31,6 +31,17 @@ namespace Sifaw.Core.Drawing
 	{
 		#region Methods de trazado de rectángulos
 
+		/// <summary>
+		/// Dibuja un rectángulo con bordes redondeados.
+		/// </summary>
+		/// <param name="graphics"><see cref="Graphics"/> donde se dibujará el rectángulo.</param>
+		/// <param name="pen"><see cref="Pen"/> usado para dibujar el rectángulo.</param>
+		/// <param name="x">Coordenada x del rectángulo.</param>
+		/// <param name="y">Coordenada y del rectángulo.</param>
+		/// <param name="width">Ancho del rectángulo.</param>
+		/// <param name="height">Alto del rectángulo.</param>
+		/// <param name="radius">Radio que se aplicará a los bordes redondeados.</param>
+		/// <param name="filter">Bordes a redondear.</param>
 		public static void DrawRoundedRectangle(
 			this Graphics graphics,
 			Pen pen,
@@ -42,7 +53,7 @@ namespace Sifaw.Core.Drawing
 			RoundedEdgeFilters filter)
 		{
 			RectangleF rectangle = new RectangleF(x, y, width, height);
-
+			
 			using (GraphicsPath path = GenerateRoundedRectangle(graphics, rectangle, radius, filter))
 			{
 				SmoothingMode old = graphics.SmoothingMode;
@@ -52,6 +63,16 @@ namespace Sifaw.Core.Drawing
 			}
 		}
 
+		/// <summary>
+		/// Dibuja un rectángulo con bordes redondeados.
+		/// </summary>
+		/// <param name="graphics"><see cref="Graphics"/> donde se dibujará el rectángulo.</param>
+		/// <param name="pen"><see cref="Pen"/> usado para dibujar el rectángulo.</param>
+		/// <param name="x">Coordenada x del rectángulo.</param>
+		/// <param name="y">Coordenada y del rectángulo.</param>
+		/// <param name="width">Ancho del rectángulo.</param>
+		/// <param name="height">Alto del rectángulo.</param>
+		/// <param name="radius">Radio que se aplicará a los bordes redondeados.</param>
 		public static void DrawRoundedRectangle(
 			this Graphics graphics,
 			Pen pen,
@@ -63,14 +84,25 @@ namespace Sifaw.Core.Drawing
 		{
 			graphics.DrawRoundedRectangle(
 				pen,
-				x,
-				y,
-				width,
-				height,
-				radius,
+				Convert.ToSingle(x),
+				Convert.ToSingle(y),
+				Convert.ToSingle(width),
+				Convert.ToSingle(height),
+				Convert.ToSingle(radius),
 				RoundedEdgeFilters.All);
 		}
 
+		/// <summary>
+		/// Dibuja un rectángulo con bordes redondeados.
+		/// </summary>
+		/// <param name="graphics"><see cref="Graphics"/> donde se dibujará el rectángulo.</param>
+		/// <param name="pen"><see cref="Pen"/> usado para dibujar el rectángulo.</param>
+		/// <param name="x">Coordenada x del rectángulo.</param>
+		/// <param name="y">Coordenada y del rectángulo.</param>
+		/// <param name="width">Ancho del rectángulo.</param>
+		/// <param name="height">Alto del rectángulo.</param>
+		/// <param name="radius">Radio que se aplicará a los bordes redondeados.</param>
+		/// <param name="filter">Bordes a redondear.</param>
 		public static void DrawRoundedRectangle(
 			this Graphics graphics,
 			Pen pen,
@@ -91,6 +123,16 @@ namespace Sifaw.Core.Drawing
 				filter);
 		}
 
+		/// <summary>
+		/// Dibuja un rectángulo con bordes redondeados.
+		/// </summary>
+		/// <param name="graphics"><see cref="Graphics"/> donde se dibujará el rectángulo.</param>
+		/// <param name="pen"><see cref="Pen"/> usado para dibujar el rectángulo.</param>
+		/// <param name="x">Coordenada x del rectángulo.</param>
+		/// <param name="y">Coordenada y del rectángulo.</param>
+		/// <param name="width">Ancho del rectángulo.</param>
+		/// <param name="height">Alto del rectángulo.</param>
+		/// <param name="radius">Radio que se aplicará a los bordes redondeados.</param>
 		public static void DrawRoundedRectangle(
 			this Graphics graphics,
 			Pen pen,
@@ -110,6 +152,14 @@ namespace Sifaw.Core.Drawing
 				RoundedEdgeFilters.All);
 		}
 
+		/// <summary>
+		/// Dibuja un rectángulo con bordes redondeados.
+		/// </summary>
+		/// <param name="graphics"><see cref="Graphics"/> donde se dibujará el rectángulo.</param>
+		/// <param name="pen"><see cref="Pen"/> usado para dibujar el rectángulo.</param>
+		/// <param name="rectangle"><see cref="Rectangle"/> que representa el rectángulo a dibujar.</param>
+		/// <param name="radius">Radio que se aplicará a los bordes redondeados.</param>
+		/// <param name="filter">Bordes a redondear.</param>
 		public static void DrawRoundedRectangle(
 			this Graphics graphics,
 			Pen pen,
@@ -127,6 +177,13 @@ namespace Sifaw.Core.Drawing
 				filter);
 		}
 
+		/// <summary>
+		/// Dibuja un rectángulo con bordes redondeados.
+		/// </summary>
+		/// <param name="graphics"><see cref="Graphics"/> donde se dibujará el rectángulo.</param>
+		/// <param name="pen"><see cref="Pen"/> usado para dibujar el rectángulo.</param>
+		/// <param name="rectangle"><see cref="Rectangle"/> que representa el rectángulo a dibujar.</param>
+		/// <param name="radius">Radio que se aplicará a los bordes redondeados.</param>
 		public static void DrawRoundedRectangle(
 			this Graphics graphics,
 			Pen pen,
@@ -143,6 +200,14 @@ namespace Sifaw.Core.Drawing
 				RoundedEdgeFilters.All);
 		}
 
+		/// <summary>
+		/// Dibuja un rectángulo con bordes redondeados.
+		/// </summary>
+		/// <param name="graphics"><see cref="Graphics"/> donde se dibujará el rectángulo.</param>
+		/// <param name="pen"><see cref="Pen"/> usado para dibujar el rectángulo.</param>
+		/// <param name="rectangle"><see cref="RectangleF"/> que representa el rectángulo a dibujar.</param>
+		/// <param name="radius">Radio que se aplicará a los bordes redondeados.</param>
+		/// <param name="filter">Bordes a redondear.</param>
 		public static void DrawRoundedRectangle(
 			this Graphics graphics,
 			Pen pen,
@@ -160,6 +225,13 @@ namespace Sifaw.Core.Drawing
 				filter);
 		}
 
+		/// <summary>
+		/// Dibuja un rectángulo con bordes redondeados.
+		/// </summary>
+		/// <param name="graphics"><see cref="Graphics"/> donde se dibujará el rectángulo.</param>
+		/// <param name="pen"><see cref="Pen"/> usado para dibujar el rectángulo.</param>
+		/// <param name="rectangle"><see cref="RectangleF"/> que representa el rectángulo a dibujar.</param>
+		/// <param name="radius">Radio que se aplicará a los bordes redondeados.</param>
 		public static void DrawRoundedRectangle(
 			this Graphics graphics,
 			Pen pen,
@@ -180,6 +252,17 @@ namespace Sifaw.Core.Drawing
 
 		#region Methods de relleno de rectángulos
 
+		/// <summary>
+		/// Rellena el interior de un rectángulo con bordes redondeados.
+		/// </summary>
+		/// <param name="graphics"><see cref="Graphics"/> donde se dibujará el rectángulo.</param>
+		/// <param name="brush"><see cref="Brush"/> usado para rellenar el rectángulo.</param>
+		/// <param name="x">Coordenada x del rectángulo.</param>
+		/// <param name="y">Coordenada y del rectángulo.</param>
+		/// <param name="width">Ancho del rectángulo.</param>
+		/// <param name="height">Alto del rectángulo.</param>
+		/// <param name="radius">Radio que se aplicará a los bordes redondeados.</param>
+		/// <param name="filter">Bordes a redondear.</param>
 		public static void FillRoundedRectangle(
 			this Graphics graphics,
 			Brush brush,
@@ -201,6 +284,16 @@ namespace Sifaw.Core.Drawing
 			}
 		}
 
+		/// <summary>
+		/// Rellena el interior de un rectángulo con bordes redondeados.
+		/// </summary>
+		/// <param name="graphics"><see cref="Graphics"/> donde se dibujará el rectángulo.</param>
+		/// <param name="brush"><see cref="Brush"/> usado para rellenar el rectángulo.</param>
+		/// <param name="x">Coordenada x del rectángulo.</param>
+		/// <param name="y">Coordenada y del rectángulo.</param>
+		/// <param name="width">Ancho del rectángulo.</param>
+		/// <param name="height">Alto del rectángulo.</param>
+		/// <param name="radius">Radio que se aplicará a los bordes redondeados.</param>
 		public static void FillRoundedRectangle(
 			this Graphics graphics,
 			Brush brush,
@@ -220,6 +313,47 @@ namespace Sifaw.Core.Drawing
 				RoundedEdgeFilters.All);
 		}
 
+		/// <summary>
+		/// Rellena el interior de un rectángulo con bordes redondeados.
+		/// </summary>
+		/// <param name="graphics"><see cref="Graphics"/> donde se dibujará el rectángulo.</param>
+		/// <param name="brush"><see cref="Brush"/> usado para rellenar el rectángulo.</param>
+		/// <param name="x">Coordenada x del rectángulo.</param>
+		/// <param name="y">Coordenada y del rectángulo.</param>
+		/// <param name="width">Ancho del rectángulo.</param>
+		/// <param name="height">Alto del rectángulo.</param>
+		/// <param name="radius">Radio que se aplicará a los bordes redondeados.</param>
+		/// <param name="filter">Bordes a redondear.</param>
+		public static void FillRoundedRectangle(
+			this Graphics graphics,
+			Brush brush,
+			int x,
+			int y,
+			int width,
+			int height,
+			int radius,
+			RoundedEdgeFilters filter)
+		{
+			graphics.FillRoundedRectangle(
+				brush,
+				Convert.ToSingle(x),
+				Convert.ToSingle(y),
+				Convert.ToSingle(width),
+				Convert.ToSingle(height),
+				Convert.ToSingle(radius),
+				filter);
+		}
+
+		/// <summary>
+		/// Rellena el interior de un rectángulo con bordes redondeados.
+		/// </summary>
+		/// <param name="graphics"><see cref="Graphics"/> donde se dibujará el rectángulo.</param>
+		/// <param name="brush"><see cref="Brush"/> usado para rellenar el rectángulo.</param>
+		/// <param name="x">Coordenada x del rectángulo.</param>
+		/// <param name="y">Coordenada y del rectángulo.</param>
+		/// <param name="width">Ancho del rectángulo.</param>
+		/// <param name="height">Alto del rectángulo.</param>
+		/// <param name="radius">Radio que se aplicará a los bordes redondeados.</param>
 		public static void FillRoundedRectangle(
 			this Graphics graphics,
 			Brush brush,
@@ -239,6 +373,14 @@ namespace Sifaw.Core.Drawing
 				RoundedEdgeFilters.All);
 		}
 
+		/// <summary>
+		/// Rellena el interior de un rectángulo con bordes redondeados.
+		/// </summary>
+		/// <param name="graphics"><see cref="Graphics"/> donde se dibujará el rectángulo.</param>
+		/// <param name="brush"><see cref="Brush"/> usado para rellenar el rectángulo.</param>
+		/// <param name="rectangle"><see cref="Rectangle"/> que representa el rectángulo a dibujar.</param>
+		/// <param name="radius">Radio que se aplicará a los bordes redondeados.</param>
+		/// <param name="filter">Bordes a redondear.</param>
 		public static void FillRoundedRectangle(
 			this Graphics graphics,
 			Brush brush,
@@ -256,6 +398,13 @@ namespace Sifaw.Core.Drawing
 				filter);
 		}
 
+		/// <summary>
+		/// Rellena el interior de un rectángulo con bordes redondeados.
+		/// </summary>
+		/// <param name="graphics"><see cref="Graphics"/> donde se dibujará el rectángulo.</param>
+		/// <param name="brush"><see cref="Brush"/> usado para rellenar el rectángulo.</param>
+		/// <param name="rectangle"><see cref="Rectangle"/> que representa el rectángulo a dibujar.</param>
+		/// <param name="radius">Radio que se aplicará a los bordes redondeados.</param>
 		public static void FillRoundedRectangle(
 			this Graphics graphics,
 			Brush brush,
@@ -272,6 +421,14 @@ namespace Sifaw.Core.Drawing
 				RoundedEdgeFilters.All);
 		}
 
+		/// <summary>
+		/// Rellena el interior de un rectángulo con bordes redondeados.
+		/// </summary>
+		/// <param name="graphics"><see cref="Graphics"/> donde se dibujará el rectángulo.</param>
+		/// <param name="brush"><see cref="Brush"/> usado para rellenar el rectángulo.</param>
+		/// <param name="rectangle"><see cref="RectangleF"/> que representa el rectángulo a dibujar.</param>
+		/// <param name="radius">Radio que se aplicará a los bordes redondeados.</param>
+		/// <param name="filter">Bordes a redondear.</param>
 		public static void FillRoundedRectangle(
 			this Graphics graphics,
 			Brush brush,
@@ -289,6 +446,13 @@ namespace Sifaw.Core.Drawing
 				filter);
 		}
 
+		/// <summary>
+		/// Rellena el interior de un rectángulo con bordes redondeados.
+		/// </summary>
+		/// <param name="graphics"><see cref="Graphics"/> donde se dibujará el rectángulo.</param>
+		/// <param name="brush"><see cref="Brush"/> usado para rellenar el rectángulo.</param>
+		/// <param name="rectangle"><see cref="RectangleF"/> que representa el rectángulo a dibujar.</param>
+		/// <param name="radius">Radio que se aplicará a los bordes redondeados.</param>
 		public static void FillRoundedRectangle(
 			this Graphics graphics,
 			Brush brush,
@@ -310,9 +474,15 @@ namespace Sifaw.Core.Drawing
 		#region Fondos con degradado predefinidos
 
 		/// <summary>
-		/// Dibuja un fondo degradado con reflejo.
+		/// Rellena el interior de un rectángulo con bordes con un fondo degradado con reflejo.
 		/// </summary>
-		public static void DrawCrystalBackground(
+		/// <param name="graphics"><see cref="Graphics"/> donde se dibujará el rectángulo.</param>
+		/// <param name="rectangle"><see cref="Rectangle"/> que representa el rectángulo a dibujar.</param>
+		/// <param name="radius">Radio que se aplicará a los bordes redondeados.</param>
+		/// <param name="filter">Bordes a redondear.</param>
+		/// <param name="color">Color predominante del degradado. El degradado parte del blanco como color base.</param>
+		/// <param name="alpha">Especifíca el nivel de transparencia.</param>
+		public static void FillCrystalRoundedRectangle(
 			this Graphics graphics,
 			Rectangle rectangle,
 			int radius,
@@ -320,7 +490,7 @@ namespace Sifaw.Core.Drawing
 			Color color,
 			int alpha)
 		{
-			graphics.DrawCrystalBackground(
+			graphics.FillCrystalRoundedRectangle(
 				rectangle,
 				radius,
 				filter,
@@ -330,9 +500,16 @@ namespace Sifaw.Core.Drawing
 		}
 
 		/// <summary>
-		/// Dibuja un fondo degradado con reflejo.
+		/// Rellena el interior de un rectángulo con bordes con un fondo degradado con reflejo.
 		/// </summary>
-		public static void DrawCrystalBackground(
+		/// <param name="graphics"><see cref="Graphics"/> donde se dibujará el rectángulo.</param>
+		/// <param name="rectangle"><see cref="Rectangle"/> que representa el rectángulo a dibujar.</param>
+		/// <param name="radius">Radio que se aplicará a los bordes redondeados.</param>
+		/// <param name="filter">Bordes a redondear.</param>
+		/// <param name="color1">Color de inicio del degradado.</param>
+		/// <param name="color2">Color de fin del degradado.</param>
+		/// <param name="alpha">Especifíca el nivel de transparencia.</param>
+		public static void FillCrystalRoundedRectangle(
 			this Graphics graphics,
 			Rectangle rectangle,
 			int radius,
@@ -347,7 +524,7 @@ namespace Sifaw.Core.Drawing
 			HSLColor hslReflex2 = HSLColor.FromRGB(color2);
 			hslReflex2.Luminance -= 0.01f;
 
-			graphics.DrawCrystalBackground(
+			graphics.FillCrystalRoundedRectangle(
 				rectangle,
 				radius,
 				filter,
@@ -359,9 +536,18 @@ namespace Sifaw.Core.Drawing
 		}
 
 		/// <summary>
-		/// Dibuja un fondo degradado con reflejo.
+		/// Rellena el interior de un rectángulo con bordes con un fondo degradado con reflejo.
 		/// </summary>
-		public static void DrawCrystalBackground(
+		/// <param name="graphics"><see cref="Graphics"/> donde se dibujará el rectángulo.</param>
+		/// <param name="rectangle"><see cref="Rectangle"/> que representa el rectángulo a dibujar.</param>
+		/// <param name="radius">Radio que se aplicará a los bordes redondeados.</param>
+		/// <param name="filter">Bordes a redondear.</param>
+		/// <param name="color1">Color de inicio del degradado.</param>
+		/// <param name="color2">Color de fin del degradado.</param>
+		/// <param name="reflexColor1">Color de inicio para el efecto reflejo.</param>
+		/// <param name="reflexColor2">Color de fin para el efecto reflejo.</param>
+		/// <param name="alpha">Especifíca el nivel de transparencia.</param>
+		public static void FillCrystalRoundedRectangle(
 			this Graphics graphics,
 			Rectangle rectangle,
 			int radius,

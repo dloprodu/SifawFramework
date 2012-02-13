@@ -30,16 +30,18 @@ namespace Sifaw.Core.Utilities
 	public static class UtilFile
 	{
 		/// <summary>
-		/// Crea un fichero temporal en la ruta definida por windows para los archivos temporales del usuario local.
-		/// Dicho fichero tendrá 0 bytes una vez creado.
-		/// Se devuelve la ruta completa al nombrado fichero.
-		/// Ejemplo de utilización: 
-		///				string nombreDocGoogleEarth = UtilTempFile.ObtenFicheroTemp("kmz");
-		///				FileStream fs = File.OpenWrite(nombreDocGoogleEarth);
+		/// Crea un fichero temporal en la ruta definida por el sistema para los archivos temporales del usuario local,
+		/// dicho fichero tendrá 0 bytes una vez creado, y devuelve la ruta completa del fichero.
 		/// </summary>
+		/// <example>
+		/// <code>
+		///		string name = UtilFile.GetTempFileName("kmz");
+		///		FileStream fs = File.OpenWrite(name);
+		/// </code>
+		/// </example>
 		/// <param name="extension">
-		/// Designa la extensión del documento. Si es igual a string.Empty se le asigna la
-		/// extensión "TMP" por defecto.
+		/// Designa la extensión del fichero. Si es igual a string.Empty se le asigna la
+		/// extensión por defecto.
 		/// </param>
 		public static String GetTempFileName(string extension)
 		{
@@ -51,11 +53,20 @@ namespace Sifaw.Core.Utilities
 			return file;
 		}
 
+		/// <summary>
+		/// Crea un fichero temporal en la ruta definida por el sistema para los archivos temporales del usuario local,
+		/// dicho fichero tendrá 0 bytes una vez creado, y devuelve la ruta completa del fichero.
+		/// </summary>
 		public static String GetTempFileName()
 		{
 			return GetTempFileName(string.Empty);
 		}
 
+		/// <summary>
+		/// Devuelve el directorio de configuración para la aplicación especificada.
+		/// </summary>
+		/// <param name="application">Nombre de la aplicación.</param>
+		/// <returns>Ruta completa del directorio de configuración.</returns>
 		public static String GetConfigurationFolder(string application)
 		{
 			string dir1 = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
@@ -65,26 +76,18 @@ namespace Sifaw.Core.Utilities
 		}
 
 		/// <summary>
-		/// Devuelve el path completo para un nombre de archivo en el directorio temporal.
-		/// </summary>
-		public static String GetFullTempPath(string filename)
-		{
-			return Path.Combine(Path.GetTempPath(), filename);
-		}
-
-		public static String GetFullTempPath()
-		{
-			return Path.GetTempPath();
-		}
-
-		/// <summary>
-		/// Devuelve la ruta donde está alojada el ejecutable
+		/// Devuelve la ruta donde está alojada el ejecutable de la aplicación.
 		/// </summary>
 		public static string GetApplicationDirectory()
 		{
 			return Path.GetDirectoryName(Assembly.GetExecutingAssembly().GetModules()[0].FullyQualifiedName);
 		}
 
+		/// <summary>
+		/// Devuelve un valor que indica si el nombre del fichero es válido.
+		/// </summary>
+		/// <param name="file">NOmbre del fichero a chequear.</param>
+		/// <returns><c>true</c> si el <c>file</c> es un nombre de fichero válido, <c>false</c> en caso contrario.</returns>
 		public static bool IsValidFilename(string file)
 		{
 			if (file.Trim().Equals(string.Empty))

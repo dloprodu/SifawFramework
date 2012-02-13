@@ -75,7 +75,7 @@ namespace Sifaw.WPF.CCL
 		#region Properties
 
 		/// <summary>
-		/// Obtiene o establece el texto que se muesta cuando la propiedad Text no tiene valor definido.
+		/// Devuelve o establece el texto que se muesta cuando la propiedad Text no tiene valor definido.
 		/// </summary>
 		[Category("Placeholder")]
 		[Bindable(true)]
@@ -86,7 +86,7 @@ namespace Sifaw.WPF.CCL
 		}
 
 		/// <summary>
-		/// Obtiene o establece el <see cref="Brush"/> usado para representar <see cref="Placeholder"/>.
+		/// Devuelve o establece el <see cref="Brush"/> usado para representar <see cref="Placeholder"/>.
 		/// </summary>
 		[Category("Brushes")]
 		[Bindable(true)]
@@ -97,7 +97,7 @@ namespace Sifaw.WPF.CCL
 		}	
 	
 		/// <summary>
-		/// Obtiene o establece el estilo de la fuente.
+		/// Devuelve o establece el estilo de la fuente.
 		/// </summary>
 		[Category("Placeholder")]
 		[Bindable(true)]
@@ -108,7 +108,7 @@ namespace Sifaw.WPF.CCL
 		}
 		
 		/// <summary>
-		/// Obtiene o establece el espesor o grosor de la fuente del <see cref="Placeholder"/>.
+		/// Devuelve o establece el espesor o grosor de la fuente del <see cref="Placeholder"/>.
 		/// </summary>
 		[Bindable(true)]
 		[Category("Placeholder")]

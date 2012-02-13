@@ -27,12 +27,25 @@ namespace Sifaw.Controllers
 {
 	/// <summary>
 	/// Controladora base que provee de un patrón e infraestructura común a aquellas controladoras
-	/// donde interviene un componente tipo shell que actúa como contenedor de otros componentes.
+    /// donde interviene un componente que actúa como shell, es decir, a modo de contenedor de componentes
+    /// <see cref="UIComponentController{TInput, TOutput, TUISettings, TComponent}"/>.
 	/// </summary>
-	/// <typeparam name="TInput">Tipo para establecer los parámetros de inicio de la controladora.</typeparam>
-	/// <typeparam name="TOutput">Tipo para establcer los parametros de retorno cuando finaliza la controladora.</typeparam>
-	/// <typeparam name="TUISettings">Tipo para establecer el proxy encargado de establecer los ajustes al elemento de interfaz de usuario.</typeparam>
-	public abstract class UIShellComponentController<TInput, TOutput, TUISettings, TGuest>
+    /// <typeparam name="TInput">
+    /// Tipo para establecer los parámetros de inicio de la controladora. Ha de ser serializable y 
+    /// derivar de <see cref="UIShellComponentController{TInput, TOutput, TUISettings, TGuest}.Input"/>.
+    /// </typeparam>
+    /// <typeparam name="TOutput">
+    /// Tipo para establcer los parametros de retorno cuando finaliza la controladora. Ha de ser serializable y 
+    /// derivar de <see cref="UIShellComponentController{TInput, TOutput, TUISettings, TGuest}.Output"/>.
+    /// </typeparam>
+    /// <typeparam name="TUISettings">
+    /// Tipo para establecer el proxy encargado de establecer los ajustes en el elemento de interfaz de usuario. Ha de
+    /// ser serializable, proveer de consturctor público y derivar de <see cref="UIShellComponentController{TInput, TOutput, TUISettings, TGuest}.UISettingsContainer"/>.
+    /// </typeparam>
+    /// <typeparam name="TGuest">
+    /// Tipo de los componentes que puede alojar la shell. Ha de implementar <see cref="UIComponent"/>.
+    /// </typeparam>
+    public abstract class UIShellComponentController<TInput, TOutput, TUISettings, TGuest>
 		: UIComponentController
 		< TInput
 		, TOutput
@@ -52,14 +65,16 @@ namespace Sifaw.Controllers
 		[Serializable]
 		public abstract new class Input : UIComponentController<TInput, TOutput, TUISettings, ShellComponent>.Input
 		{
-			#region Constructors
+            #region Constructor
 
-			protected Input()
-				: base()
-			{
-			}
+            /// <summary>
+            /// Inicializa una nueva instancia de la clase <see cref="UIShellComponentController{TInput, TOutput, TUISettings, TGuest}.Input"/>.
+            /// </summary>
+            protected Input()
+            {
+            }
 
-			#endregion
+            #endregion
 		}
 
 		/// <summary>
@@ -68,20 +83,25 @@ namespace Sifaw.Controllers
 		[Serializable]
 		public abstract new class Output : UIComponentController<TInput, TOutput, TUISettings, ShellComponent>.Output
 		{
-			#region Constructors
+            #region Constructor
 
-			protected Output()
-				: base()
-			{
-			}
+            /// <summary>
+            /// Inicializa una nueva instancia de la clase <see cref="UIShellComponentController{TInput, TOutput, TUISettings, TGuest}.Output"/>.
+            /// </summary>
+            protected Output()
+            {
+            }
 
-			#endregion
+            #endregion
 		}
 
 		#endregion
 
 		#region Settings
 
+        /// <summary>
+        /// Contenedor de ajustes de <see cref="UIShellComponentController{TInput, TOutput, TUISettings, TGuest}"/>.
+        /// </summary>
 		[Serializable]
 		public new class UISettingsContainer : UIComponentController
 			< TInput
@@ -91,6 +111,9 @@ namespace Sifaw.Controllers
 		{
 			#region Constructors
 
+            /// <summary>
+            /// Inicializa una nueva instancia de la clase <see cref="UIShellComponentController{TInput, TOutput, TUISettings, TGuest}.UISettingsContainer"/>.
+            /// </summary>
 			public UISettingsContainer()
 				: base()
 			{
@@ -103,6 +126,9 @@ namespace Sifaw.Controllers
 
 		#region Fields
 
+        /// <summary>
+        /// Lista de componetnes <see cref="Sifaw.Views.UIComponent"/> embebidos.
+        /// </summary>
 		[CLReseteable(null)]
 		protected ReadOnlyCollection<TGuest> GuestComponentes = null;
 
@@ -110,12 +136,21 @@ namespace Sifaw.Controllers
 
 		#region Constructors
 
+        /// <summary>
+        /// Inicializa una nueva instancia de la clase <see cref="UIShellComponentController{TInput, TOutput, TUISettings, TGuest}"/>.
+        /// Establece como <see cref="AbstractUILinker{TUIElement}"/> aquel establecido por defecto a través de 
+        /// <see cref="AbstractUIProviderManager{TLinker}"/>.
+        /// </summary>
 		protected UIShellComponentController()
 			: base()
 		{
 		}
 
-		protected UIShellComponentController(AbstractUILinker<ShellComponent> linker)
+        /// <summary>
+        /// Inicializa una nueva instancia de la clase <see cref="UIShellComponentController{TInput, TOutput, TUISettings, TGuest}"/>, 
+        /// estableciendo un valor en la propiedad <see cref="Sifaw.Controllers.UIElementController{TInput, TOutput, TUISettings, TUIElement}.Linker"/>.
+        /// </summary>
+        protected UIShellComponentController(AbstractUILinker<ShellComponent> linker)
 			: base(linker)
 		{
 		}
@@ -141,7 +176,7 @@ namespace Sifaw.Controllers
 		/// </summary>
 		/// <param name="row">Fila</param>
 		/// <param name="height">Aultura de la fila.</param>
-		/// <param name="heighthMode">Mode de ajuste de la fila.</param>
+        /// <param name="mode">Mode de ajuste de la fila.</param>
 		protected abstract void GetRowSettings(uint row, out double height, out UILengthModes mode);
 
 		/// <summary>
@@ -150,14 +185,17 @@ namespace Sifaw.Controllers
 		/// <param name="row">Fila de columna.</param>
 		/// <param name="cell">Celda.</param>
 		/// <param name="width">Ancho de la celda.</param>
-		/// <param name="widthMode">Modo de ajuste de la celda.</param>
-		/// <param name="component">Contenido de la celda.</param>
+        /// <param name="mode">Modo de ajuste de la celda.</param>
+        /// <param name="guest">Contenido de la celda.</param>
 		protected abstract void GetRowCellSettings(uint row, uint cell, out double width, out UILengthModes mode, out TGuest guest);
 
 		#endregion
 
         #region UIElement Methods
 
+        /// <summary>
+        /// Invoca al método sobrescirto <see cref="UIComponentController{TInput, TOutput, TUISettings, TComponent}.OnApplyUISettings()"/>.
+        /// </summary>
         protected override void OnApplyUISettings()
         {
             base.OnApplyUISettings();
@@ -167,6 +205,10 @@ namespace Sifaw.Controllers
 
         #region Start Methods
 
+        /// <summary>
+        /// Invoca al método sobrescirto <see cref="UIComponentController{TInput, TOutput, TUISettings, TComponent}.OnBeforeStartController()"/> y
+        /// posteriormente aplica la configuración de la shell, configuración como el número de filas, celdas por fila y componentes embebidos.
+        /// </summary>
         protected override void OnBeforeStartController()
 		{
 			base.OnBeforeStartController();

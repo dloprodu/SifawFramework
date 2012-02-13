@@ -74,7 +74,16 @@ namespace Sifaw.Controllers
 		[Serializable]
 		public new abstract class Input : Controller<TInput, TOutput>.Input
 		{
-			/* Empty */
+            #region Constructor
+
+            /// <summary>
+            /// Inicializa una nueva instancia de la clase <see cref="UIElementController{TInput, TOutput, TUISettings, TUIElement}.Input"/>.
+            /// </summary>
+            protected Input()
+            {
+            }
+
+            #endregion
 		}
 
 		/// <summary>
@@ -83,8 +92,17 @@ namespace Sifaw.Controllers
 		[Serializable]
 		public new abstract class Output : Controller<TInput, TOutput>.Output
 		{
-			/* Empty */
-		}
+            #region Constructor
+
+            /// <summary>
+            /// Inicializa una nueva instancia de la clase <see cref="UIElementController{TInput, TOutput, TUISettings, TUIElement}.Output"/>.
+            /// </summary>
+            protected Output()
+            {
+            }
+
+            #endregion
+        }
 
 		#endregion
 
@@ -131,7 +149,7 @@ namespace Sifaw.Controllers
 			#region Properties
 
 			/// <summary>
-			/// Obtiene o establece una denominación al componente.
+			/// Devuelve o establece una denominación al componente.
 			/// </summary>
 			public string Denomination
 			{
@@ -140,7 +158,7 @@ namespace Sifaw.Controllers
 			}
 
 			/// <summary>
-			/// Obtiene o establece una descripción al componente.
+			/// Devuelve o establece una descripción al componente.
 			/// </summary>
 			public string Description
 			{
@@ -149,7 +167,7 @@ namespace Sifaw.Controllers
 			}
 
 			/// <summary>
-			/// Obtiene o establece el ancho mínimo del componente.
+			/// Devuelve o establece el ancho mínimo del componente.
 			/// </summary>
 			public double MinWidth
 			{
@@ -158,7 +176,7 @@ namespace Sifaw.Controllers
 			}
 
 			/// <summary>
-			/// Obtiene o establece el ancho máximo del componente.
+			/// Devuelve o establece el ancho máximo del componente.
 			/// </summary>
 			public double MaxWidth
 			{
@@ -167,7 +185,7 @@ namespace Sifaw.Controllers
 			}
 
 			/// <summary>
-			/// Obtiene o establece el alto mínimo del componente.
+			/// Devuelve o establece el alto mínimo del componente.
 			/// </summary>
 			public double MinHeight
 			{
@@ -176,7 +194,7 @@ namespace Sifaw.Controllers
 			}
 
 			/// <summary>
-			/// Obtiene o establece el alto máximo del componente.
+			/// Devuelve o establece el alto máximo del componente.
 			/// </summary>
 			public double MaxHeight
 			{

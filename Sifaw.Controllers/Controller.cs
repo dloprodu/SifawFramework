@@ -83,10 +83,21 @@ namespace Sifaw.Controllers
 		/// </summary>
 		[Serializable]
 		public abstract class Input : ICloneable
-		{
-			#region ICloneable Members
+        {
+            #region Constructor
 
-			/// <summary>
+            /// <summary>
+            /// Inicializa una nueva instancia de la clase <see cref="Controller{TInput, TOutput}.Input"/>.
+            /// </summary>
+            protected Input()
+            {
+            }
+
+            #endregion
+
+            #region ICloneable Members
+
+            /// <summary>
 			/// Devuelve una copia de los parámetros de entrada de la controladora.
 			/// </summary>
 			public object Clone()
@@ -103,6 +114,17 @@ namespace Sifaw.Controllers
 		[Serializable]
 		public abstract class Output : ICloneable
 		{
+            #region Constructor
+
+            /// <summary>
+            /// Inicializa una nueva instancia de la clase <see cref="Controller{TInput, TOutput}.Output"/>.
+            /// </summary>
+            protected Output()
+            {
+            }
+
+            #endregion
+
 			#region ICloneable Members
 
 			/// <summary>
@@ -464,7 +486,7 @@ namespace Sifaw.Controllers
 		}
 
 		/// <summary>
-		/// Permite que un objeto realice su propio proceso de chequeo de precondiciones
+		/// Permite que una controladora realice su propio proceso de chequeo de precondiciones.
 		/// Las clases derivadas pueden sobreescribir este método para chequear precondiciones
 		/// </summary>
 		protected virtual void OnCheckPreconditions(string preconditionName)

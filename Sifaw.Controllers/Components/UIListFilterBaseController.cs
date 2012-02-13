@@ -59,7 +59,7 @@ namespace Sifaw.Controllers.Components
 			#region Properties
 
 			/// <summary>
-			/// Obtiene o establece la lista sobre la que se realizará el filtro.
+			/// Devuelve o establece la lista sobre la que se realizará el filtro.
 			/// </summary>
 			public TSource Source
 			{

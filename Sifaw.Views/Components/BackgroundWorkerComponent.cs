@@ -40,7 +40,7 @@ namespace Sifaw.Views.Components
 		bool AllowCancel { get;  set; }
 
 		/// <summary>
-		/// Obtiene o establece el valor máximo del progreso del proceso.
+		/// Devuelve o establece el valor máximo del progreso del proceso.
 		/// </summary>
 		int MaxProgressPercentage { get; set; }
 

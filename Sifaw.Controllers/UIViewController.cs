@@ -115,7 +115,8 @@ namespace Sifaw.Controllers
             #region Constructors
 
 			/// <summary>
-			/// Inicializa una nueva instancia de <see cref="Input"/>, estableciendo la propiedad <see cref="ShowView"/> a <c>true</c>.
+            /// Inicializa una nueva instancia de <see cref="UIViewController{TInput, TOutput, TUISettings, TView}.Input"/>, 
+            /// estableciendo la propiedad <see cref="ShowView"/> a <c>true</c>.
 			/// </summary>
             protected Input()
                 : this(true)
@@ -123,7 +124,7 @@ namespace Sifaw.Controllers
             }
 
 			/// <summary>
-			/// Inicializa una nueva instancia de <see cref="Input"/>, estableciendo un valor a la propiedad <see cref="ShowView"/>.
+            /// Inicializa una nueva instancia de <see cref="UIViewController{TInput, TOutput, TUISettings, TView}.Input"/>, estableciendo un valor a la propiedad <see cref="ShowView"/>.
 			/// </summary>
             protected Input(bool showView)
                 : base()
@@ -140,7 +141,16 @@ namespace Sifaw.Controllers
         [Serializable]
         public new abstract class Output : UIElementController<TInput, TOutput, TUISettings, TView>.Output
         {
-            /* Empty */
+            #region Constructor
+
+            /// <summary>
+            /// Inicializa una nueva instancia de la clase <see cref="UIViewController{TInput, TOutput, TUISettings, TView}.Output"/>.
+            /// </summary>
+            protected Output()
+            {
+            }
+
+            #endregion
         }
 
         #endregion
@@ -165,7 +175,7 @@ namespace Sifaw.Controllers
             #region Properties
 
 			/// <summary>
-			/// Obtiene o establece una cabecera a la vista.
+			/// Devuelve o establece una cabecera a la vista.
 			/// </summary>
             public string Header
             {
@@ -174,7 +184,7 @@ namespace Sifaw.Controllers
             }
 
 			/// <summary>
-			/// Obtiene o establece el ancho de la vista.
+			/// Devuelve o establece el ancho de la vista.
 			/// </summary>
             public double Width
             {
@@ -183,7 +193,7 @@ namespace Sifaw.Controllers
             }
 
 			/// <summary>
-			/// Obtiene o establece el alto de la vista.
+			/// Devuelve o establece el alto de la vista.
 			/// </summary>
             public double Height
             {
@@ -192,7 +202,7 @@ namespace Sifaw.Controllers
             }
 
 			/// <summary>
-			/// Obtiene o establece un valor que indica si la vista
+			/// Devuelve o establece un valor que indica si la vista
 			/// se ajusta a su contenido.
 			/// </summary>
             public bool SizeToContent

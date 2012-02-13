@@ -53,7 +53,7 @@ namespace Sifaw.WPF
 		#region Properties
 
 		/// <summary>
-		/// Obtiene o establece un valor que indica la orientación horizontal o vertical del
+		/// Devuelve o establece un valor que indica la orientación horizontal o vertical del
 		/// contenido.
 		/// </summary>
 		public Orientation Orientation

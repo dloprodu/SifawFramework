@@ -26,9 +26,8 @@ namespace Sifaw.Controllers.Components
 {
 	/// <summary>
 	/// Controladora encargada de ejecutar procesos pesados notificando el progreso en 
-	/// un componente de UI.
+    /// un componente que implemente <see cref="BackgroundWorkerComponent"/>.
 	/// </summary>
-	/// <typeparam name="TShell">Tipo del contenedor UI del componente <see cref="TComponent"/>.</typeparam>
 	public class UIBackgroundWorkerController : UIComponentController
 		< UIBackgroundWorkerController.Input
 		, UIBackgroundWorkerController.Output
@@ -38,8 +37,8 @@ namespace Sifaw.Controllers.Components
 		#region Input / Output
 
 		/// <summary>
-		/// Clase que engloba los parámetros de inicio de la controladora de procesos pesados
-		/// </summary>
+        /// Parámetros de entrada de las controladora.
+        /// </summary>
 		[Serializable]
 		public new class Input : UIComponentController
 			< Input
@@ -56,7 +55,7 @@ namespace Sifaw.Controllers.Components
 			#region Properties
 
 			/// <summary>
-			/// Paquete de ejecución
+			/// Devuelve o establece el paquete de ejecución
 			/// </summary>
 			public BackgroundWorkerPack WorkerPack
 			{
@@ -69,10 +68,9 @@ namespace Sifaw.Controllers.Components
 			#region Constructors
 
 			/// <summary>
-			/// Clase que engloba los parámetros de inicio de la controladora de procesos pesados
+            /// Inicializa una nueva instancia de la clase <see cref="UIBackgroundWorkerController.Input"/>
 			/// </summary>
 			/// <param name="worker">Paquete de ejecución</param>
-			/// <param name="finishOnWorkEnd">Flag que indica si se finaliza la controladora al terminar el proceso pesado.</param>
 			public Input(BackgroundWorkerPack worker)
 				: base()
 			{
@@ -83,8 +81,8 @@ namespace Sifaw.Controllers.Components
 		}
 
 		/// <summary>
-		/// Clase que engloba los parámetros de finalización de la controladora de procesos pesados
-		/// </summary>
+        /// Parámetros de retorno de las controladora.
+        /// </summary>
 		[Serializable]
 		public new class Output : UIComponentController
 			< Input
@@ -102,7 +100,7 @@ namespace Sifaw.Controllers.Components
 			#region Properties
 
 			/// <summary>
-			/// Resultado del proceso
+			/// Devuelve el resultado del proceso.
 			/// </summary>
 			public object Result
 			{
@@ -110,7 +108,7 @@ namespace Sifaw.Controllers.Components
 			}
 
 			/// <summary>
-			/// Indica si el proceso fue cancelado
+			/// Devuelve un valor que indica si el proceso fue cancelado
 			/// </summary>
 			public bool Cancelled
 			{
@@ -122,10 +120,10 @@ namespace Sifaw.Controllers.Components
 			#region Constructors
 
 			/// <summary>
-			/// Clase que engloba los parámetros de finalización de la controladora de procesos pesados
-			/// </summary>
-			/// <param name="resultado">Resultado del proceso</param>
-			/// <param name="cancelado">Indica si el proceso fue cancelado</param>
+            /// Inicializa una nueva instancia de la clase <see cref="UIBackgroundWorkerController.Output"/>
+            /// </summary>
+            /// <param name="result">Resultado del proceso</param>
+            /// <param name="cancelled">Indica si el proceso fue cancelado</param>
 			internal protected Output(object result, bool cancelled)
 				: base()
 			{
@@ -152,9 +150,13 @@ namespace Sifaw.Controllers.Components
 
 		#region Events
 
+        /// <summary>
+        /// Se produce antes de lanzar el proceso de fondo.
+        /// </summary>
 		public event SFCancelEventHandler BeforeBackgroundWorker = null;
 
 		/// <summary>
+        /// Provoca el evento <see cref="BeforeBackgroundWorker"/>.
 		/// Permite ejecutar operaciones antes de iniciar el proceso pesado.
 		/// </summary>
 		protected virtual void OnBeforeBackgroundWorker(SFCancelEventArgs e)
@@ -163,10 +165,14 @@ namespace Sifaw.Controllers.Components
 				BeforeBackgroundWorker(this, e);
 		}
 
+        /// <summary>
+        /// Se produce después de lanzar el proceso de fondo.
+        /// </summary>
 		public event EventHandler AfterBackgroundWorker = null;
 
 		/// <summary>
-		/// Permite ejecutar operaciones al finalizar el proceso pesado.
+        /// Provoca el evento <see cref="AfterBackgroundWorker"/>.
+        /// Permite ejecutar operaciones al finalizar el proceso pesado.
 		/// </summary>
 		protected virtual void OnAfterBackgroundWorker(EventArgs e)
 		{
@@ -178,6 +184,9 @@ namespace Sifaw.Controllers.Components
 
 		#region Settings
 
+        /// <summary>
+        /// Contenedor de ajustes de <see cref="UIBackgroundWorkerController"/>.
+        /// </summary>
 		[Serializable]
 		public new class UISettingsContainer : UIComponentController
 			< Input
@@ -249,6 +258,9 @@ namespace Sifaw.Controllers.Components
 
 			#region Constructors
 
+            /// <summary>
+            /// Inicializa una nueva instancia de la clase <see cref="UIBackgroundWorkerController.UISettingsContainer"/>
+            /// </summary>
 			public UISettingsContainer()
 				: base()
 			{
@@ -266,11 +278,20 @@ namespace Sifaw.Controllers.Components
 
 		#region Constructors
 
+        /// <summary>
+        /// Inicializa una nueva instancia de la clase <see cref="BackgroundWorkerComponent"/>.
+        /// Establece como <see cref="AbstractUILinker{TUIElement}"/> aquel establecido por defecto a través de 
+        /// <see cref="AbstractUIProviderManager{TLinker}"/>.
+        /// </summary>
 		public UIBackgroundWorkerController()
 			: base()
 		{
 		}
 
+        /// <summary>
+        /// Inicializa una nueva instancia de la clase <see cref="BackgroundWorkerComponent"/>, 
+        /// estableciendo un valor en la propiedad <see cref="Sifaw.Controllers.UIElementController{TInput, TOutput, TUISettings, TUIElement}.Linker"/>.
+        /// </summary>
 		public UIBackgroundWorkerController(AbstractUILinker<BackgroundWorkerComponent> linker)
 			: base(linker)
 		{
@@ -280,6 +301,10 @@ namespace Sifaw.Controllers.Components
 
 		#region UIElement Methods
 
+        /// <summary>
+        /// Invoca al método sobrescirto <see cref="UIElementController{TInput, TOutput, TUISettings, TComponent}.OnAfterUIElementLoad()"/> y
+        /// posteriormente se subscribe a los eventos del componente <see cref="Sifaw.Views.Components.BackgroundWorkerComponent"/>.
+        /// </summary>
 		protected override void OnAfterUIElementLoad()
 		{
 			base.OnAfterUIElementLoad();
@@ -287,6 +312,11 @@ namespace Sifaw.Controllers.Components
 			UIElement.Cancel += new EventHandler(UIElement_Cancel);
 		}
 
+        /// <summary>
+        /// Invoca al método sobrescirto <see cref="UIComponentController{TInput, TOutput, TUISettings, TComponent}.OnApplyUISettings()"/> y
+        /// posteriormente aplica la configuración al elemento <see cref="UIElementController{TInput, TOutput, TUISettings, TView}.UIElement"/> 
+        /// del tipo <see cref="Sifaw.Views.Components.BackgroundWorkerComponent"/>.
+        /// </summary>
         protected override void OnApplyUISettings()
 		{
 			base.OnApplyUISettings();
@@ -298,6 +328,10 @@ namespace Sifaw.Controllers.Components
             UIElement.Progress = UISettings.Progress;
 		}
 
+        /// <summary>
+        /// Invoca al método sobrescirto <see cref="UIElementController{TInput, TOutput, TUISettings, TUIElement}.OnAfterApplyUISettings()"/> y
+        /// posteriormente aplica la configuración sobre el objeto <see cref="System.ComponentModel.BackgroundWorker"/>.
+        /// </summary>
         protected override void OnAfterApplyUISettings()
         {
             base.OnAfterApplyUISettings();
@@ -310,6 +344,9 @@ namespace Sifaw.Controllers.Components
 
 		#region Check Preconditions
 
+        /// <summary>
+        /// Implementa el proceso de chequeo de precondiciones de la controladora.
+        /// </summary>
 		protected override void OnCheckPreconditions(string preconditionName)
 		{
 			base.OnCheckPreconditions(preconditionName);
@@ -327,20 +364,30 @@ namespace Sifaw.Controllers.Components
 
 		#region Default Input / Output
 
-		protected override Output GetDefaultOutput()
-		{
-			return new Output(null, true);
-		}
-
+        /// <summary>
+        /// Devuelve los parámetros de inicio por defecto.
+        /// </summary>
 		public override Input GetDefaultInput()
 		{
 			return new Input(null);
 		}
+        
+        /// <summary>
+        /// Devuelve los parámetros de reinicio por defecto.
+        /// </summary>
+        /// <returns></returns>
+        public override Input GetResetInput()
+        {
+            return null;
+        }
 
-		public override Input GetResetInput()
-		{
-			return null;
-		}
+        /// <summary>
+        /// Devuelve los parámetros de retorno por defecto.
+        /// </summary>
+        protected override Output GetDefaultOutput()
+        {
+            return new Output(null, true);
+        }
 
 		#endregion
 
@@ -350,7 +397,12 @@ namespace Sifaw.Controllers.Components
 		/// Ejecuta el proceso pesado. Antes de ejecutar el proceso se lanza el evento <see cref="BeforeBackgroundWorker"/>
 		/// que permite cancelar la ejecución.
 		/// </summary>
-		public void RunWorker()
+        /// <remarks>
+        /// Para invocar este método la controladora ha de estar iniciada, 
+        /// en otro caso, devolverá una excepcion.
+        /// </remarks>
+        /// <exception cref="NotValidStateException">La controladora no está iniciada.</exception>
+        public void RunWorker()
 		{
 			CheckState(CLStates.Started);
 						
@@ -367,7 +419,15 @@ namespace Sifaw.Controllers.Components
 			}
 		}
 
-		public void CancelWorker()
+        /// <summary>
+        /// Solicita la cancelación del proceso de fondo.
+        /// </summary>
+        /// <remarks>
+        /// Para invocar este método la controladora ha de estar iniciada, 
+        /// en otro caso, devolverá una excepcion.
+        /// </remarks>
+        /// <exception cref="NotValidStateException">La controladora no está iniciada.</exception>
+        public void CancelWorker()
 		{
 			CheckState(CLStates.Started);
 
@@ -378,6 +438,9 @@ namespace Sifaw.Controllers.Components
 
         #region Start Methods
 
+        /// <summary>
+        /// Ejecuta los comandos de inicio de la controladora.
+        /// </summary>
         protected override void StartController()
 		{
 			// Establecemos la configuración del componente.
@@ -391,11 +454,18 @@ namespace Sifaw.Controllers.Components
 			worker.WorkerReportsProgress = true;			
 		}
 
+        /// <summary>
+        /// Devuelve un valor que indica que no se puede reiniciar una controladora <see cref="UIBackgroundWorkerController"/>.
+        /// </summary>
+        /// <returns></returns>
 		protected override bool AllowReset()
 		{
 			return false;
 		}
 
+        /// <summary>
+        /// No realiza ninguna operación puesto que la controladora no permite el reinicio.
+        /// </summary>
 		protected override void ResetController()
 		{
 			/* Emtpy */
@@ -405,6 +475,10 @@ namespace Sifaw.Controllers.Components
 
 		#region Finish Methods
 
+        /// <summary>
+        /// Invoca al método sobrescirto <see cref="UIElementController{TInput, TOutput, TUISettings, TUIElement}.OnBeforeFinishControllers(List{IController})"/>
+        /// y posteriormente libera el objeto <see cref="System.ComponentModel.BackgroundWorker"/>.
+        /// </summary>
 		protected override void OnBeforeFinishControllers(List<IController> children)
 		{
 			base.OnBeforeFinishControllers(children);

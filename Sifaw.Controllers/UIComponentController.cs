@@ -63,21 +63,39 @@ namespace Sifaw.Controllers
         #region Input / Output
 
         /// <summary>
-        /// Parámetros de entrada de las controladoras
+        /// Parámetros de entrada de las controladora.
         /// </summary>
         [Serializable]
         public new abstract class Input : UIElementController<TInput, TOutput, TUISettings, TComponent>.Input
         {
-            /* Empty */
+            #region Constructor
+
+            /// <summary>
+            /// Inicializa una nueva instancia de la clase <see cref="UIComponentController{TInput, TOutput, TUISettings, TComponent}.Input"/>.
+            /// </summary>
+            protected Input()
+            {
+            }
+
+            #endregion
         }
 
         /// <summary>
-        /// Parámetros de retorno de las controladoras
+        /// Parámetros de retorno de la controladora.
         /// </summary>
         [Serializable]
         public new abstract class Output : UIElementController<TInput, TOutput, TUISettings, TComponent>.Output
         {
-			/* Empty */
+            #region Constructor
+
+            /// <summary>
+            /// Inicializa una nueva instancia de la clase <see cref="UIComponentController{TInput, TOutput, TUISettings, TComponent}.Output"/>.
+            /// </summary>
+            protected Output()
+            {
+            }
+
+            #endregion
 		}
 
         #endregion

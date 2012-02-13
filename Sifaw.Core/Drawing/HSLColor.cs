@@ -46,7 +46,7 @@ namespace Sifaw.Core.Drawing
 		#region Properties
 
 		/// <summary>
-		/// Obtiene o establece el tono del color.
+		/// Devuelve o establece el tono del color.
 		/// </summary>
 		public float Hue
 		{
@@ -58,7 +58,7 @@ namespace Sifaw.Core.Drawing
 		}
 
 		/// <summary>
-		/// Obtiene o establece la saturación del color.
+		/// Devuelve o establece la saturación del color.
 		/// </summary>
 		public float Saturation
 		{
@@ -70,7 +70,7 @@ namespace Sifaw.Core.Drawing
 		}
 
 		/// <summary>
-		/// Obtiene o establece la luminosidad del color.
+		/// Devuelve o establece la luminosidad del color.
 		/// </summary>
 		public float Luminance
 		{

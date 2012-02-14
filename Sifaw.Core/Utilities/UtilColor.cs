@@ -32,7 +32,7 @@ namespace Sifaw.Core.Utilities
 	public static class UtilColor
 	{
 		/// <summary>
-		/// Crea una estructura <see cref="T:System.Drawing.Color"/> a partir de los cuatro valores de los componentes ARGB de 8 bits (alfa, rojo, verde y azul).
+		/// Crea una estructura <see cref="System.Drawing.Color"/> a partir de los cuatro valores de los componentes ARGB de 8 bits (alfa, rojo, verde y azul).
 		/// </summary>
 		public static Color FromARGB(string argb)
 		{
@@ -48,7 +48,7 @@ namespace Sifaw.Core.Utilities
 		}
 
 		/// <summary>
-		/// Crea una estructura <see cref="T:System.Drawing.Color"/> a partir de los cuatro valores de los componentes ARGB de 8 bits (alfa, rojo, verde y azul).
+		/// Crea una estructura <see cref="System.Drawing.Color"/> a partir de los cuatro valores de los componentes ARGB de 8 bits (alfa, rojo, verde y azul).
 		/// </summary>
 		public static Color FromARGB(string a, string r, string g, string b)
 		{

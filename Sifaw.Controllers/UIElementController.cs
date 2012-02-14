@@ -51,7 +51,7 @@ namespace Sifaw.Controllers
 	/// derivar de <see cref="UIElementController{TInput, TOutput, TUISettings, TUIElement}.Output"/>.
 	/// </typeparam>
 	/// <typeparam name="TUISettings">
-	/// Tipo para establecer el proxy encargado de establecer los ajustes en el elemento de interfaz de usuario. Ha de
+	/// Tipo para establecer el contenedor de ajustes encargado de establecer las configuración del elemento de interfaz de usuario. Ha de
 	/// ser serializable, proveer de consturctor público y derivar de <see cref="UIElementController{TInput, TOutput, TUISettings, TUIElement}.UISettingsContainer"/>.
 	/// </typeparam>
 	/// <typeparam name="TUIElement">

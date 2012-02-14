@@ -84,6 +84,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\Sifaw.Controllers.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -105,8 +106,6 @@
     <Compile Include="Components\_Miscellany\BackgroundWorkerCommunicator.cs" />
     <Compile Include="Components\_Miscellany\BackgroundWorkerPack.cs" />
     <Compile Include="Components\_Miscellany\ReportProgressCommand.cs" />
-    <Compile Include="Test\UIGroupFiltersTestController.cs" />
-    <Compile Include="Test\UIGroupFiltersTestViewController.cs" />
     <Compile Include="UIShellComponentController.cs" />
     <Compile Include="_Attributes\CLGuidReseteable.cs" />
     <Compile Include="_Delegates\GetRowCellSettingsShellCallback.cs" />
@@ -137,8 +136,6 @@
     <Compile Include="Controller.cs" />
     <Compile Include="_Miscellany\IUIElementController.cs" />
     <Compile Include="_Miscellany\IUIViewController.cs" />
-    <Compile Include="Test\UIAssistantTestController.cs" />
-    <Compile Include="Test\UIAssistantTestViewController.cs" />
     <Compile Include="UIShellViewController.cs" />
     <Compile Include="UIComponentController.cs" />
     <Compile Include="UIElementController.cs" />

@@ -52,7 +52,7 @@ namespace Sifaw.Controllers.Components
 		/// <summary>
 		/// Inicializa una instancia de la clase <see cref="BackgroundWorkerCommunicator"/>.
 		/// </summary>
-		/// <param name="worker"><see cref="T:System.ComponentModel.BackgroundWorker"/> que usará el comunicador para informar el progreso.</param>
+		/// <param name="worker"><see cref="System.ComponentModel.BackgroundWorker"/> que usará el comunicador para informar el progreso.</param>
         public BackgroundWorkerCommunicator(System.ComponentModel.BackgroundWorker worker)
         {
             Worker = worker;

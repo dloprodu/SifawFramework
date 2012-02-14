@@ -45,7 +45,7 @@ namespace Sifaw.Controllers
 	/// derivar de <see cref="UIComponentController{TInput, TOutput, TUISettings, TComponent}.Output"/>.
 	/// </typeparam>
 	/// <typeparam name="TUISettings">
-	/// Tipo para establecer el proxy encargado de establecer los ajustes en el elemento de interfaz de usuario. Ha de
+	/// Tipo para establecer el contenedor de ajustes encargado de establecer las configuración del elemento de interfaz de usuario. Ha de
 	/// ser serializable, proveer de consturctor público y derivar de <see cref="UIComponentController{TInput, TOutput, TUISettings, TComponent}.UISettingsContainer"/>.
 	/// </typeparam>
 	/// <typeparam name="TComponent">
@@ -111,9 +111,19 @@ namespace Sifaw.Controllers
             , TOutput
             , TUISettings
             , TComponent>.UISettingsContainer
-        {
-            /* Empty */
-        }
+		{
+			#region Constructors
+
+			/// <summary>
+			/// Inicializa una nueva instancia de la clase <see cref="UIComponentController{TInput, TOutput, TUISettings, TComponent}.UISettingsContainer"/>.
+			/// </summary>
+			public UISettingsContainer()
+				: base()
+			{
+			}
+
+			#endregion
+		}
 
         #endregion
 
@@ -139,7 +149,7 @@ namespace Sifaw.Controllers
 		/// <summary>
 		/// Provoca el evento <see cref="ShowMessage"/>.
 		/// </summary>
-		/// <param name="e"><see cref="T:Sifaw.Controllers.CLShowInfoEventArgs"/> que contiene los datos del evento.</param>
+		/// <param name="e"><see cref="Sifaw.Controllers.CLShowInfoEventArgs"/> que contiene los datos del evento.</param>
 		protected void OnShowMessage(CLShowInfoEventArgs e)
         {
             if (ShowMessage != null)
@@ -154,7 +164,7 @@ namespace Sifaw.Controllers
 		/// <summary>
 		/// Provoca el evento <see cref="ShowWarning"/>.
 		/// </summary>
-		/// <param name="e"><see cref="T:Sifaw.Controllers.CLShowWarningEventArgs"/> que contiene los datos del evento.</param>
+		/// <param name="e"><see cref="Sifaw.Controllers.CLShowWarningEventArgs"/> que contiene los datos del evento.</param>
 		protected void OnShowWarning(CLShowWarningEventArgs e)
         {
             if (ShowWarning != null)
@@ -169,7 +179,7 @@ namespace Sifaw.Controllers
 		/// <summary>
 		/// Provoca el evento <see cref="ShowError"/>.
 		/// </summary>
-		/// <param name="e"><see cref="T:Sifaw.Controllers.CLShowErrorEventArgs"/> que contiene los datos del evento.</param>
+		/// <param name="e"><see cref="Sifaw.Controllers.CLShowErrorEventArgs"/> que contiene los datos del evento.</param>
 		protected void OnShowError(CLShowErrorEventArgs e)
         {
             if (ShowError != null)
@@ -184,7 +194,7 @@ namespace Sifaw.Controllers
 		/// <summary>
 		/// Provoca el evento <see cref="ConfirmMessage"/>.
 		/// </summary>
-		/// <param name="e"><see cref="T:Sifaw.Controllers.CLConfirmMessageEventArgs"/> que contiene los datos del evento.</param>
+		/// <param name="e"><see cref="Sifaw.Controllers.CLConfirmMessageEventArgs"/> que contiene los datos del evento.</param>
 		protected void OnConfirmMessage(CLConfirmMessageEventArgs e)
         {
             if (ConfirmMessage != null)

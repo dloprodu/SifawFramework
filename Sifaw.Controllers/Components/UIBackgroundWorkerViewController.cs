@@ -25,6 +25,10 @@ using Sifaw.Views.Components;
 
 namespace Sifaw.Controllers.Components
 {
+	/// <summary>
+	/// Controladora de vista que aloja el compomente <see cref="UIBackgroundWorkerController"/> y que
+	/// permite ejecutar un proceso pesado en un nuevo hilo de ejecución.
+	/// </summary>
 	public class UIBackgroundWorkerViewController
 		: UIShellViewController
 		< UIBackgroundWorkerViewController.Input
@@ -61,11 +65,21 @@ namespace Sifaw.Controllers.Components
 
 			#region Constructors
 
+			/// <summary>
+			/// Inicializa una nueva instancia de la clase <see cref="UIBackgroundWorkerViewController.Input"/>,
+			/// estableciendo la propiedad <see cref="UIViewController{TInput, TOutput, TUISettings, TView}.Input.ShowView"/> a <c>true</c>.
+			/// </summary>
+			/// <param name="worker">Paquete de ejecución</param>
 			public Input(BackgroundWorkerPack worker)
 				: this(worker, true)
 			{
 			}
 
+			/// <summary>
+			/// Inicializa una nueva instancia de la clase <see cref="UIBackgroundWorkerViewController.Input"/>
+			/// </summary>
+			/// <param name="worker">Paquete de ejecución</param>
+			/// <param name="showView">Indica si se muestra la vista al iniciar la controladora.</param>
 			public Input(BackgroundWorkerPack worker, bool showView)
 				: base(showView:showView)
 			{
@@ -91,7 +105,7 @@ namespace Sifaw.Controllers.Components
 			#region Properties
 
 			/// <summary>
-			/// Resultado del proceso
+			/// Devuelve el resultado del proceso pesado.
 			/// </summary>
 			public object Result
 			{
@@ -110,6 +124,11 @@ namespace Sifaw.Controllers.Components
 
 			#region Constructors
 
+			/// <summary>
+			/// Inicializa una nueva instancia de la clase <see cref="UIBackgroundWorkerViewController.Output"/>.
+			/// </summary>
+			/// <param name="result">Resultado del proceso pesado.</param>
+			/// <param name="cancelled">Valor que indica si el proceso ha sido cancelado.</param>
 			public Output(object result, bool cancelled)
 				: base()
 			{
@@ -124,6 +143,9 @@ namespace Sifaw.Controllers.Components
 
 		#region Settings
 
+		/// <summary>
+		/// Contenedor de ajustes de <see cref="UIBackgroundWorkerViewController"/>.
+		/// </summary>
 		[Serializable]
 		public new class UISettingsContainer : UIShellViewController
 			< Input
@@ -195,6 +217,19 @@ namespace Sifaw.Controllers.Components
 
 			#region Constructors
 
+			/// <summary>
+			/// Inicializa una nueva instancia de la clase <see cref="UIBackgroundWorkerViewController.UISettingsContainer"/>.
+			/// </summary>
+			/// <remarks>
+			/// <para>
+			/// Por defecto establece que:
+			/// <list type="bullet">
+			/// <item><description>La vista se ajuste a su contenido.</description></item>
+			/// <item><description>El proceso no permite cancelación.</description></item>
+			/// <item><description>El proceso realiza control de progreso.</description></item>
+			/// </list>
+			/// </para>
+			/// </remarks>
 			public UISettingsContainer()
 				: base()
 			{
@@ -205,8 +240,6 @@ namespace Sifaw.Controllers.Components
 				this.AllowCancel = false;
 
 				// El comportamiento por defecto es que la vista se ajuste a su contenido.
-				this.Height = double.NaN;
-				this.Width = double.NaN;
 				this.SizeToContent = true;
 			}
 
@@ -236,11 +269,20 @@ namespace Sifaw.Controllers.Components
 
 		#region Constructors
 
+		/// <summary>
+		/// Inicializa una nueva instancia de la clase <see cref="UIBackgroundWorkerViewController"/>.
+		/// Establece como <see cref="AbstractUILinker{TUIElement}"/> aquel establecido por defecto a través de 
+		/// <see cref="AbstractUIProviderManager{TLinker}"/>.
+		/// </summary>
 		public UIBackgroundWorkerViewController()
 			: base()
 		{
 		}
 
+		/// <summary>
+		/// Inicializa una nueva instancia de la clase <see cref="UIBackgroundWorkerViewController"/>, 
+		/// estableciendo un valor en la propiedad <see cref="Sifaw.Controllers.UIElementController{TInput, TOutput, TUISettings, TUIElement}.Linker"/>.
+		/// </summary>
 		public UIBackgroundWorkerViewController(AbstractUILinker<ShellView> linker)
 			: base(linker)
 		{
@@ -250,25 +292,38 @@ namespace Sifaw.Controllers.Components
 
 		#region Default Input / Output
 
-		protected override Output GetDefaultOutput()
-		{
-			return new Output(null, false);
-		}
-
+		/// <summary>
+		/// Devuelve los parámetros de inicio por defecto.
+		/// </summary>
 		public override Input GetDefaultInput()
 		{
 			return new Input(new BackgroundWorkerPack(null, null));
 		}
 
+		/// <summary>
+		/// Devuelve los parámetros de reinicio por defecto.
+		/// </summary>
 		public override Input GetResetInput()
 		{
 			return null;
 		}
 
+		/// <summary>
+		/// Devuelve los parámetros de retorno por defecto.
+		/// </summary>		
+		protected override Output GetDefaultOutput()
+		{
+			return new Output(null, false);
+		}		
+
 		#endregion
 
 		#region UIElement Methods
 
+		/// <summary>
+		/// Invoca al método sobrescirto <see cref="UIElementController{TInput, TOutput, TUISettings, TUIElement}.OnAfterApplyUISettings()"/> y
+		/// posteriormente aplica la configuración sobre el componente <see cref="UIBackgroundWorkerController"/>.
+		/// </summary>
 		protected override void OnAfterApplyUISettings()
         {
             base.OnAfterApplyUISettings();
@@ -282,6 +337,11 @@ namespace Sifaw.Controllers.Components
 			UIBackgroundWorkerController.UISettings.Apply();
 		}
 
+		/// <summary>
+		/// Invoca al método sobrescirto <see cref="UIViewController{TInput, TOutput, TUISettings, TUIView}.OnBeforeUIClose(out bool)"/> y
+		/// posteriormente solicita la cancelación del proceso al componente <see cref="UIBackgroundWorkerController"/>.
+		/// </summary>
+		/// <param name="cancel">Devuelve un valor que indica si se cancela el cierre de la vista.</param>
 		protected override void OnBeforeUIClose(out bool cancel)
 		{
 			// Deshabilitamos el comportamiento por defecto y solicitamos la cancelación del proceso.
@@ -293,6 +353,10 @@ namespace Sifaw.Controllers.Components
 			UIBackgroundWorkerController.CancelWorker();
 		}
 
+		/// <summary>
+		/// Invoca al método sobrescirto <see cref="UIViewController{TInput, TOutput, TUISettings, TUIView}.OnAfterUIShow()"/> y
+		/// posteriormente inicia la ejecución del proceso pesado.
+		/// </summary>
 		protected override void OnAfterUIShow()
 		{
 			base.OnAfterUIShow();
@@ -303,27 +367,42 @@ namespace Sifaw.Controllers.Components
 		#endregion
 
 		#region UIShell Methods
-		
+				
+		/// <summary>
+		/// Establece en 1 el número de filas de la vista.
+		/// </summary>
+		/// <returns>1</returns>
 		protected override uint GetNumberOfRows()
 		{
 			return 1;
 		}
 
+		/// <summary>
+		/// Establece en 1 el número de celdas de la fila.
+		/// </summary>
+		/// <param name="row">Fila</param>
+		/// <returns>1</returns>
 		protected override uint GetNumberOfCellsAt(uint row)
 		{
 			return 1;
 		}
 
-		protected override void GetRowSettings(uint row, out double height, out Views.UILengthModes mode)
+		/// <summary>
+		/// Establece que la fila se ajuste al contenido de la celda.
+		/// </summary>
+		protected override void GetRowSettings(uint row, out double height, out UILengthModes mode)
 		{
 			height = 0;
-			mode = Views.UILengthModes.Auto;
+			mode = UILengthModes.Auto;
 		}
 
+		/// <summary>
+		/// Establece que la celda se ajuste al componete <see cref="UIBackgroundWorkerController"/>.
+		/// </summary>
 		protected override void GetRowCellSettings(uint row, uint cell, out double width, out UILengthModes mode, out BackgroundWorkerComponent component)
 		{
 			width = 0;
-			mode = Views.UILengthModes.Auto;
+			mode = UILengthModes.Auto;
 			component = UIBackgroundWorkerController.GetUIComponent() as BackgroundWorkerComponent;
 		}
 
@@ -331,16 +410,26 @@ namespace Sifaw.Controllers.Components
 
 		#region Start Methods
 
+		/// <summary>
+		/// Ejecuta los comandos de inicio de la controladora.
+		/// </summary>
 		protected override void StartController()
 		{
 			UIBackgroundWorkerController.Start(new UIBackgroundWorkerController.Input(Parameters.Worker));
 		}
 
+		/// <summary>
+		/// Devuelve un valor que indica que no se puede reiniciar una controladora <see cref="UIBackgroundWorkerViewController"/>.
+		/// </summary>
+		/// <returns>false</returns>
 		protected override bool AllowReset()
 		{
 			return false;
 		}
 
+		/// <summary>
+		/// No realiza ninguna operación puesto que la controladora no permite el reinicio.
+		/// </summary>
 		protected override void ResetController()
 		{
 			/* Empty */

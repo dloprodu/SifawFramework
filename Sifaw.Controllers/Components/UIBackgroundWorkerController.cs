@@ -25,9 +25,24 @@ using Sifaw.Views.Components;
 namespace Sifaw.Controllers.Components
 {
 	/// <summary>
-	/// Controladora encargada de ejecutar procesos pesados notificando el progreso en 
-    /// un componente que implemente <see cref="BackgroundWorkerComponent"/>.
+	/// Controladora encargada de ejecutar un proceso pesado en un nuevo hilo de ejecución
+	/// permitiendo notificando el progreso en un componente que implemente <see cref="BackgroundWorkerComponent"/>.
 	/// </summary>
+	/// <remarks>
+	/// <para>
+	/// La descripción del proceso a ejecutar se ha de pasar mediante los parámetros de inicio en
+	/// un objeto del tipo <see cref="BackgroundWorkerPack"/>.
+	/// </para>
+	/// <para>
+	/// Haciendo uso del contenedor de ajustes de la controladora, <see cref="UIElementController{TInput, TOutput, TUISettings, TUIElement}.UISettings"/>,
+	/// se puede indicar si el proceso permite la cancelación, realiza un control del progreso asi como datos de caracter general como una descipción del proceso
+	/// que se va a ejecutar.
+	/// </para>
+	/// <para>
+	/// La controladora tiene como precondición de inicio que se provea de un método de ejecución del tipo
+	/// <see cref="BackgroundWorkerDelegate"/>.
+	/// </para>
+	/// </remarks>
 	public class UIBackgroundWorkerController : UIComponentController
 		< UIBackgroundWorkerController.Input
 		, UIBackgroundWorkerController.Output
@@ -55,7 +70,7 @@ namespace Sifaw.Controllers.Components
 			#region Properties
 
 			/// <summary>
-			/// Devuelve o establece el paquete de ejecución
+			/// Devuelve o establece el paquete de ejecución.
 			/// </summary>
 			public BackgroundWorkerPack WorkerPack
 			{
@@ -151,7 +166,7 @@ namespace Sifaw.Controllers.Components
 		#region Events
 
         /// <summary>
-        /// Se produce antes de lanzar el proceso de fondo.
+        /// Se produce antes de lanzar un proceso pesado en un nuevo hilo.
         /// </summary>
 		public event SFCancelEventHandler BeforeBackgroundWorker = null;
 
@@ -166,7 +181,7 @@ namespace Sifaw.Controllers.Components
 		}
 
         /// <summary>
-        /// Se produce después de lanzar el proceso de fondo.
+        /// Se produce después de lanzar un proceso pesado en un nuevo hilo.
         /// </summary>
 		public event EventHandler AfterBackgroundWorker = null;
 
@@ -261,6 +276,15 @@ namespace Sifaw.Controllers.Components
             /// <summary>
             /// Inicializa una nueva instancia de la clase <see cref="UIBackgroundWorkerController.UISettingsContainer"/>
             /// </summary>
+			/// <remarks>
+			/// <para>
+			/// Por defecto establece que:
+			/// <list type="bullet">
+			/// <item><description>El proceso no permite cancelación.</description></item>
+			/// <item><description>El proceso realiza control de progreso.</description></item>
+			/// </list>
+			/// </para>
+			/// </remarks>
 			public UISettingsContainer()
 				: base()
 			{
@@ -420,7 +444,7 @@ namespace Sifaw.Controllers.Components
 		}
 
         /// <summary>
-        /// Solicita la cancelación del proceso de fondo.
+        /// Solicita la cancelación del proceso pesado.
         /// </summary>
         /// <remarks>
         /// Para invocar este método la controladora ha de estar iniciada, 
@@ -457,7 +481,7 @@ namespace Sifaw.Controllers.Components
         /// <summary>
         /// Devuelve un valor que indica que no se puede reiniciar una controladora <see cref="UIBackgroundWorkerController"/>.
         /// </summary>
-        /// <returns></returns>
+		/// <returns>false</returns>
 		protected override bool AllowReset()
 		{
 			return false;

@@ -39,7 +39,7 @@ namespace Sifaw.Controllers
     /// derivar de <see cref="UIShellComponentController{TInput, TOutput, TUISettings, TGuest}.Output"/>.
     /// </typeparam>
     /// <typeparam name="TUISettings">
-    /// Tipo para establecer el proxy encargado de establecer los ajustes en el elemento de interfaz de usuario. Ha de
+    /// Tipo para establecer el contenedor de ajustes encargado de establecer las configuración del elemento de interfaz de usuario. Ha de
     /// ser serializable, proveer de consturctor público y derivar de <see cref="UIShellComponentController{TInput, TOutput, TUISettings, TGuest}.UISettingsContainer"/>.
     /// </typeparam>
     /// <typeparam name="TGuest">
@@ -194,7 +194,9 @@ namespace Sifaw.Controllers
         #region UIElement Methods
 
         /// <summary>
-        /// Invoca al método sobrescirto <see cref="UIComponentController{TInput, TOutput, TUISettings, TComponent}.OnApplyUISettings()"/>.
+		/// Invoca al método sobrescirto <see cref="UIElementController{TInput, TOutput, TUISettings, TUIElement}.OnApplyUISettings()"/> y
+		/// posteriormente aplica la configuración al elemento <see cref="UIElementController{TInput, TOutput, TUISettings, TView}.UIElement"/> 
+		/// del tipo <see cref="ShellComponent"/>
         /// </summary>
         protected override void OnApplyUISettings()
         {
@@ -206,7 +208,7 @@ namespace Sifaw.Controllers
         #region Start Methods
 
         /// <summary>
-        /// Invoca al método sobrescirto <see cref="UIComponentController{TInput, TOutput, TUISettings, TComponent}.OnBeforeStartController()"/> y
+		/// Invoca al método sobrescirto <see cref="Controller{TInput, TOutput}.OnBeforeStartController()"/> y
         /// posteriormente aplica la configuración de la shell, configuración como el número de filas, celdas por fila y componentes embebidos.
         /// </summary>
         protected override void OnBeforeStartController()

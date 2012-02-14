@@ -178,7 +178,7 @@ namespace Sifaw.Core
 			#region Properties
 
 			/// <summary>
-			/// Devuelve el objeto <see cref="T:Sifaw.BrokenRules.Rule"/> 
+			/// Devuelve el objeto <see cref="Sifaw.BrokenRules.Rule"/> 
 			/// que contiene el detalle sobre la regla especificada.
 			/// </summary>
 			public Rule this[int index]

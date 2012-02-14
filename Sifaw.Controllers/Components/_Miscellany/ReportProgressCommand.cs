@@ -29,7 +29,7 @@ namespace Sifaw.Controllers.Components
     public enum ReportProgressCommands
     {
         /// <summary>
-        /// Indica un cambio en el progreso del proceso de fondo y un texto descriptivo.
+        /// Indica un cambio en el progreso del proceso pesado y un texto descriptivo.
         /// </summary>
         ProgressAndTextChanged,
 
@@ -39,17 +39,17 @@ namespace Sifaw.Controllers.Components
         TextChanged,
 
         /// <summary>
-        /// Indica un cambio en el progreso del proceso de fondo.
+        /// Indica un cambio en el progreso del proceso pesado.
         /// </summary>
         ProgressChanged,
         
         /// <summary>
-        /// Indica un cambio del valor máximo para el progreso del proceso de fondo.
+        /// Indica un cambio del valor máximo para el progreso del proceso pesado.
         /// </summary>
         MaximumProgressChanged,
 
         /// <summary>
-        /// Indica un cambio en el tipo de comunicación, con o sin control de progreso, del proceso de fondo.
+        /// Indica un cambio en el tipo de comunicación, con o sin control de progreso, del proceso pesado.
         /// </summary>
         WithControlChanged
     }

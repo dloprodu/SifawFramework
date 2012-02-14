@@ -25,13 +25,13 @@ namespace Sifaw.WPF.Test
 			AbstractUIProviderManager<AbstractUIProvider>.SetUIElementLinker(new WPFProvider());
 
 			//(new MainWindow()).Show();			
-			
-			//UIBackgroundWorkerViewController workerController = new UIBackgroundWorkerViewController(null);
-			//workerController.UISettings.AllowCancel = true;
-			//workerController.Start(new UIBackgroundWorkerViewController.Input(new BackgroundWorkerPack(TestBackGroundWorker, null)));
 
-			UIGroupFiltersTestViewController groupFiltersTest = new UIGroupFiltersTestViewController();
-			groupFiltersTest.Start();
+			UIBackgroundWorkerViewController workerController = new UIBackgroundWorkerViewController(null);
+			workerController.UISettings.AllowCancel = true;
+			workerController.Start(new UIBackgroundWorkerViewController.Input(new BackgroundWorkerPack(TestBackGroundWorker, null)));
+
+			//UIGroupFiltersTestViewController groupFiltersTest = new UIGroupFiltersTestViewController();
+			//groupFiltersTest.Start();
 
 			//UIAssistantTestViewController assistantTest = new UIAssistantTestViewController();
 			//assistantTest.Start();

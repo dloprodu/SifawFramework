@@ -74,9 +74,9 @@ namespace Sifaw.Controllers.Components
         #region Methods
 
 		/// <summary>
-		/// Inica el proceso de fondo.
+		/// Inica el proceso pesado en un nuevo hilo de ejecución.
 		/// </summary>
-		/// <param name="communicator">Comunicador del proceso de fondo.</param>
+		/// <param name="communicator">Comunicador que usa el proceso para comunicarse con el proceso principal.</param>
         public void Start(BackgroundWorkerCommunicator communicator)
         {
             try

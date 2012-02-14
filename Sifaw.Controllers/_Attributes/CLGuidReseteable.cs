@@ -31,7 +31,7 @@ namespace Sifaw.Controllers
         #region Constructors
 
 		/// <summary>
-		/// Inicializa una nueva instancia de la clase <see cref="CLGuidReseteable"/> estableciendo <see cref="T:System.Guid.Empty"/>
+		/// Inicializa una nueva instancia de la clase <see cref="CLGuidReseteable"/> estableciendo <see cref="System.Guid.Empty"/>
 		/// como valor de reseteo.
 		/// </summary>
         public CLGuidReseteable()

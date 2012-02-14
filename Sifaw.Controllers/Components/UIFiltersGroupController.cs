@@ -34,11 +34,14 @@ namespace Sifaw.Controllers.Components
 	/// <para>
 	/// Los componentes usados han de implementar el evento <see cref="FilterChanged"/> para ser
 	/// considerados filtros válidos. Ejemplos de componentes que implementan este evento son todos aquellos
-	/// que deriven de <see cref="FilterBaseComponent"/>.
+	/// que deriven de <see cref="FilterBaseComponent{TFilter}"/>.
 	/// </para>
 	/// </remarks>
 	/// <exception cref="NotValidFilterException">Alguno de los componentes no implementa el evento <see cref="FilterChanged"/>.</exception>
-	/// <typeparam name="TFilter">Tipo para establecer los datos de filtro que devolverá la controladora.</typeparam>
+	/// <typeparam name="TFilter">
+	/// Tipo para establecer los datos de filtro que devolverá la controladora.
+	/// Ha de ser serializable y derivar de <see cref="UIFiltersGroupController{TFilter}.Filter"/>.
+	/// </typeparam>
 	public abstract class UIFiltersGroupController<TFilter> : UIShellComponentController
 		< UIFiltersGroupController<TFilter>.Input
 		, UIFiltersGroupController<TFilter>.Output
@@ -66,6 +69,9 @@ namespace Sifaw.Controllers.Components
 
 			#region Properties
 
+			/// <summary>
+			/// Devuelve el filtro a aplicar al iniciar la controladora.
+			/// </summary>
 			public TFilter Filter
 			{
 				get { return _filter; }
@@ -75,6 +81,11 @@ namespace Sifaw.Controllers.Components
 
 			#region Constructors
 
+			/// <summary>
+			/// Inicializa una nueva instancia de la clase <see cref="UIFiltersGroupController{TFilter}.Input"/>,
+			/// estableciendo un valor en la propiedad <see cref="Filter"/>.
+			/// </summary>
+			/// <param name="filter">Filtro a aplicar al iniciar la controladora.</param>
 			public Input(TFilter filter)
 				: base()
 			{
@@ -102,6 +113,9 @@ namespace Sifaw.Controllers.Components
 
 			#region Properties
 
+			/// <summary>
+			/// Devuelve el filtro establecido al finalizar la controladora.
+			/// </summary>
 			public TFilter Filter
 			{
 				get { return _filter; }
@@ -112,7 +126,8 @@ namespace Sifaw.Controllers.Components
 			#region Constructors
 
 			/// <summary>
-			/// Clase que engloba los parámetros de finalización de la controladora de procesos pesados
+			/// Inicializa una nueva instancia de la clase <see cref="UIFiltersGroupController{TFilter}.Output"/>,
+			/// estableciendo un valor en la propiedad <see cref="Filter"/>.
 			/// </summary>
 			/// <param name="filter">Filtro al finalizar la controladora.</param>
 			public Output(TFilter filter)
@@ -128,11 +143,17 @@ namespace Sifaw.Controllers.Components
 
 		#region Filter
 
+		/// <summary>
+		/// Filtro de <see cref="UIFiltersGroupController{TFilter}"/>.
+		/// </summary>
 		[Serializable]
 		public abstract class Filter : ICloneable
 		{
 			#region ICloneable Members
 
+			/// <summary>
+			/// Devuelve una copia del filtro de la controladora.
+			/// </summary>
 			public object Clone()
 			{
 				return UtilIO.Clone<TFilter>(this as TFilter);
@@ -145,6 +166,9 @@ namespace Sifaw.Controllers.Components
 
 		#region Settings
 
+		/// <summary>
+		/// Contenedor de ajustes de <see cref="UIFiltersGroupController{TFilter}"/>.
+		/// </summary>
 		[Serializable]
 		public new class UISettingsContainer : UIShellComponentController
 			< Input
@@ -154,6 +178,9 @@ namespace Sifaw.Controllers.Components
 		{
 			#region Constructors
 
+			/// <summary>
+			/// Inicializa una nueva instancia de la clase <see cref="UIFiltersGroupController{TFilter}.UISettingsContainer"/>.
+			/// </summary>
 			public UISettingsContainer()
 				: base()
 			{
@@ -170,7 +197,11 @@ namespace Sifaw.Controllers.Components
 		 * Desencadenadores privados.
 		 *  • Solo son lanzados por la controladora padre.
 		 */
-		
+
+		/// <summary>
+		/// Se produce cuando cambia el valor de la propiedad <see cref="Filter"/> de alguno de los
+		/// filtros alojados en la shell.
+		/// </summary>
 		public event CLFilterChangedEventHandler<TFilter> FilterChanged;
 		private void OnFilterChanged(CLFilterChangedEventArgs<TFilter> e)
 		{
@@ -197,11 +228,20 @@ namespace Sifaw.Controllers.Components
 
 		#region Constructors
 
+		/// <summary>
+		/// Inicializa una nueva instancia de la clase <see cref="UIFiltersGroupController{TFilter}"/>.
+		/// Establece como <see cref="AbstractUILinker{TUIElement}"/> aquel establecido por defecto a través de 
+		/// <see cref="AbstractUIProviderManager{TLinker}"/>.
+		/// </summary>
 		protected UIFiltersGroupController()
 			: base()
 		{
 		}
 
+		/// <summary>
+		/// Inicializa una nueva instancia de la clase <see cref="UIFiltersGroupController{TFilter}"/>, 
+		/// estableciendo un valor en la propiedad <see cref="Sifaw.Controllers.UIElementController{TInput, TOutput, TUISettings, TUIElement}.Linker"/>.
+		/// </summary>
 		protected UIFiltersGroupController(AbstractUILinker<ShellComponent> linker)
 			: base(linker)
 		{
@@ -221,6 +261,9 @@ namespace Sifaw.Controllers.Components
 
 		#region UIElement Methods
 
+		/// <summary>
+		/// Invoca al método sobrescirto <see cref="UIElementController{TInput, TOutput, TUISettings, TComponent}.OnAfterUIElementLoad()"/>.
+		/// </summary>
 		protected override void OnAfterUIElementLoad()
 		{
 			base.OnAfterUIElementLoad();
@@ -228,6 +271,11 @@ namespace Sifaw.Controllers.Components
 			/* Subscripción a eventos del componente... */		
 		}
 
+		/// <summary>
+		/// Invoca al método sobrescirto <see cref="UIElementController{TInput, TOutput, TUISettings, TComponent}.OnApplyUISettings()"/> y
+		/// posteriormente aplica la configuración al elemento <see cref="UIElementController{TInput, TOutput, TUISettings, TView}.UIElement"/> 
+		/// del tipo <see cref="ShellComponent"/>.
+		/// </summary>
         protected override void OnApplyUISettings()
         {
             base.OnApplyUISettings();
@@ -237,11 +285,17 @@ namespace Sifaw.Controllers.Components
 
 		#region Default Input / Output
 
+		/// <summary>
+		/// Devuelve los parámetros de reinicio por defecto.
+		/// </summary>
 		public override Input GetResetInput()
 		{
 			return GetDefaultInput();
 		}
 
+		/// <summary>
+		/// Devuelve los parámetros de retorno por defecto.
+		/// </summary>
 		protected override Output GetDefaultOutput()
 		{
 			return new Output(GetFilter());
@@ -254,6 +308,11 @@ namespace Sifaw.Controllers.Components
 		[CLReseteable(null)]
 		private Delegate[] FilterChangedCallbaks = null;
 
+		/// <summary>
+		/// Invoca al método sobrescirto <see cref="Controller{TInput, TOutput}.OnBeforeStartController()"/> y
+		/// posteriormente se subscribe a los eventos <see cref="UIFilterBaseController{TFilter, TUISettings, TComponent}.FilterChanged"/>
+		/// de los filtros alojados por la shell.
+		/// </summary>
 		protected override void OnBeforeStartController()
 		{
 			base.OnBeforeStartController();

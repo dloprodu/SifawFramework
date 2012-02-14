@@ -248,7 +248,7 @@ namespace Sifaw.Controllers
 		/// <summary>
 		/// Provoca el evento <see cref="ProgressChanged"/>.
 		/// </summary>
-		/// <param name="e"><see cref="T:Sifaw.Controllers.CLProgressChangedEventArgs"/> que contiene los datos del evento.</param>
+		/// <param name="e"><see cref="Sifaw.Controllers.CLProgressChangedEventArgs"/> que contiene los datos del evento.</param>
 		protected void OnProgressChanged(CLProgressChangedEventArgs e)
 		{
 			if (ProgressChanged != null)
@@ -263,7 +263,7 @@ namespace Sifaw.Controllers
 		/// <summary>
 		/// Provoca el evento <see cref="ThrowCtrl"/>.
 		/// </summary>
-		/// <param name="e"><see cref="T:Sifaw.Controllers.CLThrowEventArgs"/> que contiene los datos del evento.</param>
+		/// <param name="e"><see cref="Sifaw.Controllers.CLThrowEventArgs"/> que contiene los datos del evento.</param>
 		protected void OnThrowCtrl(CLThrowEventArgs e)
 		{
 			if (ThrowCtrl != null)

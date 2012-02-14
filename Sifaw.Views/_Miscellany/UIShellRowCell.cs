@@ -28,10 +28,25 @@ namespace Sifaw.Views
 	/// </summary>
 	public struct UIShellRowCell
 	{
+		/// <summary>
+		/// Devuelve el ancho de la celda de la shell.
+		/// </summary>
 		public readonly double Width;
+
+		/// <summary>
+		/// Devuelve el modo de ajuste de la celda de la shell.
+		/// </summary>
 		public readonly UILengthModes Mode;
+
+		/// <summary>
+		/// Devuelve el contenido de la celda de la shell.
+		/// </summary>
 		public readonly UIComponent Content;
 
+		/// <summary>
+		/// Inicializa una nueva instancia de la clase <see cref="UIShellRowCell"/>, estableciendo un valor para los campos
+		/// <see cref="Width"/>, <see cref="Mode"/> y <see cref="Content"/>.
+		/// </summary>
 		public UIShellRowCell(double width, UILengthModes mode, UIComponent content)
 		{
 			Width = width;

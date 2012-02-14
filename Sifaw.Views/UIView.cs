@@ -81,35 +81,27 @@ namespace Sifaw.Views
 		/// <summary>
 		/// Muestra un message de advertencia al usuario.
 		/// </summary>
-		/// <param name="message">Mensaje a mostrar.</param>
+		/// <param name="warning">Mensaje a mostrar.</param>
 		void ShowWarning(string warning);
 
 		/// <summary>
 		/// Muestra un message de advertencia al usuario.
 		/// </summary>
-		/// <param name="titulo">Título a mostrar antes del message.</param>
-		/// <param name="message">Mensaje a mostrar.</param>
+		/// <param name="title">Título a mostrar antes del message.</param>
+		/// <param name="warning">Mensaje a mostrar.</param>
 		void ShowWarning(string title, string warning);
 
 		/// <summary>
 		/// Muestra un message de error al usuario.
 		/// </summary>
-		/// <remarks>
-		/// Este método se borrará en cuanto haya dejado de usarse por los programadores
-		/// de Pincel eKade. Se debe usar el MostrarError que recibe un objeto Exception.
-		/// </remarks>
-		/// <param name="message">Mensaje a mostrar.<</param>
+		/// <param name="error">Mensaje a mostrar.</param>
 		void ShowError(string error);
 
 		/// <summary>
 		/// Muestra un message de error al usuario.
 		/// </summary>
-		/// <remarks>
-		/// Este método se borrará en cuanto haya dejado de usarse por los programadores
-		/// de Pincel eKade. Se debe usar el MostrarError que recibe un objeto Exception.
-		/// </remarks>
-		/// <param name="titulo">Título a mostrar antes del message.</param>
-		/// <param name="message">Mensaje a mostrar.<</param>
+		/// <param name="title">Título a mostrar antes del message.</param>
+		/// <param name="error">Mensaje a mostrar.</param>
 		void ShowError(string title, string error);
 
 		/// <summary>
@@ -121,26 +113,26 @@ namespace Sifaw.Views
 		/// <summary>
 		/// Muestra un mensaje al usuario pidiendo confirmación para el mismo.
 		/// </summary>
-		/// <param name="titulo">Título a mostrar antes del message.</param>
+		/// <param name="title">Título a mostrar antes del message.</param>
 		/// <param name="message">Mensaje a mostrar.</param>
-		bool ConfirmMessage(string titulo, string message);
+		bool ConfirmMessage(string title, string message);
 
 		#endregion
 
 		#region Events
 
 		/// <summary>
-		/// Tiene lugar antes de que la vista sea mostrada.
+		/// Se produce antes de que la vista sea mostrada.
 		/// </summary>
 		event EventHandler BeforeShow;
 
 		/// <summary>
-		/// Tiene lugar una vez que la vista se ha mostrado.
+		/// Se produce una vez que la vista se ha mostrado.
 		/// </summary>
 		event EventHandler AfterShow;
 
 		/// <summary>
-		/// Tiene lugar cuando se solicita desde la vista la finalización.
+		/// Se produce cuando se solicita desde la vista la finalización.
 		/// </summary>
 		/// <remarks>
 		/// <para>
@@ -160,7 +152,7 @@ namespace Sifaw.Views
 		event UIFinishRequestEventHandler BeforeClose;
 
 		/// <summary>
-		/// Tiene lugar cuando la vista se ha cerrado.
+		/// Se produce cuando la vista se ha cerrado.
 		/// </summary>
 		event EventHandler AfterClose;
 

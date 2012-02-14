@@ -38,6 +38,9 @@ namespace Sifaw.Views
 		/// </summary>
 		public readonly bool IsClosing;
 
+		/// <summary>
+		/// Inicializa una nueva instancia de la clase <see cref="UIFinishRequestEventArgs"/>, estableciendo un valor en la propiedad <see cref="IsClosing"/>.
+		/// </summary>
 		public UIFinishRequestEventArgs(bool isClosing)
 			: base()
 		{

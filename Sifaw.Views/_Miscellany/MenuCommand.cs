@@ -48,6 +48,13 @@ namespace Sifaw.Views
 
         #region Constructors
 
+		/// <summary>
+		/// Inicializa una nueva instancia de la clase <see cref="MenuCommand"/>, estableciendo
+		/// valores para los campos <see cref="IdGroup"/>, <see cref="IdCommand"/> y <see cref="Command"/>.
+		/// </summary>
+		/// <param name="idGroup">Valor que indica la agrupación del comando.</param>
+		/// <param name="idCommand">Valor que indica el identificador del comando.</param>
+		/// <param name="command">Nombre del comando.</param>
         public MenuCommand(int idGroup, int idCommand, string command)
         {
             IdGroup = idGroup;

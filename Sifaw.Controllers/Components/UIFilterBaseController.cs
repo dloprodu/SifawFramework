@@ -226,7 +226,9 @@ namespace Sifaw.Controllers.Components
 
 		/// <summary>
 		/// Inicializa una nueva instancia de la clase <see cref="UIFilterBaseController{TFilter, TUISettings, TComponent}"/>, 
-		/// estableciendo un valor en la propiedad <see cref="Sifaw.Controllers.UIElementController{TInput, TOutput, TUISettings, TUIElement}.Linker"/>.
+		/// estableciendo el <see cref="AbstractUILinker{TUIElement}"/> especificado como valor de la propiedad 
+		/// <see cref="UIElementController{TInput, TOutput, TUISettings, TUIElement}.Linker"/> donde <c>TUIElement</c>
+		/// implementa <see cref="FilterBaseComponent{TFilter}"/>.
 		/// </summary>
 		protected UIFilterBaseController(AbstractUILinker<TComponent> linker)
 			: base(linker)
@@ -282,6 +284,15 @@ namespace Sifaw.Controllers.Components
 		#endregion
 
 		#region Start Methods
+
+		/// <summary>
+		/// Devuelve un valor que indica que se puede reiniciar una controladora <see cref="UIFilterBaseController{TFilter, TUISettings, TComponent}"/>.
+		/// </summary>
+		/// <returns>true</returns>
+		protected override bool AllowReset()
+		{
+			return true;
+		}
 
 		/// <summary>
 		/// Invoca al método sobrescirto <see cref="Controller{TInput, TOutput}.OnAfterStartController()"/> y

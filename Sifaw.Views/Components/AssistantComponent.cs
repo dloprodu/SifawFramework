@@ -29,11 +29,30 @@ namespace Sifaw.Views.Components
 	{
 		#region Properties
 
+		/// <summary>
+		/// Devuelve o establece el número de componentes que mostrará el asistente.
+		/// </summary>
 		byte NumComponents { get; set; }
+
+		/// <summary>
+		/// Devuelve o establece un valor que indica si se permite la navegación al componente anterior.
+		/// </summary>
 		bool PreviousEnabled { get; set; }
-		bool AcceptEnabled { get; set; }
-		bool CancelEnabled { get; set; }
+
+		/// <summary>
+		/// Devuelve o establece un valor que indica si se permite la navegación al componente siguiente.
+		/// </summary>
 		bool NextEnabled { get; set; }
+
+		/// <summary>
+		/// Devuelve o establece un valor que indica si se permite aceptar el proceso.
+		/// </summary>
+		bool AcceptEnabled { get; set; }
+
+		/// <summary>
+		/// Devuelve o establece un valor que indica si se permite cancelar el proceso.
+		/// </summary>
+		bool CancelEnabled { get; set; }
 
 		#endregion
 
@@ -42,16 +61,32 @@ namespace Sifaw.Views.Components
 		/// <summary>
 		/// Establece el componente de interfaz de usuario a mostrar.
 		/// </summary>
-		/// <param name="component"></param>
+		/// <param name="component">Componente a mostrar.</param>
+		/// <param name="step">Valor que indica la posición actual en la secuencia de componentes.</param>
 		void SetCurrentUIComponent(UIComponent component, byte step);
 
 		#endregion
 
 		#region Events
 
+		/// <summary>
+		/// Se produce cuando se solicita mostrar el siguiente componente.
+		/// </summary>
 		event EventHandler Next;
+
+		/// <summary>
+		/// Se produce cuando se solicita mostrar el anterior componente.
+		/// </summary>
 		event EventHandler Previous;
+
+		/// <summary>
+		/// Se produce cuando se solicita cancelar el proceso.
+		/// </summary>
 		event EventHandler Cancel;
+
+		/// <summary>
+		/// Se produce cuando se solicita aceptar el proceso.
+		/// </summary>
 		event EventHandler Accept;
 
 		#endregion

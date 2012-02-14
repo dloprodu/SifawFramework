@@ -229,7 +229,9 @@ namespace Sifaw.Controllers.Components
 
         /// <summary>
         /// Inicializa una nueva instancia de la clase <see cref="UIAssistantController{TInput, TOutput}"/>, 
-        /// estableciendo un valor en la propiedad <see cref="Sifaw.Controllers.UIElementController{TInput, TOutput, TUISettings, TUIElement}.Linker"/>.
+		/// estableciendo el <see cref="AbstractUILinker{TUIElement}"/> establecido como valor de la propiedad 
+		/// <see cref="UIElementController{TInput, TOutput, TUISettings, TUIElement}.Linker"/> donde <c>TUIElement</c>
+		/// implementa <see cref="AssistantComponent"/>.
         /// </summary>
 		protected UIAssistantController(AbstractUILinker<AssistantComponent> linker)
 			: base(linker)

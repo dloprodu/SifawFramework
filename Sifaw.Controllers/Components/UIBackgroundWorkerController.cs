@@ -75,7 +75,6 @@ namespace Sifaw.Controllers.Components
 			public BackgroundWorkerPack WorkerPack
 			{
 				get { return _workerPack; }
-				set { _workerPack = value; }
 			}
 
 			#endregion
@@ -83,7 +82,8 @@ namespace Sifaw.Controllers.Components
 			#region Constructors
 
 			/// <summary>
-            /// Inicializa una nueva instancia de la clase <see cref="UIBackgroundWorkerController.Input"/>
+            /// Inicializa una nueva instancia de la clase <see cref="UIBackgroundWorkerController.Input"/>,
+			/// estableciendo un valor a la propiedad <see cref="WorkerPack"/>.
 			/// </summary>
 			/// <param name="worker">Paquete de ejecución</param>
 			public Input(BackgroundWorkerPack worker)
@@ -314,7 +314,9 @@ namespace Sifaw.Controllers.Components
 
         /// <summary>
         /// Inicializa una nueva instancia de la clase <see cref="BackgroundWorkerComponent"/>, 
-        /// estableciendo un valor en la propiedad <see cref="Sifaw.Controllers.UIElementController{TInput, TOutput, TUISettings, TUIElement}.Linker"/>.
+		/// estableciendo el <see cref="AbstractUILinker{TUIElement}"/> especificado como valor de la propiedad 
+		/// <see cref="UIElementController{TInput, TOutput, TUISettings, TUIElement}.Linker"/> donde <c>TUIElement</c>
+		/// implementa <see cref="BackgroundWorkerComponent"/>.
         /// </summary>
 		public UIBackgroundWorkerController(AbstractUILinker<BackgroundWorkerComponent> linker)
 			: base(linker)

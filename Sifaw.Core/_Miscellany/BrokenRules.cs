@@ -22,7 +22,8 @@ using System.Text;
 namespace Sifaw.Core
 {
 	/// <summary>
-	/// Clase que gestiona el registro de reglas rotas de un objeto.
+	/// Clase que gestiona el registro de reglas rotas de un objeto 
+	/// con necesidad de validación.
 	/// </summary>
 	[Serializable()]
 	public class BrokenRules
@@ -121,11 +122,17 @@ namespace Sifaw.Core
 
 			#region System.Object
 
+			/// <summary>
+			/// Devuelve la representación de cadena de un objeto <see cref="Rule"/>.
+			/// </summary>
 			public override string ToString()
 			{
 				return Name;
 			}
 
+			/// <summary>
+			/// Determina si un objeto <see cref="Rule"/> proporcionado es equivalente al objeto <see cref="Rule"/> actual.
+			/// </summary>
 			public override bool Equals(object obj)
 			{
 				if (!(obj is Rule))
@@ -134,6 +141,9 @@ namespace Sifaw.Core
 				return Equals((Rule)obj);
 			}
 
+			/// <summary>
+			/// Obtiene un código hash de este objeto <see cref="Rule"/>.
+			/// </summary>
 			public override int GetHashCode()
 			{
 				return Name.GetHashCode();
@@ -143,6 +153,9 @@ namespace Sifaw.Core
 
 			#region Miembros de IEquatable<Rule>
 
+			/// <summary>
+			/// Determina si un objeto <see cref="Rule"/> proporcionado es equivalente al objeto <see cref="Rule"/> actual.
+			/// </summary>
 			public bool Equals(Rule other)
 			{
 				return Name.Equals(other.Name);
@@ -178,7 +191,7 @@ namespace Sifaw.Core
 			#region Properties
 
 			/// <summary>
-			/// Devuelve el objeto <see cref="Sifaw.BrokenRules.Rule"/> 
+			/// Devuelve el objeto <see cref="Sifaw.Core.BrokenRules.Rule"/> 
 			/// que contiene el detalle sobre la regla especificada.
 			/// </summary>
 			public Rule this[int index]
@@ -214,6 +227,11 @@ namespace Sifaw.Core
 
 			#region Contains
 
+			/// <summary>
+			/// Devuelve una valor que indica si un objecto <see cref="Sifaw.Core.BrokenRules.Rule"/> especificado por
+			/// su nombre se encuentra en la colección.
+			/// </summary>
+			/// <param name="name">Nombre de un objeto <see cref="Sifaw.Core.BrokenRules.Rule"/>.</param>
 			public bool Contains(string name)
 			{
 				foreach (Rule rule in this)
@@ -227,6 +245,9 @@ namespace Sifaw.Core
 
 			#region Constructors
 
+			/// <summary>
+			/// Inicializa una nueva instancia de <see cref="RulesCollection"/>.
+			/// </summary>
 			internal RulesCollection()
 			{
 			}
@@ -256,6 +277,11 @@ namespace Sifaw.Core
 				}
 			}
 			
+			/// <summary>
+			/// Devuelve el índice donde se encuentra el objeto <see cref="Sifaw.Core.BrokenRules.Rule"/> especificado por su nombre.
+			/// </summary>
+			/// <param name="name">Nombre de un objeto <see cref="Sifaw.Core.BrokenRules.Rule"/>.</param>
+			/// <returns>Índice del objeto <see cref="Sifaw.Core.BrokenRules.Rule"/>.</returns>
 			public int IndexOf(string name)
 			{
 				for (int index = 0; index < List.Count; index++)
@@ -267,7 +293,7 @@ namespace Sifaw.Core
 
 			/// <summary>
 			/// Returns the text of all broken rule descriptions, each
-			/// separated by a <see cref="Environment.NewLine" />.
+			/// separated by a <see cref="Environment.NewLine"/>.
 			/// </summary>
 			/// <param name="severity">The severity of rules to
 			/// include in the result.</param>
@@ -291,6 +317,9 @@ namespace Sifaw.Core
 				return result.ToString();
 			}
 
+			/// <summary>
+			/// Devuelve un array que contiene la descripción de todas las reglas rotas.
+			/// </summary>
 			public string[] ToArray()
 			{
 				string[] description = new string[this.Count];
@@ -303,6 +332,11 @@ namespace Sifaw.Core
 				return description;
 			}
 
+			/// <summary>
+			/// Devuelve un array que contiene la descripción de las reglas con el nivel de severidad
+			/// especificado.
+			/// </summary>
+			/// <param name="severity">Nivel de severidad.</param>
 			public string[] ToArray(RuleSeverities severity)
 			{
 				string[] description = null;
@@ -457,9 +491,9 @@ namespace Sifaw.Core
 		/// broken, it is recorded under the rule name value. To mark the rule as not
 		/// broken, the same rule name must be used.
 		/// </remarks>
-		/// <param name="Rule">The name of the business rule.</param>
-		/// <param name="Description">The description of the business rule.</param>
-		/// <param name="IsBroken">True if the value is broken, False if it is not broken.</param>
+		/// <param name="rule">The name of the business rule.</param>
+		/// <param name="description">The description of the business rule.</param>
+		/// <param name="isBroken">True if the value is broken, False if it is not broken.</param>
 		public void Assert(string rule, string description, bool isBroken)
 		{
 			if (isBroken)
@@ -478,10 +512,10 @@ namespace Sifaw.Core
 		/// broken, it is recorded under the rule name value. To mark the rule as not
 		/// broken, the same rule name must be used.
 		/// </remarks>
-		/// <param name="Rule">The name of the business rule.</param>
-		/// <param name="Description">The description of the business rule.</param>
-		/// <param name="IsBroken">True if the value is broken, False if it is not broken.</param>
-		/// <param name="RuleSeverities">It specifies the severity level.</param>
+		/// <param name="rule">The name of the business rule.</param>
+		/// <param name="description">The description of the business rule.</param>
+		/// <param name="isBroken">True if the value is broken, False if it is not broken.</param>
+		/// <param name="severity">It specifies the severity level.</param>
 		public void Assert(string rule, string description, bool isBroken, RuleSeverities severity)
 		{
 			if (isBroken)
@@ -494,7 +528,7 @@ namespace Sifaw.Core
 		/// Returns a value indicating whether a particular business rule
 		/// is currently broken.
 		/// </summary>
-		/// <param name="Rule">The name of the rule to check.</param>
+		/// <param name="rule">The name of the rule to check.</param>
 		/// <returns>A value indicating whether the rule is currently broken.</returns>
 		public bool IsBroken(string rule)
 		{

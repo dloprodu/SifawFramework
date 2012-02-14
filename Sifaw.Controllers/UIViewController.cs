@@ -124,7 +124,8 @@ namespace Sifaw.Controllers
             }
 
 			/// <summary>
-            /// Inicializa una nueva instancia de <see cref="UIViewController{TInput, TOutput, TUISettings, TView}.Input"/>, estableciendo un valor a la propiedad <see cref="ShowView"/>.
+            /// Inicializa una nueva instancia de <see cref="UIViewController{TInput, TOutput, TUISettings, TView}.Input"/>, 
+			/// estableciendo un valor a la propiedad <see cref="ShowView"/>.
 			/// </summary>
 			/// <param name="showView">Indica si se muestra la vista al iniciar la controladora.</param>
             protected Input(bool showView)
@@ -347,7 +348,9 @@ namespace Sifaw.Controllers
 
 		/// <summary>
 		/// Inicializa una nueva instancia de la clase <see cref="UIViewController{TInput, TOutput, TUISettings, TView}"/>, 
-		/// estableciendo un valor en la propiedad <see cref="Sifaw.Controllers.UIElementController{TInput, TOutput, TUISettings, TUIElement}.Linker"/>.
+		/// estableciendo el <see cref="AbstractUILinker{TUIElement}"/> especificado como valor de la propiedad 
+		/// <see cref="UIElementController{TInput, TOutput, TUISettings, TUIElement}.Linker"/> donde <c>TUIElement</c> implementa
+		/// <see cref="UIView"/>.
 		/// </summary>
         protected UIViewController(AbstractUILinker<TView> linker)
             : base(linker)

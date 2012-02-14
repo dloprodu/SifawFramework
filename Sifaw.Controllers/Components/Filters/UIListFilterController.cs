@@ -43,6 +43,9 @@ namespace Sifaw.Controllers.Components.Filters
 	{
 		#region Settings
 
+		/// <summary>
+		/// Contenedor de ajustes de <see cref="UIListFilterController"/>.
+		/// </summary>
 		[Serializable]
 		public new class UISettingsContainer : UIListFilterBaseController
 			< IList<IFilterable>
@@ -52,6 +55,9 @@ namespace Sifaw.Controllers.Components.Filters
 		{
 			#region Constructors
 
+			/// <summary>
+			/// Inicializa una nueva instancia de la clase <see cref="UIListFilterController.UISettingsContainer"/>.
+			/// </summary>
 			public UISettingsContainer()
 				: base()
 			{
@@ -64,11 +70,22 @@ namespace Sifaw.Controllers.Components.Filters
 
 		#region Constructors
 
+		/// <summary>
+		/// Inicializa una nueva instancia de la clase <see cref="UIListFilterController"/>.
+		/// Establece como <see cref="AbstractUILinker{TUIElement}"/> aquel establecido por defecto a través de 
+		/// <see cref="AbstractUIProviderManager{TLinker}"/>.
+		/// </summary>
 		public UIListFilterController()
 			: base()
 		{
 		}
 
+		/// <summary>
+		/// Inicializa una nueva instancia de la clase <see cref="UIListFilterController"/>, 
+		/// estableciendo el <see cref="AbstractUILinker{TUIElement}"/> como valor de la propiedad 
+		/// <see cref="UIElementController{TInput, TOutput, TUISettings, TUIElement}.Linker"/> donde <c>TUIElement</c>
+		/// implementa <see cref="ListFilterComponent"/>.
+		/// </summary>
 		public UIListFilterController(AbstractUILinker<ListFilterComponent> linker)
 			: base(linker)
 		{
@@ -78,6 +95,9 @@ namespace Sifaw.Controllers.Components.Filters
 
 		#region Default input / output
 
+		/// <summary>
+		/// Devuelve los parámetros de inicio por defecto.
+		/// </summary>
 		public override Input GetDefaultInput()
 		{
 			return new Input(new List<IFilterable>());
@@ -87,6 +107,11 @@ namespace Sifaw.Controllers.Components.Filters
 
         #region UIElement Methods
 
+		/// <summary>
+		/// Invoca al método sobrescirto <see cref="UIElementController{TInput, TOutput, TUISettings, TComponent}.OnApplyUISettings()"/> y
+		/// posteriormente aplica la configuración al elemento <see cref="UIElementController{TInput, TOutput, TUISettings, TView}.UIElement"/> 
+		/// del tipo <see cref="ListFilterComponent"/>.
+		/// </summary>
         protected override void OnApplyUISettings()
         {
             base.OnApplyUISettings();
@@ -96,16 +121,17 @@ namespace Sifaw.Controllers.Components.Filters
 
 		#region Start Methods
 
+		/// <summary>
+		/// Ejecuta los comandos de inicio de la controladora.
+		/// </summary>
 		protected override void StartController()
 		{
 			/* Empty */
 		}
 
-		protected override bool AllowReset()
-		{
-			return true;
-		}
-
+		/// <summary>
+		/// Ejecuta los comandos de reinicio de la controladora.
+		/// </summary>
 		protected override void ResetController()
 		{
 			/* Empty */

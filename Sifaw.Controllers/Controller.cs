@@ -47,6 +47,16 @@ namespace Sifaw.Controllers
 	/// Además las controladoras han de definir los parametros que recibirán como entrada cuando son iniciadas (<see cref="Controller{TInput, TOutput}.Input"/>)
 	/// y aquellos que retornarán cuando finalicen (<see cref="Controller{TInput, TOutput}.Output"/>).
     /// </para>
+	/// <para>
+	/// Como norma de buenas prácticas es deseable que las propiedades de los parámetros de entrada y retorno de las controladoras sean
+	/// de solo lectura de modo que sus valores se establescan por medio de los constructores.
+	/// </para>
+	/// <para>
+	/// Al iniciar la controladora se realizan dos copias de los parámetros de entrada. Una copia puede ser referenciada por las controladoras derivadas
+	/// a través de la propiedad protegida <see cref="Controller{TInput, TOutput}.Parameters"/> y es posible modificar alguno de los valores originales. La 
+	/// otra copia puede ser obtenida a través del método protegido <see cref="Controller{TInput, TOutput}.GetInitialParameters()"/> el cual  
+	/// devuelve una copia de los parámetros de entrada originales.
+	/// </para>
     /// </remarks>
 	/// <typeparam name="TInput">
     /// Tipo para establecer los parámetros de inicio de la controladora. Ha de ser serializable y 

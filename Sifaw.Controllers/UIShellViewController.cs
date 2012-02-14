@@ -148,7 +148,9 @@ namespace Sifaw.Controllers
 
         /// <summary>
         /// Inicializa una nueva instancia de la clase <see cref="UIShellViewController{TInput, TOutput, TUISettings, TGuest}"/>, 
-        /// estableciendo un valor en la propiedad <see cref="Sifaw.Controllers.UIElementController{TInput, TOutput, TUISettings, TUIElement}.Linker"/>.
+		/// estableciendo el <see cref="AbstractUILinker{TUIElement}"/> especificado como valor de la propiedad 
+		/// <see cref="UIElementController{TInput, TOutput, TUISettings, TUIElement}.Linker"/>
+		/// donde <c>TUIElement</c> implementa <see cref="ShellView"/>.
         /// </summary>
 		protected UIShellViewController(AbstractUILinker<ShellView> linker)
 			: base(linker)

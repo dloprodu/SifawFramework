@@ -33,6 +33,9 @@ namespace Sifaw.Views.Components
 	/// </summary>
 	public class UIFilterChangedEventArgs : SFCancelEventArgs
 	{
+		/// <summary>
+		/// Inicializa una nueva instancia de la clase <see cref="UIFilterChangedEventArgs"/>.
+		/// </summary>
 		public UIFilterChangedEventArgs()
 			: base()
 		{

@@ -41,6 +41,10 @@ namespace Sifaw.Controllers
 	/// Los ajustes sobre el elemento de interfaz de usuario se establecen mediante la propiedad <see cref="UISettings"/> que actúa a
 	/// modo de proxy entre la controladora y el <see cref="UIElement"/>.
 	/// </para>
+	/// <para>
+	/// Como norma de buenas prácticas es deseable que las propiedades de <see cref="UISettings"/> sean seteables de modo que la configuración
+	/// del elemento de interfaz de usuario pueda ser actualizada.
+	/// </para>
 	/// </remarks>
 	/// <typeparam name="TInput">
 	/// Tipo para establecer los parámetros de inicio de la controladora. Ha de ser serializable y 
@@ -496,7 +500,8 @@ namespace Sifaw.Controllers
 
 		/// <summary>
 		/// Inicializa una nueva instancia de la clase <see cref="UIElementController{TInput, TOutput, TUISettings, TUIElement}"/>, 
-		/// estableciendo un valor en la propiedad <see cref="Linker"/>.
+		/// estableciendo el <see cref="AbstractUILinker{TUIElement}"/> especificado como valor de la propiedad <see cref="Linker"/>
+		/// donde <c>TUIElement</c> implementa <see cref="UIElement"/>.
 		/// </summary>
 		protected UIElementController(AbstractUILinker<TUIElement> linker)
 			: base()

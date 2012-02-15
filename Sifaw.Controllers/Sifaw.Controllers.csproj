@@ -107,11 +107,6 @@
     <Compile Include="Components\_Miscellany\BackgroundWorkerPack.cs" />
     <Compile Include="Components\_Miscellany\ReportProgressCommand.cs" />
     <Compile Include="UIShellComponentController.cs" />
-    <Compile Include="_Templates\UIShellComponentController1.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>UIShellComponentController.tt</DependentUpon>
-    </Compile>
     <Compile Include="_Attributes\CLGuidReseteable.cs" />
     <Compile Include="_Delegates\GetRowCellSettingsShellCallback.cs" />
     <Compile Include="_Delegates\GetNumberOfCellsAtShellCallback.cs" />
@@ -178,12 +173,6 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="_Templates\UIShellComponentController.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>UIShellComponentController1.cs</LastGenOutput>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

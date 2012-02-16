@@ -112,6 +112,25 @@ namespace Sifaw.Controllers
             , TUISettings
             , TComponent>.UISettingsContainer
 		{
+			#region Fields
+
+			private UIDistance _margin;
+
+			#endregion
+
+			#region Properties
+
+			/// <summary>
+			/// Obtiene o establece una el margen de <see cref="UIElementController{TInput, TOutput, TUISettings, TUIElement}.UIElement"/>.
+			/// </summary>
+			public UIDistance Margin
+			{
+				get { return _margin; }
+				set { _margin = value; }
+			}
+			
+			#endregion
+			
 			#region Constructors
 
 			/// <summary>
@@ -120,6 +139,7 @@ namespace Sifaw.Controllers
 			public UISettingsContainer()
 				: base()
 			{
+				this._margin = UIDistance.Empty;
 			}
 
 			#endregion
@@ -268,6 +288,8 @@ namespace Sifaw.Controllers
         protected override void OnApplyUISettings()
         {
             base.OnApplyUISettings();
+
+			UIElement.Margin = UISettings.Margin;
         }
 
         #endregion

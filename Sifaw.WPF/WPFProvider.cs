@@ -25,6 +25,8 @@ using Sifaw.Views;
 using Sifaw.Views.Components;
 using Sifaw.Views.Components.Filters;
 
+using Sifaw.WPF.Filters;
+
 
 namespace Sifaw.WPF
 {

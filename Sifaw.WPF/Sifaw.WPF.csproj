@@ -58,15 +58,15 @@
     <Compile Include="BackgroundWorkerControl.xaml.cs">
       <DependentUpon>BackgroundWorkerControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="BoolFilterControl.cs" />
+    <Compile Include="Filters\BoolFilterControl.cs" />
     <Compile Include="Commands\DelegateCommand.cs" />
-    <Compile Include="DropDownListFilterControl.cs" />
-    <Compile Include="EnumFilterControl.cs" />
-    <Compile Include="ListFilterControl.cs" />
+    <Compile Include="Filters\DropDownListFilterControl.cs" />
+    <Compile Include="Filters\EnumFilterControl.cs" />
+    <Compile Include="Filters\ListFilterControl.cs" />
     <Compile Include="ShellControl.xaml.cs">
       <DependentUpon>ShellControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="TextFilterControl.cs" />
+    <Compile Include="Filters\TextFilterControl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

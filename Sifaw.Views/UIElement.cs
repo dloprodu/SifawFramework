@@ -31,7 +31,7 @@ namespace Sifaw.Views
 		#region Properties
 
 		/// <summary>
-		/// Establece o devuelve la denominación del <see cref="UIElement"/>.
+		/// Obtiene o establece la denominación del <see cref="UIElement"/>.
 		/// </summary>
 		string Denomination { get; set; }
 
@@ -41,25 +41,25 @@ namespace Sifaw.Views
 		string Description { get; set; }
 
 		/// <summary>
-		/// Establece o devuelve el ancho mínimo del <see cref="UIElement"/>.
+		/// Obtiene o establece el ancho mínimo del <see cref="UIElement"/>.
 		/// </summary>
 		double MinWidth { get; set; }
 
 		/// <summary>
-		/// Establece o devuelve el ancho máximo del <see cref="UIElement"/>.
+		/// Obtiene o establece el ancho máximo del <see cref="UIElement"/>.
 		/// </summary>
 		double MaxWidth { get; set; }
 
 		/// <summary>
-		/// Establece o devuelve el alto mínimo del <see cref="UIElement"/>.
+		/// Obtiene o establece el alto mínimo del <see cref="UIElement"/>.
 		/// </summary>
 		double MinHeight { get; set; }
 
 		/// <summary>
-		/// Establece o devuelve el alto máximo del <see cref="UIElement"/>.
+		/// Obtiene o establece el alto máximo del <see cref="UIElement"/>.
 		/// </summary>
 		double MaxHeight { get; set; }
-
+		
 		#endregion
 
 		#region Methods

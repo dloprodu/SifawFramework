@@ -306,9 +306,6 @@ namespace Sifaw.Controllers.Components
 
 		#region Start Methods
 
-		[CLReseteable(null)]
-		private Delegate[] FilterChangedCallbaks = null;
-
 		/// <summary>
 		/// Invoca al método sobrescirto <see cref="Controller{TInput, TOutput}.OnBeforeStartController()"/> y
 		/// posteriormente se subscribe a los eventos <see cref="UIFilterBaseController{TFilter, TUISettings, TComponent}.FilterChanged"/>
@@ -320,8 +317,6 @@ namespace Sifaw.Controllers.Components
 
 			if (GuestComponentes != null)
 			{
-				FilterChangedCallbaks = new Delegate[GuestComponentes.Count];
-
 				for (int i = 0; i < GuestComponentes.Count; i++)
 				{
 					try
@@ -332,7 +327,7 @@ namespace Sifaw.Controllers.Components
 							, this
 							, typeof(UIFiltersGroupController<TFilter>)
 							, "GuestComponentes_FilterChanged"
-							, FilterChangedCallbaks[i]);
+							, (Delegate)null);
 					}
 					catch
 					{

@@ -33,7 +33,7 @@ using Sifaw.Views;
 using Sifaw.Views.Components.Filters;
 
 
-namespace Sifaw.WPF
+namespace Sifaw.WPF.Filters
 {
 	/// <summary>
 	/// Representa un control que implementa el componente <see cref="BoolFilterComponent"/>.
@@ -150,6 +150,16 @@ namespace Sifaw.WPF
 		{
 			if (FilterChanged != null)
 				FilterChanged(this as TextFilterComponent, e);
+		}
+
+		#endregion
+
+		#region UIComponent Members
+
+		public new UIDistance Margin
+		{
+			get { return new UIDistance(base.Margin.Left, base.Margin.Top, base.Margin.Right, base.Margin.Bottom); }
+			set { base.Margin = new Thickness(value.Left, value.Top, value.Right, value.Bottom); }
 		}
 
 		#endregion

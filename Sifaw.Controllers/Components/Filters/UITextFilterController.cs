@@ -54,7 +54,7 @@ namespace Sifaw.Controllers.Components.Filters
 			#region Properties
 
 			/// <summary>
-			/// Devuelve o establece el placeholder, o texto de entrada, para el componente.
+			/// Obtiene o establece el placeholder, o texto de entrada, para el componente.
 			/// </summary>
 			public string Placeholder
 			{

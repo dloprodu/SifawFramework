@@ -33,7 +33,7 @@ using Sifaw.Views.Components;
 using Sifaw.Views.Components.Filters;
 
 
-namespace Sifaw.WPF
+namespace Sifaw.WPF.Filters
 {
 	/// <summary>
 	/// Representa un control que implementa el componente <see cref="ListFilterComponent"/>.
@@ -122,8 +122,20 @@ namespace Sifaw.WPF
 
 		public IList<IFilterable> Filter
 		{
-			get	{ return SelectedItems as IList<IFilterable>; }
-			set	{ SetSelectedItems(value);	}
+			get	
+			{
+				List<IFilterable> filter = new List<IFilterable>();
+				
+				foreach (IFilterable item in SelectedItems)
+					filter.Add(item);
+				
+				return filter; 
+			}
+			set	
+			{				
+				//SelectAll();
+				SetSelectedItems(value); 
+			}
 		}
 
 		public event UIFilterChangedEventHandler FilterChanged;
@@ -131,6 +143,16 @@ namespace Sifaw.WPF
 		{
 			if (FilterChanged != null)
 				FilterChanged(this as TextFilterComponent, e);
+		}
+
+		#endregion
+
+		#region UIComponent Members
+
+		public new UIDistance Margin
+		{
+			get { return new UIDistance(base.Margin.Left, base.Margin.Top, base.Margin.Right, base.Margin.Bottom); }
+			set { base.Margin = new Thickness(value.Left, value.Top, value.Right, value.Bottom); }
 		}
 
 		#endregion

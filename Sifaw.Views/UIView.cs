@@ -32,22 +32,22 @@ namespace Sifaw.Views
 		#region Properties
 
 		/// <summary>
-		/// Establece o devuelve la cabecera de la vista.
+		/// Obtiene o establece la cabecera de la vista.
 		/// </summary>
 		string Header { get; set; }
 
 		/// <summary>
-		/// Establece o devuelve el ancho de la vista.
+		/// Obtiene o establece el ancho de la vista.
 		/// </summary>
 		double Width { get; set; }
 
 		/// <summary>
-		/// Establece o devuelve el alto de la vista.
+		/// Obtiene o establece el alto de la vista.
 		/// </summary>
 		double Height { get; set; }
 
 		/// <summary>
-		/// Establece o devuelve un valor que indica si la vista se ajusta a su contenido.
+		/// Obtiene o establece un valor que indica si la vista se ajusta a su contenido.
 		/// </summary>
 		bool SizeToContent { get; set; }
 

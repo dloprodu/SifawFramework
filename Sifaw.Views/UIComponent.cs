@@ -35,6 +35,9 @@ namespace Sifaw.Views
 	/// </summary>
 	public interface UIComponent : UIElement
 	{
-		/* Empty */
+		/// <summary>
+		/// Obtiene o establece el margen del componente.
+		/// </summary>
+		UIDistance Margin { get; set; }
 	}
 }

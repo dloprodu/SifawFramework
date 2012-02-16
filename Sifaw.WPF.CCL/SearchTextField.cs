@@ -104,7 +104,7 @@ namespace Sifaw.WPF.CCL
 		#region Properties
 
 		/// <summary>
-		/// Devuelve o establece un valor que indica el módo en el que se ejecutan las búsquedas.
+		/// Obtiene o estableceun valor que indica el módo en el que se ejecutan las búsquedas.
 		/// </summary>
 		[Category("Common")]
 		public SearchMode Mode
@@ -114,7 +114,7 @@ namespace Sifaw.WPF.CCL
 		}
 
 		/// <summary>
-		/// Devuelve o establece la duración de tiempo en el desencadenamiento de eventos
+		/// Obtiene o establecela duración de tiempo en el desencadenamiento de eventos
 		/// <see cref="Search"/> en el modo de búsqueda Instant.
 		/// </summary>
 		[Category("Common")]

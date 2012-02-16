@@ -59,6 +59,15 @@ namespace Sifaw.WPF.Test
 			}
 
 			#endregion
+
+			#region IEquatable<IFilterable> Members
+
+			public bool Equals(IFilterable other)
+			{
+				return Value.Equals(other.DisplayFilter);
+			}
+
+			#endregion
 		}
 
 		public MainWindow()

@@ -69,6 +69,7 @@
     <Compile Include="ShellComponent.cs" />
     <Compile Include="_Attributes\Empty.cs" />
     <Compile Include="_Exceptions\Empty.cs" />
+    <Compile Include="_Miscellany\UIDistance.cs" />
     <Compile Include="_Miscellany\UILengthModes.cs" />
     <Compile Include="Components\_Events\UIFilterChangedEvent.cs" />
     <Compile Include="_Events\UIFinishRequestEvent.cs" />

@@ -39,15 +39,15 @@ namespace Sifaw.Controllers
 		/// <summary>
 		/// Devuelve los parámetros de inicio de la controladora que se va a iniciar.
 		/// </summary>
-		public readonly object[] Parameters = null;
+		public readonly object Input = null;
 
 		/// <summary>
 		/// Inicializa una nueva instancia de la clase <see cref="CLThrowEventArgs"/>.
 		/// </summary>
-		public CLThrowEventArgs(Type clType, params object[] parameters)
+		public CLThrowEventArgs(Type clType, object input)
 		{
 			CLType = clType;
-			Parameters = parameters;
+			Input = input;
 		}
 	}
 

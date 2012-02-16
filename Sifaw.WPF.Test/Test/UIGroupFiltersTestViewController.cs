@@ -87,6 +87,7 @@ namespace Sifaw.Controllers.Test
 			public UISettingsContainer()
 				: base()
 			{
+				this.SizeToContent = true;
 			}
 
 			#endregion
@@ -122,14 +123,14 @@ namespace Sifaw.Controllers.Test
 
 		protected override void GetRowSettings(uint row, out double height, out UILengthModes mode)
 		{
-			height = 100;
-			mode = UILengthModes.WeightedProportion;
+			height = 0;
+			mode = UILengthModes.Auto;
 		}
 
 		protected override void GetRowCellSettings(uint row, uint cell, out double width, out UILengthModes mode, out ShellComponent guest)
 		{
-			width = 100;
-			mode = UILengthModes.WeightedProportion;
+			width = 0;
+			mode = UILengthModes.Auto;
 			guest = GroupFilterTest.GetUIComponent() as ShellComponent;
 		}
 
@@ -159,6 +160,11 @@ namespace Sifaw.Controllers.Test
 		protected override void StartController()
 		{
 			GroupFilterTest.Start();
+		}
+
+		protected override void OnAfterStartController()
+		{
+			base.OnAfterStartController();
 		}
 
 		protected override bool AllowReset()

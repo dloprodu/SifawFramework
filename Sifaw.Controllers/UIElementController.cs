@@ -153,7 +153,7 @@ namespace Sifaw.Controllers
 			#region Properties
 
 			/// <summary>
-			/// Devuelve o establece una denominación al componente.
+			/// Obtiene o establece una denominación a <see cref="UIElementController{TInput, TOutput, TUISettings, TUIElement}.UIElement"/>.
 			/// </summary>
 			public string Denomination
 			{
@@ -162,7 +162,7 @@ namespace Sifaw.Controllers
 			}
 
 			/// <summary>
-			/// Devuelve o establece una descripción al componente.
+			/// Obtiene o establece una descripción a <see cref="UIElementController{TInput, TOutput, TUISettings, TUIElement}.UIElement"/>.
 			/// </summary>
 			public string Description
 			{
@@ -171,7 +171,7 @@ namespace Sifaw.Controllers
 			}
 
 			/// <summary>
-			/// Devuelve o establece el ancho mínimo del componente.
+			/// Obtiene o establece el ancho mínimo de <see cref="UIElementController{TInput, TOutput, TUISettings, TUIElement}.UIElement"/>.
 			/// </summary>
 			public double MinWidth
 			{
@@ -180,7 +180,7 @@ namespace Sifaw.Controllers
 			}
 
 			/// <summary>
-			/// Devuelve o establece el ancho máximo del componente.
+			/// Obtiene o establece el ancho máximo de <see cref="UIElementController{TInput, TOutput, TUISettings, TUIElement}.UIElement"/>.
 			/// </summary>
 			public double MaxWidth
 			{
@@ -189,7 +189,7 @@ namespace Sifaw.Controllers
 			}
 
 			/// <summary>
-			/// Devuelve o establece el alto mínimo del componente.
+			/// Obtiene o establece el alto mínimo de <see cref="UIElementController{TInput, TOutput, TUISettings, TUIElement}.UIElement"/>.
 			/// </summary>
 			public double MinHeight
 			{
@@ -198,7 +198,7 @@ namespace Sifaw.Controllers
 			}
 
 			/// <summary>
-			/// Devuelve o establece el alto máximo del componente.
+			/// Obtiene o establece el alto máximo de <see cref="UIElementController{TInput, TOutput, TUISettings, TUIElement}.UIElement"/>.
 			/// </summary>
 			public double MaxHeight
 			{

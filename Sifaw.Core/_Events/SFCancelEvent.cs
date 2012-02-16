@@ -33,7 +33,7 @@ namespace Sifaw.Core
 	public class SFCancelEventArgs : EventArgs
 	{
 		/// <summary>
-		/// Devuelve o establece un valor que indica si se debe cancelar el evento.
+		/// Obtiene o estableceun valor que indica si se debe cancelar el evento.
 		/// </summary>
 		public bool Cancel = false;
 

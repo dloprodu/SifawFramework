@@ -75,7 +75,7 @@ namespace Sifaw.WPF.CCL
 		#region Properties
 
 		/// <summary>
-		/// Devuelve o establece el texto que se muesta cuando la propiedad Text no tiene valor definido.
+		/// Obtiene o establece el texto que se muesta cuando la propiedad Text no tiene valor definido.
 		/// </summary>
 		[Category("Placeholder")]
 		[Bindable(true)]
@@ -86,7 +86,7 @@ namespace Sifaw.WPF.CCL
 		}
 
 		/// <summary>
-		/// Devuelve o establece el <see cref="Brush"/> usado para representar <see cref="Placeholder"/>.
+		/// Obtiene o establece el <see cref="Brush"/> usado para representar <see cref="Placeholder"/>.
 		/// </summary>
 		[Category("Brushes")]
 		[Bindable(true)]
@@ -97,7 +97,7 @@ namespace Sifaw.WPF.CCL
 		}	
 	
 		/// <summary>
-		/// Devuelve o establece el estilo de la fuente.
+		/// Obtiene o establece el estilo de la fuente.
 		/// </summary>
 		[Category("Placeholder")]
 		[Bindable(true)]
@@ -108,7 +108,7 @@ namespace Sifaw.WPF.CCL
 		}
 		
 		/// <summary>
-		/// Devuelve o establece el espesor o grosor de la fuente del <see cref="Placeholder"/>.
+		/// Obtiene o establece el espesor o grosor de la fuente del <see cref="Placeholder"/>.
 		/// </summary>
 		[Bindable(true)]
 		[Category("Placeholder")]
@@ -132,7 +132,7 @@ namespace Sifaw.WPF.CCL
 		{
 			DefaultStyleKeyProperty.OverrideMetadata(typeof(TextField), new FrameworkPropertyMetadata(typeof(TextField)));
 		}
-
+				
 		#endregion
 
 		#region Override Methods
@@ -140,9 +140,14 @@ namespace Sifaw.WPF.CCL
 		protected override void OnTextChanged(TextChangedEventArgs e)
 		{
 			if (placeHolderLabel != null)
-				placeHolderLabel.Visibility = string.IsNullOrEmpty(Text) ? Visibility.Visible : Visibility.Collapsed;
+				UpdatePlaceholderVisibility();
 
 			base.OnTextChanged(e);
+		}
+
+		public void UpdatePlaceholderVisibility()
+		{
+			placeHolderLabel.Visibility = string.IsNullOrEmpty(Text) ? Visibility.Visible : Visibility.Collapsed;
 		}
 
 		public override void OnApplyTemplate()
@@ -173,6 +178,8 @@ namespace Sifaw.WPF.CCL
 					UtilWPF.BindParent("PlaceholderStyle", placeHolderLabel, Control.FontStyleProperty);
 					UtilWPF.BindParent("PlaceholderWeight", placeHolderLabel, Control.FontWeightProperty);
 					UtilWPF.BindParent("Padding", placeHolderLabel, Control.PaddingProperty);
+
+					UpdatePlaceholderVisibility();
 				}
 			}
 		}

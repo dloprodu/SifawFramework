@@ -26,7 +26,7 @@ namespace Sifaw.Views.Components
 	/// Define un método generalizado, que implementa una clase o tipo de valor con
 	/// el fin de crear un método para realizar filtros sobre listas.
 	/// </summary>
-	public interface IFilterable : IComparable, IComparable<IFilterable>
+	public interface IFilterable : IComparable, IComparable<IFilterable>, IEquatable<IFilterable>
 	{
 		/// <summary>
 		/// Obtiene la denominación del item <see cref="IFilterable"/>.

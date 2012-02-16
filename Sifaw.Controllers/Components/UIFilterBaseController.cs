@@ -207,7 +207,7 @@ namespace Sifaw.Controllers.Components
 		/// </summary>
 		public TFilter Filter
 		{
-			get { return UIElement.Filter; }
+			get { return (State == CLStates.Started) ? UIElement.Filter : default(TFilter); }
 		}
 
 		#endregion

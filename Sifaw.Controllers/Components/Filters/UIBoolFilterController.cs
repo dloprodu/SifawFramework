@@ -54,7 +54,7 @@ namespace Sifaw.Controllers.Components.Filters
 			#region Properties
 
 			/// <summary>
-			/// Devuelve o establece el texto que se muestra como descripción del filtro booleano.
+			/// Obtiene o establece el texto que se muestra como descripción del filtro booleano.
 			/// </summary>
 			public string Text
 			{

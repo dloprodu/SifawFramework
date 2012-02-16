@@ -152,6 +152,15 @@ namespace Sifaw.Controllers.Test
 			}
 
 			#endregion
+
+			#region IEquatable<IFilterable> Members
+
+			public bool Equals(IFilterable other)
+			{
+				return DisplayFilter.Equals(other.DisplayFilter);
+			}
+
+			#endregion
 		}
 
 		public static class Filters
@@ -159,12 +168,14 @@ namespace Sifaw.Controllers.Test
 			public static readonly Filterable Filter1;
 			public static readonly Filterable Filter2;
 			public static readonly Filterable Filter3;
+			public static readonly Filterable Filter4;
 
 			static Filters()
 			{
 				Filter1 = new Filterable("Filtro 1");
 				Filter2 = new Filterable("Filtro 2");
 				Filter3 = new Filterable("Filtro 3");
+				Filter4 = new Filterable("Filtro 4");
 			}
 		}
 
@@ -267,18 +278,24 @@ namespace Sifaw.Controllers.Test
 
 		protected override void StartController()
 		{
+			TextFilter.UISettings.Margin = new UIDistance(3);
 			TextFilter.UISettings.Placeholder = "Introduzca un texto...";
 			TextFilter.Start(new UITextFilterController.Input("prueba"));
 
-			BoolFilter.Start();
-			
-			EnumFilter.UISettings.Source = new Filterable[] { Filters.Filter1, Filters.Filter2, Filters.Filter3 };
+			BoolFilter.UISettings.Margin = new UIDistance(3);
+			BoolFilter.UISettings.Text = "Mostrar algo al chequear ...";
+			BoolFilter.Start(new UIBoolFilterController.Input(true));
+
+			EnumFilter.UISettings.Margin = new UIDistance(3);
+			EnumFilter.UISettings.Source = new Filterable[] { Filters.Filter1, Filters.Filter2, Filters.Filter3, Filters.Filter4 };
 			EnumFilter.Start(new UIEnumFilterController.Input(Filters.Filter2));
 
-			ListFilter.UISettings.Source = new Filterable[] { Filters.Filter1, Filters.Filter2, Filters.Filter3 };
+			ListFilter.UISettings.Margin = new UIDistance(3);
+			ListFilter.UISettings.Source = new Filterable[] { Filters.Filter1, Filters.Filter2, Filters.Filter3, Filters.Filter4 };
 			ListFilter.Start(new UIListFilterController.Input(new Filterable[] { Filters.Filter1, Filters.Filter2 }));
 
-			DropDownListFilter.UISettings.Source = new Filterable[] { Filters.Filter1, Filters.Filter2, Filters.Filter3 };
+			DropDownListFilter.UISettings.Margin = new UIDistance(3);
+			DropDownListFilter.UISettings.Source = new Filterable[] { Filters.Filter1, Filters.Filter2, Filters.Filter3, Filters.Filter4 };
 			DropDownListFilter.Start(new UIDropDownListFilterController.Input(Filters.Filter3));
 		}
 

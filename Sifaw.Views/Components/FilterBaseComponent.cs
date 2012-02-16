@@ -33,7 +33,7 @@ namespace Sifaw.Views.Components
 		#region Properties
 
 		/// <summary>
-		/// Devuelve o establece el filtro del componente.
+		/// Obtiene o establece el filtro del componente.
 		/// </summary>
 		TFilter Filter { get; set; }
 

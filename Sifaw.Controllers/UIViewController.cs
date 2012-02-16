@@ -177,7 +177,7 @@ namespace Sifaw.Controllers
             #region Properties
 
 			/// <summary>
-			/// Devuelve o establece una cabecera a la vista.
+			/// Obtiene o establece una cabecera a la vista.
 			/// </summary>
             public string Header
             {
@@ -186,7 +186,7 @@ namespace Sifaw.Controllers
             }
 
 			/// <summary>
-			/// Devuelve o establece el ancho de la vista.
+			/// Obtiene o establece el ancho de la vista.
 			/// </summary>
             public double Width
             {
@@ -195,7 +195,7 @@ namespace Sifaw.Controllers
             }
 
 			/// <summary>
-			/// Devuelve o establece el alto de la vista.
+			/// Obtiene o establece el alto de la vista.
 			/// </summary>
             public double Height
             {
@@ -204,7 +204,7 @@ namespace Sifaw.Controllers
             }
 
 			/// <summary>
-			/// Devuelve o establece un valor que indica si la vista
+			/// Obtiene o estableceun valor que indica si la vista
 			/// se ajusta a su contenido.
 			/// </summary>
             public bool SizeToContent

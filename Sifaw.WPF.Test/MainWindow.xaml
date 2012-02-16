@@ -2,7 +2,8 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="MainWindow" Height="529" Width="556" 
-        xmlns:my="clr-namespace:Sifaw.WPF.CCL;assembly=Sifaw.WPF.CCL" xmlns:my1="clr-namespace:Sifaw.WPF;assembly=Sifaw.WPF">
+        xmlns:my="clr-namespace:Sifaw.WPF.CCL;assembly=Sifaw.WPF.CCL" 
+        xmlns:my1="clr-namespace:Sifaw.WPF.Filters;assembly=Sifaw.WPF">
     <Window.Resources>
         <ControlTemplate x:Key="templateSpeedometer"
                          TargetType="ProgressBar">

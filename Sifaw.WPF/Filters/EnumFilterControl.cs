@@ -32,7 +32,7 @@ using Sifaw.Views.Components;
 using Sifaw.Views.Components.Filters;
 
 
-namespace Sifaw.WPF
+namespace Sifaw.WPF.Filters
 {
 	/// <summary>
 	/// Representa un control que implementa el componente EnumComponentFilter
@@ -53,7 +53,7 @@ namespace Sifaw.WPF
 		#region Properties
 
 		/// <summary>
-		/// Devuelve o establece un valor que indica la orientación horizontal o vertical del
+		/// Obtiene o estableceun valor que indica la orientación horizontal o vertical del
 		/// contenido.
 		/// </summary>
 		public Orientation Orientation
@@ -128,7 +128,7 @@ namespace Sifaw.WPF
 				}
 			}
 		}
-
+				
 		#endregion
 
 		#region ComponentListFilterBase<IFilterable,IList<IFilterable>> Members
@@ -147,7 +147,11 @@ namespace Sifaw.WPF
 		public IFilterable Filter
 		{
 			get { return SelectedItem as IFilterable; }
-			set { SelectedItem = value; }
+			set 
+			{
+				
+				SelectedItem = value; 
+			}
 		}
 
 		public event UIFilterChangedEventHandler FilterChanged;
@@ -155,6 +159,16 @@ namespace Sifaw.WPF
 		{
 			if (FilterChanged != null)
 				FilterChanged(this as TextFilterComponent, e);
+		}
+
+		#endregion
+
+		#region UIComponent Members
+
+		public new UIDistance Margin
+		{
+			get { return new UIDistance(base.Margin.Left, base.Margin.Top, base.Margin.Right, base.Margin.Bottom); }
+			set { base.Margin = new Thickness(value.Left, value.Top, value.Right, value.Bottom); }
 		}
 
 		#endregion

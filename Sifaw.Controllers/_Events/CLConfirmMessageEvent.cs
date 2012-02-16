@@ -36,7 +36,7 @@ namespace Sifaw.Controllers
 	public class CLConfirmMessageEventArgs : SFStringEventArgs
 	{
 		/// <summary>
-		/// Devuelve o establece un valor que indica si se ha confirmado la acción expuesta por
+		/// Obtiene o estableceun valor que indica si se ha confirmado la acción expuesta por
 		/// por la propiedad <c>Value</c>.
 		/// </summary>
 		public bool Confirmed = false;

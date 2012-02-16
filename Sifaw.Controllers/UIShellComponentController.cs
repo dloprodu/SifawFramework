@@ -127,7 +127,7 @@ namespace Sifaw.Controllers
 		#region Fields
 
         /// <summary>
-        /// Lista de componetnes <see cref="Sifaw.Views.UIComponent"/> embebidos.
+        /// Lista de componetnes <see cref="Sifaw.Views.UIComponent"/> embebidos en la shell.
         /// </summary>
 		[CLReseteable(null)]
 		protected ReadOnlyCollection<TGuest> GuestComponentes = null;

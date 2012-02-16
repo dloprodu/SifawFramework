@@ -30,27 +30,27 @@ namespace Sifaw.Views.Components
 		#region Properties
 
 		/// <summary>
-		/// Devuelve o establece el número de componentes que mostrará el asistente.
+		/// Obtiene o establece el número de componentes que mostrará el asistente.
 		/// </summary>
 		byte NumComponents { get; set; }
 
 		/// <summary>
-		/// Devuelve o establece un valor que indica si se permite la navegación al componente anterior.
+		/// Obtiene o estableceun valor que indica si se permite la navegación al componente anterior.
 		/// </summary>
 		bool PreviousEnabled { get; set; }
 
 		/// <summary>
-		/// Devuelve o establece un valor que indica si se permite la navegación al componente siguiente.
+		/// Obtiene o estableceun valor que indica si se permite la navegación al componente siguiente.
 		/// </summary>
 		bool NextEnabled { get; set; }
 
 		/// <summary>
-		/// Devuelve o establece un valor que indica si se permite aceptar el proceso.
+		/// Obtiene o estableceun valor que indica si se permite aceptar el proceso.
 		/// </summary>
 		bool AcceptEnabled { get; set; }
 
 		/// <summary>
-		/// Devuelve o establece un valor que indica si se permite cancelar el proceso.
+		/// Obtiene o estableceun valor que indica si se permite cancelar el proceso.
 		/// </summary>
 		bool CancelEnabled { get; set; }
 

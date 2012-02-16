@@ -70,7 +70,7 @@ namespace Sifaw.Controllers.Components
 			#region Properties
 
 			/// <summary>
-			/// Devuelve o establece el paquete de ejecución.
+			/// Obtiene o establece el paquete de ejecución.
 			/// </summary>
 			public BackgroundWorkerPack WorkerPack
 			{
@@ -222,7 +222,7 @@ namespace Sifaw.Controllers.Components
 			#region Properties
 
 			/// <summary>
-			/// Establece o devuelve un valor que indica si el proceso
+			/// Obtiene o establece un valor que indica si el proceso
 			/// se ejecuta con o sin control de seguimiento.
 			/// </summary>
 			public bool WithControl
@@ -232,7 +232,7 @@ namespace Sifaw.Controllers.Components
 			}
 
 			/// <summary>
-			/// Establece o devuelve un valor que indica si se permite
+			/// Obtiene o establece un valor que indica si se permite
 			/// cancelar el proceso.
 			/// </summary>
 			public bool AllowCancel
@@ -242,7 +242,7 @@ namespace Sifaw.Controllers.Components
 			}
 
 			/// <summary>
-			/// Establece o devuelve una descripción breve del proceso.
+			/// Obtiene o establece una descripción breve del proceso.
 			/// </summary>
 			public string Summary
 			{
@@ -251,7 +251,7 @@ namespace Sifaw.Controllers.Components
 			}
 
 			/// <summary>
-			/// Establece o devuelve una descripción del proceso.
+			/// Obtiene o establece una descripción del proceso.
 			/// </summary>
 			public string ProcessDescription
 			{
@@ -260,7 +260,7 @@ namespace Sifaw.Controllers.Components
 			}
 
 			/// <summary>
-			/// Establece o devuelve el texto a mostrar durante el progreso del
+			/// Obtiene o establece el texto a mostrar durante el progreso del
 			/// proceso.
 			/// </summary>
 			public string Progress

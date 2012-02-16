@@ -28,34 +28,34 @@ namespace Sifaw.Views.Components
 		#region Properties
 		
 		/// <summary>
-		/// Devuelve o establece un valor que indica si el proceso
+		/// Obtiene o estableceun valor que indica si el proceso
 		/// se ejecuta con o sin control de seguimiento.
 		/// </summary>
 		bool WithControl { get;  set; }
 
 		/// <summary>
-		/// Devuelve o establece un valor que indica si se permite
+		/// Obtiene o estableceun valor que indica si se permite
 		/// cancelar el proceso.
 		/// </summary>
 		bool AllowCancel { get;  set; }
 
 		/// <summary>
-		/// Devuelve o establece el valor máximo del progreso del proceso.
+		/// Obtiene o establece el valor máximo del progreso del proceso.
 		/// </summary>
 		int MaxProgressPercentage { get; set; }
 
 		/// <summary>
-		/// Devuelve o establece una descripción breve del proceso.
+		/// Obtiene o establece una descripción breve del proceso.
 		/// </summary>
 		string Summary { get; set; }
 
 		/// <summary>
-		/// Devuelve o establece una descripción del proceso.
+		/// Obtiene o establece una descripción del proceso.
 		/// </summary>
 		string ProcessDescription { get; set; }
 
 		/// <summary>
-		/// Devuelve o establece el texto a mostrar durante el progreso del
+		/// Obtiene o establece el texto a mostrar durante el progreso del
 		/// proceso.
 		/// </summary>
 		string Progress { get;  set; }

@@ -38,8 +38,9 @@ namespace Sifaw.Controllers
     /// derivar de <see cref="UIShellViewController{TInput, TOutput, TUISettings, TGuest}.Output"/>.
     /// </typeparam>
     /// <typeparam name="TUISettings">
-    /// Tipo para establecer el contenedor de ajustes encargado de establecer las configuración del elemento de interfaz de usuario. Ha de
-    /// ser serializable, proveer de consturctor público y derivar de <see cref="UIShellViewController{TInput, TOutput, TUISettings, TGuest}.UISettingsContainer"/>.
+    /// Tipo para establecer el contenedor de ajustes encargado de establecer las configuración del elemento de interfaz 
+	/// de usuario o de componentes embebidos. Ha de ser serializable, proveer de consturctor público y derivar 
+	/// de <see cref="UIShellViewController{TInput, TOutput, TUISettings, TGuest}.UISettingsContainer"/>.
     /// </typeparam>
     /// <typeparam name="TGuest">
     /// Tipo de los componentes que puede alojar la shell. Ha de implementar <see cref="UIComponent"/>.

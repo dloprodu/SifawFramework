@@ -48,6 +48,12 @@ namespace Sifaw.WPF
 			ui = new BackgroundWorkerControl();
 		}
 
+		public void Get(out TabsGroupComponent ui)
+		{
+			// TODO: TabsGroupComponent
+			throw new NotImplementedException();
+		}
+
 		public void Get(out AssistantComponent ui)
 		{
 			ui = new AssistantControl();
@@ -77,7 +83,7 @@ namespace Sifaw.WPF
 		{
 			ui = new DropDownListFilterControl();
 		}
-		
+
 		#endregion
 
 		#region Vistas

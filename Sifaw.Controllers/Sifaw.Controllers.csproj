@@ -102,11 +102,13 @@
     <Compile Include="Components\UIBackgroundWorkerViewController.cs" />
     <Compile Include="Components\UIFilterBaseController.cs" />
     <Compile Include="Components\UIFiltersGroupController.cs" />
+    <Compile Include="Components\UITabsGroupController.cs" />
     <Compile Include="Components\_Delegates\BackgroundWorkerDelegate.cs" />
     <Compile Include="Components\_Miscellany\BackgroundWorkerCommunicator.cs" />
     <Compile Include="Components\_Miscellany\BackgroundWorkerPack.cs" />
     <Compile Include="Components\_Miscellany\ReportProgressCommand.cs" />
     <Compile Include="UIShellComponentController.cs" />
+    <Compile Include="UIActorController.cs" />
     <Compile Include="_Attributes\CLGuidReseteable.cs" />
     <Compile Include="_Delegates\GetRowCellSettingsShellCallback.cs" />
     <Compile Include="_Delegates\GetNumberOfCellsAtShellCallback.cs" />
@@ -122,6 +124,7 @@
     <Compile Include="_Events\CLShowWarningEvent.cs" />
     <Compile Include="_Events\CLShowErrorEvent.cs" />
     <Compile Include="_Events\CLProgressChangedEvent.cs" />
+    <Compile Include="_Events\CLComponentChangedEvent.cs" />
     <Compile Include="_Exceptions\AbstractUILinkerNullException.cs" />
     <Compile Include="Components\_Exceptions\NotValidFilterException.cs" />
     <Compile Include="_Exceptions\NotAllowResetException.cs" />

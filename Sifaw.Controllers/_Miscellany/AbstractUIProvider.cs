@@ -41,13 +41,14 @@ namespace Sifaw.Controllers
 		// • Componentes 
 		: AbstractUILinker<ShellComponent>
 		, AbstractUILinker<BackgroundWorkerComponent>
+		, AbstractUILinker<TabsGroupComponent>
 		, AbstractUILinker<AssistantComponent>
 		, AbstractUILinker<TextFilterComponent>
 		, AbstractUILinker<BoolFilterComponent>
 		, AbstractUILinker<ListFilterComponent>
 		, AbstractUILinker<EnumFilterComponent>
 		, AbstractUILinker<DropDownListFilterComponent>
-				
+						
 		// • Vistas 		 
 		, AbstractUILinker<ShellView>
 	{

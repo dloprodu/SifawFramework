@@ -172,6 +172,16 @@ namespace Sifaw.Controllers.Test
 					return false;
 			}
 
+			public override int GetHashCode()
+			{
+				return DisplayFilter.GetHashCode();
+			}
+
+			public override string ToString()
+			{
+				return DisplayFilter;
+			}
+
 			#endregion
 		}
 

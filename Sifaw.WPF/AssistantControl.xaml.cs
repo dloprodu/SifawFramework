@@ -52,12 +52,12 @@ namespace Sifaw.WPF
 
 		private void buttonAnterior_Click(object sender, RoutedEventArgs e)
 		{
-			OnPrevious(EventArgs.Empty);
+			OnUIComponentChanged(new UIComponentChangedEventArgs((byte)(assistantProgressBar.Value - 1)));
 		}
 
 		private void buttonSiguiente_Click(object sender, RoutedEventArgs e)
 		{
-			OnNext(EventArgs.Empty);
+			OnUIComponentChanged(new UIComponentChangedEventArgs((byte)(assistantProgressBar.Value + 1)));
 		}
 
 		private void buttonAceptar_Click(object sender, RoutedEventArgs e)
@@ -75,12 +75,6 @@ namespace Sifaw.WPF
 		#region AssistantManagerComponent Members
 
 		#region Properties
-
-		public byte NumComponents
-		{
-			get { return assistantProgressBar.Maximum; }
-			set { assistantProgressBar.Maximum = value; }
-		}
 
 		public bool PreviousEnabled
 		{
@@ -108,48 +102,7 @@ namespace Sifaw.WPF
 
 		#endregion
 
-		#region Methods
-
-		public void SetCurrentUIComponent(UIComponent component, byte step)
-		{
-            if (gridContent.Children.Contains(component as System.Windows.UIElement))
-                return;
-
-			(component as FrameworkElement).VerticalAlignment = VerticalAlignment.Stretch;
-			(component as FrameworkElement).HorizontalAlignment = HorizontalAlignment.Stretch;
-			(component as FrameworkElement).Margin = new Thickness(0);
-			
-			gridContent.Children.Add(component as System.Windows.UIElement);
-
-			// Eliminamos la vista anterior
-			// • Se hace después de mostrar la vista actual para evitar parpadeos.
-			if (gridContent.Children.Count > 1)
-				gridContent.Children.Remove(gridContent.Children[0]);
-
-			// Actualizamos el estado de la barra de progreso del asistente.
-			assistantProgressBar.Value = step;
-			labelStep.Content = step;
-			textBlockTitle.Text = component.Denomination;
-			textBlockDescription.Text = component.Description;
-		}
-
-		#endregion
-
 		#region Events
-
-		public event EventHandler Next;
-		private void OnNext(EventArgs e)
-		{
-			if (Next != null)
-				Next(this as AssistantComponent, e);
-		}
-
-		public event EventHandler Previous;
-		private void OnPrevious(EventArgs e)
-		{
-			if (Previous != null)
-				Previous(this as AssistantComponent, e);
-		}
 
 		public event EventHandler Cancel;
 		private void OnCancel(EventArgs e)
@@ -163,6 +116,58 @@ namespace Sifaw.WPF
 		{
 			if (Accept != null)
 				Accept(this as AssistantComponent, e);
+		}
+
+		#endregion
+
+		#endregion
+		
+		#region UIActorComponent Members
+
+		#region Propiedades
+
+		public byte NumComponents
+		{
+			get { return assistantProgressBar.Maximum; }
+			set { assistantProgressBar.Maximum = value; }
+		}
+
+		#endregion
+
+		#region Métodos
+
+		public void UpdateContent(UIComponent component, byte key)
+		{
+			if (gridContent.Children.Contains(component as System.Windows.UIElement))
+				return;
+
+			(component as FrameworkElement).VerticalAlignment = VerticalAlignment.Stretch;
+			(component as FrameworkElement).HorizontalAlignment = HorizontalAlignment.Stretch;
+			(component as FrameworkElement).Margin = new Thickness(0);
+
+			gridContent.Children.Add(component as System.Windows.UIElement);
+
+			// Eliminamos la vista anterior
+			// • Se hace después de mostrar la vista actual para evitar parpadeos.
+			if (gridContent.Children.Count > 1)
+				gridContent.Children.Remove(gridContent.Children[0]);
+
+			// Actualizamos el estado de la barra de progreso del asistente.
+			assistantProgressBar.Value = key;
+			labelStep.Content = key;
+			textBlockTitle.Text = component.Denomination;
+			textBlockDescription.Text = component.Description;
+		}
+
+		#endregion
+
+		#region Eventos
+
+		public event UIComponentChangedEventHandler UIComponentChanged;
+		private void OnUIComponentChanged(UIComponentChangedEventArgs e)
+		{
+			if (UIComponentChanged != null)
+				UIComponentChanged(this as AssistantComponent, e);
 		}
 
 		#endregion

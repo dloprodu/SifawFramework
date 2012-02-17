@@ -29,7 +29,7 @@ namespace Sifaw.Controllers
 	 */
 
 	/// <summary>
-	/// Proporciona datos para un evento ProgressChanged.
+	/// Proporciona datos para un evento <see cref="Controller{TInput, TOutput}.ProgressChanged"/> .
 	/// </summary>
 	public class CLProgressChangedEventArgs : SFByteEventArgs
 	{

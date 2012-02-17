@@ -315,14 +315,14 @@ namespace Sifaw.Controllers.Components
 		{
 			base.OnBeforeStartController();
 
-			if (GuestComponentes != null)
+			if (GuestComponents != null)
 			{
-				for (int i = 0; i < GuestComponentes.Count; i++)
+				for (int i = 0; i < GuestComponents.Count; i++)
 				{
 					try
 					{
 						UtilReflection.SubscribeToEvent(
-							  GuestComponentes[i]
+							  GuestComponents[i]
 							, "FilterChanged"
 							, this
 							, typeof(UIFiltersGroupController<TFilter>)

@@ -32,19 +32,31 @@ namespace Sifaw.Controllers.Components
 	/// </summary>
     /// <typeparam name="TInput">
     /// Tipo para establecer los parámetros de inicio de la controladora. Ha de ser serializable y 
-    /// derivar de <see cref="UIAssistantController{TInput, TOutput}.Input"/>.
+    /// derivar de <see cref="UIAssistantController{TInput, TOutput, TUISettings, TGuest}.Input"/>.
     /// </typeparam>
     /// <typeparam name="TOutput">
     /// Tipo para establcer los parametros de retorno cuando finaliza la controladora. Ha de ser serializable y 
-    /// derivar de <see cref="UIAssistantController{TInput, TOutput}.Output"/>.
+    /// derivar de <see cref="UIAssistantController{TInput, TOutput, TUISettings, TGuest}.Output"/>.
     /// </typeparam>
-    public abstract class UIAssistantController<TInput, TOutput> : UIComponentController
+	/// <typeparam name="TUISettings">
+	/// Tipo para establecer el contenedor de ajustes encargado de establecer las configuración del elemento de interfaz 
+	/// de usuario o de componentes embebidos. Ha de ser serializable, proveer de consturctor público y derivar 
+	/// de <see cref="UIAssistantController{TInput, TOutput, TUISettings, TGuest}.UISettingsContainer"/>.
+	/// </typeparam>
+	/// <typeparam name="TGuest">
+	/// Tipo de los componentes que puede alojar el asistente. Ha de implementar <see cref="UIComponent"/>.
+	/// </typeparam>
+	public abstract class UIAssistantController<TInput, TOutput, TUISettings, TGuest> : UIActorController
 		< TInput
 		, TOutput
-		, UIAssistantController<TInput, TOutput>.UISettingsContainer
-		, AssistantComponent>
-		where TInput  : UIAssistantController<TInput, TOutput>.Input
-		where TOutput : UIAssistantController<TInput, TOutput>.Output
+		, TUISettings
+		, AssistantComponent
+		, TGuest>
+		where TInput      : UIAssistantController<TInput, TOutput, TUISettings, TGuest>.Input
+		where TOutput     : UIAssistantController<TInput, TOutput, TUISettings, TGuest>.Output
+		where TUISettings : UIAssistantController<TInput, TOutput, TUISettings, TGuest>.UISettingsContainer
+		                  , new()
+		where TGuest      : UIComponent
 	{
 		#region Input / Output
 
@@ -52,16 +64,17 @@ namespace Sifaw.Controllers.Components
         /// Parámetros de entrada de las controladora.
         /// </summary>
 		[Serializable]
-		public new abstract class Input : UIComponentController
+		public new abstract class Input : UIActorController
 			< TInput
 			, TOutput
-			, UISettingsContainer
-			, AssistantComponent>.Input
+			, TUISettings
+			, AssistantComponent
+			, TGuest>.Input
 		{
 			#region Constructors
 
             /// <summary>
-            /// Inicializa una nueva instancia de la clase <see cref="UIAssistantController{TInput, TOutput}.Input"/>.
+            /// Inicializa una nueva instancia de la clase <see cref="UIAssistantController{TInput, TOutput, TUISettings, TGuest}.Input"/>.
             /// </summary>
 			public Input()
 				: base()
@@ -75,11 +88,12 @@ namespace Sifaw.Controllers.Components
         /// Parámetros de retorno de las controladora.
         /// </summary>
 		[Serializable]
-		public new abstract class Output : UIComponentController
+		public new abstract class Output : UIActorController
 			< TInput
 			, TOutput
-			, UISettingsContainer
-			, AssistantComponent>.Output
+			, TUISettings
+			, AssistantComponent
+			, TGuest>.Output
 		{
 			#region Fields
 
@@ -103,7 +117,7 @@ namespace Sifaw.Controllers.Components
 			#region Constructors
 
             /// <summary>
-            /// Inicializa una nueva instancia de la clase <see cref="UIAssistantController{TInput, TOutput}.Output"/>.
+            /// Inicializa una nueva instancia de la clase <see cref="UIAssistantController{TInput, TOutput, TUISettings, TGuest}.Output"/>.
             /// </summary>
 			public Output()
 				: base()
@@ -118,19 +132,20 @@ namespace Sifaw.Controllers.Components
 		#region Settings
 
         /// <summary>
-        /// Contenedor de ajustes de <see cref="UIAssistantController{TInput, TOutput}"/>.
+        /// Contenedor de ajustes de <see cref="UIAssistantController{TInput, TOutput, TUISettings, TGuest}"/>.
         /// </summary>
 		[Serializable]
-		public new class UISettingsContainer : UIComponentController
+		public new class UISettingsContainer : UIActorController
 			< TInput
 			, TOutput
-			, UISettingsContainer
-			, AssistantComponent>.UISettingsContainer
+			, TUISettings
+			, AssistantComponent
+			, TGuest>.UISettingsContainer
 		{
 			#region Constructors
 
             /// <summary>
-            /// Inicializa una nueva instancia de la clase <see cref="UIAssistantController{TInput, TOutput}.UISettingsContainer"/>.
+            /// Inicializa una nueva instancia de la clase <see cref="UIAssistantController{TInput, TOutput, TUISettings, TGuest}.UISettingsContainer"/>.
             /// </summary>
 			public UISettingsContainer()
 				: base()
@@ -145,7 +160,7 @@ namespace Sifaw.Controllers.Components
 		#region Fields
 
 		[CLReseteable(null)]
-		private Stack<UIComponent> _stack = null;
+		private Stack<TGuest> _stack = null;
 
 		#endregion
 
@@ -202,12 +217,12 @@ namespace Sifaw.Controllers.Components
 
 		#region Properties
 
-		private Stack<UIComponent> StackComponents
+		private Stack<TGuest> StackComponents
 		{
 			get
 			{
 				if (_stack == null)
-					_stack = new Stack<UIComponent>();
+					_stack = new Stack<TGuest>();
 
 				return _stack;
 			}
@@ -218,7 +233,7 @@ namespace Sifaw.Controllers.Components
 		#region Constructors
 
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="UIAssistantController{TInput, TOutput}"/>.
+        /// Inicializa una nueva instancia de la clase <see cref="UIAssistantController{TInput, TOutput, TUISettings, TGuest}"/>.
         /// Establece como <see cref="AbstractUILinker{TUIElement}"/> aquel establecido por defecto a través de 
         /// <see cref="AbstractUIProviderManager{TLinker}"/>.
         /// </summary>
@@ -228,7 +243,7 @@ namespace Sifaw.Controllers.Components
 		}
 
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="UIAssistantController{TInput, TOutput}"/>, 
+        /// Inicializa una nueva instancia de la clase <see cref="UIAssistantController{TInput, TOutput, TUISettings, TGuest}"/>, 
 		/// estableciendo el <see cref="AbstractUILinker{TUIElement}"/> establecido como valor de la propiedad 
 		/// <see cref="UIElementController{TInput, TOutput, TUISettings, TUIElement}.Linker"/> donde <c>TUIElement</c>
 		/// implementa <see cref="AssistantComponent"/>.
@@ -253,8 +268,6 @@ namespace Sifaw.Controllers.Components
 			/* Subscripción a eventos del componente... */			
 			UIElement.Cancel += new EventHandler(UIElement_Cancel);
 			UIElement.Accept += new EventHandler(UIElement_Accept);
-			UIElement.Previous += new EventHandler(UIElement_Previous);
-			UIElement.Next += new EventHandler(UIElement_Next);
 		}
 
         /// <summary>
@@ -276,7 +289,7 @@ namespace Sifaw.Controllers.Components
 
 			OnBeforeUpdateUIAssistant(StackComponents.Peek(), out allowCancel, out allowPrevious);
 			
-			UIElement.SetCurrentUIComponent(StackComponents.Peek(), (byte)StackComponents.Count);
+			UIElement.UpdateContent(StackComponents.Peek(), (byte)StackComponents.Count);
 			UIElement.NextEnabled = StackComponents.Count < GetNumberOfComponents();
 			UIElement.PreviousEnabled = allowPrevious && StackComponents.Count > 1;
 			UIElement.AcceptEnabled = StackComponents.Count == GetNumberOfComponents();
@@ -289,22 +302,6 @@ namespace Sifaw.Controllers.Components
 
 		#region Abstract Methods
 
-		/// <summary>		
-		/// Devuelve el número total de componentes que presentará el asistente al usuario.
-		/// </summary>
-		protected abstract byte GetNumberOfComponents();
-
-		/// <summary>
-		/// Devuelve el componente inicial de la que parte el asistente.
-		/// </summary>
-		protected abstract UIComponent GetStartComponent();
-
-		/// <summary>
-		/// Devuelve el siguiente componente a mostrar en el asistente.
-		/// </summary>
-        /// <param name="current">Vista que actualmente esta mostrando el asistente.</param>
-		protected abstract UIComponent GetNextComponent(UIComponent current);
-
 		/// <summary>
 		/// Se encarga de ejecutar las operaciones necesarias al aceptar al finalizar el asistente.
 		/// </summary>
@@ -314,7 +311,7 @@ namespace Sifaw.Controllers.Components
 		/// en otro caso, no se finaliza la controladora.
 		/// </param>
 		/// <param name="output">Parámetros de salida.</param>
-		protected abstract void OnBeforeCancel(UIComponent current, out bool finish, out TOutput output);
+		protected abstract void OnBeforeCancel(TGuest current, out bool finish, out TOutput output);
 
 		/// <summary>
 		/// Se encarga de ejecutar las operaciones necesarias al cancelar el asistente.
@@ -325,7 +322,7 @@ namespace Sifaw.Controllers.Components
 		/// en otro caso, no se finaliza la controladora.
 		/// </param>
 		/// <param name="output">Parámetros de salida.</param>
-		protected abstract void OnBeforeAccept(UIComponent current, out bool finish, out TOutput output);
+		protected abstract void OnBeforeAccept(TGuest current, out bool finish, out TOutput output);
 
 		#endregion
 
@@ -342,18 +339,47 @@ namespace Sifaw.Controllers.Components
 
 		#endregion
 
+		#region UIActor Methods
+
+		/// <summary>
+		/// Actualiza el assitente.
+		/// </summary>
+		protected override void UpdateUIComponent(byte key)
+		{
+			if ((key < 1) || (key > UIElement.NumComponents))
+				return;
+
+			if (key < StackComponents.Count)
+			{
+				// Previous ...
+				if (StackComponents.Count > 1)
+					StackComponents.Pop();
+			}
+			else
+			{
+				// Next ...
+				TGuest next = GetComponentAt(key, StackComponents.Peek());
+
+				if (next != null)
+					StackComponents.Push(next);
+			}
+
+			UpdateAssistant();
+		}
+
+		#endregion
+
 		#region Start Methods
 
-        /// <summary>
+		/// <summary>
         /// Invoca al método sobrescirto <see cref="UIElementController{TInput, TOutput, TUISettings, TUIElement}.OnAfterStartController()"/> y
         /// posteriormente establece la configuración inicial del asistente.
         /// </summary>
 		protected override void OnAfterStartController()
 		{
             base.OnAfterStartController();
-
-			UIElement.NumComponents = GetNumberOfComponents();
-			StackComponents.Push(GetStartComponent());
+						
+			StackComponents.Push(GetComponentAt((byte)1, default(TGuest)));
 			UpdateAssistant();
 		}
 
@@ -403,28 +429,6 @@ namespace Sifaw.Controllers.Components
 
 			if (finish)
 				FinishController(output);
-		}
-
-		private void UIElement_Next(object sender, EventArgs e)
-		{
-			UIComponent next = GetNextComponent(StackComponents.Peek());
-
-			if (next != null)
-			{
-				StackComponents.Push(next);
-				UpdateAssistant();
-			}
-
-			// Si no se devuelve una vista (null) y tampoco un mensaje el asistente permanece en la vista actual.
-		}
-
-		private void UIElement_Previous(object sender, EventArgs e)
-		{
-			if (StackComponents.Count > 1)
-			{
-				StackComponents.Pop();
-				UpdateAssistant();
-			}
 		}
 
 		#endregion

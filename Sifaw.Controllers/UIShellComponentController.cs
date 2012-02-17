@@ -39,14 +39,14 @@ namespace Sifaw.Controllers
     /// derivar de <see cref="UIShellComponentController{TInput, TOutput, TUISettings, TGuest}.Output"/>.
     /// </typeparam>
     /// <typeparam name="TUISettings">
-    /// Tipo para establecer el contenedor de ajustes encargado de establecer las configuración del elemento de interfaz de usuario. Ha de
-    /// ser serializable, proveer de consturctor público y derivar de <see cref="UIShellComponentController{TInput, TOutput, TUISettings, TGuest}.UISettingsContainer"/>.
+    /// Tipo para establecer el contenedor de ajustes encargado de establecer las configuración del elemento de interfaz 
+	/// de usuario o de componentes embebidos. Ha de ser serializable, proveer de consturctor público y derivar 
+	/// de <see cref="UIShellComponentController{TInput, TOutput, TUISettings, TGuest}.UISettingsContainer"/>.
     /// </typeparam>
     /// <typeparam name="TGuest">
     /// Tipo de los componentes que puede alojar la shell. Ha de implementar <see cref="UIComponent"/>.
     /// </typeparam>
-    public abstract class UIShellComponentController<TInput, TOutput, TUISettings, TGuest>
-		: UIComponentController
+    public abstract class UIShellComponentController<TInput, TOutput, TUISettings, TGuest> : UIComponentController
 		< TInput
 		, TOutput
 		, TUISettings
@@ -130,7 +130,7 @@ namespace Sifaw.Controllers
         /// Lista de componetnes <see cref="Sifaw.Views.UIComponent"/> embebidos en la shell.
         /// </summary>
 		[CLReseteable(null)]
-		protected ReadOnlyCollection<TGuest> GuestComponentes = null;
+		protected ReadOnlyCollection<TGuest> GuestComponents = null;
 
 		#endregion
 
@@ -234,7 +234,7 @@ namespace Sifaw.Controllers
 				}
 			}
 
-			GuestComponentes = guests.AsReadOnly();
+			GuestComponents = guests.AsReadOnly();
 			
 			UIElement.SetSettings(rows);
 		}

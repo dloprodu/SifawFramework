@@ -10,12 +10,20 @@ using Sifaw.Views.Components;
 
 namespace Sifaw.Controllers.Test
 {
-	public class UIAssistantTestController : UIAssistantController<UIAssistantTestController.Input, UIAssistantTestController.Output>
+	public class UIAssistantTestController : UIAssistantController
+		< UIAssistantTestController.Input
+		, UIAssistantTestController.Output
+		, UIAssistantTestController.UISettingsContainer
+		, UIComponent>
 	{
 		#region Input / Output
 
 		[Serializable]
-		public new class Input : UIAssistantController<UIAssistantTestController.Input, UIAssistantTestController.Output>.Input
+		public new class Input : UIAssistantController
+			< Input
+			, Output
+			, UISettingsContainer
+			, UIComponent>.Input
 		{
 			public Input()
 				: base()
@@ -24,12 +32,43 @@ namespace Sifaw.Controllers.Test
 		}
 
 		[Serializable]
-		public new class Output : UIAssistantController<UIAssistantTestController.Input, UIAssistantTestController.Output>.Output
+		public new class Output : UIAssistantController
+			< Input
+			, Output
+			, UISettingsContainer
+			, UIComponent>.Output
 		{
 			public Output()
 				: base()
 			{
 			}
+		}
+
+		#endregion
+
+		#region Settings
+
+		/// <summary>
+		/// Contenedor de ajustes de <see cref="UIAssistantController{TInput, TOutput, TUISettings, TGuest}"/>.
+		/// </summary>
+		[Serializable]
+		public new class UISettingsContainer : UIAssistantController
+			< Input
+			, Output
+			, UISettingsContainer
+			, UIComponent>.UISettingsContainer
+		{
+			#region Constructors
+
+			/// <summary>
+			/// Inicializa una nueva instancia de la clase <see cref="UIAssistantController{TInput, TOutput, TUISettings, TGuest}.UISettingsContainer"/>.
+			/// </summary>
+			public UISettingsContainer()
+				: base()
+			{
+			}
+
+			#endregion
 		}
 
 		#endregion
@@ -120,17 +159,22 @@ namespace Sifaw.Controllers.Test
 			return 3;
 		}
 
-		protected override UIComponent GetStartComponent()
+		protected override UIComponent GetComponentAt(byte key, UIComponent current)
 		{
-			return Controller1.GetUIComponent();
-		}
+			switch (key)
+			{
+				case 1:
+					return Controller1.GetUIComponent();
 
-		protected override UIComponent GetNextComponent(UIComponent current)
-		{
-			if (Convert.ReferenceEquals(current, Controller1.GetUIComponent()))
-				return Controller2.GetUIComponent();
-			else
-				return Controller3.GetUIComponent();
+				case 2:
+					return Controller2.GetUIComponent();
+
+				case 3:
+					return Controller3.GetUIComponent();
+
+				default:
+					return null;
+			}
 		}
 
 		protected override void OnBeforeCancel(UIComponent current, out bool finish, out Output output)

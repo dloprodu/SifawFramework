@@ -147,11 +147,7 @@ namespace Sifaw.WPF.Filters
 		public IFilterable Filter
 		{
 			get { return SelectedItem as IFilterable; }
-			set 
-			{
-				
-				SelectedItem = value; 
-			}
+			set { SelectedItem = value; }
 		}
 
 		public event UIFilterChangedEventHandler FilterChanged;

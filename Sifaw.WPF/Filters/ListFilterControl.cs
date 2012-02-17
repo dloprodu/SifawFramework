@@ -131,11 +131,7 @@ namespace Sifaw.WPF.Filters
 				
 				return filter; 
 			}
-			set	
-			{				
-				//SelectAll();
-				SetSelectedItems(value); 
-			}
+			set	{ SetSelectedItems(value); }
 		}
 
 		public event UIFilterChangedEventHandler FilterChanged;

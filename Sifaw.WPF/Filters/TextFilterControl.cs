@@ -48,6 +48,12 @@ namespace Sifaw.WPF.Filters
 			DefaultStyleKeyProperty.OverrideMetadata(typeof(TextFilterControl), new FrameworkPropertyMetadata(typeof(TextFilterControl)));
 		}
 
+		public TextFilterControl()
+			: base()
+		{
+			this.Mode = SearchMode.Delayed;
+		}
+
 		#endregion
 
 		#region Helpers

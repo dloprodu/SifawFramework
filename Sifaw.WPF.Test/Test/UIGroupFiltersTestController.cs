@@ -161,6 +161,18 @@ namespace Sifaw.Controllers.Test
 			}
 
 			#endregion
+
+			#region System Override
+
+			public override bool Equals(object obj)
+			{
+				if (obj is Filterable)
+					return Equals(obj as Filterable);
+				else
+					return false;
+			}
+
+			#endregion
 		}
 
 		public static class Filters

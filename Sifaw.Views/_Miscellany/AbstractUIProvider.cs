@@ -1,5 +1,5 @@
 ﻿/*
- * Sifaw.Controllers
+ * Sifaw.Views
  * 
  * Diseñador:   David López Rguez
  * Programador: David López Rguez
@@ -17,14 +17,12 @@
 using System;
 using System.Collections.Generic;
 
-using Sifaw.Controllers.Components;
-
 using Sifaw.Views;
 using Sifaw.Views.Components;
 using Sifaw.Views.Components.Filters;
 
 
-namespace Sifaw.Controllers
+namespace Sifaw.Views
 {
 	/// <summary>
 	/// Proveedor de enlaces de carga de vistas para las controladoras
@@ -41,7 +39,7 @@ namespace Sifaw.Controllers
 		// • Componentes 
 		: AbstractUILinker<ShellComponent>
 		, AbstractUILinker<BackgroundWorkerComponent>
-		, AbstractUILinker<TabsGroupComponent>
+		, AbstractUILinker<TabHostComponent>
 		, AbstractUILinker<AssistantComponent>
 		, AbstractUILinker<TextFilterComponent>
 		, AbstractUILinker<BoolFilterComponent>

@@ -27,9 +27,8 @@ using Sifaw.Views.Components;
 namespace Sifaw.Controllers
 {
 	/// <summary>
-	/// Controladora base que implemnenta una interfaz que permite la selección de un
-	/// componente de interfaz <see cref="UIComponent"/> a mostrar de entre una colección
-	/// de componentes embebidos.
+	/// Controladora base que implemnenta una interfaz que administra un conjunto relacionado de 
+	/// componente de interfaz <see cref="UIComponent"/> a mostrar.
 	/// </summary>
 	/// <typeparam name="TInput">
 	/// Tipo para establecer los parámetros de inicio de la controladora. Ha de ser serializable y 
@@ -136,6 +135,13 @@ namespace Sifaw.Controllers
 
 		#endregion
 
+		#region Fileds
+
+		[CLReseteable(null)]
+		private string[] _descriptors = null;
+
+		#endregion
+
 		#region Events
 
 		/*
@@ -144,18 +150,34 @@ namespace Sifaw.Controllers
 		 */
 
 		/// <summary>
-		/// Se produce cuando cambia el progreso del proceso.
+		/// Se produce antes de cambiar el componente a mostrar, permitiendo que un controlador cancele el cambio de
+		/// componente.
 		/// </summary>
-		public event CLComponentChangedEventHandler ComponentChanged;
+		public event CLComponentChangingEventHandler GuestChanging;
 
 		/// <summary>
-		/// Provoca el evento <see cref="ComponentChanged"/>. 
+		/// Provoca el evento <see cref="GuestChanging"/>. 
+		/// </summary>
+		/// <param name="e"><see cref="Sifaw.Controllers.CLComponentChangingEventArgs"/> que contiene los datos del evento.</param>
+		private void OnGuestChanging(CLComponentChangingEventArgs e)
+		{
+			if (GuestChanging != null)
+				GuestChanging(this, e);
+		}
+
+		/// <summary>
+		/// Se produce cuando ha cambiado el componente a mostrar.
+		/// </summary>
+		public event CLComponentChangedEventHandler GuestChanged;
+
+		/// <summary>
+		/// Provoca el evento <see cref="GuestChanged"/>. 
 		/// </summary>
 		/// <param name="e"><see cref="Sifaw.Controllers.CLComponentChangedEventArgs"/> que contiene los datos del evento.</param>
-		private void OnComponentChanged(CLComponentChangedEventArgs e)
+		private void OnGuestChanged(CLComponentChangedEventArgs e)
 		{
-			if (ComponentChanged != null)
-				ComponentChanged(this, e);
+			if (GuestChanged != null)
+				GuestChanged(this, e);
 		}
 
 		/*
@@ -172,34 +194,48 @@ namespace Sifaw.Controllers
 		 */
 
 		/// <summary>
-		/// Se llama al método <see cref="OnBeforeComponentChanged"/> antes de finalizar las
+		/// Se llama al método <see cref="OnBeforeGuestChanged"/> antes de finalizar las
 		/// controladoras embebidas. El método permite que las clases derivadas controlen
 		/// el evento sin asociar un delegado.
 		/// </summary>
 		/// <remarks>
-		/// Al reemplazar <see cref="OnBeforeComponentChanged"/> en una clase derivada, asegúrese de llamar al
-		/// método <see cref="OnBeforeComponentChanged"/> de la clase base para que los delegados registrados 
+		/// Al reemplazar <see cref="OnBeforeGuestChanged"/> en una clase derivada, asegúrese de llamar al
+		/// método <see cref="OnBeforeGuestChanged"/> de la clase base para que los delegados registrados 
 		/// reciban el evento.
 		/// </remarks>
-		protected virtual void OnBeforeComponentChanged()
+		protected virtual void OnBeforeGuestChanged()
 		{
 			/* Emtpy */
 		}
 
 		/// <summary>
-		/// Se llama al método <see cref="OnAfterComponentChanged"/> después de finalizar las
+		/// Se llama al método <see cref="OnAfterGuestChanged"/> después de finalizar las
 		/// controladoras embebidas. El método permite que las clases derivadas controlen 
 		/// el evento sin asociar un delegado.
 		/// </summary>
 		/// <remarks>
-		/// Al reemplazar <see cref="OnAfterComponentChanged"/> en una clase derivada, asegúrese de llamar al
-		/// método <see cref="OnAfterComponentChanged"/> de la clase base para que los delegados registrados
+		/// Al reemplazar <see cref="OnAfterGuestChanged"/> en una clase derivada, asegúrese de llamar al
+		/// método <see cref="OnAfterGuestChanged"/> de la clase base para que los delegados registrados
 		/// reciban el evento.
 		/// </remarks>
-		protected virtual void OnAfterComponentChanged()
+		protected virtual void OnAfterGuestChanged()
 		{
 			/* Emtpy */
 		}	
+
+		#endregion
+
+		#region Propiedades
+
+		/// <summary>
+		/// Devuelve el array que informa del número de componentes a hospedar conteniendo
+		/// para cada uno de ellos una cadena de texto susceptible de ser usada como identificador
+		/// en la interfaz de usuario.
+		/// </summary>
+		protected string[] Descriptors
+		{
+			get { return _descriptors; }
+		}
 
 		#endregion
 
@@ -227,26 +263,28 @@ namespace Sifaw.Controllers
 		}
 
 		#endregion
-
+		
 		#region Abstract Methods
 
 		/// <summary>		
-		/// Devuelve el número total de componentes que presentará la controladora al usuario.
+		/// Devuelve un array que informará del número de componentes a hospedar, conteniendo
+		/// para cada uno de ellos una cadena de texto susceptible de ser usada como identificador
+		/// en la interfaz de usuario.
 		/// </summary>
-		protected abstract byte GetNumberOfComponents();
+		protected abstract string[] GetGuestsDescriptors();
 
 		/// <summary>
 		/// Devuelve el componente a mostrar según la posición y componente mostrado actualmente.
 		/// </summary>
-		/// <param name="key">Clave que indica la posición del componente en la secuencia.</param>
+		/// <param name="key">Clave que indica la posición del componente dentro del conjunto de componentes a hospedar.</param>
 		/// <param name="current">Vista que actualmente esta mostrando el asistente.</param>
-		protected abstract TGuest GetComponentAt(byte key, TGuest current);
+		protected abstract TGuest GetGuestAt(int key, TGuest current);
 
 		/// <summary>
 		/// Actualiza el componente a mostrar.
 		/// </summary>
 		/// <param name="key">Clave que indica la posición del componente en la secuencia.</param>
-		protected abstract void UpdateUIComponent(byte key);
+		protected abstract void ChangeGuest(int key);
 
 		#endregion
 
@@ -284,7 +322,9 @@ namespace Sifaw.Controllers
 		{
 			base.OnAfterStartController();
 
-			UIElement.NumComponents = GetNumberOfComponents();
+			_descriptors = GetGuestsDescriptors();
+
+			UIElement.Descriptors = _descriptors;
 		}
 
 		#endregion
@@ -293,10 +333,18 @@ namespace Sifaw.Controllers
 
 		private void UIElement_UIComponentChanged(object sender, UIComponentChangedEventArgs e)
 		{
-			OnBeforeComponentChanged();
-			UpdateUIComponent(e.Key);
-			OnComponentChanged(new CLComponentChangedEventArgs());
-			OnAfterComponentChanged();
+			OnBeforeGuestChanged();
+
+			CLComponentChangingEventArgs args = new CLComponentChangingEventArgs(e.Key);
+			OnGuestChanging(args);
+
+			if (!args.Cancel)
+			{
+				ChangeGuest(e.Key);
+
+				OnGuestChanged(new CLComponentChangedEventArgs(e.Key));
+				OnAfterGuestChanged();
+			}
 		}
 
 		#endregion

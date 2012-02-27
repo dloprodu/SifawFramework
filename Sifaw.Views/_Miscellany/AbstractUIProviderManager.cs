@@ -1,5 +1,5 @@
 /*
- * Sifaw.Controllers
+ * Sifaw.Views
  * 
  * Diseñador:   David López Rguez
  * Programador: David López Rguez
@@ -19,7 +19,7 @@ using System.Collections.Generic;
 using System.Text;
 
 
-namespace Sifaw.Controllers
+namespace Sifaw.Views
 {
 	/// <summary>
 	/// Gestor encargado de almacenamiento y suministro del ViewLinker para las operaciones de 
@@ -40,7 +40,7 @@ namespace Sifaw.Controllers
 		/// Devuelve el enlazador de vistas establecido por defecto para
 		/// la aplicación.
 		/// </summary>
-		internal static TLinker Linker
+		public static TLinker Linker
 		{
 			get { return _linker; }
 		}

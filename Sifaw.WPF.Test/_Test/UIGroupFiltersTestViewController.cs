@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using Sifaw.Controllers;
+
 using Sifaw.Views;
 
 
-namespace Sifaw.Controllers.Test
+namespace Sifaw.WPF.Test
 {
 	public class UIGroupFiltersTestViewController : UIShellViewController
 		< UIGroupFiltersTestViewController.Input

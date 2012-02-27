@@ -5,9 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Windows;
 
-using Sifaw.Controllers;
-using Sifaw.Controllers.Components;
-using Sifaw.Controllers.Test;
+using Sifaw.Views;
 
 
 namespace Sifaw.WPF.Test
@@ -26,36 +24,15 @@ namespace Sifaw.WPF.Test
 
 			//(new MainWindow()).Show();			
 
-            //UIBackgroundWorkerViewController workerController = new UIBackgroundWorkerViewController(null);
-            //workerController.UISettings.AllowCancel = true;
-            //workerController.Start(new UIBackgroundWorkerViewController.Input(new BackgroundWorkerPack(TestBackGroundWorker, null)));
+			//UIBackgroundWorkerViewController workerController = new UIBackgroundWorkerViewController(null);
+			//workerController.UISettings.AllowCancel = true;
+			//workerController.Start(new UIBackgroundWorkerViewController.Input(new BackgroundWorkerPack(TestBackGroundWorker, null)));
 
 			//UIGroupFiltersTestViewController groupFiltersTest = new UIGroupFiltersTestViewController();
 			//groupFiltersTest.Start();
 
 			UIAssistantTestViewController assistantTest = new UIAssistantTestViewController();
 			assistantTest.Start();
-		}
-
-		#endregion
-
-		#region Methods auxiliares
-
-		public static object TestBackGroundWorker(BackgroundWorkerCommunicator com, object[] args)
-		{
-			int count = 1000;
-			com.ChangeMaxProgress(count);
-
-			for (int i = 0; i < count; i++)
-			{
-				com.Progress(i, "Procesando iteración " + i.ToString() + " ...");
-				System.Threading.Thread.Sleep(100);
-
-				if (com.CancellationPending)
-					return "Cancelled";
-			}
-
-			return "Finished";
 		}
 
 		#endregion

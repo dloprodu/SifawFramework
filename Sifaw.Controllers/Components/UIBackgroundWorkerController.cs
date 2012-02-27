@@ -19,6 +19,8 @@ using System.Collections.Generic;
 using System.Text;
 
 using Sifaw.Core;
+
+using Sifaw.Views;
 using Sifaw.Views.Components;
 
 

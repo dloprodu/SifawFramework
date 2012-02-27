@@ -83,6 +83,7 @@
     <Compile Include="ShellWindow.xaml.cs">
       <DependentUpon>ShellWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="TabHostControl.cs" />
     <Compile Include="WPFProvider.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -95,10 +96,6 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Sifaw.Controllers\Sifaw.Controllers.csproj">
-      <Project>{743FBFCD-68ED-4F4B-AA3A-09E63E65442B}</Project>
-      <Name>Sifaw.Controllers</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Sifaw.Core\Sifaw.Core.csproj">
       <Project>{00C17ECC-56B7-4FBA-A4A5-72D7E7D2A4B7}</Project>
       <Name>Sifaw.Core</Name>
@@ -156,6 +153,10 @@
     <Page Include="Themes\Generic.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\TabHostControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Themes\TextFilterControl.xaml">
       <SubType>Designer</SubType>

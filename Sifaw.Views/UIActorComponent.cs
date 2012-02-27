@@ -23,17 +23,19 @@ using System.Text;
 namespace Sifaw.Views
 {
 	/// <summary>
-	/// Representa un componente que implementa una interfaz que permite seleccionar y mostrar
-	/// un componente <see cref="UIComponent"/> de entre un grupo de componentes.
+	/// Representa un componente que implementa una interfaz que administra un
+	/// conjunto relacionado de componente.
 	/// </summary>
 	public interface UIActorComponent : UIComponent
 	{
 		#region Properties
 
 		/// <summary>
-		/// Obtiene o establece el número de componentes que gestionará el componente.
+		/// Establece un array que informa del número de componentes a hospedar conteniendo
+		/// para cada uno de ellos una cadena de texto susceptible de ser usada como identificador
+		/// en la interfaz de usuario.
 		/// </summary>
-		byte NumComponents { get; set; }
+		string[] Descriptors { set; }
 
 		#endregion
 
@@ -44,7 +46,7 @@ namespace Sifaw.Views
 		/// </summary>
 		/// <param name="content">Componente a mostrar.</param>
 		/// <param name="key">Valor que indica la posición actual en la secuencia de componentes.</param>
-		void UpdateContent(UIComponent content, byte key);
+		void UpdateContent(UIComponent content, int key);
 
 		#endregion
 

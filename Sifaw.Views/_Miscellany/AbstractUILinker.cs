@@ -1,5 +1,5 @@
 ﻿/*
- * Sifaw.Controllers
+ * Sifaw.Views
  * 
  * Diseñador:   David López Rguez
  * Programador: David López Rguez
@@ -19,10 +19,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using Sifaw.Views;
 
-
-namespace Sifaw.Controllers
+namespace Sifaw.Views
 {
 	/// <summary>
 	/// Define el método para enlazar el componente de interfaz de usuario con su correspondiente instancia

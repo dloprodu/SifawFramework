@@ -35,12 +35,12 @@ namespace Sifaw.Views
 		/// <summary>
 		/// Obtiene la clave del componete a mostrar.
 		/// </summary>
-		public readonly byte Key;
+		public readonly int Key;
 
 		/// <summary>
 		/// Inicializa una nueva instancia de la clase <see cref="UIComponentChangedEventArgs"/>.
 		/// </summary>
-		public UIComponentChangedEventArgs(byte key)
+		public UIComponentChangedEventArgs(int key)
 			: base()
 		{
 			Key = key;

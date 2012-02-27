@@ -52,12 +52,12 @@ namespace Sifaw.WPF
 
 		private void buttonAnterior_Click(object sender, RoutedEventArgs e)
 		{
-			OnUIComponentChanged(new UIComponentChangedEventArgs((byte)(assistantProgressBar.Value - 1)));
+			OnUIComponentChanged(new UIComponentChangedEventArgs(assistantProgressBar.Value - 1));
 		}
 
 		private void buttonSiguiente_Click(object sender, RoutedEventArgs e)
 		{
-			OnUIComponentChanged(new UIComponentChangedEventArgs((byte)(assistantProgressBar.Value + 1)));
+			OnUIComponentChanged(new UIComponentChangedEventArgs(assistantProgressBar.Value));
 		}
 
 		private void buttonAceptar_Click(object sender, RoutedEventArgs e)
@@ -126,17 +126,16 @@ namespace Sifaw.WPF
 
 		#region Propiedades
 
-		public byte NumComponents
+		public string[] Descriptors
 		{
-			get { return assistantProgressBar.Maximum; }
-			set { assistantProgressBar.Maximum = value; }
+			set { assistantProgressBar.Maximum = (byte)value.Length; }
 		}
 
 		#endregion
 
 		#region Métodos
 
-		public void UpdateContent(UIComponent component, byte key)
+		public void UpdateContent(UIComponent component, int key)
 		{
 			if (gridContent.Children.Contains(component as System.Windows.UIElement))
 				return;
@@ -153,8 +152,8 @@ namespace Sifaw.WPF
 				gridContent.Children.Remove(gridContent.Children[0]);
 
 			// Actualizamos el estado de la barra de progreso del asistente.
-			assistantProgressBar.Value = key;
-			labelStep.Content = key;
+			assistantProgressBar.Value = (byte)(key + 1);
+			labelStep.Content = (key + 1);
 			textBlockTitle.Text = component.Denomination;
 			textBlockDescription.Text = component.Description;
 		}

@@ -11,7 +11,7 @@ using Sifaw.Views.Components.Filters;
 using Sifaw.Views.Components;
 
 
-namespace Sifaw.Controllers.Test
+namespace Sifaw.WPF.Test
 {
 	public class UIGroupFiltersTestController : UIFiltersGroupController<UIGroupFiltersTestController.Filter>
 	{

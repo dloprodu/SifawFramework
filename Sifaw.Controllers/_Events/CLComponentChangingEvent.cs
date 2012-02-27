@@ -25,13 +25,13 @@ using Sifaw.Core;
 namespace Sifaw.Controllers
 {
 	/*
-	 * Argumento y manejador para los eventos GuestChanged.
+	 * Argumento y manejador para los eventos GuestChanging.
 	 */
 
 	/// <summary>
-	/// Proporciona datos para un evento <see cref="UIActorController{TInput, TOutpu, TUISettings, TComponent, TGuest}.GuestChanged"/>.
+	/// Proporciona datos para un evento <see cref="UIActorController{TInput, TOutpu, TUISettings, TComponent, TGuest}.GuestChanging"/>.
 	/// </summary>
-	public class CLComponentChangedEventArgs : EventArgs
+	public class CLComponentChangingEventArgs : SFCancelEventArgs
 	{
 		/// <summary>
 		/// Obtiene la clave del componete a mostrar.
@@ -42,7 +42,7 @@ namespace Sifaw.Controllers
 		/// Inicializa una nueva instancia de la clase <see cref="CLComponentChangingEventArgs"/>, estableciendo la clave del componente
 		/// al que se va a cambiar.
 		/// </summary>
-		public CLComponentChangedEventArgs(int key)
+        public CLComponentChangingEventArgs(int key)
             : base()
         {
 			Key = key;
@@ -50,9 +50,9 @@ namespace Sifaw.Controllers
 	}
 
 	/// <summary>
-	/// Representa el método que controla un evento <see cref="UIActorController{TInput, TOutpu, TUISettings, TComponent, TGuest}.GuestChanged"/>.
+	/// Representa el método que controla un evento <see cref="UIActorController{TInput, TOutpu, TUISettings, TComponent, TGuest}.GuestChanging"/>.
 	/// </summary>
 	/// <param name="sender">Origen del evento.</param>
-	/// <param name="e"><see cref="CLComponentChangedEventArgs"/> que contiene los datos de eventos.</param>
-	public delegate void CLComponentChangedEventHandler(object sender, CLComponentChangedEventArgs e);
+	/// <param name="e"><see cref="CLComponentChangingEventArgs"/> que contiene los datos de eventos.</param>
+	public delegate void CLComponentChangingEventHandler(object sender, CLComponentChangingEventArgs e);
 }

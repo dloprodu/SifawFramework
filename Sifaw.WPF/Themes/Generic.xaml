@@ -9,7 +9,7 @@
         <ResourceDictionary Source="/Sifaw.WPF;component/Themes/ListFilterControl.xaml" />
         <ResourceDictionary Source="/Sifaw.WPF;component/Themes/EnumFilterControl.xaml" />
         <ResourceDictionary Source="/Sifaw.WPF;component/Themes/DropDownListFilterControl.xaml" />
+        <ResourceDictionary Source="/Sifaw.WPF;component/Themes/TabHostControl.xaml" />
     </ResourceDictionary.MergedDictionaries>
-
-
+    
 </ResourceDictionary>

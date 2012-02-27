@@ -74,10 +74,11 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Test\UIAssistantTestController.cs" />
-    <Compile Include="Test\UIAssistantTestViewController.cs" />
-    <Compile Include="Test\UIGroupFiltersTestController.cs" />
-    <Compile Include="Test\UIGroupFiltersTestViewController.cs" />
+    <Compile Include="_Test\UIAssistantTestController.cs" />
+    <Compile Include="_Test\UIAssistantTestViewController.cs" />
+    <Compile Include="_Test\UIGroupFiltersTestController.cs" />
+    <Compile Include="_Test\UIGroupFiltersTestViewController.cs" />
+    <Compile Include="_Test\UITabHostTestController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainWindow.xaml.cs">

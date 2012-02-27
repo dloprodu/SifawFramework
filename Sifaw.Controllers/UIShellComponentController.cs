@@ -130,7 +130,7 @@ namespace Sifaw.Controllers
         /// Lista de componetnes <see cref="Sifaw.Views.UIComponent"/> embebidos en la shell.
         /// </summary>
 		[CLReseteable(null)]
-		protected ReadOnlyCollection<TGuest> GuestComponents = null;
+		protected ReadOnlyCollection<TGuest> Guests = null;
 
 		#endregion
 
@@ -234,7 +234,7 @@ namespace Sifaw.Controllers
 				}
 			}
 
-			GuestComponents = guests.AsReadOnly();
+			Guests = guests.AsReadOnly();
 			
 			UIElement.SetSettings(rows);
 		}

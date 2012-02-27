@@ -174,7 +174,7 @@ namespace Sifaw.Controllers.Components
 
 		/// <summary>
 		/// <para>
-		/// Se llama al método <see cref="OnBeforeUpdateUIAssistant"/> antes de actualizar el assistente 
+		/// Se llama al método <see cref="OnBeforeUpdateAssistant"/> antes de actualizar el assistente 
 		/// para mostrar el componente que corresponde. El método permite que las clases derivadas 
 		/// controlen el evento sin asociar un delegado.
 		/// </para>
@@ -183,14 +183,14 @@ namespace Sifaw.Controllers.Components
 		/// </para>
 		/// </summary>
 		/// <remarks>
-		/// Al reemplazar <see cref="OnBeforeUpdateUIAssistant"/> en una clase derivada, asegúrese de llamar al
-		/// método <see cref="OnBeforeUpdateUIAssistant"/> de la clase base para que los delegados registrados 
+		/// Al reemplazar <see cref="OnBeforeUpdateAssistant"/> en una clase derivada, asegúrese de llamar al
+		/// método <see cref="OnBeforeUpdateAssistant"/> de la clase base para que los delegados registrados 
 		/// reciban el evento si desea mantener el comportamiento por defecto.
 		/// </remarks>
 		/// <param name="current">Componente que se va a mostrar en la etapa actual.</param>
         /// <param name="allowCancel">Valor que indica si la etapa actual permite la cancelación.</param>
 		/// <param name="allowPrevious">Valor que indica si la etapa actual permite el retroceso a la anterior.</param>
-		protected virtual void OnBeforeUpdateUIAssistant(UIComponent current, out bool allowCancel, out bool allowPrevious)
+		protected virtual void OnBeforeUpdateAssistant(UIComponent current, out bool allowCancel, out bool allowPrevious)
 		{
 			allowCancel = true;
 			allowPrevious = true;
@@ -198,17 +198,17 @@ namespace Sifaw.Controllers.Components
 
 		/// <summary>
 		/// <para>
-		/// Se llama al método <see cref="OnAfterUpdateUIAssistant"/> después de actualizar el assistente 
+		/// Se llama al método <see cref="OnAfterUpdateAssistant"/> después de actualizar el assistente 
 		/// para mostrar el componente que corresponde. El método permite que las clases derivadas 
 		/// controlen el evento sin asociar un delegado.
 		/// </para>
 		/// </summary>
 		/// <remarks>
-		/// Al reemplazar <see cref="OnAfterUpdateUIAssistant"/> en una clase derivada, asegúrese de llamar al
-		/// método <see cref="OnAfterUpdateUIAssistant"/> de la clase base para que los delegados registrados 
+		/// Al reemplazar <see cref="OnAfterUpdateAssistant"/> en una clase derivada, asegúrese de llamar al
+		/// método <see cref="OnAfterUpdateAssistant"/> de la clase base para que los delegados registrados 
 		/// reciban el evento si desea mantener el comportamiento por defecto.
 		/// </remarks>
-		protected virtual void OnAfterUpdateUIAssistant()
+		protected virtual void OnAfterUpdateAssistant()
 		{
 			/* Empty */
 		}
@@ -287,15 +287,15 @@ namespace Sifaw.Controllers.Components
 			bool allowCancel = true;
 			bool allowPrevious = true;
 
-			OnBeforeUpdateUIAssistant(StackComponents.Peek(), out allowCancel, out allowPrevious);
+			OnBeforeUpdateAssistant(StackComponents.Peek(), out allowCancel, out allowPrevious);
 			
-			UIElement.UpdateContent(StackComponents.Peek(), (byte)StackComponents.Count);
-			UIElement.NextEnabled = StackComponents.Count < GetNumberOfComponents();
+			UIElement.UpdateContent(StackComponents.Peek(), StackComponents.Count - 1);
+			UIElement.NextEnabled = StackComponents.Count < Descriptors.Length;
 			UIElement.PreviousEnabled = allowPrevious && StackComponents.Count > 1;
-			UIElement.AcceptEnabled = StackComponents.Count == GetNumberOfComponents();
+			UIElement.AcceptEnabled = StackComponents.Count == Descriptors.Length;
 			UIElement.CancelEnabled = allowCancel;
 
-			OnAfterUpdateUIAssistant();
+			OnAfterUpdateAssistant();
 		}
 
 		#endregion
@@ -344,9 +344,9 @@ namespace Sifaw.Controllers.Components
 		/// <summary>
 		/// Actualiza el assitente.
 		/// </summary>
-		protected override void UpdateUIComponent(byte key)
+		protected override void ChangeGuest(int key)
 		{
-			if ((key < 1) || (key > UIElement.NumComponents))
+			if ((key < 0) || (key >= Descriptors.Length))
 				return;
 
 			if (key < StackComponents.Count)
@@ -358,7 +358,7 @@ namespace Sifaw.Controllers.Components
 			else
 			{
 				// Next ...
-				TGuest next = GetComponentAt(key, StackComponents.Peek());
+				TGuest next = GetGuestAt(key, StackComponents.Peek());
 
 				if (next != null)
 					StackComponents.Push(next);
@@ -379,22 +379,22 @@ namespace Sifaw.Controllers.Components
 		{
             base.OnAfterStartController();
 						
-			StackComponents.Push(GetComponentAt((byte)1, default(TGuest)));
+			StackComponents.Push(GetGuestAt(0, default(TGuest)));
 			UpdateAssistant();
 		}
 
         /// <summary>
-        /// Devuelve un valor que indica que no se permite reiniciar un asistente.
+        /// Devuelve un valor que indica que, por defecto, no se permite reiniciar un asistente.
         /// </summary>
-		protected sealed override bool AllowReset()
+		protected override bool AllowReset()
 		{
 			return false;
 		}
 
         /// <summary>
-        /// No realiza ninguna operación puesto que la controladora no permite el reinicio.
+        /// No realiza ninguna operación puesto que, por defecto, la controladora no permite el reinicio.
         /// </summary>
-		protected sealed override void ResetController()
+		protected override void ResetController()
 		{
 			/* Nada */
 		}

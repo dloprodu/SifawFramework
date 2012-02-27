@@ -19,8 +19,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using Sifaw.Controllers;
-
 using Sifaw.Views;
 using Sifaw.Views.Components;
 using Sifaw.Views.Components.Filters;
@@ -48,10 +46,9 @@ namespace Sifaw.WPF
 			ui = new BackgroundWorkerControl();
 		}
 
-		public void Get(out TabsGroupComponent ui)
+		public void Get(out TabHostComponent ui)
 		{
-			// TODO: TabsGroupComponent
-			throw new NotImplementedException();
+			ui = new TabHostControl();
 		}
 
 		public void Get(out AssistantComponent ui)

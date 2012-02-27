@@ -26,9 +26,10 @@ namespace Sifaw.Views.Components
 {
 	/// <summary>
 	/// Representa un componente que implemnenta una interfaz que permite la selección de un
-	/// componente de interfaz <see cref="UIComponent"/> a mostrar de entre un grupo de componentes.
+	/// componente de interfaz <see cref="UIComponent"/> a mostrar de entre un grupo de componentes que 
+	/// comparten el mismo espacio en pantalla.
 	/// </summary>
-	public interface TabsGroupComponent : UIActorComponent
+	public interface TabHostComponent : UIActorComponent
 	{
 		/* Empty */
 	}

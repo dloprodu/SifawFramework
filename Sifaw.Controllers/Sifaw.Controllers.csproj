@@ -102,7 +102,7 @@
     <Compile Include="Components\UIBackgroundWorkerViewController.cs" />
     <Compile Include="Components\UIFilterBaseController.cs" />
     <Compile Include="Components\UIFiltersGroupController.cs" />
-    <Compile Include="Components\UITabsGroupController.cs" />
+    <Compile Include="Components\UITabHostController.cs" />
     <Compile Include="Components\_Delegates\BackgroundWorkerDelegate.cs" />
     <Compile Include="Components\_Miscellany\BackgroundWorkerCommunicator.cs" />
     <Compile Include="Components\_Miscellany\BackgroundWorkerPack.cs" />
@@ -124,18 +124,17 @@
     <Compile Include="_Events\CLShowWarningEvent.cs" />
     <Compile Include="_Events\CLShowErrorEvent.cs" />
     <Compile Include="_Events\CLProgressChangedEvent.cs" />
+    <Compile Include="_Events\CLComponentChangingEvent.cs" />
     <Compile Include="_Events\CLComponentChangedEvent.cs" />
     <Compile Include="_Exceptions\AbstractUILinkerNullException.cs" />
     <Compile Include="Components\_Exceptions\NotValidFilterException.cs" />
     <Compile Include="_Exceptions\NotAllowResetException.cs" />
     <Compile Include="_Exceptions\NotCanStartException.cs" />
     <Compile Include="_Exceptions\NotValidStateException.cs" />
-    <Compile Include="_Miscellany\AbstractUILinker.cs" />
     <Compile Include="_Miscellany\CLInformation.cs" />
     <Compile Include="_Miscellany\CLStates.cs" />
     <Compile Include="_Miscellany\IUIComponentController.cs" />
     <Compile Include="_Miscellany\IController.cs" />
-    <Compile Include="_Miscellany\AbstractUIProvider.cs" />
     <Compile Include="Controller.cs" />
     <Compile Include="_Miscellany\IUIElementController.cs" />
     <Compile Include="_Miscellany\IUIViewController.cs" />
@@ -147,7 +146,6 @@
     <Compile Include="Components\UIAssistantController.cs" />
     <Compile Include="Components\UIBackgroundWorkerController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="_Miscellany\AbstractUIProviderManager.cs" />
     <Compile Include="_Miscellany\ShellOperationsManager.cs" />
   </ItemGroup>
   <ItemGroup>

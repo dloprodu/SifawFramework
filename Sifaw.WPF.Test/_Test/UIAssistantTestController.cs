@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 
 using Sifaw.Controllers.Components;
+
 using Sifaw.Views;
 using Sifaw.Views.Components;
 
 
-namespace Sifaw.Controllers.Test
+namespace Sifaw.WPF.Test
 {
 	public class UIAssistantTestController : UIAssistantController
 		< UIAssistantTestController.Input
@@ -154,22 +155,27 @@ namespace Sifaw.Controllers.Test
 
 		#region UIAssistente Methods
 
-		protected override byte GetNumberOfComponents()
+		protected override string[] GetGuestsDescriptors()
 		{
-			return 3;
+			return new string[] 
+			{
+				  Controller1.GetUIComponent().Denomination
+				, Controller2.GetUIComponent().Denomination
+				, Controller3.GetUIComponent().Denomination
+			};
 		}
 
-		protected override UIComponent GetComponentAt(byte key, UIComponent current)
+		protected override UIComponent GetGuestAt(int key, UIComponent current)
 		{
 			switch (key)
 			{
-				case 1:
+				case 0:
 					return Controller1.GetUIComponent();
 
-				case 2:
+				case 1:
 					return Controller2.GetUIComponent();
 
-				case 3:
+				case 2:
 					return Controller3.GetUIComponent();
 
 				default:

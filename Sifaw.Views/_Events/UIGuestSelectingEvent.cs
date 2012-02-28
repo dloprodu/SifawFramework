@@ -19,6 +19,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using Sifaw.Core;
+
 
 namespace Sifaw.Views
 {
@@ -30,7 +32,7 @@ namespace Sifaw.Views
 	/// Proporciona datos para un evento que solicita el cambio del componente <see cref="UIComponent"/> a mostrar
 	/// en un <see cref="UIActorComponent"/>.
 	/// </summary>
-	public class UIComponentChangedEventArgs : EventArgs
+	public class UIGuestSelectingEventArgs : SFCancelEventArgs
 	{
 		/// <summary>
 		/// Obtiene la clave del componete a mostrar.
@@ -38,9 +40,9 @@ namespace Sifaw.Views
 		public readonly int Key;
 
 		/// <summary>
-		/// Inicializa una nueva instancia de la clase <see cref="UIComponentChangedEventArgs"/>.
+		/// Inicializa una nueva instancia de la clase <see cref="UIGuestSelectingEventArgs"/>.
 		/// </summary>
-		public UIComponentChangedEventArgs(int key)
+		public UIGuestSelectingEventArgs(int key)
 			: base()
 		{
 			Key = key;
@@ -52,6 +54,6 @@ namespace Sifaw.Views
 	/// a mostrar en un <see cref="UIActorComponent"/>.
 	/// </summary>
 	/// <param name="sender">Origen del evento.</param>
-	/// <param name="e"><see cref="UIComponentChangedEventArgs"/> que contiene los datos de eventos.</param>
-	public delegate void UIComponentChangedEventHandler(object sender, UIComponentChangedEventArgs e);
+	/// <param name="e"><see cref="UIGuestSelectingEventArgs"/> que contiene los datos de eventos.</param>
+	public delegate void UIGuestSelectingEventHandler(object sender, UIGuestSelectingEventArgs e);
 }

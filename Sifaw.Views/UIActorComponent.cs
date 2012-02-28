@@ -46,16 +46,16 @@ namespace Sifaw.Views
 		/// </summary>
 		/// <param name="content">Componente a mostrar.</param>
 		/// <param name="key">Valor que indica la posición actual en la secuencia de componentes.</param>
-		void UpdateContent(UIComponent content, int key);
+		void Update(UIComponent content, int key);
 
 		#endregion
 
 		#region Eventos
 
 		/// <summary>
-		/// Se produce cuando se solicita cambiar el componente a mostrar.
+		/// Se produce cuando se solicita cambiar el componente a hospedar.
 		/// </summary>
-		event UIComponentChangedEventHandler UIComponentChanged;
+		event UIGuestSelectingEventHandler GuestSelecting;
 
 		#endregion
 	}

@@ -27,8 +27,10 @@ using Sifaw.Views.Components;
 namespace Sifaw.Controllers.Components
 {
 	/// <summary>
-	/// Controladora encargada de presentar una serie de componentes <see cref="Sifaw.Views.UIComponent"/> de forma secuencial 
-    /// a modo de asistente.
+	/// Controladora base encargada de administrar un conjunto relacionado de 
+	/// componentes de interfaz <see cref="Sifaw.Views.UIComponent"/> que comparten entre ellos
+	/// el mismo espacio en pantalla pudiendo el usuario visualizarlos de forma secuencial a 
+	/// modo de asistente.
 	/// </summary>
     /// <typeparam name="TInput">
     /// Tipo para establecer los parámetros de inicio de la controladora. Ha de ser serializable y 
@@ -157,13 +159,6 @@ namespace Sifaw.Controllers.Components
 		
 		#endregion
 
-		#region Fields
-
-		[CLReseteable(null)]
-		private Stack<TGuest> _stack = null;
-
-		#endregion
-
 		#region Events
 
 		/*
@@ -187,10 +182,9 @@ namespace Sifaw.Controllers.Components
 		/// método <see cref="OnBeforeUpdateAssistant"/> de la clase base para que los delegados registrados 
 		/// reciban el evento si desea mantener el comportamiento por defecto.
 		/// </remarks>
-		/// <param name="current">Componente que se va a mostrar en la etapa actual.</param>
         /// <param name="allowCancel">Valor que indica si la etapa actual permite la cancelación.</param>
 		/// <param name="allowPrevious">Valor que indica si la etapa actual permite el retroceso a la anterior.</param>
-		protected virtual void OnBeforeUpdateAssistant(UIComponent current, out bool allowCancel, out bool allowPrevious)
+		protected virtual void OnBeforeUpdateAssistant(out bool allowCancel, out bool allowPrevious)
 		{
 			allowCancel = true;
 			allowPrevious = true;
@@ -211,21 +205,6 @@ namespace Sifaw.Controllers.Components
 		protected virtual void OnAfterUpdateAssistant()
 		{
 			/* Empty */
-		}
-
-		#endregion
-
-		#region Properties
-
-		private Stack<TGuest> StackComponents
-		{
-			get
-			{
-				if (_stack == null)
-					_stack = new Stack<TGuest>();
-
-				return _stack;
-			}
 		}
 
 		#endregion
@@ -255,31 +234,6 @@ namespace Sifaw.Controllers.Components
 
 		#endregion
 
-		#region UIElement Methods
-
-        /// <summary>
-        /// Invoca al método sobrescirto <see cref="UIComponentController{TInput, TOutput, TUISettings, TComponent}.OnAfterUIElementLoad()"/>  y
-        /// posteriormente se subscribe a eventos de <see cref="AssistantComponent"/>.
-        /// </summary>
-		protected override void OnAfterUIElementLoad()
-		{
-			base.OnAfterUIElementLoad();
-
-			/* Subscripción a eventos del componente... */			
-			UIElement.Cancel += new EventHandler(UIElement_Cancel);
-			UIElement.Accept += new EventHandler(UIElement_Accept);
-		}
-
-        /// <summary>
-        /// Invoca al método sobrescirto <see cref="UIComponentController{TInput, TOutput, TUISettings, TComponent}.OnApplyUISettings()"/>.
-        /// </summary>
-        protected override void OnApplyUISettings()
-        {
-            base.OnApplyUISettings();
-        }
-
-		#endregion
-
 		#region Helpers
 
 		private void UpdateAssistant()
@@ -287,12 +241,11 @@ namespace Sifaw.Controllers.Components
 			bool allowCancel = true;
 			bool allowPrevious = true;
 
-			OnBeforeUpdateAssistant(StackComponents.Peek(), out allowCancel, out allowPrevious);
-			
-			UIElement.UpdateContent(StackComponents.Peek(), StackComponents.Count - 1);
-			UIElement.NextEnabled = StackComponents.Count < Descriptors.Length;
-			UIElement.PreviousEnabled = allowPrevious && StackComponents.Count > 1;
-			UIElement.AcceptEnabled = StackComponents.Count == Descriptors.Length;
+			OnBeforeUpdateAssistant(out allowCancel, out allowPrevious);
+
+			UIElement.NextEnabled = Key < Descriptors.Length - 1;
+			UIElement.PreviousEnabled = allowPrevious && Key > 0;
+			UIElement.AcceptEnabled = Key == Descriptors.Length - 1;
 			UIElement.CancelEnabled = allowCancel;
 
 			OnAfterUpdateAssistant();
@@ -305,24 +258,22 @@ namespace Sifaw.Controllers.Components
 		/// <summary>
 		/// Se encarga de ejecutar las operaciones necesarias al aceptar al finalizar el asistente.
 		/// </summary>
-		/// <param name="current">Componente que actualmente está mostrando el asistente.</param>
 		/// <param name="finish">
 		/// Si es true se finaliza la controladora completando la operación de cancelar, 
 		/// en otro caso, no se finaliza la controladora.
 		/// </param>
 		/// <param name="output">Parámetros de salida.</param>
-		protected abstract void OnBeforeCancel(TGuest current, out bool finish, out TOutput output);
+		protected abstract void OnBeforeCancel(out bool finish, out TOutput output);
 
 		/// <summary>
 		/// Se encarga de ejecutar las operaciones necesarias al cancelar el asistente.
 		/// </summary>
-		/// <param name="current">Componente que actualmente está mostrando el asistente.</param>
 		/// <param name="finish">
 		/// Si es true se finaliza la controladora completando la operación de aceptar, 
 		/// en otro caso, no se finaliza la controladora.
 		/// </param>
 		/// <param name="output">Parámetros de salida.</param>
-		protected abstract void OnBeforeAccept(TGuest current, out bool finish, out TOutput output);
+		protected abstract void OnBeforeAccept(out bool finish, out TOutput output);
 
 		#endregion
 
@@ -339,30 +290,40 @@ namespace Sifaw.Controllers.Components
 
 		#endregion
 
+		#region UIElement Methods
+
+		/// <summary>
+		/// Invoca al método sobrescirto <see cref="UIComponentController{TInput, TOutput, TUISettings, TComponent}.OnAfterUIElementLoad()"/>  y
+		/// posteriormente se subscribe a eventos de <see cref="AssistantComponent"/>.
+		/// </summary>
+		protected override void OnAfterUIElementLoad()
+		{
+			base.OnAfterUIElementLoad();
+
+			/* Subscripción a eventos del componente... */
+			UIElement.Cancel += new EventHandler(UIElement_Cancel);
+			UIElement.Accept += new EventHandler(UIElement_Accept);
+		}
+
+		/// <summary>
+		/// Invoca al método sobrescirto <see cref="UIComponentController{TInput, TOutput, TUISettings, TComponent}.OnApplyUISettings()"/>.
+		/// </summary>
+		protected override void OnApplyUISettings()
+		{
+			base.OnApplyUISettings();
+		}
+
+		#endregion
+
 		#region UIActor Methods
 
 		/// <summary>
-		/// Actualiza el assitente.
+		/// Invoca al método sobrescirto <see cref="UIActorController{TInput, TOutput, TUISettings, TComponent, TGuest}.OnAfterUpdateGuest()"/>  y
+		/// posteriormente actualiza el asistente.
 		/// </summary>
-		protected override void ChangeGuest(int key)
+		protected override void OnAfterUpdateGuest()
 		{
-			if ((key < 0) || (key >= Descriptors.Length))
-				return;
-
-			if (key < StackComponents.Count)
-			{
-				// Previous ...
-				if (StackComponents.Count > 1)
-					StackComponents.Pop();
-			}
-			else
-			{
-				// Next ...
-				TGuest next = GetGuestAt(key, StackComponents.Peek());
-
-				if (next != null)
-					StackComponents.Push(next);
-			}
+			base.OnAfterUpdateGuest();
 
 			UpdateAssistant();
 		}
@@ -378,8 +339,7 @@ namespace Sifaw.Controllers.Components
 		protected override void OnAfterStartController()
 		{
             base.OnAfterStartController();
-						
-			StackComponents.Push(GetGuestAt(0, default(TGuest)));
+
 			UpdateAssistant();
 		}
 
@@ -409,7 +369,7 @@ namespace Sifaw.Controllers.Components
 
 			TOutput output = null;
 
-			OnBeforeAccept(StackComponents.Peek(), out finish, out output);
+			OnBeforeAccept(out finish, out output);
 
 			output.Cancelled = false;
 
@@ -423,7 +383,7 @@ namespace Sifaw.Controllers.Components
 
 			TOutput output = null;
 
-			OnBeforeCancel(StackComponents.Peek(), out finish, out output);
+			OnBeforeCancel(out finish, out output);
 
 			output.Cancelled = finish;
 

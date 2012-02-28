@@ -431,6 +431,10 @@ namespace Sifaw.Controllers
 
 		#region Properties
 
+		/*
+		 * Protected
+		 */
+
 		/// <summary>
 		/// Devuelve el elemento de interfaz de usuario de la controladora.
 		/// </summary>
@@ -441,7 +445,7 @@ namespace Sifaw.Controllers
 				if (_uiElement == null)
 				{
 					OnBeforeUIElementLoad();
-					Linker.Get(out _uiElement);
+					Linker.Load(out _uiElement);
 
 					if (_uiElement != null)
 					{
@@ -456,6 +460,19 @@ namespace Sifaw.Controllers
 				return _uiElement;
 			}
 		}
+
+		/// <summary>
+		/// Devuelve una instancia de <see cref="AbstractUILinker{TUIElement}"/> a través de la cual
+		/// se carga la propiedad <see cref="UIElement"/>.
+		/// </summary>
+		protected AbstractUILinker<TUIElement> Linker
+		{
+			get { return _linker ?? AbstractUIProviderManager<AbstractUIProvider>.Linker as AbstractUILinker<TUIElement>; }
+		}
+
+		/*
+		 * Public
+		 */
 
 		/// <summary>
 		/// Devuelve el contenedor de ajustes de la vista a través
@@ -473,15 +490,6 @@ namespace Sifaw.Controllers
 
 				return _uiSettings;
 			}
-		}
-
-		/// <summary>
-		/// Devuelve una instancia de <see cref="AbstractUILinker{TUIElement}"/> a través de la cual
-		/// se carga la propiedad <see cref="UIElement"/>.
-		/// </summary>
-		protected AbstractUILinker<TUIElement> Linker
-		{
-			get { return _linker ?? AbstractUIProviderManager<AbstractUIProvider>.Linker as AbstractUILinker<TUIElement>; }
 		}
 
 		#endregion

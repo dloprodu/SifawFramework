@@ -70,7 +70,7 @@
     <Compile Include="Components\_Miscellany\IFilterable.cs" />
     <Compile Include="ShellComponent.cs" />
     <Compile Include="_Attributes\Empty.cs" />
-    <Compile Include="_Events\UIComponentChangedEvent.cs" />
+    <Compile Include="_Events\UIGuestSelectingEvent.cs" />
     <Compile Include="_Exceptions\Empty.cs" />
     <Compile Include="_Miscellany\AbstractUILinker.cs" />
     <Compile Include="_Miscellany\AbstractUIProvider.cs" />

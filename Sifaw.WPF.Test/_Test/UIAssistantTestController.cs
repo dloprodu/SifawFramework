@@ -155,7 +155,7 @@ namespace Sifaw.WPF.Test
 
 		#region UIAssistente Methods
 
-		protected override string[] GetGuestsDescriptors()
+		protected override string[] GetDescriptors()
 		{
 			return new string[] 
 			{
@@ -165,7 +165,7 @@ namespace Sifaw.WPF.Test
 			};
 		}
 
-		protected override UIComponent GetGuestAt(int key, UIComponent current)
+		protected override UIComponent GetGuestAt(int key)
 		{
 			switch (key)
 			{
@@ -183,13 +183,13 @@ namespace Sifaw.WPF.Test
 			}
 		}
 
-		protected override void OnBeforeCancel(UIComponent current, out bool finish, out Output output)
+		protected override void OnBeforeCancel(out bool finish, out Output output)
 		{
 			output = new Output();
 			finish = true;
 		}
 
-		protected override void OnBeforeAccept(UIComponent current, out bool finish, out Output output)
+		protected override void OnBeforeAccept(out bool finish, out Output output)
 		{
 			output = new Output();
 			finish = true;

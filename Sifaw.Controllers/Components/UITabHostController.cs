@@ -27,9 +27,10 @@ using Sifaw.Views.Components;
 namespace Sifaw.Controllers.Components
 {
 	/// <summary>
-	/// Controladora que implemnenta una interfaz que permite la selección de un
-	/// componente de interfaz <see cref="UIComponent"/> a mostrar de entre un conjunto
-	/// de componentes embebidos.
+	/// Controladora base encargada de administrar un conjunto relacionado de 
+	/// componentes de interfaz <see cref="Sifaw.Views.UIComponent"/> que comparten entre ellos
+	/// el mismo espacio en pantalla pudiendo el usuario visualizarlos de forma arbitraria
+	/// mediante un método de selección.
 	/// </summary>
 	/// <typeparam name="TInput">
 	/// Tipo para establecer los parámetros de inicio de la controladora. Ha de ser serializable y 
@@ -162,18 +163,6 @@ namespace Sifaw.Controllers.Components
 
 		#endregion
 		
-		#region UIActor Methods
-
-		/// <summary>
-		/// Actualiza el componente a mostrar.
-		/// </summary>
-		protected override void ChangeGuest(int key)
-		{
-			// TODO
-		}
-
-		#endregion
-
 		#region UIElement Methods
 
 		/// <summary>
@@ -183,7 +172,7 @@ namespace Sifaw.Controllers.Components
 		{
 			base.OnAfterUIElementLoad();
 
-			/* Subscripción a eventos del componente... */
+			/* Subscripción a eventos del componente... */			
 		}
 
 		/// <summary>

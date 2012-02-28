@@ -30,6 +30,9 @@ namespace Sifaw.Views
 	/// Sigue el patrón de diseño 'Abstract Factory (Fábrica abstractra)' para crear
 	/// interfaces gráficas.
 	/// </remarks>
+	/// <typeparam name="TUIElement">
+	/// Tipo abstracto del elemento de interfaz de usuario, derivado de <see cref="UIElement"/>.
+	/// </typeparam>
 	public interface AbstractUILinker<TUIElement>
 		where TUIElement : UIElement
 	{
@@ -37,6 +40,6 @@ namespace Sifaw.Views
 		/// Devuelve una representación concreta para el componente abstracto <c>TUIElement</c>.
 		/// </summary>
 		/// <param name="ui">Elemento de interfaz de usuario.</param>
-		void Get(out TUIElement ui);
+		void Load(out TUIElement ui);
 	}
 }

@@ -24,15 +24,9 @@ namespace Sifaw.WPF.Test
 
 			//(new MainWindow()).Show();			
 
-			//UIBackgroundWorkerViewController workerController = new UIBackgroundWorkerViewController(null);
-			//workerController.UISettings.AllowCancel = true;
-			//workerController.Start(new UIBackgroundWorkerViewController.Input(new BackgroundWorkerPack(TestBackGroundWorker, null)));
-
-			//UIGroupFiltersTestViewController groupFiltersTest = new UIGroupFiltersTestViewController();
-			//groupFiltersTest.Start();
-
-			UIAssistantTestViewController assistantTest = new UIAssistantTestViewController();
-			assistantTest.Start();
+			//(new UIGroupFiltersTestViewController()).Start();
+			//(new UIAssistantTestViewController()).Start();
+			(new UITabHostTestViewController()).Start();
 		}
 
 		#endregion

@@ -110,7 +110,9 @@ namespace Sifaw.WPF.Test
 			}
 		}
 
-		#region Filtros
+		#endregion
+
+		#region Filtrs
 
 		[Serializable]
 		public class Filterable : IFilterable
@@ -200,8 +202,6 @@ namespace Sifaw.WPF.Test
 				Filter4 = new Filterable("Filtro 4");
 			}
 		}
-
-		#endregion
 
 		#endregion
 

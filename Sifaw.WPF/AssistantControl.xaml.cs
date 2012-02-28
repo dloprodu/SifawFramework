@@ -52,12 +52,12 @@ namespace Sifaw.WPF
 
 		private void buttonAnterior_Click(object sender, RoutedEventArgs e)
 		{
-			OnUIComponentChanged(new UIComponentChangedEventArgs(assistantProgressBar.Value - 1));
+			OnGuestSelecting(new UIGuestSelectingEventArgs(assistantProgressBar.Value - 2));
 		}
 
 		private void buttonSiguiente_Click(object sender, RoutedEventArgs e)
 		{
-			OnUIComponentChanged(new UIComponentChangedEventArgs(assistantProgressBar.Value));
+			OnGuestSelecting(new UIGuestSelectingEventArgs(assistantProgressBar.Value));
 		}
 
 		private void buttonAceptar_Click(object sender, RoutedEventArgs e)
@@ -126,27 +126,38 @@ namespace Sifaw.WPF
 
 		#region Propiedades
 
+		private string[] _descriptors = null;
 		public string[] Descriptors
 		{
-			set { assistantProgressBar.Maximum = (byte)value.Length; }
+			get { return _descriptors; }
+			set 
+			{
+				_descriptors = value;
+				assistantProgressBar.Maximum = (byte)value.Length; 
+			}
 		}
 
 		#endregion
 
 		#region Métodos
 
-		public void UpdateContent(UIComponent component, int key)
+		public void Update(UIComponent content, int key)
 		{
-			if (gridContent.Children.Contains(component as System.Windows.UIElement))
-				return;
+			// Precondiciones.
+			if (!(content is FrameworkElement))
+				throw new ArgumentException("Se esperaba un componente WPF.", "content");
+			
+			if (key < 0 || key > assistantProgressBar.Maximum - 1)
+				throw new ArgumentOutOfRangeException("key");
+			
+			// Actualizamos el contenido.
+			(content as FrameworkElement).VerticalAlignment = VerticalAlignment.Stretch;
+			(content as FrameworkElement).HorizontalAlignment = HorizontalAlignment.Stretch;
+			(content as FrameworkElement).Margin = new Thickness(0);
 
-			(component as FrameworkElement).VerticalAlignment = VerticalAlignment.Stretch;
-			(component as FrameworkElement).HorizontalAlignment = HorizontalAlignment.Stretch;
-			(component as FrameworkElement).Margin = new Thickness(0);
+			gridContent.Children.Add(content as FrameworkElement);
 
-			gridContent.Children.Add(component as System.Windows.UIElement);
-
-			// Eliminamos la vista anterior
+			// Eliminamos la vista anterior.
 			// • Se hace después de mostrar la vista actual para evitar parpadeos.
 			if (gridContent.Children.Count > 1)
 				gridContent.Children.Remove(gridContent.Children[0]);
@@ -154,19 +165,19 @@ namespace Sifaw.WPF
 			// Actualizamos el estado de la barra de progreso del asistente.
 			assistantProgressBar.Value = (byte)(key + 1);
 			labelStep.Content = (key + 1);
-			textBlockTitle.Text = component.Denomination;
-			textBlockDescription.Text = component.Description;
+			textBlockTitle.Text = Descriptors[key];
+			textBlockDescription.Text = content.Description;
 		}
 
 		#endregion
 
 		#region Eventos
 
-		public event UIComponentChangedEventHandler UIComponentChanged;
-		private void OnUIComponentChanged(UIComponentChangedEventArgs e)
+		public event UIGuestSelectingEventHandler GuestSelecting;
+		private void OnGuestSelecting(UIGuestSelectingEventArgs e)
 		{
-			if (UIComponentChanged != null)
-				UIComponentChanged(this as AssistantComponent, e);
+			if (GuestSelecting != null)
+				GuestSelecting(this as AssistantComponent, e);
 		}
 
 		#endregion

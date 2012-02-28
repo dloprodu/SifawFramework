@@ -39,42 +39,103 @@ namespace Sifaw.WPF
 	/// </summary>
 	public class TabHostControl : TabControl, TabHostComponent
 	{
+		#region Fields
+
+		/// <summary>
+		/// Flag que indica si se está procesando una solicitud de selección.
+		/// </summary>
+		private bool selecting = false;
+
+		#endregion
+
 		#region Constructor
 
 		static TabHostControl()
 		{
 			DefaultStyleKeyProperty.OverrideMetadata(typeof(TabHostControl), new FrameworkPropertyMetadata(typeof(TabHostControl)));
 		}
+		
+		#endregion
+
+		#region Override Methods
+
+		protected override void OnSelectionChanged(SelectionChangedEventArgs e)
+		{
+			if (selecting)
+				return;
+
+			selecting = true;
+
+			UIGuestSelectingEventArgs args = new UIGuestSelectingEventArgs(SelectedIndex);
+
+			OnGuestSelecting(args);
+				
+			if (args.Cancel && e.RemovedItems.Count != 0)
+				SelectedItem = e.RemovedItems[0];
+
+			if (!args.Cancel)
+				base.OnSelectionChanged(e);
+
+			selecting = false;
+		}
 
 		#endregion
 
 		#region UIActorComponent Members
 
+		#region Propiedades
+
+		private string[] _descriptors = null;
 		public string[] Descriptors
 		{
+			get { return _descriptors; }
 			set
 			{
-				Reset();
-
+				Reset();				
+				_descriptors = value;
+				
 				if (value != null)
 				{
 					for (int i = 0; i < value.Length; i++)
-						Items.Add(value[i]);
+					{
+						TabItem item = new TabItem();
+						item.Header = value[i];
+						Items.Add(item);
+					}
 				}
 			}
 		}
 
-		public void UpdateContent(UIComponent content, int key)
+		#endregion
+
+		#region Métodos
+
+		public void Update(UIComponent content, int key)
 		{
-			// TODO
+			// Precondiciones.
+			if (!(content is FrameworkElement))
+				throw new ArgumentException("Se esperaba un componente WPF.", "content");
+
+			if (key < 0 || key > Items.Count - 1)
+				throw new ArgumentOutOfRangeException("key");
+
+			// Actualizamos el contenido.
+			(Items[key] as TabItem).Content = null;
+			(Items[key] as TabItem).Content = content;
 		}
 
-		public event UIComponentChangedEventHandler UIComponentChanged;
-		private void OnUIComponentChanged(UIComponentChangedEventArgs e)
+		#endregion
+
+		#region Eventos
+
+		public event UIGuestSelectingEventHandler GuestSelecting;
+		private void OnGuestSelecting(UIGuestSelectingEventArgs e)
 		{
-			if (UIComponentChanged != null)
-				UIComponentChanged(this as TabHostComponent, e);
+			if (GuestSelecting != null)
+				GuestSelecting(this as AssistantComponent, e);
 		}
+
+		#endregion
 
 		#endregion
 

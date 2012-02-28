@@ -16,24 +16,6 @@ namespace Sifaw.WPF.Test
 		, UIGroupFiltersTestViewController.UISettingsContainer
 		, ShellComponent>
 	{
-		#region Inclusions
-
-		private UIGroupFiltersTestController _groupFilterTest = null;
-		private UIGroupFiltersTestController GroupFilterTest
-		{
-			get
-			{
-				if (_groupFilterTest == null)
-				{
-					_groupFilterTest = new UIGroupFiltersTestController();
-				}
-
-				return _groupFilterTest;
-			}
-		}
-
-		#endregion
-
 		#region Input / Output
 
 		/// <summary>
@@ -93,6 +75,24 @@ namespace Sifaw.WPF.Test
 			}
 
 			#endregion
+		}
+
+		#endregion
+
+		#region Inclusions
+
+		private UIGroupFiltersTestController _groupFilterTest = null;
+		private UIGroupFiltersTestController GroupFilterTest
+		{
+			get
+			{
+				if (_groupFilterTest == null)
+				{
+					_groupFilterTest = new UIGroupFiltersTestController();
+				}
+
+				return _groupFilterTest;
+			}
 		}
 
 		#endregion

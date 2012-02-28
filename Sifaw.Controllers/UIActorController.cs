@@ -27,8 +27,9 @@ using Sifaw.Views.Components;
 namespace Sifaw.Controllers
 {
 	/// <summary>
-	/// Controladora base que implemnenta una interfaz que administra un conjunto relacionado de 
-	/// componente de interfaz <see cref="UIComponent"/> a mostrar.
+	/// Controladora base encargada de administrar un conjunto relacionado de 
+	/// componentes de interfaz <see cref="Sifaw.Views.UIComponent"/> que comparten entre ellos
+	/// el mismo espacio en pantalla.
 	/// </summary>
 	/// <typeparam name="TInput">
 	/// Tipo para establecer los parámetros de inicio de la controladora. Ha de ser serializable y 
@@ -59,6 +60,7 @@ namespace Sifaw.Controllers
 		where TUISettings : UIActorController<TInput, TOutput, TUISettings, TComponent, TGuest>.UISettingsContainer
 						  , new()
 		where TComponent  : UIActorComponent
+		where TGuest      : UIComponent
 	{
 		#region Input / Output
 
@@ -140,6 +142,12 @@ namespace Sifaw.Controllers
 		[CLReseteable(null)]
 		private string[] _descriptors = null;
 
+		[CLReseteable(null)]
+		private TGuest _guest = default(TGuest);
+
+		[CLReseteable(0)]
+		private int _key = 0;
+
 		#endregion
 
 		#region Events
@@ -194,38 +202,38 @@ namespace Sifaw.Controllers
 		 */
 
 		/// <summary>
-		/// Se llama al método <see cref="OnBeforeGuestChanged"/> antes de finalizar las
-		/// controladoras embebidas. El método permite que las clases derivadas controlen
+		/// Se llama al método <see cref="OnBeforeUpdateGuest"/> antes de actualizar el
+		/// componente a mostrar. El método permite que las clases derivadas controlen
 		/// el evento sin asociar un delegado.
 		/// </summary>
 		/// <remarks>
-		/// Al reemplazar <see cref="OnBeforeGuestChanged"/> en una clase derivada, asegúrese de llamar al
-		/// método <see cref="OnBeforeGuestChanged"/> de la clase base para que los delegados registrados 
+		/// Al reemplazar <see cref="OnBeforeUpdateGuest"/> en una clase derivada, asegúrese de llamar al
+		/// método <see cref="OnBeforeUpdateGuest"/> de la clase base para que los delegados registrados 
 		/// reciban el evento.
 		/// </remarks>
-		protected virtual void OnBeforeGuestChanged()
+		protected virtual void OnBeforeUpdateGuest()
 		{
 			/* Emtpy */
 		}
 
 		/// <summary>
-		/// Se llama al método <see cref="OnAfterGuestChanged"/> después de finalizar las
-		/// controladoras embebidas. El método permite que las clases derivadas controlen 
+		/// Se llama al método <see cref="OnAfterUpdateGuest"/> después de actualizar el
+		/// componente a mostrar. El método permite que las clases derivadas controlen 
 		/// el evento sin asociar un delegado.
 		/// </summary>
 		/// <remarks>
-		/// Al reemplazar <see cref="OnAfterGuestChanged"/> en una clase derivada, asegúrese de llamar al
-		/// método <see cref="OnAfterGuestChanged"/> de la clase base para que los delegados registrados
+		/// Al reemplazar <see cref="OnAfterUpdateGuest"/> en una clase derivada, asegúrese de llamar al
+		/// método <see cref="OnAfterUpdateGuest"/> de la clase base para que los delegados registrados
 		/// reciban el evento.
 		/// </remarks>
-		protected virtual void OnAfterGuestChanged()
+		protected virtual void OnAfterUpdateGuest()
 		{
 			/* Emtpy */
 		}	
 
 		#endregion
 
-		#region Propiedades
+		#region Properties
 
 		/// <summary>
 		/// Devuelve el array que informa del número de componentes a hospedar conteniendo
@@ -235,6 +243,22 @@ namespace Sifaw.Controllers
 		protected string[] Descriptors
 		{
 			get { return _descriptors; }
+		}
+
+		/// <summary>
+		/// Devuelve el componente de interfaz visible.
+		/// </summary>
+		protected TGuest Guest
+		{
+			get { return _guest; }
+		}
+
+		/// <summary>
+		/// Devuelve la clave que indica la posición del componete de interfaz visible dentro del conjunto de componentes.
+		/// </summary>
+		protected int Key
+		{
+			get { return _key; }
 		}
 
 		#endregion
@@ -271,20 +295,13 @@ namespace Sifaw.Controllers
 		/// para cada uno de ellos una cadena de texto susceptible de ser usada como identificador
 		/// en la interfaz de usuario.
 		/// </summary>
-		protected abstract string[] GetGuestsDescriptors();
+		protected abstract string[] GetDescriptors();
 
 		/// <summary>
 		/// Devuelve el componente a mostrar según la posición y componente mostrado actualmente.
 		/// </summary>
-		/// <param name="key">Clave que indica la posición del componente dentro del conjunto de componentes a hospedar.</param>
-		/// <param name="current">Vista que actualmente esta mostrando el asistente.</param>
-		protected abstract TGuest GetGuestAt(int key, TGuest current);
-
-		/// <summary>
-		/// Actualiza el componente a mostrar.
-		/// </summary>
-		/// <param name="key">Clave que indica la posición del componente en la secuencia.</param>
-		protected abstract void ChangeGuest(int key);
+		/// <param name="key">Clave que indica la posición del componente dentro del conjunto de componentes.</param>
+		protected abstract TGuest GetGuestAt(int key);
 
 		#endregion
 
@@ -298,7 +315,7 @@ namespace Sifaw.Controllers
 			base.OnAfterUIElementLoad();
 
 			/* Subscripción a eventos del componente... */
-			UIElement.UIComponentChanged += new UIComponentChangedEventHandler(UIElement_UIComponentChanged);
+			UIElement.GuestSelecting += new UIGuestSelectingEventHandler(UIElement_UpdateGuest);
 		}
 
 		/// <summary>
@@ -322,28 +339,38 @@ namespace Sifaw.Controllers
 		{
 			base.OnAfterStartController();
 
-			_descriptors = GetGuestsDescriptors();
+			_descriptors = GetDescriptors();
+			_guest = GetGuestAt(_key);
 
 			UIElement.Descriptors = _descriptors;
+			UIElement.Update(_guest, _key);
 		}
 
 		#endregion
 
 		#region UIElement Event Handlers
 
-		private void UIElement_UIComponentChanged(object sender, UIComponentChangedEventArgs e)
+		private void UIElement_UpdateGuest(object sender, UIGuestSelectingEventArgs e)
 		{
-			OnBeforeGuestChanged();
-
 			CLComponentChangingEventArgs args = new CLComponentChangingEventArgs(e.Key);
 			OnGuestChanging(args);
+			e.Cancel = args.Cancel;
 
 			if (!args.Cancel)
 			{
-				ChangeGuest(e.Key);
+				TGuest new_guest = GetGuestAt(e.Key);
 
-				OnGuestChanged(new CLComponentChangedEventArgs(e.Key));
-				OnAfterGuestChanged();
+				if (new_guest != null)
+				{
+					OnBeforeUpdateGuest();
+					UIElement.Update(new_guest, e.Key);
+
+					_guest = new_guest;
+					_key = e.Key;					
+
+					OnAfterUpdateGuest();
+					OnGuestChanged(new CLComponentChangedEventArgs(e.Key));
+				}
 			}
 		}
 

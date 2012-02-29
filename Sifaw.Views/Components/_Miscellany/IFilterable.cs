@@ -24,7 +24,8 @@ namespace Sifaw.Views.Components
 {
 	/// <summary>
 	/// Define un método generalizado, que implementa una clase o tipo de valor con
-	/// el fin de crear un método para realizar filtros sobre listas.
+	/// el fin de que un objeto pueda ser interpretado por un componente que derive 
+	/// de <see cref="FilterBaseComponent{TFilter}"/>.
 	/// </summary>
 	/// <remarks>
 	/// Los objetos que implementen la interfaz <see cref="IFilterable"/> han de proporcionar

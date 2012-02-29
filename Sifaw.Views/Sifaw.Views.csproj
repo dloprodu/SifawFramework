@@ -66,6 +66,11 @@
     <Compile Include="Components\Filters\ListFilterComponent.cs" />
     <Compile Include="Components\Filters\TextFilterComponent.cs" />
     <Compile Include="Components\Filters\EnumFilterComponent.cs" />
+    <Compile Include="Components\TableComponent.cs" />
+    <Compile Include="Components\_Miscellany\UITableCell.cs" />
+    <Compile Include="Components\_Miscellany\UITableColumn.cs" />
+    <Compile Include="Components\_Miscellany\UITableRow.cs" />
+    <Compile Include="Components\_Miscellany\UITable.cs" />
     <Compile Include="UIActorComponent.cs" />
     <Compile Include="Components\_Miscellany\IFilterable.cs" />
     <Compile Include="ShellComponent.cs" />

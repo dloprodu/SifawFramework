@@ -103,6 +103,7 @@
     <Compile Include="Components\UIFilterBaseController.cs" />
     <Compile Include="Components\UIFiltersGroupController.cs" />
     <Compile Include="Components\UITabHostController.cs" />
+    <Compile Include="Components\UITableController.cs" />
     <Compile Include="Components\_Delegates\BackgroundWorkerDelegate.cs" />
     <Compile Include="Components\_Miscellany\BackgroundWorkerCommunicator.cs" />
     <Compile Include="Components\_Miscellany\BackgroundWorkerPack.cs" />

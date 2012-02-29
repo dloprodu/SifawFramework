@@ -183,6 +183,12 @@ namespace Sifaw.WPF.Test
 			}
 		}
 
+		protected override void OnBeforeUpdateAssistant(out bool allowCancel, out bool allowPrevious)
+		{
+			allowCancel = true;
+			allowPrevious = true;
+		}
+
 		protected override void OnBeforeCancel(out bool finish, out Output output)
 		{
 			output = new Output();

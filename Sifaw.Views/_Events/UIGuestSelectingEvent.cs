@@ -40,7 +40,8 @@ namespace Sifaw.Views
 		public readonly int Key;
 
 		/// <summary>
-		/// Inicializa una nueva instancia de la clase <see cref="UIGuestSelectingEventArgs"/>.
+		/// Inicializa una nueva instancia de la clase <see cref="UIGuestSelectingEventArgs"/>, estableciendo un valor
+		/// para la propiedad <see cref="Key"/>.
 		/// </summary>
 		public UIGuestSelectingEventArgs(int key)
 			: base()

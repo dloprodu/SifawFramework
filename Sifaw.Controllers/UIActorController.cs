@@ -236,7 +236,7 @@ namespace Sifaw.Controllers
 		#region Properties
 
 		/// <summary>
-		/// Devuelve el array que informa del número de componentes a hospedar conteniendo
+		/// Devuelve el array que informa del número de componentes a hospedar, conteniendo
 		/// para cada uno de ellos una cadena de texto susceptible de ser usada como identificador
 		/// en la interfaz de usuario.
 		/// </summary>
@@ -254,8 +254,11 @@ namespace Sifaw.Controllers
 		}
 
 		/// <summary>
-		/// Devuelve la clave que indica la posición del componete de interfaz visible dentro del conjunto de componentes.
+		/// Devuelve la clave que identifica al componete de interfaz visible dentro del conjunto de componentes.
 		/// </summary>
+		/// <remarks>
+		/// El valor de la clave está comprendido entre 0 y <c><see cref="Descriptors"/>.Length - 1</c>.
+		/// </remarks>
 		protected int Key
 		{
 			get { return _key; }
@@ -300,7 +303,10 @@ namespace Sifaw.Controllers
 		/// <summary>
 		/// Devuelve el componente a mostrar según la posición y componente mostrado actualmente.
 		/// </summary>
-		/// <param name="key">Clave que indica la posición del componente dentro del conjunto de componentes.</param>
+		/// <param name="key">
+		/// Clave que identifica al componente de interfaz dentro del conjunto de componentes, cuyo valor 
+		/// está comprendido entre 0 y <c><see cref="Descriptors"/>.Length - 1</c>.
+		/// </param>
 		protected abstract TGuest GetGuestAt(int key);
 
 		#endregion

@@ -67,6 +67,7 @@
     <Compile Include="Components\Filters\TextFilterComponent.cs" />
     <Compile Include="Components\Filters\EnumFilterComponent.cs" />
     <Compile Include="Components\TableComponent.cs" />
+    <Compile Include="Components\_Miscellany\UITableCellCollection.cs" />
     <Compile Include="Components\_Miscellany\UITableCell.cs" />
     <Compile Include="Components\_Miscellany\UITableColumn.cs" />
     <Compile Include="Components\_Miscellany\UITableRow.cs" />

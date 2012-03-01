@@ -28,28 +28,58 @@ namespace Sifaw.Views.Components
 	{
 		#region Fields
 
-		public UITableColumnCollection Header;
-		public UITableRowCollection Rows;
-		public UITableColumnCollection Footer;
+        private UITableCellCollection _header;
+        private UITableRowCollection _rows;
+        private UITableCellCollection _footer;
 
 		#endregion
 
-		#region Constructros
+        #region Properties
 
-		public UITable()
+        public UITableCellCollection Header
+        {
+            get
+            {
+                if (_header == null)
+                    _header = new UITableCellCollection();
+
+                return _header;
+            }
+        }
+
+        public UITableRowCollection Rows
+        {
+            get
+            {
+                if (_rows == null)
+                    _rows = new UITableRowCollection();
+
+                return _rows;
+            }
+        }
+
+        public UITableCellCollection Footer
+        {
+            get
+            {
+                if (_footer == null)
+                    _footer = new UITableCellCollection();
+
+                return _footer;
+            }
+        }
+
+        #endregion
+
+        #region Constructros
+
+        public UITable()
 		{
-			Header = new UITableColumnCollection();
-			Rows = new UITableRowCollection();
-			Footer = new UITableColumnCollection();
 		}
 
 		#endregion
 
 		#region Miscellany
-
-		public class UITableColumnCollection : CollectionBase
-		{			
-		}
 
 		public class UITableRowCollection : CollectionBase
 		{

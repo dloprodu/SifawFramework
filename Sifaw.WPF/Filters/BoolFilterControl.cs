@@ -156,9 +156,9 @@ namespace Sifaw.WPF.Filters
 
 		#region UIComponent Members
 
-		public new UIDistance Margin
+		public new UIFrame Margin
 		{
-			get { return new UIDistance(base.Margin.Left, base.Margin.Top, base.Margin.Right, base.Margin.Bottom); }
+			get { return new UIFrame(base.Margin.Left, base.Margin.Top, base.Margin.Right, base.Margin.Bottom); }
 			set { base.Margin = new Thickness(value.Left, value.Top, value.Right, value.Bottom); }
 		}
 

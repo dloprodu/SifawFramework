@@ -114,7 +114,7 @@ namespace Sifaw.Controllers
 		{
 			#region Fields
 
-			private UIDistance _margin;
+			private UIFrame _margin;
 
 			#endregion
 
@@ -123,7 +123,7 @@ namespace Sifaw.Controllers
 			/// <summary>
 			/// Obtiene o establece una el margen de <see cref="UIElementController{TInput, TOutput, TUISettings, TUIElement}.UIElement"/>.
 			/// </summary>
-			public UIDistance Margin
+			public UIFrame Margin
 			{
 				get { return _margin; }
 				set { _margin = value; }
@@ -139,7 +139,7 @@ namespace Sifaw.Controllers
 			public UISettingsContainer()
 				: base()
 			{
-				this._margin = UIDistance.Empty;
+				this._margin = UIFrame.Empty;
 			}
 
 			#endregion

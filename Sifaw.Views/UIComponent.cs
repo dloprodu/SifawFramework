@@ -38,6 +38,6 @@ namespace Sifaw.Views
 		/// <summary>
 		/// Obtiene o establece el margen del componente.
 		/// </summary>
-		UIDistance Margin { get; set; }
+		UIFrame Margin { get; set; }
 	}
 }

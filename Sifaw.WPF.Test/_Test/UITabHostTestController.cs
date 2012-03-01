@@ -290,11 +290,11 @@ namespace Sifaw.WPF.Test
 		{
 			GroupFilterTest.Start();
 
-			EnumFilter.UISettings.Margin = new UIDistance(3);
+			EnumFilter.UISettings.Margin = new UIFrame(3);
 			EnumFilter.UISettings.Source = new Filterable[] { Filters.Filter1, Filters.Filter2, Filters.Filter3, Filters.Filter4, Filters.Filter5, Filters.Filter6 };
 			EnumFilter.Start(new UIEnumFilterController.Input(Filters.Filter2));
 
-			ListFilter.UISettings.Margin = new UIDistance(3);
+			ListFilter.UISettings.Margin = new UIFrame(3);
 			ListFilter.UISettings.Source = new Filterable[] { Filters.Filter1, Filters.Filter2, Filters.Filter3, Filters.Filter4, Filters.Filter5, Filters.Filter6 };
 			ListFilter.Start(new UIListFilterController.Input(new Filterable[] { Filters.Filter1, Filters.Filter2 }));
 		}

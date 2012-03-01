@@ -67,9 +67,10 @@
     <Compile Include="Components\Filters\TextFilterComponent.cs" />
     <Compile Include="Components\Filters\EnumFilterComponent.cs" />
     <Compile Include="Components\TableComponent.cs" />
-    <Compile Include="Components\_Miscellany\UITableCellCollection.cs" />
+    <Compile Include="Components\_Miscellany\UITableStyle.cs" />
+    <Compile Include="Components\_Miscellany\UITableTextCell.cs" />
+    <Compile Include="Components\_Miscellany\UITableSection.cs" />
     <Compile Include="Components\_Miscellany\UITableCell.cs" />
-    <Compile Include="Components\_Miscellany\UITableColumn.cs" />
     <Compile Include="Components\_Miscellany\UITableRow.cs" />
     <Compile Include="Components\_Miscellany\UITable.cs" />
     <Compile Include="UIActorComponent.cs" />
@@ -81,7 +82,10 @@
     <Compile Include="_Miscellany\AbstractUILinker.cs" />
     <Compile Include="_Miscellany\AbstractUIProvider.cs" />
     <Compile Include="_Miscellany\AbstractUIProviderManager.cs" />
-    <Compile Include="_Miscellany\UIDistance.cs" />
+    <Compile Include="_Miscellany\UIColor.cs" />
+    <Compile Include="_Miscellany\UIColors.cs" />
+    <Compile Include="_Miscellany\UIFrameColor.cs" />
+    <Compile Include="_Miscellany\UIFrame.cs" />
     <Compile Include="_Miscellany\UILengthModes.cs" />
     <Compile Include="Components\_Events\UIFilterChangedEvent.cs" />
     <Compile Include="_Events\UIFinishRequestEvent.cs" />

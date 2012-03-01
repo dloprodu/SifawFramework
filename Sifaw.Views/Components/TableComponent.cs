@@ -29,6 +29,9 @@ namespace Sifaw.Views.Components
 	/// </summary>
 	public interface TableComponent : UIComponent
 	{
-		// ...
+		/// <summary>
+		/// Establece la tabla a mostrar.
+		/// </summary>		
+		void SetTable(UITable table);
 	}
 }

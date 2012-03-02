@@ -194,7 +194,7 @@ namespace Sifaw.Views.Kit
             }
             catch (Exception e)
             {
-                throw new ArgumentException("No se pudo realizar la conversión.");
+                throw new ArgumentException(string.Format("No se pudo realizar la conversión: {0}.", e.Message));
             }
 
             return color;

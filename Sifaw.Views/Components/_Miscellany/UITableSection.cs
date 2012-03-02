@@ -39,7 +39,7 @@ namespace Sifaw.Views.Components
 		private string _detail = string.Empty;
 		private UITableRowCollection _rows;
 
-		private int _rowHeight = 18;
+		//private int _rowHeight = 18;
 
 
 		#endregion

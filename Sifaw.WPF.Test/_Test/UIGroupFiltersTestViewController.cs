@@ -6,6 +6,7 @@ using System.Text;
 using Sifaw.Controllers;
 
 using Sifaw.Views;
+using Sifaw.Views.Kit;
 
 
 namespace Sifaw.WPF.Test

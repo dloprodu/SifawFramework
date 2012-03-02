@@ -6,6 +6,7 @@ using System.Text;
 using Sifaw.Controllers;
 
 using Sifaw.Views;
+using Sifaw.Views.Kit;
 
 
 namespace Sifaw.WPF.Test
@@ -187,16 +188,16 @@ namespace Sifaw.WPF.Test
 			return 1;
 		}
 
-		protected override void GetRowSettings(uint row, out double height, out Views.UILengthModes mode)
+		protected override void GetRowSettings(uint row, out double height, out UILengthModes mode)
 		{
 			height = 400;
-			mode = Views.UILengthModes.WeightedProportion;
+			mode = UILengthModes.WeightedProportion;
 		}
 
-		protected override void GetRowCellSettings(uint row, uint cell, out double width, out Views.UILengthModes mode, out Views.UIComponent component)
+		protected override void GetRowCellSettings(uint row, uint cell, out double width, out UILengthModes mode, out Views.UIComponent component)
 		{
 			width = 400;
-			mode = Views.UILengthModes.WeightedProportion;
+			mode = UILengthModes.WeightedProportion;
 			component = UIAssistantTestController.GetUIComponent();
 		}
 

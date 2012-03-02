@@ -36,7 +36,7 @@ namespace Sifaw.Views
 		string Denomination { get; set; }
 
 		/// <summary>
-		/// Establece o devuevle la descripción del <see cref="UIElement"/>.
+		/// Obtiene o establece la descripción del <see cref="UIElement"/>.
 		/// </summary>
 		string Description { get; set; }
 

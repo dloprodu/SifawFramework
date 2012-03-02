@@ -30,6 +30,16 @@ namespace Sifaw.Views.Kit
     /// </remarks>
     public static class UIColors
     {
+		/// <summary>
+		/// Obtiene el color que tiene un valor ARGB #00FFFFFF.
+		/// </summary>
+		public static readonly UIColor Transparent;
+		
+		static UIColors()
+		{
+			Transparent = UIColor.FromArgb(0, 255, 255, 255);
+		}
+
         /// <summary>
         /// Paleta de blancos.
         /// </summary>
@@ -155,7 +165,7 @@ namespace Sifaw.Views.Kit
             /// <summary>
             /// Obtiene el color que tiene un valor de RGB de #D3D3D3.
             /// </summary>
-            public static readonly UIColor LightGrey;
+            public static readonly UIColor LightGray;
 
             /// <summary>
             /// Obtiene el color que tiene un valor de RGB de #C0C0C0.
@@ -200,7 +210,7 @@ namespace Sifaw.Views.Kit
             static GrayColors()
             {
                 Gainsboro = UIColor.FromRgb(220, 220, 220);
-                LightGrey = UIColor.FromRgb(211, 211, 211);
+                LightGray = UIColor.FromRgb(211, 211, 211);
                 Silver = UIColor.FromRgb(192, 192, 192);
                 DarkGray = UIColor.FromRgb(169, 169, 169);
                 Gray = UIColor.FromRgb(105, 105, 105);

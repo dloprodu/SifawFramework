@@ -7,6 +7,7 @@ using Sifaw.Controllers;
 
 using Sifaw.Views;
 using Sifaw.Views.Components;
+using Sifaw.Views.Kit;
 
 
 namespace Sifaw.WPF.Test
@@ -163,13 +164,13 @@ namespace Sifaw.WPF.Test
 
 		protected override void GetRowSettings(uint row, out double height, out UILengthModes mode)
 		{
-			height = 400;
+			height = 100;
 			mode = UILengthModes.WeightedProportion;
 		}
 
 		protected override void GetRowCellSettings(uint row, uint cell, out double width, out UILengthModes mode, out TabHostComponent component)
 		{
-			width = 400;
+			width = 100;
 			mode = UILengthModes.WeightedProportion;
 			component = UITabHostTestController.GetUIComponent() as TabHostComponent;
 		}

@@ -20,7 +20,7 @@ using System.Linq;
 using System.Text;
 
 
-namespace Sifaw.Views
+namespace Sifaw.Views.Kit
 {
 	/// <summary>
 	/// Modos de ajuste de un elemento de interfaz de usuario.

@@ -31,6 +31,7 @@ using System.ComponentModel;
 
 using Sifaw.Views.Components;
 using Sifaw.Views;
+using Sifaw.Views.Kit;
 
 
 namespace Sifaw.WPF

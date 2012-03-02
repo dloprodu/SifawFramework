@@ -20,13 +20,13 @@ using System.Linq;
 using System.Text;
 
 
-namespace Sifaw.Views
+namespace Sifaw.Views.Kit
 {
 	/// <summary>
 	/// Describe el grosor de un marco situado alrededor de un rectángulo. 
 	/// Cuatro valores <c>Double</c> describen los lados Left, Top, Right y Bottom del rectángulo, respectivamente.
 	/// </summary>
-	public struct UIFrame
+	public struct UIFrame : IEquatable<UIFrame>
 	{
 		/// <summary>
 		/// Representa una estructura <see cref="UIFrame"/> con longitudes definidas a 0.
@@ -100,5 +100,53 @@ namespace Sifaw.Views
 		}
 
 		#endregion
+
+        #region Override Methods
+
+        /// <summary>
+        /// Devuelve la representación de cadena de un objeto <see cref="UIFrame"/>.
+        /// </summary>
+        public override string ToString()
+        {
+            return string.Format("Left: {0}; Top: {1}; Right: {2}; Bottom: {3}", Left, Top, Right, Bottom);
+        }
+
+        /// <summary>
+        /// Determina si un objeto <see cref="UIFrame"/> proporcionado es equivalente al objeto <see cref="UIFrame"/> actual.
+        /// </summary>
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+                return false;
+
+            if (!(obj is UIFrame))
+                return false;
+
+            return Left.Equals(((UIFrame)obj).Left)
+                && Top.Equals(((UIFrame)obj).Top)
+                && Right.Equals(((UIFrame)obj).Right)
+                && Bottom.Equals(((UIFrame)obj).Bottom);
+        }
+
+        /// <summary>
+        /// Obtiene un código hash de este objeto <see cref="UIFrame"/>.
+        /// </summary>
+        public override int GetHashCode()
+        {
+            return Left.GetHashCode() ^ Top.GetHashCode() ^ Right.GetHashCode() ^ Bottom.GetHashCode();
+        }
+
+        /// <summary>
+        /// Determina si un objeto <see cref="UIFrame"/> proporcionado es equivalente al objeto <see cref="UIFrame"/> actual.
+        /// </summary>
+        public bool Equals(UIFrame other)
+        {
+            return Left.Equals(other.Left)
+               && Top.Equals(other.Top)
+               && Right.Equals(other.Right)
+               && Bottom.Equals(other.Bottom);
+        }
+
+        #endregion
 	}
 }

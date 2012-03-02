@@ -19,7 +19,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Sifaw.Views.Components._Miscellany;
+using Sifaw.Views.Components;
 
 
 namespace Sifaw.Views.Components

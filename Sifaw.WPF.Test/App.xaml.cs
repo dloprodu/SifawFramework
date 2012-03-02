@@ -21,7 +21,7 @@ namespace Sifaw.WPF.Test
 			: base()
 		{
 			AbstractUIProviderManager<AbstractUIProvider>.SetUIElementLinker(new WPFProvider());
-
+            
 			//(new MainWindow()).Show();			
 
 			//(new UIGroupFiltersTestViewController()).Start();

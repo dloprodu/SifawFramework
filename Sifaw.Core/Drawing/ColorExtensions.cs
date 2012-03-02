@@ -34,7 +34,7 @@ namespace Sifaw.Core.Drawing
 		/// Devuelve una representación levemente oscurecida del color especificado.
 		/// </summary>
 		public static Color SlightDark(this Color color)
-		{		
+		{
 			return color.SlightDark(SLIGHTDARK_FACTOR);
 		}
 

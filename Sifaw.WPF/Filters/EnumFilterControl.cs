@@ -30,6 +30,7 @@ using System.Windows.Shapes;
 using Sifaw.Views;
 using Sifaw.Views.Components;
 using Sifaw.Views.Components.Filters;
+using Sifaw.Views.Kit;
 
 
 namespace Sifaw.WPF.Filters

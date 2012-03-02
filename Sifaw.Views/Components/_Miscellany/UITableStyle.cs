@@ -20,23 +20,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using Sifaw.Views.Kit;
+
 
 namespace Sifaw.Views.Components
 {
-	public class UITableStyle : INotifyPropertyChanged
+    [Serializable]
+	public class UITableStyle
 	{
 		#region Fields
 
-		private UIColor _background = UIColors.Whites.White;
-		private UIColor _foreground = UIColors.Grays.Black;
+        private UIBrush _background = new UISolidBrush(UIColors.WhiteColors.White);
+        private UIBrush _foreground = new UISolidBrush(UIColors.GrayColors.Black);
 		private UIFrame _border = new UIFrame(1);
-		private UIFrameColor _borderColor = new UIFrameColor(UIColors.Grays.LightGrey);
-
-		#endregion
-
-		#region INotifyPropertyChanged Members
-
-		public event PropertyChangedEventHandler PropertyChanged;
+		private UIFrameBrush _borderColor = new UIFrameBrush(new UISolidBrush(UIColors.GrayColors.LightGrey));
 
 		#endregion
 	}

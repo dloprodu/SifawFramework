@@ -9,6 +9,7 @@ using Sifaw.Controllers.Components.Filters;
 using Sifaw.Views;
 using Sifaw.Views.Components.Filters;
 using Sifaw.Views.Components;
+using Sifaw.Views.Kit;
 
 
 namespace Sifaw.WPF.Test

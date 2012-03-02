@@ -28,7 +28,7 @@ namespace Sifaw.Views.Components
 	/// <summary>
 	/// Representa un componente que muestra datos en una tabla.
 	/// </summary>
-	public interface TableComponent : UIComponent<ComponentStyle>
+	public interface TableComponent : UIComponent
 	{
 		/// <summary>
 		/// Establece la tabla a mostrar.

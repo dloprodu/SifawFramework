@@ -36,7 +36,7 @@ namespace Sifaw.Controllers.Components
 	/// un objeto del tipo <see cref="BackgroundWorkerPack"/>.
 	/// </para>
 	/// <para>
-	/// Haciendo uso del contenedor de ajustes de la controladora, <see cref="UIElementController{TInput, TOutput, TUIStyle, TUIElement}.UISettings"/>,
+	/// Haciendo uso del contenedor de ajustes de la controladora, <see cref="UIElementController{TInput, TOutput, TUIElement}.UISettings"/>,
 	/// se puede indicar si el proceso permite la cancelación, realiza un control del progreso asi como datos de caracter general como una descipción del proceso
 	/// que se va a ejecutar.
 	/// </para>
@@ -48,7 +48,6 @@ namespace Sifaw.Controllers.Components
 	public class UIBackgroundWorkerController : UIComponentController
 		< UIBackgroundWorkerController.Input
 		, UIBackgroundWorkerController.Output
-		, BackgroundWorkerComponentStyle
 		, BackgroundWorkerComponent>
 	{
 		#region Input / Output
@@ -60,7 +59,6 @@ namespace Sifaw.Controllers.Components
 		public new class Input : UIComponentController
 			< Input
 			, Output
-			, BackgroundWorkerComponentStyle
 			, BackgroundWorkerComponent>.Input
 		{
 			#region Fields
@@ -104,7 +102,6 @@ namespace Sifaw.Controllers.Components
 		public new class Output : UIComponentController
 			< Input
 			, Output
-			, BackgroundWorkerComponentStyle
 			, BackgroundWorkerComponent>.Output
 		{
 			#region Fields
@@ -199,6 +196,19 @@ namespace Sifaw.Controllers.Components
 
 		#endregion
 
+        #region Properties
+
+        /// <summary>
+        /// Devuelve el contenedor de ajustes del elemento de interfaz a través
+        /// del cual se puede modificar la configuración predeterminada.
+        /// </summary>
+        public new BackgroundWorkerSettings UISettings
+        {
+            get { return UIElement.UISettings; }
+        }
+
+        #endregion
+
 		#region Constructors
 
         /// <summary>
@@ -214,7 +224,7 @@ namespace Sifaw.Controllers.Components
         /// <summary>
         /// Inicializa una nueva instancia de la clase <see cref="BackgroundWorkerComponent"/>, 
 		/// estableciendo el <see cref="AbstractUILinker{TUIElement}"/> especificado como valor de la propiedad 
-		/// <see cref="UIElementController{TInput, TOutput, TUIStyle, TUIElement}.Linker"/> donde <c>TUIElement</c>
+		/// <see cref="UIElementController{TInput, TOutput, TUIElement}.Linker"/> donde <c>TUIElement</c>
 		/// implementa <see cref="BackgroundWorkerComponent"/>.
         /// </summary>
 		public UIBackgroundWorkerController(AbstractUILinker<BackgroundWorkerComponent> linker)
@@ -227,7 +237,7 @@ namespace Sifaw.Controllers.Components
 		#region UIElement Methods
 
         /// <summary>
-        /// Invoca al método sobrescirto <see cref="UIElementController{TInput, TOutput, TUIStyle, TComponent}.OnAfterUIElementLoad()"/> y
+        /// Invoca al método sobrescirto <see cref="UIElementController{TInput, TOutput, TComponent}.OnAfterUIElementLoad()"/> y
         /// posteriormente se subscribe a los eventos del componente <see cref="Sifaw.Views.Components.BackgroundWorkerComponent"/>.
         /// </summary>
 		protected override void OnAfterUIElementLoad()
@@ -371,7 +381,7 @@ namespace Sifaw.Controllers.Components
 		#region Finish Methods
 
         /// <summary>
-        /// Invoca al método sobrescirto <see cref="UIElementController{TInput, TOutput, TUIStyle, TUIElement}.OnBeforeFinishControllers(List{IController})"/>
+        /// Invoca al método sobrescirto <see cref="UIElementController{TInput, TOutput, TUIElement}.OnBeforeFinishControllers(List{IController})"/>
         /// y posteriormente libera el objeto <see cref="System.ComponentModel.BackgroundWorker"/>.
         /// </summary>
 		protected override void OnBeforeFinishControllers(List<IController> children)
@@ -447,11 +457,11 @@ namespace Sifaw.Controllers.Components
 
 				case ReportProgressCommands.MaximumProgressChanged:
 					if (UISettings.WithControl)
-						UIElement.MaxProgressPercentage = e.ProgressPercentage;
+						UIElement.UISettings.MaxProgressPercentage = e.ProgressPercentage;
 					break;
 
 				case ReportProgressCommands.WithControlChanged:
-					UIElement.WithControl = !UIElement.WithControl;
+					UIElement.UISettings.WithControl = !UIElement.UISettings.WithControl;
 					break;
 			}
 		}

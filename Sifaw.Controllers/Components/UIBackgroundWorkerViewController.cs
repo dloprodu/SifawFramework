@@ -33,7 +33,6 @@ namespace Sifaw.Controllers.Components
 	public class UIBackgroundWorkerViewController : UIShellViewController
 		< UIBackgroundWorkerViewController.Input
 		, UIBackgroundWorkerViewController.Output
-		, BackgroundWorkerComponentStyle
 		, BackgroundWorkerComponent>
 	{
 		#region Input / Output
@@ -42,7 +41,7 @@ namespace Sifaw.Controllers.Components
 		/// Parámetros de entrada de las controladora.
 		/// </summary>
 		[Serializable]
-		public new class Input : UIShellViewController<Input, Output, BackgroundWorkerComponentStyle, BackgroundWorkerComponent>.Input
+		public new class Input : UIShellViewController<Input, Output, BackgroundWorkerComponent>.Input
 		{
 			#region Fields
 
@@ -67,7 +66,7 @@ namespace Sifaw.Controllers.Components
 
 			/// <summary>
 			/// Inicializa una nueva instancia de la clase <see cref="UIBackgroundWorkerViewController.Input"/>,
-			/// estableciendo la propiedad <see cref="UIViewController{TInput, TOutput, TUIStyle, TView}.Input.ShowView"/> a <c>true</c>.
+			/// estableciendo la propiedad <see cref="UIViewController{TInput, TOutput, TView}.Input.ShowView"/> a <c>true</c>.
 			/// </summary>
 			/// <param name="worker">Paquete de ejecución</param>
 			public Input(BackgroundWorkerPack worker)
@@ -93,7 +92,7 @@ namespace Sifaw.Controllers.Components
 		/// Parámetros de retorno de la controladora.
 		/// </summary>
 		[Serializable]
-		public new class Output : UIShellViewController<Input, Output, BackgroundWorkerComponentStyle, BackgroundWorkerComponent>.Output
+		public new class Output : UIShellViewController<Input, Output, BackgroundWorkerComponent>.Output
 		{
 			#region Fields
 
@@ -166,7 +165,7 @@ namespace Sifaw.Controllers.Components
 		/// Obtiene el contenedor de ajustes del componente <see cref="UIBackgroundWorkerController"/>
 		/// alojado.
 		/// </summary>
-		public BackgroundWorkerComponentStyle UIBWSettings
+        public BackgroundWorkerSettings UIBackgroundWorkerSettings
 		{
 			get { return UIBackgroundWorkerController.UISettings; }
 		}
@@ -188,7 +187,7 @@ namespace Sifaw.Controllers.Components
 		/// <summary>
 		/// Inicializa una nueva instancia de la clase <see cref="UIBackgroundWorkerViewController"/>, 
 		/// estableciendo el <see cref="AbstractUILinker{TUIElement}"/> especificado como valor de la propiedad 
-		/// <see cref="UIElementController{TInput, TOutput, TUIStyle, TUIElement}.Linker"/> donde <c>TUIElement</c>
+		/// <see cref="UIElementController{TInput, TOutput, TUIElement}.Linker"/> donde <c>TUIElement</c>
 		/// implementa <see cref="ShellView"/>.
 		/// </summary>
 		public UIBackgroundWorkerViewController(AbstractUILinker<ShellView> linker)
@@ -229,7 +228,7 @@ namespace Sifaw.Controllers.Components
 		#region UIElement Methods
 
 		/// <summary>
-		/// Invoca al método sobrescirto <see cref="UIViewController{TInput, TOutput, TUIStyle, TUIView}.OnBeforeUIClose(out bool)"/> y
+		/// Invoca al método sobrescirto <see cref="UIViewController{TInput, TOutput, TUIView}.OnBeforeUIClose(out bool)"/> y
 		/// posteriormente solicita la cancelación del proceso al componente <see cref="UIBackgroundWorkerController"/>.
 		/// </summary>
 		/// <param name="cancel">Devuelve un valor que indica si se cancela el cierre de la vista.</param>
@@ -245,7 +244,7 @@ namespace Sifaw.Controllers.Components
 		}
 
 		/// <summary>
-		/// Invoca al método sobrescirto <see cref="UIViewController{TInput, TOutput, TUIStyle, TUIView}.OnAfterUIShow()"/> y
+		/// Invoca al método sobrescirto <see cref="UIViewController{TInput, TOutput, TUIView}.OnAfterUIShow()"/> y
 		/// posteriormente inicia la ejecución del proceso pesado.
 		/// </summary>
 		protected override void OnAfterUIShow()

@@ -30,24 +30,27 @@ namespace Sifaw.Controllers.Components
 	/// <summary>
 	/// Controladora base que da soporte a la implementación de componentes para realizar filtros.
 	/// </summary>
-	/// <typeparam name="TFilter">
+    /// <typeparam name="TInput">
+    /// Tipo para establecer los parámetros de inicio de la controladora. Ha de ser serializable y 
+    /// derivar de <see cref="UIFilterBaseController{TInput, TOutput, TFilter, TComponent}.Input"/>.
+    /// </typeparam>
+    /// <typeparam name="TOutput">
+    /// Tipo para establcer los parametros de retorno cuando finaliza la controladora. Ha de ser serializable y 
+    /// derivar de <see cref="UIFilterBaseController{TInput, TOutput, TFilter, TComponent}.Output"/>.
+    /// </typeparam>
+    /// <typeparam name="TFilter">
 	/// Tipo del filtro que devolverá la controladora.
-	/// </typeparam>
-	/// <typeparam name="TUISettings">
-	/// Tipo para establecer el contenedor de ajustes encargado de establecer las configuración del elemento de interfaz de usuario. Ha de
-	/// ser serializable, proveer de consturctor público y derivar de <see cref="UIFilterBaseController{TFilter, TUISettings, TComponent}.UISettingsContainer"/>.
 	/// </typeparam>
 	/// <typeparam name="TComponent">
 	/// Tipo para establecer el elemento de interfaz de usuario de la controladora. Ha de implementar <see cref="FilterBaseComponent{TFilter}"/>.
 	/// </typeparam>
-	public abstract class UIFilterBaseController<TFilter, TUISettings, TComponent> : UIComponentController
-		< UIFilterBaseController<TFilter, TUISettings, TComponent>.Input
-		, UIFilterBaseController<TFilter, TUISettings, TComponent>.Output
-		, TUISettings
+	public abstract class UIFilterBaseController<TInput, TOutput, TFilter, TComponent> : UIComponentController
+		< TInput
+        , TOutput
 		, TComponent>
-		where TUISettings : UIFilterBaseController<TFilter, TUISettings, TComponent>.UISettingsContainer
-						  , new()
-		where TComponent  : FilterBaseComponent<TFilter>
+        where TInput     : UIFilterBaseController<TInput, TOutput, TFilter, TComponent>.Input
+        where TOutput    : UIFilterBaseController<TInput, TOutput, TFilter, TComponent>.Output
+        where TComponent : FilterBaseComponent<TFilter>
 	{
 		#region Input / Output
 
@@ -55,10 +58,9 @@ namespace Sifaw.Controllers.Components
 		/// Parámetros de entrada de la controladora.
 		/// </summary>
 		[Serializable]
-		public new class Input : UIComponentController
-			< Input
-			, Output
-			, TUISettings
+		public abstract new class Input : UIComponentController
+			< TInput
+			, TOutput
 			, TComponent>.Input
 		{
 			#region Fields
@@ -82,11 +84,11 @@ namespace Sifaw.Controllers.Components
 			#region Constructors
 
 			/// <summary>
-			/// Inicializa una nueva instancia de la clase <see cref="UIFilterBaseController{TFilter, TUISettings, TComponent}.Input"/>,
+            /// Inicializa una nueva instancia de la clase <see cref="UIFilterBaseController{TInput, TOutput, TFilter, TComponent}.Input"/>,
 			/// estableciendo un valor en la propiedad <see cref="Filter"/>.
 			/// </summary>
 			/// <param name="filter">Filtro a aplicar al iniciar la controladora.</param>
-			public Input(TFilter filter)
+            protected Input(TFilter filter)
 				: base()
 			{
 				_filter = filter;
@@ -99,10 +101,9 @@ namespace Sifaw.Controllers.Components
 		/// Parámetros de retorno de la controladora.
 		/// </summary>
 		[Serializable]
-		public new class Output : UIComponentController
-			< Input
-			, Output
-			, TUISettings
+		public abstract new class Output : UIComponentController
+			< TInput
+			, TOutput
 			, TComponent>.Output
 		{
 			#region Fields
@@ -126,41 +127,14 @@ namespace Sifaw.Controllers.Components
 			#region Constructors
 
 			/// <summary>
-			/// Inicializa una nueva instancia de la clase <see cref="UIFilterBaseController{TFilter, TUISettings, TComponent}.Output"/>,
+            /// Inicializa una nueva instancia de la clase <see cref="UIFilterBaseController{TInput, TOutput, TFilter, TComponent}.Output"/>,
 			/// estableciendo un valor en la propiedad <see cref="Filter"/>.
 			/// </summary>
 			/// <param name="filter">Filtro al finalizar la controladora.</param>
-			public Output(TFilter filter)
+            protected Output(TFilter filter)
 				: base()
 			{
 				_filter = filter;
-			}
-
-			#endregion
-		}
-
-		#endregion
-
-		#region Settings
-
-		/// <summary>
-		/// Contenedor de ajustes de <see cref="UIFilterBaseController{TFilter, TUISettings, TComponent}"/>.
-		/// </summary>
-		[Serializable]
-		public new class UISettingsContainer : UIComponentController
-			< Input
-			, Output
-			, TUISettings
-			, TComponent>.UISettingsContainer
-		{
-			#region Constructors
-
-			/// <summary>
-			/// Inicializa una nueva instancia de la clase <see cref="UIFilterBaseController{TFilter, TUISettings, TComponent}.UISettingsContainer"/>.
-			/// </summary>
-			public UISettingsContainer()
-				: base()
-			{
 			}
 
 			#endregion
@@ -217,7 +191,7 @@ namespace Sifaw.Controllers.Components
 		#region Constructors
 
 		/// <summary>
-		/// Inicializa una nueva instancia de la clase <see cref="UIFilterBaseController{TFilter, TUISettings, TComponent}"/>.
+        /// Inicializa una nueva instancia de la clase <see cref="UIFilterBaseController{TInput, TOutput, TFilter, TComponent}"/>.
 		/// Establece como <see cref="AbstractUILinker{TUIElement}"/> aquel establecido por defecto a través de 
 		/// <see cref="AbstractUIProviderManager{TLinker}"/>.
 		/// </summary>
@@ -227,9 +201,9 @@ namespace Sifaw.Controllers.Components
 		}
 
 		/// <summary>
-		/// Inicializa una nueva instancia de la clase <see cref="UIFilterBaseController{TFilter, TUISettings, TComponent}"/>, 
+        /// Inicializa una nueva instancia de la clase <see cref="UIFilterBaseController{TInput, TOutput, TFilter, TComponent}"/>, 
 		/// estableciendo el <see cref="AbstractUILinker{TUIElement}"/> especificado como valor de la propiedad 
-		/// <see cref="UIElementController{TInput, TOutput, TUIStyle, TUIElement}.Linker"/> donde <c>TUIElement</c>
+		/// <see cref="UIElementController{TInput, TOutput, TUIElement}.Linker"/> donde <c>TUIElement</c>
 		/// implementa <see cref="FilterBaseComponent{TFilter}"/>.
 		/// </summary>
 		protected UIFilterBaseController(AbstractUILinker<TComponent> linker)
@@ -242,7 +216,7 @@ namespace Sifaw.Controllers.Components
 		#region UIElement Methods
 
 		/// <summary>
-		/// Invoca al método sobrescirto <see cref="UIElementController{TInput, TOutput, TUIStyle, TComponent}.OnAfterUIElementLoad()"/> y
+		/// Invoca al método sobrescirto <see cref="UIElementController{TInput, TOutput, TComponent}.OnAfterUIElementLoad()"/> y
 		/// posteriormente se subscribe a los eventos del componente <see cref="FilterBaseComponent{TFilter}"/>.
 		/// </summary>
 		protected override void OnAfterUIElementLoad()
@@ -253,42 +227,12 @@ namespace Sifaw.Controllers.Components
 			UIElement.FilterChanged += new UIFilterChangedEventHandler(UIElement_FilterChanged);
 		}
 
-		/// <summary>
-		/// Invoca al método sobrescirto <see cref="UIElementController{TInput, TOutput, TUIStyle, TComponent}.OnApplyUISettings()"/> y
-		/// posteriormente aplica la configuración al elemento <see cref="UIElementController{TInput, TOutput, TUIStyle, TView}.UIElement"/> 
-		/// del tipo <see cref="FilterBaseComponent{TFilter}"/>.
-		/// </summary>
-        protected override void OnApplyUISettings()
-        {
-            base.OnApplyUISettings();
-        }
-
-		#endregion
-
-        #region Default Input / Output
-
-		/// <summary>
-		/// Devuelve los parámetros de reinicio por defecto.
-		/// </summary>
-        public override Input GetResetInput()
-		{
-			return new Input(Filter);
-		}
-
-		/// <summary>
-		/// Devuelve los parámetros de retorno por defecto.
-		/// </summary>
-		protected override Output GetDefaultOutput()
-		{
-			return new Output(Filter);
-		}
-
 		#endregion
 
 		#region Start Methods
 
 		/// <summary>
-		/// Devuelve un valor que indica que se puede reiniciar una controladora <see cref="UIFilterBaseController{TFilter, TUISettings, TComponent}"/>.
+        /// Devuelve un valor que indica que se puede reiniciar una controladora <see cref="UIFilterBaseController{TInput, TOutput, TFilter, TComponent}"/>.
 		/// </summary>
 		/// <returns>true</returns>
 		protected override bool AllowReset()

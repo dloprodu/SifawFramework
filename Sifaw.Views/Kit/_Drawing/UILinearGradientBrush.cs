@@ -71,5 +71,70 @@ namespace Sifaw.Views.Kit
         }
 
         #endregion
+
+        #region Override Methods
+
+        /// <summary>
+        /// Devuelve la representación de cadena de un objeto <see cref="UIGradientBrush"/>.
+        /// </summary>
+        public override string ToString()
+        {
+            return base.ToString();
+        }
+
+        /// <summary>
+        /// Determina si un objeto <see cref="UILinearGradientBrush"/> proporcionado es equivalente al objeto <see cref="UILinearGradientBrush"/> actual.
+        /// </summary>
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+                return false;
+
+            if (!(obj is UILinearGradientBrush))
+                return false;
+
+            return base.Equals(obj) 
+                && StartPoint.Equals(((UILinearGradientBrush)obj).StartPoint)
+                && EndPoint.Equals(((UILinearGradientBrush)obj).EndPoint);
+        }
+
+        /// <summary>
+        /// Obtiene un código hash de este objeto <see cref="UILinearGradientBrush"/>.
+        /// </summary>
+        public override int GetHashCode()
+        {
+            return base.GetHashCode() ^ StartPoint.GetHashCode() ^ EndPoint.GetHashCode();
+        }
+
+        #endregion
+
+        #region Operator Overloading
+
+        /// <summary>
+        /// Comprueba si dos estructuras <see cref="UILinearGradientBrush"/> no son idénticas.
+        /// </summary>
+        /// <param name="brush1"> Primera estructura <see cref="UILinearGradientBrush"/> que se va a comparar.</param>
+        /// <param name="brush2"> Segunda estructura <see cref="UILinearGradientBrush"/> que se va a comparar.</param>
+        /// <returns> Es true si brush1 y brush2 no son iguales; en caso contrario, es false.</returns>
+        public static bool operator !=(UILinearGradientBrush brush1, UILinearGradientBrush brush2)
+        {
+            return !brush1.Equals(brush2);
+        }
+
+        /// <summary>
+        /// Comprueba si dos estructuras <see cref="UILinearGradientBrush"/> son idénticas.
+        /// </summary>
+        /// <param name="brush1"> Primera estructura <see cref="UILinearGradientBrush"/> que se va a comparar.</param>
+        /// <param name="brush2"> Segunda estructura <see cref="UILinearGradientBrush"/> que se va a comparar.</param>
+        /// <returns>
+        /// Es true si brush1 y brush2 son totalmente idénticos; en caso contrario, es
+        /// false.
+        /// </returns>
+        public static bool operator ==(UILinearGradientBrush brush1, UILinearGradientBrush brush2)
+        {
+            return brush1.Equals(brush2);
+        }
+
+        #endregion
     }
 }

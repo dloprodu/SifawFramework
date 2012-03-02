@@ -38,37 +38,68 @@ namespace Sifaw.Controllers.Components.Filters
 	/// </para>
 	/// </remarks>
 	public class UIDropDownListFilterController : UIListFilterBaseController
-		< IFilterable
+        < UIDropDownListFilterController.Input
+        , UIDropDownListFilterController.Output
+        , IFilterable
 		, IList<IFilterable>
-		, UIDropDownListFilterController.UISettingsContainer
 		, DropDownListFilterComponent>
 	{
-		#region Settings
+        #region Input / Output
 
-		/// <summary>
-		/// Contenedor de ajustes de <see cref="UIDropDownListFilterController"/>.
-		/// </summary>
-		[Serializable]
-		public new class UISettingsContainer : UIListFilterBaseController
-			< IFilterable
-			, IList<IFilterable>
-			, UISettingsContainer
-			, DropDownListFilterComponent>.UISettingsContainer
-		{
-			#region Constructors
+        /// <summary>
+        /// Parámetros de entrada de la controladora.
+        /// </summary>
+        [Serializable]
+        public new class Input : UIListFilterBaseController
+            < Input
+            , Output
+            , IFilterable
+            , IList<IFilterable>
+            , DropDownListFilterComponent>.Input
+        {
+            #region Constructors
 
-			/// <summary>
-			/// Inicializa una nueva instancia de la clase <see cref="UIDropDownListFilterController.UISettingsContainer"/>.
-			/// </summary>
-			public UISettingsContainer()
-				: base()
-			{
-			}
+            /// <summary>
+            /// Inicializa una nueva instancia de la clase <see cref="UIDropDownListFilterController.Input"/>,
+            /// estableciendo un valor en la propiedad <see cref="UIFilterBaseController{TInput, TOutput, TFilter, TComponent}.Filter"/>.
+            /// </summary>
+            /// <param name="filter">Filtro a aplicar al iniciar la controladora.</param>
+            public Input(IFilterable filter)
+                : base(filter)
+            {
 
-			#endregion
-		}
+            }
 
-		#endregion
+            #endregion
+        }
+
+        /// <summary>
+        /// Parámetros de retorno de la controladora.
+        /// </summary>
+        [Serializable]
+        public new class Output : UIListFilterBaseController
+            < Input
+            , Output
+            , IFilterable
+            , IList<IFilterable>
+            , DropDownListFilterComponent>.Output
+        {
+            #region Constructors
+
+            /// <summary>
+            /// Inicializa una nueva instancia de la clase <see cref="UIDropDownListFilterController.Output"/>,
+            /// estableciendo un valor en la propiedad <see cref="UIFilterBaseController{TInput, TOutput, TFilter, TComponent}.Filter"/>.
+            /// </summary>
+            /// <param name="filter">Filtro al finalizar la controladora.</param>
+            public Output(IFilterable filter)
+                : base(filter)
+            {
+            }
+
+            #endregion
+        }
+
+        #endregion
 
 		#region Constructors
 
@@ -85,7 +116,7 @@ namespace Sifaw.Controllers.Components.Filters
 		/// <summary>
 		/// Inicializa una nueva instancia de la clase <see cref="UIDropDownListFilterController"/>, 
 		/// estableciendo el <see cref="AbstractUILinker{TUIElement}"/> como valor de la propiedad 
-		/// <see cref="UIElementController{TInput, TOutput, TUIStyle, TUIElement}.Linker"/> donde <c>TUIElement</c>
+		/// <see cref="UIElementController{TInput, TOutput, TUIElement}.Linker"/> donde <c>TUIElement</c>
 		/// implementa <see cref="DropDownListFilterComponent"/>.
 		/// </summary>
 		public UIDropDownListFilterController(AbstractUILinker<DropDownListFilterComponent> linker)
@@ -105,21 +136,23 @@ namespace Sifaw.Controllers.Components.Filters
 			return new Input(null);
 		}
 
-		#endregion
-
-        #region UIElement Methods
-
-		/// <summary>
-		/// Invoca al método sobrescirto <see cref="UIElementController{TInput, TOutput, TUIStyle, TComponent}.OnApplyUISettings()"/> y
-		/// posteriormente aplica la configuración al elemento <see cref="UIElementController{TInput, TOutput, TUIStyle, TView}.UIElement"/> 
-		/// del tipo <see cref="DropDownListFilterComponent"/>.
-		/// </summary>
-        protected override void OnApplyUISettings()
+        /// <summary>
+        /// Devuelve los parámetros de reinicio por defecto.
+        /// </summary>
+        public override Input GetResetInput()
         {
-            base.OnApplyUISettings();
+            return new Input(Filter);
         }
 
-        #endregion
+        /// <summary>
+        /// Devuelve los parámetros de retorno por defecto.
+        /// </summary>
+        protected override Output GetDefaultOutput()
+        {
+            return new Output(Filter);
+        }
+
+		#endregion
 
         #region Start Methods
 

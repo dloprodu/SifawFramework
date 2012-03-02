@@ -30,7 +30,7 @@ namespace Sifaw.Views
 	/// permite alojar elementos <see cref="UIComponent"/>.
 	/// </para>
 	/// </summary>
-	public interface ShellComponent : UIComponent<ComponentStyle>
+	public interface ShellComponent : UIComponent
 	{
 		#region Methods
 

@@ -28,8 +28,7 @@ namespace Sifaw.Views
 	/// Representa un componente que implementa una interfaz que administra un
 	/// conjunto relacionado de componente.
 	/// </summary>
-	public interface UIActorComponent<TStyle> : UIComponent<TStyle>
-		where TStyle : ComponentStyle
+	public interface UIActorComponent : UIComponent
 	{
 		#region Properties
 

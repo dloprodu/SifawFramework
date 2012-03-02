@@ -28,7 +28,7 @@ namespace Sifaw.Views
 	/// de una vista de interfaz de usuario.
 	/// </summary>
 	[Serializable]
-	public class ViewStyle : ElementStyle
+	public class ViewSettings : UISettings
 	{
 		#region Fields
 
@@ -44,7 +44,14 @@ namespace Sifaw.Views
 		public string Header
 		{
 			get { return _header; }
-			set { _header = value; }
+			set
+            {
+                if (_header != value)
+                {
+                    _header = value;
+                    OnPropertyChanged(() => Header);
+                }
+            }
 		}
 		
 		#endregion
@@ -52,9 +59,9 @@ namespace Sifaw.Views
 		#region Constructor
 
 		/// <summary>
-		/// Inicializa una nueva instancia de la clase <see cref="ViewStyle"/>.
+		/// Inicializa una nueva instancia de la clase <see cref="ViewSettings"/>.
 		/// </summary>
-		public ViewStyle()
+		public ViewSettings()
 			: base()
 		{
 		}

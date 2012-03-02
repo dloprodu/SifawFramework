@@ -29,32 +29,26 @@ namespace Sifaw.Controllers
 	/// <summary>
 	/// Controladora base que provee de un patrón e infraestructura común a aquellas controladoras
     /// donde interviene un componente que actúa como shell, es decir, a modo de contenedor de componentes
-    /// <see cref="UIComponentController{TInput, TOutput, TUIStyle, TComponent}"/>.
+    /// <see cref="UIComponentController{TInput, TOutput, TComponent}"/>.
 	/// </summary>
     /// <typeparam name="TInput">
     /// Tipo para establecer los parámetros de inicio de la controladora. Ha de ser serializable y 
-    /// derivar de <see cref="UIShellComponentController{TInput, TOutput, TUIGuestStyle, TGuest}.Input"/>.
+    /// derivar de <see cref="UIShellComponentController{TInput, TOutput, TGuest}.Input"/>.
     /// </typeparam>
     /// <typeparam name="TOutput">
     /// Tipo para establcer los parametros de retorno cuando finaliza la controladora. Ha de ser serializable y 
-    /// derivar de <see cref="UIShellComponentController{TInput, TOutput, TUIGuestStyle, TGuest}.Output"/>.
-    /// </typeparam>
-    /// <typeparam name="TUIGuestStyle">
-	/// Tipo para establecer el contenedor de ajustes encargado de establecer las configuración de los elementos de interfaz 
-	/// de usuario embebidos. Ha de ser serializable y derivar de <see cref="ComponentStyle"/>.
+    /// derivar de <see cref="UIShellComponentController{TInput, TOutput, TGuest}.Output"/>.
     /// </typeparam>
     /// <typeparam name="TGuest">
     /// Tipo de los componentes que puede alojar la shell. Ha de implementar <see cref="UIComponent"/>.
     /// </typeparam>
-    public abstract class UIShellComponentController<TInput, TOutput, TUIGuestStyle, TGuest> : UIComponentController
+    public abstract class UIShellComponentController<TInput, TOutput, TGuest> : UIComponentController
 		< TInput
 		, TOutput
-		, ComponentStyle
 		, ShellComponent>
-		where TInput        : UIShellComponentController<TInput, TOutput, TUIGuestStyle, TGuest>.Input
-		where TOutput       : UIShellComponentController<TInput, TOutput, TUIGuestStyle, TGuest>.Output
-		where TUIGuestStyle : ComponentStyle
-		where TGuest        : UIComponent<TUIGuestStyle>
+		where TInput  : UIShellComponentController<TInput, TOutput, TGuest>.Input
+		where TOutput : UIShellComponentController<TInput, TOutput, TGuest>.Output
+		where TGuest  : UIComponent
 	{
 		#region Input / Output
 
@@ -62,12 +56,12 @@ namespace Sifaw.Controllers
 		/// Parámetros de entrada de las controladora.
 		/// </summary>
 		[Serializable]
-		public abstract new class Input : UIComponentController<TInput, TOutput, ComponentStyle, ShellComponent>.Input
+		public abstract new class Input : UIComponentController<TInput, TOutput, ShellComponent>.Input
 		{
             #region Constructor
 
             /// <summary>
-            /// Inicializa una nueva instancia de la clase <see cref="UIShellComponentController{TInput, TOutput, TUIGuestStyle, TGuest}.Input"/>.
+            /// Inicializa una nueva instancia de la clase <see cref="UIShellComponentController{TInput, TOutput, TGuest}.Input"/>.
             /// </summary>
             protected Input()
             {
@@ -80,12 +74,12 @@ namespace Sifaw.Controllers
 		/// Parámetros de retorno de la controladora.
 		/// </summary>
 		[Serializable]
-		public abstract new class Output : UIComponentController<TInput, TOutput, ComponentStyle, ShellComponent>.Output
+		public abstract new class Output : UIComponentController<TInput, TOutput, ShellComponent>.Output
 		{
             #region Constructor
 
             /// <summary>
-            /// Inicializa una nueva instancia de la clase <see cref="UIShellComponentController{TInput, TOutput, TUIGuestStyle, TGuest}.Output"/>.
+            /// Inicializa una nueva instancia de la clase <see cref="UIShellComponentController{TInput, TOutput, TGuest}.Output"/>.
             /// </summary>
             protected Output()
             {
@@ -109,7 +103,7 @@ namespace Sifaw.Controllers
 		#region Constructors
 
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="UIShellComponentController{TInput, TOutput, TUIGuestStyle, TGuest}"/>.
+        /// Inicializa una nueva instancia de la clase <see cref="UIShellComponentController{TInput, TOutput, TGuest}"/>.
         /// Establece como <see cref="AbstractUILinker{TUIElement}"/> aquel establecido por defecto a través de 
         /// <see cref="AbstractUIProviderManager{TLinker}"/>.
         /// </summary>
@@ -119,9 +113,9 @@ namespace Sifaw.Controllers
 		}
 
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="UIShellComponentController{TInput, TOutput, TUIGuestStyle, TGuest}"/>, 
+        /// Inicializa una nueva instancia de la clase <see cref="UIShellComponentController{TInput, TOutput, TGuest}"/>, 
 		/// estableciendo el <see cref="AbstractUILinker{TUIElement}"/> especificado como valor de la propiedad 
-		/// <see cref="UIElementController{TInput, TOutput, TUIStyle, TUIElement}.Linker"/> donde <c>TUIElement</c> 
+		/// <see cref="UIElementController{TInput, TOutput, TUIElement}.Linker"/> donde <c>TUIElement</c> 
 		/// implementa <see cref="ShellComponent"/>.
         /// </summary>
         protected UIShellComponentController(AbstractUILinker<ShellComponent> linker)
@@ -175,7 +169,7 @@ namespace Sifaw.Controllers
 		{
 			base.OnBeforeStartController();
 
-			UIShellRow[] rows = ShellOperationsManager.GetSettings<TGuest>(
+			UIShellRow[] rows = ShellOperationsManager.MakeLayout<TGuest>(
 				  GetNumberOfRows
 				, GetNumberOfCellsAt
 				, GetRowSettings

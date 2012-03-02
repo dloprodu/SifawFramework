@@ -148,5 +148,40 @@ namespace Sifaw.Views.Kit
         }
 
         #endregion
+
+        #region Operator Overloading
+        
+        /// <summary>
+        /// Comprueba si dos estructuras <see cref="UIFrame"/> no son idénticas.
+        /// </summary>
+        /// <param name="frame1"> Primera estructura <see cref="UIFrame"/> que se va a comparar.</param>
+        /// <param name="frame2"> Segunda estructura <see cref="UIFrame"/> que se va a comparar.</param>
+        /// <returns> Es true si color1 y color2 no son iguales; en caso contrario, es false.</returns>
+        public static bool operator !=(UIFrame frame1, UIFrame frame2)
+        {
+            return frame1.Left != frame2.Left
+                || frame1.Top != frame2.Top
+                || frame1.Right != frame2.Right
+                || frame1.Right != frame2.Right;
+        }
+
+        /// <summary>
+        /// Comprueba si dos estructuras <see cref="UIFrame"/> son idénticas.
+        /// </summary>
+        /// <param name="frame1"> Primera estructura <see cref="UIFrame"/> que se va a comparar.</param>
+        /// <param name="frame2"> Segunda estructura <see cref="UIFrame"/> que se va a comparar.</param>
+        /// <returns>
+        /// Es true si color1 y color2 son totalmente idénticos; en caso contrario, es
+        /// false.
+        /// </returns>
+        public static bool operator ==(UIFrame frame1, UIFrame frame2)
+        {
+            return frame1.Left == frame2.Left
+                && frame1.Top == frame2.Top
+                && frame1.Right == frame2.Right
+                && frame1.Bottom == frame2.Bottom;
+        }
+
+        #endregion
 	}
 }

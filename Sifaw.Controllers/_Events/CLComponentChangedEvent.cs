@@ -29,7 +29,7 @@ namespace Sifaw.Controllers
 	 */
 
 	/// <summary>
-	/// Proporciona datos para un evento <see cref="UIActorController{TInput, TOutpu, TUIStyle, TComponent, TGuest}.GuestChanged"/>.
+	/// Proporciona datos para un evento <see cref="UIActorController{TInput, TOutpu, TComponent, TGuest}.GuestChanged"/>.
 	/// </summary>
 	public class CLComponentChangedEventArgs : EventArgs
 	{
@@ -50,7 +50,7 @@ namespace Sifaw.Controllers
 	}
 
 	/// <summary>
-	/// Representa el método que controla un evento <see cref="UIActorController{TInput, TOutpu, TUIStyle, TComponent, TGuest}.GuestChanged"/>.
+	/// Representa el método que controla un evento <see cref="UIActorController{TInput, TOutpu, TComponent, TGuest}.GuestChanged"/>.
 	/// </summary>
 	/// <param name="sender">Origen del evento.</param>
 	/// <param name="e"><see cref="CLComponentChangedEventArgs"/> que contiene los datos de eventos.</param>

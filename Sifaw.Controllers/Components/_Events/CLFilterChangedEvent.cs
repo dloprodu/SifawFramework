@@ -29,7 +29,7 @@ namespace Sifaw.Controllers.Components
 	 */
 
 	/// <summary>
-	/// Proporciona datos para un evento <see cref="UIFilterBaseController{TFilter, TUISettings, TComponent}.FilterChanged"/>.
+	/// Proporciona datos para un evento <see cref="UIFilterBaseController{TInput, TOutput, TFilter, TComponent}.FilterChanged"/>.
 	/// </summary>
 	public class CLFilterChangedEventArgs<TFilter> : SFCancelEventArgs
 	{
@@ -50,7 +50,7 @@ namespace Sifaw.Controllers.Components
 	}
 
 	/// <summary>
-	/// Representa el método que controla un evento <see cref="UIFilterBaseController{TFilter, TUISettings, TComponent}.FilterChanged"/>.
+    /// Representa el método que controla un evento <see cref="UIFilterBaseController{TInput, TOutput, TFilter, TComponent}.FilterChanged"/>.
 	/// </summary>
 	/// <param name="sender">Origen del evento.</param>
 	/// <param name="e"><see cref="CLFilterChangedEventArgs{TFiler}"/> que contiene los datos de eventos.</param>

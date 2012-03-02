@@ -20,6 +20,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using Sifaw.Core;
+
 using Sifaw.Views.Kit;
 
 
@@ -30,10 +32,12 @@ namespace Sifaw.Views
 	/// de un elemento de interfaz de usuario.
 	/// </summary>
 	[Serializable]
-	public class ElementStyle
+    public class UISettings : ObservableBase
 	{
 		#region Fields
 
+        private string _denomination = string.Empty;
+        private string _description = string.Empty;
 		private UIBrush _background = new UISolidBrush(UIColors.WhiteColors.White);
 		private UIBrush _foreground = new UISolidBrush(UIColors.GrayColors.Black);
 		private UIFrame _margin = UIFrame.Empty;
@@ -49,13 +53,52 @@ namespace Sifaw.Views
 
 		#region Propiedades
 
+        /// <summary>
+        /// Obtiene o establece una denominación al elemento.
+        /// </summary>
+        public string Denomination
+        {
+            get { return _denomination; }
+            set 
+            {
+                if (_denomination != value)
+                {
+                    _denomination = value;
+                    OnPropertyChanged(() => Denomination);
+                }
+            } 
+        }
+
+        /// <summary>
+        /// Obtiene o establece una descripción al elemento.
+        /// </summary>
+        public string Description
+        {
+            get { return _description; }
+            set
+            {
+                if (_description != value)
+                {
+                    _description = value;
+                    OnPropertyChanged(() => Description);
+                }
+            }
+        }
+
 		/// <summary>
 		/// Obtiene o establece el pincel que describe el fondo del elemento.
 		/// </summary>
 		public UIBrush Background
 		{
 			get { return _background; }
-			set { _background = value; }
+			set
+            {
+                if (_background != value)
+                {
+                    _background = value;
+                    OnPropertyChanged(() => Background);
+                }
+            }
 		}
 
 		/// <summary>
@@ -64,7 +107,14 @@ namespace Sifaw.Views
 		public UIBrush Foreground
 		{
 			get { return _foreground; }
-			set { _foreground = value; }
+			set 
+            {
+                if (_foreground != value)
+                {
+                    _foreground = value;
+                    OnPropertyChanged(() => Foreground);
+                }
+            }
 		}
 
 		/// <summary>
@@ -73,7 +123,14 @@ namespace Sifaw.Views
 		public UIFrame Margin
 		{
 			get { return _margin; }
-			set { _margin = value; }
+			set 
+            {
+                if (_margin != value)
+                {
+                    _margin = value;
+                    OnPropertyChanged(() => Foreground);
+                }
+            }
 		}
 
 		/// <summary>
@@ -82,7 +139,14 @@ namespace Sifaw.Views
 		public UIFrame Padding
 		{
 			get { return _padding; }
-			set { _padding = value; }
+			set
+            {
+                if (_padding != value)
+                {
+                    _padding = value;
+                    OnPropertyChanged(() => Padding);
+                }
+            }
 		}
 
 		/// <summary>
@@ -91,7 +155,14 @@ namespace Sifaw.Views
 		public UISize MinSize
 		{
 			get { return _minSize; }
-			set { _minSize = value; }
+			set
+            {
+                if (_minSize != value)
+                {
+                    _minSize = value;
+                    OnPropertyChanged(() => MinSize);
+                }
+            }
 		}
 
 		/// <summary>
@@ -100,7 +171,14 @@ namespace Sifaw.Views
 		public UISize MaxSize
 		{
 			get { return _maxSize; }
-			set { _maxSize = value; }
+			set 
+            {
+                if (_maxSize != value)
+                {
+                    _maxSize = value;
+                    OnPropertyChanged(() => MaxSize);
+                }
+            }
 		}
 
 		/// <summary>
@@ -110,7 +188,14 @@ namespace Sifaw.Views
 		public double Width
 		{
 			get { return _width; }
-			set { _width = value; }
+			set
+            {
+                if (_width != value)
+                {
+                    _width = value;
+                    OnPropertyChanged(() => Width);
+                }
+            }
 		}
 
 		/// <summary>
@@ -121,7 +206,14 @@ namespace Sifaw.Views
 		public UILengthModes WidthMode
 		{
 			get { return _widthMode; }
-			set { _widthMode = value; }
+			set
+            {
+                if (_widthMode != value)
+                {
+                    _widthMode = value;
+                    OnPropertyChanged(() => WidthMode);
+                }
+            }
 		}
 
 		/// <summary>
@@ -131,7 +223,14 @@ namespace Sifaw.Views
 		public double Height
 		{
 			get { return _height; }
-			set { _height = value; }
+			set
+            {
+                if (_height != value)
+                {
+                    _height = value;
+                    OnPropertyChanged(() => Height);
+                }
+            }
 		}
 
 		/// <summary>
@@ -142,7 +241,14 @@ namespace Sifaw.Views
 		public UILengthModes HeightMode
 		{
 			get { return _heightMode; }
-			set { _heightMode = value; }
+			set 
+            {
+                if (_heightMode != value)
+                {
+                    _heightMode = value;
+                    OnPropertyChanged(() => HeightMode);
+                }
+            }
 		}
 
 		#endregion
@@ -150,12 +256,12 @@ namespace Sifaw.Views
 		#region Constructor
 
 		/// <summary>
-		/// Inicializa una nueva instancia de la clase <see cref="ElementStyle"/>.
+		/// Inicializa una nueva instancia de la clase <see cref="UISettings"/>.
 		/// </summary>
-		public ElementStyle()
+		public UISettings()
 		{
 		}
 
-		#endregion
-	}
+		#endregion    
+    }
 }

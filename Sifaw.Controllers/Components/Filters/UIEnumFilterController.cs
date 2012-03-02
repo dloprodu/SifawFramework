@@ -41,37 +41,68 @@ namespace Sifaw.Controllers.Components.Filters
 	/// </para>
 	/// </remarks>
 	public class UIEnumFilterController : UIListFilterBaseController
-		< IFilterable
+        < UIEnumFilterController.Input
+        , UIEnumFilterController.Output 
+        , IFilterable
 		, IList<IFilterable>
-		, UIEnumFilterController.UISettingsContainer
 		, EnumFilterComponent>
 	{
-		#region Settings
+        #region Input / Output
 
-		/// <summary>
-		/// Contenedor de ajustes de <see cref="UIEnumFilterController"/>.
-		/// </summary>
-		[Serializable]
-		public new class UISettingsContainer : UIListFilterBaseController
-			< IFilterable
-			, IList<IFilterable>
-			, UISettingsContainer
-			, EnumFilterComponent>.UISettingsContainer
-		{
-			#region Constructors
+        /// <summary>
+        /// Parámetros de entrada de la controladora.
+        /// </summary>
+        [Serializable]
+        public new class Input : UIListFilterBaseController
+            < Input
+            , Output
+            , IFilterable
+            , IList<IFilterable>
+            , EnumFilterComponent>.Input
+        {
+            #region Constructors
 
-			/// <summary>
-			/// Inicializa una nueva instancia de la clase <see cref="UIEnumFilterController.UISettingsContainer"/>.
-			/// </summary>
-			public UISettingsContainer()
-				: base()
-			{
-			}
+            /// <summary>
+            /// Inicializa una nueva instancia de la clase <see cref="UIEnumFilterController.Input"/>,
+            /// estableciendo un valor en la propiedad <see cref="UIFilterBaseController{TInput, TOutput, TFilter, TComponent}.Filter"/>.
+            /// </summary>
+            /// <param name="filter">Filtro a aplicar al iniciar la controladora.</param>
+            public Input(IFilterable filter)
+                : base(filter)
+            {
 
-			#endregion
-		}
+            }
 
-		#endregion
+            #endregion
+        }
+
+        /// <summary>
+        /// Parámetros de retorno de la controladora.
+        /// </summary>
+        [Serializable]
+        public new class Output : UIListFilterBaseController
+            < Input
+            , Output
+            , IFilterable
+            , IList<IFilterable>
+            , EnumFilterComponent>.Output
+        {
+            #region Constructors
+
+            /// <summary>
+            /// Inicializa una nueva instancia de la clase <see cref="UIEnumFilterController.Output"/>,
+            /// estableciendo un valor en la propiedad <see cref="UIFilterBaseController{TInput, TOutput, TFilter, TComponent}.Filter"/>.
+            /// </summary>
+            /// <param name="filter">Filtro al finalizar la controladora.</param>
+            public Output(IFilterable filter)
+                : base(filter)
+            {
+            }
+
+            #endregion
+        }
+
+        #endregion
 
 		#region Constructors
 
@@ -88,7 +119,7 @@ namespace Sifaw.Controllers.Components.Filters
 		/// <summary>
 		/// Inicializa una nueva instancia de la clase <see cref="UIEnumFilterController"/>, 
 		/// estableciendo el <see cref="AbstractUILinker{TUIElement}"/> como valor de la propiedad 
-		/// <see cref="UIElementController{TInput, TOutput, TUIStyle, TUIElement}.Linker"/> donde <c>TUIElement</c>
+		/// <see cref="UIElementController{TInput, TOutput, TUIElement}.Linker"/> donde <c>TUIElement</c>
 		/// implementa <see cref="EnumFilterComponent"/>.
 		/// </summary>
 		public UIEnumFilterController(AbstractUILinker<EnumFilterComponent> linker)
@@ -108,21 +139,23 @@ namespace Sifaw.Controllers.Components.Filters
 			return new Input(null);
 		}
 
-		#endregion
-
-        #region UIElement Methods
-
-		/// <summary>
-		/// Invoca al método sobrescirto <see cref="UIElementController{TInput, TOutput, TUIStyle, TComponent}.OnApplyUISettings()"/> y
-		/// posteriormente aplica la configuración al elemento <see cref="UIElementController{TInput, TOutput, TUIStyle, TView}.UIElement"/> 
-		/// del tipo <see cref="EnumFilterComponent"/>.
-		/// </summary>
-        protected override void OnApplyUISettings()
+        /// <summary>
+        /// Devuelve los parámetros de reinicio por defecto.
+        /// </summary>
+        public override Input GetResetInput()
         {
-            base.OnApplyUISettings();
+            return new Input(Filter);
         }
 
-        #endregion
+        /// <summary>
+        /// Devuelve los parámetros de retorno por defecto.
+        /// </summary>
+        protected override Output GetDefaultOutput()
+        {
+            return new Output(Filter);
+        }
+
+		#endregion
 
         #region Start Methods
 

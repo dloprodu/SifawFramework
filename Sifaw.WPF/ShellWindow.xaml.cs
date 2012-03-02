@@ -72,7 +72,7 @@ namespace Sifaw.WPF
 
 		#region UIShell Members
 
-		public void SetSettings(UIShellRow[] rows)
+		public void SetLayout(UIShellRow[] rows)
 		{
 			shell.SetSettings(rows);
 		}

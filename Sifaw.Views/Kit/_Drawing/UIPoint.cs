@@ -123,5 +123,36 @@ namespace Sifaw.Views.Kit
         }
 
         #endregion
+
+        #region Operator Overloading
+
+        /// <summary>
+        /// Comprueba si dos estructuras <see cref="UIPoint"/> no son idénticas.
+        /// </summary>
+        /// <param name="point1"> Primera estructura <see cref="UIPoint"/> que se va a comparar.</param>
+        /// <param name="point2"> Segunda estructura <see cref="UIPoint"/> que se va a comparar.</param>
+        /// <returns> Es true si point1 y point2 no son iguales; en caso contrario, es false.</returns>
+        public static bool operator !=(UIPoint point1, UIPoint point2)
+        {
+            return point1.X != point2.X
+                || point1.Y != point2.Y;
+        }
+
+        /// <summary>
+        /// Comprueba si dos estructuras <see cref="UIPoint"/> son idénticas.
+        /// </summary>
+        /// <param name="point1"> Primera estructura <see cref="UIPoint"/> que se va a comparar.</param>
+        /// <param name="point2"> Segunda estructura <see cref="UIPoint"/> que se va a comparar.</param>
+        /// <returns>
+        /// Es true si point1 y point2 son totalmente idénticos; en caso contrario, es
+        /// false.
+        /// </returns>
+        public static bool operator ==(UIPoint point1, UIPoint point2)
+        {
+            return point1.X == point2.X
+                && point1.Y == point2.Y;
+        }
+
+        #endregion
     }
 }

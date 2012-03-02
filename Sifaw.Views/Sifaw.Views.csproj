@@ -67,11 +67,12 @@
     <Compile Include="Components\Filters\TextFilterComponent.cs" />
     <Compile Include="Components\Filters\EnumFilterComponent.cs" />
     <Compile Include="Components\TableComponent.cs" />
-    <Compile Include="Components\_Styles\BackgroundWorkerComponentStyle.cs" />
+    <Compile Include="Components\_Settings\BackgroundWorkerSettings.cs" />
+    <Compile Include="Components\_Settings\TextFilterSettings.cs" />
     <Compile Include="Kit\_Drawing\UISize.cs" />
-    <Compile Include="_Styles\ViewStyle.cs" />
-    <Compile Include="_Styles\ComponentStyle.cs" />
-    <Compile Include="_Styles\ElementStyle.cs" />
+    <Compile Include="_Settings\ViewSettings.cs" />
+    <Compile Include="_Settings\ComponentSettings.cs" />
+    <Compile Include="_Settings\UISettings.cs" />
     <Compile Include="Components\_Miscellany\UITableTextCell.cs" />
     <Compile Include="Components\_Miscellany\UITableSection.cs" />
     <Compile Include="Components\_Miscellany\UITableCell.cs" />

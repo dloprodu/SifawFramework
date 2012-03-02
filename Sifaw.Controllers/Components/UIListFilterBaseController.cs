@@ -31,87 +31,121 @@ namespace Sifaw.Controllers.Components
 	/// <summary>
 	/// Controladora base que da soporte a la implementación de componentes para realizar filtros sobre listas.
 	/// </summary>
-	/// <typeparam name="TFilter">
+    /// <typeparam name="TInput">
+    /// Tipo para establecer los parámetros de inicio de la controladora. Ha de ser serializable y 
+    /// derivar de <see cref="UIListFilterBaseController{TInput, TOutput, TFilter, TSource, TComponent}.Input"/>.
+    /// </typeparam>
+    /// <typeparam name="TOutput">
+    /// Tipo para establcer los parametros de retorno cuando finaliza la controladora. Ha de ser serializable y 
+    /// derivar de <see cref="UIListFilterBaseController{TInput, TOutput, TFilter, TSource, TComponent}.Output"/>.
+    /// </typeparam>
+    /// <typeparam name="TFilter">
 	/// Tipo del filtro que devolverá la controladora.
 	/// </typeparam>
 	/// <typeparam name="TSource">
 	/// Tipo de la lista sobre la que se aplicarán los filtros. 
 	/// Ha de implementar <see cref="IList{IFilterable}"/>.</typeparam>
-	/// <typeparam name="TUISettings">
-	/// Tipo para establecer el contenedor de ajustes encargado de establecer las configuración del elemento de interfaz de usuario. Ha de
-	/// ser serializable, proveer de consturctor público y derivar de <see cref="UIListFilterBaseController{TFilter, TSource, TUISettings, TComponent}.UISettingsContainer"/>.
-	/// </typeparam>
 	/// <typeparam name="TComponent">
 	/// Tipo para establecer el elemento de interfaz de usuario de la controladora. 
 	/// Ha de implementar <see cref="ListFilterBaseComponent{TFilter, TSource}"/>.
 	/// </typeparam>
-	public abstract class UIListFilterBaseController<TFilter, TSource, TUISettings, TComponent> : UIFilterBaseController
-		< TFilter
-		, TUISettings
+	public abstract class UIListFilterBaseController<TInput, TOutput, TFilter, TSource, TComponent> : UIFilterBaseController
+		< TInput
+        , TOutput
+        , TFilter
 		, TComponent>
-		where TSource : IList<IFilterable>
-		where TUISettings : UIListFilterBaseController<TFilter, TSource, TUISettings, TComponent>.UISettingsContainer
-						  , new()
+        where TInput     : UIListFilterBaseController<TInput, TOutput, TFilter, TSource, TComponent>.Input
+        where TOutput    : UIListFilterBaseController<TInput, TOutput, TFilter, TSource, TComponent>.Output
+        where TSource    : IList<IFilterable>
 		where TComponent : ListFilterBaseComponent<TFilter, TSource>
 	{
-		#region Settings
+        #region Input / Output
 
-		/// <summary>
-		/// Contenedor de ajustes de <see cref="UIListFilterBaseController{TFilter, TSource, TUISettings, TComponent}"/>.
-		/// </summary>
-		[Serializable]
-		public new class UISettingsContainer : UIFilterBaseController
-			< TFilter
-			, TUISettings
-			, TComponent>.UISettingsContainer
-		{
-			#region Fields
+        /// <summary>
+        /// Parámetros de entrada de la controladora.
+        /// </summary>
+        [Serializable]
+        public abstract new class Input :  UIFilterBaseController
+		    < TInput
+            , TOutput
+            , TFilter
+		    , TComponent>.Input
+        {
+            #region Fields
 
-			private TSource _source;
+            private TSource _source;
 
-			#endregion
+            #endregion
 
-			#region Properties
+            #region Properties
 
-			/// <summary>
-			/// Obtiene o establecela lista sobre la que se realizará el filtro.
-			/// </summary>
-			public TSource Source
-			{
-				get { return _source; }
-				set
-				{
-					_source = (TSource)(new List<IFilterable>() as IList<IFilterable>);
+            /// <summary>
+            /// Obtiene o establecela lista sobre la que se realizará el filtro.
+            /// </summary>
+            public TSource Source
+            {
+                get { return _source; }
+                set
+                {
+                    _source = (TSource)(new List<IFilterable>() as IList<IFilterable>);
 
-					if (value != null)
-					{
-						(_source as List<IFilterable>).AddRange(value);
-						(_source as List<IFilterable>).Sort();
-					}
-				}
-			}
+                    if (value != null)
+                    {
+                        (_source as List<IFilterable>).AddRange(value);
+                        (_source as List<IFilterable>).Sort();
+                    }
+                }
+            }
 
-			#endregion
+            #endregion
 
-			#region Constructors
+            #region Constructors
 
-			/// <summary>
-			/// Inicializa una nueva instancia de la clase <see cref="UIListFilterBaseController{TFilter, TSource, TUISettings, TComponent}.UISettingsContainer"/>.
-			/// </summary>
-			public UISettingsContainer()
-				: base()
-			{
-			}
+            /// <summary>
+            /// Inicializa una nueva instancia de la clase <see cref="UIFilterBaseController{TInput, TOutput, TFilter, TComponent}.Input"/>,
+            /// estableciendo un valor en la propiedad <see cref="UIFilterBaseController{TInput, TOutput, TFilter, TComponent}.Filter"/>.
+            /// </summary>
+            /// <param name="filter">Filtro a aplicar al iniciar la controladora.</param>
+            protected Input(TFilter filter)
+                : base(filter)
+            {
+                
+            }
 
-			#endregion
-		}
+            #endregion
+        }
 
-		#endregion
+        /// <summary>
+        /// Parámetros de retorno de la controladora.
+        /// </summary>
+        [Serializable]
+        public abstract new class Output :  UIFilterBaseController
+		    < TInput
+            , TOutput
+            , TFilter
+		    , TComponent>.Output
+        {
+            #region Constructors
+
+            /// <summary>
+            /// Inicializa una nueva instancia de la clase <see cref="UIFilterBaseController{TInput, TOutput, TFilter, TComponent}.Output"/>,
+            /// estableciendo un valor en la propiedad <see cref="UIFilterBaseController{TInput, TOutput, TFilter, TComponent}.Filter"/>.
+            /// </summary>
+            /// <param name="filter">Filtro al finalizar la controladora.</param>
+            protected Output(TFilter filter)
+                : base(filter)
+            {
+            }
+
+            #endregion
+        }
+
+        #endregion
 
 		#region Constructors
 
 		/// <summary>
-		/// Inicializa una nueva instancia de la clase <see cref="UIListFilterBaseController{TFilter, TSource, TUISettings, TComponent}"/>.
+        /// Inicializa una nueva instancia de la clase <see cref="UIListFilterBaseController{TInput, TOutput, TFilter, TSource, TComponent}"/>.
 		/// Establece como <see cref="AbstractUILinker{TUIElement}"/> aquel establecido por defecto a través de 
 		/// <see cref="AbstractUIProviderManager{TLinker}"/>.
 		/// </summary>
@@ -121,9 +155,9 @@ namespace Sifaw.Controllers.Components
 		}
 
 		/// <summary>
-		/// Inicializa una nueva instancia de la clase <see cref="UIListFilterBaseController{TFilter, TSource, TUISettings, TComponent}"/>, 
+        /// Inicializa una nueva instancia de la clase <see cref="UIListFilterBaseController{TInput, TOutput, TFilter, TSource, TComponent}"/>, 
 		/// estableciendo el <see cref="AbstractUILinker{TUIElement}"/> especificado como valor de la propiedad 
-		/// <see cref="UIElementController{TInput, TOutput, TUIStyle, TUIElement}.Linker"/> donde <c>TUIElement</c>
+		/// <see cref="UIElementController{TInput, TOutput, TUIElement}.Linker"/> donde <c>TUIElement</c>
 		/// implementa <see cref="ListFilterBaseComponent{TFilter, TSource}"/>.
 		/// </summary>
 		protected UIListFilterBaseController(AbstractUILinker<TComponent> linker)
@@ -133,18 +167,17 @@ namespace Sifaw.Controllers.Components
 
 		#endregion
 
-        #region UIElement Methods
+        #region Start Methods
 
-		/// <summary>
-		/// Invoca al método sobrescirto <see cref="UIElementController{TInput, TOutput, TUIStyle, TComponent}.OnApplyUISettings()"/> y
-		/// posteriormente aplica la configuración al elemento <see cref="UIElementController{TInput, TOutput, TUIStyle, TView}.UIElement"/> 
-		/// del tipo <see cref="ListFilterBaseComponent{TFilter, TSource}"/>.
-		/// </summary>
-        protected override void OnApplyUISettings()
+        /// <summary>
+        /// Invoca al método sobrescirto <see cref="Controller{TInput, TOutput}.OnAfterStartController()"/> y
+        /// posteriormente establece la configuración inicial de <see cref="FilterBaseComponent{TFilter}"/>.
+        /// </summary>
+        protected override void OnAfterStartController()
         {
-            base.OnApplyUISettings();
+            base.OnAfterStartController();
 
-            UIElement.Add(UISettings.Source);
+            UIElement.Add(Parameters.Source);
         }
 
         #endregion

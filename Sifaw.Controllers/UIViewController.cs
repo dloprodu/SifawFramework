@@ -54,36 +54,33 @@ namespace Sifaw.Controllers
     /// </summary>
     /// <remarks>
     /// <para>
-	/// La vistas solo deben de actuar a modo de contenedor de componentes <see cref="UIComponentController{TInput, TOutput, TUIStyle, TComponent}"/>
+	/// La vistas solo deben de actuar a modo de contenedor de componentes <see cref="UIComponentController{TInput, TOutput, TComponent}"/>
     /// </para>
     /// <para>
-	/// Esto implica que un <see cref="UIViewController{TInput, TOutput, TUIStyle, TView}"/> actúa a modo de shell
-	/// sobre uno o varios componentes <see cref="UIComponentController{TInput, TOutput, TUIStyle, TComponent}"/> que se comunican entre si para
+	/// Esto implica que un <see cref="UIViewController{TInput, TOutput, TView}"/> actúa a modo de shell
+	/// sobre uno o varios componentes <see cref="UIComponentController{TInput, TOutput, TComponent}"/> que se comunican entre si para
     /// dar forma a un componente mas complejo.
     /// </para>
     /// </remarks>
 	/// <typeparam name="TInput">
 	/// Tipo para establecer los parámetros de inicio de la controladora. Ha de ser serializable y 
-	/// derivar de <see cref="UIViewController{TInput, TOutput, TUIStyle, TView}.Input"/>.
+	/// derivar de <see cref="UIViewController{TInput, TOutput, TView}.Input"/>.
 	/// </typeparam>
 	/// <typeparam name="TOutput">
 	/// Tipo para establcer los parametros de retorno cuando finaliza la controladora. Ha de ser serializable y 
-	/// derivar de <see cref="UIViewController{TInput, TOutput, TUIStyle, TView}.Output"/>.
-	/// </typeparam>
-	/// <typeparam name="TUIStyle">
-	/// Tipo para establecer el contenedor de ajustes encargado de establecer las configuración del elemento de interfaz de usuario. Ha de
-	/// ser serializable y derivar de <see cref="ViewStyle"/>.
+	/// derivar de <see cref="UIViewController{TInput, TOutput, TView}.Output"/>.
 	/// </typeparam>
 	/// <typeparam name="TView">
 	/// Tipo para establecer el elemento de interfaz de usuario de la controladora. Ha de implementar <see cref="UIView"/>.
 	/// </typeparam>
-	public abstract class UIViewController<TInput, TOutput, TUIStyle, TView>
-        : UIElementController<TInput, TOutput, TUIStyle, TView>
+	public abstract class UIViewController<TInput, TOutput, TView> : UIElementController
+        < TInput
+        , TOutput
+        , TView >
         , IUIViewController
-        where TInput   : UIViewController<TInput, TOutput, TUIStyle, TView>.Input
-        where TOutput  : UIViewController<TInput, TOutput, TUIStyle, TView>.Output
-        where TUIStyle : ViewStyle
-        where TView    : UIView<TUIStyle>
+        where TInput  : UIViewController<TInput, TOutput, TView>.Input
+        where TOutput : UIViewController<TInput, TOutput, TView>.Output
+        where TView   : UIView
     {
         #region Input / Output
 
@@ -91,7 +88,7 @@ namespace Sifaw.Controllers
         /// Parámetros de entrada de la controladora.
         /// </summary>
         [Serializable]
-        public new abstract class Input : UIElementController<TInput, TOutput, TUIStyle, TView>.Input
+        public new abstract class Input : UIElementController<TInput, TOutput, TView>.Input
         {
             #region Fields
 
@@ -115,7 +112,7 @@ namespace Sifaw.Controllers
             #region Constructors
 
 			/// <summary>
-            /// Inicializa una nueva instancia de <see cref="UIViewController{TInput, TOutput, TUIStyle, TView}.Input"/>, 
+            /// Inicializa una nueva instancia de <see cref="UIViewController{TInput, TOutput, TView}.Input"/>, 
             /// estableciendo la propiedad <see cref="ShowView"/> a <c>true</c>.
 			/// </summary>
             protected Input()
@@ -124,7 +121,7 @@ namespace Sifaw.Controllers
             }
 
 			/// <summary>
-            /// Inicializa una nueva instancia de <see cref="UIViewController{TInput, TOutput, TUIStyle, TView}.Input"/>, 
+            /// Inicializa una nueva instancia de <see cref="UIViewController{TInput, TOutput, TView}.Input"/>, 
 			/// estableciendo un valor a la propiedad <see cref="ShowView"/>.
 			/// </summary>
 			/// <param name="showView">Indica si se muestra la vista al iniciar la controladora.</param>
@@ -141,12 +138,12 @@ namespace Sifaw.Controllers
         /// Parámetros de retorno de la controladora.
         /// </summary>
         [Serializable]
-        public new abstract class Output : UIElementController<TInput, TOutput, TUIStyle, TView>.Output
+        public new abstract class Output : UIElementController<TInput, TOutput, TView>.Output
         {
             #region Constructor
 
             /// <summary>
-            /// Inicializa una nueva instancia de la clase <see cref="UIViewController{TInput, TOutput, TUIStyle, TView}.Output"/>.
+            /// Inicializa una nueva instancia de la clase <see cref="UIViewController{TInput, TOutput, TView}.Output"/>.
             /// </summary>
             protected Output()
             {
@@ -257,10 +254,23 @@ namespace Sifaw.Controllers
 
         #endregion
 
+        #region Properties
+
+        /// <summary>
+        /// Devuelve el contenedor de ajustes del elemento de interfaz a través
+        /// del cual se puede modificar la configuración predeterminada.
+        /// </summary>
+        public new ViewSettings UISettings
+        {
+            get { return UIElement.UISettings; }
+        }
+
+        #endregion
+
         #region Constructors
 
 		/// <summary>
-		/// Inicializa una nueva instancia de la clase <see cref="UIViewController{TInput, TOutput, TUIStyle, TView}"/>.
+		/// Inicializa una nueva instancia de la clase <see cref="UIViewController{TInput, TOutput, TView}"/>.
 		/// Establece como <see cref="AbstractUILinker{TUIElement}"/> aquel establecido por defecto a través de 
 		/// <see cref="AbstractUIProviderManager{TLinker}"/>.
 		/// </summary>
@@ -270,9 +280,9 @@ namespace Sifaw.Controllers
         }
 
 		/// <summary>
-		/// Inicializa una nueva instancia de la clase <see cref="UIViewController{TInput, TOutput, TUIStyle, TView}"/>, 
+		/// Inicializa una nueva instancia de la clase <see cref="UIViewController{TInput, TOutput, TView}"/>, 
 		/// estableciendo el <see cref="AbstractUILinker{TUIElement}"/> especificado como valor de la propiedad 
-		/// <see cref="UIElementController{TInput, TOutput, TUIStyle, TUIElement}.Linker"/> donde <c>TUIElement</c> implementa
+		/// <see cref="UIElementController{TInput, TOutput, TUIElement}.Linker"/> donde <c>TUIElement</c> implementa
 		/// <see cref="UIView"/>.
 		/// </summary>
         protected UIViewController(AbstractUILinker<TView> linker)
@@ -303,7 +313,7 @@ namespace Sifaw.Controllers
         #region UIElement Methods
 
 		/// <summary>
-		/// Invoca al método sobrescirto <see cref="UIElementController{TInput, TOutput, TUIStyle, TView}.OnAfterUIElementLoad()"/> y
+		/// Invoca al método sobrescirto <see cref="UIElementController{TInput, TOutput, TView}.OnAfterUIElementLoad()"/> y
 		/// posteriormente se subscribe a eventos de <see cref="UIView"/>.
 		/// </summary>
         protected override void OnAfterUIElementLoad()
@@ -346,7 +356,7 @@ namespace Sifaw.Controllers
 
 		/// <summary>
 		/// Invoca al método sobrescirto <see cref="Controller{TInput, TOutput}.OnAfterStartController()"/> y
-		/// posteriormente muestra la vistá si <see cref="UIViewController{TInput, TOutput, TUIStyle, TView}.Input.ShowView"/> 
+		/// posteriormente muestra la vistá si <see cref="UIViewController{TInput, TOutput, TView}.Input.ShowView"/> 
 		/// es <c>true</c>.
 		/// </summary>
         protected override void OnAfterStartController()

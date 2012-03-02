@@ -49,26 +49,21 @@ namespace Sifaw.Controllers
 	/// </remarks>
 	/// <typeparam name="TInput">
 	/// Tipo para establecer los parámetros de inicio de la controladora. Ha de ser serializable y 
-	/// derivar de <see cref="UIElementController{TInput, TOutput, TUIStyle, TUIElement}.Input"/>.
+	/// derivar de <see cref="UIElementController{TInput, TOutput, TUIElement}.Input"/>.
 	/// </typeparam>
 	/// <typeparam name="TOutput">
 	/// Tipo para establcer los parametros de retorno cuando finaliza la controladora. Ha de ser serializable y 
-	/// derivar de <see cref="UIElementController{TInput, TOutput, TUIStyle, TUIElement}.Output"/>.
-	/// </typeparam>
-	/// <typeparam name="TUIStyle">
-	/// Tipo para establecer el contenedor de ajustes encargado de establecer las configuración del elemento de interfaz de usuario. Ha de
-	/// ser serializable y derivar de <see cref="ElementStyle"/>.
+	/// derivar de <see cref="UIElementController{TInput, TOutput, TUIElement}.Output"/>.
 	/// </typeparam>
 	/// <typeparam name="TUIElement">
 	/// Tipo para establecer el elemento de interfaz de usuario de la controladora. Ha de implementar <see cref="UIElement"/>.
 	/// </typeparam>
-	public abstract class UIElementController<TInput, TOutput, TUIStyle, TUIElement> 
+	public abstract class UIElementController<TInput, TOutput, TUIElement> 
 		: Controller<TInput, TOutput>
 		, IUIElementController
-		where TInput     : UIElementController<TInput, TOutput, TUIStyle, TUIElement>.Input
-		where TOutput    : UIElementController<TInput, TOutput, TUIStyle, TUIElement>.Output
-		where TUIStyle   : ElementStyle						 
-		where TUIElement : UIElement<TUIStyle>
+		where TInput      : UIElementController<TInput, TOutput, TUIElement>.Input
+		where TOutput     : UIElementController<TInput, TOutput, TUIElement>.Output
+		where TUIElement  : UIElement
 	{
 		#region Input / Output
 
@@ -81,7 +76,7 @@ namespace Sifaw.Controllers
             #region Constructor
 
             /// <summary>
-            /// Inicializa una nueva instancia de la clase <see cref="UIElementController{TInput, TOutput, TUIStyle, TUIElement}.Input"/>.
+            /// Inicializa una nueva instancia de la clase <see cref="UIElementController{TInput, TOutput, TUIElement}.Input"/>.
             /// </summary>
             protected Input()
             {
@@ -99,7 +94,7 @@ namespace Sifaw.Controllers
             #region Constructor
 
             /// <summary>
-            /// Inicializa una nueva instancia de la clase <see cref="UIElementController{TInput, TOutput, TUIStyle, TUIElement}.Output"/>.
+            /// Inicializa una nueva instancia de la clase <see cref="UIElementController{TInput, TOutput, TUIElement}.Output"/>.
             /// </summary>
             protected Output()
             {
@@ -249,9 +244,9 @@ namespace Sifaw.Controllers
 		/// Devuelve el contenedor de ajustes del elemento de interfaz a través
 		/// del cual se puede modificar la configuración predeterminada.
 		/// </summary>
-		public TUIStyle UISettings
+		public UISettings UISettings
 		{
-			get { return UIElement.Style; }
+			get { return UIElement.UISettings; }
 		}
 
 		#endregion
@@ -259,7 +254,7 @@ namespace Sifaw.Controllers
 		#region Constructors
 
 		/// <summary>
-		/// Inicializa una nueva instancia de la clase <see cref="UIElementController{TInput, TOutput, TUIStyle, TUIElement}"/>.
+		/// Inicializa una nueva instancia de la clase <see cref="UIElementController{TInput, TOutput, TUIElement}"/>.
 		/// Establece como <see cref="AbstractUILinker{TUIElement}"/> aquel establecido por defecto a través de 
 		/// <see cref="AbstractUIProviderManager{TLinker}"/>.
 		/// </summary>
@@ -269,7 +264,7 @@ namespace Sifaw.Controllers
 		}
 
 		/// <summary>
-		/// Inicializa una nueva instancia de la clase <see cref="UIElementController{TInput, TOutput, TUIStyle, TUIElement}"/>, 
+		/// Inicializa una nueva instancia de la clase <see cref="UIElementController{TInput, TOutput, TUIElement}"/>, 
 		/// estableciendo el <see cref="AbstractUILinker{TUIElement}"/> especificado como valor de la propiedad <see cref="Linker"/>
 		/// donde <c>TUIElement</c> implementa <see cref="UIElement"/>.
 		/// </summary>

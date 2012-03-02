@@ -30,7 +30,7 @@ namespace Sifaw.Views
 	/// permite alojar elementos <see cref="UIComponent"/>.
 	/// </para>
 	/// </summary>
-	public interface ShellView : UIView<ViewStyle>
+	public interface ShellView : UIView
 	{
 		#region Methods
 
@@ -39,7 +39,7 @@ namespace Sifaw.Views
 		/// de la shell.
 		/// </summary>
 		/// <param name="rows">Array de filas de la Shell.</param>
-		void SetSettings(UIShellRow[] rows);
+		void SetLayout(UIShellRow[] rows);
 
 		#endregion
 	}

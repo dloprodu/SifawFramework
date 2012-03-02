@@ -28,25 +28,14 @@ namespace Sifaw.Views
 	/// Define métodos, propiedades y eventos que ha de tener cualquier elemento
 	/// de interfaz de usuario.
 	/// </summary>
-	public interface UIElement<TStyle>
-		where TStyle : ElementStyle
+	public interface UIElement
 	{
 		#region Properties
-
+        
 		/// <summary>
-		/// Obtiene o establece la denominación del <see cref="UIElement"/>.
+		/// Obtiene el <see cref="UISettings"/> del <see cref="UIElement"/>.
 		/// </summary>
-		string Denomination { get; set; }
-
-		/// <summary>
-		/// Obtiene o establece la descripción del <see cref="UIElement"/>.
-		/// </summary>
-		string Description { get; set; }
-
-		/// <summary>
-		/// Obtiene el <see cref="ElementStyle"/> del <see cref="UIElement"/>.
-		/// </summary>
-		TStyle Style { get; }			
+		UISettings UISettings { get; }			
 		
 		#endregion
 

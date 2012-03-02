@@ -86,12 +86,43 @@ namespace Sifaw.Views.Kit
         }
 
         /// <summary>
-        /// Determina si un objeto <see cref="UIColor"/> proporcionado es equivalente al objeto <see cref="UIColor"/> actual.
+        /// Determina si un objeto <see cref="UIGradientStop"/> proporcionado es equivalente al objeto <see cref="UIGradientStop"/> actual.
         /// </summary>
         public bool Equals(UIGradientStop other)
         {
             return Color.Equals(other.Color)
                 && Offset.Equals(other.Offset);
+        }
+
+        #endregion
+
+        #region Operator Overloading
+
+        /// <summary>
+        /// Comprueba si dos estructuras <see cref="UIGradientStop"/> no son idénticas.
+        /// </summary>
+        /// <param name="brush1"> Primera estructura <see cref="UIGradientStop"/> que se va a comparar.</param>
+        /// <param name="brush2"> Segunda estructura <see cref="UIGradientStop"/> que se va a comparar.</param>
+        /// <returns> Es true si brush1 y brush2 no son iguales; en caso contrario, es false.</returns>
+        public static bool operator !=(UIGradientStop brush1, UIGradientStop brush2)
+        {
+            return brush1.Color != brush2.Color
+                || brush1.Offset != brush2.Offset;
+        }
+
+        /// <summary>
+        /// Comprueba si dos estructuras <see cref="UIGradientStop"/> son idénticas.
+        /// </summary>
+        /// <param name="brush1"> Primera estructura <see cref="UIGradientStop"/> que se va a comparar.</param>
+        /// <param name="brush2"> Segunda estructura <see cref="UIGradientStop"/> que se va a comparar.</param>
+        /// <returns>
+        /// Es true si brush1 y brush2 son totalmente idénticos; en caso contrario, es
+        /// false.
+        /// </returns>
+        public static bool operator ==(UIGradientStop brush1, UIGradientStop brush2)
+        {
+            return brush1.Color == brush2.Color
+                || brush1.Offset == brush2.Offset;
         }
 
         #endregion

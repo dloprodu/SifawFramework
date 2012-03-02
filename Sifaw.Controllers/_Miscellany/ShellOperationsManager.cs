@@ -39,7 +39,7 @@ namespace Sifaw.Controllers
 		/// <param name="getNumberOfCellsAt">Callbak invocado cuando se solicita el número de celdas de una fila.</param>
 		/// <param name="getRowSettings">Callbak invocado cuando se solicita la configuración de una fila de la shell.</param>
 		/// <param name="getRowCellSettings">Callbak invocado cuando se solicita la configuración de una celda de la shell.</param>
-		public static UIShellRow[] GetSettings<TGuest>(
+		public static UIShellRow[] MakeLayout<TGuest>(
 			  GetNumberOfRowsShellCallback getNumberOfRows
 			, GetNumberOfCellsAtShellCallback getNumberOfCellsAt
 			, GetRowSettingsShellCallback getRowSettings

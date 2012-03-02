@@ -31,65 +31,65 @@ namespace Sifaw.Controllers.Components.Filters
 	/// permite realizar filtros sobre un campo booleanos, devolviendo como filtro <c>true</c> o <c>false</c>.
 	/// </summary>
 	public class UIBoolFilterController : UIFilterBaseController
-		< bool
-		, UIBoolFilterController.UISettingsContainer
-		, BoolFilterComponent>
+        < UIBoolFilterController.Input
+        , UIBoolFilterController.Output
+        , bool
+		, BoolFilterComponent >
 	{
-		#region Settings
+        #region Input / Output
 
-		/// <summary>
-		/// Contenedor de ajustes de <see cref="UIBoolFilterController"/>.
-		/// </summary>
-		[Serializable]
-		public new class UISettingsContainer : UIFilterBaseController
-			< bool
-			, UISettingsContainer
-			, BoolFilterComponent>.UISettingsContainer
-		{
-			#region Fields
+        /// <summary>
+        /// Parámetros de entrada de la controladora.
+        /// </summary>
+        [Serializable]
+        public new class Input : UIFilterBaseController
+            < Input
+            , Output
+            , bool
+            , BoolFilterComponent>.Input
+        {
+            #region Constructors
 
-			private string _text;
+            /// <summary>
+            /// Inicializa una nueva instancia de la clase <see cref="UIBoolFilterController.Input"/>,
+            /// estableciendo un valor en la propiedad <see cref="UIFilterBaseController{TInput, TOutput, TFilter, TComponent}.Filter"/>.
+            /// </summary>
+            /// <param name="filter">Filtro a aplicar al iniciar la controladora.</param>
+            public Input(bool filter)
+                : base(filter)
+            {
 
-			#endregion
+            }
 
-			#region Properties
+            #endregion
+        }
 
-			/// <summary>
-			/// Obtiene o establece el texto que se muestra como descripción del filtro booleano.
-			/// </summary>
-			public string Text
-			{
-				get { return _text; }
-				set { _text = value; }
-			}
+        /// <summary>
+        /// Parámetros de retorno de la controladora.
+        /// </summary>
+        [Serializable]
+        public new class Output : UIFilterBaseController
+            < Input
+            , Output
+            , bool
+            , BoolFilterComponent>.Output
+        {
+            #region Constructors
 
-			#endregion
+            /// <summary>
+            /// Inicializa una nueva instancia de la clase <see cref="UIBoolFilterController.Output"/>,
+            /// estableciendo un valor en la propiedad <see cref="UIFilterBaseController{TInput, TOutput, TFilter, TComponent}.Filter"/>.
+            /// </summary>
+            /// <param name="filter">Filtro al finalizar la controladora.</param>
+            public Output(bool filter)
+                : base(filter)
+            {
+            }
 
-			#region Constructors
+            #endregion
+        }
 
-			/// <summary>
-			/// Inicializa una nueva instancia de la clase <see cref="UIBoolFilterController.UISettingsContainer"/>,
-			/// estableciendo la propiedad <see cref="Text"/> a <c>string.Empty</c>.
-			/// </summary>
-			public UISettingsContainer()
-				: this(string.Empty)
-			{
-			}
-
-			/// <summary>
-			/// Inicializa una nueva instancia de la clase <see cref="UIBoolFilterController.UISettingsContainer"/>,
-			/// estableciendo un valor a la propiedad <see cref="Text"/>.
-			/// </summary>
-			public UISettingsContainer(string text)
-				: base()
-			{
-				this._text = text;
-			}
-
-			#endregion
-		}
-
-		#endregion
+        #endregion
 
 		#region Constructors
 
@@ -106,7 +106,7 @@ namespace Sifaw.Controllers.Components.Filters
 		/// <summary>
 		/// Inicializa una nueva instancia de la clase <see cref="UIBoolFilterController"/>, 
 		/// estableciendo el <see cref="AbstractUILinker{TUIElement}"/> como valor de la propiedad 
-		/// <see cref="UIElementController{TInput, TOutput, TUIStyle, TUIElement}.Linker"/> donde <c>TUIElement</c>
+		/// <see cref="UIElementController{TInput, TOutput, TUIElement}.Linker"/> donde <c>TUIElement</c>
 		/// implementa <see cref="BoolFilterComponent"/>.
 		/// </summary>
 		public UIBoolFilterController(AbstractUILinker<BoolFilterComponent> linker)
@@ -126,23 +126,23 @@ namespace Sifaw.Controllers.Components.Filters
 			return new Input(false);
 		}
 
-		#endregion
-
-        #region UIElement Methods
-
-		/// <summary>
-		/// Invoca al método sobrescirto <see cref="UIElementController{TInput, TOutput, TUIStyle, TComponent}.OnApplyUISettings()"/> y
-		/// posteriormente aplica la configuración al elemento <see cref="UIElementController{TInput, TOutput, TUIStyle, TView}.UIElement"/> 
-		/// del tipo <see cref="BoolFilterComponent"/>.
-		/// </summary>
-        protected override void OnApplyUISettings()
+        /// <summary>
+        /// Devuelve los parámetros de reinicio por defecto.
+        /// </summary>
+        public override Input GetResetInput()
         {
-            base.OnApplyUISettings();
-
-            UIElement.Text = UISettings.Text;
+            return new Input(Filter);
         }
 
-        #endregion
+        /// <summary>
+        /// Devuelve los parámetros de retorno por defecto.
+        /// </summary>
+        protected override Output GetDefaultOutput()
+        {
+            return new Output(Filter);
+        }
+
+		#endregion
 
         #region Start Methods
 

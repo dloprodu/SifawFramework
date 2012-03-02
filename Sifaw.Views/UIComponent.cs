@@ -35,12 +35,11 @@ namespace Sifaw.Views
 	/// por ejemplo una vista.
 	/// </para>
 	/// </summary>
-	public interface UIComponent<TStyle> : UIElement<TStyle>
-		where TStyle : ComponentStyle
+	public interface UIComponent : UIElement
 	{
 		/// <summary>
-		/// Obtiene el <see cref="ComponentStyle"/> del <see cref="UIComponent"/>.
+		/// Obtiene el <see cref="ComponentSettings"/> del <see cref="UIComponent"/>.
 		/// </summary>
-		TStyle Style { get; }
+        new ComponentSettings UISettings { get; }
 	}
 }

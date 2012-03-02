@@ -30,7 +30,7 @@ namespace Sifaw.Views
 	/// de un componente de interfaz de usuario.
 	/// </summary>
 	[Serializable]
-	public class ComponentStyle : ElementStyle
+	public class ComponentSettings : UISettings
 	{
 		#region Fields
 
@@ -49,7 +49,14 @@ namespace Sifaw.Views
 		public UIFrame Border
 		{
 			get { return _border; }
-			set { _border = value; }
+			set 
+            {
+                if (_border != value)
+                {
+                    _border = value;
+                    OnPropertyChanged(() => Border);
+                }
+            }
 		}
 
 		/// <summary>
@@ -58,7 +65,14 @@ namespace Sifaw.Views
 		public UIFrameBrush BorderBrush
 		{
 			get { return _borderBrush; }
-			set { _borderBrush = value; }
+			set
+            {
+                if (_borderBrush != value)
+                {
+                    _borderBrush = value;
+                    OnPropertyChanged(() => BorderBrush);
+                }
+            }
 		}
 
 		/// <summary>
@@ -68,7 +82,14 @@ namespace Sifaw.Views
 		public UIHorizontalAlignment HorizontalAlignment
 		{
 			get { return _horizontalAlignment; }
-			set { _horizontalAlignment = value; }
+			set
+            {
+                if (_horizontalAlignment != value)
+                {
+                    _horizontalAlignment = value;
+                    OnPropertyChanged(() => HorizontalAlignment);
+                }
+            }
 		}
 
 		/// <summary>
@@ -78,7 +99,14 @@ namespace Sifaw.Views
 		public UIVerticalAlignment VerticalAlignment
 		{
 			get { return _verticalAlignment; }
-			set { _verticalAlignment = value; }
+			set 
+            {
+                if (_verticalAlignment != value)
+                {
+                    _verticalAlignment = value;
+                    OnPropertyChanged(() => VerticalAlignment);
+                }
+            }
 		}
 
 		#endregion
@@ -86,9 +114,9 @@ namespace Sifaw.Views
 		#region Constructor
 
 		/// <summary>
-		/// Inicializa una nueva instancia de la clase <see cref="ComponentStyle"/>.
+		/// Inicializa una nueva instancia de la clase <see cref="ComponentSettings"/>.
 		/// </summary>
-		public ComponentStyle()
+		public ComponentSettings()
 			: base()
 		{
 		}

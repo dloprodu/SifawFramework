@@ -83,7 +83,7 @@ namespace Sifaw.Views.Kit
         {
             return (List.IndexOf(value));
         }
-        
+
         /// <summary>
         /// Inserta una sección existente en la colección, en el índice
         /// especificado.
@@ -118,6 +118,88 @@ namespace Sifaw.Views.Kit
         public bool Contains(UIGradientStop value)
         {
             return (List.Contains(value));
+        }
+
+        #endregion
+
+        #region Override Methods
+
+        /// <summary>
+        /// Devuelve la representación de cadena de un objeto <see cref="UIGradientStopCollection"/>.
+        /// </summary>
+        public override string ToString()
+        {
+            List<string> childs = new List<string>();
+
+            foreach (UIGradientStop child in this)
+                childs.Add(child.ToString());
+
+            return string.Format(string.Join(" - ", childs));
+        }
+
+        /// <summary>
+        /// Determina si un objeto <see cref="UIGradientStopCollection"/> proporcionado es equivalente al objeto <see cref="UIGradientStopCollection"/> actual.
+        /// </summary>
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+                return false;
+
+            if (!(obj is UIGradientStopCollection))
+                return false;
+
+            return (this == (UIGradientStopCollection)obj);
+        }
+
+        /// <summary>
+        /// Obtiene un código hash de este objeto <see cref="UIGradientStopCollection"/>.
+        /// </summary>
+        public override int GetHashCode()
+        {
+            int code = 0;
+
+            foreach (UIGradientStop child in this)
+                code ^= child.GetHashCode();
+
+            return code;
+        }
+
+        #endregion
+
+        #region Operator Overloading
+
+        /// <summary>
+        /// Comprueba si dos estructuras <see cref="UIGradientStopCollection"/> no son idénticas.
+        /// </summary>
+        /// <param name="list1"> Primera estructura <see cref="UIGradientStopCollection"/> que se va a comparar.</param>
+        /// <param name="list2"> Segunda estructura <see cref="UIGradientStopCollection"/> que se va a comparar.</param>
+        public static bool operator !=(UIGradientStopCollection list1, UIGradientStopCollection list2)
+        {
+            if (list1.Count != list2.Count)
+                return true;
+
+            foreach (UIGradientStop child in list2)
+                if (!list1.Contains(child))
+                    return true;
+
+            return false;
+        }
+
+        /// <summary>
+        /// Comprueba si dos estructuras <see cref="UIGradientStopCollection"/> son idénticas.
+        /// </summary>
+        /// <param name="list1"> Primera estructura <see cref="UIGradientStopCollection"/> que se va a comparar.</param>
+        /// <param name="list2"> Segunda estructura <see cref="UIGradientStopCollection"/> que se va a comparar.</param>
+        public static bool operator ==(UIGradientStopCollection list1, UIGradientStopCollection list2)
+        {
+            if (list1.Count != list2.Count)
+                return false;
+
+            foreach (UIGradientStop child in list2)
+                if (!list1.Contains(child))
+                    return false;
+
+            return true;
         }
 
         #endregion

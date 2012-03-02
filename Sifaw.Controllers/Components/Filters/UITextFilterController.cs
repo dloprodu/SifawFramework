@@ -31,64 +31,76 @@ namespace Sifaw.Controllers.Components.Filters
 	/// filtro el texto introducido por el usuario.
 	/// </summary>
 	public class UITextFilterController : UIFilterBaseController
-		< string
-		, UITextFilterController.UISettingsContainer
+        < UITextFilterController.Input
+        , UITextFilterController.Output
+        , string
 		, TextFilterComponent>
 	{
-		#region Settings
+        #region Input / Output
 
-		/// <summary>
-		/// Contenedor de ajustes de <see cref="UITextFilterController"/>.
-		/// </summary>
-		[Serializable]
-		public new class UISettingsContainer : UIFilterBaseController
-			< string
-			, UISettingsContainer
-			, TextFilterComponent>.UISettingsContainer
-		{
-			#region Fields
+        /// <summary>
+        /// Parámetros de entrada de la controladora.
+        /// </summary>
+        [Serializable]
+        public new class Input : UIFilterBaseController
+            < Input
+            , Output
+            , string
+            , TextFilterComponent>.Input
+        {
+            #region Constructors
 
-			private string _placeholder = string.Empty;
+            /// <summary>
+            /// Inicializa una nueva instancia de la clase <see cref="UITextFilterController.Input"/>,
+            /// estableciendo un valor en la propiedad <see cref="UIFilterBaseController{TInput, TOutput, TFilter, TComponent}.Filter"/>.
+            /// </summary>
+            /// <param name="filter">Filtro a aplicar al iniciar la controladora.</param>
+            public Input(string filter)
+                : base(filter)
+            {
 
-			#endregion
+            }
 
-			#region Properties
+            #endregion
+        }
 
-			/// <summary>
-			/// Obtiene o establece el placeholder, o texto de entrada, para el componente.
-			/// </summary>
-			public string Placeholder
-			{
-				get { return _placeholder; }
-				set { _placeholder = value; }
-			}
+        /// <summary>
+        /// Parámetros de retorno de la controladora.
+        /// </summary>
+        [Serializable]
+        public new class Output : UIFilterBaseController
+            < Input
+            , Output
+            , string
+            , TextFilterComponent>.Output
+        {
+            #region Constructors
 
-			#endregion
+            /// <summary>
+            /// Inicializa una nueva instancia de la clase <see cref="UITextFilterController.Output"/>,
+            /// estableciendo un valor en la propiedad <see cref="UIFilterBaseController{TInput, TOutput, TFilter, TComponent}.Filter"/>.
+            /// </summary>
+            /// <param name="filter">Filtro al finalizar la controladora.</param>
+            public Output(string filter)
+                : base(filter)
+            {
+            }
 
-			#region Constructors
+            #endregion
+        }
 
-			/// <summary>
-			/// Inicializa una nueva instancia de la clase <see cref="UITextFilterController.UISettingsContainer"/>,
-			/// estableciendo la propiedad <see cref="Placeholder"/> a <c>"Buscar..."</c>.
-			/// </summary>
-			public UISettingsContainer()
-				: base()
-			{
-				this._placeholder = "Buscar...";
-			}
+        #endregion
 
-			/// <summary>
-			/// Inicializa una nueva instancia de la clase <see cref="UITextFilterController.UISettingsContainer"/>,
-			/// estableciendo un valor a la propiedad <see cref="Placeholder"/>.
-			/// </summary>
-			public UISettingsContainer(string placeholder)
-				: base()
-			{
-				this._placeholder = placeholder;
-			}
+		#region Properties
 
-			#endregion
-		}
+        /// <summary>
+        /// Devuelve el contenedor de ajustes del elemento de interfaz a través
+        /// del cual se puede modificar la configuración predeterminada.
+        /// </summary>
+        public new TextFilterSettings UISettings
+        {
+            get { return UIElement.UISettings; }
+        }
 
 		#endregion
 
@@ -107,7 +119,7 @@ namespace Sifaw.Controllers.Components.Filters
 		/// <summary>
 		/// Inicializa una nueva instancia de la clase <see cref="UITextFilterController"/>, 
 		/// estableciendo el <see cref="AbstractUILinker{TUIElement}"/> como valor de la propiedad 
-		/// <see cref="UIElementController{TInput, TOutput, TUIStyle, TUIElement}.Linker"/> donde <c>TUIElement</c>
+		/// <see cref="UIElementController{TInput, TOutput, TUIElement}.Linker"/> donde <c>TUIElement</c>
 		/// implementa <see cref="TextFilterComponent"/>.
 		/// </summary>
 		public UITextFilterController(AbstractUILinker<TextFilterComponent> linker)
@@ -127,23 +139,23 @@ namespace Sifaw.Controllers.Components.Filters
 			return new Input(string.Empty);
 		}
 
-		#endregion
-
-        #region UIElement Methods
-
-		/// <summary>
-		/// Invoca al método sobrescirto <see cref="UIElementController{TInput, TOutput, TUIStyle, TComponent}.OnApplyUISettings()"/> y
-		/// posteriormente aplica la configuración al elemento <see cref="UIElementController{TInput, TOutput, TUIStyle, TView}.UIElement"/> 
-		/// del tipo <see cref="TextFilterComponent"/>.
-		/// </summary>
-        protected override void OnApplyUISettings()
+        /// <summary>
+        /// Devuelve los parámetros de reinicio por defecto.
+        /// </summary>
+        public override Input GetResetInput()
         {
-            base.OnApplyUISettings();
-
-            UIElement.Placeholder = UISettings.Placeholder;
+            return new Input(Filter);
         }
 
-        #endregion
+        /// <summary>
+        /// Devuelve los parámetros de retorno por defecto.
+        /// </summary>
+        protected override Output GetDefaultOutput()
+        {
+            return new Output(Filter);
+        }
+
+		#endregion
 
 		#region Start Methods
 

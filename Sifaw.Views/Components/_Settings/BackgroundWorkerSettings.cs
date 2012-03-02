@@ -28,7 +28,7 @@ namespace Sifaw.Views.Components
 	/// de un componente de interfaz de usuario.
 	/// </summary>
 	[Serializable]
-	public class BackgroundWorkerComponentStyle : ComponentStyle
+	public class BackgroundWorkerSettings : ComponentSettings
 	{
 		#region Fields
 
@@ -37,6 +37,7 @@ namespace Sifaw.Views.Components
 		private string _summary = string.Empty;
 		private string _processDescription = string.Empty;
 		private string _progress = string.Empty;
+        private int _maxProgressPercentage = 100;
 
 		#endregion
 
@@ -49,7 +50,14 @@ namespace Sifaw.Views.Components
 		public bool WithControl
 		{
 			get { return _withControl; }
-			set { _withControl = value; }
+			set
+            {
+                if (_withControl != value)
+                {
+                    _withControl = value;
+                    OnPropertyChanged(() => WithControl);
+                }
+            }
 		}
 
 		/// <summary>
@@ -59,7 +67,14 @@ namespace Sifaw.Views.Components
 		public bool AllowCancel
 		{
 			get { return _allowCancel; }
-			set { _allowCancel = value; }
+			set 
+            {
+                if (_allowCancel != value)
+                {
+                    _allowCancel = value;
+                    OnPropertyChanged(() => AllowCancel);
+                }
+            }
 		}
 
 		/// <summary>
@@ -68,7 +83,14 @@ namespace Sifaw.Views.Components
 		public string Summary
 		{
 			get { return _summary; }
-			set { _summary = value; }
+			set
+            {
+                if (_summary != value)
+                {
+                    _summary = value;
+                    OnPropertyChanged(() => Summary);
+                }
+            }
 		}
 
 		/// <summary>
@@ -77,7 +99,14 @@ namespace Sifaw.Views.Components
 		public string ProcessDescription
 		{
 			get { return _processDescription; }
-			set { _processDescription = value; }
+			set 
+            {
+                if (_processDescription != value)
+                {
+                    _processDescription = value;
+                    OnPropertyChanged(() => ProcessDescription);
+                }
+            }
 		}
 
 		/// <summary>
@@ -87,17 +116,41 @@ namespace Sifaw.Views.Components
 		public string Progress
 		{
 			get { return _progress; }
-			set { _progress = value; }
+			set 
+            {
+                if (_progress != value)
+                {
+                    _progress = value;
+                    OnPropertyChanged(() => Progress);
+                }
+            }
 		}
+
+        /// <summary>
+        /// Obtiene o establece un valor que indica el máximo progreso 
+        /// del proceso.
+        /// </summary>
+        public int MaxProgressPercentage
+        {
+            get { return _maxProgressPercentage; }
+            set
+            {
+                if (_maxProgressPercentage != value)
+                {
+                    _maxProgressPercentage = value;
+                    OnPropertyChanged(() => MaxProgressPercentage);
+                }
+            }
+        }
 
 		#endregion
 
 		#region Constructor
 
 		/// <summary>
-		/// Inicializa una nueva instancia de la clase <see cref="BackgroundWorkerComponentStyle"/>.
+		/// Inicializa una nueva instancia de la clase <see cref="BackgroundWorkerSettings"/>.
 		/// </summary>
-		public BackgroundWorkerComponentStyle()
+		public BackgroundWorkerSettings()
 			: base()
 		{
 			this.Summary = "Operación pesada";

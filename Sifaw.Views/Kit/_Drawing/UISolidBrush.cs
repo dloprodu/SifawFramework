@@ -92,5 +92,34 @@ namespace Sifaw.Views.Kit
         }
 
         #endregion
+
+        #region Operator Overloading
+
+        /// <summary>
+        /// Comprueba si dos estructuras <see cref="UISolidBrush"/> no son idénticas.
+        /// </summary>
+        /// <param name="brush1"> Primera estructura <see cref="UISolidBrush"/> que se va a comparar.</param>
+        /// <param name="brush2"> Segunda estructura <see cref="UISolidBrush"/> que se va a comparar.</param>
+        /// <returns> Es true si brush1 y brush2 no son iguales; en caso contrario, es false.</returns>
+        public static bool operator !=(UISolidBrush brush1, UISolidBrush brush2)
+        {
+            return brush1.Color != brush2.Color;
+        }
+
+        /// <summary>
+        /// Comprueba si dos estructuras <see cref="UISolidBrush"/> son idénticas.
+        /// </summary>
+        /// <param name="brush1"> Primera estructura <see cref="UISolidBrush"/> que se va a comparar.</param>
+        /// <param name="brush2"> Segunda estructura <see cref="UISolidBrush"/> que se va a comparar.</param>
+        /// <returns>
+        /// Es true si brush1 y brush2 son totalmente idénticos; en caso contrario, es
+        /// false.
+        /// </returns>
+        public static bool operator ==(UISolidBrush brush1, UISolidBrush brush2)
+        {
+            return brush1.Color == brush2.Color;
+        }
+
+        #endregion
     }
 }

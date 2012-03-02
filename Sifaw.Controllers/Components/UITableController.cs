@@ -32,26 +32,18 @@ namespace Sifaw.Controllers.Components
 	/// </remarks>
 	/// <typeparam name="TInput">
 	/// Tipo para establecer los parámetros de inicio de la controladora. Ha de ser serializable y 
-	/// derivar de <see cref="UITableController{TInput, TOutput, TUISettings}.Input"/>.
+	/// derivar de <see cref="UITableController{TInput, TOutput}.Input"/>.
 	/// </typeparam>
 	/// <typeparam name="TOutput">
 	/// Tipo para establcer los parametros de retorno cuando finaliza la controladora. Ha de ser serializable y 
-	/// derivar de <see cref="UITableController{TInput, TOutput, TUISettings}.Output"/>.
+	/// derivar de <see cref="UITableController{TInput, TOutput}.Output"/>.
 	/// </typeparam>
-	/// <typeparam name="TUISettings">
-	/// Tipo para establecer el contenedor de ajustes encargado de establecer las configuración del elemento de interfaz 
-	/// de usuario o de componentes embebidos. Ha de ser serializable, proveer de consturctor público y derivar 
-	/// de <see cref="UITableController{TInput, TOutput, TUISettings}.UISettingsContainer"/>.
-	/// </typeparam>
-	public abstract class UITableController<TInput, TOutput, TUISettings> : UIComponentController
+	public abstract class UITableController<TInput, TOutput> : UIComponentController
 		< TInput
 		, TOutput
-		, TUISettings
 		, TableComponent>
-		where TInput      : UITableController<TInput, TOutput, TUISettings>.Input
-		where TOutput     : UITableController<TInput, TOutput, TUISettings>.Output
-		where TUISettings : UITableController<TInput, TOutput, TUISettings>.UISettingsContainer
-						  , new()
+		where TInput  : UITableController<TInput, TOutput>.Input
+		where TOutput : UITableController<TInput, TOutput>.Output
 	{
 		#region Input / Output
 
@@ -62,13 +54,12 @@ namespace Sifaw.Controllers.Components
 		public abstract new class Input : UIComponentController
 			< TInput
 			, TOutput
-			, TUISettings
 			, TableComponent>.Input
 		{
 			#region Constructor
 
 			/// <summary>
-			/// Inicializa una nueva instancia de la clase <see cref="UITableController{TInput, TOutput, TUISettings}.Input"/>.
+			/// Inicializa una nueva instancia de la clase <see cref="UITableController{TInput, TOutput}.Input"/>.
 			/// </summary>
 			protected Input()
 			{
@@ -84,42 +75,14 @@ namespace Sifaw.Controllers.Components
 		public abstract new class Output : UIComponentController
 			< TInput
 			, TOutput
-			, TUISettings
 			, TableComponent>.Output
 		{
 			#region Constructor
 
 			/// <summary>
-			/// Inicializa una nueva instancia de la clase <see cref="UITableController{TInput, TOutput, TUISettings}.Output"/>.
+			/// Inicializa una nueva instancia de la clase <see cref="UITableController{TInput, TOutput}.Output"/>.
 			/// </summary>
 			protected Output()
-			{
-			}
-
-			#endregion
-		}
-
-		#endregion
-
-		#region Settings
-
-		/// <summary>
-		/// Contenedor de ajustes de <see cref="UITableController{TInput, TOutput, TUISettings}"/>.
-		/// </summary>
-		[Serializable]
-		public new class UISettingsContainer : UIComponentController
-			< TInput
-			, TOutput
-			, TUISettings
-			, TableComponent>.UISettingsContainer
-		{
-			#region Constructors
-
-			/// <summary>
-			/// Inicializa una nueva instancia de la clase <see cref="UITableController{TInput, TOutput, TUISettings}.UISettingsContainer"/>.
-			/// </summary>
-			public UISettingsContainer()
-				: base()
 			{
 			}
 
@@ -166,7 +129,7 @@ namespace Sifaw.Controllers.Components
 		#region Constructors
 
 		/// <summary>
-		/// Inicializa una nueva instancia de la clase <see cref="UITableController{TInput, TOutput, TUISettings}"/>.
+		/// Inicializa una nueva instancia de la clase <see cref="UITableController{TInput, TOutput}"/>.
         /// Establece como <see cref="AbstractUILinker{TUIElement}"/> aquel establecido por defecto a través de 
         /// <see cref="AbstractUIProviderManager{TLinker}"/>.
         /// </summary>
@@ -176,9 +139,9 @@ namespace Sifaw.Controllers.Components
 		}
 
         /// <summary>
-		/// Inicializa una nueva instancia de la clase <see cref="UITableController{TInput, TOutput, TUISettings}"/>, 
+		/// Inicializa una nueva instancia de la clase <see cref="UITableController{TInput, TOutput}"/>, 
 		/// estableciendo el <see cref="AbstractUILinker{TUIElement}"/> especificado como valor de la propiedad 
-		/// <see cref="UIElementController{TInput, TOutput, TUIStyle, TUIElement}.Linker"/> donde <c>TUIElement</c> 
+		/// <see cref="UIElementController{TInput, TOutput, TUIElement}.Linker"/> donde <c>TUIElement</c> 
 		/// implementa <see cref="TableComponent"/>.
         /// </summary>
 		protected UITableController(AbstractUILinker<TableComponent> linker)

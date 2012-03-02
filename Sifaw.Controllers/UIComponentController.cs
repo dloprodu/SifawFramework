@@ -35,31 +35,28 @@ namespace Sifaw.Controllers
     /// <remarks>
     /// <para>
 	/// Un componente de interfaz de usuario no puede mostrarse por si solo, en su lugar,
-	/// ha de ser embebido por un <see cref="UIViewController{TInput, TOutput, TUIStyle, TView}"/>.
+	/// ha de ser embebido por un <see cref="UIViewController{TInput, TOutput, TView}"/>.
     /// </para>
     /// </remarks>
 	/// <typeparam name="TInput">
 	/// Tipo para establecer los parámetros de inicio de la controladora. Ha de ser serializable y 
-	/// derivar de <see cref="UIComponentController{TInput, TOutput, TUIStyle, TComponent}.Input"/>.
+	/// derivar de <see cref="UIComponentController{TInput, TOutput, TComponent}.Input"/>.
 	/// </typeparam>
 	/// <typeparam name="TOutput">
 	/// Tipo para establcer los parametros de retorno cuando finaliza la controladora. Ha de ser serializable y 
-	/// derivar de <see cref="UIComponentController{TInput, TOutput, TUIStyle, TComponent}.Output"/>.
-	/// </typeparam>
-	/// <typeparam name="TUIStyle">
-	/// Tipo para establecer el contenedor de ajustes encargado de establecer las configuración del elemento de interfaz de usuario. Ha de
-	/// ser serializable y derivar de <see cref="ComponentStyle"/>.
+	/// derivar de <see cref="UIComponentController{TInput, TOutput, TComponent}.Output"/>.
 	/// </typeparam>
 	/// <typeparam name="TComponent">
 	/// Tipo para establecer el elemento de interfaz de usuario de la controladora. Ha de implementar <see cref="UIComponent"/>.
 	/// </typeparam>
-	public abstract class UIComponentController<TInput, TOutput, TUIStyle, TComponent>
-        : UIElementController<TInput, TOutput, TUIStyle, TComponent>
+	public abstract class UIComponentController<TInput, TOutput, TComponent> : UIElementController
+        < TInput
+        , TOutput
+        , TComponent>
         , IUIComponentController
-        where TInput     : UIComponentController<TInput, TOutput, TUIStyle, TComponent>.Input
-        where TOutput    : UIComponentController<TInput, TOutput, TUIStyle, TComponent>.Output
-        where TUIStyle   : ComponentStyle                        
-        where TComponent : UIComponent<TUIStyle>
+        where TInput     : UIComponentController<TInput, TOutput, TComponent>.Input
+        where TOutput    : UIComponentController<TInput, TOutput, TComponent>.Output
+        where TComponent : UIComponent
     {
         #region Input / Output
 
@@ -67,12 +64,12 @@ namespace Sifaw.Controllers
         /// Parámetros de entrada de las controladora.
         /// </summary>
         [Serializable]
-        public new abstract class Input : UIElementController<TInput, TOutput, TUIStyle, TComponent>.Input
+        public new abstract class Input : UIElementController<TInput, TOutput, TComponent>.Input
         {
             #region Constructor
 
             /// <summary>
-            /// Inicializa una nueva instancia de la clase <see cref="UIComponentController{TInput, TOutput, TUIStyle, TComponent}.Input"/>.
+            /// Inicializa una nueva instancia de la clase <see cref="UIComponentController{TInput, TOutput, TComponent}.Input"/>.
             /// </summary>
             protected Input()
             {
@@ -85,12 +82,12 @@ namespace Sifaw.Controllers
         /// Parámetros de retorno de la controladora.
         /// </summary>
         [Serializable]
-        public new abstract class Output : UIElementController<TInput, TOutput, TUIStyle, TComponent>.Output
+        public new abstract class Output : UIElementController<TInput, TOutput, TComponent>.Output
         {
             #region Constructor
 
             /// <summary>
-            /// Inicializa una nueva instancia de la clase <see cref="UIComponentController{TInput, TOutput, TUIStyle, TComponent}.Output"/>.
+            /// Inicializa una nueva instancia de la clase <see cref="UIComponentController{TInput, TOutput, TComponent}.Output"/>.
             /// </summary>
             protected Output()
             {
@@ -185,10 +182,23 @@ namespace Sifaw.Controllers
 
         #endregion
 
+        #region Properties
+
+        /// <summary>
+        /// Devuelve el contenedor de ajustes del elemento de interfaz a través
+        /// del cual se puede modificar la configuración predeterminada.
+        /// </summary>
+        public new ComponentSettings UISettings
+        {
+            get { return UIElement.UISettings; }
+        }
+
+        #endregion
+
         #region Constructors
 
-		/// <summary>
-		/// Inicializa una nueva instancia de la clase <see cref="UIComponentController{TInput, TOutput, TUIStyle, TComponent}"/>.
+        /// <summary>
+		/// Inicializa una nueva instancia de la clase <see cref="UIComponentController{TInput, TOutput, TComponent}"/>.
 		/// Establece como <see cref="AbstractUILinker{TUIElement}"/> aquel establecido por defecto a través de 
 		/// <see cref="AbstractUIProviderManager{TLinker}"/>.
 		/// </summary>
@@ -198,9 +208,9 @@ namespace Sifaw.Controllers
         }
 
 		/// <summary>
-		/// Inicializa una nueva instancia de la clase <see cref="UIComponentController{TInput, TOutput, TUIStyle, TComponent}"/>, 
+		/// Inicializa una nueva instancia de la clase <see cref="UIComponentController{TInput, TOutput, TComponent}"/>, 
 		/// estableciendo el <see cref="AbstractUILinker{TUIElement}"/> especificado como valor de la propiedad 
-		/// <see cref="UIElementController{TInput, TOutput, TUIStyle, TUIElement}.Linker"/> donde <c>TUIElement</c> 
+		/// <see cref="UIElementController{TInput, TOutput, TUIElement}.Linker"/> donde <c>TUIElement</c> 
 		/// implementa <see cref="UIComponent"/>.
 		/// </summary>
         protected UIComponentController(AbstractUILinker<TComponent> linker)
@@ -225,7 +235,7 @@ namespace Sifaw.Controllers
         #region UIElement Methods
 
 		/// <summary>
-		/// Invoca al método sobrescirto <see cref="UIElementController{TInput, TOutput, TUIStyle, TComponent}.OnAfterUIElementLoad()"/>.
+		/// Invoca al método sobrescirto <see cref="UIElementController{TInput, TOutput, TComponent}.OnAfterUIElementLoad()"/>.
 		/// </summary>
         protected override void OnAfterUIElementLoad()
         {

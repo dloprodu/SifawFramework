@@ -105,5 +105,36 @@ namespace Sifaw.Views.Kit
         }
 
         #endregion
+
+        #region Operator Overloading
+
+        /// <summary>
+        /// Comprueba si dos estructuras <see cref="UISize"/> no son idénticas.
+        /// </summary>
+        /// <param name="size1"> Primera estructura <see cref="UISize"/> que se va a comparar.</param>
+        /// <param name="size2"> Segunda estructura <see cref="UISize"/> que se va a comparar.</param>
+        /// <returns> Es true si color1 y color2 no son iguales; en caso contrario, es false.</returns>
+        public static bool operator !=(UISize size1, UISize size2)
+        {
+            return size1.Width != size2.Width
+                || size1.Height != size2.Height;
+        }
+
+        /// <summary>
+        /// Comprueba si dos estructuras <see cref="UISize"/> son idénticas.
+        /// </summary>
+        /// <param name="size1"> Primera estructura <see cref="UISize"/> que se va a comparar.</param>
+        /// <param name="size2"> Segunda estructura <see cref="UISize"/> que se va a comparar.</param>
+        /// <returns>
+        /// Es true si color1 y color2 son totalmente idénticos; en caso contrario, es
+        /// false.
+        /// </returns>
+        public static bool operator ==(UISize size1, UISize size2)
+        {
+            return size1.Width == size2.Width
+                && size1.Height == size2.Height;
+        }
+
+        #endregion
     }
 }

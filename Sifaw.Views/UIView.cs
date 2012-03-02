@@ -28,20 +28,14 @@ namespace Sifaw.Views
 	/// Puele alojar elementos <see cref="UIComponent"/>.
 	/// </para>
 	/// </summary>
-	public interface UIView<TStyle> : UIElement<TStyle>
-		where TStyle : ViewStyle
+	public interface UIView : UIElement
 	{
 		#region Properties
-
-		/// <summary>
-		/// Obtiene o establece la cabecera de la vista.
+		
+        /// <summary>
+		/// Obtiene el <see cref="ViewSettings"/> del <see cref="UIView"/>.
 		/// </summary>
-		string Header { get; set; }
-
-		/// <summary>
-		/// Obtiene el <see cref="ViewStyle"/> del <see cref="UIView"/>.
-		/// </summary>
-		TStyle Style { get; }
+        new ViewSettings UISettings { get; }
 
 		#endregion
 

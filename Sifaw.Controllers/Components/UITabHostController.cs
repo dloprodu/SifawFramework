@@ -34,31 +34,23 @@ namespace Sifaw.Controllers.Components
 	/// </summary>
 	/// <typeparam name="TInput">
 	/// Tipo para establecer los parámetros de inicio de la controladora. Ha de ser serializable y 
-	/// derivar de <see cref="UITabHostController{TInput, TOutput, TUISettings, TGuest}.Input"/>.
+	/// derivar de <see cref="UITabHostController{TInput, TOutput, TGuest}.Input"/>.
 	/// </typeparam>
 	/// <typeparam name="TOutput">
 	/// Tipo para establcer los parametros de retorno cuando finaliza la controladora. Ha de ser serializable y 
-	/// derivar de <see cref="UITabHostController{TInput, TOutput, TUISettings, TGuest}.Output"/>.
-	/// </typeparam>
-	/// <typeparam name="TUISettings">
-	/// Tipo para establecer el contenedor de ajustes encargado de establecer las configuración del elemento de interfaz 
-	/// de usuario o de componentes embebidos. Ha de ser serializable, proveer de consturctor público y derivar 
-	/// de <see cref="UITabHostController{TInput, TOutput, TUISettings, TGuest}.UISettingsContainer"/>.
+	/// derivar de <see cref="UITabHostController{TInput, TOutput, TGuest}.Output"/>.
 	/// </typeparam>
 	/// <typeparam name="TGuest">
 	/// Tipo de los componentes que puede alojar. Ha de implementar <see cref="UIComponent"/>.
 	/// </typeparam>
-	public abstract class UITabHostController<TInput, TOutput, TUISettings, TGuest> : UIActorController
+	public abstract class UITabHostController<TInput, TOutput, TGuest> : UIActorController
 		< TInput
 		, TOutput
-		, TUISettings
 		, TabHostComponent
 		, TGuest>
-		where TInput      : UITabHostController<TInput, TOutput, TUISettings, TGuest>.Input
-		where TOutput     : UITabHostController<TInput, TOutput, TUISettings, TGuest>.Output
-		where TUISettings : UITabHostController<TInput, TOutput, TUISettings, TGuest>.UISettingsContainer
-						  , new()
-		where TGuest      : UIComponent
+		where TInput  : UITabHostController<TInput, TOutput, TGuest>.Input
+		where TOutput : UITabHostController<TInput, TOutput, TGuest>.Output
+    	where TGuest  : UIComponent
 	{
 		#region Input / Output
 
@@ -69,14 +61,13 @@ namespace Sifaw.Controllers.Components
 		public abstract new class Input : UIActorController
 			< TInput
 			, TOutput
-			, TUISettings
 			, TabHostComponent
 			, TGuest>.Input
 		{
 			#region Constructor
 
 			/// <summary>
-			/// Inicializa una nueva instancia de la clase <see cref="UITabHostController{TInput, TOutput, TUISettings, TGuest}.Input"/>.
+			/// Inicializa una nueva instancia de la clase <see cref="UITabHostController{TInput, TOutput, TGuest}.Input"/>.
 			/// </summary>
 			protected Input()
 			{
@@ -92,44 +83,15 @@ namespace Sifaw.Controllers.Components
 		public abstract new class Output : UIActorController
 			< TInput
 			, TOutput
-			, TUISettings
 			, TabHostComponent
 			, TGuest>.Output
 		{
 			#region Constructor
 
 			/// <summary>
-			/// Inicializa una nueva instancia de la clase <see cref="UITabHostController{TInput, TOutput, TUISettings, TGuest}.Output"/>.
+			/// Inicializa una nueva instancia de la clase <see cref="UITabHostController{TInput, TOutput, TGuest}.Output"/>.
 			/// </summary>
 			protected Output()
-			{
-			}
-
-			#endregion
-		}
-
-		#endregion
-
-		#region Settings
-
-		/// <summary>
-		/// Contenedor de ajustes de <see cref="UITabHostController{TInput, TOutput, TUISettings, TGuest}"/>.
-		/// </summary>
-		[Serializable]
-		public new class UISettingsContainer : UIActorController
-			< TInput
-			, TOutput
-			, TUISettings
-			, TabHostComponent
-			, TGuest>.UISettingsContainer
-		{
-			#region Constructors
-
-			/// <summary>
-			/// Inicializa una nueva instancia de la clase <see cref="UITabHostController{TInput, TOutput, TUISettings, TGuest}.UISettingsContainer"/>.
-			/// </summary>
-			public UISettingsContainer()
-				: base()
 			{
 			}
 
@@ -141,7 +103,7 @@ namespace Sifaw.Controllers.Components
 		#region Constructors
 
 		/// <summary>
-		/// Inicializa una nueva instancia de la clase <see cref="UITabHostController{TInput, TOutput, TUISettings, TGuest}"/>.
+		/// Inicializa una nueva instancia de la clase <see cref="UITabHostController{TInput, TOutput, TGuest}"/>.
         /// Establece como <see cref="AbstractUILinker{TUIElement}"/> aquel establecido por defecto a través de 
         /// <see cref="AbstractUIProviderManager{TLinker}"/>.
         /// </summary>
@@ -151,9 +113,9 @@ namespace Sifaw.Controllers.Components
 		}
 
         /// <summary>
-		/// Inicializa una nueva instancia de la clase <see cref="UITabHostController{TInput, TOutput, TUISettings, TGuest}"/>, 
+		/// Inicializa una nueva instancia de la clase <see cref="UITabHostController{TInput, TOutput, TGuest}"/>, 
 		/// estableciendo el <see cref="AbstractUILinker{TUIElement}"/> especificado como valor de la propiedad 
-		/// <see cref="UIElementController{TInput, TOutput, TUIStyle, TUIElement}.Linker"/> donde <c>TUIElement</c> 
+		/// <see cref="UIElementController{TInput, TOutput, TUIElement}.Linker"/> donde <c>TUIElement</c> 
 		/// implementa <see cref="TabHostComponent"/>.
         /// </summary>
 		protected UITabHostController(AbstractUILinker<TabHostComponent> linker)
@@ -166,23 +128,13 @@ namespace Sifaw.Controllers.Components
 		#region UIElement Methods
 
 		/// <summary>
-		/// Invoca al método sobrescirto <see cref="UIElementController{TInput, TOutput, TUIStyle, TComponent}.OnAfterUIElementLoad()"/>.
+		/// Invoca al método sobrescirto <see cref="UIElementController{TInput, TOutput, TComponent}.OnAfterUIElementLoad()"/>.
 		/// </summary>
 		protected override void OnAfterUIElementLoad()
 		{
 			base.OnAfterUIElementLoad();
 
 			/* Subscripción a eventos del componente... */			
-		}
-
-		/// <summary>
-		/// Invoca al método sobrescirto <see cref="UIElementController{TInput, TOutput, TUIStyle, TComponent}.OnApplyUISettings()"/> y
-		/// posteriormente aplica la configuración al elemento <see cref="UIElementController{TInput, TOutput, TUIStyle, TView}.UIElement"/> 
-		/// del tipo <see cref="TabHostComponent"/>.
-		/// </summary>
-		protected override void OnApplyUISettings()
-		{
-			base.OnApplyUISettings();
 		}
 
 		#endregion

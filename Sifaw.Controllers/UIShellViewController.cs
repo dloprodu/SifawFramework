@@ -28,32 +28,26 @@ namespace Sifaw.Controllers
 	/// <summary>
 	/// Controladora base que provee de un patrón e infraestructura común a aquellas controladoras
 	/// donde interviene una vista que actúa como shell, es decir, a modo de contenedor de componentes
-    /// <see cref="UIComponentController{TInput, TOutput, TUIStyle, TComponent}"/>.
+    /// <see cref="UIComponentController{TInput, TOutput, TComponent}"/>.
 	/// </summary>
     /// <typeparam name="TInput">
     /// Tipo para establecer los parámetros de inicio de la controladora. Ha de ser serializable y 
-    /// derivar de <see cref="UIShellViewController{TInput, TOutput, TUIGuestStyle, TGuest}.Input"/>.
+    /// derivar de <see cref="UIShellViewController{TInput, TOutput, TGuest}.Input"/>.
     /// </typeparam>
     /// <typeparam name="TOutput">
     /// Tipo para establcer los parametros de retorno cuando finaliza la controladora. Ha de ser serializable y 
-    /// derivar de <see cref="UIShellViewController{TInput, TOutput, TUIGuestStyle, TGuest}.Output"/>.
-    /// </typeparam>
-    /// <typeparam name="TUIGuestStyle">
-    /// Tipo para establecer el contenedor de ajustes encargado de establecer las configuración de los elementos de interfaz 
-	/// de usuario embebidos. Ha de ser serializable y derivar de <see cref="ComponentStyle"/>.
+    /// derivar de <see cref="UIShellViewController{TInput, TOutput, TGuest}.Output"/>.
     /// </typeparam>
     /// <typeparam name="TGuest">
     /// Tipo de los componentes que puede alojar la shell. Ha de implementar <see cref="UIComponent"/>.
     /// </typeparam>
-	public abstract class UIShellViewController<TInput, TOutput, TUIGuestStyle, TGuest> : UIViewController
+	public abstract class UIShellViewController<TInput, TOutput, TGuest> : UIViewController
 		< TInput
 		, TOutput
-		, ViewStyle
 		, ShellView>
-		where TInput        : UIShellViewController<TInput, TOutput, TUIGuestStyle, TGuest>.Input
-		where TOutput       : UIShellViewController<TInput, TOutput, TUIGuestStyle, TGuest>.Output
-		where TUIGuestStyle : ComponentStyle
-		where TGuest        : UIComponent<TUIGuestStyle>
+		where TInput  : UIShellViewController<TInput, TOutput, TGuest>.Input
+		where TOutput : UIShellViewController<TInput, TOutput, TGuest>.Output
+		where TGuest  : UIComponent
 	{
 		#region Input / Output
 
@@ -61,13 +55,13 @@ namespace Sifaw.Controllers
 		/// Parámetros de entrada de las controladora.
 		/// </summary>
 		[Serializable]
-		public abstract new class Input : UIViewController<TInput, TOutput, ViewStyle, ShellView>.Input
+		public abstract new class Input : UIViewController<TInput, TOutput, ShellView>.Input
 		{
 			#region Constructors
 
             /// <summary>
-            /// Inicializa una nueva instancia de la clase <see cref="UIShellViewController{TInput, TOutput, TUIGuestStyle, TGuest}.Input"/>, 
-            /// estableciendo la propiedad <see cref="UIViewController{TInput, TOutput, TUIStyle, TView}.Input.ShowView"/> a <c>true</c>
+            /// Inicializa una nueva instancia de la clase <see cref="UIShellViewController{TInput, TOutput, TGuest}.Input"/>, 
+            /// estableciendo la propiedad <see cref="UIViewController{TInput, TOutput, TView}.Input.ShowView"/> a <c>true</c>
             /// </summary>
 			protected Input()
 				: this(true)
@@ -75,8 +69,8 @@ namespace Sifaw.Controllers
 			}
 
             /// <summary>
-            /// Inicializa una nueva instancia de <see cref="UIShellViewController{TInput, TOutput, TUIGuestStyle, TGuest}.Input"/>, 
-            /// estableciendo un valor a la propiedad <see cref="UIViewController{TInput, TOutput, TUIStyle, TView}.Input.ShowView"/>.
+            /// Inicializa una nueva instancia de <see cref="UIShellViewController{TInput, TOutput, TGuest}.Input"/>, 
+            /// estableciendo un valor a la propiedad <see cref="UIViewController{TInput, TOutput, TView}.Input.ShowView"/>.
             /// </summary>
 			protected Input(bool showView)
 				: base(showView:showView)
@@ -90,12 +84,12 @@ namespace Sifaw.Controllers
 		/// Parámetros de retorno de la controladora.
 		/// </summary>
 		[Serializable]
-		public abstract new class Output : UIViewController<TInput, TOutput, ViewStyle, ShellView>.Output
+		public abstract new class Output : UIViewController<TInput, TOutput, ShellView>.Output
 		{
             #region Constructor
 
             /// <summary>
-            /// Inicializa una nueva instancia de la clase <see cref="UIShellViewController{TInput, TOutput, TUIGuestStyle, TGuest}.Output"/>.
+            /// Inicializa una nueva instancia de la clase <see cref="UIShellViewController{TInput, TOutput, TGuest}.Output"/>.
             /// </summary>
             protected Output()
             {
@@ -109,7 +103,7 @@ namespace Sifaw.Controllers
 		#region Constructors
 
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="UIShellViewController{TInput, TOutput, TUIGuestStyle, TGuest}"/>.
+        /// Inicializa una nueva instancia de la clase <see cref="UIShellViewController{TInput, TOutput, TGuest}"/>.
         /// Establece como <see cref="AbstractUILinker{TUIElement}"/> aquel establecido por defecto a través de 
         /// <see cref="AbstractUIProviderManager{TLinker}"/>.
         /// </summary>
@@ -119,9 +113,9 @@ namespace Sifaw.Controllers
 		}
 
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="UIShellViewController{TInput, TOutput, TUIGuestStyle, TGuest}"/>, 
+        /// Inicializa una nueva instancia de la clase <see cref="UIShellViewController{TInput, TOutput, TGuest}"/>, 
 		/// estableciendo el <see cref="AbstractUILinker{TUIElement}"/> especificado como valor de la propiedad 
-		/// <see cref="UIElementController{TInput, TOutput, TUIStyle, TUIElement}.Linker"/>
+		/// <see cref="UIElementController{TInput, TOutput, TUIElement}.Linker"/>
 		/// donde <c>TUIElement</c> implementa <see cref="ShellView"/>.
         /// </summary>
 		protected UIShellViewController(AbstractUILinker<ShellView> linker)
@@ -168,14 +162,14 @@ namespace Sifaw.Controllers
         #region Start Methods
 
         /// <summary>
-        /// Invoca al método sobrescirto <see cref="UIViewController{TInput, TOutput, TUIStyle, TView}.OnBeforeStartController()"/> y
+        /// Invoca al método sobrescirto <see cref="UIViewController{TInput, TOutput, TView}.OnBeforeStartController()"/> y
         /// posteriormente aplica la configuración de la shell, configuración como el número de filas, celdas por fila y componentes embebidos.
         /// </summary>
         protected override void OnBeforeStartController()
 		{
 			base.OnBeforeStartController();
 			
-			UIElement.SetSettings(ShellOperationsManager.GetSettings<TGuest>(
+			UIElement.SetLayout(ShellOperationsManager.MakeLayout<TGuest>(
 				  GetNumberOfRows
 				, GetNumberOfCellsAt
 				, GetRowSettings

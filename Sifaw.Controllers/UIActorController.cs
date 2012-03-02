@@ -33,34 +33,37 @@ namespace Sifaw.Controllers
 	/// </summary>
 	/// <typeparam name="TInput">
 	/// Tipo para establecer los parámetros de inicio de la controladora. Ha de ser serializable y 
-	/// derivar de <see cref="UIActorController{TInput, TOutput, TUISettings, TComponent, TGuest}.Input"/>.
+	/// derivar de <see cref="UIActorController{TInput, TOutput, TUIStyle, TComponent, TGuest}.Input"/>.
 	/// </typeparam>
 	/// <typeparam name="TOutput">
 	/// Tipo para establcer los parametros de retorno cuando finaliza la controladora. Ha de ser serializable y 
-	/// derivar de <see cref="UIActorController{TInput, TOutput, TUISettings, TComponent, TGuest}.Output"/>.
+	/// derivar de <see cref="UIActorController{TInput, TOutput, TUIStyle, TComponent, TGuest}.Output"/>.
 	/// </typeparam>
-	/// <typeparam name="TUISettings">
+	/// <typeparam name="TUIStyle">
 	/// Tipo para establecer el contenedor de ajustes encargado de establecer las configuración del elemento de interfaz 
-	/// de usuario o de componentes embebidos. Ha de ser serializable, proveer de consturctor público y derivar 
-	/// de <see cref="UIActorController{TInput, TOutput, TUISettings, TComponent, TGuest}.UISettingsContainer"/>.
+	/// de usuario. Ha de ser serializable y derivar de <see cref="ComponentStyle"/>.
 	/// </typeparam>
 	/// <typeparam name="TComponent">
 	/// Tipo para establecer el elemento de interfaz de usuario de la controladora. Ha de implementar <see cref="UIActorComponent"/>.
 	/// </typeparam>
-	/// <typeparam name="TGuest">
+	/// <typeparam name="TUIGuestStyle">
+	/// Tipo para establecer el contenedor de ajustes encargado de establecer las configuración de los elementos de interfaz 
+	/// embebidos. Ha de ser serializable y derivar de <see cref="ComponentStyle"/>.
+	/// </typeparam>
+	/// <typeparam name="TGuest">	
 	/// Tipo de los componentes que puede alojar. Ha de implementar <see cref="UIComponent"/>.
 	/// </typeparam>
-	public abstract class UIActorController<TInput, TOutput, TUISettings, TComponent, TGuest> : UIComponentController
+	public abstract class UIActorController<TInput, TOutput, TUIStyle, TComponent, TUIGuestStyle, TGuest> : UIComponentController
 		< TInput
 		, TOutput
-		, TUISettings
+		, TUIStyle
 		, TComponent >
-		where TInput      : UIActorController<TInput, TOutput, TUISettings, TComponent, TGuest>.Input
-		where TOutput     : UIActorController<TInput, TOutput, TUISettings, TComponent, TGuest>.Output
-		where TUISettings : UIActorController<TInput, TOutput, TUISettings, TComponent, TGuest>.UISettingsContainer
-						  , new()
-		where TComponent  : UIActorComponent
-		where TGuest      : UIComponent
+		where TInput        : UIActorController<TInput, TOutput, TUIStyle, TComponent, TUIGuestStyle, TGuest>.Input
+		where TOutput       : UIActorController<TInput, TOutput, TUIStyle, TComponent, TUIGuestStyle, TGuest>.Output
+		where TUIStyle      : ComponentStyle
+		where TComponent    : UIActorComponent<TUIStyle>
+		where TUIGuestStyle : ComponentStyle
+		where TGuest        : UIComponent<TUIGuestStyle>
 	{
 		#region Input / Output
 
@@ -71,13 +74,13 @@ namespace Sifaw.Controllers
 		public abstract new class Input : UIComponentController
 			< TInput
 			, TOutput
-			, TUISettings
+			, TUIStyle
 			, TComponent>.Input
 		{
 			#region Constructor
 
 			/// <summary>
-			/// Inicializa una nueva instancia de la clase <see cref="UIActorController{TInput, TOutput, TUISettings, TComponent, TGuest}.Input"/>.
+			/// Inicializa una nueva instancia de la clase <see cref="UIActorController{TInput, TOutput, TUIStyle, TComponent, TGuest}.Input"/>.
 			/// </summary>
 			protected Input()
 			{
@@ -93,42 +96,15 @@ namespace Sifaw.Controllers
 		public abstract new class Output : UIComponentController
 			< TInput
 			, TOutput
-			, TUISettings
+			, TUIStyle
 			, TComponent>.Output
 		{
 			#region Constructor
 
 			/// <summary>
-			/// Inicializa una nueva instancia de la clase <see cref="UIActorController{TInput, TOutput, TUISettings, TComponent, TGuest}.Output"/>.
+			/// Inicializa una nueva instancia de la clase <see cref="UIActorController{TInput, TOutput, TUIStyle, TComponent, TGuest}.Output"/>.
 			/// </summary>
 			protected Output()
-			{
-			}
-
-			#endregion
-		}
-
-		#endregion
-
-		#region Settings
-
-		/// <summary>
-		/// Contenedor de ajustes de <see cref="UIActorController{TInput, TOutput, TUISettings, TComponent, TGuest}"/>.
-		/// </summary>
-		[Serializable]
-		public new class UISettingsContainer : UIComponentController
-			< TInput
-			, TOutput
-			, TUISettings
-			, TComponent>.UISettingsContainer
-		{
-			#region Constructors
-
-			/// <summary>
-			/// Inicializa una nueva instancia de la clase <see cref="UIActorController{TInput, TOutput, TUISettings, TComponent, TGuest}.UISettingsContainer"/>.
-			/// </summary>
-			public UISettingsContainer()
-				: base()
 			{
 			}
 
@@ -269,7 +245,7 @@ namespace Sifaw.Controllers
 		#region Constructors
 
 		/// <summary>
-		/// Inicializa una nueva instancia de la clase <see cref="UIActorController{TInput, TOutput, TUISettings, TComponent, TGuest}"/>.
+		/// Inicializa una nueva instancia de la clase <see cref="UIActorController{TInput, TOutput, TUIStyle, TComponent, TGuest}"/>.
         /// Establece como <see cref="AbstractUILinker{TUIElement}"/> aquel establecido por defecto a través de 
         /// <see cref="AbstractUIProviderManager{TLinker}"/>.
         /// </summary>
@@ -279,9 +255,9 @@ namespace Sifaw.Controllers
 		}
 
         /// <summary>
-		/// Inicializa una nueva instancia de la clase <see cref="UIActorController{TInput, TOutput, TUISettings, TComponent, TGuest}"/>, 
+		/// Inicializa una nueva instancia de la clase <see cref="UIActorController{TInput, TOutput, TUIStyle, TComponent, TGuest}"/>, 
 		/// estableciendo el <see cref="AbstractUILinker{TUIElement}"/> especificado como valor de la propiedad 
-		/// <see cref="UIElementController{TInput, TOutput, TUISettings, TUIElement}.Linker"/> donde <c>TUIElement</c> 
+		/// <see cref="UIElementController{TInput, TOutput, TUIStyle, TUIElement}.Linker"/> donde <c>TUIElement</c> 
 		/// implementa <see cref="UIActorComponent"/>.
         /// </summary>
 		protected UIActorController(AbstractUILinker<TComponent> linker)
@@ -314,7 +290,7 @@ namespace Sifaw.Controllers
 		#region UIElement Methods
 
 		/// <summary>
-		/// Invoca al método sobrescirto <see cref="UIElementController{TInput, TOutput, TUISettings, TComponent}.OnAfterUIElementLoad()"/>.
+		/// Invoca al método sobrescirto <see cref="UIElementController{TInput, TOutput, TUIStyle, TComponent}.OnAfterUIElementLoad()"/>.
 		/// </summary>
 		protected override void OnAfterUIElementLoad()
 		{
@@ -322,16 +298,6 @@ namespace Sifaw.Controllers
 
 			/* Subscripción a eventos del componente... */
 			UIElement.GuestSelecting += new UIGuestSelectingEventHandler(UIElement_UpdateGuest);
-		}
-
-		/// <summary>
-		/// Invoca al método sobrescirto <see cref="UIElementController{TInput, TOutput, TUISettings, TComponent}.OnApplyUISettings()"/> y
-		/// posteriormente aplica la configuración al elemento <see cref="UIElementController{TInput, TOutput, TUISettings, TView}.UIElement"/> 
-		/// del tipo <see cref="UIActorComponent"/>.
-		/// </summary>
-		protected override void OnApplyUISettings()
-		{
-			base.OnApplyUISettings();
 		}
 
 		#endregion

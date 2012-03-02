@@ -20,6 +20,7 @@ using System.Linq;
 using System.Text;
 
 using Sifaw.Views;
+using Sifaw.Views.Kit;
 
 
 namespace Sifaw.Views.Components
@@ -27,7 +28,7 @@ namespace Sifaw.Views.Components
 	/// <summary>
 	/// Representa un componente que muestra datos en una tabla.
 	/// </summary>
-	public interface TableComponent : UIComponent
+	public interface TableComponent : UIComponent<ComponentStyle>
 	{
 		/// <summary>
 		/// Establece la tabla a mostrar.

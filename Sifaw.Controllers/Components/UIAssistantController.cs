@@ -34,31 +34,30 @@ namespace Sifaw.Controllers.Components
 	/// </summary>
     /// <typeparam name="TInput">
     /// Tipo para establecer los parámetros de inicio de la controladora. Ha de ser serializable y 
-    /// derivar de <see cref="UIAssistantController{TInput, TOutput, TUISettings, TGuest}.Input"/>.
+    /// derivar de <see cref="UIAssistantController{TInput, TOutput, TUIGuestStyle, TGuest}.Input"/>.
     /// </typeparam>
     /// <typeparam name="TOutput">
     /// Tipo para establcer los parametros de retorno cuando finaliza la controladora. Ha de ser serializable y 
-    /// derivar de <see cref="UIAssistantController{TInput, TOutput, TUISettings, TGuest}.Output"/>.
+    /// derivar de <see cref="UIAssistantController{TInput, TOutput, TUIGuestStyle, TGuest}.Output"/>.
     /// </typeparam>
-	/// <typeparam name="TUISettings">
+	/// <typeparam name="TUIGuestStyle">
 	/// Tipo para establecer el contenedor de ajustes encargado de establecer las configuración del elemento de interfaz 
-	/// de usuario o de componentes embebidos. Ha de ser serializable, proveer de consturctor público y derivar 
-	/// de <see cref="UIAssistantController{TInput, TOutput, TUISettings, TGuest}.UISettingsContainer"/>.
+	/// de componentes embebidos. Ha de ser serializable y derivar de <see cref="ComponentStyle"/>.
 	/// </typeparam>
 	/// <typeparam name="TGuest">
 	/// Tipo de los componentes que puede alojar el asistente. Ha de implementar <see cref="UIComponent"/>.
 	/// </typeparam>
-	public abstract class UIAssistantController<TInput, TOutput, TUISettings, TGuest> : UIActorController
+	public abstract class UIAssistantController<TInput, TOutput, TUIGuestStyle, TGuest> : UIActorController
 		< TInput
 		, TOutput
-		, TUISettings
+		, ComponentStyle
 		, AssistantComponent
+		, TUIGuestStyle
 		, TGuest>
-		where TInput      : UIAssistantController<TInput, TOutput, TUISettings, TGuest>.Input
-		where TOutput     : UIAssistantController<TInput, TOutput, TUISettings, TGuest>.Output
-		where TUISettings : UIAssistantController<TInput, TOutput, TUISettings, TGuest>.UISettingsContainer
-		                  , new()
-		where TGuest      : UIComponent
+		where TInput        : UIAssistantController<TInput, TOutput, TUIGuestStyle, TGuest>.Input
+		where TOutput       : UIAssistantController<TInput, TOutput, TUIGuestStyle, TGuest>.Output
+		where TUIGuestStyle : ComponentStyle
+		where TGuest        : UIComponent<TUIGuestStyle>
 	{
 		#region Input / Output
 
@@ -69,14 +68,15 @@ namespace Sifaw.Controllers.Components
 		public new abstract class Input : UIActorController
 			< TInput
 			, TOutput
-			, TUISettings
+			, ComponentStyle
 			, AssistantComponent
+			, TUIGuestStyle
 			, TGuest>.Input
 		{
 			#region Constructors
 
             /// <summary>
-            /// Inicializa una nueva instancia de la clase <see cref="UIAssistantController{TInput, TOutput, TUISettings, TGuest}.Input"/>.
+            /// Inicializa una nueva instancia de la clase <see cref="UIAssistantController{TInput, TOutput, TUIGuestStyle, TGuest}.Input"/>.
             /// </summary>
 			public Input()
 				: base()
@@ -93,8 +93,9 @@ namespace Sifaw.Controllers.Components
 		public new abstract class Output : UIActorController
 			< TInput
 			, TOutput
-			, TUISettings
+			, ComponentStyle
 			, AssistantComponent
+			, TUIGuestStyle
 			, TGuest>.Output
 		{
 			#region Fields
@@ -119,7 +120,7 @@ namespace Sifaw.Controllers.Components
 			#region Constructors
 
             /// <summary>
-            /// Inicializa una nueva instancia de la clase <see cref="UIAssistantController{TInput, TOutput, TUISettings, TGuest}.Output"/>.
+            /// Inicializa una nueva instancia de la clase <see cref="UIAssistantController{TInput, TOutput, TUIGuestStyle, TGuest}.Output"/>.
             /// </summary>
 			public Output()
 				: base()
@@ -129,34 +130,6 @@ namespace Sifaw.Controllers.Components
 			#endregion
 		}
 
-		#endregion
-
-		#region Settings
-
-        /// <summary>
-        /// Contenedor de ajustes de <see cref="UIAssistantController{TInput, TOutput, TUISettings, TGuest}"/>.
-        /// </summary>
-		[Serializable]
-		public new class UISettingsContainer : UIActorController
-			< TInput
-			, TOutput
-			, TUISettings
-			, AssistantComponent
-			, TGuest>.UISettingsContainer
-		{
-			#region Constructors
-
-            /// <summary>
-            /// Inicializa una nueva instancia de la clase <see cref="UIAssistantController{TInput, TOutput, TUISettings, TGuest}.UISettingsContainer"/>.
-            /// </summary>
-			public UISettingsContainer()
-				: base()
-			{
-			}
-
-			#endregion
-		}	
-		
 		#endregion
 
 		#region Events
@@ -191,7 +164,7 @@ namespace Sifaw.Controllers.Components
 		/// <remarks>
 		/// <para>
 		/// Este método no dispone de su equivalente <c>OnAfterUpdateAssistant</c>, en su lugar, usar
-		/// <see cref="UIActorController{TInput, TOutput, TUISettings, TComponent, TGuest}.OnAfterUpdateGuest"/>.
+		/// <see cref="UIActorController{TInput, TOutput, TUIStyle, TComponent, TGuest}.OnAfterUpdateGuest"/>.
 		/// </para>
 		/// </remarks>		
 		/// <param name="allowCancel">Valor que indica si la etapa actual permite la cancelación.</param>
@@ -243,7 +216,7 @@ namespace Sifaw.Controllers.Components
 		#region Constructors
 
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="UIAssistantController{TInput, TOutput, TUISettings, TGuest}"/>.
+        /// Inicializa una nueva instancia de la clase <see cref="UIAssistantController{TInput, TOutput, TUIGuestStyle, TGuest}"/>.
         /// Establece como <see cref="AbstractUILinker{TUIElement}"/> aquel establecido por defecto a través de 
         /// <see cref="AbstractUIProviderManager{TLinker}"/>.
         /// </summary>
@@ -253,9 +226,9 @@ namespace Sifaw.Controllers.Components
 		}
 
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="UIAssistantController{TInput, TOutput, TUISettings, TGuest}"/>, 
+        /// Inicializa una nueva instancia de la clase <see cref="UIAssistantController{TInput, TOutput, TUIGuestStyle, TGuest}"/>, 
 		/// estableciendo el <see cref="AbstractUILinker{TUIElement}"/> establecido como valor de la propiedad 
-		/// <see cref="UIElementController{TInput, TOutput, TUISettings, TUIElement}.Linker"/> donde <c>TUIElement</c>
+		/// <see cref="UIElementController{TInput, TOutput, TUIStyle, TUIElement}.Linker"/> donde <c>TUIElement</c>
 		/// implementa <see cref="AssistantComponent"/>.
         /// </summary>
 		protected UIAssistantController(AbstractUILinker<AssistantComponent> linker)
@@ -298,7 +271,7 @@ namespace Sifaw.Controllers.Components
 		#region UIElement Methods
 
 		/// <summary>
-		/// Invoca al método sobrescirto <see cref="UIComponentController{TInput, TOutput, TUISettings, TComponent}.OnAfterUIElementLoad()"/>  y
+		/// Invoca al método sobrescirto <see cref="UIComponentController{TInput, TOutput, TUIStyle, TComponent}.OnAfterUIElementLoad()"/>  y
 		/// posteriormente se subscribe a eventos de <see cref="AssistantComponent"/>.
 		/// </summary>
 		protected override void OnAfterUIElementLoad()
@@ -310,20 +283,12 @@ namespace Sifaw.Controllers.Components
 			UIElement.Accept += new EventHandler(UIElement_Accept);
 		}
 
-		/// <summary>
-		/// Invoca al método sobrescirto <see cref="UIComponentController{TInput, TOutput, TUISettings, TComponent}.OnApplyUISettings()"/>.
-		/// </summary>
-		protected override void OnApplyUISettings()
-		{
-			base.OnApplyUISettings();
-		}
-
 		#endregion
 
 		#region UIActor Methods
 
 		/// <summary>
-		/// Invoca al método sobrescirto <see cref="UIActorController{TInput, TOutput, TUISettings, TComponent, TGuest}.OnAfterUpdateGuest()"/>  y
+		/// Invoca al método sobrescirto <see cref="UIActorController{TInput, TOutput, TUIStyle, TComponent, TGuest}.OnAfterUpdateGuest()"/>  y
 		/// posteriormente actualiza el asistente.
 		/// </summary>
 		protected override void OnAfterUpdateGuest()
@@ -338,7 +303,7 @@ namespace Sifaw.Controllers.Components
 		#region Start Methods
 
 		/// <summary>
-        /// Invoca al método sobrescirto <see cref="UIElementController{TInput, TOutput, TUISettings, TUIElement}.OnAfterStartController()"/> y
+        /// Invoca al método sobrescirto <see cref="UIElementController{TInput, TOutput, TUIStyle, TUIElement}.OnAfterStartController()"/> y
         /// posteriormente establece la configuración inicial del asistente.
         /// </summary>
 		protected override void OnAfterStartController()

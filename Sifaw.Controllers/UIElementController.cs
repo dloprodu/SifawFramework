@@ -23,6 +23,7 @@ using System.Diagnostics.Contracts;
 
 using Sifaw.Core;
 using Sifaw.Views;
+using Sifaw.Views.Kit;
 
 
 namespace Sifaw.Controllers
@@ -48,27 +49,26 @@ namespace Sifaw.Controllers
 	/// </remarks>
 	/// <typeparam name="TInput">
 	/// Tipo para establecer los parámetros de inicio de la controladora. Ha de ser serializable y 
-	/// derivar de <see cref="UIElementController{TInput, TOutput, TUISettings, TUIElement}.Input"/>.
+	/// derivar de <see cref="UIElementController{TInput, TOutput, TUIStyle, TUIElement}.Input"/>.
 	/// </typeparam>
 	/// <typeparam name="TOutput">
 	/// Tipo para establcer los parametros de retorno cuando finaliza la controladora. Ha de ser serializable y 
-	/// derivar de <see cref="UIElementController{TInput, TOutput, TUISettings, TUIElement}.Output"/>.
+	/// derivar de <see cref="UIElementController{TInput, TOutput, TUIStyle, TUIElement}.Output"/>.
 	/// </typeparam>
-	/// <typeparam name="TUISettings">
+	/// <typeparam name="TUIStyle">
 	/// Tipo para establecer el contenedor de ajustes encargado de establecer las configuración del elemento de interfaz de usuario. Ha de
-	/// ser serializable, proveer de consturctor público y derivar de <see cref="UIElementController{TInput, TOutput, TUISettings, TUIElement}.UISettingsContainer"/>.
+	/// ser serializable y derivar de <see cref="ElementStyle"/>.
 	/// </typeparam>
 	/// <typeparam name="TUIElement">
 	/// Tipo para establecer el elemento de interfaz de usuario de la controladora. Ha de implementar <see cref="UIElement"/>.
 	/// </typeparam>
-	public abstract class UIElementController<TInput, TOutput, TUISettings, TUIElement> 
+	public abstract class UIElementController<TInput, TOutput, TUIStyle, TUIElement> 
 		: Controller<TInput, TOutput>
 		, IUIElementController
-		where TInput      : UIElementController<TInput, TOutput, TUISettings, TUIElement>.Input
-		where TOutput     : UIElementController<TInput, TOutput, TUISettings, TUIElement>.Output
-		where TUISettings : UIElementController<TInput, TOutput, TUISettings, TUIElement>.UISettingsContainer
-						  , new()
-		where TUIElement  : UIElement
+		where TInput     : UIElementController<TInput, TOutput, TUIStyle, TUIElement>.Input
+		where TOutput    : UIElementController<TInput, TOutput, TUIStyle, TUIElement>.Output
+		where TUIStyle   : ElementStyle						 
+		where TUIElement : UIElement<TUIStyle>
 	{
 		#region Input / Output
 
@@ -81,7 +81,7 @@ namespace Sifaw.Controllers
             #region Constructor
 
             /// <summary>
-            /// Inicializa una nueva instancia de la clase <see cref="UIElementController{TInput, TOutput, TUISettings, TUIElement}.Input"/>.
+            /// Inicializa una nueva instancia de la clase <see cref="UIElementController{TInput, TOutput, TUIStyle, TUIElement}.Input"/>.
             /// </summary>
             protected Input()
             {
@@ -99,7 +99,7 @@ namespace Sifaw.Controllers
             #region Constructor
 
             /// <summary>
-            /// Inicializa una nueva instancia de la clase <see cref="UIElementController{TInput, TOutput, TUISettings, TUIElement}.Output"/>.
+            /// Inicializa una nueva instancia de la clase <see cref="UIElementController{TInput, TOutput, TUIStyle, TUIElement}.Output"/>.
             /// </summary>
             protected Output()
             {
@@ -107,150 +107,6 @@ namespace Sifaw.Controllers
 
             #endregion
         }
-
-		#endregion
-
-		#region Settings
-
-		/// <summary>
-		/// Contenedor de ajustes que hace de proxy entre controladoras y elementos de
-		/// interfaz de usuario.
-		/// </summary>
-		/// <remarks>
-		/// <para>
-		/// El proxy es un intermediario que implica un recubrimiento de elementos de UI para
-		/// evitar accesos a éstos desde fuera de la controladora.
-		/// </para>
-		/// <para> 
-		/// Sigue el patón de diseño de Inyección de Dependencias (Dependency Injection, DI) para
-		/// establecer los ajustes en la vista. Es un patrón de diseño en el que se suministran 
-		/// objetos a una clase en lugar de ser la propia clase quien cree el objeto.
-		/// </para>
-		/// <para>
-		/// En este contenedor se han de publicar aquellas propiedades
-		/// del <see cref="UIElement"/> que se quiere que sean visibles desde fuera
-		/// de la controladora.
-		/// </para>
-		/// <para>
-		/// Las clases derivadas también pueden ocultar propiedades heredadas reemplazandolas con el 
-		/// modificador de visibilidad private.
-		/// </para>
-		/// </remarks>
-		[Serializable]
-		public class UISettingsContainer
-		{
-			#region Fields
-
-			private string _denomination;
-			private string _description;
-			private double _minWidth;
-			private double _maxWidth;
-			private double _minHeight;
-			private double _maxHeight;
-
-			#endregion
-
-			#region Properties
-
-			/// <summary>
-			/// Obtiene o establece una denominación a <see cref="UIElementController{TInput, TOutput, TUISettings, TUIElement}.UIElement"/>.
-			/// </summary>
-			public string Denomination
-			{
-				get { return _denomination; }
-				set { _denomination = value; }
-			}
-
-			/// <summary>
-			/// Obtiene o establece una descripción a <see cref="UIElementController{TInput, TOutput, TUISettings, TUIElement}.UIElement"/>.
-			/// </summary>
-			public string Description
-			{
-				get { return _description; }
-				set { _description = value; }
-			}
-
-			/// <summary>
-			/// Obtiene o establece el ancho mínimo de <see cref="UIElementController{TInput, TOutput, TUISettings, TUIElement}.UIElement"/>.
-			/// </summary>
-			public double MinWidth
-			{
-				get { return _minWidth; }
-				set { _minWidth = value; }
-			}
-
-			/// <summary>
-			/// Obtiene o establece el ancho máximo de <see cref="UIElementController{TInput, TOutput, TUISettings, TUIElement}.UIElement"/>.
-			/// </summary>
-			public double MaxWidth
-			{
-				get { return _maxWidth; }
-				set { _maxWidth = value; }
-			}
-
-			/// <summary>
-			/// Obtiene o establece el alto mínimo de <see cref="UIElementController{TInput, TOutput, TUISettings, TUIElement}.UIElement"/>.
-			/// </summary>
-			public double MinHeight
-			{
-				get { return _minHeight; }
-				set { _minHeight = value; }
-			}
-
-			/// <summary>
-			/// Obtiene o establece el alto máximo de <see cref="UIElementController{TInput, TOutput, TUISettings, TUIElement}.UIElement"/>.
-			/// </summary>
-			public double MaxHeight
-			{
-				get { return _maxHeight; }
-				set { _maxHeight = value; }
-			}
-
-			#endregion
-
-			#region Events
-
-			/// <summary>
-			/// Se produce cuando se llama al método <see cref="UIElementController{TInput, TOutput, TUISettings, TUIElement}.UISettingsContainer.Apply()"/>
-			/// </summary>
-			public event EventHandler ApplyUISettings = null;
-            private void OnApplyUISettings(EventArgs e)
-			{
-                if (ApplyUISettings != null)
-                    ApplyUISettings(this, e);
-			}
-
-			#endregion
-
-			#region Constructors
-
-			/// <summary>
-			/// Inicializa una nueva instancia de <see cref="UIElementController{TInput, TOutput, TUISettings, TUIElement}.UISettingsContainer"/>.
-			/// </summary>
-			public UISettingsContainer()
-			{
-				this._denomination = string.Empty;
-				this._description = string.Empty;
-				this._maxWidth = -1.0f;
-				this._maxWidth = -1.0f;
-				this._minHeight = -1.0f;
-				this._maxHeight = -1.0f;
-			}
-
-			#endregion
-
-			#region Public Methods
-
-			/// <summary>
-			/// Inicializa una nueva instancia de la clase <see cref="UIElementController{TInput, TOutput, TUISettings, TUIElement}.UISettingsContainer"/>.
-			/// </summary>
-			public void Apply()
-			{
-                OnApplyUISettings(EventArgs.Empty);
-			}
-
-			#endregion
-		}
 
 		#endregion
 
@@ -271,10 +127,6 @@ namespace Sifaw.Controllers
 		// Elemento de UI
         [CLReseteable(null)]
         private TUIElement _uiElement = default(TUIElement);
-
-		// Contenedor de configuración de la vista.
-		[CLReseteable(null)]
-		private TUISettings _uiSettings = default(TUISettings);
 
 		#endregion
 
@@ -345,88 +197,7 @@ namespace Sifaw.Controllers
 		{
 			/* Empty */
 		}
-
-        /// <summary>
-        /// <para>
-        /// Se llama al método <see cref="OnBeforeApplyUISettings"/> antes de aplicar la 
-        /// configuración al elemento de interfaz <see cref="UIElement"/>. 
-        /// El método permite que las clases derivadas controlen el evento sin asociar un delegado.
-        /// </para>
-        /// <para>
-        /// Este métodos permite que las clases derivadas realicen operaciones de 
-        /// configuración tales como suscribirse a eventos de la vista.
-        /// </para>
-        /// </summary>
-        /// <remarks>
-        /// <para>
-        /// Al reemplazar <see cref="OnBeforeApplyUISettings"/> en una clase derivada, asegúrese de llamar al
-        /// método <see cref="OnBeforeApplyUISettings"/> de la clase base para que los delegados registrados 
-        /// reciban el evento.
-        /// </para>
-        /// </remarks>
-        protected virtual void OnBeforeApplyUISettings()
-        {
-            /* Empty */
-        }
-
-        /// <summary>
-        /// <para>
-        /// Se llama al método <see cref="OnApplyUISettings"/> cuando se aplican los ajustes establecidos
-        /// al elemento de interfaz de usuario.
-        /// </para>
-        /// <para>
-        /// El método permite aplicar los ajustes de <see cref="UISettings"/> a la interfaz de usuario y a 
-        /// elementos de interfaz de usuario de controladoras embebidas.
-        /// </para>
-        /// </summary>
-        /// <remarks>
-        /// <para>
-        /// Al reemplazar <see cref="OnApplyUISettings"/> en una clase derivada, asegúrese de llamar al
-        /// método <see cref="OnApplyUISettings"/> de la clase base para que los delegados registrados 
-        /// reciban el evento.
-        /// </para>
-        /// </remarks>
-        protected virtual void OnApplyUISettings()
-        {
-            this.UIElement.Denomination = UISettings.Denomination;
-            this.UIElement.Description = UISettings.Description;
-
-            if (UISettings.MinWidth >= 0.0f)
-                this.UIElement.MinWidth = UISettings.MinWidth;
-
-            if (UISettings.MaxHeight >= 0.0f)
-                this.UIElement.MaxWidth = UISettings.MaxWidth;
-
-            if (UISettings.MinHeight >= 0.0f)
-                this.UIElement.MinHeight = UISettings.MinHeight;
-
-            if (UISettings.MaxHeight >= 0.0f)
-                this.UIElement.MaxHeight = UISettings.MaxHeight;
-        }
-
-        /// <summary>
-		/// <para>
-        /// Se llama al método <see cref="OnAfterApplyUISettings"/> después de aplicar la 
-        /// configuración al elemento de interfaz <see cref="UIElement"/>. 
-        /// El método permite que las clases derivadas controlen el evento sin asociar un delegado.
-		/// </para>
-		/// <para>
-		/// Este métodos permite que las clases derivadas realicen operaciones de 
-		/// configuración tales como suscribirse a eventos de la vista.
-		/// </para>
-		/// </summary>
-		/// <remarks>
-		/// <para>
-        /// Al reemplazar <see cref="OnAfterApplyUISettings"/> en una clase derivada, asegúrese de llamar al
-        /// método <see cref="OnAfterApplyUISettings"/> de la clase base para que los delegados registrados 
-		/// reciban el evento.
-		/// </para>
-		/// </remarks>
-		protected virtual void OnAfterApplyUISettings()
-        {
-            /* Empty */
-        }
-
+        
 		#endregion
 
 		#region Properties
@@ -475,21 +246,12 @@ namespace Sifaw.Controllers
 		 */
 
 		/// <summary>
-		/// Devuelve el contenedor de ajustes de la vista a través
+		/// Devuelve el contenedor de ajustes del elemento de interfaz a través
 		/// del cual se puede modificar la configuración predeterminada.
 		/// </summary>
-		public TUISettings UISettings
+		public TUIStyle UISettings
 		{
-			get
-			{
-				if (_uiSettings == null)
-				{
-					_uiSettings = new TUISettings();
-					_uiSettings.ApplyUISettings += new EventHandler(_uiSettings_ApplyUISettings);
-				}
-
-				return _uiSettings;
-			}
+			get { return UIElement.Style; }
 		}
 
 		#endregion
@@ -497,7 +259,7 @@ namespace Sifaw.Controllers
 		#region Constructors
 
 		/// <summary>
-		/// Inicializa una nueva instancia de la clase <see cref="UIElementController{TInput, TOutput, TUISettings, TUIElement}"/>.
+		/// Inicializa una nueva instancia de la clase <see cref="UIElementController{TInput, TOutput, TUIStyle, TUIElement}"/>.
 		/// Establece como <see cref="AbstractUILinker{TUIElement}"/> aquel establecido por defecto a través de 
 		/// <see cref="AbstractUIProviderManager{TLinker}"/>.
 		/// </summary>
@@ -507,7 +269,7 @@ namespace Sifaw.Controllers
 		}
 
 		/// <summary>
-		/// Inicializa una nueva instancia de la clase <see cref="UIElementController{TInput, TOutput, TUISettings, TUIElement}"/>, 
+		/// Inicializa una nueva instancia de la clase <see cref="UIElementController{TInput, TOutput, TUIStyle, TUIElement}"/>, 
 		/// estableciendo el <see cref="AbstractUILinker{TUIElement}"/> especificado como valor de la propiedad <see cref="Linker"/>
 		/// donde <c>TUIElement</c> implementa <see cref="UIElement"/>.
 		/// </summary>
@@ -538,23 +300,6 @@ namespace Sifaw.Controllers
 
         #endregion
 
-        #region Start Methods
-
-		/// <summary>
-		/// Invoca al método sobrescirto <see cref="Controller{TInput, TOutput}.OnAfterStartController()"/>
-		/// y posteriormente al método <see cref="UISettingsContainer.Apply()"/> del contenedor de ajustes
-		/// <see cref="UISettings"/> applicando la configuración sobre <see cref="UIElement"/>.
-		/// </summary>
-        protected override void OnAfterStartController()
-        {
-            base.OnAfterStartController();
-
-            // Se aplica la configuración inicial despues de iniciar el componente.
-            UISettings.Apply();
-        }
-
-        #endregion
-
 		#region Finish Methods
 
 		/// <summary>
@@ -577,17 +322,6 @@ namespace Sifaw.Controllers
 			
 			// No se permite mas de un elemento de UI por
 			// controladora
-		}
-
-		#endregion
-
-        #region UISettings Events Handlers
-
-        private void _uiSettings_ApplyUISettings(object sender, EventArgs e)
-		{
-            OnBeforeApplyUISettings();
-			OnApplyUISettings();
-            OnAfterApplyUISettings();
 		}
 
 		#endregion

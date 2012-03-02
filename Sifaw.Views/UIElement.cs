@@ -19,6 +19,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using Sifaw.Views.Kit;
+
 
 namespace Sifaw.Views
 {
@@ -26,7 +28,8 @@ namespace Sifaw.Views
 	/// Define métodos, propiedades y eventos que ha de tener cualquier elemento
 	/// de interfaz de usuario.
 	/// </summary>
-	public interface UIElement
+	public interface UIElement<TStyle>
+		where TStyle : ElementStyle
 	{
 		#region Properties
 
@@ -41,24 +44,9 @@ namespace Sifaw.Views
 		string Description { get; set; }
 
 		/// <summary>
-		/// Obtiene o establece el ancho mínimo del <see cref="UIElement"/>.
+		/// Obtiene el <see cref="ElementStyle"/> del <see cref="UIElement"/>.
 		/// </summary>
-		double MinWidth { get; set; }
-
-		/// <summary>
-		/// Obtiene o establece el ancho máximo del <see cref="UIElement"/>.
-		/// </summary>
-		double MaxWidth { get; set; }
-
-		/// <summary>
-		/// Obtiene o establece el alto mínimo del <see cref="UIElement"/>.
-		/// </summary>
-		double MinHeight { get; set; }
-
-		/// <summary>
-		/// Obtiene o establece el alto máximo del <see cref="UIElement"/>.
-		/// </summary>
-		double MaxHeight { get; set; }
+		TStyle Style { get; }			
 		
 		#endregion
 

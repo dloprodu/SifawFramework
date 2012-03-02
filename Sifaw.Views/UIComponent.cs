@@ -35,11 +35,12 @@ namespace Sifaw.Views
 	/// por ejemplo una vista.
 	/// </para>
 	/// </summary>
-	public interface UIComponent : UIElement
+	public interface UIComponent<TStyle> : UIElement<TStyle>
+		where TStyle : ComponentStyle
 	{
 		/// <summary>
-		/// Obtiene o establece el margen del componente.
+		/// Obtiene el <see cref="ComponentStyle"/> del <see cref="UIComponent"/>.
 		/// </summary>
-		UIFrame Margin { get; set; }
+		TStyle Style { get; }
 	}
 }

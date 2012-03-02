@@ -106,7 +106,7 @@ namespace Sifaw.Controllers.Components.Filters
 		/// <summary>
 		/// Inicializa una nueva instancia de la clase <see cref="UIBoolFilterController"/>, 
 		/// estableciendo el <see cref="AbstractUILinker{TUIElement}"/> como valor de la propiedad 
-		/// <see cref="UIElementController{TInput, TOutput, TUISettings, TUIElement}.Linker"/> donde <c>TUIElement</c>
+		/// <see cref="UIElementController{TInput, TOutput, TUIStyle, TUIElement}.Linker"/> donde <c>TUIElement</c>
 		/// implementa <see cref="BoolFilterComponent"/>.
 		/// </summary>
 		public UIBoolFilterController(AbstractUILinker<BoolFilterComponent> linker)
@@ -131,8 +131,8 @@ namespace Sifaw.Controllers.Components.Filters
         #region UIElement Methods
 
 		/// <summary>
-		/// Invoca al método sobrescirto <see cref="UIElementController{TInput, TOutput, TUISettings, TComponent}.OnApplyUISettings()"/> y
-		/// posteriormente aplica la configuración al elemento <see cref="UIElementController{TInput, TOutput, TUISettings, TView}.UIElement"/> 
+		/// Invoca al método sobrescirto <see cref="UIElementController{TInput, TOutput, TUIStyle, TComponent}.OnApplyUISettings()"/> y
+		/// posteriormente aplica la configuración al elemento <see cref="UIElementController{TInput, TOutput, TUIStyle, TView}.UIElement"/> 
 		/// del tipo <see cref="BoolFilterComponent"/>.
 		/// </summary>
         protected override void OnApplyUISettings()

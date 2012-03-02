@@ -30,11 +30,10 @@ namespace Sifaw.Controllers.Components
 	/// Controladora de vista que aloja el compomente <see cref="UIBackgroundWorkerController"/> y que
 	/// permite ejecutar un proceso pesado en un nuevo hilo de ejecución.
 	/// </summary>
-	public class UIBackgroundWorkerViewController
-		: UIShellViewController
+	public class UIBackgroundWorkerViewController : UIShellViewController
 		< UIBackgroundWorkerViewController.Input
 		, UIBackgroundWorkerViewController.Output
-		, UIBackgroundWorkerViewController.UISettingsContainer
+		, BackgroundWorkerComponentStyle
 		, BackgroundWorkerComponent>
 	{
 		#region Input / Output
@@ -43,7 +42,7 @@ namespace Sifaw.Controllers.Components
 		/// Parámetros de entrada de las controladora.
 		/// </summary>
 		[Serializable]
-		public new class Input : UIShellViewController<Input, Output, UISettingsContainer, BackgroundWorkerComponent>.Input
+		public new class Input : UIShellViewController<Input, Output, BackgroundWorkerComponentStyle, BackgroundWorkerComponent>.Input
 		{
 			#region Fields
 
@@ -68,7 +67,7 @@ namespace Sifaw.Controllers.Components
 
 			/// <summary>
 			/// Inicializa una nueva instancia de la clase <see cref="UIBackgroundWorkerViewController.Input"/>,
-			/// estableciendo la propiedad <see cref="UIViewController{TInput, TOutput, TUISettings, TView}.Input.ShowView"/> a <c>true</c>.
+			/// estableciendo la propiedad <see cref="UIViewController{TInput, TOutput, TUIStyle, TView}.Input.ShowView"/> a <c>true</c>.
 			/// </summary>
 			/// <param name="worker">Paquete de ejecución</param>
 			public Input(BackgroundWorkerPack worker)
@@ -94,7 +93,7 @@ namespace Sifaw.Controllers.Components
 		/// Parámetros de retorno de la controladora.
 		/// </summary>
 		[Serializable]
-		public new class Output : UIShellViewController<Input, Output, UISettingsContainer, BackgroundWorkerComponent>.Output
+		public new class Output : UIShellViewController<Input, Output, BackgroundWorkerComponentStyle, BackgroundWorkerComponent>.Output
 		{
 			#region Fields
 
@@ -142,113 +141,6 @@ namespace Sifaw.Controllers.Components
 
 		#endregion
 
-		#region Settings
-
-		/// <summary>
-		/// Contenedor de ajustes de <see cref="UIBackgroundWorkerViewController"/>.
-		/// </summary>
-		[Serializable]
-		public new class UISettingsContainer : UIShellViewController
-			< Input
-			, Output
-			, UISettingsContainer
-			, BackgroundWorkerComponent>.UISettingsContainer
-		{
-			#region Fields
-
-			private bool _withControl = true;
-			private bool _allowCancel = false;
-			private string _summary = string.Empty;
-			private string _processDescription = string.Empty;
-			private string _progress = string.Empty;
-
-			#endregion
-
-			#region Properties
-
-			/// <summary>
-			/// Obtiene o establece un valor que indica si el proceso
-			/// se ejecuta con o sin control de seguimiento.
-			/// </summary>
-			public bool WithControl
-			{
-				get { return _withControl; }
-				set { _withControl = value; }
-			}
-
-			/// <summary>
-			/// Obtiene o establece un valor que indica si se permite
-			/// cancelar el proceso.
-			/// </summary>
-			public bool AllowCancel
-			{
-				get { return _allowCancel; }
-				set { _allowCancel = value; }
-			}
-
-			/// <summary>
-			/// Obtiene o establece una descripción breve del proceso.
-			/// </summary>
-			public string Summary
-			{
-				get { return _summary; }
-				set { _summary = value; }
-			}
-
-			/// <summary>
-			/// Obtiene o establece una descripción del proceso.
-			/// </summary>
-			public string ProcessDescription
-			{
-				get { return _processDescription; }
-				set { _processDescription = value; }
-			}
-
-			/// <summary>
-			/// Obtiene o establece el texto a mostrar durante el progreso del
-			/// proceso.
-			/// </summary>
-			public string Progress
-			{
-				get { return _progress; }
-				set { _progress = value; }
-			}
-
-			#endregion
-
-			#region Constructors
-
-			/// <summary>
-			/// Inicializa una nueva instancia de la clase <see cref="UIBackgroundWorkerViewController.UISettingsContainer"/>.
-			/// </summary>
-			/// <remarks>
-			/// <para>
-			/// Por defecto establece que:
-			/// <list type="bullet">
-			/// <item><description>La vista se ajuste a su contenido.</description></item>
-			/// <item><description>El proceso no permite cancelación.</description></item>
-			/// <item><description>El proceso realiza control de progreso.</description></item>
-			/// </list>
-			/// </para>
-			/// </remarks>
-			public UISettingsContainer()
-				: base()
-			{
-				this.Summary = "Operación pesada";
-				this.ProcessDescription = "Se está ejecutando un proceso pesado. Esta operación puede tardar varios minutos. Espere por favor...";
-				this.Progress = "Ejecutando proceso...";
-				this.WithControl = true;
-				this.AllowCancel = false;
-
-				// El comportamiento por defecto es que la vista se ajuste a su contenido.
-				this.SizeToContent = true;
-			}
-
-			#endregion
-		}
-
-		#endregion
-
         #region Inclusions
 
         private UIBackgroundWorkerController _uiBackgroundWorkerController = null;
@@ -268,6 +160,19 @@ namespace Sifaw.Controllers.Components
 
 		#endregion
 
+		#region Properties
+
+		/// <summary>
+		/// Obtiene el contenedor de ajustes del componente <see cref="UIBackgroundWorkerController"/>
+		/// alojado.
+		/// </summary>
+		public BackgroundWorkerComponentStyle UIBWSettings
+		{
+			get { return UIBackgroundWorkerController.UISettings; }
+		}
+
+		#endregion
+
 		#region Constructors
 
 		/// <summary>
@@ -283,7 +188,7 @@ namespace Sifaw.Controllers.Components
 		/// <summary>
 		/// Inicializa una nueva instancia de la clase <see cref="UIBackgroundWorkerViewController"/>, 
 		/// estableciendo el <see cref="AbstractUILinker{TUIElement}"/> especificado como valor de la propiedad 
-		/// <see cref="UIElementController{TInput, TOutput, TUISettings, TUIElement}.Linker"/> donde <c>TUIElement</c>
+		/// <see cref="UIElementController{TInput, TOutput, TUIStyle, TUIElement}.Linker"/> donde <c>TUIElement</c>
 		/// implementa <see cref="ShellView"/>.
 		/// </summary>
 		public UIBackgroundWorkerViewController(AbstractUILinker<ShellView> linker)
@@ -324,24 +229,7 @@ namespace Sifaw.Controllers.Components
 		#region UIElement Methods
 
 		/// <summary>
-		/// Invoca al método sobrescirto <see cref="UIElementController{TInput, TOutput, TUISettings, TUIElement}.OnAfterApplyUISettings()"/> y
-		/// posteriormente aplica la configuración sobre el componente <see cref="UIBackgroundWorkerController"/>.
-		/// </summary>
-		protected override void OnAfterApplyUISettings()
-        {
-            base.OnAfterApplyUISettings();
-
-			// Aplicamos configuración a componentes internos ...
-			UIBackgroundWorkerController.UISettings.AllowCancel = UISettings.AllowCancel;
-			UIBackgroundWorkerController.UISettings.WithControl = UISettings.WithControl;
-			UIBackgroundWorkerController.UISettings.Summary = UISettings.Summary;
-			UIBackgroundWorkerController.UISettings.ProcessDescription = UISettings.ProcessDescription;
-			UIBackgroundWorkerController.UISettings.Progress = UISettings.Progress;
-			UIBackgroundWorkerController.UISettings.Apply();
-		}
-
-		/// <summary>
-		/// Invoca al método sobrescirto <see cref="UIViewController{TInput, TOutput, TUISettings, TUIView}.OnBeforeUIClose(out bool)"/> y
+		/// Invoca al método sobrescirto <see cref="UIViewController{TInput, TOutput, TUIStyle, TUIView}.OnBeforeUIClose(out bool)"/> y
 		/// posteriormente solicita la cancelación del proceso al componente <see cref="UIBackgroundWorkerController"/>.
 		/// </summary>
 		/// <param name="cancel">Devuelve un valor que indica si se cancela el cierre de la vista.</param>
@@ -357,7 +245,7 @@ namespace Sifaw.Controllers.Components
 		}
 
 		/// <summary>
-		/// Invoca al método sobrescirto <see cref="UIViewController{TInput, TOutput, TUISettings, TUIView}.OnAfterUIShow()"/> y
+		/// Invoca al método sobrescirto <see cref="UIViewController{TInput, TOutput, TUIStyle, TUIView}.OnAfterUIShow()"/> y
 		/// posteriormente inicia la ejecución del proceso pesado.
 		/// </summary>
 		protected override void OnAfterUIShow()

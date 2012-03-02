@@ -153,7 +153,7 @@ namespace Sifaw.Controllers.Components
         /// <summary>
 		/// Inicializa una nueva instancia de la clase <see cref="UITabHostController{TInput, TOutput, TUISettings, TGuest}"/>, 
 		/// estableciendo el <see cref="AbstractUILinker{TUIElement}"/> especificado como valor de la propiedad 
-		/// <see cref="UIElementController{TInput, TOutput, TUISettings, TUIElement}.Linker"/> donde <c>TUIElement</c> 
+		/// <see cref="UIElementController{TInput, TOutput, TUIStyle, TUIElement}.Linker"/> donde <c>TUIElement</c> 
 		/// implementa <see cref="TabHostComponent"/>.
         /// </summary>
 		protected UITabHostController(AbstractUILinker<TabHostComponent> linker)
@@ -166,7 +166,7 @@ namespace Sifaw.Controllers.Components
 		#region UIElement Methods
 
 		/// <summary>
-		/// Invoca al método sobrescirto <see cref="UIElementController{TInput, TOutput, TUISettings, TComponent}.OnAfterUIElementLoad()"/>.
+		/// Invoca al método sobrescirto <see cref="UIElementController{TInput, TOutput, TUIStyle, TComponent}.OnAfterUIElementLoad()"/>.
 		/// </summary>
 		protected override void OnAfterUIElementLoad()
 		{
@@ -176,8 +176,8 @@ namespace Sifaw.Controllers.Components
 		}
 
 		/// <summary>
-		/// Invoca al método sobrescirto <see cref="UIElementController{TInput, TOutput, TUISettings, TComponent}.OnApplyUISettings()"/> y
-		/// posteriormente aplica la configuración al elemento <see cref="UIElementController{TInput, TOutput, TUISettings, TView}.UIElement"/> 
+		/// Invoca al método sobrescirto <see cref="UIElementController{TInput, TOutput, TUIStyle, TComponent}.OnApplyUISettings()"/> y
+		/// posteriormente aplica la configuración al elemento <see cref="UIElementController{TInput, TOutput, TUIStyle, TView}.UIElement"/> 
 		/// del tipo <see cref="TabHostComponent"/>.
 		/// </summary>
 		protected override void OnApplyUISettings()

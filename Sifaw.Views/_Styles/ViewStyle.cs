@@ -21,21 +21,40 @@ using System.Linq;
 using System.Text;
 
 
-namespace Sifaw.Views.Kit
+namespace Sifaw.Views
 {
 	/// <summary>
 	/// Provee un conjunto de propiedades que permiten modificar la apariencia
 	/// de una vista de interfaz de usuario.
 	/// </summary>
 	[Serializable]
-	public class UIViewStyle : UIElementStyle
+	public class ViewStyle : ElementStyle
 	{
+		#region Fields
+
+		private string _header = "SifaWake Application";
+
+		#endregion
+
+		#region Properties
+
+		/// <summary>
+		/// Obtiene o establece la cabecera de la vista.
+		/// </summary>
+		public string Header
+		{
+			get { return _header; }
+			set { _header = value; }
+		}
+		
+		#endregion
+
 		#region Constructor
 
 		/// <summary>
-		/// Inicializa una nueva instancia de la clase <see cref="UIViewStyle"/>.
+		/// Inicializa una nueva instancia de la clase <see cref="ViewStyle"/>.
 		/// </summary>
-		public UIViewStyle()
+		public ViewStyle()
 			: base()
 		{
 		}

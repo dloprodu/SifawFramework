@@ -36,7 +36,7 @@ namespace Sifaw.Controllers.Components
 	/// un objeto del tipo <see cref="BackgroundWorkerPack"/>.
 	/// </para>
 	/// <para>
-	/// Haciendo uso del contenedor de ajustes de la controladora, <see cref="UIElementController{TInput, TOutput, TUISettings, TUIElement}.UISettings"/>,
+	/// Haciendo uso del contenedor de ajustes de la controladora, <see cref="UIElementController{TInput, TOutput, TUIStyle, TUIElement}.UISettings"/>,
 	/// se puede indicar si el proceso permite la cancelación, realiza un control del progreso asi como datos de caracter general como una descipción del proceso
 	/// que se va a ejecutar.
 	/// </para>
@@ -48,7 +48,7 @@ namespace Sifaw.Controllers.Components
 	public class UIBackgroundWorkerController : UIComponentController
 		< UIBackgroundWorkerController.Input
 		, UIBackgroundWorkerController.Output
-		, UIBackgroundWorkerController.UISettingsContainer
+		, BackgroundWorkerComponentStyle
 		, BackgroundWorkerComponent>
 	{
 		#region Input / Output
@@ -60,7 +60,7 @@ namespace Sifaw.Controllers.Components
 		public new class Input : UIComponentController
 			< Input
 			, Output
-			, UISettingsContainer
+			, BackgroundWorkerComponentStyle
 			, BackgroundWorkerComponent>.Input
 		{
 			#region Fields
@@ -104,7 +104,7 @@ namespace Sifaw.Controllers.Components
 		public new class Output : UIComponentController
 			< Input
 			, Output
-			, UISettingsContainer
+			, BackgroundWorkerComponentStyle
 			, BackgroundWorkerComponent>.Output
 		{
 			#region Fields
@@ -199,109 +199,6 @@ namespace Sifaw.Controllers.Components
 
 		#endregion
 
-		#region Settings
-
-        /// <summary>
-        /// Contenedor de ajustes de <see cref="UIBackgroundWorkerController"/>.
-        /// </summary>
-		[Serializable]
-		public new class UISettingsContainer : UIComponentController
-			< Input
-			, Output
-			, UISettingsContainer
-			, BackgroundWorkerComponent>.UISettingsContainer
-		{
-			#region Fields
-
-			private bool _withControl = true;
-			private bool _allowCancel = false;
-			private string _summary = string.Empty;
-			private string _processDescription = string.Empty;
-			private string _progress = string.Empty;
-
-			#endregion
-
-			#region Properties
-
-			/// <summary>
-			/// Obtiene o establece un valor que indica si el proceso
-			/// se ejecuta con o sin control de seguimiento.
-			/// </summary>
-			public bool WithControl
-			{
-				get { return _withControl; }
-				set { _withControl = value; }
-			}
-
-			/// <summary>
-			/// Obtiene o establece un valor que indica si se permite
-			/// cancelar el proceso.
-			/// </summary>
-			public bool AllowCancel
-			{
-				get { return _allowCancel; }
-				set { _allowCancel = value; }
-			}
-
-			/// <summary>
-			/// Obtiene o establece una descripción breve del proceso.
-			/// </summary>
-			public string Summary
-			{
-				get { return _summary; }
-				set { _summary = value; }
-			}
-
-			/// <summary>
-			/// Obtiene o establece una descripción del proceso.
-			/// </summary>
-			public string ProcessDescription
-			{
-				get { return _processDescription; }
-				set { _processDescription = value; }
-			}
-
-			/// <summary>
-			/// Obtiene o establece el texto a mostrar durante el progreso del
-			/// proceso.
-			/// </summary>
-			public string Progress
-			{
-				get { return _progress; }
-				set { _progress = value; }
-			}
-
-			#endregion
-
-			#region Constructors
-
-            /// <summary>
-            /// Inicializa una nueva instancia de la clase <see cref="UIBackgroundWorkerController.UISettingsContainer"/>
-            /// </summary>
-			/// <remarks>
-			/// <para>
-			/// Por defecto establece que:
-			/// <list type="bullet">
-			/// <item><description>El proceso no permite cancelación.</description></item>
-			/// <item><description>El proceso realiza control de progreso.</description></item>
-			/// </list>
-			/// </para>
-			/// </remarks>
-			public UISettingsContainer()
-				: base()
-			{
-				this.Summary = "Operación pesada";
-				this.ProcessDescription = "Se está ejecutando un proceso pesado. Esta operación puede tardar varios minutos. Espere por favor...";
-				this.Progress = "Ejecutando proceso...";
-				this.WithControl = true;
-				this.AllowCancel = false;
-			}
-
-			#endregion
-		}		
-
-		#endregion
-
 		#region Constructors
 
         /// <summary>
@@ -317,7 +214,7 @@ namespace Sifaw.Controllers.Components
         /// <summary>
         /// Inicializa una nueva instancia de la clase <see cref="BackgroundWorkerComponent"/>, 
 		/// estableciendo el <see cref="AbstractUILinker{TUIElement}"/> especificado como valor de la propiedad 
-		/// <see cref="UIElementController{TInput, TOutput, TUISettings, TUIElement}.Linker"/> donde <c>TUIElement</c>
+		/// <see cref="UIElementController{TInput, TOutput, TUIStyle, TUIElement}.Linker"/> donde <c>TUIElement</c>
 		/// implementa <see cref="BackgroundWorkerComponent"/>.
         /// </summary>
 		public UIBackgroundWorkerController(AbstractUILinker<BackgroundWorkerComponent> linker)
@@ -330,7 +227,7 @@ namespace Sifaw.Controllers.Components
 		#region UIElement Methods
 
         /// <summary>
-        /// Invoca al método sobrescirto <see cref="UIElementController{TInput, TOutput, TUISettings, TComponent}.OnAfterUIElementLoad()"/> y
+        /// Invoca al método sobrescirto <see cref="UIElementController{TInput, TOutput, TUIStyle, TComponent}.OnAfterUIElementLoad()"/> y
         /// posteriormente se subscribe a los eventos del componente <see cref="Sifaw.Views.Components.BackgroundWorkerComponent"/>.
         /// </summary>
 		protected override void OnAfterUIElementLoad()
@@ -339,34 +236,6 @@ namespace Sifaw.Controllers.Components
 
 			UIElement.Cancel += new EventHandler(UIElement_Cancel);
 		}
-
-        /// <summary>
-        /// Invoca al método sobrescirto <see cref="UIComponentController{TInput, TOutput, TUISettings, TComponent}.OnApplyUISettings()"/> y
-        /// posteriormente aplica la configuración al elemento <see cref="UIElementController{TInput, TOutput, TUISettings, TView}.UIElement"/> 
-        /// del tipo <see cref="Sifaw.Views.Components.BackgroundWorkerComponent"/>.
-        /// </summary>
-        protected override void OnApplyUISettings()
-		{
-			base.OnApplyUISettings();
-
-            UIElement.Summary = UISettings.Summary;
-            UIElement.ProcessDescription = UISettings.ProcessDescription;
-            UIElement.AllowCancel = UISettings.AllowCancel;
-            UIElement.WithControl = UISettings.WithControl;
-            UIElement.Progress = UISettings.Progress;
-		}
-
-        /// <summary>
-        /// Invoca al método sobrescirto <see cref="UIElementController{TInput, TOutput, TUISettings, TUIElement}.OnAfterApplyUISettings()"/> y
-        /// posteriormente aplica la configuración sobre el objeto <see cref="System.ComponentModel.BackgroundWorker"/>.
-        /// </summary>
-        protected override void OnAfterApplyUISettings()
-        {
-            base.OnAfterApplyUISettings();
-
-            if (worker != null)
-                worker.WorkerSupportsCancellation = UISettings.AllowCancel;
-        }
 
 		#endregion
 
@@ -470,16 +339,14 @@ namespace Sifaw.Controllers.Components
         /// Ejecuta los comandos de inicio de la controladora.
         /// </summary>
         protected override void StartController()
-		{
-			// Establecemos la configuración del componente.
-			UISettings.Apply();		
-			
+		{	
 			// Inicializamos el worker
 			worker = new System.ComponentModel.BackgroundWorker();
 			worker.DoWork += new System.ComponentModel.DoWorkEventHandler(worker_DoWork);
 			worker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(worker_ProgressChanged);
 			worker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(worker_RunWorkerCompleted);
-			worker.WorkerReportsProgress = true;			
+			worker.WorkerReportsProgress = true;
+			worker.WorkerSupportsCancellation = UISettings.AllowCancel;
 		}
 
         /// <summary>
@@ -504,7 +371,7 @@ namespace Sifaw.Controllers.Components
 		#region Finish Methods
 
         /// <summary>
-        /// Invoca al método sobrescirto <see cref="UIElementController{TInput, TOutput, TUISettings, TUIElement}.OnBeforeFinishControllers(List{IController})"/>
+        /// Invoca al método sobrescirto <see cref="UIElementController{TInput, TOutput, TUIStyle, TUIElement}.OnBeforeFinishControllers(List{IController})"/>
         /// y posteriormente libera el objeto <see cref="System.ComponentModel.BackgroundWorker"/>.
         /// </summary>
 		protected override void OnBeforeFinishControllers(List<IController> children)

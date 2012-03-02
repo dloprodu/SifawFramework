@@ -17,13 +17,15 @@
 using System;
 using System.ComponentModel;
 
+using Sifaw.Views.Kit;
+
 
 namespace Sifaw.Views.Components
 {
 	/// <summary>
 	/// Interfaz para la vistas que gestionan procesos pesados.
 	/// </summary>
-	public interface BackgroundWorkerComponent : UIComponent
+	public interface BackgroundWorkerComponent : UIComponent<ComponentStyle>
 	{
 		#region Properties
 		

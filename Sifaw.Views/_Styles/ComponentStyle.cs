@@ -20,15 +20,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using Sifaw.Views.Kit;
 
-namespace Sifaw.Views.Kit
+
+namespace Sifaw.Views
 {
 	/// <summary>
 	/// Provee un conjunto de propiedades que permiten modificar la apariencia
 	/// de un componente de interfaz de usuario.
 	/// </summary>
 	[Serializable]
-	public class UIComponentStyle : UIElementStyle
+	public class ComponentStyle : ElementStyle
 	{
 		#region Fields
 
@@ -84,9 +86,9 @@ namespace Sifaw.Views.Kit
 		#region Constructor
 
 		/// <summary>
-		/// Inicializa una nueva instancia de la clase <see cref="UIComponentStyle"/>.
+		/// Inicializa una nueva instancia de la clase <see cref="ComponentStyle"/>.
 		/// </summary>
-		public UIComponentStyle()
+		public ComponentStyle()
 			: base()
 		{
 		}

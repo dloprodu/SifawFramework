@@ -19,6 +19,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using Sifaw.Views.Kit;
+
 
 namespace Sifaw.Views
 {
@@ -28,7 +30,7 @@ namespace Sifaw.Views
 	/// permite alojar elementos <see cref="UIComponent"/>.
 	/// </para>
 	/// </summary>
-	public interface ShellView : UIView
+	public interface ShellView : UIView<ViewStyle>
 	{
 		#region Methods
 

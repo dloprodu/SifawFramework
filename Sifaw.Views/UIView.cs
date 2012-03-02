@@ -17,6 +17,7 @@
 using System;
 
 using Sifaw.Core;
+using Sifaw.Views.Kit;
 
 
 namespace Sifaw.Views
@@ -27,7 +28,8 @@ namespace Sifaw.Views
 	/// Puele alojar elementos <see cref="UIComponent"/>.
 	/// </para>
 	/// </summary>
-	public interface UIView : UIElement
+	public interface UIView<TStyle> : UIElement<TStyle>
+		where TStyle : ViewStyle
 	{
 		#region Properties
 
@@ -37,19 +39,9 @@ namespace Sifaw.Views
 		string Header { get; set; }
 
 		/// <summary>
-		/// Obtiene o establece el ancho de la vista.
+		/// Obtiene el <see cref="ViewStyle"/> del <see cref="UIView"/>.
 		/// </summary>
-		double Width { get; set; }
-
-		/// <summary>
-		/// Obtiene o establece el alto de la vista.
-		/// </summary>
-		double Height { get; set; }
-
-		/// <summary>
-		/// Obtiene o establece un valor que indica si la vista se ajusta a su contenido.
-		/// </summary>
-		bool SizeToContent { get; set; }
+		TStyle Style { get; }
 
 		#endregion
 

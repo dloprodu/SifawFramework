@@ -19,6 +19,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using Sifaw.Views.Kit;
+
 
 namespace Sifaw.Views
 {
@@ -26,7 +28,8 @@ namespace Sifaw.Views
 	/// Representa un componente que implementa una interfaz que administra un
 	/// conjunto relacionado de componente.
 	/// </summary>
-	public interface UIActorComponent : UIComponent
+	public interface UIActorComponent<TStyle> : UIComponent<TStyle>
+		where TStyle : ComponentStyle
 	{
 		#region Properties
 

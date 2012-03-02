@@ -20,26 +20,30 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using Sifaw.Views.Kit;
 
-namespace Sifaw.Views.Kit
+
+namespace Sifaw.Views
 {
 	/// <summary>
 	/// Provee un conjunto de propiedades que permiten modificar la apariencia
 	/// de un elemento de interfaz de usuario.
 	/// </summary>
-    [Serializable]
-	public class UIElementStyle
+	[Serializable]
+	public class ElementStyle
 	{
 		#region Fields
 
-        private UIBrush _background = new UISolidBrush(UIColors.WhiteColors.White);
-        private UIBrush _foreground = new UISolidBrush(UIColors.GrayColors.Black);
-		private UIFrame _margin = new UIFrame(0);
-		private UIFrame _padding = new UIFrame(0);
+		private UIBrush _background = new UISolidBrush(UIColors.WhiteColors.White);
+		private UIBrush _foreground = new UISolidBrush(UIColors.GrayColors.Black);
+		private UIFrame _margin = UIFrame.Empty;
+		private UIFrame _padding = UIFrame.Empty;
 		private double _width = -1;
 		private double _height = -1;
 		private UILengthModes _widthMode = UILengthModes.WeightedProportion;
 		private UILengthModes _heightMode = UILengthModes.WeightedProportion;
+		private UISize _minSize = UISize.Empty;
+		private UISize _maxSize = UISize.Empty;
 
 		#endregion
 
@@ -79,6 +83,24 @@ namespace Sifaw.Views.Kit
 		{
 			get { return _padding; }
 			set { _padding = value; }
+		}
+
+		/// <summary>
+		/// Obtiene o establece el tamaño mínimo del elemento.
+		/// </summary>
+		public UISize MinSize
+		{
+			get { return _minSize; }
+			set { _minSize = value; }
+		}
+
+		/// <summary>
+		/// Obtiene o establece el tamaño máximo del elemento.
+		/// </summary>
+		public UISize MaxSize
+		{
+			get { return _maxSize; }
+			set { _maxSize = value; }
 		}
 
 		/// <summary>
@@ -128,9 +150,9 @@ namespace Sifaw.Views.Kit
 		#region Constructor
 
 		/// <summary>
-		/// Inicializa una nueva instancia de la clase <see cref="UIElementStyle"/>.
+		/// Inicializa una nueva instancia de la clase <see cref="ElementStyle"/>.
 		/// </summary>
-		public UIElementStyle()
+		public ElementStyle()
 		{
 		}
 

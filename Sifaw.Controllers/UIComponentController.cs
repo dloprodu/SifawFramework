@@ -35,32 +35,31 @@ namespace Sifaw.Controllers
     /// <remarks>
     /// <para>
 	/// Un componente de interfaz de usuario no puede mostrarse por si solo, en su lugar,
-	/// ha de ser embebido por un <see cref="UIViewController{TInput, TOutput, TUISettings, TView}"/>.
+	/// ha de ser embebido por un <see cref="UIViewController{TInput, TOutput, TUIStyle, TView}"/>.
     /// </para>
     /// </remarks>
 	/// <typeparam name="TInput">
 	/// Tipo para establecer los parámetros de inicio de la controladora. Ha de ser serializable y 
-	/// derivar de <see cref="UIComponentController{TInput, TOutput, TUISettings, TComponent}.Input"/>.
+	/// derivar de <see cref="UIComponentController{TInput, TOutput, TUIStyle, TComponent}.Input"/>.
 	/// </typeparam>
 	/// <typeparam name="TOutput">
 	/// Tipo para establcer los parametros de retorno cuando finaliza la controladora. Ha de ser serializable y 
-	/// derivar de <see cref="UIComponentController{TInput, TOutput, TUISettings, TComponent}.Output"/>.
+	/// derivar de <see cref="UIComponentController{TInput, TOutput, TUIStyle, TComponent}.Output"/>.
 	/// </typeparam>
-	/// <typeparam name="TUISettings">
+	/// <typeparam name="TUIStyle">
 	/// Tipo para establecer el contenedor de ajustes encargado de establecer las configuración del elemento de interfaz de usuario. Ha de
-	/// ser serializable, proveer de consturctor público y derivar de <see cref="UIComponentController{TInput, TOutput, TUISettings, TComponent}.UISettingsContainer"/>.
+	/// ser serializable y derivar de <see cref="ComponentStyle"/>.
 	/// </typeparam>
 	/// <typeparam name="TComponent">
 	/// Tipo para establecer el elemento de interfaz de usuario de la controladora. Ha de implementar <see cref="UIComponent"/>.
 	/// </typeparam>
-	public abstract class UIComponentController<TInput, TOutput, TUISettings, TComponent>
-        : UIElementController<TInput, TOutput, TUISettings, TComponent>
+	public abstract class UIComponentController<TInput, TOutput, TUIStyle, TComponent>
+        : UIElementController<TInput, TOutput, TUIStyle, TComponent>
         , IUIComponentController
-        where TInput      : UIComponentController<TInput, TOutput, TUISettings, TComponent>.Input
-        where TOutput     : UIComponentController<TInput, TOutput, TUISettings, TComponent>.Output
-        where TUISettings : UIComponentController<TInput, TOutput, TUISettings, TComponent>.UISettingsContainer
-                          , new()
-        where TComponent  : UIComponent
+        where TInput     : UIComponentController<TInput, TOutput, TUIStyle, TComponent>.Input
+        where TOutput    : UIComponentController<TInput, TOutput, TUIStyle, TComponent>.Output
+        where TUIStyle   : ComponentStyle                        
+        where TComponent : UIComponent<TUIStyle>
     {
         #region Input / Output
 
@@ -68,12 +67,12 @@ namespace Sifaw.Controllers
         /// Parámetros de entrada de las controladora.
         /// </summary>
         [Serializable]
-        public new abstract class Input : UIElementController<TInput, TOutput, TUISettings, TComponent>.Input
+        public new abstract class Input : UIElementController<TInput, TOutput, TUIStyle, TComponent>.Input
         {
             #region Constructor
 
             /// <summary>
-            /// Inicializa una nueva instancia de la clase <see cref="UIComponentController{TInput, TOutput, TUISettings, TComponent}.Input"/>.
+            /// Inicializa una nueva instancia de la clase <see cref="UIComponentController{TInput, TOutput, TUIStyle, TComponent}.Input"/>.
             /// </summary>
             protected Input()
             {
@@ -86,65 +85,18 @@ namespace Sifaw.Controllers
         /// Parámetros de retorno de la controladora.
         /// </summary>
         [Serializable]
-        public new abstract class Output : UIElementController<TInput, TOutput, TUISettings, TComponent>.Output
+        public new abstract class Output : UIElementController<TInput, TOutput, TUIStyle, TComponent>.Output
         {
             #region Constructor
 
             /// <summary>
-            /// Inicializa una nueva instancia de la clase <see cref="UIComponentController{TInput, TOutput, TUISettings, TComponent}.Output"/>.
+            /// Inicializa una nueva instancia de la clase <see cref="UIComponentController{TInput, TOutput, TUIStyle, TComponent}.Output"/>.
             /// </summary>
             protected Output()
             {
             }
 
             #endregion
-		}
-
-        #endregion
-
-        #region Settings
-
-		/// <summary>
-		/// Contenedor de ajustes de <see cref="UIComponentController{TInput, TOutput, TUISettings, TComponent}"/>.
-		/// </summary>
-        [Serializable]
-        public new class UISettingsContainer : UIElementController
-            < TInput
-            , TOutput
-            , TUISettings
-            , TComponent>.UISettingsContainer
-		{
-			#region Fields
-
-			private UIFrame _margin;
-
-			#endregion
-
-			#region Properties
-
-			/// <summary>
-			/// Obtiene o establece una el margen de <see cref="UIElementController{TInput, TOutput, TUISettings, TUIElement}.UIElement"/>.
-			/// </summary>
-			public UIFrame Margin
-			{
-				get { return _margin; }
-				set { _margin = value; }
-			}
-			
-			#endregion
-			
-			#region Constructors
-
-			/// <summary>
-			/// Inicializa una nueva instancia de la clase <see cref="UIComponentController{TInput, TOutput, TUISettings, TComponent}.UISettingsContainer"/>.
-			/// </summary>
-			public UISettingsContainer()
-				: base()
-			{
-				this._margin = UIFrame.Empty;
-			}
-
-			#endregion
 		}
 
         #endregion
@@ -236,7 +188,7 @@ namespace Sifaw.Controllers
         #region Constructors
 
 		/// <summary>
-		/// Inicializa una nueva instancia de la clase <see cref="UIComponentController{TInput, TOutput, TUISettings, TComponent}"/>.
+		/// Inicializa una nueva instancia de la clase <see cref="UIComponentController{TInput, TOutput, TUIStyle, TComponent}"/>.
 		/// Establece como <see cref="AbstractUILinker{TUIElement}"/> aquel establecido por defecto a través de 
 		/// <see cref="AbstractUIProviderManager{TLinker}"/>.
 		/// </summary>
@@ -246,9 +198,9 @@ namespace Sifaw.Controllers
         }
 
 		/// <summary>
-		/// Inicializa una nueva instancia de la clase <see cref="UIComponentController{TInput, TOutput, TUISettings, TComponent}"/>, 
+		/// Inicializa una nueva instancia de la clase <see cref="UIComponentController{TInput, TOutput, TUIStyle, TComponent}"/>, 
 		/// estableciendo el <see cref="AbstractUILinker{TUIElement}"/> especificado como valor de la propiedad 
-		/// <see cref="UIElementController{TInput, TOutput, TUISettings, TUIElement}.Linker"/> donde <c>TUIElement</c> 
+		/// <see cref="UIElementController{TInput, TOutput, TUIStyle, TUIElement}.Linker"/> donde <c>TUIElement</c> 
 		/// implementa <see cref="UIComponent"/>.
 		/// </summary>
         protected UIComponentController(AbstractUILinker<TComponent> linker)
@@ -273,25 +225,13 @@ namespace Sifaw.Controllers
         #region UIElement Methods
 
 		/// <summary>
-		/// Invoca al método sobrescirto <see cref="UIElementController{TInput, TOutput, TUISettings, TComponent}.OnAfterUIElementLoad()"/>.
+		/// Invoca al método sobrescirto <see cref="UIElementController{TInput, TOutput, TUIStyle, TComponent}.OnAfterUIElementLoad()"/>.
 		/// </summary>
         protected override void OnAfterUIElementLoad()
         {
             base.OnAfterUIElementLoad();
 
             /* Subscripción a eventos del componente... */
-        }
-
-		/// <summary>
-		/// Invoca al método sobrescirto <see cref="UIElementController{TInput, TOutput, TUISettings, TComponent}.OnApplyUISettings()"/> y
-		/// posteriormente aplica la configuración al elemento <see cref="UIElementController{TInput, TOutput, TUISettings, TView}.UIElement"/> 
-		/// del tipo <see cref="UIComponent"/>.
-		/// </summary>
-        protected override void OnApplyUISettings()
-        {
-            base.OnApplyUISettings();
-
-			UIElement.Margin = UISettings.Margin;
         }
 
         #endregion

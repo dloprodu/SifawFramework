@@ -80,21 +80,11 @@ namespace Sifaw.Controllers.Components
             #region Properties
 
             /// <summary>
-            /// Obtiene o establecela lista sobre la que se realizará el filtro.
+            /// Obtiene la lista sobre la que se realizará el filtro.
             /// </summary>
             public TSource Source
             {
                 get { return _source; }
-                set
-                {
-                    _source = (TSource)(new List<IFilterable>() as IList<IFilterable>);
-
-                    if (value != null)
-                    {
-                        (_source as List<IFilterable>).AddRange(value);
-                        (_source as List<IFilterable>).Sort();
-                    }
-                }
             }
 
             #endregion
@@ -102,14 +92,22 @@ namespace Sifaw.Controllers.Components
             #region Constructors
 
             /// <summary>
-            /// Inicializa una nueva instancia de la clase <see cref="UIFilterBaseController{TInput, TOutput, TFilter, TComponent}.Input"/>,
-            /// estableciendo un valor en la propiedad <see cref="UIFilterBaseController{TInput, TOutput, TFilter, TComponent}.Filter"/>.
+            /// Inicializa una nueva instancia de la clase <see cref="UIListFilterBaseController{TInput, TOutput, TFilter, TSource, TComponent}.Input"/>,
+            /// estableciendo un valores en la propiedad <see cref="Source"/> y
+            /// <see cref="UIFilterBaseController{TInput, TOutput, TFilter, TComponent}.Filter"/>.
             /// </summary>
+            /// <param name="source">Lista sobre la que se realizara el filtro.</param>
             /// <param name="filter">Filtro a aplicar al iniciar la controladora.</param>
-            protected Input(TFilter filter)
+            protected Input(TSource source, TFilter filter)
                 : base(filter)
             {
-                
+                _source = (TSource)(new List<IFilterable>() as IList<IFilterable>);
+
+                if (source != null)
+                {
+                    (_source as List<IFilterable>).AddRange(source);
+                    (_source as List<IFilterable>).Sort();
+                }
             }
 
             #endregion

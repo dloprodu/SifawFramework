@@ -14,8 +14,53 @@ using Sifaw.Views.Kit;
 
 namespace Sifaw.WPF.Test
 {
-	public class UIGroupFiltersTestController : UIFiltersGroupController<UIGroupFiltersTestController.Filter>
+	public class UIGroupFiltersTestController : UIFiltersGroupController
+        < UIGroupFiltersTestController.Input
+        , UIGroupFiltersTestController.Output
+        , UIGroupFiltersTestController.Filter>
 	{
+        #region Input / Output
+
+        /// <summary>
+        /// Parámetros de entrada de la controladora.
+        /// </summary>
+        [Serializable]
+        public new class Input : UIFiltersGroupController
+            < Input
+            , Output
+            , Filter>.Input
+        {
+            #region Constructors
+           
+            public Input(Filter filter)
+                : base(filter)
+            {
+            }
+
+            #endregion
+        }
+
+        /// <summary>
+        /// Parámetros de retorno de la controladora.
+        /// </summary>
+        [Serializable]
+        public new class Output : UIFiltersGroupController
+            < Input
+            , Output
+            , Filter>.Output
+        {
+            #region Constructors
+
+            public Output(Filter filter)
+                : base(filter)
+            {
+            }
+
+            #endregion
+        }
+
+        #endregion
+
 		#region Inclusions
 
 		private UITextFilterController _textFilter = null;
@@ -93,7 +138,7 @@ namespace Sifaw.WPF.Test
 		#region Filter
 
 		[Serializable]
-		public new class Filter : UIFiltersGroupController<Filter>.Filter
+		public new class Filter : UIFiltersGroupController<Input, Output, Filter>.Filter
 		{
 			private readonly string TextFilter;
 			private readonly bool BoolFilter;
@@ -226,7 +271,17 @@ namespace Sifaw.WPF.Test
 		{
 			return new Input(new Filter(string.Empty, false, Filters.Filter1, new Filterable[] { Filters.Filter1 }, Filters.Filter1));
 		}
-				
+        
+        protected override Output GetDefaultOutput()
+        {
+            return new Output(new Filter(
+                TextFilter.Filter
+                , BoolFilter.Filter
+                , EnumFilter.Filter as Filterable
+                , ListFilter.Filter as Filterable[]
+                , DropDownListFilter.Filter as Filterable));
+        }
+
 		#endregion
 
 		#region Filters Group Members
@@ -306,20 +361,23 @@ namespace Sifaw.WPF.Test
 			TextFilter.Start(new UITextFilterController.Input("prueba"));
 
 			BoolFilter.UISettings.Margin = new UIFrame(3);
-			BoolFilter.UISettings.Text = "Mostrar algo al chequear ...";
+			BoolFilter.UISettings.Description = "Mostrar algo al chequear ...";
 			BoolFilter.Start(new UIBoolFilterController.Input(true));
 
 			EnumFilter.UISettings.Margin = new UIFrame(3);
-			EnumFilter.UISettings.Source = new Filterable[] { Filters.Filter1, Filters.Filter2, Filters.Filter3, Filters.Filter4 };
-			EnumFilter.Start(new UIEnumFilterController.Input(Filters.Filter2));
+			EnumFilter.Start(new UIEnumFilterController.Input(
+                  new Filterable[] { Filters.Filter1, Filters.Filter2, Filters.Filter3, Filters.Filter4 }
+                , Filters.Filter2));
 
 			ListFilter.UISettings.Margin = new UIFrame(3);
-			ListFilter.UISettings.Source = new Filterable[] { Filters.Filter1, Filters.Filter2, Filters.Filter3, Filters.Filter4 };
-			ListFilter.Start(new UIListFilterController.Input(new Filterable[] { Filters.Filter1, Filters.Filter2 }));
+			ListFilter.Start(new UIListFilterController.Input(
+                  new Filterable[] { Filters.Filter1, Filters.Filter2, Filters.Filter3, Filters.Filter4 }
+                , new Filterable[] { Filters.Filter1, Filters.Filter2 }));
 
 			DropDownListFilter.UISettings.Margin = new UIFrame(3);
-			DropDownListFilter.UISettings.Source = new Filterable[] { Filters.Filter1, Filters.Filter2, Filters.Filter3, Filters.Filter4 };
-			DropDownListFilter.Start(new UIDropDownListFilterController.Input(Filters.Filter3));
+			DropDownListFilter.Start(new UIDropDownListFilterController.Input(
+                  new Filterable[] { Filters.Filter1, Filters.Filter2, Filters.Filter3, Filters.Filter4 }
+                , Filters.Filter3));
 		}
 
 		protected override bool AllowReset()
@@ -337,5 +395,5 @@ namespace Sifaw.WPF.Test
 		}
 
 		#endregion
-	}
+    }
 }

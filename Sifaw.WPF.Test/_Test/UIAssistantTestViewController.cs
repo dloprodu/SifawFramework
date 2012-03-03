@@ -15,7 +15,6 @@ namespace Sifaw.WPF.Test
 		: UIShellViewController
 		< UIAssistantTestViewController.Input
 		, UIAssistantTestViewController.Output
-		, UIAssistantTestViewController.UISettingsContainer
 		, UIComponent>
 	{
 		#region Input / Output
@@ -24,7 +23,7 @@ namespace Sifaw.WPF.Test
 		/// Parámetros de entrada de las controladora.
 		/// </summary>
 		[Serializable]
-		public new class Input : UIShellViewController<Input, Output, UISettingsContainer, UIComponent>.Input
+		public new class Input : UIShellViewController<Input, Output, UIComponent>.Input
 		{
 			#region Constructors
 
@@ -45,7 +44,7 @@ namespace Sifaw.WPF.Test
 		/// Parámetros de retorno de la controladora.
 		/// </summary>
 		[Serializable]
-		public new class Output : UIShellViewController<Input, Output, UISettingsContainer, UIComponent>.Output
+		public new class Output : UIShellViewController<Input, Output, UIComponent>.Output
 		{
 			#region Fields
 
@@ -71,27 +70,6 @@ namespace Sifaw.WPF.Test
 				: base()
 			{
 				this._cancelled = cancelled;
-			}
-
-			#endregion
-		}
-
-		#endregion
-
-		#region Settings
-
-		[Serializable]
-		public new class UISettingsContainer : UIShellViewController
-			< Input
-			, Output
-			, UISettingsContainer
-			, UIComponent>.UISettingsContainer
-		{
-			#region Constructors
-
-			public UISettingsContainer()
-				: base()
-			{
 			}
 
 			#endregion
@@ -152,20 +130,6 @@ namespace Sifaw.WPF.Test
 		#endregion
 
 		#region UIElement Methods
-
-		protected override void OnApplyUISettings()
-		{
-			base.OnApplyUISettings();			
-		}
-
-        protected override void OnAfterApplyUISettings()
-        {
-            base.OnAfterApplyUISettings();
-
-            // Aplicamos configuración a componentes internos ...
-            //   - Se aplica al iniciar la controladora
-            //UIAssistantTestController.UISettings.Apply();
-        }
 
 		protected override void OnAfterUIShow()
 		{

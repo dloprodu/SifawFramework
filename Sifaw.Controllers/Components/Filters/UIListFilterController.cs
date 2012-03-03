@@ -62,9 +62,10 @@ namespace Sifaw.Controllers.Components.Filters
             /// Inicializa una nueva instancia de la clase <see cref="UIListFilterController.Input"/>,
             /// estableciendo un valor en la propiedad <see cref="UIFilterBaseController{TInput, TOutput, TFilter, TComponent}.Filter"/>.
             /// </summary>
+            /// <param name="source">Lista de filtrado.</param>
             /// <param name="filter">Filtro a aplicar al iniciar la controladora.</param>
-            public Input(IList<IFilterable> filter)
-                : base(filter)
+            public Input(IList<IFilterable> source, IList<IFilterable> filter)
+                : base(source, filter)
             {
 
             }
@@ -132,7 +133,7 @@ namespace Sifaw.Controllers.Components.Filters
 		/// </summary>
 		public override Input GetDefaultInput()
 		{
-			return new Input(new List<IFilterable>());
+			return new Input(new List<IFilterable>(), new List<IFilterable>());
 		}
 
         /// <summary>
@@ -140,7 +141,7 @@ namespace Sifaw.Controllers.Components.Filters
         /// </summary>
         public override Input GetResetInput()
         {
-            return new Input(Filter);
+            return new Input(GetInitialParameters().Source, Filter);
         }
 
         /// <summary>

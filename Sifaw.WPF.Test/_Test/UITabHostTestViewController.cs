@@ -15,7 +15,6 @@ namespace Sifaw.WPF.Test
 	public class UITabHostTestViewController : UIShellViewController
 		< UITabHostTestViewController.Input
 		, UITabHostTestViewController.Output
-		, UITabHostTestViewController.UISettingsContainer
 		, TabHostComponent>
 	{
 		#region Input / Output
@@ -24,7 +23,7 @@ namespace Sifaw.WPF.Test
 		/// Parámetros de entrada de las controladora.
 		/// </summary>
 		[Serializable]
-		public new class Input : UIShellViewController<Input, Output, UISettingsContainer, TabHostComponent>.Input
+		public new class Input : UIShellViewController<Input, Output, TabHostComponent>.Input
 		{
 			#region Constructors
 
@@ -45,32 +44,11 @@ namespace Sifaw.WPF.Test
 		/// Parámetros de retorno de la controladora.
 		/// </summary>
 		[Serializable]
-		public new class Output : UIShellViewController<Input, Output, UISettingsContainer, TabHostComponent>.Output
+		public new class Output : UIShellViewController<Input, Output, TabHostComponent>.Output
 		{
 			#region Constructors
 
 			public Output()
-				: base()
-			{
-			}
-
-			#endregion
-		}
-
-		#endregion
-
-		#region Settings
-
-		[Serializable]
-		public new class UISettingsContainer : UIShellViewController
-			< Input
-			, Output
-			, UISettingsContainer
-			, TabHostComponent>.UISettingsContainer
-		{
-			#region Constructors
-
-			public UISettingsContainer()
 				: base()
 			{
 			}
@@ -129,24 +107,6 @@ namespace Sifaw.WPF.Test
 		{
 			return new Output();
 		}
-
-		#endregion
-
-		#region UIElement Methods
-
-		protected override void OnApplyUISettings()
-		{
-			base.OnApplyUISettings();			
-		}
-
-        protected override void OnAfterApplyUISettings()
-        {
-            base.OnAfterApplyUISettings();
-
-            // Aplicamos configuración a componentes internos ...
-            //   - Se aplica al iniciar la controladora
-            //UIAssistantTestController.UISettings.Apply();
-        }
 
 		#endregion
 

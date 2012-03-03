@@ -41,6 +41,46 @@ namespace Sifaw.WPF
 	/// </summary>
 	public partial class BackgroundWorkerControl : UserControl, BackgroundWorkerComponent
 	{
+        #region Properties
+
+        public bool WithControl
+        {
+            get { return !progressBar.IsIndeterminate; }
+            set { progressBar.IsIndeterminate = !value; }
+        }
+
+        public bool AllowCancel
+        {
+            get { return buttonCancelar.IsVisible; }
+            set { buttonCancelar.Visibility = value ? Visibility.Visible : Visibility.Collapsed; }
+        }
+
+        public int MaxProgressPercentage
+        {
+            get { return (int)progressBar.Maximum; }
+            set { progressBar.Maximum = value; }
+        }
+
+        public string Summary
+        {
+            get { return labelSummary.Content.ToString(); }
+            set { labelSummary.Content = value; }
+        }
+
+        public string ProcessDescription
+        {
+            get { return textBlockDescription.Text; }
+            set { textBlockDescription.Text = value; }
+        }
+
+        public string Progress
+        {
+            get { return labelProgress.Content.ToString(); }
+            set { labelProgress.Content = value; }
+        }
+
+        #endregion
+
 		#region Constructors
 
 		public BackgroundWorkerControl()
@@ -75,46 +115,6 @@ namespace Sifaw.WPF
 		#endregion
 
 		#region BackgroundWorkerManagerComponent Members
-
-		#region Properties
-
-		public bool WithControl
-		{
-			get	{ return !progressBar.IsIndeterminate; }
-			set { progressBar.IsIndeterminate = !value; }
-		}
-
-		public bool AllowCancel
-		{
-			get { return buttonCancelar.IsVisible;	}
-			set	{ buttonCancelar.Visibility = value ? Visibility.Visible : Visibility.Collapsed; }
-		}
-
-		public int MaxProgressPercentage
-		{
-			get { return (int)progressBar.Maximum; }
-			set { progressBar.Maximum = value; }
-		}
-
-		public string Summary
-		{
-			get { return labelSummary.Content.ToString(); }
-			set { labelSummary.Content = value; }
-		}
-
-		public string ProcessDescription
-		{
-			get { return textBlockDescription.Text; }
-			set { textBlockDescription.Text = value; }
-		}
-
-		public string Progress
-		{
-			get { return labelProgress.Content.ToString(); }
-			set { labelProgress.Content = value; }
-		}
-
-		#endregion
 
 		#region Methods
 
@@ -151,37 +151,7 @@ namespace Sifaw.WPF
 
 		#endregion
 
-		#region UIComponent Members
-
-		public new UIFrame Margin
-		{
-			get { return new UIFrame(base.Margin.Left, base.Margin.Top, base.Margin.Right, base.Margin.Bottom); }
-			set { base.Margin = new Thickness(value.Left, value.Top, value.Right, value.Bottom); }
-		}
-
-		#endregion
-
 		#region UIElement Members
-
-		#region Properties
-
-		private string _denomination = string.Empty;
-		public string Denomination
-		{
-			get { return _denomination; }
-			set { _denomination = value; }
-		}
-
-		private string _description = string.Empty;
-		public string Description
-		{
-			get { return _description; }
-			set { _description = value; }
-		}
-
-		#endregion
-
-		#region Methods
 
 		public void Refresh()
 		{
@@ -201,8 +171,32 @@ namespace Sifaw.WPF
 			expanderDetail.Focus();
 		}
 
-		#endregion
-
 		#endregion		
-	}
+
+        #region UISettings
+
+        private BackgroundWorkerSettings _uiSettings; 
+        public BackgroundWorkerSettings UISettings
+        {
+            get 
+            {
+                if (_uiSettings == null)
+                    _uiSettings = new BackgroundWorkerControlSettings(this);
+
+                return _uiSettings;
+            }
+        }
+
+        ComponentSettings UIComponent.UISettings
+        {
+            get { return UISettings; }
+        }
+
+        UISettings Views.UIElement.UISettings
+        {
+            get { return UISettings; }
+        }
+
+        #endregion
+    }
 }

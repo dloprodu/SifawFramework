@@ -167,7 +167,7 @@ namespace Sifaw.WPF
 			assistantProgressBar.Value = (byte)(key + 1);
 			labelStep.Content = (key + 1);
 			textBlockTitle.Text = Descriptors[key];
-			textBlockDescription.Text = content.Description;
+			textBlockDescription.Text = content.UISettings.Description;
 		}
 
 		#endregion
@@ -185,35 +185,7 @@ namespace Sifaw.WPF
 
 		#endregion
 
-		#region UIComponent Members
-
-		public new UIFrame Margin
-		{
-			get { return new UIFrame(base.Margin.Left, base.Margin.Top, base.Margin.Right, base.Margin.Bottom); }
-			set { base.Margin = new Thickness(value.Left, value.Top, value.Right, value.Bottom); }
-		}
-
-		#endregion
-
 		#region UIElement Members
-
-		#region Properties
-
-		private string _denomination = string.Empty;
-		public string Denomination
-		{
-			get { return _denomination; }
-			set { _denomination = value; }
-		}
-
-		private string _description = string.Empty;
-		public string Description
-		{
-			get { return _description; }
-			set { _description = value; }
-		}
-
-		#endregion
 
 		#region Methods
 
@@ -235,5 +207,26 @@ namespace Sifaw.WPF
 		#endregion
 
 		#endregion
-	}
+
+        #region UISettings
+
+        private ComponentSettings _uiSettings = null;
+        public ComponentSettings UISettings
+        {
+            get
+            {
+                if (_uiSettings == null)
+                    _uiSettings = new ControlSettings(this);
+
+                return _uiSettings;
+            }
+        }
+
+        UISettings Views.UIElement.UISettings
+        {
+            get { return UISettings; }
+        }
+
+        #endregion
+    }
 }

@@ -14,7 +14,6 @@ namespace Sifaw.WPF.Test
 	public class UIAssistantTestController : UIAssistantController
 		< UIAssistantTestController.Input
 		, UIAssistantTestController.Output
-		, UIAssistantTestController.UISettingsContainer
 		, UIComponent>
 	{
 		#region Input / Output
@@ -23,7 +22,6 @@ namespace Sifaw.WPF.Test
 		public new class Input : UIAssistantController
 			< Input
 			, Output
-			, UISettingsContainer
 			, UIComponent>.Input
 		{
 			public Input()
@@ -36,40 +34,12 @@ namespace Sifaw.WPF.Test
 		public new class Output : UIAssistantController
 			< Input
 			, Output
-			, UISettingsContainer
 			, UIComponent>.Output
 		{
 			public Output()
 				: base()
 			{
 			}
-		}
-
-		#endregion
-
-		#region Settings
-
-		/// <summary>
-		/// Contenedor de ajustes de <see cref="UIAssistantController{TInput, TOutput, TUISettings, TGuest}"/>.
-		/// </summary>
-		[Serializable]
-		public new class UISettingsContainer : UIAssistantController
-			< Input
-			, Output
-			, UISettingsContainer
-			, UIComponent>.UISettingsContainer
-		{
-			#region Constructors
-
-			/// <summary>
-			/// Inicializa una nueva instancia de la clase <see cref="UIAssistantController{TInput, TOutput, TUISettings, TGuest}.UISettingsContainer"/>.
-			/// </summary>
-			public UISettingsContainer()
-				: base()
-			{
-			}
-
-			#endregion
 		}
 
 		#endregion
@@ -159,9 +129,9 @@ namespace Sifaw.WPF.Test
 		{
 			return new string[] 
 			{
-				  Controller1.GetUIComponent().Denomination
-				, Controller2.GetUIComponent().Denomination
-				, Controller3.GetUIComponent().Denomination
+				  Controller1.GetUIComponent().UISettings.Denomination
+				, Controller2.GetUIComponent().UISettings.Denomination
+				, Controller3.GetUIComponent().UISettings.Denomination
 			};
 		}
 
@@ -220,17 +190,14 @@ namespace Sifaw.WPF.Test
 		{
 			Controller1.UISettings.Denomination = "Vista 1...";
 			Controller1.UISettings.Description = "Descripción Vista 1 Descripción Vista 1 Descripción Vista 1 Descripción Vista 1 Descripción Vista 1 Descripción Vista 1 Descripción Vista 1 Descripción Vista 1 Descripción Vista 1 Descripción Vista 1 Descripción Vista 1 Descripción Vista 1 Descripción Vista 1...";
-			Controller1.UISettings.Apply();
 			Controller1.Start(new UIBackgroundWorkerController.Input(new BackgroundWorkerPack(TestBackGroundWorker, null)));
 			
 			Controller2.UISettings.Denomination = "Vista 2...";
 			Controller2.UISettings.Description = "Descripción Vista 2...";
-			Controller2.UISettings.Apply();
 			Controller2.Start(new UIBackgroundWorkerController.Input(new BackgroundWorkerPack(TestBackGroundWorker, null)));
 
 			Controller3.UISettings.Denomination = "Vista 3...";
 			Controller3.UISettings.Description = "Descripción Vista 3...";
-			Controller3.UISettings.Apply();
 			Controller3.Start(new UIBackgroundWorkerController.Input(new BackgroundWorkerPack(TestBackGroundWorker, null)));
 		}
 

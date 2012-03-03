@@ -17,7 +17,6 @@ namespace Sifaw.WPF.Test
 	public class UITabHostTestController : UITabHostController
 		< UITabHostTestController.Input
 		, UITabHostTestController.Output
-		, UITabHostTestController.UISettingsContainer
 		, UIComponent >
 	{
 		#region Input / Output
@@ -26,7 +25,6 @@ namespace Sifaw.WPF.Test
 		public new class Input : UITabHostController
 			< Input
 			, Output
-			, UISettingsContainer
 			, UIComponent>.Input
 		{
 			#region Constructor
@@ -42,33 +40,11 @@ namespace Sifaw.WPF.Test
 		public new class Output : UITabHostController
 			< Input
 			, Output
-			, UISettingsContainer
 			, UIComponent>.Output
 		{
 			#region Constructor
 
 			public Output()
-			{
-			}
-
-			#endregion
-		}
-
-		#endregion
-
-		#region Settings
-
-		[Serializable]
-		public new class UISettingsContainer : UITabHostController
-			< Input
-			, Output
-			, UISettingsContainer
-			, UIComponent>.UISettingsContainer
-		{
-			#region Constructors
-
-			public UISettingsContainer()
-				: base()
 			{
 			}
 
@@ -292,12 +268,14 @@ namespace Sifaw.WPF.Test
 			GroupFilterTest.Start();
 
 			EnumFilter.UISettings.Margin = new UIFrame(3);
-			EnumFilter.UISettings.Source = new Filterable[] { Filters.Filter1, Filters.Filter2, Filters.Filter3, Filters.Filter4, Filters.Filter5, Filters.Filter6 };
-			EnumFilter.Start(new UIEnumFilterController.Input(Filters.Filter2));
+			EnumFilter.Start(new UIEnumFilterController.Input(
+                  new Filterable[] { Filters.Filter1, Filters.Filter2, Filters.Filter3, Filters.Filter4, Filters.Filter5, Filters.Filter6 }
+                , Filters.Filter2));
 
 			ListFilter.UISettings.Margin = new UIFrame(3);
-			ListFilter.UISettings.Source = new Filterable[] { Filters.Filter1, Filters.Filter2, Filters.Filter3, Filters.Filter4, Filters.Filter5, Filters.Filter6 };
-			ListFilter.Start(new UIListFilterController.Input(new Filterable[] { Filters.Filter1, Filters.Filter2 }));
+			ListFilter.Start(new UIListFilterController.Input(
+                  new Filterable[] { Filters.Filter1, Filters.Filter2, Filters.Filter3, Filters.Filter4, Filters.Filter5, Filters.Filter6 }
+                , new Filterable[] { Filters.Filter1, Filters.Filter2 }));
 		}
 
 		protected override void ResetController()

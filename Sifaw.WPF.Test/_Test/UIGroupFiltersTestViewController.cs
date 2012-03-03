@@ -14,7 +14,6 @@ namespace Sifaw.WPF.Test
 	public class UIGroupFiltersTestViewController : UIShellViewController
 		< UIGroupFiltersTestViewController.Input
 		, UIGroupFiltersTestViewController.Output
-		, UIGroupFiltersTestViewController.UISettingsContainer
 		, ShellComponent>
 	{
 		#region Input / Output
@@ -23,7 +22,7 @@ namespace Sifaw.WPF.Test
 		/// Parámetros de entrada de las controladora.
 		/// </summary>
 		[Serializable]
-		public new class Input : UIShellViewController<Input, Output, UISettingsContainer, ShellComponent>.Input
+		public new class Input : UIShellViewController<Input, Output, ShellComponent>.Input
 		{
 			#region Constructors
 
@@ -44,35 +43,13 @@ namespace Sifaw.WPF.Test
 		/// Parámetros de retorno de la controladora.
 		/// </summary>
 		[Serializable]
-		public new class Output : UIShellViewController<Input, Output, UISettingsContainer, ShellComponent>.Output
+		public new class Output : UIShellViewController<Input, Output, ShellComponent>.Output
 		{
 			#region Constructors
 
 			public Output()
 				: base()
 			{
-			}
-
-			#endregion
-		}
-
-		#endregion
-
-		#region Settings
-
-		[Serializable]
-		public new class UISettingsContainer : UIShellViewController
-			< Input
-			, Output
-			, UISettingsContainer
-			, ShellComponent>.UISettingsContainer
-		{
-			#region Constructors
-
-			public UISettingsContainer()
-				: base()
-			{
-				this.SizeToContent = true;
 			}
 
 			#endregion

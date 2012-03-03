@@ -81,26 +81,6 @@ namespace Sifaw.WPF
 
 		#region UIView Members
 
-		#region Properties
-
-		public string Header
-		{
-			get { return base.Title; }
-			set { base.Title = value; }
-		}
-
-		public new bool SizeToContent
-		{
-			get { return base.SizeToContent == System.Windows.SizeToContent.WidthAndHeight; }
-			set
-			{
-				base.SizeToContent = value ? System.Windows.SizeToContent.WidthAndHeight : System.Windows.SizeToContent.Manual;
-				base.ResizeMode = value ? System.Windows.ResizeMode.NoResize : System.Windows.ResizeMode.CanResize;
-			}
-		}
-
-		#endregion
-
 		#region Methods
 
 		public new void Show()
@@ -196,26 +176,6 @@ namespace Sifaw.WPF
 
 		#region UIElement Members
 
-		#region Properties
-
-		private string _denomination = string.Empty;
-		public string Denomination
-		{
-			get { return _denomination; }
-			set { _denomination = value; }
-		}
-
-		private string _description = string.Empty;
-		public string Description
-		{
-			get { return _description; }
-			set { _description = value; }
-		}
-
-		#endregion
-
-		#region Methods
-
 		public void Refresh()
 		{
 			/* Empty */
@@ -233,6 +193,35 @@ namespace Sifaw.WPF
 
 		#endregion
 
-		#endregion
-	}
+        #region UISettings
+
+        //public new bool SizeToContent
+        //{
+        //    get { return base.SizeToContent == System.Windows.SizeToContent.WidthAndHeight; }
+        //    set
+        //    {
+        //        base.SizeToContent = value ? System.Windows.SizeToContent.WidthAndHeight : System.Windows.SizeToContent.Manual;
+        //        base.ResizeMode = value ? System.Windows.ResizeMode.NoResize : System.Windows.ResizeMode.CanResize;
+        //    }
+        //}
+
+        private ViewSettings _uiSettings = null;
+        public ViewSettings UISettings
+        {
+            get 
+            {
+                if (_uiSettings == null)
+                    _uiSettings = new WindowSettings(this);
+
+                return _uiSettings;
+            }
+        }
+
+        UISettings Views.UIElement.UISettings
+        {
+            get { return UISettings; }
+        }
+
+        #endregion
+    }
 }

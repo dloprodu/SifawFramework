@@ -32,7 +32,7 @@ namespace Sifaw.Views
 	/// de un elemento de interfaz de usuario.
 	/// </summary>
 	[Serializable]
-    public class UISettings : ObservableBase
+    public abstract class UISettings : ObservableBase
 	{
 		#region Fields
 
@@ -258,7 +258,7 @@ namespace Sifaw.Views
 		/// <summary>
 		/// Inicializa una nueva instancia de la clase <see cref="UISettings"/>.
 		/// </summary>
-		public UISettings()
+		protected UISettings()
 		{
 		}
 

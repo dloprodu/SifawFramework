@@ -136,7 +136,7 @@ namespace Sifaw.Controllers.Components
 			/// estableciendo un valor en la propiedad <see cref="Filter"/>.
 			/// </summary>
 			/// <param name="filter">Filtro al finalizar la controladora.</param>
-			public Output(TFilter filter)
+			protected Output(TFilter filter)
 				: base()
 			{
 				_filter = filter;

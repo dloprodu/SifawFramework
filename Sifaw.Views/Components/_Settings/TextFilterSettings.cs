@@ -28,7 +28,7 @@ namespace Sifaw.Views.Components
 	/// de un componente de interfaz de usuario.
 	/// </summary>
 	[Serializable]
-	public class TextFilterSettings : ComponentSettings
+	public abstract class TextFilterSettings : ComponentSettings
 	{
         #region Fields
 
@@ -61,7 +61,7 @@ namespace Sifaw.Views.Components
         /// <summary>
         /// Inicializa una nueva instancia de la clase <see cref="TextFilterSettings"/>.
 		/// </summary>
-        public TextFilterSettings()
+        protected TextFilterSettings()
 			: base()
 		{
             this._placeholder = "Buscar...";

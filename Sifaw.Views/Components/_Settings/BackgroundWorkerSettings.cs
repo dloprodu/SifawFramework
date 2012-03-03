@@ -28,7 +28,7 @@ namespace Sifaw.Views.Components
 	/// de un componente de interfaz de usuario.
 	/// </summary>
 	[Serializable]
-	public class BackgroundWorkerSettings : ComponentSettings
+	public abstract class BackgroundWorkerSettings : ComponentSettings
 	{
 		#region Fields
 
@@ -150,7 +150,7 @@ namespace Sifaw.Views.Components
 		/// <summary>
 		/// Inicializa una nueva instancia de la clase <see cref="BackgroundWorkerSettings"/>.
 		/// </summary>
-		public BackgroundWorkerSettings()
+		protected BackgroundWorkerSettings()
 			: base()
 		{
 			this.Summary = "Operación pesada";

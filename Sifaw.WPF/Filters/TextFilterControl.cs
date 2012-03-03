@@ -132,37 +132,7 @@ namespace Sifaw.WPF.Filters
 
 		#endregion
 
-		#region UIComponent Members
-
-		public new UIFrame Margin
-		{
-			get { return new UIFrame(base.Margin.Left, base.Margin.Top, base.Margin.Right, base.Margin.Bottom); }
-			set { base.Margin = new Thickness(value.Left, value.Top, value.Right, value.Bottom); }
-		}
-
-		#endregion
-
 		#region UIElement Members
-
-		#region Properties
-
-		private string _denomination = string.Empty;
-		public string Denomination
-		{
-			get { return _denomination; }
-			set { _denomination = value; }
-		}
-
-		private string _description = string.Empty;
-		public string Description
-		{
-			get { return _description; }
-			set { _description = value; }
-		}
-
-		#endregion
-
-		#region Methods
 
 		public void Refresh()
 		{
@@ -181,6 +151,30 @@ namespace Sifaw.WPF.Filters
 
 		#endregion
 
-		#endregion
-	}
+        #region UISettings
+
+        private TextFilterSettings _uiSettings = null;
+        public TextFilterSettings UISettings
+        {
+            get
+            {
+                if (_uiSettings == null)
+                    _uiSettings = new TextFilterControlSettings(this);
+
+                return _uiSettings;
+            }
+        }
+
+        ComponentSettings UIComponent.UISettings
+        {
+            get { return UISettings; }
+        }
+
+        UISettings Views.UIElement.UISettings
+        {
+            get { return UISettings; }
+        }
+
+        #endregion
+    }
 }

@@ -113,6 +113,10 @@
       <Project>{743FBFCD-68ED-4F4B-AA3A-09E63E65442B}</Project>
       <Name>Sifaw.Controllers</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Sifaw.Core\Sifaw.Core.csproj">
+      <Project>{00C17ECC-56B7-4FBA-A4A5-72D7E7D2A4B7}</Project>
+      <Name>Sifaw.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Sifaw.Views\Sifaw.Views.csproj">
       <Project>{9E483C7A-D5A1-4D42-9490-4D791184ED36}</Project>
       <Name>Sifaw.Views</Name>

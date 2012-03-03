@@ -30,7 +30,7 @@ namespace Sifaw.Views
 	/// de un componente de interfaz de usuario.
 	/// </summary>
 	[Serializable]
-	public class ComponentSettings : UISettings
+	public abstract class ComponentSettings : UISettings
 	{
 		#region Fields
 
@@ -116,7 +116,7 @@ namespace Sifaw.Views
 		/// <summary>
 		/// Inicializa una nueva instancia de la clase <see cref="ComponentSettings"/>.
 		/// </summary>
-		public ComponentSettings()
+		protected ComponentSettings()
 			: base()
 		{
 		}

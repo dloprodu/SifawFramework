@@ -35,7 +35,7 @@ namespace Sifaw.WPF
 
         public TextFilterControlSettings(TextFilterControl control)
         {
-            
+            SettingsOperationsManager.SettingsDataBinding(this, control);
         }
 
         #endregion

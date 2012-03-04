@@ -33,7 +33,7 @@ namespace Sifaw.WPF
 
         public BackgroundWorkerControlSettings(BackgroundWorkerControl control)
         {
-            
+            SettingsOperationsManager.SettingsDataBinding(this, control);
         }
 
         #endregion

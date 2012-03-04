@@ -30,9 +30,9 @@ namespace Sifaw.WPF
     {
         #region Constructor
 
-        public WindowSettings(Window view)
+        public WindowSettings(Window window)
         {
-            
+            SettingsOperationsManager.SettingsDataBinding(this, window);
         }
 
         #endregion

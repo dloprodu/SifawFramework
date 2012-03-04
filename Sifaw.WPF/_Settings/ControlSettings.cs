@@ -32,7 +32,7 @@ namespace Sifaw.WPF
 
         public ControlSettings(Control control)
         {
-            
+            SettingsOperationsManager.SettingsDataBinding(this, control);
         }
 
         #endregion

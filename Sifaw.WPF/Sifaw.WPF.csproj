@@ -87,6 +87,7 @@
     <Compile Include="WPFProvider.cs" />
     <Compile Include="_Settings\ControlSettings.cs" />
     <Compile Include="_Settings\BackgroundWorkerControlSettings.cs" />
+    <Compile Include="SettingsOperationsManager.cs" />
     <Compile Include="_Settings\WindowSettings.cs" />
     <Compile Include="_Settings\TextFilterControlSettings.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">

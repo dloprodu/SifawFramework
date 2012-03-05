@@ -193,17 +193,7 @@ namespace Sifaw.WPF
 
 		#endregion
 
-        #region UISettings
-
-        //public new bool SizeToContent
-        //{
-        //    get { return base.SizeToContent == System.Windows.SizeToContent.WidthAndHeight; }
-        //    set
-        //    {
-        //        base.SizeToContent = value ? System.Windows.SizeToContent.WidthAndHeight : System.Windows.SizeToContent.Manual;
-        //        base.ResizeMode = value ? System.Windows.ResizeMode.NoResize : System.Windows.ResizeMode.CanResize;
-        //    }
-        //}
+        #region UISettings        
 
         private ViewSettings _uiSettings = null;
         public ViewSettings UISettings

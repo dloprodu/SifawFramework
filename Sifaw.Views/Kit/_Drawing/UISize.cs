@@ -33,20 +33,26 @@ namespace Sifaw.Views.Kit
         public static readonly UISize Empty;
 
         /// <summary>
+        /// Representa un <see cref="UISize"/> cuyos valores de ancho y alto son <see cref="double.PositiveInfinity"/>.
+        /// </summary>
+        public static readonly UISize Infinity;
+
+        /// <summary>
 		/// Obtiene o establece el componente horizontal de esta estructura <see cref="UISize"/>.
         /// </summary>
-		public double Width;
+		public readonly double Width;
         
         /// <summary>
 		/// Obtiene o establece el componente vertical de esta estructura <see cref="UISize"/>.
         /// </summary>
-        public double Height;
+        public readonly double Height;
 
         #region Constructors
 
         static UISize()
         {
             Empty = new UISize(0.0f, 0.0f);
+            Infinity = new UISize(double.PositiveInfinity, double.PositiveInfinity);
         }
 
         /// <summary>

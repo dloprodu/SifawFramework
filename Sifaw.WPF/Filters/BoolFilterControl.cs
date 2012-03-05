@@ -33,6 +33,8 @@ using Sifaw.Views;
 using Sifaw.Views.Components.Filters;
 using Sifaw.Views.Kit;
 
+using Sifaw.WPF.CCL;
+
 
 namespace Sifaw.WPF.Filters
 {
@@ -199,5 +201,49 @@ namespace Sifaw.WPF.Filters
         }
 
         #endregion
-	}
+
+        #region Miscellany
+
+        [Serializable]
+        public class BoolFilterControlSettings : ControlSettings, BoolFilterSettings
+        {
+            #region Fields
+
+            private string _textDisplay = string.Empty;
+
+            #endregion
+
+            #region Properties
+
+            /// <summary>
+            /// Obtiene o establece el texto a mostrar.
+            /// </summary>
+            public string TextDisplay
+            {
+                get { return _textDisplay; }
+                set
+                {
+                    if (_textDisplay != value)
+                    {
+                        _textDisplay = value;
+                        OnPropertyChanged(() => TextDisplay);
+                    }
+                }
+            }
+
+            #endregion
+
+            #region Constructor
+
+            public BoolFilterControlSettings(BoolFilterControl control)
+                : base(control)
+            {
+                UtilWPF.BindField(this, "TextDisplay", control, BoolFilterControl.ContentProperty, BindingMode.TwoWay);
+            }
+
+            #endregion
+        }
+
+        #endregion
+    }
 }

@@ -128,11 +128,14 @@ namespace Sifaw.WPF
 			UtilWPF.BindField(this, "Width",               control, Control.WidthProperty,               BindingMode.TwoWay);
 			UtilWPF.BindField(this, "HorizontalAlignment", control, Control.HorizontalAlignmentProperty, BindingMode.TwoWay, SettingsOperationsManager.UIHAlignToHAlign);
 			UtilWPF.BindField(this, "VerticalAlignment",   control, Control.VerticalAlignmentProperty,   BindingMode.TwoWay, SettingsOperationsManager.UIVAlignToVAlign);
+            UtilWPF.BindField(this, "MinWidth",            control, Control.MinWidthProperty,            BindingMode.TwoWay);
+            UtilWPF.BindField(this, "MaxWidth",            control, Control.MaxWidthProperty,            BindingMode.TwoWay);
+            UtilWPF.BindField(this, "MinHeight",           control, Control.MinHeightProperty,           BindingMode.TwoWay);
+            UtilWPF.BindField(this, "MaxHeight",           control, Control.MaxHeightProperty,           BindingMode.TwoWay);
+
 
 			//settings.HeightMode ...
 			//settings.WidthMode ...
-			//settings.MinSize ...
-			//settings.MaxSize ...
 		}
 
         #endregion

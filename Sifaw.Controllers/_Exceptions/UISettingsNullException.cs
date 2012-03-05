@@ -23,16 +23,16 @@ using System.Text;
 namespace Sifaw.Controllers
 {
 	/// <summary>
-	/// Excepción producida cuando una controladora de interfaz de usuario hace referencia
-	/// a su vista y el ViewLinker no ha devuelto una instnacia válida de la misma.
+	/// Excepción producida cuando una controladora de interfaz de usuario
+    /// no obtiene una instancia válida del los ajustes del elemento de interfaz.
 	/// </summary>
-	public class AbstractUILinkerNullException : Exception
+	public class UISettingsNullException : Exception
 	{
 		/// <summary>
-		/// Inicializa una nueva instancia de la clase <see cref="AbstractUILinkerNullException"/>.
+        /// Inicializa una nueva instancia de la clase <see cref="UISettingsNullException"/>.
 		/// </summary>
-		public AbstractUILinkerNullException()
-			: base("El AbstractUILinker no ha devuelto una instancia válida para el elemento de la interfaz de usuario.")
+        public UISettingsNullException()
+			: base("No se ha cargado una instancia válida de la configuración del elemento de interfaz de usuario.")
 		{
 		}
 	}

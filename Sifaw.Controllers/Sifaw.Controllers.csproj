@@ -129,6 +129,7 @@
     <Compile Include="_Events\CLComponentChangedEvent.cs" />
     <Compile Include="_Exceptions\AbstractUILinkerNullException.cs" />
     <Compile Include="Components\_Exceptions\NotValidFilterException.cs" />
+    <Compile Include="_Exceptions\UISettingsNullException.cs" />
     <Compile Include="_Exceptions\NotAllowResetException.cs" />
     <Compile Include="_Exceptions\NotCanStartException.cs" />
     <Compile Include="_Exceptions\NotValidStateException.cs" />

@@ -33,6 +33,11 @@ namespace Sifaw.Views.Kit
         public static readonly UIPoint Empty;
 
         /// <summary>
+        /// Representa un <see cref="UIPoint"/> cuyos valores de ancho y alto son <see cref="double.PositiveInfinity"/>.
+        /// </summary>
+        public static readonly UIPoint Infinity;
+
+        /// <summary>
         /// Obtiene o establece el valor de la coordenada <see cref="UIPoint"/> de esta
         /// estructura System.Windows.Point. El valor predeterminado es 0.
         /// </summary>
@@ -49,6 +54,7 @@ namespace Sifaw.Views.Kit
         static UIPoint()
         {
             Empty = new UIPoint(0.0f, 0.0f);
+            Infinity = new UIPoint(double.PositiveInfinity, double.PositiveInfinity);
         }
 
         /// <summary>

@@ -295,9 +295,22 @@ namespace Sifaw.Controllers
 
         #endregion
 
-		#region Finish Methods
+        #region Start Methods
 
-		/// <summary>
+        protected override void OnBeforeStartController()
+        {
+            base.OnBeforeStartController();
+
+            /* Forzamos la carga de la configuración. */
+            if (UISettings == null)
+                throw new UISettingsNullException();
+        }
+
+        #endregion
+
+        #region Finish Methods
+
+        /// <summary>
 		/// Invoca al método sobrescirto <see cref="Controller{TInput, TOutput}.OnBeforeFinishControllers(List{IController})"/>
 		/// y posteriormente al método <see cref="Sifaw.Views.UIElement.Reset()"/> de <see cref="UIElement"/>.
 		/// </summary>

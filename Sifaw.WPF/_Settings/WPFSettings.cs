@@ -43,8 +43,8 @@ namespace Sifaw.WPF
 		private double _height = -1;
 		private UILengthModes _widthMode = UILengthModes.WeightedProportion;
 		private UILengthModes _heightMode = UILengthModes.WeightedProportion;
-		private UISize _minSize = UISize.Empty;
-		private UISize _maxSize = UISize.Empty;
+		private UISize _minSize = UISize.Infinity;
+        private UISize _maxSize = UISize.Infinity;
 
 		#endregion
 
@@ -250,9 +250,77 @@ namespace Sifaw.WPF
 
 		#endregion
 
+        #region WPF Properties
+
+        /// <summary>
+        /// Obtiene o establece el ancho mínimo.
+        /// </summary>
+        public double MinWidth
+        {
+            get { return MinSize.Width; }
+            set
+            {
+                if (MinSize.Width != value)
+                {
+                    MinSize = new UISize(value, MinSize.Height);
+                    OnPropertyChanged(() => MinWidth);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Obtiene o establece el ancho máximo.
+        /// </summary>
+        public double MaxWidth
+        {
+            get { return MaxSize.Width; }
+            set
+            {
+                if (MaxSize.Width != value)
+                {
+                    MaxSize = new UISize(value, MaxSize.Height);
+                    OnPropertyChanged(() => MaxWidth);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Obtiene o establece el alto mínimo.
+        /// </summary>
+        public double MinHeight
+        {
+            get { return MinSize.Height; }
+            set
+            {
+                if (MinSize.Height != value)
+                {
+                    MinSize = new UISize(MinSize.Width, value);
+                    OnPropertyChanged(() => MinHeight);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Obtiene o establece el alto máximo.
+        /// </summary>
+        public double MaxHeight
+        {
+            get { return MaxSize.Height; }
+            set
+            {
+                if (MaxSize.Height != value)
+                {
+                    MaxSize = new UISize(MaxSize.Width, value);
+                    OnPropertyChanged(() => MaxHeight);
+                }
+            }
+        }
+
+        #endregion
+
         #region Constructor
 
-		protected WPFSettings()
+        protected WPFSettings()
 		{            
         }
 

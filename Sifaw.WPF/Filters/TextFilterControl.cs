@@ -28,11 +28,12 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-using Sifaw.WPF.CCL;
 using Sifaw.Views.Components;
 using Sifaw.Views;
 using Sifaw.Views.Components.Filters;
 using Sifaw.Views.Kit;
+
+using Sifaw.WPF.CCL;
 
 
 namespace Sifaw.WPF.Filters
@@ -173,6 +174,50 @@ namespace Sifaw.WPF.Filters
         UISettings Views.UIElement.UISettings
         {
             get { return UISettings; }
+        }
+
+        #endregion
+
+        #region Miscellany
+
+        [Serializable]
+        public class TextFilterControlSettings : ControlSettings, TextFilterSettings
+        {
+            #region Fields
+
+            private string _placeholder = string.Empty;
+
+            #endregion
+
+            #region Properties
+
+            /// <summary>
+            /// Obtiene o establece el placeholder, o texto de entrada, para el componente.
+            /// </summary>
+            public string Placeholder
+            {
+                get { return _placeholder; }
+                set
+                {
+                    if (_placeholder != value)
+                    {
+                        _placeholder = value;
+                        OnPropertyChanged(() => Placeholder);
+                    }
+                }
+            }
+
+            #endregion
+
+            #region Constructor
+
+            public TextFilterControlSettings(TextFilterControl control)
+                : base(control)
+            {
+                UtilWPF.BindField(this, "Placeholder", control, TextFilterControl.PlaceholderProperty, BindingMode.TwoWay);
+            }
+
+            #endregion
         }
 
         #endregion

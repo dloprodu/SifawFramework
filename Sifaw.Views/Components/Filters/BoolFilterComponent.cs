@@ -29,8 +29,8 @@ namespace Sifaw.Views.Components.Filters
 	public interface BoolFilterComponent : FilterBaseComponent<bool>
 	{
 		/// <summary>
-		/// Establece el texto que mostrará el componente.
+		/// Obtiene el <see cref="BoolFilterSettings"/> del <see cref="BoolFilterComponent"/>.
 		/// </summary>
-		string Text { set; }
+		new BoolFilterSettings UISettings { get; }
 	}
 }

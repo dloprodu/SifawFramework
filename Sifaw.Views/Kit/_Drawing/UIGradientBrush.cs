@@ -49,6 +49,7 @@ namespace Sifaw.Views.Kit
 
                 return _gradientStops;
             }
+			set { _gradientStops = value; }
         }
 
         #endregion

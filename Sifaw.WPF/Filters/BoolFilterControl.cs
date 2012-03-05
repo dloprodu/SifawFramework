@@ -176,16 +176,21 @@ namespace Sifaw.WPF.Filters
 
         #region UISettings
 
-        private ComponentSettings _uiSettings = null;
-        public ComponentSettings UISettings
-        {
-            get
-            {
-                if (_uiSettings == null)
-                    _uiSettings = new ControlSettings(this);
+		private BoolFilterControlSettings _uiSettings = null;
+		public BoolFilterSettings UISettings
+		{
+			get 
+			{
+				if (_uiSettings == null)
+					_uiSettings = new BoolFilterControlSettings(this);
 
-                return _uiSettings;
-            }
+				return _uiSettings;
+			}
+		}
+
+        ComponentSettings Views.UIComponent.UISettings
+        {
+			get { return UISettings; }
         }
 
         UISettings Views.UIElement.UISettings
@@ -194,5 +199,5 @@ namespace Sifaw.WPF.Filters
         }
 
         #endregion
-    }
+	}
 }

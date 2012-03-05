@@ -31,171 +31,88 @@ namespace Sifaw.Views
 	/// Provee un conjunto de propiedades que permiten modificar la apariencia
 	/// de un elemento de interfaz de usuario.
 	/// </summary>
-	[Serializable]
-    public abstract class UISettings : ObservableBase
+	public interface UISettings
 	{
-		#region Fields
-
-        private string _denomination = string.Empty;
-        private string _description = string.Empty;
-		private UIBrush _background = new UISolidBrush(UIColors.WhiteColors.White);
-		private UIBrush _foreground = new UISolidBrush(UIColors.GrayColors.Black);
-		private UIFrame _margin = UIFrame.Empty;
-		private UIFrame _padding = UIFrame.Empty;
-		private double _width = -1;
-		private double _height = -1;
-		private UILengthModes _widthMode = UILengthModes.WeightedProportion;
-		private UILengthModes _heightMode = UILengthModes.WeightedProportion;
-		private UISize _minSize = UISize.Empty;
-		private UISize _maxSize = UISize.Empty;
-
-		#endregion
-
-		#region Propiedades
-
         /// <summary>
         /// Obtiene o establece una denominación al elemento.
         /// </summary>
-        public string Denomination
+        string Denomination
         {
-            get { return _denomination; }
-            set 
-            {
-                if (_denomination != value)
-                {
-                    _denomination = value;
-                    OnPropertyChanged(() => Denomination);
-                }
-            } 
+			get;
+			set;
         }
 
         /// <summary>
         /// Obtiene o establece una descripción al elemento.
         /// </summary>
-        public string Description
+        string Description
         {
-            get { return _description; }
-            set
-            {
-                if (_description != value)
-                {
-                    _description = value;
-                    OnPropertyChanged(() => Description);
-                }
-            }
+			get;
+			set;
         }
 
 		/// <summary>
 		/// Obtiene o establece el pincel que describe el fondo del elemento.
 		/// </summary>
-		public UIBrush Background
+		UIBrush Background
 		{
-			get { return _background; }
-			set
-            {
-                if (_background != value)
-                {
-                    _background = value;
-                    OnPropertyChanged(() => Background);
-                }
-            }
+			get;
+			set;
 		}
 
 		/// <summary>
 		/// Obtiene o establece el pincel que describe el color de primer plano del elemento.
 		/// </summary>
-		public UIBrush Foreground
+		UIBrush Foreground
 		{
-			get { return _foreground; }
-			set 
-            {
-                if (_foreground != value)
-                {
-                    _foreground = value;
-                    OnPropertyChanged(() => Foreground);
-                }
-            }
+			get;
+			set;
 		}
 
 		/// <summary>
 		/// Obtiene o establece el margen exterior del elemento.
 		/// </summary>
-		public UIFrame Margin
+		UIFrame Margin
 		{
-			get { return _margin; }
-			set 
-            {
-                if (_margin != value)
-                {
-                    _margin = value;
-                    OnPropertyChanged(() => Foreground);
-                }
-            }
+			get;
+			set;
 		}
 
 		/// <summary>
 		/// Obtiene o establece el relleno interior del elemento.
 		/// </summary>
-		public UIFrame Padding
+		UIFrame Padding
 		{
-			get { return _padding; }
-			set
-            {
-                if (_padding != value)
-                {
-                    _padding = value;
-                    OnPropertyChanged(() => Padding);
-                }
-            }
+			get;
+			set;
 		}
 
 		/// <summary>
 		/// Obtiene o establece el tamaño mínimo del elemento.
 		/// </summary>
-		public UISize MinSize
+		UISize MinSize
 		{
-			get { return _minSize; }
-			set
-            {
-                if (_minSize != value)
-                {
-                    _minSize = value;
-                    OnPropertyChanged(() => MinSize);
-                }
-            }
+			get;
+			set;
 		}
 
 		/// <summary>
 		/// Obtiene o establece el tamaño máximo del elemento.
 		/// </summary>
-		public UISize MaxSize
+		UISize MaxSize
 		{
-			get { return _maxSize; }
-			set 
-            {
-                if (_maxSize != value)
-                {
-                    _maxSize = value;
-                    OnPropertyChanged(() => MaxSize);
-                }
-            }
+			get;
+			set;
 		}
 
 		/// <summary>
 		/// Obtiene o establece el ancho del elemento. El valor por defecto es -1, lo que sifnifica
 		/// que se mantiene el ancho por defecto de la representación concreta del elemento.
 		/// </summary>
-		public double Width
+		double Width
 		{
-			get { return _width; }
-			set
-            {
-                if (_width != value)
-                {
-                    _width = value;
-                    OnPropertyChanged(() => Width);
-                }
-            }
+			get;
+			set;
 		}
 
 		/// <summary>
@@ -203,34 +120,20 @@ namespace Sifaw.Views
 		/// <see cref="UILengthModes.WeightedProportion"/>, lo que significa que intentará ocupar
 		/// el ancho disponible del elemento primario;
 		/// </summary>
-		public UILengthModes WidthMode
+		UILengthModes WidthMode
 		{
-			get { return _widthMode; }
-			set
-            {
-                if (_widthMode != value)
-                {
-                    _widthMode = value;
-                    OnPropertyChanged(() => WidthMode);
-                }
-            }
+			get;
+			set;
 		}
 
 		/// <summary>
 		/// Obtiene o establece el alto del elemento. El valor por defecto es -1, lo que sifnifica
 		/// que se mantiene el alto por defecto de la representación concreta del elemento.
 		/// </summary>
-		public double Height
+		double Height
 		{
-			get { return _height; }
-			set
-            {
-                if (_height != value)
-                {
-                    _height = value;
-                    OnPropertyChanged(() => Height);
-                }
-            }
+			get;
+			set;
 		}
 
 		/// <summary>
@@ -238,30 +141,10 @@ namespace Sifaw.Views
 		/// <see cref="UILengthModes.WeightedProportion"/>, lo que significa que intentará ocupar
 		/// el alto disponible del elemento primario;
 		/// </summary>
-		public UILengthModes HeightMode
+		UILengthModes HeightMode
 		{
-			get { return _heightMode; }
-			set 
-            {
-                if (_heightMode != value)
-                {
-                    _heightMode = value;
-                    OnPropertyChanged(() => HeightMode);
-                }
-            }
+			get;
+			set;
 		}
-
-		#endregion
-
-		#region Constructor
-
-		/// <summary>
-		/// Inicializa una nueva instancia de la clase <see cref="UISettings"/>.
-		/// </summary>
-		protected UISettings()
-		{
-		}
-
-		#endregion    
-    }
+   }
 }

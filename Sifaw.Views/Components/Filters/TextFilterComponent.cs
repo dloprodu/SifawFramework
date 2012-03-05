@@ -29,7 +29,7 @@ namespace Sifaw.Views.Components.Filters
     public interface TextFilterComponent : FilterBaseComponent<string>
     {
         /// <summary>
-        /// Obtiene el <see cref="TextFilterSettings"/> del <see cref="FilterBaseComponent{T}"/>.
+		/// Obtiene el <see cref="TextFilterSettings"/> del <see cref="TextFilterComponent"/>.
         /// </summary>
         new TextFilterSettings UISettings { get; }
     }

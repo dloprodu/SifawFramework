@@ -87,9 +87,18 @@
     <Compile Include="WPFProvider.cs" />
     <Compile Include="_Settings\ControlSettings.cs" />
     <Compile Include="_Settings\BackgroundWorkerControlSettings.cs" />
-    <Compile Include="SettingsOperationsManager.cs" />
+    <Compile Include="_Settings\BoolFilterControlSettings.cs" />
+    <Compile Include="_Settings\SettingsOperationsManager.cs" />
+    <Compile Include="_Settings\Converters\UIFrameBrushToBorderBrush.cs" />
+    <Compile Include="_Settings\Converters\UIVAlignToVAlign.cs" />
+    <Compile Include="_Settings\Converters\UIHAlignToHAlign.cs" />
+    <Compile Include="_Settings\Converters\UIPointToPont.cs" />
+    <Compile Include="_Settings\Converters\UIColorToColor.cs" />
+    <Compile Include="_Settings\Converters\UIFrameToThickness.cs" />
+    <Compile Include="_Settings\WPFSettings.cs" />
     <Compile Include="_Settings\WindowSettings.cs" />
     <Compile Include="_Settings\TextFilterControlSettings.cs" />
+    <Compile Include="_Settings\Converters\UIBrushToBrush.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

@@ -35,7 +35,7 @@ namespace Sifaw.Views.Kit
         /// <summary>
         /// Obtiene la ubicación del punto de degradado dentro del vector de degradado.
         /// </summary>
-        public readonly float Offset;
+        public readonly double Offset;
 
         #region Constructor
 
@@ -44,7 +44,7 @@ namespace Sifaw.Views.Kit
         /// </summary>
         /// <param name="color">Color del punto de degradado.</param>
         /// <param name="offset">Punto de degradado dentro del vector de degradado.</param>
-        public UIGradientStop(UIColor color, float offset)
+        public UIGradientStop(UIColor color, double offset)
         {
             Color = color;
             Offset = offset;

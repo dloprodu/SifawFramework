@@ -31,32 +31,22 @@ namespace Sifaw.Views.Kit
     {
         #region Fields
 
-        private UIPoint _startPoint;
-        private UIPoint _endPoint;
+		private double _angle = 0.0f;
 
         #endregion
 
         #region Properties
 
-        /// <summary>
-        /// Obtiene o establece las coordenadas bidimensionales iniciales del degradado
-        /// lineal. El valor predeterminado es (0, 0).
-        /// </summary>
-        public UIPoint StartPoint
-        {
-            get { return _startPoint; }
-            set { _startPoint = value; }
-        }
-
-        /// <summary>
-        /// Obtiene o establece las coordenadas bidimensionales finales del degradado
-        /// lineal. El valor predeterminado es (1,1).
-        /// </summary>
-        public UIPoint EndPoint
-        {
-            get { return _endPoint; }
-            set { _endPoint = value; }
-        }
+		/// <summary>
+		/// Obtiene o devuelve el ángulo, en grados, del delgradado. Un
+		/// valor de 0.0 crea un degradado horizontal, y un valor de 90.0 crea
+		/// un degradado vertical.
+		/// </summary>
+		public double Angle
+		{
+			get { return _angle; }
+			set { _angle = value; }
+		}
 
         #endregion
 
@@ -65,7 +55,7 @@ namespace Sifaw.Views.Kit
         /// <summary>
         /// Inicializa una nueva instancia de la clase <see cref="UILinearGradientBrush"/>.
         /// </summary>
-        protected UILinearGradientBrush()
+        public UILinearGradientBrush()
             : base()
         {
         }
@@ -93,9 +83,7 @@ namespace Sifaw.Views.Kit
             if (!(obj is UILinearGradientBrush))
                 return false;
 
-            return base.Equals(obj) 
-                && StartPoint.Equals(((UILinearGradientBrush)obj).StartPoint)
-                && EndPoint.Equals(((UILinearGradientBrush)obj).EndPoint);
+            return base.Equals(obj) && Angle.Equals(((UILinearGradientBrush)obj).Angle);
         }
 
         /// <summary>
@@ -103,7 +91,7 @@ namespace Sifaw.Views.Kit
         /// </summary>
         public override int GetHashCode()
         {
-            return base.GetHashCode() ^ StartPoint.GetHashCode() ^ EndPoint.GetHashCode();
+            return base.GetHashCode() ^ Angle.GetHashCode();
         }
 
         #endregion

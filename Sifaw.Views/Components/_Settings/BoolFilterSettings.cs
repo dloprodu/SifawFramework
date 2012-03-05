@@ -27,12 +27,12 @@ namespace Sifaw.Views.Components
 	/// Provee un conjunto de propiedades que permiten modificar la apariencia
 	/// de un componente de interfaz de usuario.
 	/// </summary>
-	public interface TextFilterSettings : ComponentSettings
+	public interface BoolFilterSettings : ComponentSettings
 	{
         /// <summary>
-        /// Obtiene o establece el placeholder, o texto de entrada, para el componente.
+        /// Obtiene o establece el texto a mostrar.
         /// </summary>
-		string Placeholder
+		string TextDisplay
 		{
 			get;
 			set;

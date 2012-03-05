@@ -27,139 +27,64 @@ namespace Sifaw.Views.Components
 	/// Provee un conjunto de propiedades que permiten modificar la apariencia
 	/// de un componente de interfaz de usuario.
 	/// </summary>
-	[Serializable]
-	public abstract class BackgroundWorkerSettings : ComponentSettings
+	public interface BackgroundWorkerSettings : ComponentSettings
 	{
-		#region Fields
-
-		private bool _withControl = true;
-		private bool _allowCancel = false;
-		private string _summary = string.Empty;
-		private string _processDescription = string.Empty;
-		private string _progress = string.Empty;
-        private int _maxProgressPercentage = 100;
-
-		#endregion
-
-		#region Properties
-
 		/// <summary>
 		/// Obtiene o establece un valor que indica si el proceso
 		/// se ejecuta con o sin control de seguimiento.
 		/// </summary>
-		public bool WithControl
+		bool WithControl
 		{
-			get { return _withControl; }
-			set
-            {
-                if (_withControl != value)
-                {
-                    _withControl = value;
-                    OnPropertyChanged(() => WithControl);
-                }
-            }
+			get;
+			set;
 		}
 
 		/// <summary>
 		/// Obtiene o establece un valor que indica si se permite
 		/// cancelar el proceso.
 		/// </summary>
-		public bool AllowCancel
+		bool AllowCancel
 		{
-			get { return _allowCancel; }
-			set 
-            {
-                if (_allowCancel != value)
-                {
-                    _allowCancel = value;
-                    OnPropertyChanged(() => AllowCancel);
-                }
-            }
+			get;
+			set;
 		}
 
 		/// <summary>
 		/// Obtiene o establece una descripción breve del proceso.
 		/// </summary>
-		public string Summary
+		string Summary
 		{
-			get { return _summary; }
-			set
-            {
-                if (_summary != value)
-                {
-                    _summary = value;
-                    OnPropertyChanged(() => Summary);
-                }
-            }
+			get;
+			set;
 		}
 
 		/// <summary>
 		/// Obtiene o establece una descripción del proceso.
 		/// </summary>
-		public string ProcessDescription
+		string ProcessDescription
 		{
-			get { return _processDescription; }
-			set 
-            {
-                if (_processDescription != value)
-                {
-                    _processDescription = value;
-                    OnPropertyChanged(() => ProcessDescription);
-                }
-            }
+			get;
+			set;
 		}
 
 		/// <summary>
 		/// Obtiene o establece el texto a mostrar durante el progreso del
 		/// proceso.
 		/// </summary>
-		public string Progress
+		string Progress
 		{
-			get { return _progress; }
-			set 
-            {
-                if (_progress != value)
-                {
-                    _progress = value;
-                    OnPropertyChanged(() => Progress);
-                }
-            }
+			get;
+			set;
 		}
 
         /// <summary>
         /// Obtiene o establece un valor que indica el máximo progreso 
         /// del proceso.
         /// </summary>
-        public int MaxProgressPercentage
-        {
-            get { return _maxProgressPercentage; }
-            set
-            {
-                if (_maxProgressPercentage != value)
-                {
-                    _maxProgressPercentage = value;
-                    OnPropertyChanged(() => MaxProgressPercentage);
-                }
-            }
-        }
-
-		#endregion
-
-		#region Constructor
-
-		/// <summary>
-		/// Inicializa una nueva instancia de la clase <see cref="BackgroundWorkerSettings"/>.
-		/// </summary>
-		protected BackgroundWorkerSettings()
-			: base()
+		int MaxProgressPercentage
 		{
-			this.Summary = "Operación pesada";
-			this.ProcessDescription = "Se está ejecutando un proceso pesado. Esta operación puede tardar varios minutos. Espere por favor...";
-			this.Progress = "Ejecutando proceso...";
-			this.WithControl = true;
-			this.AllowCancel = false;
+			get;
+			set;
 		}
-
-		#endregion
 	}
 }

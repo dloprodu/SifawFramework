@@ -27,45 +27,15 @@ namespace Sifaw.Views
 	/// Provee un conjunto de propiedades que permiten modificar la apariencia
 	/// de una vista de interfaz de usuario.
 	/// </summary>
-	[Serializable]
-	public abstract class ViewSettings : UISettings
+	public interface ViewSettings : UISettings
 	{
-		#region Fields
-
-		private string _header = "SifaWake Application";
-
-		#endregion
-
-		#region Properties
-
 		/// <summary>
 		/// Obtiene o establece la cabecera de la vista.
 		/// </summary>
-		public string Header
+		string Header
 		{
-			get { return _header; }
-			set
-            {
-                if (_header != value)
-                {
-                    _header = value;
-                    OnPropertyChanged(() => Header);
-                }
-            }
+			get;
+			set;
 		}
-		
-		#endregion
-
-		#region Constructor
-
-		/// <summary>
-		/// Inicializa una nueva instancia de la clase <see cref="ViewSettings"/>.
-		/// </summary>
-		protected ViewSettings()
-			: base()
-		{
-		}
-
-		#endregion
 	}
 }

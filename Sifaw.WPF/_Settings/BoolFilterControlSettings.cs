@@ -30,42 +30,42 @@ using Sifaw.WPF.Filters;
 namespace Sifaw.WPF
 {
 	[Serializable]
-    public class TextFilterControlSettings : ControlSettings, TextFilterSettings
+    public class BoolFilterControlSettings : ControlSettings, BoolFilterSettings
     {
 		#region Fields
 
-		private string _placeholder = string.Empty;
+		private string _textDisplay = string.Empty;
 
 		#endregion
 
 		#region Properties
 
 		/// <summary>
-		/// Obtiene o establece el placeholder, o texto de entrada, para el componente.
+		/// Obtiene o establece el texto a mostrar.
 		/// </summary>
-		public string Placeholder
+		public string TextDisplay
 		{
-			get { return _placeholder; }
+			get { return _textDisplay; }
 			set
 			{
-				if (_placeholder != value)
+				if (_textDisplay != value)
 				{
-					_placeholder = value;
-					OnPropertyChanged(() => Placeholder);
+					_textDisplay = value;
+					OnPropertyChanged(() => TextDisplay);
 				}
 			}
-		}
+		}		
 
 		#endregion
 
         #region Constructor
 
-        public TextFilterControlSettings(TextFilterControl control)
+		public BoolFilterControlSettings(BoolFilterControl control)
 			: base(control)
         {
             
         }
 
         #endregion
-    }
+	}
 }

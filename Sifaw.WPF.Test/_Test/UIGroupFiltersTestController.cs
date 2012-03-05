@@ -361,7 +361,7 @@ namespace Sifaw.WPF.Test
 			TextFilter.Start(new UITextFilterController.Input("prueba"));
 
 			BoolFilter.UISettings.Margin = new UIFrame(3);
-			BoolFilter.UISettings.Description = "Mostrar algo al chequear ...";
+			BoolFilter.UISettings.TextDisplay = "Mostrar algo al chequear ...";
 			BoolFilter.Start(new UIBoolFilterController.Input(true));
 
 			EnumFilter.UISettings.Margin = new UIFrame(3);

@@ -32,10 +32,17 @@ namespace Sifaw.Views
 		/// <summary>
 		/// Obtiene o establece la cabecera de la vista.
 		/// </summary>
-		string Header
-		{
-			get;
-			set;
-		}
+		string Header { get; set; }
+
+		/// <summary>
+		/// Obtiene o establece un valor que indica si se debe ajustar el tamaño del elemento a su contenido.
+		/// </summary>
+		bool SizeToContent { get; set; }
+
+		/// <summary>
+		/// Obtiene o establece un valor que indica si se permite al usuario 
+		/// redimensionar la vista.
+		/// </summary>
+		bool AllowResize { get; set; }
 	}
 }

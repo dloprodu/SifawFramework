@@ -39,11 +39,10 @@ namespace Sifaw.WPF
 		private UIBrush _foreground = new UISolidBrush(UIColors.GrayColors.Black);
 		private UIFrame _margin = UIFrame.Empty;
 		private UIFrame _padding = UIFrame.Empty;
-		private double _width = -1;
-		private double _height = -1;
-		private UILengthModes _widthMode = UILengthModes.WeightedProportion;
-		private UILengthModes _heightMode = UILengthModes.WeightedProportion;
-		private UISize _minSize = UISize.Infinity;
+		// Double.NaN means in this case the same like Auto in XAML
+		private double _width = double.NaN;
+		private double _height = double.NaN;
+		private UISize _minSize = UISize.Empty;
         private UISize _maxSize = UISize.Infinity;
 
 		#endregion
@@ -196,24 +195,6 @@ namespace Sifaw.WPF
 		}
 
 		/// <summary>
-		/// Obtiene o establece el modo de ajustar horizontalmente el elemento. El valor por defecto es 
-		/// <see cref="UILengthModes.WeightedProportion"/>, lo que significa que intentará ocupar
-		/// el ancho disponible del elemento primario;
-		/// </summary>
-		public UILengthModes WidthMode
-		{
-			get { return _widthMode; }
-			set
-            {
-                if (_widthMode != value)
-                {
-                    _widthMode = value;
-                    OnPropertyChanged(() => WidthMode);
-                }
-            }
-		}
-
-		/// <summary>
 		/// Obtiene o establece el alto del elemento. El valor por defecto es -1, lo que sifnifica
 		/// que se mantiene el alto por defecto de la representación concreta del elemento.
 		/// </summary>
@@ -226,24 +207,6 @@ namespace Sifaw.WPF
                 {
                     _height = value;
                     OnPropertyChanged(() => Height);
-                }
-            }
-		}
-
-		/// <summary>
-		/// Obtiene o establece el modo de ajustar verticalmente el elemento. El valor por defecto es 
-		/// <see cref="UILengthModes.WeightedProportion"/>, lo que significa que intentará ocupar
-		/// el alto disponible del elemento primario;
-		/// </summary>
-		public UILengthModes HeightMode
-		{
-			get { return _heightMode; }
-			set 
-            {
-                if (_heightMode != value)
-                {
-                    _heightMode = value;
-                    OnPropertyChanged(() => HeightMode);
                 }
             }
 		}

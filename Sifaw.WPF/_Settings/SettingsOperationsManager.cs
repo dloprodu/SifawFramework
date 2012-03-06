@@ -122,6 +122,30 @@ namespace Sifaw.WPF
 			}
 		}
 
+		private static UIAutoSizeToSizeToContent _uiAutoSizeToSizeToContent = null;
+		public static UIAutoSizeToSizeToContent UIAutoSizeToSizeToContent
+		{
+			get
+			{
+				if (_uiAutoSizeToSizeToContent == null)
+					_uiAutoSizeToSizeToContent = new UIAutoSizeToSizeToContent();
+
+				return _uiAutoSizeToSizeToContent;
+			}
+		}
+
+		private static UIAllowResizeToResizeMode _uiAllowResizeToResizeMode = null;
+		public static UIAllowResizeToResizeMode UIAllowResizeToResizeMode
+		{
+			get
+			{
+				if (_uiAllowResizeToResizeMode == null)
+					_uiAllowResizeToResizeMode = new UIAllowResizeToResizeMode();
+
+				return _uiAllowResizeToResizeMode;
+			}
+		}
+
 		#endregion
 	}
 }

@@ -34,39 +34,23 @@ namespace Sifaw.Views
 		/// <summary>
 		/// Obtiene o establece el grosor del borde del componente.
 		/// </summary>
-		UIFrame Border
-		{
-			get;
-			set;
-		}
+		UIFrame Border { get; set; }
 
 		/// <summary>
 		/// Obtiene o establece un pincel que describe el fondo del borde del componente.
 		/// </summary>
-		UIFrameBrush BorderBrush
-		{
-			get;
-			set;
-		}
+		UIFrameBrush BorderBrush { get; set; }
 
 		/// <summary>
 		/// Obtiene o establece la alineación horizontal que se aplican a este elemento
 		/// cuando se aloja dentro de un elemento primario.
 		/// </summary>
-		UIHorizontalAlignment HorizontalAlignment
-		{
-			get;
-			set;
-		}
+		UIHorizontalAlignment HorizontalAlignment { get; set; }
 
 		/// <summary>
 		/// Obtiene o establece la alineación vertical que se aplican a este elemento
 		/// cuando se aloja dentro de un elemento primario.
 		/// </summary>
-		UIVerticalAlignment VerticalAlignment
-		{
-			get;
-			set;
-		}
+		UIVerticalAlignment VerticalAlignment { get; set; }
 	}
 }

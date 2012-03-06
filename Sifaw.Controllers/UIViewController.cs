@@ -325,6 +325,12 @@ namespace Sifaw.Controllers
             UIElement.AfterShow += new EventHandler(UIElement_AfterShow);
             UIElement.BeforeClose += new UIFinishRequestEventHandler(UIElement_BeforeClose);
             UIElement.AfterClose += new EventHandler(UIElement_AfterClose);
+
+			/* Default Settings... */
+			UISettings.Width = 800;
+			UISettings.Height = 600;
+			UISettings.AllowResize = true;
+			UISettings.SizeToContent = false;
         }
 
         #endregion

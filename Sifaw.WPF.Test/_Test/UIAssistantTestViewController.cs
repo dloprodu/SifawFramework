@@ -131,6 +131,16 @@ namespace Sifaw.WPF.Test
 
 		#region UIElement Methods
 
+		protected override void OnAfterUIElementLoad()
+		{
+			base.OnAfterUIElementLoad();
+
+			UISettings.SizeToContent = false;
+			UISettings.AllowResize = false;
+			UISettings.Width = 800;
+			UISettings.Height = 600;
+		}
+
 		protected override void OnAfterUIShow()
 		{
 			base.OnAfterUIShow();

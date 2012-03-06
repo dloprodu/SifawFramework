@@ -33,58 +33,34 @@ namespace Sifaw.Views.Components
 		/// Obtiene o establece un valor que indica si el proceso
 		/// se ejecuta con o sin control de seguimiento.
 		/// </summary>
-		bool WithControl
-		{
-			get;
-			set;
-		}
+		bool WithControl { get; set; }
 
 		/// <summary>
 		/// Obtiene o establece un valor que indica si se permite
 		/// cancelar el proceso.
 		/// </summary>
-		bool AllowCancel
-		{
-			get;
-			set;
-		}
+		bool AllowCancel { get; set; }
 
 		/// <summary>
 		/// Obtiene o establece una descripción breve del proceso.
 		/// </summary>
-		string Summary
-		{
-			get;
-			set;
-		}
+		string Summary { get; set; }
 
 		/// <summary>
 		/// Obtiene o establece una descripción del proceso.
 		/// </summary>
-		string ProcessDescription
-		{
-			get;
-			set;
-		}
+		string ProcessDescription { get; set; }
 
 		/// <summary>
 		/// Obtiene o establece el texto a mostrar durante el progreso del
 		/// proceso.
 		/// </summary>
-		string Progress
-		{
-			get;
-			set;
-		}
+		string Progress { get; set; }
 
         /// <summary>
         /// Obtiene o establece un valor que indica el máximo progreso 
         /// del proceso.
         /// </summary>
-		int MaxProgressPercentage
-		{
-			get;
-			set;
-		}
+		int MaxProgressPercentage { get; set; }
 	}
 }

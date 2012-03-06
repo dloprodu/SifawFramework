@@ -86,6 +86,8 @@
     <Compile Include="TabHostControl.cs" />
     <Compile Include="WPFProvider.cs" />
     <Compile Include="_Settings\ControlSettings.cs" />
+    <Compile Include="_Settings\Converters\UIAllowResizeToResizeMode.cs" />
+    <Compile Include="_Settings\Converters\UIAutoSizeToWPFAutoSize.cs" />
     <Compile Include="_Settings\SettingsOperationsManager.cs" />
     <Compile Include="_Settings\Converters\UIFrameBrushToBorderBrush.cs" />
     <Compile Include="_Settings\Converters\UIVAlignToVAlign.cs" />

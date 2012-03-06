@@ -27,50 +27,31 @@ using Sifaw.Views.Kit;
 
 namespace Sifaw.WPF.Converters
 {
-	public class UIHAlignToHAlign : IValueConverter
+	public class UIAllowResizeToResizeMode : IValueConverter
 	{
 		#region IValueConverter Members
 
 		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
 		{
 			if (value != null)
-				switch ((UIHorizontalAlignment)value)
-				{
-					case UIHorizontalAlignment.Left:
-						return HorizontalAlignment.Left;
+				return ((bool)value) ? ResizeMode.CanResize : ResizeMode.NoResize;
 
-					case UIHorizontalAlignment.Right:
-						return HorizontalAlignment.Right;
-
-					case UIHorizontalAlignment.Center:
-						return HorizontalAlignment.Center;
-
-					case UIHorizontalAlignment.Fill:
-						return HorizontalAlignment.Stretch;
-				}
-
-			return HorizontalAlignment.Stretch;
+			return ResizeMode.CanResize;
 		}
 
 		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
 		{
 			if (value != null)
-				switch ((HorizontalAlignment)value)
+				switch ((ResizeMode)value)
 				{
-					case HorizontalAlignment.Left:
-						return UIHorizontalAlignment.Left;
+					case ResizeMode.NoResize:
+						return false;
 
-					case HorizontalAlignment.Right:
-						return UIHorizontalAlignment.Right;
-
-					case HorizontalAlignment.Center:
-						return UIHorizontalAlignment.Center;
-
-					case HorizontalAlignment.Stretch:
-						return UIHorizontalAlignment.Fill;
+					default:
+						return true;
 				}
 
-			return UIHorizontalAlignment.Fill;
+			return true;
 		}
 
 		#endregion

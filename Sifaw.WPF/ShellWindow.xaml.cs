@@ -41,13 +41,13 @@ namespace Sifaw.WPF
 
 		public ShellWindow()
 		{
-			InitializeComponent();
+			InitializeComponent();			
 		}
 
 		#endregion
 
 		#region Events Handlers
-		
+
 		private void Window_Loaded(object sender, RoutedEventArgs e)
 		{
 			// Cuando una ventana se abre por primera vez, se producen los eventos Loaded y ContentRendered una vez que se produce el evento Activated. 
@@ -60,9 +60,9 @@ namespace Sifaw.WPF
 			// Es la controladora quién controla el Close.
 			UIFinishRequestEventArgs args = new UIFinishRequestEventArgs(true);
 			OnBeforeClose(args);
-			e.Cancel = args.Cancel;			
+			e.Cancel = args.Cancel;
 		}
-		
+
 		private void Window_Closed(object sender, EventArgs e)
 		{
 			OnAfterClose(EventArgs.Empty);
@@ -94,7 +94,7 @@ namespace Sifaw.WPF
 			// Solicitud de la controladora de cerrar la vista por lo que 
 			// desenganchamos el evento Clousing para que la vista se
 			// cierre correctamente.
-			this.Closing -= new System.ComponentModel.CancelEventHandler(Window_Closing);			
+			this.Closing -= new System.ComponentModel.CancelEventHandler(Window_Closing);
 			base.Close();
 		}
 
@@ -133,9 +133,9 @@ namespace Sifaw.WPF
 			return MessageBox.Show(this, message, "Mensaje", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes;
 		}
 
-        public bool ConfirmMessage(string title, string message)
+		public bool ConfirmMessage(string title, string message)
 		{
-            return MessageBox.Show(this, message, title, MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes;
+			return MessageBox.Show(this, message, title, MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes;
 		}
 
 		#endregion
@@ -193,25 +193,25 @@ namespace Sifaw.WPF
 
 		#endregion
 
-        #region UISettings        
+		#region UISettings
 
-        private ViewSettings _uiSettings = null;
-        public ViewSettings UISettings
-        {
-            get 
-            {
-                if (_uiSettings == null)
-                    _uiSettings = new WindowSettings(this);
+		private ViewSettings _uiSettings = null;
+		public ViewSettings UISettings
+		{
+			get
+			{
+				if (_uiSettings == null)
+					_uiSettings = new WindowSettings(this);
 
-                return _uiSettings;
-            }
-        }
+				return _uiSettings;
+			}
+		}
 
-        UISettings Views.UIElement.UISettings
-        {
-            get { return UISettings; }
-        }
+		UISettings Views.UIElement.UISettings
+		{
+			get { return UISettings; }
+		}
 
-        #endregion
-    }
+		#endregion
+	}
 }

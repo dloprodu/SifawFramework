@@ -29,9 +29,10 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.ComponentModel;
 
-using Sifaw.Views.Components;
 using Sifaw.Views;
+using Sifaw.Views.Components;
 using Sifaw.Views.Kit;
+
 using Sifaw.WPF.CCL;
 
 
@@ -42,43 +43,101 @@ namespace Sifaw.WPF
 	/// </summary>
 	public partial class BackgroundWorkerControl : UserControl, BackgroundWorkerComponent
 	{
-        #region Properties
+		#region Dependency Properties
 
-        public bool WithControl
+		public static readonly DependencyProperty WithControlProperty = DependencyProperty.Register(
+			"WithControl",
+			typeof(bool),
+			typeof(BackgroundWorkerControl),
+			new FrameworkPropertyMetadata(
+				false,
+				new PropertyChangedCallback(BackgroundWorkerControl.OnWithControlChanged)));
+
+		public static readonly DependencyProperty AllowCancelProperty = DependencyProperty.Register(
+			"AllowCancel",
+			typeof(bool),
+			typeof(BackgroundWorkerControl),
+			new FrameworkPropertyMetadata(
+				false,
+				new PropertyChangedCallback(BackgroundWorkerControl.OnAllowCancelChanged)));
+
+		public static readonly DependencyProperty MaxProgressPercentageProperty = DependencyProperty.Register(
+			"MaxProgressPercentage",
+			typeof(int),
+			typeof(BackgroundWorkerControl),
+			new FrameworkPropertyMetadata(
+				100,
+				new PropertyChangedCallback(BackgroundWorkerControl.OnMaxProgressPercentageChanged)));
+
+		public static readonly DependencyProperty SummaryProperty = DependencyProperty.Register(
+			"Summary",
+			typeof(string),
+			typeof(BackgroundWorkerControl),
+			new FrameworkPropertyMetadata(
+				"Operación pesada...",
+				new PropertyChangedCallback(BackgroundWorkerControl.OnSummaryChanged)));
+
+		public static readonly DependencyProperty ProcessDescriptionProperty = DependencyProperty.Register(
+			"ProcessDescription",
+			typeof(string),
+			typeof(BackgroundWorkerControl),
+			new FrameworkPropertyMetadata(
+				"Se está ejecutando un proceso pesado. Esta operación puede tardar varios minutos. Espere por favor...",
+				new PropertyChangedCallback(BackgroundWorkerControl.OnProcessDescriptionChanged)));
+
+		public static readonly DependencyProperty ProgressProperty = DependencyProperty.Register(
+			"Progress",
+			typeof(string),
+			typeof(BackgroundWorkerControl),
+			new FrameworkPropertyMetadata(
+				"Ejecutando proceso...",
+				new PropertyChangedCallback(BackgroundWorkerControl.OnProgressChanged)));
+
+		#endregion
+
+		#region Properties
+
+		[Category("Behavior")]
+		public bool WithControl
         {
-            get { return !progressBar.IsIndeterminate; }
-            set { progressBar.IsIndeterminate = !value; }
+            get { return (bool)GetValue(WithControlProperty); }
+            set { SetValue(WithControlProperty, value); }
         }
 
+		[Category("Behavior")]
         public bool AllowCancel
         {
-            get { return buttonCancelar.IsVisible; }
-            set { buttonCancelar.Visibility = value ? Visibility.Visible : Visibility.Collapsed; }
-        }
+			get { return (bool)GetValue(AllowCancelProperty); }
+			set { SetValue(AllowCancelProperty, value); }
+		}
 
+		[Category("Behavior")]
         public int MaxProgressPercentage
         {
-            get { return (int)progressBar.Maximum; }
-            set { progressBar.Maximum = value; }
-        }
+			get { return (int)GetValue(MaxProgressPercentageProperty); }
+			set { SetValue(MaxProgressPercentageProperty, value); }
+		}
 
+		[Category("Behavior")]
         public string Summary
         {
-            get { return labelSummary.Content.ToString(); }
-            set { labelSummary.Content = value; }
+			get { return (string)GetValue(SummaryProperty); }
+			set { SetValue(SummaryProperty, value); }
         }
 
+		[Category("Behavior")]
         public string ProcessDescription
         {
-            get { return textBlockDescription.Text; }
-            set { textBlockDescription.Text = value; }
-        }
+			get { return (string)GetValue(ProcessDescriptionProperty); }
+			set { SetValue(ProcessDescriptionProperty, value); }
+		}
 
+		[Category("Behavior")]
         public string Progress
         {
-            get { return labelProgress.Content.ToString(); }
-            set { labelProgress.Content = value; }
-        }
+			get { return (string)GetValue(ProgressProperty); }
+			set { SetValue(ProgressProperty, value); }
+		}
 
         #endregion
 
@@ -102,6 +161,70 @@ namespace Sifaw.WPF
 				return barra.Maximum;
 
 			return value;
+		}
+
+		#endregion
+
+		#region Changed Handlers
+
+		private static void OnWithControlChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+		{
+			(d as BackgroundWorkerControl).OnWithControlChanged((bool)e.OldValue, (bool)e.NewValue);
+		}
+
+		private void OnWithControlChanged(bool oldValue, bool newValue)
+		{
+			progressBar.IsIndeterminate = !newValue;
+		}
+
+		private static void OnAllowCancelChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+		{
+			(d as BackgroundWorkerControl).OnAllowCancelChanged((bool)e.OldValue, (bool)e.NewValue);
+		}
+
+		private void OnAllowCancelChanged(bool oldValue, bool newValue)
+		{
+			buttonCancelar.Visibility = newValue ? Visibility.Visible : Visibility.Collapsed; 
+		}
+
+		private static void OnMaxProgressPercentageChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+		{
+			(d as BackgroundWorkerControl).OnMaxProgressPercentageChanged((int)e.OldValue, (int)e.NewValue);
+		}
+
+		private void OnMaxProgressPercentageChanged(int oldValue, int newValue)
+		{
+			progressBar.Maximum = newValue; 
+		}
+
+		private static void OnSummaryChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+		{
+			(d as BackgroundWorkerControl).OnSummaryChanged((string)e.OldValue, (string)e.NewValue);
+		}
+
+		private void OnSummaryChanged(string oldValue, string newValue)
+		{
+			labelSummary.Content = newValue; 
+		}
+
+		private static void OnProcessDescriptionChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+		{
+			(d as BackgroundWorkerControl).OnProcessDescriptionChanged((string)e.OldValue, (string)e.NewValue);
+		}
+
+		private void OnProcessDescriptionChanged(string oldValue, string newValue)
+		{
+			textBlockDescription.Text = newValue; 
+		}
+
+		private static void OnProgressChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+		{
+			(d as BackgroundWorkerControl).OnProgressChanged((string)e.OldValue, (string)e.NewValue);
+		}
+
+		private void OnProgressChanged(string oldValue, string newValue)
+		{
+			labelProgress.Content = newValue;
 		}
 
 		#endregion
@@ -325,12 +448,12 @@ namespace Sifaw.WPF
             public BackgroundWorkerControlSettings(BackgroundWorkerControl control)
                 : base(control)
             {
-                //UtilWPF.BindField(this, "WithControl",           control, BackgroundWorkerControl.WithControlProperty, BindingMode.TwoWay);
-                //UtilWPF.BindField(this, "AllowCancel",           control, BackgroundWorkerControl.AllowCancelProperty, BindingMode.TwoWay);
-                //UtilWPF.BindField(this, "Summary",               control, BackgroundWorkerControl.SummaryProperty, BindingMode.TwoWay);
-                //UtilWPF.BindField(this, "MaxProgressPercentage", control, BackgroundWorkerControl.MaxProgressPercentageProperty, BindingMode.TwoWay);
-                //UtilWPF.BindField(this, "ProcessDescription",    control, BackgroundWorkerControl.ProcessDescriptionProperty, BindingMode.TwoWay);
-                //UtilWPF.BindField(this, "Progress",              control, BackgroundWorkerControl.ProgressProperty, BindingMode.TwoWay);
+				UtilWPF.BindField(this, "WithControl",           control, BackgroundWorkerControl.WithControlProperty,           BindingMode.TwoWay);
+				UtilWPF.BindField(this, "AllowCancel",           control, BackgroundWorkerControl.AllowCancelProperty,           BindingMode.TwoWay);
+                UtilWPF.BindField(this, "Summary",               control, BackgroundWorkerControl.SummaryProperty,               BindingMode.TwoWay);
+                UtilWPF.BindField(this, "MaxProgressPercentage", control, BackgroundWorkerControl.MaxProgressPercentageProperty, BindingMode.TwoWay);
+                UtilWPF.BindField(this, "ProcessDescription",    control, BackgroundWorkerControl.ProcessDescriptionProperty,    BindingMode.TwoWay);
+                UtilWPF.BindField(this, "Progress",              control, BackgroundWorkerControl.ProgressProperty,              BindingMode.TwoWay);
             }
 
             #endregion

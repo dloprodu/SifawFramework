@@ -38,7 +38,7 @@ namespace Sifaw.WPF.CCL
 	/// </summary>
 	public sealed class AssistantProgressBar : FrameworkElement
 	{
-		#region Dependency Property´s
+		#region Dependency Properties
 
 		public static readonly DependencyProperty MinimumProperty = DependencyProperty.Register(
 			"Minimum",

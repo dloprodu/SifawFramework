@@ -45,8 +45,7 @@ namespace Sifaw.WPF.Converters
 					case UIVerticalAlignment.Center:
 						return VerticalAlignment.Center;
 
-					case UIVerticalAlignment.Stretch:
-					case UIVerticalAlignment.Inherit:
+					case UIVerticalAlignment.Fill:
 						return VerticalAlignment.Stretch;
 				}
 
@@ -68,10 +67,10 @@ namespace Sifaw.WPF.Converters
 						return UIVerticalAlignment.Center;
 
 					case VerticalAlignment.Stretch:
-						return UIVerticalAlignment.Stretch;
+						return UIVerticalAlignment.Fill;
 				}
 
-			return UIVerticalAlignment.Stretch;
+			return UIVerticalAlignment.Fill;
 		}
 
 		#endregion

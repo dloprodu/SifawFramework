@@ -32,10 +32,6 @@ namespace Sifaw.Views.Components
         /// <summary>
         /// Obtiene o establece el texto a mostrar.
         /// </summary>
-		string TextDisplay
-		{
-			get;
-			set;
-		}
+		string TextDisplay { get; set; }
 	}
 }

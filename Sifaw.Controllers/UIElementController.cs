@@ -297,6 +297,10 @@ namespace Sifaw.Controllers
 
         #region Start Methods
 
+		/// <summary>
+		/// Invoca al método sobrescirto <see cref="Controller{TInput, TOutput}.OnBeforeStartController()"/> y
+		/// posteriormente fuerza la carga de los ajustes del elemento de interfaz.
+		/// </summary>
         protected override void OnBeforeStartController()
         {
             base.OnBeforeStartController();

@@ -28,11 +28,6 @@ namespace Sifaw.Views.Kit
 	public enum UIHorizontalAlignment
 	{
 		/// <summary>
-		/// Establece el valor de esta propiedad a la de el padre.
-		/// </summary>
-		Inherit,
-
-		/// <summary>
 		/// El elemento se alinea en la parte izquierda del elemento padre.
 		/// </summary>
 		Left,
@@ -50,6 +45,6 @@ namespace Sifaw.Views.Kit
 		/// <summary>
 		/// El elemento se ajusta para rellenar el elemento padre.
 		/// </summary>
-		Stretch
+		Fill
 	}
 }

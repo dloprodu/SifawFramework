@@ -26,12 +26,7 @@ namespace Sifaw.Views.Kit
 	/// Describe cómo se coloca o ajusta un elemento secundario verticalmente dentro de un elemento primario.
 	/// </summary>
 	public enum UIVerticalAlignment
-	{
-		/// <summary>
-		/// Establece el valor de esta propiedad a la del elemento padre.
-		/// </summary>
-		Inherit,
-		
+	{	
 		/// <summary>
 		/// El elemento se alinea en la parte superior del elemento padre.
 		/// </summary>
@@ -50,6 +45,6 @@ namespace Sifaw.Views.Kit
 		/// <summary>
 		/// El elemento se ajusta para rellenar el elemento padre.
 		/// </summary>
-		Stretch
+		Fill
 	}
 }

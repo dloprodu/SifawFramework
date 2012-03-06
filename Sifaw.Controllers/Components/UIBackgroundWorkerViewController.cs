@@ -181,7 +181,7 @@ namespace Sifaw.Controllers.Components
 		/// </summary>
 		public UIBackgroundWorkerViewController()
 			: base()
-		{
+		{			
 		}
 
 		/// <summary>
@@ -226,6 +226,19 @@ namespace Sifaw.Controllers.Components
 		#endregion
 
 		#region UIElement Methods
+
+		/// <summary>
+		/// Invoca al método sobrescirto <see cref="UIElementController{TInput, TOutput, TView}.OnAfterUIElementLoad()"/> y
+		/// posteriormente establece una configuración por defecto a la vista.
+		/// </summary>
+		protected override void OnAfterUIElementLoad()
+		{
+			base.OnAfterUIElementLoad();
+
+			/* Default Setiings... */
+			UISettings.AllowResize = false;
+			UISettings.SizeToContent = true;
+		}
 
 		/// <summary>
 		/// Invoca al método sobrescirto <see cref="UIViewController{TInput, TOutput, TUIView}.OnBeforeUIClose(out bool)"/> y

@@ -5,12 +5,7 @@
         xmlns:my="clr-namespace:Sifaw.WPF.CCL;assembly=Sifaw.WPF.CCL" 
         xmlns:my1="clr-namespace:Sifaw.WPF.Filters;assembly=Sifaw.WPF">
     <StackPanel>
-        <ListView Name="listView1"
-                  Height="155"  
-                  Width="234" />
-        <DataGrid Name="dataGrid1"
-                  AutoGenerateColumns="False" 
-                  Height="194"  
-                  Width="234" />
+        <Label Content="Label" Name="label1" HorizontalAlignment="Left" VerticalAlignment="Top" />
+        
     </StackPanel>
 </Window>

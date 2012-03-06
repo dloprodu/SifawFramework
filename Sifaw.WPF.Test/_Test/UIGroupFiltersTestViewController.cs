@@ -135,6 +135,18 @@ namespace Sifaw.WPF.Test
 
 		#endregion
 
+		#region UIElement Members
+
+		protected override void OnAfterUIElementLoad()
+		{
+			base.OnAfterUIElementLoad();
+
+			UISettings.SizeToContent = true;
+			UISettings.AllowResize = false;
+		}
+
+		#endregion
+
 		#region Start Methods
 
 		protected override void StartController()

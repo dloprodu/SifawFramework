@@ -39,8 +39,8 @@ namespace Sifaw.WPF
 
 		private UIFrame _border = new UIFrame(1);
 		private UIFrameBrush _borderBrush = new UIFrameBrush(new UISolidBrush(UIColors.GrayColors.LightGray));
-		private UIHorizontalAlignment _horizontalAlignment = UIHorizontalAlignment.Inherit;
-		private UIVerticalAlignment _verticalAlignment = UIVerticalAlignment.Inherit;
+		private UIHorizontalAlignment _horizontalAlignment = UIHorizontalAlignment.Fill;
+		private UIVerticalAlignment _verticalAlignment = UIVerticalAlignment.Fill;
 
 		#endregion
 
@@ -114,9 +114,9 @@ namespace Sifaw.WPF
 
 		#endregion
 
-        #region Constructor
+		#region Constructor
 
-        public ControlSettings(Control control)
+		public ControlSettings(Control control)
         {
 			UtilWPF.BindField(this, "Background",          control, Control.BackgroundProperty,          BindingMode.TwoWay, SettingsOperationsManager.UIBrushToBrush);
 			UtilWPF.BindField(this, "Foreground",          control, Control.ForegroundProperty,          BindingMode.TwoWay, SettingsOperationsManager.UIBrushToBrush);
@@ -131,11 +131,7 @@ namespace Sifaw.WPF
             UtilWPF.BindField(this, "MinWidth",            control, Control.MinWidthProperty,            BindingMode.TwoWay);
             UtilWPF.BindField(this, "MaxWidth",            control, Control.MaxWidthProperty,            BindingMode.TwoWay);
             UtilWPF.BindField(this, "MinHeight",           control, Control.MinHeightProperty,           BindingMode.TwoWay);
-            UtilWPF.BindField(this, "MaxHeight",           control, Control.MaxHeightProperty,           BindingMode.TwoWay);
-
-
-			//settings.HeightMode ...
-			//settings.WidthMode ...
+            UtilWPF.BindField(this, "MaxHeight",           control, Control.MaxHeightProperty,           BindingMode.TwoWay);			
 		}
 
         #endregion

@@ -110,8 +110,20 @@ namespace Sifaw.WPF.Test
 
 		#endregion
 
+		#region UIElement Methods
+
+		protected override void OnAfterUIElementLoad()
+		{
+			base.OnAfterUIElementLoad();
+
+			UISettings.SizeToContent = true;
+			UISettings.AllowResize = false;
+		}
+
+		#endregion
+
 		#region UIShell Methods
-		
+
 		protected override uint GetNumberOfRows()
 		{
 			return 1;

@@ -32,10 +32,6 @@ namespace Sifaw.Views.Components
         /// <summary>
         /// Obtiene o establece el placeholder, o texto de entrada, para el componente.
         /// </summary>
-		string Placeholder
-		{
-			get;
-			set;
-		}
+		string Placeholder { get; set; }
 	}
 }

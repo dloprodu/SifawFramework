@@ -173,9 +173,10 @@ namespace Sifaw.Controllers.Components
         /// </summary>
         protected override void OnAfterStartController()
         {
-            base.OnAfterStartController();
-
-            UIElement.Add(Parameters.Source);
+			/* Antes de aplicar el filtro añadimos el origen de datos. */
+			UIElement.Add(Parameters.Source);
+            
+			base.OnAfterStartController();            
         }
 
         #endregion

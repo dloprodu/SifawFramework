@@ -25,17 +25,12 @@ namespace Sifaw.Views.Kit
 	/// <summary>
 	/// Modos de ajuste de un elemento de interfaz de usuario.
 	/// </summary>
-	public enum UILengthModes
+	public enum UITableCellLengthModes
 	{
 		/// <summary>
 		/// Indica que el elemento ha de ajustarse a la longitud indicada en pixels.
 		/// </summary>
 		Pixel,
-
-		/// <summary>
-		/// Indica que el elemento ha de ajustarse a su contenido.
-		/// </summary>
-		Auto,
 
 		/// <summary>
 		/// Indica que el elemento ha de ajustarse como proporción ponderada de espacio disponible.

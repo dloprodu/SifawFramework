@@ -38,7 +38,7 @@ namespace Sifaw.Views
 		/// <summary>
 		/// Devuelve el modo de ajuste de la fila de la shell.
 		/// </summary>
-		public readonly UILengthModes Mode;
+		public readonly UIShellLengthModes Mode;
 		
 		/// <summary>
 		/// Devuelve las celdas de la fila de la shell.
@@ -49,7 +49,7 @@ namespace Sifaw.Views
 		/// Inicializa una nueva instancia de la clase <see cref="UIShellRow"/>, estableciendo un valor para los campos
 		/// <see cref="Height"/>, <see cref="Mode"/> y <see cref="Cells"/>.
 		/// </summary>
-		public UIShellRow(double height, UILengthModes mode, UIShellRowCell[] cells)
+		public UIShellRow(double height, UIShellLengthModes mode, UIShellRowCell[] cells)
 		{
 			Height = height;
 			Mode = mode;

@@ -175,6 +175,12 @@ namespace Sifaw.Views.Kit
         /// <param name="list2"> Segunda estructura <see cref="UIGradientStopCollection"/> que se va a comparar.</param>
         public static bool operator !=(UIGradientStopCollection list1, UIGradientStopCollection list2)
         {
+			if (Convert.ReferenceEquals(list1, list2))
+				return false;
+
+			if (Convert.ReferenceEquals(list1, null) || Convert.ReferenceEquals(list2, null))
+				return true;
+
             if (list1.Count != list2.Count)
                 return true;
 
@@ -192,6 +198,12 @@ namespace Sifaw.Views.Kit
         /// <param name="list2"> Segunda estructura <see cref="UIGradientStopCollection"/> que se va a comparar.</param>
         public static bool operator ==(UIGradientStopCollection list1, UIGradientStopCollection list2)
         {
+			if (Convert.ReferenceEquals(list1, list2))
+				return true;
+
+			if (Convert.ReferenceEquals(list1, null) || Convert.ReferenceEquals(list2, null))
+				return false;
+
             if (list1.Count != list2.Count)
                 return false;
 

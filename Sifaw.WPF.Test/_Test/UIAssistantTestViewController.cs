@@ -162,16 +162,16 @@ namespace Sifaw.WPF.Test
 			return 1;
 		}
 
-		protected override void GetRowSettings(uint row, out double height, out UILengthModes mode)
+		protected override void GetRowSettings(uint row, out double height, out UIShellLengthModes mode)
 		{
 			height = 400;
-			mode = UILengthModes.WeightedProportion;
+			mode = UIShellLengthModes.WeightedProportion;
 		}
 
-		protected override void GetRowCellSettings(uint row, uint cell, out double width, out UILengthModes mode, out Views.UIComponent component)
+		protected override void GetRowCellSettings(uint row, uint cell, out double width, out UIShellLengthModes mode, out Views.UIComponent component)
 		{
 			width = 400;
-			mode = UILengthModes.WeightedProportion;
+			mode = UIShellLengthModes.WeightedProportion;
 			component = UIAssistantTestController.GetUIComponent();
 		}
 

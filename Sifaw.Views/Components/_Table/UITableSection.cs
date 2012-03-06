@@ -38,9 +38,7 @@ namespace Sifaw.Views.Components
 		private string _caption = string.Empty;
 		private string _detail = string.Empty;
 		private UITableRowCollection _rows;
-
-		//private int _rowHeight = 18;
-
+		private TableSectionSettings _settings;
 
 		#endregion
 
@@ -86,6 +84,15 @@ namespace Sifaw.Views.Components
 			}
 		}
 
+		/// <summary>
+		/// Obtiene o establece los ajustes de la sección de tabla.
+		/// </summary>
+		public TableSectionSettings Settings
+		{
+			get { return _settings; }
+			set { _settings = value; }
+		}
+
 		#endregion
 
 		#region Consctructor
@@ -98,6 +105,18 @@ namespace Sifaw.Views.Components
 		public UITableSection(string name)
 		{
 			this._name = name;
+		}
+
+		/// <summary>
+		/// Inicializa una nueva instancia de la clase <see cref="UITableSection"/>, estableciendo valores
+		/// en las propiedades <see cref="Name"/> y <see cref="Settings"/>.
+		/// </summary>
+		/// <param name="name">Nombre de la sección.</param>
+		/// <param name="settings">Ajustes de la sección.</param>
+		public UITableSection(string name, TableSectionSettings settings)
+			: this(name)
+		{
+			this._settings = settings;
 		}
 
 		#endregion

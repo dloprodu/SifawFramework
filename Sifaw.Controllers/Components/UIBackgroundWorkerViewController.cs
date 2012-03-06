@@ -293,19 +293,19 @@ namespace Sifaw.Controllers.Components
 		/// <summary>
 		/// Establece que la fila se ajuste al contenido de la celda.
 		/// </summary>
-		protected override void GetRowSettings(uint row, out double height, out UILengthModes mode)
+		protected override void GetRowSettings(uint row, out double height, out UIShellLengthModes mode)
 		{
 			height = 0;
-			mode = UILengthModes.Auto;
+			mode = UIShellLengthModes.Auto;
 		}
 
 		/// <summary>
 		/// Establece que la celda se ajuste al componete <see cref="UIBackgroundWorkerController"/>.
 		/// </summary>
-		protected override void GetRowCellSettings(uint row, uint cell, out double width, out UILengthModes mode, out BackgroundWorkerComponent component)
+		protected override void GetRowCellSettings(uint row, uint cell, out double width, out UIShellLengthModes mode, out BackgroundWorkerComponent component)
 		{
 			width = 0;
-			mode = UILengthModes.Auto;
+			mode = UIShellLengthModes.Auto;
 			component = UIBackgroundWorkerController.GetUIComponent() as BackgroundWorkerComponent;
 		}
 

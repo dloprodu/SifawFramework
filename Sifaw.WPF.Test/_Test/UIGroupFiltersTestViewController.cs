@@ -101,16 +101,16 @@ namespace Sifaw.WPF.Test
 			return 1;
 		}
 
-		protected override void GetRowSettings(uint row, out double height, out UILengthModes mode)
+		protected override void GetRowSettings(uint row, out double height, out UIShellLengthModes mode)
 		{
 			height = 0;
-			mode = UILengthModes.Auto;
+			mode = UIShellLengthModes.Auto;
 		}
 
-		protected override void GetRowCellSettings(uint row, uint cell, out double width, out UILengthModes mode, out ShellComponent guest)
+		protected override void GetRowCellSettings(uint row, uint cell, out double width, out UIShellLengthModes mode, out ShellComponent guest)
 		{
 			width = 0;
-			mode = UILengthModes.Auto;
+			mode = UIShellLengthModes.Auto;
 			guest = GroupFilterTest.GetUIComponent() as ShellComponent;
 		}
 

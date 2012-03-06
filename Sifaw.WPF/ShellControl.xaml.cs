@@ -50,21 +50,21 @@ namespace Sifaw.WPF
 
 		#region Helpers
 
-		private GridLength GetGridLength(double length, UILengthModes mode)
+		private GridLength GetGridLength(double length, UIShellLengthModes mode)
 		{
 			GridLength gLength;
 
 			switch (mode)
 			{
-				case UILengthModes.Auto:
+				case UIShellLengthModes.Auto:
 					gLength = GridLength.Auto;
 					break;
 
-				case UILengthModes.Pixel:
+				case UIShellLengthModes.Pixel:
 					gLength = new GridLength(length, GridUnitType.Pixel);
 					break;
 
-				case UILengthModes.WeightedProportion:
+				case UIShellLengthModes.WeightedProportion:
 					gLength = new GridLength(length, GridUnitType.Star);
 					break;
 

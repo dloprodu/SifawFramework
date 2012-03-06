@@ -33,6 +33,7 @@ namespace Sifaw.Views.Components
 		private string _name;
 		private int _rowSpan;
 		private int _columnSpan;
+		private TableCellSettings _settings;
 
 		#endregion
 
@@ -64,6 +65,15 @@ namespace Sifaw.Views.Components
 		{
 			get { return _columnSpan; }
 			set { _columnSpan = value; }
+		}
+
+		/// <summary>
+		/// Obtiene o establece los ajustes de la celda.
+		/// </summary>
+		public TableCellSettings Settings
+		{
+			get { return _settings; }
+			set { _settings = value; }
 		}
 
 		#endregion

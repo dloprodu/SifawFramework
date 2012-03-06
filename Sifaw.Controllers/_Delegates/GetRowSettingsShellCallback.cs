@@ -32,5 +32,5 @@ namespace Sifaw.Controllers
 	/// <param name="row">Fila.</param>
 	/// <param name="height">Alto de la fila.</param>
 	/// <param name="mode">Modo de ajuste de la fila.</param>
-	public delegate void GetRowSettingsShellCallback(uint row, out double height, out UILengthModes mode);
+	public delegate void GetRowSettingsShellCallback(uint row, out double height, out UIShellLengthModes mode);
 }

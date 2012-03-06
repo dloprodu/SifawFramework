@@ -310,18 +310,18 @@ namespace Sifaw.WPF.Test
 			return 1;
 		}
 
-		protected override void GetRowSettings(uint row, out double height, out UILengthModes mode)
+		protected override void GetRowSettings(uint row, out double height, out UIShellLengthModes mode)
 		{
 			// Todas las filas se ajustan al contenido.
 			height = 0;
-			mode = UILengthModes.Auto;
+			mode = UIShellLengthModes.Auto;
 		}
 
-		protected override void GetRowCellSettings(uint row, uint cell, out double width, out UILengthModes mode, out UIComponent guest)
+		protected override void GetRowCellSettings(uint row, uint cell, out double width, out UIShellLengthModes mode, out UIComponent guest)
 		{
 			// Todas las celdas se ajustan al ancho disponible.
 			width = 100;
-			mode = UILengthModes.WeightedProportion;
+			mode = UIShellLengthModes.WeightedProportion;
 
 			switch (row)
 			{

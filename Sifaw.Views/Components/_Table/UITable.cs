@@ -42,9 +42,6 @@ namespace Sifaw.Views.Components
 		private UITableSectionCollection _body;
         private UITableSectionCollection _footer;
 
-		// Agrupacíón semántica de columnas para aplicar estilos comunes
-		//private UITableCellCollection _colGroup;
-
 		#endregion
 
         #region Properties
@@ -147,7 +144,7 @@ namespace Sifaw.Views.Components
 		/// </summary>
 		public override int GetHashCode()
 		{
-			return Name.GetHashCode();
+			return base.GetHashCode();
 		}
 
 		#endregion

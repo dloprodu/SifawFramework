@@ -28,6 +28,9 @@ namespace Sifaw.WPF.Converters
 {
 	public class UIBrushToBrush : IValueConverter
 	{
+		const double Rad2Deg = 180.0 / Math.PI;
+		const double Deg2Rad = Math.PI / 180.0;
+
 		#region IValueConverter Members
 
 		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -77,10 +80,12 @@ namespace Sifaw.WPF.Converters
 
 					brush = new UILinearGradientBrush();
 					(brush as UILinearGradientBrush).GradientStops = gradientStops;
-					// ATan2(dy , dx) where dy = y2 - y1 and dx = x2 - x1, or ATan(dy / dx) 
+					// ATan2(dy , dx) where dy = y2 - y1 and dx = x2 - x1, or ATan(dy / dx).
 					(brush as UILinearGradientBrush).Angle = Math.Atan2(
 						((LinearGradientBrush)value).EndPoint.Y - ((LinearGradientBrush)value).StartPoint.Y,
 						((LinearGradientBrush)value).EndPoint.X - ((LinearGradientBrush)value).StartPoint.X);
+					// Convertimos a grados.
+					(brush as UILinearGradientBrush).Angle *= Rad2Deg;
 				}
 				else
 				{

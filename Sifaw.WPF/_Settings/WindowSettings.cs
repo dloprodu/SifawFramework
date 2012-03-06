@@ -23,6 +23,8 @@ using System.Windows.Controls;
 using System.Windows.Data;
 
 using Sifaw.Views;
+using Sifaw.Views.Kit;
+
 using Sifaw.WPF.CCL;
 
 
@@ -94,7 +96,13 @@ namespace Sifaw.WPF
         #region Constructor
 
         public WindowSettings(Window window)
-        {            
+        {
+			/* Initial values */
+			this.Margin = (UIFrame)SettingsOperationsManager.UIFrameToThickness.ConvertBack(window.Margin, null, null, null);
+			this.Padding = (UIFrame)SettingsOperationsManager.UIFrameToThickness.ConvertBack(window.Padding, null, null, null);
+			this.Background = (UIBrush)SettingsOperationsManager.UIBrushToBrush.ConvertBack(window.Background, null, null, null);
+			this.Foreground = (UIBrush)SettingsOperationsManager.UIBrushToBrush.ConvertBack(window.Foreground, null, null, null);
+
 			UtilWPF.BindField(this, "Background",    window, Window.BackgroundProperty,    BindingMode.TwoWay, SettingsOperationsManager.UIBrushToBrush);
 			UtilWPF.BindField(this, "Foreground",    window, Window.ForegroundProperty,    BindingMode.TwoWay, SettingsOperationsManager.UIBrushToBrush);
 			UtilWPF.BindField(this, "Margin",        window, Window.MarginProperty,        BindingMode.TwoWay, SettingsOperationsManager.UIFrameToThickness);

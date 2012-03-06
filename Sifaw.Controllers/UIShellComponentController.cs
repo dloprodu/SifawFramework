@@ -145,7 +145,7 @@ namespace Sifaw.Controllers
 		/// <param name="row">Fila</param>
 		/// <param name="height">Aultura de la fila.</param>
         /// <param name="mode">Mode de ajuste de la fila.</param>
-		protected abstract void GetRowSettings(uint row, out double height, out UILengthModes mode);
+		protected abstract void GetRowSettings(uint row, out double height, out UIShellLengthModes mode);
 
 		/// <summary>
 		/// Devuelve la configuracion de una celda de la shell.
@@ -155,7 +155,7 @@ namespace Sifaw.Controllers
 		/// <param name="width">Ancho de la celda.</param>
         /// <param name="mode">Modo de ajuste de la celda.</param>
         /// <param name="guest">Contenido de la celda.</param>
-		protected abstract void GetRowCellSettings(uint row, uint cell, out double width, out UILengthModes mode, out TGuest guest);
+		protected abstract void GetRowCellSettings(uint row, uint cell, out double width, out UIShellLengthModes mode, out TGuest guest);
 
 		#endregion
 

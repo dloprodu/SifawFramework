@@ -51,7 +51,7 @@ namespace Sifaw.Controllers
 			for (uint row = 0; row < rows.Length; row++)
 			{
 				double height = 0.0f;
-				UILengthModes heightMode = UILengthModes.Auto;
+				UIShellLengthModes heightMode = UIShellLengthModes.Auto;
 				getRowSettings(row, out height, out heightMode);
 
 				UIShellRowCell[] columns = new UIShellRowCell[Math.Max(1, getNumberOfCellsAt(row))];
@@ -59,7 +59,7 @@ namespace Sifaw.Controllers
 				for (uint column = 0; column < columns.Length; column++)
 				{
 					double width = 0.0f;
-					UILengthModes widthMode = UILengthModes.Auto;
+					UIShellLengthModes widthMode = UIShellLengthModes.Auto;
 					TGuest component = default(TGuest);
 
 					getRowCellSettings(row, column, out width, out widthMode, out component);

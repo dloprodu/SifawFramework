@@ -35,8 +35,7 @@ namespace Sifaw.Views.Components
 	{
 		#region Fields
 
-		private string _name = string.Empty;
-		private string _caption = string.Empty;
+		private string _name = string.Empty;		
 		
 		private UITableSectionCollection _header;
 		private UITableSectionCollection _body;
@@ -52,15 +51,6 @@ namespace Sifaw.Views.Components
 		public string Name
 		{
 			get { return _name; }
-		}
-
-		/// <summary>
-		/// Obtiene el título de la tabla.
-		/// </summary>
-		public string Caption
-		{
-			get { return _caption; }
-			set { _caption = value; }
 		}
 
 		/// <summary>
@@ -232,9 +222,12 @@ namespace Sifaw.Views.Components
 			/// </summary>
 			/// <param name="section"> Objeto <see cref="UITableSection"/> que se va a agregar a la colección.</param>
 			/// <returns>Índice basado en cero en la colección donde se almacena el elemento.</returns>
-			public int Add(UITableSection section)
+			public int Add(string name, UITableSection.UISettings settings)
 			{
-				return (List.Add(section));
+				if (ContainsKey(name))
+					throw new ArgumentException("Ya existe una sección con igual nombre.", "name");
+
+				return (List.Add(new UITableSection(name, settings)));
 			}
 
 			/// <summary>

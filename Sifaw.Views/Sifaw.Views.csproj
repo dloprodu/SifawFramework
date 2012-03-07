@@ -69,8 +69,7 @@
     <Compile Include="Components\TableComponent.cs" />
     <Compile Include="Components\_Settings\BackgroundWorkerSettings.cs" />
     <Compile Include="Components\_Settings\BoolFilterSettings.cs" />
-    <Compile Include="Components\_Settings\TableCellSettings.cs" />
-    <Compile Include="Components\_Settings\TableSectionSettings.cs" />
+    <Compile Include="Components\_Settings\TableSettings.cs" />
     <Compile Include="Components\_Settings\TextFilterSettings.cs" />
     <Compile Include="Components\_Table\UITableCellLengthModes.cs" />
     <Compile Include="Kit\_Drawing\UISize.cs" />

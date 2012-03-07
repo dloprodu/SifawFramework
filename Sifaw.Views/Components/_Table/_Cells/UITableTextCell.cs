@@ -42,6 +42,15 @@ namespace Sifaw.Views.Components
 		public string Text
 		{
 			get { return _text; }
+			set
+			{
+				if (_text != value)
+				{
+					_text = value;
+					// Notificar: Table:{name}; Section:{name}; Row:{name}; Cell:{name}.
+					// OnTextChange
+				}
+			}
 		}
 
 		#endregion

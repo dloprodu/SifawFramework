@@ -1,5 +1,5 @@
 ﻿/*
- * Sifaw.Controllers
+ * Sifaw.Controllers.Components
  * 
  * Diseñador:   David López Rguez
  * Programador: David López Rguez
@@ -19,18 +19,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using Sifaw.Views;
-using Sifaw.Views.Kit;
 
-
-namespace Sifaw.Controllers
+namespace Sifaw.Controllers.Components
 {
 	/// <summary>
-	/// Representa el callbak que es invocado cuando se solicita desde una 
-	/// shell la configuración de una fila de la shell.
+	/// Representa el callbak que es invocado cuando se solicita, desde un componente
+	/// que gestiona un objeto <see cref="UITable"/>, el número de filas que componen 
+	/// la sección especificada.
 	/// </summary>
-	/// <param name="row">Fila.</param>
-	/// <param name="height">Alto de la fila.</param>
-	/// <param name="mode">Modo de ajuste de la fila.</param>
-	internal delegate void GetRowSettingsShellCallback(uint row, out double height, out UIShellLengthModes mode);
+	/// <param name="tableName">Nombre de la tabla.</param>
+	/// <param name="section">Índice de la sección.</param>
+	/// <returns>Número de filas.</returns>
+	internal delegate int GetNumberOfRowsAt(string tableName, int section);
 }

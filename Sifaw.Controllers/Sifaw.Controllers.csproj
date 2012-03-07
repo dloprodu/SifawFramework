@@ -93,6 +93,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Components\Filters\TODO.cs" />
+    <Compile Include="Components\_Miscellany\TableOperationsManager.cs" />
     <Compile Include="Components\UIListFilterBaseController.cs" />
     <Compile Include="Components\Filters\UIDropDownListFilterController.cs" />
     <Compile Include="Components\Filters\UIBoolFilterController.cs" />
@@ -105,6 +106,14 @@
     <Compile Include="Components\UITabHostController.cs" />
     <Compile Include="Components\UITableController.cs" />
     <Compile Include="Components\_Delegates\BackgroundWorkerDelegate.cs" />
+    <Compile Include="Components\_Delegates\GetFooterAt.cs" />
+    <Compile Include="Components\_Delegates\GetNumberOfFooterRows.cs" />
+    <Compile Include="Components\_Delegates\RowContainChildTable.cs" />
+    <Compile Include="Components\_Delegates\GetCellsAt.cs" />
+    <Compile Include="Components\_Delegates\GetNumberOfRowsAt.cs" />
+    <Compile Include="Components\_Delegates\GetNumberOfSectionsAt.cs" />
+    <Compile Include="Components\_Delegates\GetHeaderAt.cs" />
+    <Compile Include="Components\_Delegates\GetNumberOfHeaderRows.cs" />
     <Compile Include="Components\_Miscellany\BackgroundWorkerCommunicator.cs" />
     <Compile Include="Components\_Miscellany\BackgroundWorkerPack.cs" />
     <Compile Include="Components\_Miscellany\ReportProgressCommand.cs" />

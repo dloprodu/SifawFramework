@@ -70,6 +70,7 @@ namespace Sifaw.Views.Components
 		public UITable ChildTable
 		{
 			get { return _childTable; }
+			internal set { _childTable = value; }
 		}
 
 		#endregion

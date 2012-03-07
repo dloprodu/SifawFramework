@@ -20,6 +20,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using Sifaw.Views.Kit;
+
 
 namespace Sifaw.Views.Components
 {
@@ -30,7 +32,7 @@ namespace Sifaw.Views.Components
 	/// Una sección viene definida por una colección de filas.
 	/// </remarks>
 	[Serializable]
-	public abstract class UITableSection : IEquatable<UITableSection>
+	public class UITableSection : IEquatable<UITableSection>
 	{
 		#region Fields
 
@@ -38,7 +40,7 @@ namespace Sifaw.Views.Components
 		private string _caption = string.Empty;
 		private string _detail = string.Empty;
 		private UITableRowCollection _rows;
-		private TableSectionSettings _settings;
+		private UISettings _settings;
 
 		#endregion
 
@@ -87,7 +89,7 @@ namespace Sifaw.Views.Components
 		/// <summary>
 		/// Obtiene o establece los ajustes de la sección de tabla.
 		/// </summary>
-		public TableSectionSettings Settings
+		public UISettings Settings
 		{
 			get { return _settings; }
 			set { _settings = value; }
@@ -113,7 +115,7 @@ namespace Sifaw.Views.Components
 		/// </summary>
 		/// <param name="name">Nombre de la sección.</param>
 		/// <param name="settings">Ajustes de la sección.</param>
-		public UITableSection(string name, TableSectionSettings settings)
+		public UITableSection(string name, UISettings settings)
 			: this(name)
 		{
 			this._settings = settings;
@@ -162,6 +164,66 @@ namespace Sifaw.Views.Components
 		#endregion
 	
 		#region Miscellany
+
+		/// <summary>
+		/// Provee un conjunto de propiedades que permiten modificar la apariencia
+		/// de un componente de interfaz de usuario.
+		/// </summary>
+		public struct UISettings
+		{
+			/// <summary>
+			/// Obtiene un <see cref="UISettings"/> con unos valores por defecto.
+			/// </summary>
+			public static readonly UISettings Default;
+
+			#region Fields
+
+			/// <summary>
+			/// Obtiene o establece el pincel que describe el fondo del elemento.
+			/// </summ
+			public UIBrush Background;
+
+			/// <summary>
+			/// Obtiene o establece el grosor del borde del componente.
+			/// </summary>
+			public UIFrame Border;
+
+			/// <summary>
+			/// Obtiene o establece un pincel que describe el fondo del borde del componente.
+			/// </summary>
+			public UIFrameBrush BorderBrush;
+
+			/// <summary>
+			/// Obtiene o establece el alto de las filas de la sección.
+			/// </summary>
+			public double RowHeight;
+
+			#endregion
+
+			#region Constructor
+
+			static UISettings()
+			{
+				Default = new UISettings(
+					  background: new UISolidBrush(UIColors.WhiteColors.White)
+					, border: new UIFrame(1)
+					, borderBrush: new UIFrameBrush(new UISolidBrush(UIColors.BlueColors.RoyalBlue))
+					, rowHeight: 18);			
+			}
+
+			/// <summary>
+			/// Inicializa una nueva instancia de la estructura <see cref="UISettings"/>.
+			/// </summary>
+			public UISettings(UIBrush background, UIFrame border, UIFrameBrush borderBrush, double rowHeight)
+			{
+				Background = background;
+				Border = border;
+				BorderBrush = borderBrush;
+				RowHeight = rowHeight;
+			}
+
+			#endregion
+		}
 
 		/// <summary>
 		/// Representa la colección de filas que definen un objeto <see cref="UITableSection"/>.
@@ -232,9 +294,12 @@ namespace Sifaw.Views.Components
 			/// </summary>
 			/// <param name="row"> Objeto <see cref="UITableRow"/> que se va a agregar a la colección.</param>
 			/// <returns>Índice basado en cero en la colección donde se almacena el elemento.</returns>
-			public int Add(UITableRow row)
+			public int Add(string name)
 			{
-				return (List.Add(row));
+				if (ContainsKey(name))
+					throw new ArgumentException("Ya existe una fila con igual nombre.", "name");
+
+				return (List.Add(new UITableRow(name)));
 			}
 
 			/// <summary>

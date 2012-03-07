@@ -30,9 +30,22 @@ namespace Sifaw.Views.Components
 	/// </summary>
 	public interface TableComponent : UIComponent
 	{
+		#region Properties
+
+		/// <summary>
+		/// Obtiene el <see cref="TableSettings"/> del <see cref="TableComponent"/>.
+		/// </summary>
+		new TableSettings UISettings { get; }
+
+		#endregion
+
+		#region Methods
+
 		/// <summary>
 		/// Establece la tabla a mostrar.
 		/// </summary>		
 		void SetTable(UITable table);
+
+		#endregion
 	}
 }

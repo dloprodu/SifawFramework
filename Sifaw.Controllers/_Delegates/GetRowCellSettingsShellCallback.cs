@@ -35,6 +35,6 @@ namespace Sifaw.Controllers
 	/// <param name="width">Alto de la fila.</param>
 	/// <param name="mode">Modo de ajuste de la fila.</param>
 	/// <param name="guest">Componente que contendrá la celda.</param>
-	public delegate void GetRowCellSettingsShellCallback<TGuest>(uint row, uint cell, out double width, out UIShellLengthModes mode, out TGuest guest)
+	internal delegate void GetRowCellSettingsShellCallback<TGuest>(uint row, uint cell, out double width, out UIShellLengthModes mode, out TGuest guest)
 		where TGuest : UIComponent;
 }

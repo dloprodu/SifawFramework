@@ -91,6 +91,26 @@ namespace Sifaw.Controllers.Components
 
 		#endregion
 
+		#region Fields
+
+		[CLReseteable(null)]
+		private UITable _root = null;
+		
+		#endregion
+
+		#region Properties
+
+		/// <summary>
+		/// Devuelve el contenedor de ajustes del elemento de interfaz a través
+		/// del cual se puede modificar la configuración predeterminada.
+		/// </summary>
+		public new TableSettings UISettings
+		{
+			get { return UIElement.UISettings; }
+		}
+
+		#endregion
+
 		#region Fileds
 
 
@@ -122,10 +142,6 @@ namespace Sifaw.Controllers.Components
 
 		#endregion
 
-		#region Properties
-
-		#endregion
-
 		#region Constructors
 
 		/// <summary>
@@ -147,6 +163,134 @@ namespace Sifaw.Controllers.Components
 		protected UITableController(AbstractUILinker<TableComponent> linker)
 			: base(linker)
 		{
+		}
+
+		#endregion
+
+		#region UITableController Members
+				
+		/// <summary>
+		/// Devuelve el número de filas que componen la cabecera de la tabla especificada.
+		/// </summary>
+		/// <param name="tableName">Nombre de la tabla.</param>
+		/// <returns>Número de filas de la cabecera.</returns>
+		protected abstract int GetNumberOfHeaderRows(string tableName);
+
+		/// <summary>
+		/// Devuelve el número de filas que componen el pie de la tabla especificada.
+		/// </summary>
+		/// <param name="tableName">Nombre de la tabla.</param>
+		/// <returns>Número de filas del pie de tabla.</returns>
+		protected abstract int GetNumberOfFooterRows(string tableName);
+
+		/// <summary>
+		/// Devuelve el número de secciones que componen el cuerpo de la tabla especificada.
+		/// </summary>
+		/// <param name="tableName">Nombre de la tabla.</param>
+		/// <param name="settings">Ajustes de la sección.</param>
+		/// <returns>Número de secciones de la tabla.</returns>
+		protected abstract int GetNumberOfSectionsAt(string tableName, out UITableSection.UISettings settings);
+
+		/// <summary>
+		/// Devuelve el número de filas que componen la sección especificada.
+		/// </summary>
+		/// <param name="tableName">Nombre de la tabla.</param>
+		/// <param name="section">Índice de la sección.</param>
+		/// <returns>Número de filas.</returns>
+		protected abstract int GetNumberOfRowsAt(string tableName, int section);
+
+		/// <summary>
+		/// Devuelve la configuración de celdas que componen la fila especificada de la cabecera.
+		/// </summary>
+		/// <param name="tableName">Nombre de la tabla.</param>
+		/// <param name="row">Índice de la fila.</param>
+		/// <returns>Array de celdas.</returns>
+		protected abstract UITableCell[] GetHeaderAt(string tableName, int row);
+
+		/// <summary>
+		/// Devuelve la configuración de celdas que componen la fila y sección especificadas.
+		/// </summary>
+		/// <param name="tableName">Nombre de la tabla.</param>
+		/// <param name="section">Índice de la sección.</param>
+		/// <param name="row">Índice de la fila.</param>
+		/// <returns>Array de celdas.</returns>
+		protected abstract UITableCell[] GetCellsAt(string tableName, int section, int row);
+
+		/// <summary>
+		/// Devuelve un valor que indica si la fila de la sección especificada tiene una tabla secundaria asociada. 
+		/// </summary>
+		/// <param name="name">Nombre de la tabla.</param>
+		/// <param name="section">Índice de la sección.</param>
+		/// <param name="row">Índice de la fila.</param>
+		/// <returns>
+		/// <c>true</c> si la fila tiene una tabla secundaria asociada; 
+		/// <c>false</c> en otro caso.
+		/// </returns>
+		protected abstract bool RowContainChildTable(string name, int section, int row);
+
+		/// <summary>
+		/// Devuelve la configuración de celdas que componen la fila especificada del pie de tabla.
+		/// </summary>
+		/// <param name="tableName">Nombre de la tabla.</param>
+		/// <param name="row">Índice de la fila.</param>
+		/// <returns>Array de celdas.</returns>
+		protected abstract UITableCell[] GetFooterAt(string tableName, int row);
+
+		#endregion
+
+		#region Start Controler
+
+		/// <summary>
+		/// Devuelve un valor que indica que se puede reiniciar una controladora <see cref="UITableController{TInput, TOutput}"/>.
+		/// </summary>
+		/// <returns>true</returns>
+		protected override bool AllowReset()
+		{
+			return true;
+		}
+
+		/// <summary>
+		/// Invoca al método sobrescirto <see cref="Controller{TInput, TOutput}.OnAfterStartController()"/> y
+		/// posteriormente establece la configuración inicial de <see cref="TableComponent"/>.
+		/// </summary>
+		protected override void OnAfterStartController()
+		{
+			base.OnAfterStartController();
+
+			_root = TableOperationsManager.BuildTable(
+				  GetNumberOfHeaderRows
+				, GetHeaderAt
+				, GetNumberOfFooterRows
+				, GetFooterAt
+				, GetNumberOfSectionsAt
+				, GetNumberOfRowsAt
+				, GetCellsAt
+				, RowContainChildTable
+				, "Root");
+
+			UIElement.SetTable(_root);
+		}
+
+		/// <summary>
+		/// Invoca al método sobrescirto <see cref="Controller{TInput, TOutput}.OnAfterResetController()"/> y
+		/// posteriormente establece la configuración de reinicio de <see cref="TableComponent"/>.
+		/// </summary>
+		protected override void OnAfterResetController()
+		{
+			base.OnAfterResetController();
+
+			_root = TableOperationsManager.BuildTable(
+				  GetNumberOfHeaderRows
+				, GetHeaderAt
+				, GetNumberOfFooterRows
+				, GetFooterAt
+				, GetNumberOfSectionsAt
+				, GetNumberOfRowsAt
+				, GetCellsAt
+				, RowContainChildTable
+				, "Root");
+
+			UIElement.SetTable(_root);
 		}
 
 		#endregion

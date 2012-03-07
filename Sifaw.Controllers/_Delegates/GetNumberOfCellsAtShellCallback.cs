@@ -28,5 +28,5 @@ namespace Sifaw.Controllers
 	/// </summary>
 	/// <param name="row">Fila.</param>
 	/// <returns>Número de celdas de la fila.</returns>
-	public delegate uint GetNumberOfCellsAtShellCallback(uint row);
+	internal delegate uint GetNumberOfCellsAtShellCallback(uint row);
 }

@@ -169,7 +169,7 @@ namespace Sifaw.Controllers
 		{
 			base.OnBeforeStartController();
 
-			UIShellRow[] rows = ShellOperationsManager.MakeLayout<TGuest>(
+			UIShellRow[] rows = ShellOperationsManager.BuildLayout<TGuest>(
 				  GetNumberOfRows
 				, GetNumberOfCellsAt
 				, GetRowSettings

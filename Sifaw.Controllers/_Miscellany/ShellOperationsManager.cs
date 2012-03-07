@@ -28,33 +28,33 @@ namespace Sifaw.Controllers
 	/// <summary>
 	/// Provee de métodos para la administración de un componente tipo Shell.
 	/// </summary>
-	public static class ShellOperationsManager
+	internal static class ShellOperationsManager
 	{
 		/// <summary>
 		/// Método que dado los correspondientes métodos callback devuelve la configuración
 		/// ha aplicar a la shell por fila.
 		/// </summary>
 		/// <typeparam name="TGuest">Tipo de los componentes que puede alojar la shell.</typeparam>
-		/// <param name="getNumberOfRows">Callbak invocado cuando se solicita el número de filas.</param>
-		/// <param name="getNumberOfCellsAt">Callbak invocado cuando se solicita el número de celdas de una fila.</param>
-		/// <param name="getRowSettings">Callbak invocado cuando se solicita la configuración de una fila de la shell.</param>
-		/// <param name="getRowCellSettings">Callbak invocado cuando se solicita la configuración de una celda de la shell.</param>
-		public static UIShellRow[] MakeLayout<TGuest>(
-			  GetNumberOfRowsShellCallback getNumberOfRows
-			, GetNumberOfCellsAtShellCallback getNumberOfCellsAt
-			, GetRowSettingsShellCallback getRowSettings
-			, GetRowCellSettingsShellCallback<TGuest> getRowCellSettings)
+		/// <param name="GetNumberOfRows">Callbak invocado cuando se solicita el número de filas.</param>
+		/// <param name="GetNumberOfCellsAt">Callbak invocado cuando se solicita el número de celdas de una fila.</param>
+		/// <param name="GetRowSettings">Callbak invocado cuando se solicita la configuración de una fila de la shell.</param>
+		/// <param name="GetRowCellSettings">Callbak invocado cuando se solicita la configuración de una celda de la shell.</param>
+		internal static UIShellRow[] BuildLayout<TGuest>(
+			  GetNumberOfRowsShellCallback GetNumberOfRows
+			, GetNumberOfCellsAtShellCallback GetNumberOfCellsAt
+			, GetRowSettingsShellCallback GetRowSettings
+			, GetRowCellSettingsShellCallback<TGuest> GetRowCellSettings)
 			where TGuest : UIComponent
 		{
-			UIShellRow[] rows = new UIShellRow[Math.Max(1, getNumberOfRows())];
+			UIShellRow[] rows = new UIShellRow[Math.Max(1, GetNumberOfRows())];
 
 			for (uint row = 0; row < rows.Length; row++)
 			{
 				double height = 0.0f;
 				UIShellLengthModes heightMode = UIShellLengthModes.Auto;
-				getRowSettings(row, out height, out heightMode);
+				GetRowSettings(row, out height, out heightMode);
 
-				UIShellRowCell[] columns = new UIShellRowCell[Math.Max(1, getNumberOfCellsAt(row))];
+				UIShellRowCell[] columns = new UIShellRowCell[Math.Max(1, GetNumberOfCellsAt(row))];
 
 				for (uint column = 0; column < columns.Length; column++)
 				{
@@ -62,7 +62,7 @@ namespace Sifaw.Controllers
 					UIShellLengthModes widthMode = UIShellLengthModes.Auto;
 					TGuest component = default(TGuest);
 
-					getRowCellSettings(row, column, out width, out widthMode, out component);
+					GetRowCellSettings(row, column, out width, out widthMode, out component);
 
 					columns[column] = new UIShellRowCell(width, widthMode, component);
 				}

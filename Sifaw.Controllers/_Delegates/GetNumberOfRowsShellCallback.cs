@@ -27,5 +27,5 @@ namespace Sifaw.Controllers
 	/// shell el número de filas.
 	/// </summary>
 	/// <returns>Número de filas de la shell.</returns>
-	public delegate uint GetNumberOfRowsShellCallback();
+	internal delegate uint GetNumberOfRowsShellCallback();
 }

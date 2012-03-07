@@ -19,6 +19,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using Sifaw.Core;
+using Sifaw.Views.Kit;
+
 
 namespace Sifaw.Views.Components
 {
@@ -33,7 +36,7 @@ namespace Sifaw.Views.Components
 		private string _name;
 		private int _rowSpan;
 		private int _columnSpan;
-		private TableCellSettings _settings;
+		private UISettings _settings;
 
 		#endregion
 
@@ -70,7 +73,7 @@ namespace Sifaw.Views.Components
 		/// <summary>
 		/// Obtiene o establece los ajustes de la celda.
 		/// </summary>
-		public TableCellSettings Settings
+		public UISettings Settings
 		{
 			get { return _settings; }
 			set { _settings = value; }
@@ -127,6 +130,124 @@ namespace Sifaw.Views.Components
 		public bool Equals(UITableCell other)
 		{
 			return ReferenceEquals(this, other);
+		}
+
+		#endregion
+
+		#region Miscellany
+
+		/// <summary>
+		/// Provee un conjunto de propiedades que permiten modificar la apariencia
+		/// de un componente de interfaz de usuario.
+		/// </summary>
+		public struct UISettings
+		{
+			/// <summary>
+			/// Obtiene un <see cref="UISettings"/> con unos valores por defecto.
+			/// </summary>
+			public static readonly UISettings Default;
+
+			#region Fields
+
+			/// <summary>
+			/// Obtiene o establece el pincel que describe el fondo del elemento.
+			/// </summary>
+			public UIBrush Background;
+
+			/// <summary>
+			/// Obtiene o establece el pincel que describe el color de primer plano del elemento.
+			/// </summary>
+			public UIBrush Foreground;
+
+			/// <summary>
+			/// Obtiene o establece el grosor del borde del componente.
+			/// </summary>
+			public UIFrame Border;
+
+			/// <summary>
+			/// Obtiene o establece un pincel que describe el fondo del borde del componente.
+			/// </summary>
+			public UIFrameBrush BorderBrush;
+
+			/// <summary>
+			/// Obtiene o establece la alineación horizontal que se aplican a este elemento
+			/// cuando se aloja dentro de un elemento primario.
+			/// </summary>
+			public UIHorizontalAlignment HorizontalAlignment;
+
+			/// <summary>
+			/// Obtiene o establece la alineación vertical que se aplican a este elemento
+			/// cuando se aloja dentro de un elemento primario.
+			/// </summary>
+			public UIVerticalAlignment VerticalAlignment;
+
+			/// <summary>
+			/// Obtiene o establece el ancho de la celda.
+			/// </summary>
+			public double Width;
+
+			/// <summary>
+			/// Obtiene o establece el modo en el que se ajusta la celda.
+			/// </summary>
+			public UITableCellLengthModes WidthMode;
+
+			#endregion
+
+			#region Constructor
+
+			static UISettings()
+			{
+				Default = new UISettings(
+					  background: new UISolidBrush(UIColors.WhiteColors.White)
+					, foreground: new UISolidBrush(UIColors.GrayColors.Black)
+					, border: new UIFrame(1, 0, 1, 0)
+					, borderBrush: new UIFrameBrush(new UISolidBrush(UIColors.WhiteColors.GhostWhite))
+					, horizontalAlignment: UIHorizontalAlignment.Left
+					, verticalAlignment:  UIVerticalAlignment.Center
+					, width: 50
+					, widthMode: UITableCellLengthModes.Pixel);
+			}
+
+			/// <summary>
+			/// Inicializa una nueva instancia de la estructura <see cref="UISettings"/>.
+			/// </summary>
+			public UISettings(double width, UITableCellLengthModes widthMode) 
+				: this(
+				  background: Default.Background
+				, foreground: Default.Foreground
+				, border: Default.Border
+				, borderBrush: Default.BorderBrush
+				, horizontalAlignment: Default.HorizontalAlignment
+				, verticalAlignment: Default.VerticalAlignment
+				, width:width
+				, widthMode:widthMode)
+			{			
+			}
+
+			/// <summary>
+			/// Inicializa una nueva instancia de la estructura <see cref="UISettings"/>.
+			/// </summary>
+			public UISettings(
+				  UIBrush background
+				, UIBrush foreground
+				, UIFrame border
+				, UIFrameBrush borderBrush
+				, UIHorizontalAlignment horizontalAlignment
+				, UIVerticalAlignment verticalAlignment
+				, double width
+				, UITableCellLengthModes widthMode)
+			{
+				Background = new UISolidBrush(UIColors.WhiteColors.White);
+				Foreground = new UISolidBrush(UIColors.GrayColors.Black);
+				Border = new UIFrame(1);
+				BorderBrush = new UIFrameBrush(new UISolidBrush(UIColors.WhiteColors.GhostWhite));
+				HorizontalAlignment = UIHorizontalAlignment.Left;
+				VerticalAlignment = UIVerticalAlignment.Center;
+				Width = 50;
+				WidthMode = UITableCellLengthModes.Pixel;
+			}
+
+			#endregion
 		}
 
 		#endregion

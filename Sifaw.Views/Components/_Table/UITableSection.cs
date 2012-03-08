@@ -39,7 +39,7 @@ namespace Sifaw.Views.Components
 		private string _name = string.Empty;
 		private string _caption = string.Empty;
 		private string _detail = string.Empty;
-		private UITableRowCollection _rows;
+		private UITableSectionRowCollection _rows;
 		private UISettings _settings;
 
 		#endregion
@@ -75,12 +75,12 @@ namespace Sifaw.Views.Components
 		/// <summary>
 		/// Obtiene las filas de la sección.
 		/// </summary>
-		public UITableRowCollection Rows
+		public UITableSectionRowCollection Rows
 		{
 			get
 			{
 				if (_rows == null)
-					_rows = new UITableRowCollection(this);
+					_rows = new UITableSectionRowCollection(this);
 
 				return _rows;
 			}
@@ -229,7 +229,7 @@ namespace Sifaw.Views.Components
 		/// Representa la colección de filas que definen un objeto <see cref="UITableSection"/>.
 		/// </summary>
 		[Serializable]
-		public class UITableRowCollection : CollectionBase
+		public class UITableSectionRowCollection : CollectionBase
 		{
 			#region Fields
 
@@ -247,24 +247,24 @@ namespace Sifaw.Views.Components
 			/// </summary>
 			/// <param name="index">Índice de la fila que se va a recuperar de la colección.</param>
 			/// <returns>
-			/// <see cref="UITableRow"/> que representa la fila
+			/// <see cref="UITableSectionRow"/> que representa la fila
 			/// ubicada en el índice especificado de la colección
 			/// </returns>
-			public UITableRow this[int index]
+			public UITableSectionRow this[int index]
 			{
-				get { return ((UITableRow)List[index]); }
+				get { return ((UITableSectionRow)List[index]); }
 			}
 
 			/// <summary>
 			/// Obtiene de la colección la fila con la clave especificada.
 			/// </summary>
 			/// <param name="key">Nombre de la fila que se va a recuperar de la colección.</param>
-			/// <returns>Objeto <see cref="UITableRow"/> con la clave especificada.</returns>
-			public UITableRow this[string key]
+			/// <returns>Objeto <see cref="UITableSectionRow"/> con la clave especificada.</returns>
+			public UITableSectionRow this[string key]
 			{
 				get
 				{
-					foreach (UITableRow obj in List)
+					foreach (UITableSectionRow obj in List)
 						if (obj.Name.Equals(key))
 							return obj;
 
@@ -277,10 +277,10 @@ namespace Sifaw.Views.Components
 			#region Constructor
 
 			/// <summary>
-			/// Inicializa una nueva instancia de la clase <see cref="UITableRowCollection"/>.
+			/// Inicializa una nueva instancia de la clase <see cref="UITableSectionRowCollection"/>.
 			/// </summary>
 			/// <param name="owner"><see cref="UITableSection"/> que posee esta colección.</param>
-			public UITableRowCollection(UITableSection owner)
+			public UITableSectionRowCollection(UITableSection owner)
 			{
 				this.Owner = owner;
 			}
@@ -290,28 +290,57 @@ namespace Sifaw.Views.Components
 			#region Public Methods
 
 			/// <summary>
-			/// Agrega un objeto <see cref="UITableRow"/> existente a la colección.
+			/// Agrega un objeto <see cref="UITableSectionRow"/> existente a la colección.
 			/// </summary>
-			/// <param name="row"> Objeto <see cref="UITableRow"/> que se va a agregar a la colección.</param>
+			/// <param name="name">Nombre de la fila.</param>
 			/// <returns>Índice basado en cero en la colección donde se almacena el elemento.</returns>
 			public int Add(string name)
 			{
 				if (ContainsKey(name))
 					throw new ArgumentException("Ya existe una fila con igual nombre.", "name");
 
-				return (List.Add(new UITableRow(name)));
+				return (List.Add(new UITableSectionRow(name)));
+			}
+
+			/// <summary>
+			/// Agrega un objeto <see cref="UITableSectionRow"/> existente a la colección.
+			/// </summary>
+			/// <param name="name">Nombre de la fila.</param>
+			/// <param name="cells">Configuración de celdas del fila.</param>
+			/// <returns>Índice basado en cero en la colección donde se almacena el elemento.</returns>
+			public int Add(string name, UITableCell[] cells)
+			{
+				if (ContainsKey(name))
+					throw new ArgumentException("Ya existe una fila con igual nombre.", "name");
+
+				return (List.Add(new UITableSectionRow(name, cells)));
+			}
+
+			/// <summary>
+			/// Agrega un objeto <see cref="UITableSectionRow"/> existente a la colección.
+			/// </summary>
+			/// <param name="name">Nombre de la fila.</param>
+			/// <param name="cells">Configuración de celdas del fila.</param>
+			/// <param name="child">Tabla hija.</param>
+			/// <returns>Índice basado en cero en la colección donde se almacena el elemento.</returns>
+			public int Add(string name, UITableCell[] cells, UITable child)
+			{
+				if (ContainsKey(name))
+					throw new ArgumentException("Ya existe una fila con igual nombre.", "name");
+
+				return (List.Add(new UITableSectionRow(name, cells, child)));
 			}
 
 			/// <summary>
 			/// Devuelve el índice de la fila especificada incluida en la colección.
 			/// </summary>
-			/// <param name="row"><see cref="UITableRow"/> que representa la fila que se va a buscar en la colección.</param>
+			/// <param name="row"><see cref="UITableSectionRow"/> que representa la fila que se va a buscar en la colección.</param>
 			/// <returns>
 			/// Índice de base cero de la ubicación de la fila en la colección.
 			/// Si la fila no se encuentra en la colección, el valor devuelto
 			/// es -1.
 			/// </returns>
-			public int IndexOf(UITableRow row)
+			public int IndexOf(UITableSectionRow row)
 			{
 				return (List.IndexOf(row));
 			}
@@ -338,8 +367,8 @@ namespace Sifaw.Views.Components
 			/// especificado.
 			/// </summary>
 			/// <param name="index">Posición de índice de base cero donde se inserta la fila.</param>
-			/// <param name="row">Objeto <see cref="UITableRow"/> que se va a insertar en la colección.</param>
-			public void Insert(int index, UITableRow row)
+			/// <param name="row">Objeto <see cref="UITableSectionRow"/> que se va a insertar en la colección.</param>
+			public void Insert(int index, UITableSectionRow row)
 			{
 				List.Insert(index, row);
 			}
@@ -348,10 +377,10 @@ namespace Sifaw.Views.Components
 			/// Quita la fila especificado de la colección.
 			/// </summary>
 			/// <param name="row">
-			/// <see cref="UITableRow"/> que representa la fila
+			/// <see cref="UITableSectionRow"/> que representa la fila
 			/// que se va a quitar de la colección.
 			/// </param>
-			public void Remove(UITableRow row)
+			public void Remove(UITableSectionRow row)
 			{
 				List.Remove(row);				
 			}
@@ -362,7 +391,7 @@ namespace Sifaw.Views.Components
 			/// <param name="key">Nombre de la fila que se va a quitar de la colección.</param>
 			public void RemoveByKey(string key)
 			{
-				UITableRow obj = this[key];
+				UITableSectionRow obj = this[key];
 
 				if (obj != null)
 					Remove(obj);
@@ -372,13 +401,13 @@ namespace Sifaw.Views.Components
 			/// Determina si la fila especificado se encuentra en la colección.
 			/// </summary>
 			/// <param name="row">
-			/// <see cref="UITableRow"/> que representa la fila 
+			/// <see cref="UITableSectionRow"/> que representa la fila 
 			/// que se va a buscar en la colección.
 			/// </param>
 			/// <returns>
 			/// true si la colección contiene la fila; en caso contrario, false.
 			/// </returns>
-			public bool Contains(UITableRow row)
+			public bool Contains(UITableSectionRow row)
 			{
 				return (List.Contains(row));
 			}

@@ -19,20 +19,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using Sifaw.Views.Components;
+
 
 namespace Sifaw.Controllers.Components
 {
 	/// <summary>
 	/// Representa el callbak que es invocado cuando se solicita, desde un componente
-	/// que gestiona un objeto <see cref="UITable"/>, que indica si la fila de la 
+	/// que gestiona un objeto <see cref="Sifaw.Views.Components.UITable"/>, que indica si la fila de la 
 	/// sección especificada tiene una tabla secundaria asociada. 
 	/// </summary>
-	/// <param name="name">Nombre de la tabla.</param>
-	/// <param name="section">Índice de la sección.</param>
-	/// <param name="row">Índice de la fila.</param>
+	/// <param name="path">Ruta de la fila.</param>
 	/// <returns>
 	/// <c>true</c> si la fila tiene una tabla secundaria asociada; 
 	/// <c>false</c> en otro caso.
 	/// </returns>
-	internal delegate bool RowContainChildTable(string name, int section, int row);
+	internal delegate bool RowContainChildTable(UIIndexRowPath path);
 }

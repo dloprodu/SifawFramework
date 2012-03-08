@@ -24,7 +24,7 @@ namespace Sifaw.Controllers.Components
 {
 	/// <summary>
 	/// Representa el callbak que es invocado cuando se solicita, desde un componente
-	/// que gestiona un objeto <see cref="UITable"/>, el número de filas que componen 
+	/// que gestiona un objeto <see cref="Sifaw.Views.Components.UITable"/>, el número de filas que componen 
 	/// el pie de la tabla especificada.
 	/// </summary>
 	/// <param name="tableName">Nombre de la tabla.</param>

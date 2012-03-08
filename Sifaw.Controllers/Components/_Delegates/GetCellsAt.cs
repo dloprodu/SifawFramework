@@ -27,11 +27,9 @@ namespace Sifaw.Controllers.Components
 	/// <summary>
 	/// Representa el callbak que es invocado cuando se solicita, desde un componente
 	/// que gestiona un objeto <see cref="UITable"/>, la configuración
-	/// de celdas que componen la fila y sección especificadas.
+	/// de celdas que componen la fila especificada.
 	/// </summary>
-	/// <param name="tableName">Nombre de la tabla.</param>
-	/// <param name="section">Índice de la sección.</param>
-	/// <param name="row">Índice de la fila.</param>
+	/// <param name="path">Ruta de la fila.</param>
 	/// <returns>Array de celdas.</returns>
-	internal delegate UITableCell[] GetCellsAt(string tableName, int section, int row);
+	internal delegate UITableCell[] GetCellsAt(UIIndexRowPath path);
 }

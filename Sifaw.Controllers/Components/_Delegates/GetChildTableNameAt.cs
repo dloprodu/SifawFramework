@@ -19,16 +19,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using Sifaw.Views.Components;
+
 
 namespace Sifaw.Controllers.Components
 {
 	/// <summary>
 	/// Representa el callbak que es invocado cuando se solicita, desde un componente
-	/// que gestiona un objeto <see cref="Sifaw.Views.Components.UITable"/>, el número de filas que componen 
-	/// la sección especificada.
+	/// que gestiona un objeto <see cref="UITable"/>, el nombre de una tabla hija asociada
+	/// a una fila.
 	/// </summary>
-	/// <param name="tableName">Nombre de la tabla.</param>
-	/// <param name="section">Índice de la sección.</param>
-	/// <returns>Número de filas.</returns>
-	internal delegate int GetNumberOfRowsAt(string tableName, int section);
+	/// <param name="path">Ruta de fila.</param>
+	/// <returns>Nombre de la tabla hija.</returns>
+	internal delegate string GetChildTableNameAt(UIIndexRowPath path);
 }

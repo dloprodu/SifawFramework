@@ -35,11 +35,11 @@ namespace Sifaw.Views.Components
 	{
 		#region Fields
 
-		private string _name = string.Empty;		
-		
-		private UITableSectionCollection _header;
+		private string _name = string.Empty;
+
+		private UITableRowCollection _header;
 		private UITableSectionCollection _body;
-        private UITableSectionCollection _footer;
+		private UITableRowCollection _footer;
 
 		#endregion
 
@@ -56,12 +56,12 @@ namespace Sifaw.Views.Components
 		/// <summary>
 		/// Obtiene la cabecera de la tabla.
 		/// </summary>
-		public UITableSectionCollection Header
+		public UITableRowCollection Header
         {
             get
             {
                 if (_header == null)
-					_header = new UITableSectionCollection(this);
+					_header = new UITableRowCollection(this);
 
                 return _header;
             }
@@ -84,12 +84,12 @@ namespace Sifaw.Views.Components
 		/// <summary>
 		/// Obtiene el pie de la tabla.
 		/// </summary>
-		public UITableSectionCollection Footer
+		public UITableRowCollection Footer
         {
             get
             {
                 if (_footer == null)
-					_footer = new UITableSectionCollection(this);
+					_footer = new UITableRowCollection(this);
 
                 return _footer;
             }
@@ -152,6 +152,194 @@ namespace Sifaw.Views.Components
 		#endregion
 
 		#region Miscellany
+
+		/// <summary>
+		/// Representa la colección de secciones que definen la cabecera, cuerpo y pie de un objeto <see cref="UITable"/>.
+		/// </summary>
+		[Serializable]
+		public class UITableRowCollection : CollectionBase
+		{
+			#region Fields
+
+			/// <summary>
+			/// Propietario de la colección.
+			/// </summary>
+			protected readonly UITable Owner;
+
+			#endregion
+
+			#region Properties
+
+			/// <summary>
+			/// Obtiene la fila en el índice especificado de la colección.
+			/// </summary>
+			/// <param name="index">Índice de la fila que se va a recuperar de la colección.</param>
+			/// <returns>
+			/// <see cref="UITableRow"/> que representa la fila
+			/// ubicada en el índice especificado de la colección
+			/// </returns>
+			public UITableRow this[int index]
+			{
+				get { return ((UITableRow)List[index]); }
+			}
+
+			/// <summary>
+			/// Obtiene de la colección la fila con la clave especificada.
+			/// </summary>
+			/// <param name="key">Nombre de la fila que se va a recuperar de la colección.</param>
+			/// <returns>Objeto <see cref="UITableRow"/> con la clave especificada.</returns>
+			public UITableRow this[string key]
+			{
+				get
+				{
+					foreach (UITableRow obj in List)
+						if (obj.Name.Equals(key))
+							return obj;
+
+					return null;
+				}
+			}
+
+			#endregion
+
+			#region Constructor
+
+			/// <summary>
+			/// Inicializa una nueva instancia de la clase <see cref="UITableSectionCollection"/>.
+			/// </summary>
+			/// <param name="owner"><see cref="UITable"/> que posee esta colección.</param>
+			public UITableRowCollection(UITable owner)
+			{
+				this.Owner = owner;
+			}
+
+			#endregion
+
+			#region Public Methods
+
+			/// <summary>
+			/// Agrega un objeto <see cref="UITableRow"/> existente a la colección.
+			/// </summary>
+			/// <param name="name">Nombre de la fila.</param>
+			/// <returns>Índice basado en cero en la colección donde se almacena el elemento.</returns>
+			public int Add(string name)
+			{
+				if (ContainsKey(name))
+					throw new ArgumentException("Ya existe una sección con igual nombre.", "name");
+
+				return (List.Add(new UITableRow(name)));
+			}
+
+			/// <summary>
+			/// Agrega un objeto <see cref="UITableRow"/> existente a la colección.
+			/// </summary>
+			/// <param name="name">Nombre de la fila.</param>
+			/// <param name="cells">Configuración de celdas de la fila.</param>
+			/// <returns>Índice basado en cero en la colección donde se almacena el elemento.</returns>
+			public int Add(string name, UITableCell[] cells)
+			{
+				if (ContainsKey(name))
+					throw new ArgumentException("Ya existe una sección con igual nombre.", "name");
+
+				return (List.Add(new UITableRow(name, cells)));
+			}
+
+			/// <summary>
+			/// Devuelve el índice de la fila especificada incluida en la colección.
+			/// </summary>
+			/// <param name="section"><see cref="UITableRow"/> que representa la fila que se va a buscar en la colección.</param>
+			/// <returns>
+			/// Índice de base cero de la ubicación de la fila en la colección.
+			/// Si la fila no se encuentra en la colección, el valor devuelto
+			/// es -1.
+			/// </returns>
+			public int IndexOf(UITableRow section)
+			{
+				return (List.IndexOf(section));
+			}
+
+			/// <summary>
+			/// Determina el índice de la fila con la clave especificada.
+			/// </summary>
+			/// <param name="key">Nombre de la fila cuyo índice se va a recuperar.</param>
+			/// <returns>
+			/// Índice de base cero de la primera aparición de la fila con el nombre especificado,
+			/// si se encuentra; de lo contrario, -1.
+			/// </returns>
+			public int IndexOfKey(string key)
+			{
+				for (int i = 0; i < List.Count; i++)
+					if (this[i].Name.Equals(key))
+						return i;
+
+				return -1;
+			}
+
+			/// <summary>
+			/// Inserta una sección existente en la colección, en el índice
+			/// especificado.
+			/// </summary>
+			/// <param name="index">Posición de índice de base cero donde se inserta la fila.</param>
+			/// <param name="section">Objeto <see cref="UITableRow"/> que se va a insertar en la colección.</param>
+			public void Insert(int index, UITableRow section)
+			{
+				List.Insert(index, section);
+			}
+
+			/// <summary>
+			/// Quita la fila especificado de la colección.
+			/// </summary>
+			/// <param name="section">
+			/// <see cref="UITableRow"/> que representa la fila
+			/// que se va a quitar de la colección.
+			/// </param>
+			public void Remove(UITableRow section)
+			{
+				List.Remove(section);
+			}
+
+			/// <summary>
+			/// Quita de la colección la fila con la clave especificada.
+			/// </summary>
+			/// <param name="key">Nombre de la fila que se va a quitar de la colección.</param>
+			public void RemoveByKey(string key)
+			{
+				UITableRow obj = this[key];
+
+				if (obj != null)
+					Remove(obj);
+			}
+
+			/// <summary>
+			/// Determina si la fila especificado se encuentra en la colección.
+			/// </summary>
+			/// <param name="section">
+			/// <see cref="UITableRow"/> que representa la fila 
+			/// que se va a buscar en la colección.
+			/// </param>
+			/// <returns>
+			/// true si la colección contiene la fila; en caso contrario, false.
+			/// </returns>
+			public bool Contains(UITableRow section)
+			{
+				return (List.Contains(section));
+			}
+
+			/// <summary>
+			/// Determina si una seccón con la clave especificada está incluida en la colección.
+			/// </summary>
+			/// <param name="key">Nombre de la fila que se va a buscar.</param>
+			/// <returns>
+			/// true si la fila con el nombre especificado está incluida en la colección;
+			/// en caso contrario, false.
+			/// </returns>
+			public bool ContainsKey(string key)
+			{
+				return (this[key] != null);
+			}
+
+			#endregion
+		}
 
 		/// <summary>
 		/// Representa la colección de secciones que definen la cabecera, cuerpo y pie de un objeto <see cref="UITable"/>.
@@ -220,7 +408,8 @@ namespace Sifaw.Views.Components
 			/// <summary>
 			/// Agrega un objeto <see cref="UITableSection"/> existente a la colección.
 			/// </summary>
-			/// <param name="section"> Objeto <see cref="UITableSection"/> que se va a agregar a la colección.</param>
+			/// <param name="name"> Nombre de la sección.</param>
+			/// <param name="settings">Estilo visual de la sección.</param>
 			/// <returns>Índice basado en cero en la colección donde se almacena el elemento.</returns>
 			public int Add(string name, UITableSection.UISettings settings)
 			{

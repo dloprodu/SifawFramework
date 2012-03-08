@@ -138,7 +138,28 @@ namespace Sifaw.Controllers.Components
 		 *    completar funcionalidad.
 		 */
 
-		/* Empty */	
+		/// <summary>
+		/// <para>
+		/// Se llama al método <see cref="OnRowSelected"/> cuando una fila es
+		/// seleccionada. El método permite que las clases derivadas 
+		/// controlen el evento sin asociar un delegado.
+		/// </para>
+		/// <para>
+		/// Este métodos permite que las clases derivadas realicen operaciones de 
+		/// configuración tales como suscribirse a eventos de la vista.
+		/// </para>
+		/// </summary>
+		/// <remarks>
+		/// <para>
+		/// Al reemplazar <see cref="OnRowSelected"/> en una clase derivada, asegúrese de llamar al
+		/// método <see cref="OnRowSelected"/> de la clase base para que los delegados registrados 
+		/// reciban el evento.
+		/// </para>
+		/// </remarks>
+		protected virtual void OnRowSelected(UIIndexRowPath path)
+		{
+			/* Empty */
+		}
 
 		#endregion
 
@@ -167,74 +188,92 @@ namespace Sifaw.Controllers.Components
 
 		#endregion
 
+		#region UIElement Methods
+
+		/// <summary>
+		/// Invoca al método sobrescirto <see cref="UIElementController{TInput, TOutput, TComponent}.OnAfterUIElementLoad()"/>.
+		/// </summary>
+		protected override void OnAfterUIElementLoad()
+		{
+			base.OnAfterUIElementLoad();
+
+			/* Subscripción a eventos del componente... */
+			UIElement.RowSelected += new UITableSectionRowSelectedEventHandler(UIElement_RowSelected);
+		}
+
+		#endregion
+
 		#region UITableController Members
-				
+
 		/// <summary>
 		/// Devuelve el número de filas que componen la cabecera de la tabla especificada.
 		/// </summary>
-		/// <param name="tableName">Nombre de la tabla.</param>
+		/// <param name="table">Nombre de la tabla.</param>
 		/// <returns>Número de filas de la cabecera.</returns>
-		protected abstract int GetNumberOfHeaderRows(string tableName);
+		protected abstract int GetNumberOfHeaderRows(string table);
 
 		/// <summary>
 		/// Devuelve el número de filas que componen el pie de la tabla especificada.
 		/// </summary>
-		/// <param name="tableName">Nombre de la tabla.</param>
+		/// <param name="table">Nombre de la tabla.</param>
 		/// <returns>Número de filas del pie de tabla.</returns>
-		protected abstract int GetNumberOfFooterRows(string tableName);
+		protected abstract int GetNumberOfFooterRows(string table);
 
 		/// <summary>
 		/// Devuelve el número de secciones que componen el cuerpo de la tabla especificada.
 		/// </summary>
-		/// <param name="tableName">Nombre de la tabla.</param>
+		/// <param name="table">Nombre de la tabla.</param>
 		/// <param name="settings">Ajustes de la sección.</param>
 		/// <returns>Número de secciones de la tabla.</returns>
-		protected abstract int GetNumberOfSectionsAt(string tableName, out UITableSection.UISettings settings);
+		protected abstract int GetNumberOfSectionsAt(string table, out UITableSection.UISettings settings);
 
 		/// <summary>
 		/// Devuelve el número de filas que componen la sección especificada.
 		/// </summary>
-		/// <param name="tableName">Nombre de la tabla.</param>
+		/// <param name="table">Nombre de la tabla.</param>
 		/// <param name="section">Índice de la sección.</param>
 		/// <returns>Número de filas.</returns>
-		protected abstract int GetNumberOfRowsAt(string tableName, int section);
+		protected abstract int GetNumberOfRowsAt(string table, int section);
 
 		/// <summary>
 		/// Devuelve la configuración de celdas que componen la fila especificada de la cabecera.
 		/// </summary>
-		/// <param name="tableName">Nombre de la tabla.</param>
+		/// <param name="table">Nombre de la tabla.</param>
 		/// <param name="row">Índice de la fila.</param>
 		/// <returns>Array de celdas.</returns>
-		protected abstract UITableCell[] GetHeaderAt(string tableName, int row);
+		protected abstract UITableCell[] GetHeaderAt(string table, int row);
 
 		/// <summary>
-		/// Devuelve la configuración de celdas que componen la fila y sección especificadas.
+		/// Devuelve la configuración de celdas que componen la fila especificada.
 		/// </summary>
-		/// <param name="tableName">Nombre de la tabla.</param>
-		/// <param name="section">Índice de la sección.</param>
-		/// <param name="row">Índice de la fila.</param>
+		/// <param name="path">Ruta de la fila.</param>
 		/// <returns>Array de celdas.</returns>
-		protected abstract UITableCell[] GetCellsAt(string tableName, int section, int row);
+		protected abstract UITableCell[] GetCellsAt(UIIndexRowPath path);
 
 		/// <summary>
-		/// Devuelve un valor que indica si la fila de la sección especificada tiene una tabla secundaria asociada. 
+		/// Devuelve un valor que indica si la fila especificada tiene una tabla secundaria asociada. 
 		/// </summary>
-		/// <param name="name">Nombre de la tabla.</param>
-		/// <param name="section">Índice de la sección.</param>
-		/// <param name="row">Índice de la fila.</param>
+		/// <param name="path">Ruta de la fila.</param>
 		/// <returns>
 		/// <c>true</c> si la fila tiene una tabla secundaria asociada; 
 		/// <c>false</c> en otro caso.
 		/// </returns>
-		protected abstract bool RowContainChildTable(string name, int section, int row);
+		protected abstract bool RowContainChildTable(UIIndexRowPath path);
+
+		/// <summary>
+		/// Devuelve el nombre de la tabla hija vinculada a la fila especificada.
+		/// </summary>
+		/// <param name="path">Ruta de la fila.</param>
+		/// <returns>Nombre del a tabla hija.</returns>
+		protected abstract string GetChildTableNameAt(UIIndexRowPath path);
 
 		/// <summary>
 		/// Devuelve la configuración de celdas que componen la fila especificada del pie de tabla.
 		/// </summary>
-		/// <param name="tableName">Nombre de la tabla.</param>
+		/// <param name="table">Nombre de la tabla.</param>
 		/// <param name="row">Índice de la fila.</param>
 		/// <returns>Array de celdas.</returns>
-		protected abstract UITableCell[] GetFooterAt(string tableName, int row);
+		protected abstract UITableCell[] GetFooterAt(string table, int row);
 
 		#endregion
 
@@ -266,6 +305,7 @@ namespace Sifaw.Controllers.Components
 				, GetNumberOfRowsAt
 				, GetCellsAt
 				, RowContainChildTable
+				, GetChildTableNameAt
 				, "Root");
 
 			UIElement.SetTable(_root);
@@ -288,9 +328,19 @@ namespace Sifaw.Controllers.Components
 				, GetNumberOfRowsAt
 				, GetCellsAt
 				, RowContainChildTable
+				, GetChildTableNameAt
 				, "Root");
 
 			UIElement.SetTable(_root);
+		}
+
+		#endregion
+
+		#region UIElement Event Handlers
+
+		private void UIElement_RowSelected(object sender, UITableSectionRowSelectedEventArgs e)
+		{
+			OnRowSelected(e.Path);
 		}
 
 		#endregion

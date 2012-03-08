@@ -6,7 +6,7 @@
  * 
  * ===============================================================================================
  * Historial de versiones:
- *   - 09/02/2012: Creación de la clase.
+ *   - 08/03/2012: Creación de la clase.
  * ===============================================================================================
  * Observaciones:
  * 
@@ -25,27 +25,33 @@ using Sifaw.Core;
 namespace Sifaw.Views.Components
 {
 	/*
-	 * Argumento y manejador para los eventos FilterChanged.
+	 * Argumento y manejador para los eventos TableSectionRowSelected.
 	 */
 
 	/// <summary>
-	/// Proporciona datos para un evento <see cref="FilterBaseComponent{TFilter}.FilterChanged"/>.
+	/// Proporciona datos para un evento <see cref="TableComponent.RowSelected"/>.
 	/// </summary>
-	public class UIFilterChangedEventArgs : SFCancelEventArgs
+	public class UITableSectionRowSelectedEventArgs : EventArgs
 	{
 		/// <summary>
-		/// Inicializa una nueva instancia de la clase <see cref="UIFilterChangedEventArgs"/>.
+		/// Obtiene la ruta de la fila.
 		/// </summary>
-		public UIFilterChangedEventArgs()
+		public readonly UIIndexRowPath Path;
+
+		/// <summary>
+		/// Inicializa una nueva instancia de la clase <see cref="UITableSectionRowSelectedEventArgs"/>.
+		/// </summary>
+		public UITableSectionRowSelectedEventArgs(UIIndexRowPath path)
 			: base()
 		{
+			Path = path;
 		}
 	}
 
 	/// <summary>
-	/// Representa el método que controla un evento <see cref="FilterBaseComponent{TFilter}.FilterChanged"/>.
+	/// Representa el método que controla un evento <see cref="TableComponent.RowSelected"/>.
 	/// </summary>
 	/// <param name="sender">Origen del evento.</param>
 	/// <param name="e"><see cref="UIFilterChangedEventArgs"/> que contiene los datos de eventos.</param>
-	public delegate void UIFilterChangedEventHandler(object sender, UIFilterChangedEventArgs e);
+	public delegate void UITableSectionRowSelectedEventHandler(object sender, UITableSectionRowSelectedEventArgs e);
 }

@@ -47,5 +47,14 @@ namespace Sifaw.Views.Components
 		void SetTable(UITable table);
 
 		#endregion
+
+		#region Eventos
+
+		/// <summary>
+		/// Se produce cuando se selecciona una fila.
+		/// </summary>
+		event UITableSectionRowSelectedEventHandler RowSelected;
+		
+		#endregion
 	}
 }

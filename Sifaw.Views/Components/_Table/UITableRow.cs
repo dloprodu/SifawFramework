@@ -36,7 +36,6 @@ namespace Sifaw.Views.Components
 
 		private string _name = string.Empty;
         private UITableCellCollection _cells = null;
-		private UITable _childTable = null;
 
 		#endregion
 
@@ -64,15 +63,6 @@ namespace Sifaw.Views.Components
             }
         }
 
-		/// <summary>
-		/// Obtiene la tabla secundaria asociada a la fila.
-		/// </summary>
-		public UITable ChildTable
-		{
-			get { return _childTable; }
-			internal set { _childTable = value; }
-		}
-
 		#endregion
 
 		#region Constructor
@@ -85,6 +75,21 @@ namespace Sifaw.Views.Components
 		public UITableRow(string name)
 		{
 			this._name = name;
+		}
+
+		/// <summary>
+		/// Inicializa una nueva instancia de la clase <see cref="UITableRow"/>, estableciendo valores
+		/// en las propiedades <see cref="Name"/> y <see cref="Cells"/>.
+		/// </summary>
+		/// <param name="name">Nombre de la fila.</param>
+		/// <param name="cells">Configuración de celdas de la fila.</param>
+		public UITableRow(string name, UITableCell[] cells)
+		{
+			this._name = name;
+
+			if (cells != null)
+				for (int i = 0; i < cells.Length; i++)
+					Cells.Add(cells[i]);					
 		}
 
 		#endregion

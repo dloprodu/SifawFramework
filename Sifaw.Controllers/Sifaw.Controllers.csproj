@@ -93,6 +93,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Components\Filters\TODO.cs" />
+    <Compile Include="Components\_Delegates\GetChildTableNameAt.cs" />
     <Compile Include="Components\_Miscellany\TableOperationsManager.cs" />
     <Compile Include="Components\UIListFilterBaseController.cs" />
     <Compile Include="Components\Filters\UIDropDownListFilterController.cs" />

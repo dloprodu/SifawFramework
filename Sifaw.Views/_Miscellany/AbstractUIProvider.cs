@@ -46,6 +46,7 @@ namespace Sifaw.Views
 		, AbstractUILinker<ListFilterComponent>
 		, AbstractUILinker<EnumFilterComponent>
 		, AbstractUILinker<DropDownListFilterComponent>
+		, AbstractUILinker<TableComponent>
 						
 		// • Vistas 		 
 		, AbstractUILinker<ShellView>

@@ -24,9 +24,10 @@ namespace Sifaw.WPF.Test
             
 			//(new MainWindow()).Show();			
 
-			(new UIGroupFiltersTestViewController()).Start();
+			//(new UIGroupFiltersTestViewController()).Start();
 			//(new UIAssistantTestViewController()).Start();
 			//(new UITabHostTestViewController()).Start();
+			(new UITableTestViewController()).Start();
 		}
 
 		#endregion

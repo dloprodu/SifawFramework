@@ -57,7 +57,6 @@ namespace Sifaw.Views.Components
 		public int RowSpan
 		{
 			get { return _rowSpan; }
-			set { _rowSpan = value; }
 		}
 
 		/// <summary>
@@ -67,7 +66,6 @@ namespace Sifaw.Views.Components
 		public int ColumnSpan
 		{
 			get { return _columnSpan; }
-			set { _columnSpan = value; }
 		}
 
 		/// <summary>
@@ -75,8 +73,7 @@ namespace Sifaw.Views.Components
 		/// </summary>
 		public UISettings Settings
 		{
-			get { return _settings; }
-			set { _settings = value; }
+			get { return _settings; }			
 		}
 
 		#endregion
@@ -88,8 +85,23 @@ namespace Sifaw.Views.Components
 		/// </summary>
 		/// <param name="name">Nombre de la celda.</param>
 		protected UITableCell(string name)
+			: this(name, UISettings.Default)
+		{
+		}
+
+		/// <summary>
+		/// Inicializa una nueva instancia de la clase <see cref="UITableCell"/>.
+		/// </summary>
+		/// <param name="name">Nombre de la celda.</param>
+		/// <param name="settings">Estilo visual de la celda.</param>
+		/// <param name="rowSpan">Número de filas que ocupa la celda.</param>
+		/// <param name="colSpan">Número de columnas que ocupa la celda.</param>
+		protected UITableCell(string name, UISettings settings, int rowSpan = 1, int colSpan = 1)
 		{
 			this._name = name;
+			this._settings = settings;
+			this._rowSpan = rowSpan;
+			this._columnSpan = colSpan;
 		}
 
 		#endregion

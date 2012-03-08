@@ -63,7 +63,21 @@ namespace Sifaw.Views.Components
 		/// <param name="name">Nombre de la celda.</param>
 		/// <param name="text">Texto de la celda.</param>
 		public UITableTextCell(string name, string text)
-			: base(name)
+			: this(name, text, UISettings.Default)
+		{
+			this._text = text;
+		}
+
+		/// <summary>
+		/// Inicializa una nueva instancia de la clase <see cref="UITableTextCell"/>.
+		/// </summary>
+		/// <param name="name">Nombre de la celda.</param>
+		/// <param name="text">Texto de la celda.</param>
+		/// <param name="settings">Estilo visual de la celda.</param>
+		/// <param name="rowSpan">Número de filas que ocupa la celda.</param>
+		/// <param name="colSpan">Número de columnas que ocupa la celda.</param>
+		public UITableTextCell(string name, string text, UISettings settings, int rowSpan = 1, int colSpan = 1)
+			: base(name, settings, rowSpan, colSpan)
 		{
 			this._text = text;
 		}

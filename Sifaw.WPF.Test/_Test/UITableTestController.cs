@@ -82,9 +82,8 @@ namespace Sifaw.WPF.Test
 			return 1;
 		}
 
-		protected override int GetNumberOfSectionsAt(string table, out UITableSection.UISettings settings)
+		protected override int GetNumberOfSectionsAt(string table)
 		{
-			settings = UITableSection.UISettings.Default;
 			return 2;
 		}
 
@@ -100,6 +99,13 @@ namespace Sifaw.WPF.Test
 				  new UITableTextCell("Foto", "Foto Alumno", UITableCell.UISettings.Default, 2, 1)
 				, new UITableTextCell("Detalle", "Detalle alumno", UITableCell.UISettings.Default, 1, 1)
 			};
+		}
+
+		protected override void GetSectionAt(string table, int section, out string caption, out string detail, out UITableSection.UISettings setting)
+		{
+			setting = UITableSection.UISettings.Default;
+			caption = "Sección " + section.ToString();
+			detail = string.Empty;
 		}
 
 		protected override UITableCell[] GetCellsAt(UIIndexRowPath path)

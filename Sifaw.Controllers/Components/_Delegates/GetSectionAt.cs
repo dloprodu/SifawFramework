@@ -26,11 +26,13 @@ namespace Sifaw.Controllers.Components
 {
 	/// <summary>
 	/// Representa el callbak que es invocado cuando se solicita, desde un componente
-	/// que gestiona un objeto <see cref="UITable"/>, el número de secciones que 
-	/// componen el cuerpo de la tabla especificada.
+	/// que gestiona un objeto <see cref="UITable"/>, la configuración
+	/// de la sección especificada.
 	/// </summary>
-	/// <param name="tableName">Nombre de la tabla.</param>
-	/// <param name="settings">Ajustes de la sección.</param>
-	/// <returns>Número de secciones de la tabla.</returns>
-	internal delegate int GetNumberOfSectionsAt(string tableName);
+	/// <param name="table">Nombre de la tabla.</param>
+	/// <param name="section">Índice de la sección.</param>
+	/// <param name="caption">Título de sección.</param>
+	/// <param name="detail">Detalle de sección.</param>
+	/// <param name="setting">Estilo visual de la sección.</param>
+	internal delegate void GetSectionAt(string table, int section, out string caption, out string detail, out UITableSection.UISettings setting);
 }

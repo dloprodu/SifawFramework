@@ -105,8 +105,8 @@ namespace Sifaw.Views.Components
 		/// </summary>
 		/// <param name="name">Nombre de la sección.</param>
 		public UITableSection(string name)
-		{
-			this._name = name;
+			: this(name, string.Empty, string.Empty, UISettings.Default)
+		{			
 		}
 
 		/// <summary>
@@ -114,10 +114,14 @@ namespace Sifaw.Views.Components
 		/// en las propiedades <see cref="Name"/> y <see cref="Settings"/>.
 		/// </summary>
 		/// <param name="name">Nombre de la sección.</param>
+		/// <param name="caption">Título de sección.</param>
+		/// <param name="detail">Detalle de sección.</param>
 		/// <param name="settings">Ajustes de la sección.</param>
-		public UITableSection(string name, UISettings settings)
-			: this(name)
+		public UITableSection(string name, string caption, string detail, UISettings settings)
 		{
+			this._name = name;
+			this._caption = caption;
+			this._detail = detail;
 			this._settings = settings;
 		}
 
@@ -167,7 +171,7 @@ namespace Sifaw.Views.Components
 
 		/// <summary>
 		/// Provee un conjunto de propiedades que permiten modificar la apariencia
-		/// de un componente de interfaz de usuario.
+		/// de la sección.
 		/// </summary>
 		public struct UISettings
 		{
@@ -193,11 +197,6 @@ namespace Sifaw.Views.Components
 			/// </summary>
 			public UIFrameBrush BorderBrush;
 
-			/// <summary>
-			/// Obtiene o establece el alto de las filas de la sección.
-			/// </summary>
-			public double RowHeight;
-
 			#endregion
 
 			#region Constructor
@@ -207,19 +206,17 @@ namespace Sifaw.Views.Components
 				Default = new UISettings(
 					  background: new UISolidBrush(UIColors.WhiteColors.White)
 					, border: new UIFrame(1)
-					, borderBrush: new UIFrameBrush(new UISolidBrush(UIColors.BlueColors.RoyalBlue))
-					, rowHeight: 18);			
+					, borderBrush: new UIFrameBrush(new UISolidBrush(UIColors.BlueColors.RoyalBlue)));			
 			}
 
 			/// <summary>
 			/// Inicializa una nueva instancia de la estructura <see cref="UISettings"/>.
 			/// </summary>
-			public UISettings(UIBrush background, UIFrame border, UIFrameBrush borderBrush, double rowHeight)
+			public UISettings(UIBrush background, UIFrame border, UIFrameBrush borderBrush)
 			{
 				Background = background;
 				Border = border;
 				BorderBrush = borderBrush;
-				RowHeight = rowHeight;
 			}
 
 			#endregion

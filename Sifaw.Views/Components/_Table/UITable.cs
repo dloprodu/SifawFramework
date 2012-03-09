@@ -19,7 +19,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+
 using Sifaw.Views.Components;
+using Sifaw.Views.Kit;
 
 
 namespace Sifaw.Views.Components
@@ -40,6 +42,8 @@ namespace Sifaw.Views.Components
 		private UITableRowCollection _header;
 		private UITableSectionCollection _body;
 		private UITableRowCollection _footer;
+
+		private UISettings _settings;
 
 		#endregion
 
@@ -95,6 +99,15 @@ namespace Sifaw.Views.Components
             }
         }
 
+		/// <summary>
+		/// Obtiene o establece los ajustes de la sección de tabla.
+		/// </summary>
+		public UISettings Settings
+		{
+			get { return _settings; }
+			set { _settings = value; }
+		}
+
         #endregion
 
         #region Constructros
@@ -105,8 +118,20 @@ namespace Sifaw.Views.Components
 		/// </summary>
 		/// <param name="name">Nombre de la tabla.</param>
         public UITable(string name)
+			: this(name, UISettings.Default)
+		{			
+		}
+
+		/// <summary>
+		/// Inicializa una nueva instancia de la clase <see cref="UITable"/>, estableciendo valores
+		/// en la propiedades <see cref="Name"/> y <see cref="Settings"/>.
+		/// </summary>
+		/// <param name="name">Nombre de la tabla.</param>
+		/// <param name="settings">Estilo visual de la tabla.</param>
+		public UITable(string name, UISettings settings)
 		{
 			this._name = name;
+			this._settings = settings;
 		}
 
 		#endregion
@@ -152,6 +177,66 @@ namespace Sifaw.Views.Components
 		#endregion
 
 		#region Miscellany
+
+		/// <summary>
+		/// Provee un conjunto de propiedades que permiten modificar la apariencia
+		/// de la tabla.
+		/// </summary>
+		public struct UISettings
+		{
+			/// <summary>
+			/// Obtiene un <see cref="UISettings"/> con unos valores por defecto.
+			/// </summary>
+			public static readonly UISettings Default;
+
+			#region Fields
+
+			/// <summary>
+			/// Obtiene o establece el pincel que describe el fondo del elemento.
+			/// </summ
+			public UIBrush Background;
+
+			/// <summary>
+			/// Obtiene o establece el grosor del borde del componente.
+			/// </summary>
+			public UIFrame Border;
+
+			/// <summary>
+			/// Obtiene o establece un pincel que describe el fondo del borde del componente.
+			/// </summary>
+			public UIFrameBrush BorderBrush;
+
+			/// <summary>
+			/// Obtiene o establece el alto de la filas.
+			/// </summary>
+			public double RowHeight;
+
+			#endregion
+
+			#region Constructor
+
+			static UISettings()
+			{
+				Default = new UISettings(
+					  background: new UISolidBrush(UIColors.WhiteColors.White)
+					, border: new UIFrame(1)
+					, borderBrush: new UIFrameBrush(new UISolidBrush(UIColors.BlueColors.RoyalBlue))
+					, rowHeight: 18);
+			}
+
+			/// <summary>
+			/// Inicializa una nueva instancia de la estructura <see cref="UISettings"/>.
+			/// </summary>
+			public UISettings(UIBrush background, UIFrame border, UIFrameBrush borderBrush, double rowHeight)
+			{
+				Background = background;
+				Border = border;
+				BorderBrush = borderBrush;
+				RowHeight = rowHeight;
+			}
+
+			#endregion
+		}
 
 		/// <summary>
 		/// Representa la colección de secciones que definen la cabecera, cuerpo y pie de un objeto <see cref="UITable"/>.
@@ -409,14 +494,16 @@ namespace Sifaw.Views.Components
 			/// Agrega un objeto <see cref="UITableSection"/> existente a la colección.
 			/// </summary>
 			/// <param name="name"> Nombre de la sección.</param>
+			/// <param name="caption">Título de sección.</param>
+			/// <param name="detail">Detalle de sección.</param>
 			/// <param name="settings">Estilo visual de la sección.</param>
 			/// <returns>Índice basado en cero en la colección donde se almacena el elemento.</returns>
-			public int Add(string name, UITableSection.UISettings settings)
+			public int Add(string name, string caption, string detail, UITableSection.UISettings settings)
 			{
 				if (ContainsKey(name))
 					throw new ArgumentException("Ya existe una sección con igual nombre.", "name");
 
-				return (List.Add(new UITableSection(name, settings)));
+				return (List.Add(new UITableSection(name, caption, detail, settings)));
 			}
 
 			/// <summary>

@@ -51,6 +51,7 @@ namespace Sifaw.Controllers.Components
 			, GetNumberOfFooterRows GetNumberOfFooterRows
 			, GetFooterAt GetFooterAt
 			, GetNumberOfSectionsAt GetNumberOfSectionsAt
+			, GetSectionAt GetSectionAt
 			, GetNumberOfRowsAt GetNumberOfRowsAt
 			, GetCellsAt GetCellsAt
 			, RowContainChildTable RowContainChildTable
@@ -64,10 +65,14 @@ namespace Sifaw.Controllers.Components
 				table.Header.Add(string.Format("T:{0}; H:{1}", name, row), GetHeaderAt(name, row));
 
 			/* Body */
-			UITableSection.UISettings settings;
-			for (int section = 0; section < GetNumberOfSectionsAt(name, out settings); section++)
+			for (int section = 0; section < GetNumberOfSectionsAt(name); section++)
 			{
-				table.Body.Add(string.Format("T:{0}; S:{1}", name, section), settings);
+				UITableSection.UISettings settings;
+				string caption, detail;
+
+				GetSectionAt(name, section, out caption, out detail, out settings);
+
+				table.Body.Add(string.Format("T:{0}; S:{1}", name, section), caption, detail, settings);
 
 				for (int row = 0; row < GetNumberOfRowsAt(name, section); row++)
 				{
@@ -82,6 +87,7 @@ namespace Sifaw.Controllers.Components
 							, GetNumberOfFooterRows
 							, GetFooterAt
 							, GetNumberOfSectionsAt
+							, GetSectionAt
 							, GetNumberOfRowsAt
 							, GetCellsAt
 							, RowContainChildTable

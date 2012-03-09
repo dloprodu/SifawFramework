@@ -94,6 +94,7 @@
   <ItemGroup>
     <Compile Include="Components\Filters\TODO.cs" />
     <Compile Include="Components\TODO.cs" />
+    <Compile Include="Components\_Delegates\GetSectionAt.cs" />
     <Compile Include="Components\_Delegates\GetChildTableNameAt.cs" />
     <Compile Include="Components\_Miscellany\TableOperationsManager.cs" />
     <Compile Include="Components\UIListFilterBaseController.cs" />

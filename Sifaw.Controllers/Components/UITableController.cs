@@ -225,7 +225,7 @@ namespace Sifaw.Controllers.Components
 		/// <param name="table">Nombre de la tabla.</param>
 		/// <param name="settings">Ajustes de la sección.</param>
 		/// <returns>Número de secciones de la tabla.</returns>
-		protected abstract int GetNumberOfSectionsAt(string table, out UITableSection.UISettings settings);
+		protected abstract int GetNumberOfSectionsAt(string table);
 
 		/// <summary>
 		/// Devuelve el número de filas que componen la sección especificada.
@@ -242,6 +242,16 @@ namespace Sifaw.Controllers.Components
 		/// <param name="row">Índice de la fila.</param>
 		/// <returns>Array de celdas.</returns>
 		protected abstract UITableCell[] GetHeaderAt(string table, int row);
+
+		/// <summary>
+		/// Devuelve la configuración de la sección especificada.
+		/// </summary>
+		/// <param name="table">Nombre de la tabla.</param>
+		/// <param name="section">Índice de la sección.</param>
+		/// <param name="caption">Título de sección.</param>
+		/// <param name="detail">Detalle de sección.</param>
+		/// <param name="setting">Estilo visual de la sección.</param>
+		protected abstract void GetSectionAt(string table, int section, out string caption, out string detail, out UITableSection.UISettings setting);
 
 		/// <summary>
 		/// Devuelve la configuración de celdas que componen la fila especificada.
@@ -302,6 +312,7 @@ namespace Sifaw.Controllers.Components
 				, GetNumberOfFooterRows
 				, GetFooterAt
 				, GetNumberOfSectionsAt
+				, GetSectionAt
 				, GetNumberOfRowsAt
 				, GetCellsAt
 				, RowContainChildTable
@@ -325,6 +336,7 @@ namespace Sifaw.Controllers.Components
 				, GetNumberOfFooterRows
 				, GetFooterAt
 				, GetNumberOfSectionsAt
+				, GetSectionAt
 				, GetNumberOfRowsAt
 				, GetCellsAt
 				, RowContainChildTable

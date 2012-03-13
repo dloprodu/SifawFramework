@@ -11,8 +11,20 @@
        • DataTableRow
     -->
     <Style TargetType="{x:Type local:DataTableRow}"
-           BasedOn="{StaticResource {x:Type Control}}">
-        <!-- Empty -->
+           BasedOn="{StaticResource {x:Type Control}}">        
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:DataTableRow}">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                        <local:DataTableCellsPresenter x:Name="PART_CellsPresenter">
+                            
+                        </local:DataTableCellsPresenter>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
     
 </ResourceDictionary>

@@ -34,7 +34,7 @@ namespace Sifaw.WPF.CCL
 	/// Se usa en la plantilla de un control <see cref="DataTable"/> para especificar la ubicación en el árbol visual del 
 	/// control donde se van a agregar los encabezados de tabla.
 	/// </summary>
-	public class DataTableHeadersPresenter : ItemsControl
+	public class DataTableHeadersPresenter : VirtualizingStackPanel
 	{
 		#region Constructor
 

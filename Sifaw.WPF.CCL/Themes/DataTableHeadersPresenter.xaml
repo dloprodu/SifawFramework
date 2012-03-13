@@ -11,7 +11,7 @@
        • DataTableHeadersPresenter
     -->
     <Style TargetType="{x:Type local:DataTableHeadersPresenter}"
-           BasedOn="{StaticResource {x:Type ItemsControl}}">
+           BasedOn="{StaticResource {x:Type VirtualizingStackPanel}}">
         <!-- Empty -->
     </Style>
     

@@ -393,56 +393,56 @@ namespace Sifaw.WPF.CCL
 
 		#endregion
 
-		#region Virtual Methods
+		#region Changed Methods
 
 		private void OnMinimumChanged(byte oldValue, byte newValue)
 		{
-
+			/* Empty */
 		}
 
 		private void OnMaximumChanged(byte oldValue, byte newValue)
 		{
-
+			/* Empty */
 		}
 
 		private void OnValueChanged(byte oldValue, byte newValue)
 		{
-
+			/* Empty */
 		}
 
 		private void OnArrowChanged(int oldValue, int newValue)
 		{
-
+			/* Empty */
 		}
 
 		private void OnCurrentStepBrushChanged(Brush oldValue, Brush newValue)
 		{
-
+			/* Empty */
 		}
 
 		private void OnPreviousStepBrushChanged(Brush oldValue, Brush newValue)
 		{
-
+			/* Empty */
 		}
 
 		private void OnFollowingStepBrushChanged(Brush oldValue, Brush newValue)
 		{
-
+			/* Empty */
 		}
 
 		private void OnCurrentStepBorderBrushChanged(Brush oldValue, Brush newValue)
 		{
-
+			/* Empty */
 		}
 
 		private void OnPreviousStepBorderBrushChanged(Brush oldValue, Brush newValue)
 		{
-
+			/* Empty */
 		}
 
 		private void OnFollowingStepBorderBrushChanged(Brush oldValue, Brush newValue)
 		{
-
+			/* Empty */
 		}
 
 		#endregion

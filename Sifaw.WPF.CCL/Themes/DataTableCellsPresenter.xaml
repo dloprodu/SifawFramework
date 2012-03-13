@@ -12,7 +12,13 @@
     -->
     <Style TargetType="{x:Type local:DataTableCellsPresenter}"
            BasedOn="{StaticResource {x:Type ItemsControl}}">
-        <!-- Empty -->
-    </Style>
-    
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <!-- Plantilla que define el panel que controla el diseño de elementos. -->
+                <ItemsPanelTemplate>                    
+                    <local:DataTableCellsPanel />
+                </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>    
 </ResourceDictionary>

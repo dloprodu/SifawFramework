@@ -23,7 +23,7 @@ namespace Sifaw.WPF.Test
 			AbstractUIProviderManager<AbstractUIProvider>.SetUIElementLinker(new WPFProvider());
             
 			//(new MainWindow()).Show();			
-			System.Windows.Controls.DataGridCell;
+			
 			//(new UIGroupFiltersTestViewController()).Start();
 			//(new UIAssistantTestViewController()).Start();
 			//(new UITabHostTestViewController()).Start();

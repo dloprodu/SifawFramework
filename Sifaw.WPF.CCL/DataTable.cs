@@ -33,6 +33,7 @@ DataTable
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -44,6 +45,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Collections.Specialized;
 
 
 namespace Sifaw.WPF.CCL
@@ -52,8 +54,17 @@ namespace Sifaw.WPF.CCL
 	/// Representa un control que permite representar datos en una tabla con cabecera y pie.
 	/// Las celdas de la tabla pueden ocupar mas de una fila y/o columna.
 	/// </summary>
+	[TemplatePart(Name = "PART_Header", Type = typeof(DataTableHeadersPresenter))]
+	[TemplatePart(Name = "PART_Rows", Type = typeof(DataTableRowsPresenter))]
 	public class DataTable : Control
 	{
+		#region Fields
+
+		private DataTableHeadersPresenter HeaderPresenter = null;
+		private DataTableRowsPresenter RowsPresenter = null;
+
+		#endregion
+
 		#region Dependency Properties
 
 		public static readonly DependencyProperty ColumnsProperty = DependencyProperty.Register(
@@ -64,14 +75,78 @@ namespace Sifaw.WPF.CCL
 				null,
 				FrameworkPropertyMetadataOptions.AffectsRender));
 
+		public static readonly DependencyProperty HeaderProperty = DependencyProperty.Register(
+			"Header",
+			typeof(DataTableRowCollection),
+			typeof(DataTable),
+			new FrameworkPropertyMetadata(
+				null,
+				FrameworkPropertyMetadataOptions.AffectsRender));
+
+		public static readonly DependencyProperty RowsProperty = DependencyProperty.Register(
+			"Rows",
+			typeof(DataTableRowCollection),
+			typeof(DataTable),
+			new FrameworkPropertyMetadata(
+				null,
+				FrameworkPropertyMetadataOptions.AffectsRender));
+
 		#endregion
 
 		#region Properties
 
+		/// <summary>
+		/// Obtiene la colección de columnas del <see cref="DataTable"/>.
+		/// </summary>
 		public DataTableColumnCollection Columns
 		{
-			get { return (DataTableColumnCollection)GetValue(ColumnsProperty); }
-			set { SetValue(ColumnsProperty, value); }
+			get 
+			{
+				if (GetValue(ColumnsProperty) == null)
+				{
+					Columns = new DataTableColumnCollection(this);
+					Columns.CollectionChanged += new System.Collections.Specialized.NotifyCollectionChangedEventHandler(Columns_CollectionChanged);
+				}
+
+				return (DataTableColumnCollection)GetValue(ColumnsProperty); 
+			}
+			protected internal set { SetValue(ColumnsProperty, value); }
+		}		
+
+		/// <summary>
+		/// Obtiene la colección de filas de la cabecera del <see cref="DataTable"/>.
+		/// </summary>
+		public DataTableRowCollection Header
+		{
+			get
+			{
+				if (GetValue(HeaderProperty) == null)
+				{
+					Header = new DataTableRowCollection(this);
+					Header.CollectionChanged += new System.Collections.Specialized.NotifyCollectionChangedEventHandler(Header_CollectionChanged);
+				}
+
+				return (DataTableRowCollection)GetValue(HeaderProperty);
+			}
+			protected internal set { SetValue(HeaderProperty, value); }
+		}
+		
+		/// <summary>
+		/// Obtiene la colección de filas del <see cref="DataTable"/>.
+		/// </summary>
+		public DataTableRowCollection Rows
+		{
+			get 
+			{
+				if (GetValue(RowsProperty) == null)
+				{
+					Rows = new DataTableRowCollection(this);
+					Rows.CollectionChanged += new System.Collections.Specialized.NotifyCollectionChangedEventHandler(Rows_CollectionChanged);
+				}
+
+				return (DataTableRowCollection)GetValue(RowsProperty); 
+			}
+			protected internal set { SetValue(RowsProperty, value); }
 		}
 
 		#endregion
@@ -83,9 +158,85 @@ namespace Sifaw.WPF.CCL
 			DefaultStyleKeyProperty.OverrideMetadata(typeof(DataTable), new FrameworkPropertyMetadata(typeof(DataTable)));
 		}
 
-		public DataTable()
+		#endregion
+
+		#region Override Methods
+
+		public override void OnApplyTemplate()
 		{
-			Columns = new DataTableColumnCollection(this);
+			base.OnApplyTemplate();
+
+			HeaderPresenter = Template.FindName("PART_Header", this) as DataTableHeadersPresenter;
+			RowsPresenter = Template.FindName("PART_Rows", this) as DataTableRowsPresenter;
+		}
+
+		#endregion
+
+		#region Public Methods
+
+		public void Clean()
+		{
+		}
+
+		public void CleanHeader()
+		{
+			Header.Clear();
+		}
+
+		public void CleanRows()
+		{
+		}
+
+		public DataTableRow AddHeader()
+		{
+			DataTableRow row = Header[Header.Add()];
+			HeaderPresenter.Children.Add(row);
+			return row;
+		}
+
+		public DataTableRow AddRow()
+		{
+			DataTableRow row = Rows[Rows.Add()];
+			RowsPresenter.Children.Add(row);
+			return row;
+		}
+
+		#endregion
+
+		#region
+
+		private void Columns_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+		{
+			switch (e.Action)
+			{
+				case NotifyCollectionChangedAction.Add:
+					break;
+
+				case NotifyCollectionChangedAction.Remove:
+					break;
+
+				case NotifyCollectionChangedAction.Reset:
+					break;
+
+				case NotifyCollectionChangedAction.Move:
+					break;
+
+				case NotifyCollectionChangedAction.Replace:
+					break;
+
+				default:
+					break;
+			}
+		}
+
+		private void Header_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+		{
+			throw new NotImplementedException();
+		}
+
+		private void Rows_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+		{
+			throw new NotImplementedException();
 		}
 
 		#endregion
@@ -96,7 +247,7 @@ namespace Sifaw.WPF.CCL
 		/// Representa la colección de columnas de <see cref="DataTable"/>.
 		/// </summary>
 		[Serializable]
-		public class DataTableColumnCollection : CollectionBase
+		public class DataTableColumnCollection : ObservableCollection<DataTableColumn>
 		{
 			#region Fields
 
@@ -104,23 +255,6 @@ namespace Sifaw.WPF.CCL
 			/// Propietario de la colección.
 			/// </summary>
 			protected readonly DataTable Owner;
-
-			#endregion
-
-			#region Properties
-
-			/// <summary>
-			/// Obtiene la columna en el índice especificado de la colección.
-			/// </summary>
-			/// <param name="index">Índice de la columna que se va a recuperar de la colección.</param>
-			/// <returns>
-			/// <see cref="DataTableColumn"/> que representa la columna
-			/// ubicada en el índice especificado de la colección
-			/// </returns>
-			public DataTableColumn this[int index]
-			{
-				get { return ((DataTableColumn)List[index]); }
-			}
 
 			#endregion
 
@@ -136,68 +270,32 @@ namespace Sifaw.WPF.CCL
 			}
 
 			#endregion
+		}
 
-			#region Public Methods
-
-			/// <summary>
-			/// Agrega un objeto <see cref="DataTableColumn"/> nuevo a la colección.
-			/// </summary>
-			/// <returns>Índice basado en cero en la colección donde se almacena el elemento.</returns>
-			public int Add()
-			{
-				return (List.Add(new DataTableColumn()));
-			}
+		/// <summary>
+		/// Representa la colección de filas de <see cref="DataTable"/>.
+		/// </summary>
+		[Serializable]
+		public class DataTableRowCollection : ObservableCollection<DataTableRow>
+		{
+			#region Fields
 
 			/// <summary>
-			/// Devuelve el índice de la columna especificada incluida en la colección.
+			/// Propietario de la colección.
 			/// </summary>
-			/// <param name="section"><see cref="DataTableColumn"/> que representa la columna que se va a buscar en la colección.</param>
-			/// <returns>
-			/// Índice de base cero de la ubicación de la columna en la colección.
-			/// Si la columna no se encuentra en la colección, el valor devuelto
-			/// es -1.
-			/// </returns>
-			public int IndexOf(DataTableColumn section)
-			{
-				return (List.IndexOf(section));
-			}
+			protected readonly DataTable Owner;
+
+			#endregion
+
+			#region Constructor
 
 			/// <summary>
-			/// Inserta una sección existente en la colección, en el índice
-			/// especificado.
+			/// Inicializa una nueva instancia de la clase <see cref="DataTableRowCollection"/>.
 			/// </summary>
-			/// <param name="index">Posición de índice de base cero donde se inserta la columna.</param>
-			/// <param name="section">Objeto <see cref="DataTableColumn"/> que se va a insertar en la colección.</param>
-			public void Insert(int index, DataTableColumn section)
+			/// <param name="owner"><see cref="DataTable"/> que posee esta colección.</param>
+			internal DataTableRowCollection(DataTable owner)
 			{
-				List.Insert(index, section);
-			}
-
-			/// <summary>
-			/// Quita la columna especificado de la colección.
-			/// </summary>
-			/// <param name="section">
-			/// <see cref="DataTableColumn"/> que representa la columna
-			/// que se va a quitar de la colección.
-			/// </param>
-			public void Remove(DataTableColumn section)
-			{
-				List.Remove(section);
-			}
-
-			/// <summary>
-			/// Determina si la columna especificado se encuentra en la colección.
-			/// </summary>
-			/// <param name="section">
-			/// <see cref="DataTableColumn"/> que representa la columna 
-			/// que se va a buscar en la colección.
-			/// </param>
-			/// <returns>
-			/// true si la colección contiene la columna; en caso contrario, false.
-			/// </returns>
-			public bool Contains(DataTableColumn section)
-			{
-				return (List.Contains(section));
+				this.Owner = owner;
 			}
 
 			#endregion

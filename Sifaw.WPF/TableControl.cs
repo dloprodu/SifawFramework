@@ -39,7 +39,7 @@ namespace Sifaw.WPF
 	/// <summary>
 	/// Representa un control que permite mostrar tablas del tipo <see cref="UITable"/>.
 	/// </summary>
-	public class TableControl : Control, TableComponent
+	public class TableControl : DataTable, TableComponent
 	{
 		#region Constructor
 

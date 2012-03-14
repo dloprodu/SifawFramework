@@ -4,7 +4,7 @@
         Title="MainWindow" Height="529" Width="556" 
         xmlns:my="clr-namespace:Sifaw.WPF.CCL;assembly=Sifaw.WPF.CCL" 
         xmlns:my1="clr-namespace:Sifaw.WPF.Filters;assembly=Sifaw.WPF">
-    <StackPanel>
+    <StackPanel Orientation="Vertical" >
         <Label Content="Label" Name="label1" HorizontalAlignment="Left" VerticalAlignment="Top" />
         <CheckBox Content="CheckBox" Height="16" Name="checkBox1" />
     </StackPanel>

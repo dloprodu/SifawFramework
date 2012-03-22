@@ -30,7 +30,6 @@ namespace Sifaw.Controllers.Components
 	/// componen el cuerpo de la tabla especificada.
 	/// </summary>
 	/// <param name="tableName">Nombre de la tabla.</param>
-	/// <param name="settings">Ajustes de la sección.</param>
 	/// <returns>Número de secciones de la tabla.</returns>
 	internal delegate int GetNumberOfSectionsAt(string tableName);
 }

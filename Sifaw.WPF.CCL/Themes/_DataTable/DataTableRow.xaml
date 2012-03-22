@@ -18,9 +18,7 @@
                     <Border Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}">
-                        <local:DataTableCellsPresenter x:Name="PART_CellsPresenter">
-                            
-                        </local:DataTableCellsPresenter>
+                        <local:DataTableCellsPresenter x:Name="PART_Cells" />
                     </Border>
                 </ControlTemplate>
             </Setter.Value>

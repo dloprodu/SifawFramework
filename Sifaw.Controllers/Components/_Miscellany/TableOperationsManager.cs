@@ -40,7 +40,8 @@ namespace Sifaw.Controllers.Components
 		/// <param name="GetNumberOfFooterRows">Callbak invocado cuando se solicita el número de filas que componene el pie de tabla.</param>
 		/// <param name="GetFooterAt">Callbak invocado cuando se solicita la configuración de celdas que componen una fila del piel de tabla.</param>
 		/// <param name="GetNumberOfSectionsAt">Callbak invocado cuando se solicita el número de secciones del cuerpo de la tabla.</param>
-		/// <param name="GetNumberOfRowsAt">Callbak invocado cuando se solicita el número filas de una sección de la tabla.</param>
+		/// <param name="GetSectionAt">Callbak invocado cuanso se solicita la configuración de la sección especificada.</param>
+        /// <param name="GetNumberOfRowsAt">Callbak invocado cuando se solicita el número filas de una sección de la tabla.</param>
 		/// <param name="GetCellsAt">Callbak invocado cuando se solicita la configuración de celdas de una fila de la tabla.</param>
 		/// <param name="RowContainChildTable">Callbak invocado cuando se solicita un valor que indique si una fila contendrá una tabla hija asociada.</param>		
 		/// <param name="GetChildTableNameAt">Callbak invocado cuando se solicita el nombre de la tabla hija asociada a una fila dada.</param>

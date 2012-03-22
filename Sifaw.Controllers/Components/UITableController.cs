@@ -223,7 +223,6 @@ namespace Sifaw.Controllers.Components
 		/// Devuelve el número de secciones que componen el cuerpo de la tabla especificada.
 		/// </summary>
 		/// <param name="table">Nombre de la tabla.</param>
-		/// <param name="settings">Ajustes de la sección.</param>
 		/// <returns>Número de secciones de la tabla.</returns>
 		protected abstract int GetNumberOfSectionsAt(string table);
 

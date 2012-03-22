@@ -54,13 +54,13 @@ namespace Sifaw.WPF.CCL
 	/// Representa un control que permite representar datos en una tabla con cabecera y pie.
 	/// Las celdas de la tabla pueden ocupar mas de una fila y/o columna.
 	/// </summary>
-	[TemplatePart(Name = "PART_Header", Type = typeof(DataTableHeadersPresenter))]
+    [TemplatePart(Name = "PART_Header", Type = typeof(DataTableRowsPresenter))]
 	[TemplatePart(Name = "PART_Rows", Type = typeof(DataTableRowsPresenter))]
 	public class DataTable : Control
 	{
 		#region Fields
 
-		private DataTableHeadersPresenter HeaderPresenter = null;
+        private DataTableRowsPresenter HeaderPresenter = null;
 		private DataTableRowsPresenter RowsPresenter = null;
 
 		#endregion
@@ -166,7 +166,7 @@ namespace Sifaw.WPF.CCL
 		{
 			base.OnApplyTemplate();
 
-			HeaderPresenter = Template.FindName("PART_Header", this) as DataTableHeadersPresenter;
+            HeaderPresenter = Template.FindName("PART_Header", this) as DataTableRowsPresenter;
 			RowsPresenter = Template.FindName("PART_Rows", this) as DataTableRowsPresenter;
 		}
 
@@ -176,67 +176,65 @@ namespace Sifaw.WPF.CCL
 
 		public void Clean()
 		{
-		}
-
-		public void CleanHeader()
-		{
-			Header.Clear();
-		}
-
-		public void CleanRows()
-		{
-		}
-
-		public DataTableRow AddHeader()
-		{
-			DataTableRow row = Header[Header.Add()];
-			HeaderPresenter.Children.Add(row);
-			return row;
-		}
-
-		public DataTableRow AddRow()
-		{
-			DataTableRow row = Rows[Rows.Add()];
-			RowsPresenter.Children.Add(row);
-			return row;
+            Columns.Clear();
+            Header.Clear();
+            Rows.Clear();
 		}
 
 		#endregion
 
-		#region
+		#region Collections Event Handlers
 
 		private void Columns_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
 		{
-			switch (e.Action)
-			{
-				case NotifyCollectionChangedAction.Add:
-					break;
-
-				case NotifyCollectionChangedAction.Remove:
-					break;
-
-				case NotifyCollectionChangedAction.Reset:
-					break;
-
-				case NotifyCollectionChangedAction.Move:
-					break;
-
-				case NotifyCollectionChangedAction.Replace:
-					break;
-
-				default:
-					break;
-			}
+            // Depedency Property -> FrameworkPropertyMetadataOptions.AffectsRender
+            // InvalidateVisual();			
 		}
 
 		private void Header_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
 		{
-			throw new NotImplementedException();
+            switch (e.Action)
+            {
+                case NotifyCollectionChangedAction.Add:
+                    HeaderPresenter.Children.Add(e.NewItems[0] as UIElement);
+                    break;
+
+                case NotifyCollectionChangedAction.Remove:
+                    HeaderPresenter.Children.Remove(e.OldItems[0] as UIElement);
+                    break;
+
+                case NotifyCollectionChangedAction.Reset:
+                    HeaderPresenter.Children.Clear();
+                    break;
+
+                case NotifyCollectionChangedAction.Move:
+                case NotifyCollectionChangedAction.Replace:
+                default:
+                    break;
+            }
 		}
 
 		private void Rows_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
 		{
-			throw new NotImplementedException();
+            switch (e.Action)
+            {
+                case NotifyCollectionChangedAction.Add:
+                    RowsPresenter.Children.Add(e.NewItems[0] as UIElement);
+                    break;
+
+                case NotifyCollectionChangedAction.Remove:
+                    RowsPresenter.Children.Remove(e.OldItems[0] as UIElement);
+                    break;
+
+                case NotifyCollectionChangedAction.Reset:
+                    RowsPresenter.Children.Clear();
+                    break;
+
+                case NotifyCollectionChangedAction.Move:
+                case NotifyCollectionChangedAction.Replace:
+                default:
+                    break;
+            }
 		}
 
 		#endregion

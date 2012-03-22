@@ -184,7 +184,7 @@ namespace Sifaw.Views.Components
 
 			/// <summary>
 			/// Obtiene o establece el pincel que describe el fondo del elemento.
-			/// </summ
+            /// </summary>
 			public UIBrush Background;
 
 			/// <summary>

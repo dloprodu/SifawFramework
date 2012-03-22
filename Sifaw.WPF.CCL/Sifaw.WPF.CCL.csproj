@@ -78,7 +78,6 @@
     <Compile Include="_DataTable\DataTableCellsPresenter.cs" />
     <Compile Include="_DataTable\DataTableCellsPanel.cs" />
     <Compile Include="_DataTable\DataTableRowsPresenter.cs" />
-    <Compile Include="_DataTable\DataTableHeadersPresenter.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -94,27 +93,23 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Themes\DataTableCell.xaml">
+    <Page Include="Themes\_DataTable\DataTableCell.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Themes\DataTableRow.xaml">
+    <Page Include="Themes\_DataTable\DataTableRow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Themes\DataTableCellsPresenter.xaml">
+    <Page Include="Themes\_DataTable\DataTableCellsPresenter.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Themes\DataTableCellsPanel.xaml">
+    <Page Include="Themes\_DataTable\DataTableCellsPanel.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Themes\DataTableRowsPresenter.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Themes\DataTableHeadersPresenter.xaml">
+    <Page Include="Themes\_DataTable\DataTableRowsPresenter.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -140,10 +135,10 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Themes\Images\Clear.png" />
+    <Resource Include="Themes\_Images\Clear.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Themes\Images\Search.png" />
+    <Resource Include="Themes\_Images\Search.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

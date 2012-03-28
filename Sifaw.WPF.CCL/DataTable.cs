@@ -193,6 +193,9 @@ namespace Sifaw.WPF.CCL
 
 		private void Header_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
 		{
+            if (HeaderPresenter == null)
+                return;
+
             switch (e.Action)
             {
                 case NotifyCollectionChangedAction.Add:
@@ -216,6 +219,9 @@ namespace Sifaw.WPF.CCL
 
 		private void Rows_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
 		{
+            if (RowsPresenter == null)
+                return;
+
             switch (e.Action)
             {
                 case NotifyCollectionChangedAction.Add:

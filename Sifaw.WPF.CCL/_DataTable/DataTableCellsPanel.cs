@@ -36,10 +36,10 @@ namespace Sifaw.WPF.CCL
 	/// <remarks>
 	/// El <see cref="DataTableCellsPanel"/> se utiliza como <see cref="ItemsControl.ItemsPanel"/> del <see cref="DataTableCellsPresenter"/> para 
 	/// disponer las celdas en una fila. 
-	/// Se utiliza como ItemsPanel de <see cref="DataTableHeadersPresenter"/> para la disposición de los encabezados. El panel organiza las 
+	/// Se utiliza como ItemsPanel de <see cref="DataTableRowsPresenter"/> para la disposición de los encabezados. El panel organiza las 
 	/// celdas horizontalmente y usa la información de columna de cada celda para determinar el tamaño correcto de cada celda.
 	/// </remarks>
-	public class DataTableCellsPanel : VirtualizingPanel
+	public class DataTableCellsPanel : VirtualizingStackPanel
 	{
 		#region Constructor
 

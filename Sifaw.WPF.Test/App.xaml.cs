@@ -22,12 +22,12 @@ namespace Sifaw.WPF.Test
 		{
 			AbstractUIProviderManager<AbstractUIProvider>.SetUIElementLinker(new WPFProvider());
             
-			//(new MainWindow()).Show();			
+			(new MainWindow()).Show();			
 			
 			//(new UIGroupFiltersTestViewController()).Start();
 			//(new UIAssistantTestViewController()).Start();
 			//(new UITabHostTestViewController()).Start();
-			(new UITableTestViewController()).Start();
+			//(new UITableTestViewController()).Start();
 		}
 
 		#endregion

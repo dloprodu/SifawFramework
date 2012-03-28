@@ -3,6 +3,7 @@
                     xmlns:sys="clr-namespace:System;assembly=mscorlib"
                     xmlns:local="clr-namespace:Sifaw.WPF.CCL">
 
+    
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="Shared.xaml" />
     </ResourceDictionary.MergedDictionaries>
@@ -15,8 +16,8 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:DataTable}">
                     <Border Background="{TemplateBinding Background}"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}">
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
                         <ScrollViewer x:Name="ScrollViewer">
                             <StackPanel Orientation="Vertical">
                                 <local:DataTableRowsPresenter x:Name="PART_Header"/>

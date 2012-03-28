@@ -9,7 +9,6 @@
         <ResourceDictionary Source="/Sifaw.WPF.CCL;component/Themes/TextField.xaml" />
         <ResourceDictionary Source="/Sifaw.WPF.CCL;component/Themes/SearchTextField.xaml" />
         <ResourceDictionary Source="/Sifaw.WPF.CCL;component/Themes/DataTable.xaml" />
-        <ResourceDictionary Source="/Sifaw.WPF.CCL;component/Themes/DataTableHeadersPresenter.xaml" />        
         <ResourceDictionary Source="/Sifaw.WPF.CCL;component/Themes/DataTableRowsPresenter.xaml" />
         <ResourceDictionary Source="/Sifaw.WPF.CCL;component/Themes/DataTableRow.xaml" />
         <ResourceDictionary Source="/Sifaw.WPF.CCL;component/Themes/DataTableCellsPresenter.xaml" />

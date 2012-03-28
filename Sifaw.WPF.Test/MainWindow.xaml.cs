@@ -12,6 +12,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Sifaw.Views.Components;
 
+using Sifaw.WPF.CCL;
+
+
 namespace Sifaw.WPF.Test
 {
 	/// <summary>
@@ -21,8 +24,18 @@ namespace Sifaw.WPF.Test
 	{
 		public MainWindow()
 		{
-			InitializeComponent();			
-			
+			InitializeComponent();
+
+            //DataTableCell cell1 = new DataTableCell();
+            //cell1.Content = "Celda 1";
+            //DataTableCell cell2 = new DataTableCell();
+            //cell2.Content = "Celda 1";
+
+            //DataTableRow row = new DataTableRow();
+            //tableControl1.Header.Add(row);
+            
+            //row.Cells.Add(cell1);
+            //row.Cells.Add(cell2);
 		}
 	}
 }

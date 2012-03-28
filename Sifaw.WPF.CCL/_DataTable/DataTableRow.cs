@@ -103,6 +103,9 @@ namespace Sifaw.WPF.CCL
 
         private void Cells_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
+            if (CellsPresenter == null)
+                return;
+
             switch (e.Action)
             {
                 case NotifyCollectionChangedAction.Add:

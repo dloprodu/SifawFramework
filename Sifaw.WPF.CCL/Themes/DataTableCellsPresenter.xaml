@@ -3,15 +3,17 @@
                     xmlns:sys="clr-namespace:System;assembly=mscorlib"
                     xmlns:local="clr-namespace:Sifaw.WPF.CCL">
 
+    
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="Shared.xaml" />
     </ResourceDictionary.MergedDictionaries>
-
+    
     <!-- 
        • DataTableCellsPanel
     -->
     <Style TargetType="{x:Type local:DataTableCellsPresenter}"
            BasedOn="{StaticResource {x:Type ItemsControl}}">
+        <Setter Property="Background" Value="Transparent"/>
         <Setter Property="ItemsPanel">
             <Setter.Value>
                 <!-- Plantilla que define el panel que controla el diseño de elementos. -->

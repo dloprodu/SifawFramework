@@ -3,9 +3,15 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="MainWindow" Height="529" Width="556" 
         xmlns:my="clr-namespace:Sifaw.WPF.CCL;assembly=Sifaw.WPF.CCL" 
-        xmlns:my1="clr-namespace:Sifaw.WPF.Filters;assembly=Sifaw.WPF">
+        xmlns:my1="clr-namespace:Sifaw.WPF.Filters;assembly=Sifaw.WPF" 
+        xmlns:my2="clr-namespace:Sifaw.WPF;assembly=Sifaw.WPF">
     <StackPanel Orientation="Vertical" >
         <Label Content="Label" Name="label1" HorizontalAlignment="Left" VerticalAlignment="Top" />
         <CheckBox Content="CheckBox" Height="16" Name="checkBox1" />
+        <my:DataTableRowsPresenter Name="pruebakeylk"
+                                   Height="140"  Width="361" 
+                                   Background="#FFEBACAC" Orientation="Vertical">
+            
+        </my:DataTableRowsPresenter>
     </StackPanel>
 </Window>

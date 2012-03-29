@@ -93,23 +93,23 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Themes\DataTableCell.xaml">
+    <Page Include="Themes\_DataTable\DataTableRowsPresenter.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Themes\DataTableRow.xaml">
+    <Page Include="Themes\_DataTable\DataTableCell.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Themes\DataTableCellsPresenter.xaml">
+    <Page Include="Themes\_DataTable\DataTableRow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Themes\DataTableCellsPanel.xaml">
+    <Page Include="Themes\_DataTable\DataTableCellsPresenter.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Themes\DataTableRowsPresenter.xaml">
+    <Page Include="Themes\_DataTable\DataTableCellsPanel.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

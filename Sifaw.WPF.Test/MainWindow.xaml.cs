@@ -26,16 +26,25 @@ namespace Sifaw.WPF.Test
 		{
 			InitializeComponent();
 
-            //DataTableCell cell1 = new DataTableCell();
-            //cell1.Content = "Celda 1";
-            //DataTableCell cell2 = new DataTableCell();
-            //cell2.Content = "Celda 1";
+            Label label1 = new Label();
+            label1.Content = "Label1";
+            label1.Background = Brushes.Red;
 
-            //DataTableRow row = new DataTableRow();
-            //tableControl1.Header.Add(row);
-            
-            //row.Cells.Add(cell1);
-            //row.Cells.Add(cell2);
+            Label label2 = new Label();
+            label2.Content = "Label2";
+            label2.Background = Brushes.Red;
+
+            DataTableCell cell1 = new DataTableCell();
+            cell1.Content = label1;
+            DataTableCell cell2 = new DataTableCell();
+            cell2.Content = label2;
+
+            DataTableRow row = new DataTableRow();
+
+            row.Cells.Add(cell1);
+            row.Cells.Add(cell2);
+
+            tableControl1.Header.Add(row);
 		}
 	}
 }

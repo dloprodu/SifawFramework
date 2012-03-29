@@ -3,18 +3,20 @@
                     xmlns:sys="clr-namespace:System;assembly=mscorlib"
                     xmlns:local="clr-namespace:Sifaw.WPF.CCL">
 
-
+    
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="Shared.xaml" />
+        <ResourceDictionary Source="../Shared.xaml" />
     </ResourceDictionary.MergedDictionaries>
     
     <!-- 
-       • DataTableRowsPresenter
+       • DataTableCell
     -->
-    <Style TargetType="{x:Type local:DataTableRowsPresenter}"
-           BasedOn="{StaticResource {x:Type VirtualizingStackPanel}}">
-        <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="Orientation" Value="Vertical"/>
+    <Style TargetType="{x:Type local:DataTableCell}"
+            BasedOn="{StaticResource {x:Type ContentControl}}">
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="VerticalAlignment" Value="Stretch"/>
+        <Setter Property="Width" Value="Auto"/>
+        <Setter Property="Height" Value="Auto"/>
     </Style>
     
 </ResourceDictionary>

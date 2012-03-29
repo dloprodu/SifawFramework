@@ -5,15 +5,15 @@
 
     
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="Shared.xaml" />
+        <ResourceDictionary Source="../Shared.xaml" />
     </ResourceDictionary.MergedDictionaries>
     
     <!-- 
-       • DataTableCell
+       • DataTableCellsPanel
     -->
-    <Style TargetType="{x:Type local:DataTableCell}"
-            BasedOn="{StaticResource {x:Type ContentControl}}">
-        <!-- Empty -->
+    <Style TargetType="{x:Type local:DataTableCellsPanel}">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Orientation" Value="Horizontal"/>        
     </Style>
     
 </ResourceDictionary>

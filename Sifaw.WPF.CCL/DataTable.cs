@@ -55,13 +55,13 @@ namespace Sifaw.WPF.CCL
 	/// Las celdas de la tabla pueden ocupar mas de una fila y/o columna.
 	/// </summary>
     [TemplatePart(Name = "PART_Header", Type = typeof(DataTableRowsPresenter))]
-	[TemplatePart(Name = "PART_Rows", Type = typeof(DataTableRowsPresenter))]
+    [TemplatePart(Name = "PART_Rows", Type = typeof(DataTableRowsPresenter))]
 	public class DataTable : Control
 	{
 		#region Fields
 
         private DataTableRowsPresenter HeaderPresenter = null;
-		private DataTableRowsPresenter RowsPresenter = null;
+        private DataTableRowsPresenter RowsPresenter = null;
 
 		#endregion
 
@@ -166,8 +166,21 @@ namespace Sifaw.WPF.CCL
 		{
 			base.OnApplyTemplate();
 
-            HeaderPresenter = Template.FindName("PART_Header", this) as DataTableRowsPresenter;
-			RowsPresenter = Template.FindName("PART_Rows", this) as DataTableRowsPresenter;
+            if (HeaderPresenter == null)
+            {
+                HeaderPresenter = Template.FindName("PART_Header", this) as DataTableRowsPresenter;
+
+                foreach (DataTableRow row in Header)
+                    HeaderPresenter.Children.Add(row);
+            }
+
+            if (RowsPresenter == null)
+            {
+                RowsPresenter = Template.FindName("PART_Rows", this) as DataTableRowsPresenter;
+
+                foreach (DataTableRow row in Rows)
+                    RowsPresenter.Children.Add(row);
+            }
 		}
 
 		#endregion
@@ -193,53 +206,53 @@ namespace Sifaw.WPF.CCL
 
 		private void Header_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
 		{
-            if (HeaderPresenter == null)
-                return;
-
-            switch (e.Action)
+            if (HeaderPresenter != null)
             {
-                case NotifyCollectionChangedAction.Add:
-                    HeaderPresenter.Children.Add(e.NewItems[0] as UIElement);
-                    break;
+                switch (e.Action)
+                {
+                    case NotifyCollectionChangedAction.Add:
+                        HeaderPresenter.Children.Add(e.NewItems[0] as DataTableRow);
+                        break;
 
-                case NotifyCollectionChangedAction.Remove:
-                    HeaderPresenter.Children.Remove(e.OldItems[0] as UIElement);
-                    break;
+                    case NotifyCollectionChangedAction.Remove:
+                        HeaderPresenter.Children.Remove(e.OldItems[0] as DataTableRow);
+                        break;
 
-                case NotifyCollectionChangedAction.Reset:
-                    HeaderPresenter.Children.Clear();
-                    break;
+                    case NotifyCollectionChangedAction.Reset:
+                        HeaderPresenter.Children.Clear();
+                        break;
 
-                case NotifyCollectionChangedAction.Move:
-                case NotifyCollectionChangedAction.Replace:
-                default:
-                    break;
+                    case NotifyCollectionChangedAction.Move:
+                    case NotifyCollectionChangedAction.Replace:
+                    default:
+                        break;
+                }
             }
 		}
 
 		private void Rows_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
 		{
-            if (RowsPresenter == null)
-                return;
-
-            switch (e.Action)
+            if (RowsPresenter != null)
             {
-                case NotifyCollectionChangedAction.Add:
-                    RowsPresenter.Children.Add(e.NewItems[0] as UIElement);
-                    break;
+                switch (e.Action)
+                {
+                    case NotifyCollectionChangedAction.Add:
+                        RowsPresenter.Children.Add(e.NewItems[0] as DataTableRow);
+                        break;
 
-                case NotifyCollectionChangedAction.Remove:
-                    RowsPresenter.Children.Remove(e.OldItems[0] as UIElement);
-                    break;
+                    case NotifyCollectionChangedAction.Remove:
+                        RowsPresenter.Children.Remove(e.OldItems[0] as DataTableRow);
+                        break;
 
-                case NotifyCollectionChangedAction.Reset:
-                    RowsPresenter.Children.Clear();
-                    break;
+                    case NotifyCollectionChangedAction.Reset:
+                        RowsPresenter.Children.Clear();
+                        break;
 
-                case NotifyCollectionChangedAction.Move:
-                case NotifyCollectionChangedAction.Replace:
-                default:
-                    break;
+                    case NotifyCollectionChangedAction.Move:
+                    case NotifyCollectionChangedAction.Replace:
+                    default:
+                        break;
+                }
             }
 		}
 

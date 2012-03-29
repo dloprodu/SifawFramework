@@ -5,7 +5,7 @@
 
     
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="Shared.xaml" />
+        <ResourceDictionary Source="../Shared.xaml" />
     </ResourceDictionary.MergedDictionaries>
     
     <!-- 
@@ -13,7 +13,11 @@
     -->
     <Style TargetType="{x:Type local:DataTableCellsPresenter}"
            BasedOn="{StaticResource {x:Type ItemsControl}}">
-        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="VerticalAlignment" Value="Stretch"/>
+        <Setter Property="Width" Value="Auto"/>
+        <Setter Property="Height" Value="Auto"/>
+        <Setter Property="Background" Value="Red"/>
         <Setter Property="ItemsPanel">
             <Setter.Value>
                 <!-- Plantilla que define el panel que controla el diseño de elementos. -->

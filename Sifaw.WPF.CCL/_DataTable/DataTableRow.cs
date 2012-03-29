@@ -36,7 +36,7 @@ namespace Sifaw.WPF.CCL
 	/// <summary>
 	/// Representa una fila <see cref="DataTable"/>.
 	/// </summary>
-    [TemplatePart(Name = "PART_Cells", Type = typeof(DataTableRowsPresenter))]
+    [TemplatePart(Name = "PART_Cells", Type = typeof(DataTableCellsPresenter))]
     public class DataTableRow : Control
 	{
         #region Fields
@@ -94,7 +94,13 @@ namespace Sifaw.WPF.CCL
         {
             base.OnApplyTemplate();
 
-            CellsPresenter = Template.FindName("PART_Cells", this) as DataTableCellsPresenter;
+            if (CellsPresenter == null)
+            {
+                CellsPresenter = Template.FindName("PART_Cells", this) as DataTableCellsPresenter;
+
+                foreach (DataTableCell cell in Cells)
+                    CellsPresenter.Items.Add(cell);
+            }
         }
 
         #endregion
@@ -103,27 +109,27 @@ namespace Sifaw.WPF.CCL
 
         private void Cells_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            if (CellsPresenter == null)
-                return;
-
-            switch (e.Action)
+            if (CellsPresenter != null)
             {
-                case NotifyCollectionChangedAction.Add:
-                    CellsPresenter.Items.Add(e.NewItems[0] as UIElement);
-                    break;
+                switch (e.Action)
+                {
+                    case NotifyCollectionChangedAction.Add:
+                        CellsPresenter.Items.Add(e.NewItems[0] as DataTableCell);
+                        break;
 
-                case NotifyCollectionChangedAction.Remove:
-                    CellsPresenter.Items.Remove(e.OldItems[0] as UIElement);
-                    break;
+                    case NotifyCollectionChangedAction.Remove:
+                        CellsPresenter.Items.Remove(e.OldItems[0] as DataTableCell);
+                        break;
 
-                case NotifyCollectionChangedAction.Reset:
-                    CellsPresenter.Items.Clear();
-                    break;
+                    case NotifyCollectionChangedAction.Reset:
+                        CellsPresenter.Items.Clear();
+                        break;
 
-                case NotifyCollectionChangedAction.Move:
-                case NotifyCollectionChangedAction.Replace:
-                default:
-                    break;
+                    case NotifyCollectionChangedAction.Move:
+                    case NotifyCollectionChangedAction.Replace:
+                    default:
+                        break;
+                }
             }
         }
 

@@ -8,13 +8,12 @@
         <ResourceDictionary Source="/Sifaw.WPF.CCL;component/Themes/AssistantProgressBar.xaml" />        
         <ResourceDictionary Source="/Sifaw.WPF.CCL;component/Themes/TextField.xaml" />
         <ResourceDictionary Source="/Sifaw.WPF.CCL;component/Themes/SearchTextField.xaml" />
-        <ResourceDictionary Source="/Sifaw.WPF.CCL;component/Themes/DataTable.xaml" />
         <ResourceDictionary Source="/Sifaw.WPF.CCL;component/Themes/_DataTable/DataTableRowsPresenter.xaml" />
         <ResourceDictionary Source="/Sifaw.WPF.CCL;component/Themes/_DataTable/DataTableRow.xaml" />
         <ResourceDictionary Source="/Sifaw.WPF.CCL;component/Themes/_DataTable/DataTableCellsPresenter.xaml" />
         <ResourceDictionary Source="/Sifaw.WPF.CCL;component/Themes/_DataTable/DataTableCellsPanel.xaml" />
         <ResourceDictionary Source="/Sifaw.WPF.CCL;component/Themes/_DataTable/DataTableCell.xaml" />
-    </ResourceDictionary.MergedDictionaries>
-   
+        <ResourceDictionary Source="/Sifaw.WPF.CCL;component/Themes/DataTable.xaml" />
+    </ResourceDictionary.MergedDictionaries>   
     
 </ResourceDictionary>

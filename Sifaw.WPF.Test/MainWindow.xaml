@@ -1,14 +1,11 @@
 ﻿<Window x:Class="Sifaw.WPF.Test.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="529" Width="556" xmlns:my="clr-namespace:Sifaw.WPF;assembly=Sifaw.WPF">
+        Title="MainWindow" Height="529" Width="556" 
+        xmlns:my="clr-namespace:Sifaw.WPF;assembly=Sifaw.WPF"
+        xmlns:my1="clr-namespace:Sifaw.WPF.CCL;assembly=Sifaw.WPF.CCL" 
+        xmlns:my2="clr-namespace:System.Windows.Controls.Primitives;assembly=PresentationFramework">
     <StackPanel Orientation="Vertical" Height="Auto" VerticalAlignment="Stretch">
-        <Label Content="Label" Name="label1" HorizontalAlignment="Left" VerticalAlignment="Top" />
-        <CheckBox Content="CheckBox" Height="16" Name="checkBox1" />
-        <my:TableControl Name="tableControl1" Height="156" />
-        <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto" Height="Auto">
-            <Label>hola</Label>
-            <Label>adios</Label>
-        </StackPanel>
+
     </StackPanel>
 </Window>

@@ -25,8 +25,8 @@
                             BorderThickness="{TemplateBinding BorderThickness}">
                         <ScrollViewer x:Name="ScrollViewer">
                             <StackPanel Orientation="Vertical">
-                                <local:DataTableRowsPresenter x:Name="PART_Header" Orientation="Vertical" Height="50" Background="CornflowerBlue"/>
-                                <local:DataTableRowsPresenter x:Name="PART_Rows" Orientation="Vertical"/>
+                                <ListBox x:Name="PART_Header" Padding="0" Background="CornflowerBlue"/>
+                                <ListBox x:Name="PART_Rows" Padding="0"  Background="Green"/>
                             </StackPanel>
                         </ScrollViewer>
                     </Border>

@@ -54,14 +54,14 @@ namespace Sifaw.WPF.CCL
 	/// Representa un control que permite representar datos en una tabla con cabecera y pie.
 	/// Las celdas de la tabla pueden ocupar mas de una fila y/o columna.
 	/// </summary>
-    [TemplatePart(Name = "PART_Header", Type = typeof(DataTableRowsPresenter))]
-    [TemplatePart(Name = "PART_Rows", Type = typeof(DataTableRowsPresenter))]
+    [TemplatePart(Name = "PART_Header", Type = typeof(ListBox))]
+    [TemplatePart(Name = "PART_Rows", Type = typeof(ListBox))]
 	public class DataTable : Control
 	{
 		#region Fields
 
-        private DataTableRowsPresenter HeaderPresenter = null;
-        private DataTableRowsPresenter RowsPresenter = null;
+        private ListBox HeaderPresenter = null;
+        private ListBox RowsPresenter = null;
 
 		#endregion
 
@@ -168,18 +168,18 @@ namespace Sifaw.WPF.CCL
 
             if (HeaderPresenter == null)
             {
-                HeaderPresenter = Template.FindName("PART_Header", this) as DataTableRowsPresenter;
+                HeaderPresenter = Template.FindName("PART_Header", this) as ListBox;
 
                 foreach (DataTableRow row in Header)
-                    HeaderPresenter.Children.Add(row);
+                    HeaderPresenter.Items.Add(row);
             }
 
             if (RowsPresenter == null)
             {
-                RowsPresenter = Template.FindName("PART_Rows", this) as DataTableRowsPresenter;
+                RowsPresenter = Template.FindName("PART_Rows", this) as ListBox;
 
                 foreach (DataTableRow row in Rows)
-                    RowsPresenter.Children.Add(row);
+                    RowsPresenter.Items.Add(row);
             }
 		}
 
@@ -211,15 +211,15 @@ namespace Sifaw.WPF.CCL
                 switch (e.Action)
                 {
                     case NotifyCollectionChangedAction.Add:
-                        HeaderPresenter.Children.Add(e.NewItems[0] as DataTableRow);
+                        HeaderPresenter.Items.Add(e.NewItems[0] as DataTableRow);
                         break;
 
                     case NotifyCollectionChangedAction.Remove:
-                        HeaderPresenter.Children.Remove(e.OldItems[0] as DataTableRow);
+                        HeaderPresenter.Items.Remove(e.OldItems[0] as DataTableRow);
                         break;
 
                     case NotifyCollectionChangedAction.Reset:
-                        HeaderPresenter.Children.Clear();
+                        HeaderPresenter.Items.Clear();
                         break;
 
                     case NotifyCollectionChangedAction.Move:
@@ -237,15 +237,15 @@ namespace Sifaw.WPF.CCL
                 switch (e.Action)
                 {
                     case NotifyCollectionChangedAction.Add:
-                        RowsPresenter.Children.Add(e.NewItems[0] as DataTableRow);
+                        RowsPresenter.Items.Add(e.NewItems[0] as DataTableRow);
                         break;
 
                     case NotifyCollectionChangedAction.Remove:
-                        RowsPresenter.Children.Remove(e.OldItems[0] as DataTableRow);
+                        RowsPresenter.Items.Remove(e.OldItems[0] as DataTableRow);
                         break;
 
                     case NotifyCollectionChangedAction.Reset:
-                        RowsPresenter.Children.Clear();
+                        RowsPresenter.Items.Clear();
                         break;
 
                     case NotifyCollectionChangedAction.Move:

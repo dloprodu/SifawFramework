@@ -5,7 +5,19 @@
         xmlns:my="clr-namespace:Sifaw.WPF;assembly=Sifaw.WPF"
         xmlns:my1="clr-namespace:Sifaw.WPF.CCL;assembly=Sifaw.WPF.CCL" 
         xmlns:my2="clr-namespace:System.Windows.Controls.Primitives;assembly=PresentationFramework">
-    <StackPanel Orientation="Vertical" Height="Auto" VerticalAlignment="Stretch">
 
-    </StackPanel>
+        <ScrollViewer CanContentScroll="True">
+            <my1:DataTableRowsPresenter RowHeight="26">
+                <Button>1</Button>
+                <Button>2</Button>
+                <Button>3</Button>
+                <Button>4</Button>
+                <Button>5</Button>
+                <Button>6</Button>
+                <Button>7</Button>
+                <Button>8</Button>
+                <Button>9</Button>
+                <Button>10</Button>
+            </my1:DataTableRowsPresenter >
+        </ScrollViewer>
 </Window>

@@ -28,6 +28,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Controls.Primitives;
 using System.ComponentModel;
+using System.Collections.Specialized;
 
 
 namespace Sifaw.WPF.CCL
@@ -78,6 +79,20 @@ namespace Sifaw.WPF.CCL
             set { SetValue(RowHeightProperty, value); }
         }
 
+        public new IItemContainerGenerator ItemContainerGenerator 
+        {
+            get 
+            {
+                if (base.ItemContainerGenerator == null)
+                    if (InternalChildren != null)
+                    {
+                        /* Al acceder a InternalChildren ItemContainerGenerator se carga. */
+                    }
+
+                return base.ItemContainerGenerator;
+            }
+        }
+
         #endregion
 
         #region Constructor
@@ -101,10 +116,16 @@ namespace Sifaw.WPF.CCL
                 _owner.InvalidateScrollInfo();
         }
 
-        private void UpdateViewPortAndExtend(Size availableSize)
+        private int GetNumElements()
+        {
+            ItemsControl itemsControl = ItemsControl.GetItemsOwner(this);
+            return (itemsControl == null) ? InternalChildren.Count : (itemsControl.HasItems ? itemsControl.Items.Count : 0);
+        }
+
+        private void UpdateScrollInfo(Size availableSize)
         {
             bool update = false;
-            Size newExtent = new Size(availableSize.Width, InternalChildren.Count * RowHeight);
+            Size newExtent = new Size(availableSize.Width, GetNumElements() * RowHeight);
 
             if (_extent != newExtent)
             {
@@ -131,21 +152,89 @@ namespace Sifaw.WPF.CCL
             if (InternalChildren.Count != 0)
             {
                 double first = ((0) * RowHeight) - _offset.Y;
-                double last = ((InternalChildren.Count - 1) * RowHeight) - _offset.Y;
+                double last = ((GetNumElements() - 1) * RowHeight) - _offset.Y;
 
                 if ((first < 0) && ((last + RowHeight) < _viewport.Height))
                 {
-                    /* Mejorar el arreglo de _offset.Y para no dar saltos bruscos. */
-                    _offset.Y = Math.Max(0, /* Completar */);
-                    InvalidateScrollInfo();
+                    SetVerticalOffset(double.PositiveInfinity);
                 }
             }
+        }
+
+        /// <summary>
+        /// En caso de que el panel esté como plantilla de un ItemsControl 
+        /// obtiene el rango de items visibles.
+        /// </summary>
+        /// <param name="first">Índice del primer item visible.</param>
+        /// <param name="last">Índice del último item visible.</param>
+        private void GetVisibleRange(out int first, out int last)
+        {
+            first = -1;
+            last = -1;
+
+            ItemsControl itemsControl = ItemsControl.GetItemsOwner(this);
+
+            if (itemsControl != null)
+            {
+                /* Se calculan los índices que deben estar visibles. */
+                first = (int)Math.Floor(VerticalOffset / RowHeight);
+                last = (int)Math.Ceiling((VerticalOffset + ViewportHeight - RowHeight) / RowHeight);
+
+                /* Se normaliza con los items existentes. */
+                if (itemsControl.HasItems)
+                {
+                    first = Math.Min(first, itemsControl.Items.Count - 1);
+                    last = Math.Min(last, itemsControl.Items.Count - 1);
+                }
+                else
+                {
+                    first = -1;
+                    last = -1;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Revirtualiza los items que ya no son visibles.
+        /// </summary>
+        /// <param name="first">Índice del primer item visible.</param>
+        /// <param name="last">Índice del último item visible.</param>
+        private void CleanUpItems(int first, int last)
+        {
+            IItemContainerGenerator generator = this.ItemContainerGenerator;
+
+            for (int i = InternalChildren.Count - 1; i >= 0; i--)
+            {
+                GeneratorPosition childGeneratorPos = new GeneratorPosition(i, 0);
+
+                int index = generator.IndexFromGeneratorPosition(childGeneratorPos);
+
+                if (index < first || index > last)
+                {
+                    generator.Remove(childGeneratorPos, 1);
+                    RemoveInternalChildRange(i, 1);
+                }
+            }
+        }
+
+        /// <summary>
+        /// // Coloca el elemento secundario y determina su tamaño.
+        /// </summary>
+        private void ArrangeChild(int itemIndex, UIElement child, Size childSize)
+        {
+            Rect rect = new Rect(
+                  - _offset.X
+                , (itemIndex * childSize.Height) - _offset.Y
+                , childSize.Width
+                , childSize.Height);
+
+            child.Arrange(rect);
         }
 
         #endregion
 
         #region Override Methods
-
+                
         /// <summary>
         /// Mide el tamaño del diseño necesario para los elementos secundarios y 
         /// determina un tamaño para la clase.
@@ -169,13 +258,62 @@ namespace Sifaw.WPF.CCL
             if (double.IsInfinity(desireSize.Width))
                 desireSize.Width = ActualWidth;
 
-            UpdateViewPortAndExtend(desireSize);
+            Size childSize = new Size(desireSize.Width, RowHeight);
 
-            Size availableChildSize = new Size(desireSize.Width, RowHeight);
+            UpdateScrollInfo(desireSize);
 
-            foreach (UIElement child in InternalChildren)
+            if (ItemsControl.GetItemsOwner(this) == null)
             {
-                child.Measure(availableChildSize);
+                /*
+                 * Comportamiento por defecto. El panel no está asociado a un ItemsControl
+                 * por lo que los elementos no son virtualizados.
+                 */
+                foreach (UIElement child in InternalChildren)
+                    child.Measure(childSize);
+            }
+            else
+            {
+                /*
+                 * El panel está asociado a un ItemsControl por lo que los elementos serán
+                 * virtualizados.
+                 */
+                int first, last;
+                GetVisibleRange(out first, out last);
+
+                IItemContainerGenerator generator = this.ItemContainerGenerator;
+
+                // Get the generator position of the first visible data item.
+                GeneratorPosition startPos = generator.GeneratorPositionFromIndex(first);
+
+                // Get index where we'd insert the child for this position. If the item is realized
+                // (position.Offset == 0), it's just position.Index, otherwise we have to add one to
+                // insert after the corresponding child
+                int childIndex = (startPos.Offset == 0) ? startPos.Index : startPos.Index + 1;
+
+                using (generator.StartAt(startPos, GeneratorDirection.Forward, true))
+                {
+                    for (int index = first; index <= last; ++index, ++childIndex)
+                    {
+                        bool isNew;
+
+                        // Get or create the child
+                        UIElement child = generator.GenerateNext(out isNew) as UIElement;
+
+                        if (isNew)
+                        {
+                            generator.PrepareItemContainer(child);
+                            
+                            if (childIndex >= InternalChildren.Count)
+                                base.AddInternalChild(child);
+                            else
+                                base.InsertInternalChild(childIndex, child);                            
+                        }
+
+                        child.Measure(childSize);
+                    }
+                }
+
+                CleanUpItems(first, last);
             }
 
             return desireSize;
@@ -199,24 +337,52 @@ namespace Sifaw.WPF.CCL
             if (double.IsInfinity(desireSize.Width))
                 desireSize.Width = ActualWidth;
 
-            UpdateViewPortAndExtend(desireSize);
+            Size childSize = new Size(desireSize.Width, RowHeight);
+
+            UpdateScrollInfo(desireSize);
             CorrectArrange();
 
-            Size availableChildSize = new Size(desireSize.Width, RowHeight);
-
-            for (int row = 0; row < InternalChildren.Count; row++)
+            if (ItemsControl.GetItemsOwner(this) == null)
             {
-                Rect rect = new Rect(
-                      -_offset.X
-                    , (row * RowHeight) - _offset.Y
-                    , availableChildSize.Width
-                    , availableChildSize.Height);
-                
-                // Coloca los elementos secundarios y determina su tamaño.
-                InternalChildren[row].Arrange(rect);
+                /*
+                 * Comportamiento por defecto. El panel no está asociado a un ItemsControl
+                 * por lo que los elementos no son virtualizados.
+                 */
+                for (int row = 0; row < InternalChildren.Count; row++)
+                    ArrangeChild(row, InternalChildren[row], childSize);
+            }
+            else
+            {
+                /*
+                 * El panel está asociado a un ItemsControl por lo que los elementos serán
+                 * virtualizados.
+                 */
+                IItemContainerGenerator generator = this.ItemContainerGenerator;
+
+                for (int i = 0; i < InternalChildren.Count; i++)
+                {
+                    UIElement child = InternalChildren[i];
+
+                    // Map the child offset to an item offset
+                    int itemIndex = generator.IndexFromGeneratorPosition(new GeneratorPosition(i, 0));
+
+                    ArrangeChild(itemIndex, child, childSize);
+                }
             }
 
             return finalSize;
+        }
+
+        protected override void OnItemsChanged(object sender, ItemsChangedEventArgs args)
+        {
+            switch (args.Action)
+            {
+                case NotifyCollectionChangedAction.Remove:
+                case NotifyCollectionChangedAction.Replace:
+                case NotifyCollectionChangedAction.Move:
+                    RemoveInternalChildRange(args.Position.Index, args.ItemUICount);
+                    break;
+            }
         }
 
         #endregion
@@ -440,8 +606,8 @@ namespace Sifaw.WPF.CCL
 
             _offset.X = offset;
 
-            //InvalidateScrollInfo();
-            InvalidateArrange();
+            InvalidateMeasure();
+            //InvalidateArrange();
         }
 
         /// <summary>
@@ -462,8 +628,8 @@ namespace Sifaw.WPF.CCL
 
             _offset.Y = offset;
 
-            //InvalidateScrollInfo();
-            InvalidateArrange();
+            InvalidateMeasure();
+            //InvalidateArrange();
         }
 
         #endregion

@@ -289,10 +289,11 @@ namespace Sifaw.WPF.CCL
                 // (position.Offset == 0), it's just position.Index, otherwise we have to add one to
                 // insert after the corresponding child
                 int childIndex = (startPos.Offset == 0) ? startPos.Index : startPos.Index + 1;
+                int zIndex = last;
 
                 using (generator.StartAt(startPos, GeneratorDirection.Forward, true))
                 {
-                    for (int index = first; index <= last; ++index, ++childIndex)
+                    for (int index = first; index <= last; ++index, ++childIndex, --zIndex)
                     {
                         bool isNew;
 
@@ -310,6 +311,16 @@ namespace Sifaw.WPF.CCL
                         }
 
                         child.Measure(childSize);
+                        
+                        /*
+                         * Este es un arreglo específico para el DataTableRowsPresenter
+                         * para que las filas que son colapsadas muestren su contenido correctamente.
+                         */
+                        if (child is Panel)
+                        {
+                            (child as Panel).SetValue(Panel.ClipToBoundsProperty, false);
+                            (child as Panel).SetValue(Panel.ZIndexProperty, zIndex);
+                        }
                     }
                 }
 
@@ -359,7 +370,7 @@ namespace Sifaw.WPF.CCL
                  */
                 IItemContainerGenerator generator = this.ItemContainerGenerator;
 
-                for (int i = 0; i < InternalChildren.Count; i++)
+                for (int i = InternalChildren.Count - 1; i >= 0; i--)
                 {
                     UIElement child = InternalChildren[i];
 

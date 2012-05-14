@@ -38,6 +38,14 @@ namespace Sifaw.WPF.CCL
 				(double)50,
 				FrameworkPropertyMetadataOptions.AffectsRender));
 
+        public static readonly DependencyProperty TypeLenghtProperty = DependencyProperty.Register(
+            "TypeLenght",
+            typeof(DataTableColumnTypesLenght),
+			typeof(DataTableColumn),
+			new FrameworkPropertyMetadata(
+                (double)DataTableColumnTypesLenght.Fixed,
+				FrameworkPropertyMetadataOptions.AffectsRender));
+
 		#endregion
 
 		#region Properties
@@ -48,13 +56,18 @@ namespace Sifaw.WPF.CCL
 			set { SetValue(WidthProperty, value); }
 		}
 
+        public DataTableColumnTypesLenght TypeLenght
+        {
+            get { return (DataTableColumnTypesLenght)GetValue(TypeLenghtProperty); }
+            set { SetValue(TypeLenghtProperty, value); }
+        }
+
 		#endregion
 
 		#region Constructor
 
 		public DataTableColumn()
-		{			
-			
+		{           
 		}
 
 		#endregion

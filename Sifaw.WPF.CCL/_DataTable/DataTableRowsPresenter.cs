@@ -79,9 +79,9 @@ namespace Sifaw.WPF.CCL
             set { SetValue(RowHeightProperty, value); }
         }
 
-        public new IItemContainerGenerator ItemContainerGenerator 
+        public new IItemContainerGenerator ItemContainerGenerator
         {
-            get 
+            get
             {
                 if (base.ItemContainerGenerator == null)
                     if (InternalChildren != null)
@@ -141,6 +141,19 @@ namespace Sifaw.WPF.CCL
 
             if (update)
                 InvalidateScrollInfo();
+        }
+
+        /// <summary>
+        /// Este es un arreglo específico para el DataTableRowsPresenter
+        /// para que las filas que son colapsadas muestren su contenido correctamente.
+        /// </summary>
+        private void ApplyDataTableCriteria(UIElement child, int zIndex)
+        {
+            if (child is Panel)
+            {
+                (child as Panel).SetValue(Panel.ClipToBoundsProperty, false);
+                (child as Panel).SetValue(Panel.ZIndexProperty, zIndex);
+            }
         }
 
         /// <summary>
@@ -223,7 +236,7 @@ namespace Sifaw.WPF.CCL
         private void ArrangeChild(int itemIndex, UIElement child, Size childSize)
         {
             Rect rect = new Rect(
-                  - _offset.X
+                  -_offset.X
                 , (itemIndex * childSize.Height) - _offset.Y
                 , childSize.Width
                 , childSize.Height);
@@ -234,7 +247,7 @@ namespace Sifaw.WPF.CCL
         #endregion
 
         #region Override Methods
-                
+
         /// <summary>
         /// Mide el tamaño del diseño necesario para los elementos secundarios y 
         /// determina un tamaño para la clase.
@@ -288,38 +301,33 @@ namespace Sifaw.WPF.CCL
                 // Get index where we'd insert the child for this position. If the item is realized
                 // (position.Offset == 0), it's just position.Index, otherwise we have to add one to
                 // insert after the corresponding child
-                int childIndex = (startPos.Offset == 0) ? startPos.Index : startPos.Index + 1;
-                int zIndex = last;
-
-                using (generator.StartAt(startPos, GeneratorDirection.Forward, true))
+                if (startPos.Index >= 0)
                 {
-                    for (int index = first; index <= last; ++index, ++childIndex, --zIndex)
+                    int childIndex = (startPos.Offset == 0) ? startPos.Index : startPos.Index + 1;
+                    int zIndex = last;
+
+                    using (generator.StartAt(startPos, GeneratorDirection.Forward, true))
                     {
-                        bool isNew;
-
-                        // Get or create the child
-                        UIElement child = generator.GenerateNext(out isNew) as UIElement;
-
-                        if (isNew)
+                        for (int index = first; index <= last; ++index, ++childIndex, --zIndex)
                         {
-                            generator.PrepareItemContainer(child);
-                            
-                            if (childIndex >= InternalChildren.Count)
-                                base.AddInternalChild(child);
-                            else
-                                base.InsertInternalChild(childIndex, child);                            
-                        }
+                            bool isNew;
 
-                        child.Measure(childSize);
-                        
-                        /*
-                         * Este es un arreglo específico para el DataTableRowsPresenter
-                         * para que las filas que son colapsadas muestren su contenido correctamente.
-                         */
-                        if (child is Panel)
-                        {
-                            (child as Panel).SetValue(Panel.ClipToBoundsProperty, false);
-                            (child as Panel).SetValue(Panel.ZIndexProperty, zIndex);
+                            // Get or create the child
+                            UIElement child = generator.GenerateNext(out isNew) as UIElement;
+
+                            if (isNew)
+                            {
+                                generator.PrepareItemContainer(child);
+
+                                if (childIndex >= InternalChildren.Count)
+                                    base.AddInternalChild(child);
+                                else
+                                    base.InsertInternalChild(childIndex, child);
+                            }
+
+                            child.Measure(childSize);
+
+                            ApplyDataTableCriteria(child, zIndex);
                         }
                     }
                 }

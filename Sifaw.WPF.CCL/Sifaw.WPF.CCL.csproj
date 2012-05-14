@@ -74,6 +74,7 @@
     <Compile Include="UtilWPF.cs" />
     <Compile Include="_DataTable\DataTableCell.cs" />
     <Compile Include="_DataTable\DataTableColumn.cs" />
+    <Compile Include="_DataTable\DataTableColumnTypesLenght.cs" />
     <Compile Include="_DataTable\DataTableRow.cs" />
     <Compile Include="_DataTable\DataTableCellsPresenter.cs" />
     <Compile Include="_DataTable\DataTableCellsPanel.cs" />

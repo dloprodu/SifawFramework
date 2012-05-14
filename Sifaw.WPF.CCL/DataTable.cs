@@ -54,14 +54,14 @@ namespace Sifaw.WPF.CCL
 	/// Representa un control que permite representar datos en una tabla con cabecera y pie.
 	/// Las celdas de la tabla pueden ocupar mas de una fila y/o columna.
 	/// </summary>
-    [TemplatePart(Name = "PART_Header", Type = typeof(ListBox))]
-    [TemplatePart(Name = "PART_Rows", Type = typeof(ListBox))]
+    [TemplatePart(Name = "PART_Header", Type = typeof(ItemsControl))]
+    [TemplatePart(Name = "PART_Rows", Type = typeof(ItemsControl))]
 	public class DataTable : Control
 	{
 		#region Fields
 
-        private ListBox HeaderPresenter = null;
-        private ListBox RowsPresenter = null;
+        private ItemsControl HeaderPresenter = null;
+        private ItemsControl RowsPresenter = null;
 
 		#endregion
 
@@ -103,14 +103,20 @@ namespace Sifaw.WPF.CCL
 			get 
 			{
 				if (GetValue(ColumnsProperty) == null)
-				{
 					Columns = new DataTableColumnCollection(this);
-					Columns.CollectionChanged += new System.Collections.Specialized.NotifyCollectionChangedEventHandler(Columns_CollectionChanged);
-				}
 
 				return (DataTableColumnCollection)GetValue(ColumnsProperty); 
 			}
-			protected internal set { SetValue(ColumnsProperty, value); }
+			set
+            {
+                if (GetValue(ColumnsProperty) != null)
+                    (GetValue(ColumnsProperty) as DataTableColumnCollection).CollectionChanged -= new NotifyCollectionChangedEventHandler(Columns_CollectionChanged);
+
+                SetValue(ColumnsProperty, value);
+
+                if (value != null)
+                    value.CollectionChanged += new NotifyCollectionChangedEventHandler(Columns_CollectionChanged);
+            }
 		}		
 
 		/// <summary>
@@ -121,14 +127,20 @@ namespace Sifaw.WPF.CCL
 			get
 			{
 				if (GetValue(HeaderProperty) == null)
-				{
 					Header = new DataTableRowCollection(this);
-					Header.CollectionChanged += new System.Collections.Specialized.NotifyCollectionChangedEventHandler(Header_CollectionChanged);
-				}
 
 				return (DataTableRowCollection)GetValue(HeaderProperty);
 			}
-			protected internal set { SetValue(HeaderProperty, value); }
+			set 
+            {
+                if (GetValue(HeaderProperty) != null)
+                    (GetValue(HeaderProperty) as DataTableRowCollection).CollectionChanged -= new NotifyCollectionChangedEventHandler(Header_CollectionChanged);
+
+                SetValue(HeaderProperty, value);
+                
+                if (value != null)
+                    value.CollectionChanged += new NotifyCollectionChangedEventHandler(Header_CollectionChanged);
+            }
 		}
 		
 		/// <summary>
@@ -139,14 +151,20 @@ namespace Sifaw.WPF.CCL
 			get 
 			{
 				if (GetValue(RowsProperty) == null)
-				{
 					Rows = new DataTableRowCollection(this);
-					Rows.CollectionChanged += new System.Collections.Specialized.NotifyCollectionChangedEventHandler(Rows_CollectionChanged);
-				}
 
 				return (DataTableRowCollection)GetValue(RowsProperty); 
 			}
-			protected internal set { SetValue(RowsProperty, value); }
+			set 
+            {
+                if (GetValue(RowsProperty) != null)
+                    (GetValue(RowsProperty) as DataTableRowCollection).CollectionChanged -= new NotifyCollectionChangedEventHandler(Rows_CollectionChanged);
+
+                SetValue(RowsProperty, value); 
+
+                if (value != null)
+                    Rows.CollectionChanged += new System.Collections.Specialized.NotifyCollectionChangedEventHandler(Rows_CollectionChanged);
+            }
 		}
 
 		#endregion
@@ -168,7 +186,7 @@ namespace Sifaw.WPF.CCL
 
             if (HeaderPresenter == null)
             {
-                HeaderPresenter = Template.FindName("PART_Header", this) as ListBox;
+                HeaderPresenter = Template.FindName("PART_Header", this) as ItemsControl;
 
                 foreach (DataTableRow row in Header)
                     HeaderPresenter.Items.Add(row);
@@ -176,7 +194,7 @@ namespace Sifaw.WPF.CCL
 
             if (RowsPresenter == null)
             {
-                RowsPresenter = Template.FindName("PART_Rows", this) as ListBox;
+                RowsPresenter = Template.FindName("PART_Rows", this) as ItemsControl;
 
                 foreach (DataTableRow row in Rows)
                     RowsPresenter.Items.Add(row);

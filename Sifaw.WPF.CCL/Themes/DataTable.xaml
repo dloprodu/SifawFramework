@@ -16,19 +16,47 @@
         <Setter Property="VerticalAlignment" Value="Stretch"/>
         <Setter Property="Width" Value="Auto"/>
         <Setter Property="Height" Value="Auto"/>
-        <Setter Property="Background" Value="LightGray"/>
+        <Setter Property="Background" Value="Transparent"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:DataTable}">
                     <Border Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}">
-                        <ScrollViewer x:Name="ScrollViewer">
-                            <StackPanel Orientation="Vertical">
-                                <ListBox x:Name="PART_Header" Padding="0" Background="CornflowerBlue"/>
-                                <ListBox x:Name="PART_Rows" Padding="0"  Background="Green"/>
-                            </StackPanel>
-                        </ScrollViewer>
+                        <StackPanel Orientation="Vertical">
+                            <!-- Header -->
+                            <ItemsControl x:Name="PART_Header">
+                                <ItemsControl.Template>
+                                    <ControlTemplate TargetType="ItemsControl">
+                                        <ScrollViewer CanContentScroll="True">
+                                            <ItemsPresenter />
+                                        </ScrollViewer>
+                                    </ControlTemplate>
+                                </ItemsControl.Template>
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <!--<VirtualizingStackPanel />-->
+                                        <local:DataTableRowsPresenter RowHeight="21" />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                            </ItemsControl>
+                            <!-- Body -->
+                            <ItemsControl x:Name="PART_Rows"  >
+                                <ItemsControl.Template>
+                                    <ControlTemplate TargetType="ItemsControl">
+                                        <ScrollViewer CanContentScroll="True">
+                                            <ItemsPresenter />
+                                        </ScrollViewer>
+                                    </ControlTemplate>
+                                </ItemsControl.Template>
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <!--<VirtualizingStackPanel />-->
+                                        <local:DataTableRowsPresenter RowHeight="21" />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                            </ItemsControl>
+                        </StackPanel>
                     </Border>
                 </ControlTemplate>
             </Setter.Value>

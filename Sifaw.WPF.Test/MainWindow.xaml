@@ -4,7 +4,7 @@
         Title="MainWindow"
         Height="529" Width="556" 
         xmlns:local="clr-namespace:Sifaw.WPF;assembly=Sifaw.WPF"
-        xmlns:ccl="clr-namespace:Sifaw.WPF.CCL;assembly=Sifaw.WPF.CCL">
+        xmlns:ccl="clr-namespace:Sifaw.WPF.CCL;assembly=Sifaw.WPF.CCL" xmlns:my="clr-namespace:Sifaw.WPF.Filters;assembly=Sifaw.WPF">
 
         <!--<Border BorderBrush="Black" BorderThickness="3">
             <ScrollViewer CanContentScroll="True" Height="200" BorderBrush="Black">
@@ -26,9 +26,9 @@
             </ScrollViewer>
         </Border>-->
 
-        <Border BorderBrush="Black" BorderThickness="3" >
-        <ccl:DataTable >
+    <Border BorderBrush="Black" BorderThickness="3" >
+        <!--<ccl:DataTable >
             
-        </ccl:DataTable>
+        </ccl:DataTable>-->
     </Border>
 </Window>

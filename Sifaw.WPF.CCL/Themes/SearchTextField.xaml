@@ -44,7 +44,7 @@
                                        Height="15"
                                        HorizontalAlignment="Center"
                                        VerticalAlignment="Center"
-                                       Source="/Sifaw.WPF.CCL;component/Themes/Images/Search.png"/>
+                                       Source="/Sifaw.WPF.CCL;component/Themes/_Images/Search.png"/>
                             </Border>
                         </Grid>
                     </Border>
@@ -70,7 +70,7 @@
                                <Condition Property="HasText" Value="true"/>
                                <Condition Property="Mode" Value="Instant" />
                             </MultiTrigger.Conditions> 
-                            <Setter TargetName="PART_SearchIcon" Property="Source" Value="/Sifaw.WPF.CCL;component/Themes/Images/Clear.png"/>
+                            <Setter TargetName="PART_SearchIcon" Property="Source" Value="/Sifaw.WPF.CCL;component/Themes/_Images/Clear.png"/>
                         </MultiTrigger>
                         <!-- MouseOver icon -->
                         <MultiTrigger>

@@ -13,8 +13,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sifaw.WPF.Test", "Sifaw.WPF
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sifaw.WPF.CCL", "Sifaw.WPF.CCL\Sifaw.WPF.CCL.csproj", "{71E138FD-4065-4AD6-A96E-2501CDE90D7F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sifaw.AppResources", "Sifaw.AppResources\Sifaw.AppResources.csproj", "{AAF2F3C2-4072-458E-B654-9C29380BE7ED}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -85,16 +83,6 @@ Global
 		{71E138FD-4065-4AD6-A96E-2501CDE90D7F}.Release|Mixed Platforms.Build.0 = Release|x86
 		{71E138FD-4065-4AD6-A96E-2501CDE90D7F}.Release|x86.ActiveCfg = Release|x86
 		{71E138FD-4065-4AD6-A96E-2501CDE90D7F}.Release|x86.Build.0 = Release|x86
-		{AAF2F3C2-4072-458E-B654-9C29380BE7ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AAF2F3C2-4072-458E-B654-9C29380BE7ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AAF2F3C2-4072-458E-B654-9C29380BE7ED}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{AAF2F3C2-4072-458E-B654-9C29380BE7ED}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{AAF2F3C2-4072-458E-B654-9C29380BE7ED}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{AAF2F3C2-4072-458E-B654-9C29380BE7ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AAF2F3C2-4072-458E-B654-9C29380BE7ED}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AAF2F3C2-4072-458E-B654-9C29380BE7ED}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{AAF2F3C2-4072-458E-B654-9C29380BE7ED}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{AAF2F3C2-4072-458E-B654-9C29380BE7ED}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

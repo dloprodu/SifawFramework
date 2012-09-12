@@ -35,7 +35,7 @@ namespace Sifaw.Controllers
 	/// <remarks>
 	/// <para>
 	/// La controladora obtiene la instancia de su elemento de interfaz de usuario a través de la interfaz
-	/// <see cref="AbstractUILinker{TUIElement}"/>. Este enlazador de elementos de interfaz se le pasa a la 
+	/// <see cref="UILinker{TUIElement}"/>. Este enlazador de elementos de interfaz se le pasa a la 
 	/// controladora cuando es instanciada.
 	/// </para>
 	/// <para>
@@ -113,7 +113,7 @@ namespace Sifaw.Controllers
 
 		// Enlazador para la carga de la vista.
         // No es un campo reseteable.
-		private readonly AbstractUILinker<TUIElement> _linker = null;
+		private readonly UILinker<TUIElement> _linker = null;
 
 		/*
 		 * Reseteables
@@ -221,20 +221,38 @@ namespace Sifaw.Controllers
 				}
 
 				if (_uiElement == null)
-					throw new AbstractUILinkerNullException();
+					throw new UIElementNullException();
 				
 				return _uiElement;
 			}
 		}
 
 		/// <summary>
-		/// Devuelve una instancia de <see cref="AbstractUILinker{TUIElement}"/> a través de la cual
+		/// Devuelve una instancia de <see cref="UILinker{TUIElement}"/> a través de la cual
 		/// se carga la propiedad <see cref="UIElement"/>.
 		/// </summary>
-		protected AbstractUILinker<TUIElement> Linker
+		protected UILinker<TUIElement> Linker
 		{
-			get { return _linker ?? AbstractUIProviderManager<AbstractUIProvider>.Linker as AbstractUILinker<TUIElement>; }
-		}
+            get
+            {
+                if (_linker == null)
+                {
+                    foreach (object linker in UILinkersManager.Linkers)
+                    {
+                        if (linker is UILinker<TUIElement>)
+                        {
+                            return linker as UILinker<TUIElement>;
+                        }
+                    }
+
+                    // Si no ha encontrado el linker del elemento UI de la controladora lanzamos
+                    // una excepción.
+                    throw new UILinkerNullException();
+                }
+
+                return _linker;
+            }
+        }
 
 		/*
 		 * Public
@@ -255,20 +273,20 @@ namespace Sifaw.Controllers
 
 		/// <summary>
 		/// Inicializa una nueva instancia de la clase <see cref="UIElementController{TInput, TOutput, TUIElement}"/>.
-		/// Establece como <see cref="AbstractUILinker{TUIElement}"/> aquel establecido por defecto a través de 
-		/// <see cref="AbstractUIProviderManager{TLinker}"/>.
+		/// Establece como <see cref="UILinker{TUIElement}"/> aquel establecido por defecto a través de 
+		/// <see cref="UILinkersManager{TLinker}"/>.
 		/// </summary>
 		protected UIElementController()
-			: this((AbstractUILinker<TUIElement>)null)
+			: this((UILinker<TUIElement>)null)
 		{
 		}
 
 		/// <summary>
 		/// Inicializa una nueva instancia de la clase <see cref="UIElementController{TInput, TOutput, TUIElement}"/>, 
-		/// estableciendo el <see cref="AbstractUILinker{TUIElement}"/> especificado como valor de la propiedad <see cref="Linker"/>
+		/// estableciendo el <see cref="UILinker{TUIElement}"/> especificado como valor de la propiedad <see cref="Linker"/>
 		/// donde <c>TUIElement</c> implementa <see cref="UIElement"/>.
 		/// </summary>
-		protected UIElementController(AbstractUILinker<TUIElement> linker)
+		protected UIElementController(UILinker<TUIElement> linker)
 			: base()
 		{
 			this._linker = linker;

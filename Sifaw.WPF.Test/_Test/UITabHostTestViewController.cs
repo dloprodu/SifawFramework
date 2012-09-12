@@ -84,7 +84,7 @@ namespace Sifaw.WPF.Test
 		{
 		}
 
-		public UITabHostTestViewController(AbstractUILinker<ShellView> linker)
+		public UITabHostTestViewController(UILinker<ShellView> linker)
 			: base(linker)
 		{
 		}

@@ -103,7 +103,7 @@ namespace Sifaw.WPF.Test
 		{
 		}
 
-		public UIAssistantTestViewController(AbstractUILinker<ShellView> linker)
+		public UIAssistantTestViewController(UILinker<ShellView> linker)
 			: base(linker)
 		{
 		}

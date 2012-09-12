@@ -63,7 +63,7 @@ namespace Sifaw.WPF.Test
 		{
 		}
 
-		public UITableTestController(AbstractUILinker<TableComponent> linker)
+		public UITableTestController(UILinker<TableComponent> linker)
 			: base(linker)
 		{
 		}

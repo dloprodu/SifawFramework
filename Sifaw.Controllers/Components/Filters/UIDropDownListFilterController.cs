@@ -106,8 +106,8 @@ namespace Sifaw.Controllers.Components.Filters
 
 		/// <summary>
 		/// Inicializa una nueva instancia de la clase <see cref="UIDropDownListFilterController"/>.
-		/// Establece como <see cref="AbstractUILinker{TUIElement}"/> aquel establecido por defecto a través de 
-		/// <see cref="AbstractUIProviderManager{TLinker}"/>.
+		/// Establece como <see cref="UILinker{TUIElement}"/> aquel establecido por defecto a través de 
+		/// <see cref="UILinkersManager{TLinker}"/>.
 		/// </summary>
 		public UIDropDownListFilterController()
 			: base()
@@ -116,11 +116,11 @@ namespace Sifaw.Controllers.Components.Filters
 
 		/// <summary>
 		/// Inicializa una nueva instancia de la clase <see cref="UIDropDownListFilterController"/>, 
-		/// estableciendo el <see cref="AbstractUILinker{TUIElement}"/> como valor de la propiedad 
+		/// estableciendo el <see cref="UILinker{TUIElement}"/> como valor de la propiedad 
 		/// <see cref="UIElementController{TInput, TOutput, TUIElement}.Linker"/> donde <c>TUIElement</c>
 		/// implementa <see cref="DropDownListFilterComponent"/>.
 		/// </summary>
-		public UIDropDownListFilterController(AbstractUILinker<DropDownListFilterComponent> linker)
+		public UIDropDownListFilterController(UILinker<DropDownListFilterComponent> linker)
 			: base(linker)
 		{
 		}

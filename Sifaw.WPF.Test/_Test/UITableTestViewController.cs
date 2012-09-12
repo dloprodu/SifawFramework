@@ -84,7 +84,7 @@ namespace Sifaw.WPF.Test
 		{
 		}
 
-		public UITableTestViewController(AbstractUILinker<ShellView> linker)
+		public UITableTestViewController(UILinker<ShellView> linker)
 			: base(linker)
 		{
 		}

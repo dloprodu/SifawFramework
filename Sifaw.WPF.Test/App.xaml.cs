@@ -20,7 +20,7 @@ namespace Sifaw.WPF.Test
 		public App()
 			: base()
 		{
-			AbstractUIProviderManager<AbstractUIProvider>.SetUIElementLinker(new WPFProvider());
+			UILinkersManager.SetUIElementLinker(new WPFLinkers());
             
             // (new MainWindow()).Show();			
 			

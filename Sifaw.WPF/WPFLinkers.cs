@@ -30,9 +30,9 @@ namespace Sifaw.WPF
 {
 	/// <summary>
 	/// Implementación WPF del proveedor de componentes y vistas 
-	/// <see cref="AbstractUIProvider"/> para Sifaw Framework.
+	/// <see cref="UILinkers"/> para Sifaw Framework.
 	/// </summary>
-	public class WPFProvider : AbstractUIProvider
+	public class WPFLinkers : UILinkers
 	{
 		#region Controles
 

@@ -97,7 +97,7 @@ namespace Sifaw.WPF.Test
 		{
 		}
 
-		public UIAssistantTestController(AbstractUILinker<AssistantComponent> linker)
+		public UIAssistantTestController(UILinker<AssistantComponent> linker)
 			: base(linker)
 		{
 		}

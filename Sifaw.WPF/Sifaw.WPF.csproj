@@ -85,7 +85,7 @@
     </Compile>
     <Compile Include="TabHostControl.cs" />
     <Compile Include="TableControl.cs" />
-    <Compile Include="WPFProvider.cs" />
+    <Compile Include="WPFLinkers.cs" />
     <Compile Include="_Settings\ControlSettings.cs" />
     <Compile Include="_Settings\Converters\UIAllowResizeToResizeMode.cs" />
     <Compile Include="_Settings\Converters\UIAutoSizeToWPFAutoSize.cs" />

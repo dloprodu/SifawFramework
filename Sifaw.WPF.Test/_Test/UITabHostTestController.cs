@@ -203,7 +203,7 @@ namespace Sifaw.WPF.Test
 		{
 		}
 
-		public UITabHostTestController(AbstractUILinker<TabHostComponent> linker)
+		public UITabHostTestController(UILinker<TabHostComponent> linker)
 			: base(linker)
 		{
 		}

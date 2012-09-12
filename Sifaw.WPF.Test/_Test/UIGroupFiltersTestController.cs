@@ -258,7 +258,7 @@ namespace Sifaw.WPF.Test
 		{
 		}
 
-		public UIGroupFiltersTestController(AbstractUILinker<ShellComponent> linker)
+		public UIGroupFiltersTestController(UILinker<ShellComponent> linker)
 			: base(linker)
 		{
 		}

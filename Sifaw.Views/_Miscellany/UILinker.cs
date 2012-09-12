@@ -33,7 +33,7 @@ namespace Sifaw.Views
 	/// <typeparam name="TUIElement">
 	/// Tipo abstracto del elemento de interfaz de usuario, derivado de <see cref="UIElement"/>.
 	/// </typeparam>
-	public interface AbstractUILinker<TUIElement>
+	public interface UILinker<TUIElement>
 		where TUIElement : UIElement
 	{
 		/// <summary>

@@ -99,9 +99,9 @@
     <Compile Include="_Attributes\Empty.cs" />
     <Compile Include="_Events\UIGuestSelectingEvent.cs" />
     <Compile Include="_Exceptions\Empty.cs" />
-    <Compile Include="_Miscellany\AbstractUILinker.cs" />
-    <Compile Include="_Miscellany\AbstractUIProvider.cs" />
-    <Compile Include="_Miscellany\AbstractUIProviderManager.cs" />
+    <Compile Include="_Miscellany\UILinker.cs" />
+    <Compile Include="_Miscellany\UILinkers.cs" />
+    <Compile Include="_Miscellany\UILinkersManager.cs" />
     <Compile Include="Kit\_Drawing\UIColor.cs" />
     <Compile Include="Kit\_Drawing\UIColors.cs" />
     <Compile Include="Kit\UIFrameBrush.cs" />

@@ -139,7 +139,8 @@
     <Compile Include="_Events\CLProgressChangedEvent.cs" />
     <Compile Include="_Events\CLComponentChangingEvent.cs" />
     <Compile Include="_Events\CLComponentChangedEvent.cs" />
-    <Compile Include="_Exceptions\AbstractUILinkerNullException.cs" />
+    <Compile Include="_Exceptions\UIElementNullException.cs" />
+    <Compile Include="_Exceptions\UILinkerNullException.cs" />
     <Compile Include="Components\_Exceptions\NotValidFilterException.cs" />
     <Compile Include="_Exceptions\UISettingsNullException.cs" />
     <Compile Include="_Exceptions\NotAllowResetException.cs" />
@@ -191,9 +192,6 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -105,8 +105,8 @@ namespace Sifaw.Controllers.Components.Filters
 
 		/// <summary>
 		/// Inicializa una nueva instancia de la clase <see cref="UIListFilterController"/>.
-		/// Establece como <see cref="AbstractUILinker{TUIElement}"/> aquel establecido por defecto a través de 
-		/// <see cref="AbstractUIProviderManager{TLinker}"/>.
+		/// Establece como <see cref="UILinker{TUIElement}"/> aquel establecido por defecto a través de 
+		/// <see cref="UILinkersManager{TLinker}"/>.
 		/// </summary>
 		public UIListFilterController()
 			: base()
@@ -115,11 +115,11 @@ namespace Sifaw.Controllers.Components.Filters
 
 		/// <summary>
 		/// Inicializa una nueva instancia de la clase <see cref="UIListFilterController"/>, 
-		/// estableciendo el <see cref="AbstractUILinker{TUIElement}"/> como valor de la propiedad 
+		/// estableciendo el <see cref="UILinker{TUIElement}"/> como valor de la propiedad 
 		/// <see cref="UIElementController{TInput, TOutput, TUIElement}.Linker"/> donde <c>TUIElement</c>
 		/// implementa <see cref="ListFilterComponent"/>.
 		/// </summary>
-		public UIListFilterController(AbstractUILinker<ListFilterComponent> linker)
+		public UIListFilterController(UILinker<ListFilterComponent> linker)
 			: base(linker)
 		{
 		}

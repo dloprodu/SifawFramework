@@ -32,24 +32,24 @@ namespace Sifaw.Views
 	/// Sigue el patrón de diseño 'Abstract Factory (Fábrica abstractra)' para crear
 	/// interfaces gráficas.
 	/// </remarks>
-	public interface AbstractUIProvider 
+	public interface UILinkers 
 		/****************************************************************/
 		/* Lista de linker´s de controladoras con vistas y componentes. */
 		/****************************************************************/	
 		// • Componentes 
-		: AbstractUILinker<ShellComponent>
-		, AbstractUILinker<BackgroundWorkerComponent>
-		, AbstractUILinker<TabHostComponent>
-		, AbstractUILinker<AssistantComponent>
-		, AbstractUILinker<TextFilterComponent>
-		, AbstractUILinker<BoolFilterComponent>
-		, AbstractUILinker<ListFilterComponent>
-		, AbstractUILinker<EnumFilterComponent>
-		, AbstractUILinker<DropDownListFilterComponent>
-		, AbstractUILinker<TableComponent>
+		: UILinker<ShellComponent>
+		, UILinker<BackgroundWorkerComponent>
+		, UILinker<TabHostComponent>
+		, UILinker<AssistantComponent>
+		, UILinker<TextFilterComponent>
+		, UILinker<BoolFilterComponent>
+		, UILinker<ListFilterComponent>
+		, UILinker<EnumFilterComponent>
+		, UILinker<DropDownListFilterComponent>
+		, UILinker<TableComponent>
 						
 		// • Vistas 		 
-		, AbstractUILinker<ShellView>
+		, UILinker<ShellView>
 	{
 		/* Empty */
 	}

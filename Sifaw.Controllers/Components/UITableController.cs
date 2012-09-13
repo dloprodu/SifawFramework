@@ -168,7 +168,7 @@ namespace Sifaw.Controllers.Components
 		/// <summary>
 		/// Inicializa una nueva instancia de la clase <see cref="UITableController{TInput, TOutput}"/>.
         /// Establece como <see cref="UILinker{TUIElement}"/> aquel establecido por defecto a través de 
-        /// <see cref="UILinkersManager{TLinker}"/>.
+        /// <see cref="UILinkersManager"/>.
         /// </summary>
 		protected UITableController()
 			: base()

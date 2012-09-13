@@ -274,7 +274,7 @@ namespace Sifaw.Controllers
 		/// <summary>
 		/// Inicializa una nueva instancia de la clase <see cref="UIElementController{TInput, TOutput, TUIElement}"/>.
 		/// Establece como <see cref="UILinker{TUIElement}"/> aquel establecido por defecto a través de 
-		/// <see cref="UILinkersManager{TLinker}"/>.
+		/// <see cref="UILinkersManager"/>.
 		/// </summary>
 		protected UIElementController()
 			: this((UILinker<TUIElement>)null)

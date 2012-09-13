@@ -210,7 +210,7 @@ namespace Sifaw.Controllers.Components
 		/// <summary>
         /// Inicializa una nueva instancia de la clase <see cref="UIFiltersGroupController{TInput, TOutput, TFilter}"/>.
 		/// Establece como <see cref="UILinker{TUIElement}"/> aquel establecido por defecto a través de 
-		/// <see cref="UILinkersManager{TLinker}"/>.
+		/// <see cref="UILinkersManager"/>.
 		/// </summary>
 		protected UIFiltersGroupController()
 			: base()

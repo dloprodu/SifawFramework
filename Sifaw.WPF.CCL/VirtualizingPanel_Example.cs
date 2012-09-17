@@ -37,7 +37,7 @@ namespace Sifaw.WPF.CCL
     /// Se usa en la plantilla de un control <see cref="DataTable"/> para especificar la ubicación en el árbol visual del 
     /// control donde se van a agregar las filas de la tabla.
     /// </summary>
-    public class DataTableRowsPresenter : VirtualizingPanel, IScrollInfo
+    public class VirtualizingPanel_Example : VirtualizingPanel, IScrollInfo
     {
         #region Fields
 
@@ -56,7 +56,7 @@ namespace Sifaw.WPF.CCL
            DependencyProperty.Register(
                "RowHeight",
                typeof(double),
-               typeof(DataTableRowsPresenter),
+               typeof(VirtualizingPanel_Example),
                new FrameworkPropertyMetadata(
                      (double)21.0
                    , FrameworkPropertyMetadataOptions.AffectsMeasure
@@ -97,12 +97,12 @@ namespace Sifaw.WPF.CCL
 
         #region Constructor
 
-        static DataTableRowsPresenter()
+        static VirtualizingPanel_Example()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(DataTableRowsPresenter), new FrameworkPropertyMetadata(typeof(DataTableRowsPresenter)));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(VirtualizingPanel_Example), new FrameworkPropertyMetadata(typeof(VirtualizingPanel_Example)));
         }
 
-        public DataTableRowsPresenter()
+        public VirtualizingPanel_Example()
         {
         }
 

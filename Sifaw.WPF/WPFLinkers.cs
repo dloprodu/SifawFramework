@@ -81,11 +81,6 @@ namespace Sifaw.WPF
 			ui = new DropDownListFilterControl();
 		}
 
-		public void Load(out TableComponent ui)
-		{
-			ui = new TableControl();
-		}
-
 		#endregion
 
 		#region Vistas

@@ -5,13 +5,13 @@
 
 
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="../Shared.xaml" />
+        <ResourceDictionary Source="Shared.xaml" />
     </ResourceDictionary.MergedDictionaries>
     
     <!-- 
        • DataTableRowsPresenter
     -->
-    <Style TargetType="{x:Type local:DataTableRowsPresenter}" >
+    <Style TargetType="{x:Type local:VirtualizingPanel_Example}" >
         <Setter Property="HorizontalAlignment" Value="Stretch"/>
         <Setter Property="VerticalAlignment" Value="Stretch"/>
         <Setter Property="Width" Value="Auto"/>

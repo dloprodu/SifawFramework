@@ -46,7 +46,6 @@ namespace Sifaw.Views
 		, UILinker<ListFilterComponent>
 		, UILinker<EnumFilterComponent>
 		, UILinker<DropDownListFilterComponent>
-		, UILinker<TableComponent>
 						
 		// • Vistas 		 
 		, UILinker<ShellView>

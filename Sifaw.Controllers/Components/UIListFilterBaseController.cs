@@ -179,6 +179,18 @@ namespace Sifaw.Controllers.Components
 			base.OnAfterStartController();            
         }
 
+        /// <summary>
+        /// Invoca al método sobrescirto <see cref="Controller{TInput, TOutput}.OnAfterResetController()"/> y
+        /// posteriormente establece la configuración inicial de <see cref="FilterBaseComponent{TFilter}"/>.
+        /// </summary>
+        protected override void OnAfterResetController()
+        {
+            /* Antes de aplicar el filtro añadimos el origen de datos. */
+            UIElement.Add(Parameters.Source);
+
+            base.OnAfterResetController();
+        }
+
         #endregion
     }
 }

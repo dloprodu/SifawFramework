@@ -44,6 +44,22 @@ namespace Sifaw.Core.Utilities
 			return list;
 		}
 
+        /// <summary>
+        /// Devuelve todas las propiedades especificadas teniendo en cuenta las clases heredadas.
+        /// </summary>
+        /// <param name="type">Tipo base</param>
+        /// <param name="flags">Flags de busqueda</param>
+        public static List<PropertyInfo> GetAllProperties(Type type, BindingFlags flags)
+        {
+            if (type == typeof(object))
+                return new List<PropertyInfo>();
+
+            // Obtenemos los campos de la base 
+            List<PropertyInfo> list = GetAllProperties(type.BaseType, flags);
+            list.AddRange(type.GetProperties(flags));
+            return list;
+        }
+
 		/// <summary>
 		/// Devuelve el valor que tenga el objeto en la propiedad indicada.
 		/// </summary>

@@ -54,33 +54,33 @@ namespace Sifaw.Controllers
     /// </summary>
     /// <remarks>
     /// <para>
-	/// La vistas solo deben de actuar a modo de contenedor de componentes <see cref="UIComponentController{TInput, TOutput, TComponent}"/>
+    /// La vistas solo deben de actuar a modo de contenedor de componentes <see cref="UIComponentController{TInput, TOutput, TComponent}"/>
     /// </para>
     /// <para>
-	/// Esto implica que un <see cref="UIViewController{TInput, TOutput, TView}"/> actúa a modo de shell
-	/// sobre uno o varios componentes <see cref="UIComponentController{TInput, TOutput, TComponent}"/> que se comunican entre si para
+    /// Esto implica que un <see cref="UIViewController{TInput, TOutput, TView}"/> actúa a modo de shell
+    /// sobre uno o varios componentes <see cref="UIComponentController{TInput, TOutput, TComponent}"/> que se comunican entre si para
     /// dar forma a un componente mas complejo.
     /// </para>
     /// </remarks>
-	/// <typeparam name="TInput">
-	/// Tipo para establecer los parámetros de inicio de la controladora. Ha de ser serializable y 
-	/// derivar de <see cref="UIViewController{TInput, TOutput, TView}.Input"/>.
-	/// </typeparam>
-	/// <typeparam name="TOutput">
-	/// Tipo para establcer los parametros de retorno cuando finaliza la controladora. Ha de ser serializable y 
-	/// derivar de <see cref="UIViewController{TInput, TOutput, TView}.Output"/>.
-	/// </typeparam>
-	/// <typeparam name="TView">
-	/// Tipo para establecer el elemento de interfaz de usuario de la controladora. Ha de implementar <see cref="UIView"/>.
-	/// </typeparam>
-	public abstract class UIViewController<TInput, TOutput, TView> : UIElementController
+    /// <typeparam name="TInput">
+    /// Tipo para establecer los parámetros de inicio de la controladora. Ha de ser serializable y 
+    /// derivar de <see cref="UIViewController{TInput, TOutput, TView}.Input"/>.
+    /// </typeparam>
+    /// <typeparam name="TOutput">
+    /// Tipo para establcer los parametros de retorno cuando finaliza la controladora. Ha de ser serializable y 
+    /// derivar de <see cref="UIViewController{TInput, TOutput, TView}.Output"/>.
+    /// </typeparam>
+    /// <typeparam name="TView">
+    /// Tipo para establecer el elemento de interfaz de usuario de la controladora. Ha de implementar <see cref="UIView"/>.
+    /// </typeparam>
+    public abstract class UIViewController<TInput, TOutput, TView> : UIElementController
         < TInput
         , TOutput
-        , TView >
+        , TView>
         , IUIViewController
-        where TInput  : UIViewController<TInput, TOutput, TView>.Input
+        where TInput : UIViewController<TInput, TOutput, TView>.Input
         where TOutput : UIViewController<TInput, TOutput, TView>.Output
-        where TView   : UIView
+        where TView : UIView
     {
         #region Input / Output
 
@@ -111,20 +111,20 @@ namespace Sifaw.Controllers
 
             #region Constructors
 
-			/// <summary>
+            /// <summary>
             /// Inicializa una nueva instancia de <see cref="UIViewController{TInput, TOutput, TView}.Input"/>, 
             /// estableciendo la propiedad <see cref="ShowView"/> a <c>true</c>.
-			/// </summary>
+            /// </summary>
             protected Input()
                 : this(true)
             {
             }
 
-			/// <summary>
+            /// <summary>
             /// Inicializa una nueva instancia de <see cref="UIViewController{TInput, TOutput, TView}.Input"/>, 
-			/// estableciendo un valor a la propiedad <see cref="ShowView"/>.
-			/// </summary>
-			/// <param name="showView">Indica si se muestra la vista al iniciar la controladora.</param>
+            /// estableciendo un valor a la propiedad <see cref="ShowView"/>.
+            /// </summary>
+            /// <param name="showView">Indica si se muestra la vista al iniciar la controladora.</param>
             protected Input(bool showView)
                 : base()
             {
@@ -153,7 +153,7 @@ namespace Sifaw.Controllers
         }
 
         #endregion
-		
+
         #region Fields
 
         [CLReseteable(false)]
@@ -269,22 +269,22 @@ namespace Sifaw.Controllers
 
         #region Constructors
 
-		/// <summary>
-		/// Inicializa una nueva instancia de la clase <see cref="UIViewController{TInput, TOutput, TView}"/>.
-		/// Establece como <see cref="UILinker{TUIElement}"/> aquel establecido por defecto a través de 
-		/// <see cref="UILinkersManager"/>.
-		/// </summary>
+        /// <summary>
+        /// Inicializa una nueva instancia de la clase <see cref="UIViewController{TInput, TOutput, TView}"/>.
+        /// Establece como <see cref="UILinker{TUIElement}"/> aquel establecido por defecto a través de 
+        /// <see cref="AbstractUIProviderManager{TLinker}"/>.
+        /// </summary>
         protected UIViewController()
             : base()
         {
         }
 
-		/// <summary>
-		/// Inicializa una nueva instancia de la clase <see cref="UIViewController{TInput, TOutput, TView}"/>, 
-		/// estableciendo el <see cref="UILinker{TUIElement}"/> especificado como valor de la propiedad 
-		/// <see cref="UIElementController{TInput, TOutput, TUIElement}.Linker"/> donde <c>TUIElement</c> implementa
-		/// <see cref="UIView"/>.
-		/// </summary>
+        /// <summary>
+        /// Inicializa una nueva instancia de la clase <see cref="UIViewController{TInput, TOutput, TView}"/>, 
+        /// estableciendo el <see cref="UILinker{TUIElement}"/> especificado como valor de la propiedad 
+        /// <see cref="UIElementController{TInput, TOutput, TUIElement}.Linker"/> donde <c>TUIElement</c> implementa
+        /// <see cref="UIView"/>.
+        /// </summary>
         protected UIViewController(UILinker<TView> linker)
             : base(linker)
         {
@@ -312,10 +312,10 @@ namespace Sifaw.Controllers
 
         #region UIElement Methods
 
-		/// <summary>
-		/// Invoca al método sobrescirto <see cref="UIElementController{TInput, TOutput, TView}.OnAfterUIElementLoad()"/> y
-		/// posteriormente se subscribe a eventos de <see cref="UIView"/>.
-		/// </summary>
+        /// <summary>
+        /// Invoca al método sobrescirto <see cref="UIElementController{TInput, TOutput, TView}.OnAfterUIElementLoad()"/> y
+        /// posteriormente se subscribe a eventos de <see cref="UIView"/>.
+        /// </summary>
         protected override void OnAfterUIElementLoad()
         {
             base.OnAfterUIElementLoad();
@@ -326,21 +326,21 @@ namespace Sifaw.Controllers
             UIElement.BeforeClose += new UIFinishRequestEventHandler(UIElement_BeforeClose);
             UIElement.AfterClose += new EventHandler(UIElement_AfterClose);
 
-			/* Default Settings... */
-			UISettings.Width = 800;
-			UISettings.Height = 600;
-			UISettings.AllowResize = true;
-			UISettings.SizeToContent = false;
+            /* Default Settings... */
+            UISettings.Width = 800;
+            UISettings.Height = 600;
+            UISettings.AllowResize = true;
+            UISettings.SizeToContent = false;
         }
 
         #endregion
 
         #region Start Methods
 
-		/// <summary>
-		/// Invoca al método sobrescirto <see cref="Controller{TInput, TOutput}.OnBeforeStartController()"/> y
-		/// posteriormente se subscribe a eventos genéricos de componentes embebidos.
-		/// </summary>
+        /// <summary>
+        /// Invoca al método sobrescirto <see cref="Controller{TInput, TOutput}.OnBeforeStartController()"/> y
+        /// posteriormente se subscribe a eventos genéricos de componentes embebidos.
+        /// </summary>
         protected override void OnBeforeStartController()
         {
             base.OnBeforeStartController();
@@ -360,11 +360,11 @@ namespace Sifaw.Controllers
             }
         }
 
-		/// <summary>
-		/// Invoca al método sobrescirto <see cref="Controller{TInput, TOutput}.OnAfterStartController()"/> y
-		/// posteriormente muestra la vistá si <see cref="UIViewController{TInput, TOutput, TView}.Input.ShowView"/> 
-		/// es <c>true</c>.
-		/// </summary>
+        /// <summary>
+        /// Invoca al método sobrescirto <see cref="Controller{TInput, TOutput}.OnAfterStartController()"/> y
+        /// posteriormente muestra la vistá si <see cref="UIViewController{TInput, TOutput, TView}.Input.ShowView"/> 
+        /// es <c>true</c>.
+        /// </summary>
         protected override void OnAfterStartController()
         {
             base.OnAfterStartController();
@@ -377,13 +377,27 @@ namespace Sifaw.Controllers
 
         #region Finish Methods
 
-		/// <summary>
-		/// Invoca al método sobrescirto <see cref="Controller{TInput, TOutput}.OnBeforeFinishControllers(List{IController})"/> y
-		/// posteriormente, si no ha sido cerrada ya, cierra la vista.
-		/// </summary>
+        /// <summary>
+        /// Invoca al método sobrescirto <see cref="Controller{TInput, TOutput}.OnBeforeFinishControllers(List{IController})"/> y
+        /// posteriormente, si no ha sido cerrada ya, cierra la vista.
+        /// </summary>
         protected override void OnBeforeFinishControllers(List<IController> children)
         {
             base.OnBeforeFinishControllers(children);
+
+            // Nos enganchamos a eventos de la controladoras hijas para propagarlos.
+            // • Los eventos ShowMessage, ShowWarning, ShowError y ConfirmMessage han de ser propagados hasta que sean
+            //   capturados por una controladora UIViewController que los gestione.
+            foreach (IController controller in GetControllers())
+            {
+                if (controller is IUIComponentController)
+                {
+                    (controller as IUIComponentController).ShowMessage -= new CLShowInfoEventHandler(UIComponentController_ShowMessage);
+                    (controller as IUIComponentController).ShowWarning -= new CLShowWarningEventHandler(UIComponentController_ShowWarning);
+                    (controller as IUIComponentController).ShowError -= new CLShowErrorEventHandler(UIComponentController_ShowError);
+                    (controller as IUIComponentController).ConfirmMessage -= new CLConfirmMessageEventHandler(UIComponentController_ConfirmMessage);
+                }
+            }
 
             if (!autoClosing)
                 UIElement.Close();

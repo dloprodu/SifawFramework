@@ -332,8 +332,8 @@ namespace Sifaw.WPF
 
             private bool _withControl = true;
             private bool _allowCancel = false;
-            private string _summary = string.Empty;
-            private string _processDescription = string.Empty;
+            private string _summary = "Operación pesada";
+            private string _processDescription = "Se está ejecutando un proceso pesado. Esta operación puede tardar varios minutos. Espere por favor...";
             private string _progress = string.Empty;
             private int _maxProgressPercentage = 100;
 

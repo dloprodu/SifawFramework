@@ -295,7 +295,7 @@ namespace Sifaw.Controllers.Components
 		/// </summary>
 		protected override void GetRowSettings(uint row, out double height, out UIShellLengthModes mode)
 		{
-			height = 0;
+			height = 100;
 			mode = UIShellLengthModes.Auto;
 		}
 
@@ -304,8 +304,8 @@ namespace Sifaw.Controllers.Components
 		/// </summary>
 		protected override void GetRowCellSettings(uint row, uint cell, out double width, out UIShellLengthModes mode, out BackgroundWorkerComponent component)
 		{
-			width = 0;
-			mode = UIShellLengthModes.Auto;
+			width = 100;
+            mode = UIShellLengthModes.Auto;
 			component = UIBackgroundWorkerController.GetUIComponent() as BackgroundWorkerComponent;
 		}
 

@@ -201,7 +201,7 @@ namespace Sifaw.WPF.Test
 			Controller3.Start(new UIBackgroundWorkerController.Input(new BackgroundWorkerPack(TestBackGroundWorker, null)));
 		}
 
-		public static object TestBackGroundWorker(BackgroundWorkerCommunicator com, object[] args)
+		private static object TestBackGroundWorker(BackgroundWorkerCommunicator com, object[] args)
 		{
 			int count = 1000;
 			com.ChangeMaxProgress(count);

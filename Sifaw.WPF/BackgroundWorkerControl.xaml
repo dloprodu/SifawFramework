@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d"             
              Width="Auto"
-             Height="Auto" Background="White">
+             Height="Auto" Background="White" MinWidth="300">
     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -37,7 +37,7 @@
             <Label Name="labelProgress" Content="Ejecutando proceso..." Height="28"  />
             <ProgressBar Name="progressBar" HorizontalAlignment="Stretch" Height="21" Margin="12,0,12,12"/>
         </StackPanel>
-        <Expander Name="expanderDetail" Grid.Row="2" Margin="9,0,9,0" Header="Detalle" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch" >
+        <Expander Name="expanderDetail" Grid.Row="2" Margin="0,0,0,0" Header="Detalle" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch" >
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />

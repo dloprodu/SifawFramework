@@ -60,9 +60,9 @@ namespace Sifaw.WPF.Test {
             }
         }
         
-        internal static System.Drawing.Bitmap SffWhiteIco128x128 {
+        internal static System.Drawing.Bitmap SffIco128x128 {
             get {
-                object obj = ResourceManager.GetObject("SffWhiteIco128x128", resourceCulture);
+                object obj = ResourceManager.GetObject("SffIco128x128", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

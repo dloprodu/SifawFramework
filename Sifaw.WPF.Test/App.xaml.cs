@@ -24,12 +24,12 @@ namespace Sifaw.WPF.Test
 		{
 			UILinkersManager.SetUIElementLinker(new WPFLinkers());
 
-            Bitmap ico = Resource.SffWhiteIco128x128;
+            Bitmap ico = Resource.SffIco128x128;
             byte[] buffer = null;
 
             using (MemoryStream mStream = new MemoryStream())
             {
-                ico.Save(mStream, System.Drawing.Imaging.ImageFormat.Jpeg);
+                ico.Save(mStream, System.Drawing.Imaging.ImageFormat.Png);
                 buffer = mStream.GetBuffer();
             }
 

@@ -1,16 +1,17 @@
 ﻿using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using System.Resources;
 
 // La información general sobre un ensamblado se controla mediante el siguiente 
 // conjunto de atributos. Cambie estos atributos para modificar la información
 // asociada con un ensamblado.
 [assembly: AssemblyTitle("Sifaw.Views")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Abstract View Logic Layer")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Gobierno de Canarias")]
+[assembly: AssemblyCompany("Sifaw Software SL")]
 [assembly: AssemblyProduct("Sifaw.Views")]
-[assembly: AssemblyCopyright("© Gobierno de Canarias 2011")]
+[assembly: AssemblyCopyright("© Sifaw Software SL 2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -33,3 +34,4 @@ using System.Runtime.InteropServices;
 // mediante el asterisco ('*'), como se muestra a continuación:
 [assembly: AssemblyVersion("1.0.0.*")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: NeutralResourcesLanguageAttribute("en")]

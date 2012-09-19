@@ -7,11 +7,11 @@ using System.Resources;
 // conjunto de atributos. Cambie estos atributos para modificar la información
 // asociada con un ensamblado.
 [assembly: AssemblyTitle("Sifaw.Controllers")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Controller Logic Layer")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Gobierno de Canarias")]
+[assembly: AssemblyCompany("Sifaw Software SL")]
 [assembly: AssemblyProduct("Sifaw.Controllers")]
-[assembly: AssemblyCopyright("© Gobierno de Canarias 2011")]
+[assembly: AssemblyCopyright("© Sifaw Software SL 2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -34,4 +34,4 @@ using System.Resources;
 // mediante el asterisco ('*'), como se muestra a continuación:
 [assembly: AssemblyVersion("1.0.0.*")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
-[assembly: NeutralResourcesLanguageAttribute("")]
+[assembly: NeutralResourcesLanguageAttribute("en")]

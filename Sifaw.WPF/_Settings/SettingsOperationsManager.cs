@@ -38,6 +38,18 @@ namespace Sifaw.WPF
 	{
 		#region Converteres
 
+        private static UIImageToImageSource _uiImageToImageSource = null;
+        public static UIImageToImageSource UIImageToImageSource 
+        {
+            get
+            {
+                if (_uiImageToImageSource == null)
+                    _uiImageToImageSource = new UIImageToImageSource();
+
+                return _uiImageToImageSource;
+            }
+        }
+
 		private static UIBrushToBrush _uiBrushToBrush = null;
 		public static UIBrushToBrush UIBrushToBrush
 		{
@@ -147,5 +159,5 @@ namespace Sifaw.WPF
 		}
 
 		#endregion
-	}
+    }
 }

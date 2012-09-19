@@ -20,6 +20,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using Sifaw.Views.Kit;
+
 
 namespace Sifaw.Views
 {
@@ -28,7 +30,12 @@ namespace Sifaw.Views
 	/// de una vista de interfaz de usuario.
 	/// </summary>
 	public interface ViewSettings : UISettings
-	{
+	{        
+        /// <summary>
+        /// Obtiene o establece la miniatura de la vista.
+        /// </summary>
+        UIImage Thumbnail { get; set; }        
+
 		/// <summary>
 		/// Obtiene o establece la cabecera de la vista.
 		/// </summary>

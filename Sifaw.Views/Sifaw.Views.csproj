@@ -16,7 +16,8 @@
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
     <OldToolsVersion>2.0</OldToolsVersion>
-    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
     <PublishUrl>http://localhost/Sifaw.Views/</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Web</InstallFrom>
@@ -52,6 +53,9 @@
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\Release\Sifaw.Views.XML</DocumentationFile>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Sff256x256.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -69,6 +73,7 @@
     <Compile Include="Components\_Settings\BackgroundWorkerSettings.cs" />
     <Compile Include="Components\_Settings\BoolFilterSettings.cs" />
     <Compile Include="Components\_Settings\TextFilterSettings.cs" />
+    <Compile Include="Kit\UIImage.cs" />
     <Compile Include="Kit\_Drawing\UISize.cs" />
     <Compile Include="_Settings\ViewSettings.cs" />
     <Compile Include="_Settings\ComponentSettings.cs" />
@@ -132,6 +137,9 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Sff256x256.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

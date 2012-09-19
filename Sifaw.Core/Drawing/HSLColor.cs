@@ -28,7 +28,7 @@ namespace Sifaw.Core.Drawing
 	/// <summary>
 	/// Representa un color en el espacio de colores HSL.
 	/// </summary>
-	public struct HSLColor
+	public struct HSLColor : IEquatable<HSLColor>
 	{
 		/// <summary>
 		/// Representa un <see cref="HSLColor"/> vacío. Este campo es de solo lectura.
@@ -113,6 +113,53 @@ namespace Sifaw.Core.Drawing
 		}
 
 		#endregion
+
+        #region Override Methods
+
+        /// <summary>
+        /// Devuelve la representación de cadena de un objeto <see cref="HSLColor"/>.
+        /// </summary>
+        public override string ToString()
+        {
+            return string.Format("Hue: {0}; Saturation: {1}; Luminance: {2}", h, s, l);
+        }
+
+        /// <summary>
+        /// Determina si un objeto <see cref="HSLColor"/> proporcionado es equivalente al objeto <see cref="HSLColor"/> actual.
+        /// </summary>
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+                return false;
+
+            if (!(obj is HSLColor))
+                return false;
+
+            return h.Equals(((HSLColor)obj).h)
+                && s.Equals(((HSLColor)obj).s)
+                && l.Equals(((HSLColor)obj).l);
+        }
+
+        /// <summary>
+        /// Obtiene un código hash de este objeto <see cref="HSLColor"/>.
+        /// </summary>
+        public override int GetHashCode()
+        {
+            return h.GetHashCode() ^ s.GetHashCode() ^ l.GetHashCode();
+        }
+
+        #endregion
+
+        #region IEquatable<HSLColor> Members
+
+        public bool Equals(HSLColor other)
+        {
+            return h.Equals(other.h)
+                && s.Equals(other.s)
+                && l.Equals(other.l);
+        }
+
+        #endregion
 
 		#region Factory Methods
 
@@ -200,5 +247,5 @@ namespace Sifaw.Core.Drawing
 		}
 
 		#endregion
-	}
+    }
 }

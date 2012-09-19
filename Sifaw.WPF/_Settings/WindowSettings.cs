@@ -35,6 +35,7 @@ namespace Sifaw.WPF
     {
 		#region Fields
 
+        private UIImage _image = null;
 		private string _header = "SifaWake Application";
 		private bool _sizeToContent = false;
 		private bool _alloResize = true;
@@ -42,6 +43,22 @@ namespace Sifaw.WPF
 		#endregion
 
 		#region Properties
+        
+        /// <summary>
+        /// Obtiene o establece el icono de la ventana.
+        /// </summary>
+        public UIImage Thumbnail
+        {
+            get { return _image; }
+            set
+            {
+                if (_image != value)
+                {
+                    _image = value;
+                    OnPropertyChanged(() => Thumbnail);
+                }
+            }
+        }
 
 		/// <summary>
 		/// Obtiene o establece la cabecera de la vista.
@@ -103,6 +120,7 @@ namespace Sifaw.WPF
 			this.Background = (UIBrush)SettingsOperationsManager.UIBrushToBrush.ConvertBack(window.Background, null, null, null);
 			this.Foreground = (UIBrush)SettingsOperationsManager.UIBrushToBrush.ConvertBack(window.Foreground, null, null, null);
 
+            UtilWPF.BindField(this, "Thumbnail",     window, Window.IconProperty,          BindingMode.TwoWay, SettingsOperationsManager.UIImageToImageSource);
 			UtilWPF.BindField(this, "Background",    window, Window.BackgroundProperty,    BindingMode.TwoWay, SettingsOperationsManager.UIBrushToBrush);
 			UtilWPF.BindField(this, "Foreground",    window, Window.ForegroundProperty,    BindingMode.TwoWay, SettingsOperationsManager.UIBrushToBrush);
 			UtilWPF.BindField(this, "Margin",        window, Window.MarginProperty,        BindingMode.TwoWay, SettingsOperationsManager.UIFrameToThickness);
@@ -119,5 +137,5 @@ namespace Sifaw.WPF
 		}
 
         #endregion
-	}
+    }
 }

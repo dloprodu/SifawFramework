@@ -116,8 +116,8 @@ namespace Sifaw.WPF.Test
 		{
 			base.OnAfterUIElementLoad();
 
-			UISettings.SizeToContent = true;
-			UISettings.AllowResize = false;
+			UISettings.SizeToContent = false;
+			UISettings.AllowResize = true;
 		}
 
 		#endregion

@@ -37,13 +37,13 @@
             <Label Name="labelProgress" Content="Ejecutando proceso..." Height="28"  />
             <ProgressBar Name="progressBar" HorizontalAlignment="Stretch" Height="21" Margin="12,0,12,12"/>
         </StackPanel>
-        <Expander Name="expanderDetail" Grid.Row="2" Margin="0,0,0,0" Header="Detalle" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch" >
+        <Expander Name="expanderDetail" Grid.Row="2" Margin="0" Header="Detalle" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch" >
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
-                <Border BorderThickness="1" CornerRadius="3" BorderBrush="DarkGray">
-                    <ScrollViewer Grid.Row="0" Height="200" Margin="1" Padding="1">
+                <Border BorderThickness="1" CornerRadius="0" BorderBrush="DarkGray" Background="WhiteSmoke">
+                    <ScrollViewer Grid.Row="0" Height="200" Margin="0" Padding="0">
                         <TextBlock 
                             Name="textBlockDetail"
                             Padding="6" 

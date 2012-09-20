@@ -188,22 +188,23 @@ namespace Sifaw.WPF.Test
 
         protected override void StartController()
 		{
+            Controller1.UISettings.AllowCancel = false;
 			Controller1.UISettings.Denomination = "Vista 1...";
 			Controller1.UISettings.Description = "Descripción Vista 1 Descripción Vista 1 Descripción Vista 1 Descripción Vista 1 Descripción Vista 1 Descripción Vista 1 Descripción Vista 1 Descripción Vista 1 Descripción Vista 1 Descripción Vista 1 Descripción Vista 1 Descripción Vista 1 Descripción Vista 1...";
-			Controller1.Start(new UIBackgroundWorkerController.Input(new BackgroundWorkerPack(TestBackGroundWorker, null)));
+			Controller1.Start(new UIBackgroundWorkerController.Input(new BackgroundWorkerPack(TestBackGroundWorker, null), false));
 			
 			Controller2.UISettings.Denomination = "Vista 2...";
 			Controller2.UISettings.Description = "Descripción Vista 2...";
-			Controller2.Start(new UIBackgroundWorkerController.Input(new BackgroundWorkerPack(TestBackGroundWorker, null)));
+			Controller2.Start(new UIBackgroundWorkerController.Input(new BackgroundWorkerPack(TestBackGroundWorker, null), false));
 
 			Controller3.UISettings.Denomination = "Vista 3...";
 			Controller3.UISettings.Description = "Descripción Vista 3...";
-			Controller3.Start(new UIBackgroundWorkerController.Input(new BackgroundWorkerPack(TestBackGroundWorker, null)));
+			Controller3.Start(new UIBackgroundWorkerController.Input(new BackgroundWorkerPack(TestBackGroundWorker, null), false));
 		}
 
 		private static object TestBackGroundWorker(BackgroundWorkerCommunicator com, object[] args)
 		{
-			int count = 1000;
+			int count = 300;
 			com.ChangeMaxProgress(count);
 
 			for (int i = 0; i < count; i++)

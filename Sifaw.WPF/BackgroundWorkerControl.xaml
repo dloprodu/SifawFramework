@@ -11,7 +11,6 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <DockPanel HorizontalAlignment="Stretch" Grid.Row="0" Name="dockPanelTop" VerticalAlignment="Stretch">
             <DockPanel.Background>
@@ -34,7 +33,10 @@
                 TextAlignment="Justify" />           
         </DockPanel>
         <StackPanel Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-            <Label Name="labelProgress" Content="Ejecutando proceso..." Height="28"  />
+            <DockPanel>                
+                <Button DockPanel.Dock="Right" Content="Cancelar" Margin="6,6,12,6" Height="23" Name="buttonCancelar" Width="75" Click="buttonCancelar_Click" />
+                <Label Name="labelProgress" Content="Ejecutando proceso..." VerticalContentAlignment="Center" HorizontalContentAlignment="Stretch" />
+            </DockPanel>            
             <ProgressBar Name="progressBar" HorizontalAlignment="Stretch" Height="21" Margin="12,0,12,12"/>
         </StackPanel>
         <Expander Name="expanderDetail" Grid.Row="2" Margin="0" Header="Detalle" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch" >
@@ -65,8 +67,5 @@
                 </Border>
             </Grid>
         </Expander>
-        <StackPanel Height="Auto" Grid.Row="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Orientation="Horizontal" FlowDirection="RightToLeft">
-            <Button Content="Cancelar" Margin="6" Height="23" Name="buttonCancelar" Width="75" Click="buttonCancelar_Click" />
-        </StackPanel>
     </Grid>
 </UserControl>

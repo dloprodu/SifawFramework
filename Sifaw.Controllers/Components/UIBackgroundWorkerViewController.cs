@@ -318,7 +318,7 @@ namespace Sifaw.Controllers.Components
 		/// </summary>
 		protected override void StartController()
 		{
-			UIBackgroundWorkerController.Start(new UIBackgroundWorkerController.Input(Parameters.Worker));
+			UIBackgroundWorkerController.Start(new UIBackgroundWorkerController.Input(Parameters.Worker, true));
 		}
 
 		/// <summary>

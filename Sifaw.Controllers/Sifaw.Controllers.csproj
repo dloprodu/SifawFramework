@@ -109,6 +109,7 @@
     <Compile Include="Components\UIFiltersGroupController.cs" />
     <Compile Include="Components\UITabHostController.cs" />
     <Compile Include="Components\_Delegates\BackgroundWorkerDelegate.cs" />
+    <Compile Include="Components\_Events\CLRunWorkerCompletedEvent.cs" />
     <Compile Include="Components\_Miscellany\BackgroundWorkerCommunicator.cs" />
     <Compile Include="Components\_Miscellany\BackgroundWorkerPack.cs" />
     <Compile Include="Components\_Miscellany\ReportProgressCommand.cs" />

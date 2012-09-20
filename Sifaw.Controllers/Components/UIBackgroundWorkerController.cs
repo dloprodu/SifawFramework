@@ -17,6 +17,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 
 using Sifaw.Core;
 
@@ -64,18 +65,27 @@ namespace Sifaw.Controllers.Components
 			#region Fields
 
 			private BackgroundWorkerPack _workerPack;
+            private bool _finishToWorkerCompleted;
 
 			#endregion
 
 			#region Properties
 
 			/// <summary>
-			/// Obtiene o establece el paquete de ejecución.
+			/// Obtiene el paquete de ejecución.
 			/// </summary>
 			public BackgroundWorkerPack WorkerPack
 			{
 				get { return _workerPack; }
 			}
+
+            /// <summary>
+            /// Obtiene un valor que indica si se finaliza la controladora al completar la tarea de segundo plano.
+            /// </summary>
+            public bool FinishToWorkerCompleted
+            {
+                get { return _finishToWorkerCompleted; }
+            }
 
 			#endregion
 
@@ -86,10 +96,11 @@ namespace Sifaw.Controllers.Components
 			/// estableciendo un valor a la propiedad <see cref="WorkerPack"/>.
 			/// </summary>
 			/// <param name="worker">Paquete de ejecución</param>
-			public Input(BackgroundWorkerPack worker)
+			public Input(BackgroundWorkerPack worker, bool finishToWorkerCompleted)
 				: base()
 			{
 				this._workerPack = worker;
+                this._finishToWorkerCompleted = finishToWorkerCompleted;
 			}
 
 			#endregion
@@ -159,7 +170,10 @@ namespace Sifaw.Controllers.Components
 		/// </summary>
 		[CLReseteable(null)]
 		private System.ComponentModel.BackgroundWorker worker = null;
-		
+
+        [CLReseteable(null)]
+        private BackgroundWorkerCommunicator Communicator = null;
+
 		#endregion
 
 		#region Events
@@ -180,15 +194,15 @@ namespace Sifaw.Controllers.Components
 		}
 
         /// <summary>
-        /// Se produce después de lanzar un proceso pesado en un nuevo hilo.
+        /// Se produce al finalizar el proceso pesado.
         /// </summary>
-		public event EventHandler AfterBackgroundWorker = null;
+        public event CLRunWorkerCompletedEventHandler AfterBackgroundWorker = null;
 
 		/// <summary>
         /// Provoca el evento <see cref="AfterBackgroundWorker"/>.
         /// Permite ejecutar operaciones al finalizar el proceso pesado.
 		/// </summary>
-		protected virtual void OnAfterBackgroundWorker(EventArgs e)
+        protected virtual void OnAfterBackgroundWorker(CLRunWorkerCompletedEventArgs e)
 		{
 			if (AfterBackgroundWorker != null)
 				AfterBackgroundWorker(this, e);
@@ -276,7 +290,7 @@ namespace Sifaw.Controllers.Components
         /// </summary>
 		public override Input GetDefaultInput()
 		{
-			return new Input(null);
+			return new Input(null, true);
 		}
         
         /// <summary>
@@ -356,7 +370,7 @@ namespace Sifaw.Controllers.Components
 			worker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(worker_ProgressChanged);
 			worker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(worker_RunWorkerCompleted);
 			worker.WorkerReportsProgress = true;
-			worker.WorkerSupportsCancellation = UISettings.AllowCancel;
+			worker.WorkerSupportsCancellation = true;
 		}
 
         /// <summary>
@@ -391,7 +405,10 @@ namespace Sifaw.Controllers.Components
 			// Liberamos el worker
 			if (worker != null)
 			{
-				worker.Dispose();
+                worker.DoWork -= new System.ComponentModel.DoWorkEventHandler(worker_DoWork);
+                worker.ProgressChanged -= new System.ComponentModel.ProgressChangedEventHandler(worker_ProgressChanged);
+                worker.RunWorkerCompleted -= new System.ComponentModel.RunWorkerCompletedEventHandler(worker_RunWorkerCompleted);
+                worker.Dispose();
 				worker = null;
 			}
 		}
@@ -402,7 +419,7 @@ namespace Sifaw.Controllers.Components
 
 		private void UIElement_Cancel(object sender, EventArgs e)
 		{
-			if (worker.IsBusy && UISettings.AllowCancel && !worker.CancellationPending)
+			if (worker.IsBusy && !worker.CancellationPending)
 			{
 				worker.CancelAsync();
 				
@@ -419,7 +436,7 @@ namespace Sifaw.Controllers.Components
 			BackgroundWorkerPack pack = (BackgroundWorkerPack)e.Argument;
 			System.ComponentModel.BackgroundWorker work = (System.ComponentModel.BackgroundWorker)sender;
 
-			pack.Start(new BackgroundWorkerCommunicator(work));
+			pack.Start(Communicator = new BackgroundWorkerCommunicator(work));
 			e.Result = pack.Result;
 
 			if (work.CancellationPending)
@@ -428,42 +445,51 @@ namespace Sifaw.Controllers.Components
 
 		private void worker_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
 		{
-			OnAfterBackgroundWorker(EventArgs.Empty);
+            object result = e.Cancelled ? null : e.Result;
+            bool cancelled = e.Cancelled;
 
-			FinishController(new UIBackgroundWorkerController.Output(e.Cancelled ? null : e.Result, e.Cancelled));
+			OnAfterBackgroundWorker(new CLRunWorkerCompletedEventArgs(result, cancelled));
+
+            if (Parameters.FinishToWorkerCompleted)
+                FinishController(new UIBackgroundWorkerController.Output(result, cancelled));
 		}
 
 		private void worker_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
 		{
-			Tuple<ReportProgressCommands, string> argumentos = (Tuple<ReportProgressCommands, string>)e.UserState;
-			
-			switch (argumentos.Item1)
-			{
-				case ReportProgressCommands.TextChanged:
-					UIElement.UpdateProgress(argumentos.Item2);
-					break;
+            lock (Communicator)
+            {
+                Tuple<ReportProgressCommands, string> argumentos = (Tuple<ReportProgressCommands, string>)e.UserState;
+                
+                switch (argumentos.Item1)
+                {
+                    case ReportProgressCommands.TextChanged:
+                        UIElement.UpdateProgress(argumentos.Item2);
+                        break;
 
-				case ReportProgressCommands.ProgressAndTextChanged:
-					if (UISettings.WithControl)
-						UIElement.UpdateProgress(e.ProgressPercentage);
-					
-					UIElement.UpdateProgress(argumentos.Item2);
-					break;
+                    case ReportProgressCommands.ProgressAndTextChanged:
+                        if (UISettings.WithControl)
+                            UIElement.UpdateProgress(e.ProgressPercentage);
 
-				case ReportProgressCommands.ProgressChanged:
-					if (UISettings.WithControl)
-						UIElement.UpdateProgress(e.ProgressPercentage);
-					break;
+                        UIElement.UpdateProgress(argumentos.Item2);
+                        break;
 
-				case ReportProgressCommands.MaximumProgressChanged:
-					if (UISettings.WithControl)
-						UIElement.UISettings.MaxProgressPercentage = e.ProgressPercentage;
-					break;
+                    case ReportProgressCommands.ProgressChanged:
+                        if (UISettings.WithControl)
+                            UIElement.UpdateProgress(e.ProgressPercentage);
+                        break;
 
-				case ReportProgressCommands.WithControlChanged:
-					UIElement.UISettings.WithControl = !UIElement.UISettings.WithControl;
-					break;
-			}
+                    case ReportProgressCommands.MaximumProgressChanged:
+                        if (UISettings.WithControl)
+                            UIElement.UISettings.MaxProgressPercentage = e.ProgressPercentage;
+                        break;
+
+                    case ReportProgressCommands.WithControlChanged:
+                        UIElement.UISettings.WithControl = !UIElement.UISettings.WithControl;
+                        break;
+                }
+
+                Monitor.Pulse(Communicator);
+            }
 		}
 
 		#endregion

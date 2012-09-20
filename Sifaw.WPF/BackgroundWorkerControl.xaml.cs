@@ -146,6 +146,9 @@ namespace Sifaw.WPF
 		public BackgroundWorkerControl()
 		{
 			InitializeComponent();
+
+            // Sincronizamos el valor de AllowCancel con el de la visibilidad del botón de cancelar.
+            buttonCancelar.Visibility = AllowCancel ? Visibility.Visible : Visibility.Collapsed; 
 		}
 
 		#endregion

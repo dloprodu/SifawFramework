@@ -47,7 +47,7 @@ namespace Sifaw.WPF.Test
             //(new UIAssistantTestViewController()).Start();
             //(new UITabHostTestViewController()).Start();
 
-            UIAssistantTestViewController test = new UIAssistantTestViewController();
+            UIAssistantTestViewController test = new UIAssistantTestViewController();            
             test.UISettings.Thumbnail = image;// new UIImage(buffer);
             test.Start();            
 		}

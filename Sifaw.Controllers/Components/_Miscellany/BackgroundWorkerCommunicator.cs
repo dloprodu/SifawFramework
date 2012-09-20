@@ -18,6 +18,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 
 
 namespace Sifaw.Controllers.Components
@@ -62,13 +63,22 @@ namespace Sifaw.Controllers.Components
 
         #region Progress Methods
 
+        private void ReportProgress(int percentProgress, object userState)
+        {
+            lock (this)
+            {
+                Worker.ReportProgress(percentProgress, userState);
+                Monitor.Wait(this);
+            }
+        }
+
         /// <summary>
         /// Indica al gestor de procesos pesados, el progreso y el texto a mostrar en el progreso.
         /// Si se ha iniciado el proceso en modo sin control, este método no hace nada.
         /// </summary>
         public void Progress(int progess, string text)
         {
-            Worker.ReportProgress(progess, new Tuple<ReportProgressCommands, string>(ReportProgressCommands.ProgressAndTextChanged, text));
+            ReportProgress(progess, new Tuple<ReportProgressCommands, string>(ReportProgressCommands.ProgressAndTextChanged, text));
         }
 
         /// <summary>
@@ -76,7 +86,7 @@ namespace Sifaw.Controllers.Components
         /// </summary>
         public void Progress(string text)
         {
-            Worker.ReportProgress(0, new Tuple<ReportProgressCommands, string>(ReportProgressCommands.TextChanged, text));
+            ReportProgress(0, new Tuple<ReportProgressCommands, string>(ReportProgressCommands.TextChanged, text));
         }
 
         /// <summary>
@@ -85,7 +95,7 @@ namespace Sifaw.Controllers.Components
         /// </summary>
         public void Increment(string text)
         {
-            Worker.ReportProgress(1, new Tuple<ReportProgressCommands, string>(ReportProgressCommands.ProgressAndTextChanged, text));
+            ReportProgress(1, new Tuple<ReportProgressCommands, string>(ReportProgressCommands.ProgressAndTextChanged, text));
         }
 
         /// <summary>
@@ -94,7 +104,7 @@ namespace Sifaw.Controllers.Components
         /// </summary>
         public void Increment()
         {
-            Worker.ReportProgress(1, new Tuple<ReportProgressCommands, string>(ReportProgressCommands.ProgressChanged, string.Empty));
+            ReportProgress(1, new Tuple<ReportProgressCommands, string>(ReportProgressCommands.ProgressChanged, string.Empty));
         }
 
         /// <summary>
@@ -103,7 +113,7 @@ namespace Sifaw.Controllers.Components
         /// </summary>
         public void ChangeMaxProgress(int value)
         {
-            Worker.ReportProgress(value, new Tuple<ReportProgressCommands, string>(ReportProgressCommands.MaximumProgressChanged, string.Empty));
+            ReportProgress(value, new Tuple<ReportProgressCommands, string>(ReportProgressCommands.MaximumProgressChanged, string.Empty));
         }
 
         /// <summary>
@@ -111,7 +121,7 @@ namespace Sifaw.Controllers.Components
         /// </summary>
         public void ChangeWithControl(bool value)
         {
-            Worker.ReportProgress(0, new Tuple<ReportProgressCommands, string>(ReportProgressCommands.WithControlChanged, ""));
+            ReportProgress(0, new Tuple<ReportProgressCommands, string>(ReportProgressCommands.WithControlChanged, ""));
         }
 
         #endregion

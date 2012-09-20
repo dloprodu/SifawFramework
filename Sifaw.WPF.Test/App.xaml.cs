@@ -8,6 +8,7 @@ using System.Drawing;
 using System.IO;
 
 using Sifaw.Views;
+using Sifaw.Views.Kit;
 
 
 namespace Sifaw.WPF.Test
@@ -25,12 +26,19 @@ namespace Sifaw.WPF.Test
 			UILinkersManager.SetUIElementLinker(new WPFLinkers());
 
             Bitmap ico = Resource.SffIco128x128;
-            byte[] buffer = null;
+            //byte[] buffer = null;
 
+            //using (MemoryStream mStream = new MemoryStream())
+            //{
+            //    ico.Save(mStream, System.Drawing.Imaging.ImageFormat.Png);
+            //    buffer = mStream.GetBuffer();
+            //}
+
+            UIImage image = null;
             using (MemoryStream mStream = new MemoryStream())
             {
                 ico.Save(mStream, System.Drawing.Imaging.ImageFormat.Png);
-                buffer = mStream.GetBuffer();
+                image = new UIImage(mStream);
             }
 
             // (new MainWindow()).Show();			
@@ -40,7 +48,7 @@ namespace Sifaw.WPF.Test
             //(new UITabHostTestViewController()).Start();
 
             UIAssistantTestViewController test = new UIAssistantTestViewController();
-            test.UISettings.Thumbnail = new Views.Kit.UIImage(buffer);
+            test.UISettings.Thumbnail = image;// new UIImage(buffer);
             test.Start();            
 		}
 

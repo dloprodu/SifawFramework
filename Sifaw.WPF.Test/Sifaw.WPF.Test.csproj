@@ -199,9 +199,6 @@
     <Resource Include="Sff256x256.ico" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\SffWhiteIco128x128.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\SffIco128x128.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -36,12 +36,12 @@ namespace Sifaw.WPF.Converters
 		{
             BitmapImage image = null;
             
-            if ((value != null) && ((value as UIImage).Bytes != null))
+            if ((value != null) && ((value as UIImage).Buffer != null))
             {
                 image = new BitmapImage();                
                 image.BeginInit();
                 //image.CacheOption = BitmapCacheOption.OnLoad;
-                image.StreamSource = new MemoryStream((value as UIImage).Bytes);
+                image.StreamSource = new MemoryStream((value as UIImage).Buffer);
                 image.EndInit();
             }
 
@@ -54,12 +54,7 @@ namespace Sifaw.WPF.Converters
 
             if (value != null)
             {
-                BitmapImage iSource = value as BitmapImage;
-
-                using (BinaryReader ms = new BinaryReader(iSource.StreamSource))
-                {
-                    image = new UIImage(ms.ReadBytes((Int32)iSource.StreamSource.Length));
-                }
+                image = new UIImage((value as BitmapImage).StreamSource);
             }
 
             return image;

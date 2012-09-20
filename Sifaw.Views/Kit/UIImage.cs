@@ -24,13 +24,13 @@ using System.IO;
 namespace Sifaw.Views.Kit
 {
     /// <summary>
-    /// Clase abstracta que almacena una imagen.
+    /// Clase que almacena una imagen.
     /// </summary>
-    public class UIImage : IDisposable, IEquatable<UIImage>
+    public class UIImage : IEquatable<UIImage>
     {
         #region Fields
 
-        private byte[] _bytes = null;
+        private readonly byte[] _buffer = null;
 
         #endregion
 
@@ -39,9 +39,9 @@ namespace Sifaw.Views.Kit
         /// <summary>
         /// Devuelve el array de bytes que almacena la imagen.
         /// </summary>
-        public byte[] Bytes
+        public byte[] Buffer
         {
-            get { return _bytes; }
+            get { return _buffer; }
         }
 
         #endregion
@@ -56,9 +56,12 @@ namespace Sifaw.Views.Kit
         {
             using (FileStream fStream = new FileStream(path, FileMode.Open))
             {
-                using (BinaryReader bReader = new BinaryReader(fStream))
+                fStream.Seek(0, SeekOrigin.Begin);
+
+                using (MemoryStream mStream = new MemoryStream())
                 {
-                    _bytes = bReader.ReadBytes((Int32)fStream.Length);
+                    fStream.CopyTo(mStream);
+                    _buffer = mStream.ToArray();
                 }
             }
         }
@@ -71,9 +74,9 @@ namespace Sifaw.Views.Kit
         {
             if ((bytes != null) && (bytes.Length > 0))
             {
-                _bytes = new byte[bytes.Length];
+                _buffer = new byte[bytes.Length];
 
-                Array.Copy(bytes, 0, _bytes, 0, _bytes.Length);
+                Array.Copy(bytes, 0, _buffer, 0, _buffer.Length);
             }
         }
 
@@ -85,11 +88,55 @@ namespace Sifaw.Views.Kit
         {
             if ((stream != null) && (stream.Length > 0))
             {
-                using (BinaryReader bReader = new BinaryReader(stream))
+                long iPosition = stream.Position;
+
+                stream.Seek(0, SeekOrigin.Begin);
+
+                using (MemoryStream mStream = new MemoryStream())
                 {
-                     _bytes = bReader.ReadBytes((Int32)stream.Length);
+                    stream.CopyTo(mStream);
+                    _buffer = mStream.ToArray();
+                }
+
+                stream.Seek(iPosition, SeekOrigin.Begin);
+            }
+        }
+
+        #endregion
+
+        #region Public Methods
+
+        /// <summary>
+        /// Devuelve una cadena resultante de convertir la imagen almacenada a Base64.
+        /// </summary>        
+        public string ToBase64()
+        {
+            string base64 = string.Empty;
+
+            if (_buffer != null)
+            {
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    base64 = Convert.ToBase64String(_buffer);
                 }
             }
+
+            return base64;
+        }
+
+        #endregion
+
+        #region Factory Methods
+
+        /// <summary>
+        /// Devuelve una nueva instancia de la clase <see cref="UIImage"/> que almacena la imagen
+        /// representada por la cadena en base64 indicada por parámetro.
+        /// </summary>
+        /// <param name="base64">Imagen en Base64.</param>
+        /// <returns><see cref="UIImage"/></returns>
+        public static UIImage CraeteFromBase64(string base64)
+        {
+            return new UIImage(Convert.FromBase64String(base64));
         }
 
         #endregion
@@ -120,7 +167,7 @@ namespace Sifaw.Views.Kit
         /// </summary>
         public override int GetHashCode()
         {
-            return ((_bytes != null) ? (_bytes.GetHashCode()) : (-1));
+            return ((_buffer != null) ? (_buffer.GetHashCode()) : (-1));
         }
 
         #endregion
@@ -133,18 +180,6 @@ namespace Sifaw.Views.Kit
         public bool Equals(UIImage other)
         {
             return ReferenceEquals(this, other);
-        }
-
-        #endregion
-
-        #region IDisposable Members
-
-        /// <summary>
-        /// Libera los recursos del objeto <see cref="UIImage"/>.
-        /// </summary>
-        public void Dispose()
-        {
-            _bytes = null;
         }
 
         #endregion

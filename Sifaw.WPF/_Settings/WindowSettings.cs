@@ -21,6 +21,7 @@ using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Media.Imaging;
 
 using Sifaw.Views;
 using Sifaw.Views.Kit;

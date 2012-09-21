@@ -23,27 +23,33 @@ using System.Windows.Media;
 
 using Sifaw.Views.Kit;
 
+using Sifaw.WPF.CCL;
+
 
 namespace Sifaw.WPF.Converters
 {
-	public class UIColorToColor : IValueConverter
+    public class UIBoolToSearchMode : IValueConverter
 	{
 		#region IValueConverter Members
 
 		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
 		{
-			if (value != null)
-				return Color.FromArgb(((UIColor)value).A, ((UIColor)value).R, ((UIColor)value).G, ((UIColor)value).B);
+            SearchTextField.SearchMode mode = SearchTextField.SearchMode.Delayed;
 
-			return Colors.Transparent;
+            if (value != null)
+                mode = ((bool)value) ? SearchTextField.SearchMode.Instant : SearchTextField.SearchMode.Delayed;
+
+            return mode;
 		}
 
 		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
 		{
-			if (value != null)
-				return UIColor.FromArgb(((Color)value).A, ((Color)value).R, ((Color)value).G, ((Color)value).B);
+            bool instant = false;
 
-			return UIColors.Transparent;
+            if (value != null)
+                instant = ((SearchTextField.SearchMode)value == SearchTextField.SearchMode.Instant);
+
+            return instant;
 		}
 
 		#endregion

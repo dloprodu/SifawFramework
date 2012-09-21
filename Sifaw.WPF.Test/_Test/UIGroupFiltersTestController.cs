@@ -358,6 +358,7 @@ namespace Sifaw.WPF.Test
 		{
 			TextFilter.UISettings.Margin = new UIFrame(3);
 			TextFilter.UISettings.Placeholder = "Introduzca un texto...";
+            TextFilter.UISettings.InstantSearch = true;
 			TextFilter.Start(new UITextFilterController.Input("prueba"));
 
 			BoolFilter.UISettings.Margin = new UIFrame(3);

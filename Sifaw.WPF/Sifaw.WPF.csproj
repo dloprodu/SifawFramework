@@ -90,6 +90,7 @@
     <Compile Include="TabHostControl.cs" />
     <Compile Include="WPFLinkers.cs" />
     <Compile Include="_Settings\ControlSettings.cs" />
+    <Compile Include="_Settings\Converters\UIBoolToSearchMode.cs" />
     <Compile Include="_Settings\Converters\UIImageToImageSource.cs" />
     <Compile Include="_Settings\Converters\UIAllowResizeToResizeMode.cs" />
     <Compile Include="_Settings\Converters\UIAutoSizeToWPFAutoSize.cs" />

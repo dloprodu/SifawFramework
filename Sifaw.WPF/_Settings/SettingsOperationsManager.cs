@@ -158,6 +158,18 @@ namespace Sifaw.WPF
 			}
 		}
 
+        private static UIBoolToSearchMode _uiBoolToSearchMode = null;
+        public static UIBoolToSearchMode UIBoolToSearchMode
+        {
+            get
+            {
+                if (_uiBoolToSearchMode == null)
+                    _uiBoolToSearchMode = new UIBoolToSearchMode();
+
+                return _uiBoolToSearchMode;
+            }
+        }
+
 		#endregion
     }
 }

@@ -186,6 +186,7 @@ namespace Sifaw.WPF.Filters
             #region Fields
 
             private string _placeholder = string.Empty;
+            private bool _instantSearch = false;
 
             #endregion
 
@@ -207,6 +208,22 @@ namespace Sifaw.WPF.Filters
                 }
             }
 
+            /// <summary>
+            /// Obtiene o establece un valor que india el módo de búsqueda del componente.
+            /// </summary>
+            public bool InstantSearch
+            {
+                get { return _instantSearch; }
+                set
+                {
+                    if (_instantSearch != value)
+                    {
+                        _instantSearch = value;
+                        OnPropertyChanged(() => InstantSearch);
+                    }
+                }
+            }
+
             #endregion
 
             #region Constructor
@@ -214,7 +231,10 @@ namespace Sifaw.WPF.Filters
             public TextFilterControlSettings(TextFilterControl control)
                 : base(control)
             {
-                UtilWPF.BindField(this, "Placeholder", control, TextFilterControl.PlaceholderProperty, BindingMode.TwoWay);
+                control.Mode = ((_instantSearch) ? SearchTextField.SearchMode.Instant : SearchMode.Delayed);
+
+                UtilWPF.BindField(this, "Placeholder",   control, TextFilterControl.PlaceholderProperty, BindingMode.TwoWay);
+                UtilWPF.BindField(this, "InstantSearch", control, TextFilterControl.ModeProperty,        BindingMode.TwoWay, SettingsOperationsManager.UIBoolToSearchMode);
             }
 
             #endregion

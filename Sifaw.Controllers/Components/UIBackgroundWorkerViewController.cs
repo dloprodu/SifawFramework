@@ -80,7 +80,8 @@ namespace Sifaw.Controllers.Components
 			/// <param name="worker">Paquete de ejecución</param>
 			/// <param name="showView">Indica si se muestra la vista al iniciar la controladora.</param>
 			public Input(BackgroundWorkerPack worker, bool showView)
-				: base(showView:showView)
+                /* Esta vista siempre se muestra como modal. */
+				: base(showView:showView, isModal:true)
 			{
 				this._worker = worker;
 			}

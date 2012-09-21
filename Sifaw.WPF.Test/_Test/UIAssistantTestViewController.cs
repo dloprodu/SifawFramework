@@ -28,13 +28,13 @@ namespace Sifaw.WPF.Test
 			#region Constructors
 
 			public Input()
-				: this(true)
+				: this(true, true)
 			{
 			}
 
-			public Input(bool showView)
-				: base(showView:showView)
-			{
+            public Input(bool showView, bool isModal)
+                : base(showView: showView, isModal: isModal)
+            {
 			}
 
 			#endregion

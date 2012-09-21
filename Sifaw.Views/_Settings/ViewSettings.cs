@@ -34,7 +34,7 @@ namespace Sifaw.Views
         /// <summary>
         /// Obtiene o establece la miniatura de la vista.
         /// </summary>
-        UIImage Thumbnail { get; set; }        
+        UIImage Thumbnail { get; set; }
 
 		/// <summary>
 		/// Obtiene o establece la cabecera de la vista.

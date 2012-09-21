@@ -227,7 +227,7 @@ namespace Sifaw.Controllers
         /// </summary>
         public UIComponent GetUIComponent()
         {
-            return UIElement as UIComponent;
+            return UIElement;
         }
 
         #endregion

@@ -64,7 +64,7 @@ namespace Sifaw.Controllers
             /// estableciendo la propiedad <see cref="UIViewController{TInput, TOutput, TView}.Input.ShowView"/> a <c>true</c>
             /// </summary>
 			protected Input()
-				: this(true)
+				: this(true, true)
 			{
 			}
 
@@ -72,8 +72,8 @@ namespace Sifaw.Controllers
             /// Inicializa una nueva instancia de <see cref="UIShellViewController{TInput, TOutput, TGuest}.Input"/>, 
             /// estableciendo un valor a la propiedad <see cref="UIViewController{TInput, TOutput, TView}.Input.ShowView"/>.
             /// </summary>
-			protected Input(bool showView)
-				: base(showView:showView)
+			protected Input(bool showView, bool isModal)
+				: base(showView:showView, isModal:isModal)
 			{
 			}
 

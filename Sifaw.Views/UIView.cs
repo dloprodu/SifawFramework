@@ -44,7 +44,7 @@ namespace Sifaw.Views
 		/// <summary>
 		/// Muestra la vista.
 		/// </summary>
-		void Show();
+		void Show(bool isModal);
 
 		/// <summary>
 		/// Cierra la vista.

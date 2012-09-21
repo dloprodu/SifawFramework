@@ -93,6 +93,7 @@ namespace Sifaw.Controllers
             #region Fields
 
             private bool _showView = true;
+            private bool _isModal = true;
 
             #endregion
 
@@ -107,6 +108,15 @@ namespace Sifaw.Controllers
                 get { return _showView; }
             }
 
+            /// <summary>
+            /// Devuelve un valor que indica si la vista se muestra como modal, es decir, que hasta que no se
+            /// cierre la aplicación no continua.
+            /// </summary>
+            public bool IsModal
+            {
+                get { return _isModal; }
+            }
+
             #endregion
 
             #region Constructors
@@ -116,7 +126,7 @@ namespace Sifaw.Controllers
             /// estableciendo la propiedad <see cref="ShowView"/> a <c>true</c>.
             /// </summary>
             protected Input()
-                : this(true)
+                : this(true, true)
             {
             }
 
@@ -125,10 +135,12 @@ namespace Sifaw.Controllers
             /// estableciendo un valor a la propiedad <see cref="ShowView"/>.
             /// </summary>
             /// <param name="showView">Indica si se muestra la vista al iniciar la controladora.</param>
-            protected Input(bool showView)
+            /// <param name="isModal">Indica si la vista es modal.</param>
+            protected Input(bool showView, bool isModal)
                 : base()
             {
                 this._showView = showView;
+                this._isModal = isModal;
             }
 
             #endregion
@@ -212,7 +224,7 @@ namespace Sifaw.Controllers
         /// </remarks>
         protected virtual void OnAfterUIShow()
         {
-            /* Empty */
+            UIViewManagerExtension.SetActiveView(UIElement);
         }
 
         /// <summary>
@@ -249,7 +261,9 @@ namespace Sifaw.Controllers
         /// </remarks>
         private void OnAfterUIClose()
         {
-            /* Empty */
+            /* En este punto no podemo hacer referencia al elemento UIElement porque ya ha sido reseteado. */
+            /* UIViewManagerExtension.RemoveActiveView(UIElement);                                         */
+            /* Empty                                                                                       */
         }
 
         #endregion
@@ -305,7 +319,15 @@ namespace Sifaw.Controllers
         public void Show()
         {
             CheckState(CLStates.Started);
-            UIElement.Show();
+            UIElement.Show(Parameters.IsModal);
+        }
+
+        /// <summary>
+        /// Devuelve una referencia del <see cref="UIView"/> de la controladora.
+        /// </summary>
+        public UIView GetUIView()
+        {
+            return UIElement;
         }
 
         #endregion
@@ -370,7 +392,7 @@ namespace Sifaw.Controllers
             base.OnAfterStartController();
 
             if (Parameters.ShowView)
-                UIElement.Show();
+                UIElement.Show(Parameters.IsModal);
         }
 
         #endregion
@@ -401,6 +423,17 @@ namespace Sifaw.Controllers
 
             if (!autoClosing)
                 UIElement.Close();
+        }
+
+        /// <summary>
+        /// Invoca al método sobrescirto <see cref="Controller{TInput, TOutput}.OnBeforeResetController()"/> y
+        /// posteriormente se elimina la vista del registro de vistas activas, antes de que sea reseteada.
+        /// </summary>
+        protected override void OnBeforeResetController()
+        {
+            base.OnBeforeResetController();
+
+            UIViewManagerExtension.RemoveActiveView(UIElement);
         }
 
         #endregion

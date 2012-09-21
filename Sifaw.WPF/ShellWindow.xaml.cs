@@ -83,10 +83,14 @@ namespace Sifaw.WPF
 
 		#region Methods
 
-		public new void Show()
+		public void Show(bool isModal)
 		{
 			OnBeforeShow(EventArgs.Empty);
-			base.Show();
+
+            if (!isModal)
+                Show();
+            else
+                ShowDialog();
 		}
 
 		public new void Close()

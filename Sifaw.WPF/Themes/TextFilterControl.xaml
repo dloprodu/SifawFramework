@@ -10,7 +10,10 @@
 
     <Style TargetType="{x:Type local:TextFilterControl}"
            BasedOn="{StaticResource {x:Type ccl:SearchTextField}}">
-
+        <Setter Property="VerticalContentAlignment">
+            <Setter.Value>Center</Setter.Value>
+        </Setter>
+        
         <!-- Empty -->
 
     </Style>

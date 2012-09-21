@@ -356,7 +356,7 @@ namespace Sifaw.WPF.Test
 
 		protected override void StartController()
 		{
-			TextFilter.UISettings.Margin = new UIFrame(3);
+			TextFilter.UISettings.Margin = new UIFrame(0);
 			TextFilter.UISettings.Placeholder = "Introduzca un texto...";
             TextFilter.UISettings.InstantSearch = true;
 			TextFilter.Start(new UITextFilterController.Input("prueba"));

@@ -63,7 +63,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BackgroundWorkerCommunicator.cs" />
     <Compile Include="Drawing\_Miscellany\RoundedEdgeFilters.cs" />
+    <Compile Include="ReportProgressCommand.cs" />
     <Compile Include="_Attributes\Empty.cs" />
     <Compile Include="_Events\SFByteEvent.cs" />
     <Compile Include="_Exceptions\Empty.cs" />

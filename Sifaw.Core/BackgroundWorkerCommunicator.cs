@@ -1,5 +1,5 @@
 ﻿/*
- * Sifaw.Controllers.Components
+ * Sifaw.Core
  * 
  * Diseñador:   David López Rguez
  * Programador: David López Rguez
@@ -21,7 +21,7 @@ using System.Text;
 using System.Threading;
 
 
-namespace Sifaw.Controllers.Components
+namespace Sifaw.Core
 {
     /// <summary>
     /// Provee de soporte a la comunicación con procesos pesados que se ejecutan 

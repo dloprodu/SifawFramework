@@ -1,5 +1,5 @@
 ﻿/*
- * Sifaw.Controllers.Components
+ * Sifaw.Core
  * 
  * Diseñador:   David López Rguez
  * Programador: David López Rguez
@@ -20,11 +20,11 @@ using System.Linq;
 using System.Text;
 
 
-namespace Sifaw.Controllers.Components
+namespace Sifaw.Core
 {
     /// <summary>
-    /// Define los comandos que puede enviar un proceso pesado, mediante <see cref="BackgroundWorkerCommunicator"/>, a la controladora
-    /// <see cref="UIBackgroundWorkerController"/> para actualizar la información mostrada al usuario.
+    /// Define los comandos que puede enviar un proceso pesado, mediante un objeto <see cref="BackgroundWorkerCommunicator"/>
+    /// para actualizar la información mostrada al usuario.
     /// </summary>
     public enum ReportProgressCommands
     {

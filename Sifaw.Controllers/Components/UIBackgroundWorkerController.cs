@@ -419,7 +419,7 @@ namespace Sifaw.Controllers.Components
 
 		private void UIElement_Cancel(object sender, EventArgs e)
 		{
-			if (worker.IsBusy && !worker.CancellationPending)
+			if (worker.IsBusy && UISettings.AllowCancel && !worker.CancellationPending)
 			{
 				worker.CancelAsync();
 				
@@ -458,19 +458,19 @@ namespace Sifaw.Controllers.Components
 		{
             lock (Communicator)
             {
-                Tuple<ReportProgressCommands, string> argumentos = (Tuple<ReportProgressCommands, string>)e.UserState;
+                Tuple<ReportProgressCommands, string, object> arguments = (Tuple<ReportProgressCommands, string, object>)e.UserState;
                 
-                switch (argumentos.Item1)
+                switch (arguments.Item1)
                 {
                     case ReportProgressCommands.TextChanged:
-                        UIElement.UpdateProgress(argumentos.Item2);
+                        UIElement.UpdateProgress(arguments.Item2);
                         break;
 
                     case ReportProgressCommands.ProgressAndTextChanged:
                         if (UISettings.WithControl)
                             UIElement.UpdateProgress(e.ProgressPercentage);
 
-                        UIElement.UpdateProgress(argumentos.Item2);
+                        UIElement.UpdateProgress(arguments.Item2);
                         break;
 
                     case ReportProgressCommands.ProgressChanged:
@@ -480,11 +480,11 @@ namespace Sifaw.Controllers.Components
 
                     case ReportProgressCommands.MaximumProgressChanged:
                         if (UISettings.WithControl)
-                            UIElement.UISettings.MaxProgressPercentage = e.ProgressPercentage;
+                            UIElement.UISettings.MaxProgressPercentage = (int)arguments.Item3;
                         break;
 
                     case ReportProgressCommands.WithControlChanged:
-                        UIElement.UISettings.WithControl = !UIElement.UISettings.WithControl;
+                        UIElement.UISettings.WithControl = (bool)arguments.Item3;
                         break;
                 }
 

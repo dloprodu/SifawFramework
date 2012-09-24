@@ -147,8 +147,9 @@ namespace Sifaw.WPF
 		{
 			InitializeComponent();
 
-            // Sincronizamos el valor de AllowCancel con el de la visibilidad del botón de cancelar.
-            buttonCancelar.Visibility = AllowCancel ? Visibility.Visible : Visibility.Collapsed; 
+            // Sincronizamos el valores ...
+            buttonCancelar.Visibility = AllowCancel ? Visibility.Visible : Visibility.Collapsed;            
+            progressBar.IsIndeterminate = !WithControl;
 		}
 
 		#endregion
@@ -247,8 +248,24 @@ namespace Sifaw.WPF
 
 		public void UpdateProgress(string message)
 		{
-			labelProgress.Content = message;
-			textBlockDetail.Text += Environment.NewLine + message;
+            if (((string)labelProgress.Content) != message)
+            {
+                labelProgress.Content = message;
+
+                try
+                {
+                    textBoxDetail.AppendText(Environment.NewLine + message);
+                }
+                catch
+                {
+                    textBoxDetail.Text = string.Empty;
+                    textBoxDetail.AppendText(message);
+                }
+                finally
+                {
+                    scrollViewer.ScrollToEnd();
+                }
+            }
 		}
 
 		public void UpdateProgress(string message, bool isCancelled)
@@ -290,7 +307,7 @@ namespace Sifaw.WPF
 			progressBar.Minimum = 0;
 			progressBar.Maximum = 100;
 			progressBar.Value = 0;
-			textBlockDetail.Text = string.Empty;
+            textBoxDetail.Text = string.Empty;
 		}
 
 		public void SetLikeActive()
@@ -333,7 +350,7 @@ namespace Sifaw.WPF
         {
             #region Fields
 
-            private bool _withControl = true;
+            private bool _withControl = false;
             private bool _allowCancel = false;
             private string _summary = "Operación pesada";
             private string _processDescription = "Se está ejecutando un proceso pesado. Esta operación puede tardar varios minutos. Espere por favor...";

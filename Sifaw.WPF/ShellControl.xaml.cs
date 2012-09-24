@@ -95,9 +95,9 @@ namespace Sifaw.WPF
 				grid.RowDefinitions.Add(rDefinition);
 
 				Grid gCells = new Grid();
+                gCells.Margin = new Thickness(0);
 				gCells.HorizontalAlignment = HorizontalAlignment.Stretch;
 				gCells.VerticalAlignment = VerticalAlignment.Stretch;
-
 				// Para que se ajuste a su contenido (Auto).
 				gCells.Width = double.NaN;
 				gCells.Height = double.NaN;
@@ -113,6 +113,9 @@ namespace Sifaw.WPF
 						FrameworkElement content = (rows[row].Cells[cell].Content as FrameworkElement);
 						content.HorizontalAlignment = HorizontalAlignment.Stretch;
 						content.VerticalAlignment = VerticalAlignment.Stretch;
+                        content.Width = double.NaN;
+                        content.Height = double.NaN;
+                        content.Margin = new Thickness(0);
 
 						Grid.SetColumn(content, cell);
 						gCells.Children.Add(content);

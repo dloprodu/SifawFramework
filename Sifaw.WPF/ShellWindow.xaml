@@ -8,7 +8,7 @@
         Loaded="Window_Loaded"
         Closing="Window_Closing"
         Closed="Window_Closed" xmlns:my="clr-namespace:Sifaw.WPF">  
-    <Grid>
+    <DockPanel>
         <my:ShellControl x:Name="shell" />
-    </Grid>
+    </DockPanel>
 </Window>

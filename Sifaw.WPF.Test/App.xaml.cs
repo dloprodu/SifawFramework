@@ -9,6 +9,8 @@ using System.IO;
 
 using Sifaw.Views;
 using Sifaw.Views.Kit;
+using Sifaw.Core;
+using Sifaw.Controllers.Components;
 
 
 namespace Sifaw.WPF.Test
@@ -45,12 +47,44 @@ namespace Sifaw.WPF.Test
 			
 			//(new UIGroupFiltersTestViewController()).Start();
             //(new UIAssistantTestViewController()).Start();
-            (new UITabHostTestViewController()).Start();
+            //(new UITabHostTestViewController()).Start();
 
-            //UIAssistantTestViewController test = new UIAssistantTestViewController();            
+            //UIAssistantTestViewController test = new UIAssistantTestViewController();
             //test.UISettings.Thumbnail = image;// new UIImage(buffer);
             //test.Start();            
+
+            (new UIBackgroundWorkerViewController()).Start(new UIBackgroundWorkerViewController.Input(new BackgroundWorkerPack(TestBackGroundWorker, null), true));
 		}
+
+        private static object TestBackGroundWorker(BackgroundWorkerCommunicator com, object[] args)
+        {
+            int count = 300;
+
+            if (com != null)
+            {
+                com.ChangeWithControl(false);
+            }
+
+            System.Threading.Thread.Sleep(6000);
+
+            if (com != null)
+            {
+                com.ChangeWithControl(true);
+            }
+
+            com.ChangeMaxProgress(count);
+
+            for (int i = 0; i < count; i++)
+            {
+                com.Increment("Procesando iteración " + i.ToString() + " ...");
+                System.Threading.Thread.Sleep(100);
+
+                if (com.CancellationPending)
+                    return "Cancelled";
+            }
+
+            return "Finished";
+        }
 
 		#endregion
 	}

@@ -166,7 +166,7 @@ namespace Sifaw.Controllers.Components
 		/// Obtiene el contenedor de ajustes del componente <see cref="UIBackgroundWorkerController"/>
 		/// alojado.
 		/// </summary>
-        public BackgroundWorkerSettings UIBackgroundWorkerSettings
+        public BackgroundWorkerSettings UIBWSettings
 		{
 			get { return UIBackgroundWorkerController.UISettings; }
 		}
@@ -239,6 +239,7 @@ namespace Sifaw.Controllers.Components
 			/* Default Setiings... */
 			UISettings.AllowResize = false;
 			UISettings.SizeToContent = true;
+            UISettings.MaxSize = new UISize(600, 600);
 		}
 
 		/// <summary>
@@ -297,7 +298,7 @@ namespace Sifaw.Controllers.Components
 		protected override void GetRowSettings(uint row, out double height, out UIShellLengthModes mode)
 		{
 			height = 100;
-			mode = UIShellLengthModes.Auto;
+			mode = UIShellLengthModes.WeightedProportion;
 		}
 
 		/// <summary>
@@ -306,7 +307,7 @@ namespace Sifaw.Controllers.Components
 		protected override void GetRowCellSettings(uint row, uint cell, out double width, out UIShellLengthModes mode, out BackgroundWorkerComponent component)
 		{
 			width = 100;
-            mode = UIShellLengthModes.Auto;
+            mode = UIShellLengthModes.WeightedProportion;
 			component = UIBackgroundWorkerController.GetUIComponent() as BackgroundWorkerComponent;
 		}
 

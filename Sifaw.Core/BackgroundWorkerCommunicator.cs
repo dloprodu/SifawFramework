@@ -33,6 +33,7 @@ namespace Sifaw.Core
         #region Fields
 
         private System.ComponentModel.BackgroundWorker Worker = null;
+        private int IncrementValue = 0;
 
         #endregion
 
@@ -78,7 +79,7 @@ namespace Sifaw.Core
         /// </summary>
         public void Progress(int progess, string text)
         {
-            ReportProgress(progess, new Tuple<ReportProgressCommands, string>(ReportProgressCommands.ProgressAndTextChanged, text));
+            ReportProgress(progess, new Tuple<ReportProgressCommands, string, object>(ReportProgressCommands.ProgressAndTextChanged, text, null));
         }
 
         /// <summary>
@@ -86,7 +87,7 @@ namespace Sifaw.Core
         /// </summary>
         public void Progress(string text)
         {
-            ReportProgress(0, new Tuple<ReportProgressCommands, string>(ReportProgressCommands.TextChanged, text));
+            ReportProgress(0, new Tuple<ReportProgressCommands, string, object>(ReportProgressCommands.TextChanged, text, null));
         }
 
         /// <summary>
@@ -95,7 +96,7 @@ namespace Sifaw.Core
         /// </summary>
         public void Increment(string text)
         {
-            ReportProgress(1, new Tuple<ReportProgressCommands, string>(ReportProgressCommands.ProgressAndTextChanged, text));
+            ReportProgress(++IncrementValue, new Tuple<ReportProgressCommands, string, object>(ReportProgressCommands.ProgressAndTextChanged, text, null));
         }
 
         /// <summary>
@@ -104,7 +105,7 @@ namespace Sifaw.Core
         /// </summary>
         public void Increment()
         {
-            ReportProgress(1, new Tuple<ReportProgressCommands, string>(ReportProgressCommands.ProgressChanged, string.Empty));
+            ReportProgress(++IncrementValue, new Tuple<ReportProgressCommands, string, object>(ReportProgressCommands.ProgressChanged, string.Empty, null));
         }
 
         /// <summary>
@@ -113,7 +114,8 @@ namespace Sifaw.Core
         /// </summary>
         public void ChangeMaxProgress(int value)
         {
-            ReportProgress(value, new Tuple<ReportProgressCommands, string>(ReportProgressCommands.MaximumProgressChanged, string.Empty));
+            ResetIncrement();
+            ReportProgress(0, new Tuple<ReportProgressCommands, string, object>(ReportProgressCommands.MaximumProgressChanged, string.Empty, value));
         }
 
         /// <summary>
@@ -121,7 +123,16 @@ namespace Sifaw.Core
         /// </summary>
         public void ChangeWithControl(bool value)
         {
-            ReportProgress(0, new Tuple<ReportProgressCommands, string>(ReportProgressCommands.WithControlChanged, ""));
+            ResetIncrement();
+            ReportProgress(0, new Tuple<ReportProgressCommands, string, object>(ReportProgressCommands.WithControlChanged, string.Empty, value));
+        }
+
+        /// <summary>
+        /// Resetea el valor del incremento.
+        /// </summary>
+        public void ResetIncrement()
+        {
+            IncrementValue = 0;
         }
 
         #endregion

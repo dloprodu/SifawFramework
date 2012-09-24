@@ -152,16 +152,18 @@ namespace Sifaw.WPF
 				throw new ArgumentOutOfRangeException("key");
 			
 			// Actualizamos el contenido.
-			(content as FrameworkElement).VerticalAlignment = VerticalAlignment.Stretch;
+            (content as FrameworkElement).Height = double.NaN;
+            (content as FrameworkElement).Width = double.NaN;
+            (content as FrameworkElement).VerticalAlignment = VerticalAlignment.Stretch;
 			(content as FrameworkElement).HorizontalAlignment = HorizontalAlignment.Stretch;
 			(content as FrameworkElement).Margin = new Thickness(0);
 
-			gridContent.Children.Add(content as FrameworkElement);
+            dockPanel.Children.Add(content as FrameworkElement);
 
 			// Eliminamos la vista anterior.
 			// • Se hace después de mostrar la vista actual para evitar parpadeos.
-			if (gridContent.Children.Count > 1)
-				gridContent.Children.Remove(gridContent.Children[0]);
+            if (dockPanel.Children.Count > 1)
+                dockPanel.Children.Remove(dockPanel.Children[0]);
 
 			// Actualizamos el estado de la barra de progreso del asistente.
 			assistantProgressBar.Value = (byte)(key + 1);

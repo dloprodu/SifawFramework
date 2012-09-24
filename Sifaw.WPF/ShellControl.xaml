@@ -6,6 +6,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid Name="grid"       
+          Margin="0"              
           HorizontalAlignment="Stretch" 
           VerticalAlignment="Stretch">
             

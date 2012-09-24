@@ -156,7 +156,8 @@ namespace Sifaw.WPF
                 if (_minSize != value)
                 {
                     _minSize = value;
-                    OnPropertyChanged(() => MinSize);
+                    OnPropertyChanged(() => MinHeight);
+                    OnPropertyChanged(() => MinWidth);
                 }
             }
 		}
@@ -172,7 +173,8 @@ namespace Sifaw.WPF
                 if (_maxSize != value)
                 {
                     _maxSize = value;
-                    OnPropertyChanged(() => MaxSize);
+                    OnPropertyChanged(() => MaxHeight);
+                    OnPropertyChanged(() => MaxWidth);
                 }
             }
 		}

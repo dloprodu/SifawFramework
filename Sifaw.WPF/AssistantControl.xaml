@@ -76,7 +76,7 @@
                 </LinearGradientBrush>
             </Grid.Background>
         </Grid>
-        <Grid Background="LightGray" Grid.Row="4" Name="gridContent"></Grid>
+        <DockPanel Grid.Row="4" Background="LightGray" Name="dockPanel"></DockPanel>
         <Grid Grid.Row="5">
             <Grid.Background>
                 <LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">

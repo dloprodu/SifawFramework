@@ -190,28 +190,44 @@ namespace Sifaw.WPF.Test
 
         protected override void StartController()
 		{
+            Controller1.UISettings.WithControl = false;
             Controller1.UISettings.AllowCancel = false;
 			Controller1.UISettings.Denomination = "Vista 1...";
 			Controller1.UISettings.Description = "Descripción Vista 1 Descripción Vista 1 Descripción Vista 1 Descripción Vista 1 Descripción Vista 1 Descripción Vista 1 Descripción Vista 1 Descripción Vista 1 Descripción Vista 1 Descripción Vista 1 Descripción Vista 1 Descripción Vista 1 Descripción Vista 1...";
-			Controller1.Start(new UIBackgroundWorkerController.Input(new BackgroundWorkerPack(TestBackGroundWorker, null), false));
-			
-			Controller2.UISettings.Denomination = "Vista 2...";
-			Controller2.UISettings.Description = "Descripción Vista 2...";
-			Controller2.Start(new UIBackgroundWorkerController.Input(new BackgroundWorkerPack(TestBackGroundWorker, null), false));
+			Controller1.Start(new UIBackgroundWorkerController.Input(new BackgroundWorkerPack(TestBackGroundWorker1, null), false));
 
-			Controller3.UISettings.Denomination = "Vista 3...";
-			Controller3.UISettings.Description = "Descripción Vista 3...";
-			Controller3.Start(new UIBackgroundWorkerController.Input(new BackgroundWorkerPack(TestBackGroundWorker, null), false));
+            Controller2.UISettings.WithControl = false;
+            Controller2.UISettings.Denomination = "Vista 2...";
+            Controller2.UISettings.Description = "Descripción Vista 2...";
+            Controller2.Start(new UIBackgroundWorkerController.Input(new BackgroundWorkerPack(TestBackGroundWorker2, null), false));
+
+            Controller3.UISettings.WithControl = false;
+            Controller3.UISettings.Denomination = "Vista 3...";
+            Controller3.UISettings.Description = "Descripción Vista 3...";
+            Controller3.Start(new UIBackgroundWorkerController.Input(new BackgroundWorkerPack(TestBackGroundWorker3, null), false));
 		}
 
-		private static object TestBackGroundWorker(BackgroundWorkerCommunicator com, object[] args)
+		private static object TestBackGroundWorker1(BackgroundWorkerCommunicator com, object[] args)
 		{
 			int count = 300;
-			com.ChangeMaxProgress(count);
+
+            if (com != null)
+            {
+                com.ChangeWithControl(false);
+            }
+
+            System.Threading.Thread.Sleep(6000);
+
+            if (com != null)
+            {
+                com.ChangeWithControl(true);
+            }
+
+            com.ChangeMaxProgress(count);
 
 			for (int i = 0; i < count; i++)
 			{
-				com.Progress(i, "Procesando iteración " + i.ToString() + " ...");
+                com.Increment("Procesando iteración " + i.ToString() + " ...");
 				System.Threading.Thread.Sleep(100);
 
 				if (com.CancellationPending)
@@ -220,6 +236,18 @@ namespace Sifaw.WPF.Test
 
 			return "Finished";
 		}
+
+        private static object TestBackGroundWorker2(BackgroundWorkerCommunicator com, object[] args)
+        {
+            /* Empty */
+            return null;
+        }
+
+        private static object TestBackGroundWorker3(BackgroundWorkerCommunicator com, object[] args)
+        {
+            /* Empty */
+            return null;
+        }
 
 		#endregion
 	}

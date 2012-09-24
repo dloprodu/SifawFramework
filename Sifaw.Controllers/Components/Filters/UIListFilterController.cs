@@ -141,7 +141,7 @@ namespace Sifaw.Controllers.Components.Filters
         /// </summary>
         public override Input GetResetInput()
         {
-            return new Input(GetInitialParameters().Source, Filter);
+            return new Input(Parameters.Source, Filter);
         }
 
         /// <summary>

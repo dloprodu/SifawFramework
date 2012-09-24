@@ -49,13 +49,8 @@ namespace Sifaw.Controllers
     /// </para>
     /// <para>
     /// Como norma de buenas prácticas es deseable que las propiedades de los parámetros de entrada y retorno de las controladoras sean
-    /// de solo lectura de modo que sus valores se establescan por medio de los constructores.
-    /// </para>
-    /// <para>
-    /// Al iniciar la controladora se realizan dos copias de los parámetros de entrada. Una copia puede ser referenciada por las controladoras derivadas
-    /// a través de la propiedad protegida <see cref="Controller{TInput, TOutput}.Parameters"/> y es posible modificar alguno de los valores originales. La 
-    /// otra copia puede ser obtenida a través del método protegido <see cref="Controller{TInput, TOutput}.GetInitialParameters()"/> el cual  
-    /// devuelve una copia de los parámetros de entrada originales.
+    /// de solo lectura de modo que sus valores se establescan por medio de los constructores. Al iniciar la controladora se asignan los parámetros 
+    /// de entrada a la propiedad protegida <see cref="Controller{TInput, TOutput}.Parameters"/>.
     /// </para>
     /// </remarks>
     /// <typeparam name="TInput">
@@ -92,7 +87,7 @@ namespace Sifaw.Controllers
         /// Parámetros de entrada de la controladora.
         /// </summary>
         [Serializable]
-        public abstract class Input : ICloneable
+        public abstract class Input
         {
             #region Constructor
 
@@ -104,25 +99,13 @@ namespace Sifaw.Controllers
             }
 
             #endregion
-
-            #region ICloneable Members
-
-            /// <summary>
-            /// Devuelve una copia de los parámetros de entrada de la controladora.
-            /// </summary>
-            public object Clone()
-            {
-                return UtilIO.Clone<TInput>(this as TInput);
-            }
-
-            #endregion
         }
 
         /// <summary>
         /// Parámetros de retorno de la controladora.
         /// </summary>
         [Serializable]
-        public abstract class Output : ICloneable
+        public abstract class Output
         {
             #region Constructor
 
@@ -131,18 +114,6 @@ namespace Sifaw.Controllers
             /// </summary>
             protected Output()
             {
-            }
-
-            #endregion
-
-            #region ICloneable Members
-
-            /// <summary>
-            /// Devuelve una copia de los parámetros de retorno de la controladora.
-            /// </summary>
-            public object Clone()
-            {
-                return UtilIO.Clone<TOutput>(this as TOutput);
             }
 
             #endregion
@@ -192,9 +163,6 @@ namespace Sifaw.Controllers
 
         [CLReseteable(null)]
         private TInput _parameters;
-
-        [CLReseteable(null)]
-        private TInput _input;
 
         #endregion
 
@@ -519,14 +487,6 @@ namespace Sifaw.Controllers
         }
 
         /// <summary>
-        /// Devuelve una copia del estado inicial de los parámetros.
-        /// </summary>
-        protected TInput GetInitialParameters()
-        {
-            return (TInput)_input.Clone();
-        }
-
-        /// <summary>
         /// Devuelve todos los cmapos de la clase teneindo en cuenta las clases heredadas
         /// </summary>
         protected List<FieldInfo> GetAllFilds()
@@ -666,10 +626,8 @@ namespace Sifaw.Controllers
             if (!cEventArgs.Cancel)
             {
                 // Establecemos los parámetros de inicio de la controladora.
-                _parameters = UtilIO.Clone<TInput>(input);
+                _parameters = input;
                 _parameters = _parameters ?? GetDefaultInput();
-                // Guardamos una copia de los parametros de entrada que no podrá ser modificada.
-                _input = UtilIO.Clone<TInput>(_parameters);
 
                 if (_parameters == null)
                     throw new ArgumentNullException();
@@ -739,11 +697,9 @@ namespace Sifaw.Controllers
             CheckState(CLStates.Started);
 
             // Establecemos los parámetros de reinicio de la controladora
-            _parameters = UtilIO.Clone<TInput>(input);
+            _parameters = input;
             _parameters = _parameters ?? GetResetInput();
             _parameters = _parameters ?? GetDefaultInput();
-            // Guardamos una copia de los parametros de entrada que no podrá ser modificada.
-            _input = UtilIO.Clone<TInput>(_parameters);
 
             if (!AllowReset())
                 throw new NotAllowResetException();

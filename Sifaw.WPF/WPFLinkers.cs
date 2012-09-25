@@ -36,7 +36,7 @@ namespace Sifaw.WPF
 	{
 		#region Controles
 
-		public void Load(out ShellComponent ui)
+		public void Create(out ShellComponent ui)
 		{
 			ui = new ShellControl();
 		}

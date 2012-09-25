@@ -57,5 +57,14 @@ namespace Sifaw.Views
 		void SetLikeActive();
 
 		#endregion
-	}
+
+        #region Eventos
+
+        /// <summary>
+        /// Se produce cuando el elemento está inicializado correctamente.
+        /// </summary>
+        event EventHandler Loaded;
+
+        #endregion
+    }
 }

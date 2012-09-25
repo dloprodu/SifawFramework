@@ -154,9 +154,6 @@ namespace Sifaw.WPF
 			// Actualizamos el contenido.
             (content as FrameworkElement).Height = double.NaN;
             (content as FrameworkElement).Width = double.NaN;
-            (content as FrameworkElement).VerticalAlignment = VerticalAlignment.Stretch;
-			(content as FrameworkElement).HorizontalAlignment = HorizontalAlignment.Stretch;
-			(content as FrameworkElement).Margin = new Thickness(0);
 
             dockPanel.Children.Add(content as FrameworkElement);
 

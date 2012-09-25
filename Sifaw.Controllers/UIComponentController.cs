@@ -235,14 +235,19 @@ namespace Sifaw.Controllers
         #region UIElement Methods
 
         /// <summary>
-        /// Invoca al método sobrescirto <see cref="UIElementController{TInput, TOutput, TComponent}.OnAfterUIElementLoad()"/>.
+        /// Invoca al método sobrescirto <see cref="UIElementController{TInput, TOutput, TComponent}.OnAfterUIElementCreate()"/>.
         /// </summary>
-        protected override void OnAfterUIElementLoad()
+        protected override void OnAfterUIElementCreate()
         {
-            base.OnAfterUIElementLoad();
+            base.OnAfterUIElementCreate();
 
-            /* Default Settings... */
-            UISettings.Border = new UIFrame(0);
+            /* Default Settings... */            
+            UISettings.HorizontalAlignment = UIHorizontalAlignment.Fill;
+            UISettings.VerticalAlignment = UIVerticalAlignment.Fill;
+
+            /* Campos que se inicializan con la representación concreta del componente ... */
+            // UISettings.Border
+            // UISettings.BorderBrush
 
             /* Subscripción a eventos del componente... */
         }

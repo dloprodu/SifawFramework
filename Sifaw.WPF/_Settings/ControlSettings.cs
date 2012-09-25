@@ -134,11 +134,13 @@ namespace Sifaw.WPF
 
         public ControlSettings(Control control)
         {
-			/* Initial values */
-			this.Margin = (UIFrame)SettingsOperationsManager.UIFrameToThickness.ConvertBack(control.Margin, null, null, null);
-			this.Padding = (UIFrame)SettingsOperationsManager.UIFrameToThickness.ConvertBack(control.Padding, null, null, null);
-			this.Background = (UIBrush)SettingsOperationsManager.UIBrushToBrush.ConvertBack(control.Background, null, null, null);
-			this.Foreground = (UIBrush)SettingsOperationsManager.UIBrushToBrush.ConvertBack(control.Foreground, null, null, null);
+            /* Initial values */
+            this.Border = (UIFrame)SettingsOperationsManager.UIFrameToThickness.ConvertBack(control.BorderThickness, null, null, null);
+            this.BorderBrush = (UIFrameBrush)SettingsOperationsManager.UIFrameBrushToBorderBrush.ConvertBack(control.BorderBrush, null, null, null);
+            this.Margin = (UIFrame)SettingsOperationsManager.UIFrameToThickness.ConvertBack(control.Margin, null, null, null);
+            this.Padding = (UIFrame)SettingsOperationsManager.UIFrameToThickness.ConvertBack(control.Padding, null, null, null);
+            this.Background = (UIBrush)SettingsOperationsManager.UIBrushToBrush.ConvertBack(control.Background, null, null, null);
+            this.Foreground = (UIBrush)SettingsOperationsManager.UIBrushToBrush.ConvertBack(control.Foreground, null, null, null);
 
             // UISettings ...
 			UtilWPF.BindField(this, "Background",          control, Control.BackgroundProperty,          BindingMode.TwoWay, SettingsOperationsManager.UIBrushToBrush);

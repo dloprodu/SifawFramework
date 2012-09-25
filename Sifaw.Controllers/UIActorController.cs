@@ -277,11 +277,11 @@ namespace Sifaw.Controllers
 		#region UIElement Methods
 
 		/// <summary>
-		/// Invoca al método sobrescirto <see cref="UIElementController{TInput, TOutput, TComponent}.OnAfterUIElementLoad()"/>.
+		/// Invoca al método sobrescirto <see cref="UIElementController{TInput, TOutput, TComponent}.OnAfterUIElementCreate()"/>.
 		/// </summary>
-		protected override void OnAfterUIElementLoad()
+		protected override void OnAfterUIElementCreate()
 		{
-			base.OnAfterUIElementLoad();
+			base.OnAfterUIElementCreate();
 
 			/* Subscripción a eventos del componente... */
 			UIElement.GuestSelecting += new UIGuestSelectingEventHandler(UIElement_UpdateGuest);
@@ -302,6 +302,13 @@ namespace Sifaw.Controllers
 			_guest = GetGuestAt(_key);
 
 			UIElement.Descriptors = _descriptors;
+
+            //_guest.UISettings.Height = double.NaN;
+            //_guest.UISettings.Width = double.NaN;
+            _guest.UISettings.VerticalAlignment = Views.Kit.UIVerticalAlignment.Fill;
+            _guest.UISettings.HorizontalAlignment = Views.Kit.UIHorizontalAlignment.Fill;
+            _guest.UISettings.Margin = Sifaw.Views.Kit.UIFrame.Empty;
+
 			UIElement.Update(_guest, _key);
 		}
 
@@ -322,6 +329,13 @@ namespace Sifaw.Controllers
 				if (new_guest != null)
 				{
 					OnBeforeUpdateGuest();
+
+                    //new_guest.UISettings.Height = double.NaN;
+                    //new_guest.UISettings.Width = double.NaN;
+                    new_guest.UISettings.VerticalAlignment = Views.Kit.UIVerticalAlignment.Fill;
+                    new_guest.UISettings.HorizontalAlignment = Views.Kit.UIHorizontalAlignment.Fill;
+                    new_guest.UISettings.Margin = Sifaw.Views.Kit.UIFrame.Empty;
+
 					UIElement.Update(new_guest, e.Key);
 
 					_guest = new_guest;

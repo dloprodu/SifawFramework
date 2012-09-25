@@ -120,6 +120,10 @@ namespace Sifaw.WPF
 			if (key < 0 || key > Items.Count - 1)
 				throw new ArgumentOutOfRangeException("key");
 
+            // Actualizamos el contenido.
+            (content as FrameworkElement).Height = double.NaN;
+            (content as FrameworkElement).Width = double.NaN;
+
 			// Actualizamos el contenido.
 			(Items[key] as TabItem).Content = null;
 			(Items[key] as TabItem).Content = content;

@@ -241,12 +241,12 @@ namespace Sifaw.Controllers.Components
 		#region UIElement Methods
 
 		/// <summary>
-		/// Invoca al método sobrescirto <see cref="UIElementController{TInput, TOutput, TView}.OnAfterUIElementLoad()"/> y
+		/// Invoca al método sobrescirto <see cref="UIElementController{TInput, TOutput, TView}.OnAfterUIElementCreate()"/> y
 		/// posteriormente establece una configuración por defecto a la vista.
 		/// </summary>
-		protected override void OnAfterUIElementLoad()
+		protected override void OnAfterUIElementCreate()
 		{
-			base.OnAfterUIElementLoad();
+			base.OnAfterUIElementCreate();
 
 			/* Default Setiings... */
             UISettings.Header = "Espere ...";

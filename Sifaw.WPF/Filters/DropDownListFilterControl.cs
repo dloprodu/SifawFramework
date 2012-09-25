@@ -152,7 +152,7 @@ namespace Sifaw.WPF.Filters
 			Focus();
 		}
 
-		#endregion
+		#endregion       
 
         #region UISettings
 
@@ -163,7 +163,7 @@ namespace Sifaw.WPF.Filters
             {
                 if (_uiSettings == null)
                     _uiSettings = new ControlSettings(this);
-
+                
                 return _uiSettings;
             }
         }

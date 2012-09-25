@@ -112,9 +112,9 @@ namespace Sifaw.WPF.Test
 
 		#region UIElement Methods
 
-		protected override void OnAfterUIElementLoad()
+		protected override void OnAfterUIElementCreate()
 		{
-			base.OnAfterUIElementLoad();
+			base.OnAfterUIElementCreate();
 
 			UISettings.SizeToContent = false;
 			UISettings.AllowResize = true;

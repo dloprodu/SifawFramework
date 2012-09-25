@@ -35,7 +35,7 @@ namespace Sifaw.WPF
 
         private string _denomination = string.Empty;
         private string _description = string.Empty;
-		private UIBrush _background = new UISolidBrush(UIColors.WhiteColors.White);
+        private UIBrush _background = null;
 		private UIBrush _foreground = new UISolidBrush(UIColors.GrayColors.Black);
 		private UIFrame _margin = UIFrame.Empty;
 		private UIFrame _padding = UIFrame.Empty;

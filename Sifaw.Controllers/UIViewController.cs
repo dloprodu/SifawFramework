@@ -335,12 +335,12 @@ namespace Sifaw.Controllers
         #region UIElement Methods
 
         /// <summary>
-        /// Invoca al método sobrescirto <see cref="UIElementController{TInput, TOutput, TView}.OnAfterUIElementLoad()"/> y
+        /// Invoca al método sobrescirto <see cref="UIElementController{TInput, TOutput, TView}.OnAfterUIElementCreate()"/> y
         /// posteriormente se subscribe a eventos de <see cref="UIView"/>.
         /// </summary>
-        protected override void OnAfterUIElementLoad()
+        protected override void OnAfterUIElementCreate()
         {
-            base.OnAfterUIElementLoad();
+            base.OnAfterUIElementCreate();
 
             /* Default Settings... */
             UISettings.Header = "Sifaw Framework Application";

@@ -27,27 +27,27 @@ namespace Sifaw.Views.Kit
     /// Cuatro valores <see cref="UIBrush"/> describen los pinceles de los lados Left, Top, Right y Bottom del rectángulo, respectivamente.
 	/// </summary>
 	[Serializable]
-    public struct UIFrameBrush
+    public class UIFrameBrush : IEquatable<UIFrameBrush>
 	{
 		/// <summary>
 		/// Obtiene o establece el pincel del lado izquierdo del rectángulo delimitador.
 		/// </summary>
-        public UIBrush Left;
+        public readonly UIBrush Left;
 
 		/// <summary>
 		/// Obtiene o establece el pincel del lado superior del rectángulo delimitador.
 		/// </summary>
-        public UIBrush Top;
+        public readonly UIBrush Top;
 
 		/// <summary>
 		/// Obtiene o establece el pincel del lado derecho del rectángulo delimitador.
 		/// </summary>
-        public UIBrush Right;
+        public readonly UIBrush Right;
 
 		/// <summary>
 		/// Obtiene o establece el pincel del lado menor del rectángulo delimitador.
 		/// </summary>
-        public UIBrush Bottom;
+        public readonly UIBrush Bottom;
 
 		#region Constructors
 
@@ -92,13 +92,13 @@ namespace Sifaw.Views.Kit
             if (obj == null)
                 return false;
 
-            if (!(obj is UIFrame))
+            if (!(obj is UIFrameBrush))
                 return false;
 
-            return Left.Equals(((UIFrame)obj).Left)
-                && Top.Equals(((UIFrame)obj).Top)
-                && Right.Equals(((UIFrame)obj).Right)
-                && Bottom.Equals(((UIFrame)obj).Bottom);
+            return Left.Equals(((UIFrameBrush)obj).Left)
+                && Top.Equals(((UIFrameBrush)obj).Top)
+                && Right.Equals(((UIFrameBrush)obj).Right)
+                && Bottom.Equals(((UIFrameBrush)obj).Bottom);
         }
 
         /// <summary>
@@ -112,8 +112,11 @@ namespace Sifaw.Views.Kit
         /// <summary>
         /// Determina si un objeto <see cref="UIFrame"/> proporcionado es equivalente al objeto <see cref="UIFrame"/> actual.
         /// </summary>
-        public bool Equals(UIFrame other)
+        public bool Equals(UIFrameBrush other)
         {
+            if (other == null)
+                return false;
+
             return Left.Equals(other.Left)
                && Top.Equals(other.Top)
                && Right.Equals(other.Right)
@@ -132,6 +135,12 @@ namespace Sifaw.Views.Kit
         /// <returns> Es true si color1 y color2 no son iguales; en caso contrario, es false.</returns>
         public static bool operator !=(UIFrameBrush frame1, UIFrameBrush frame2)
         {
+            if ((ReferenceEquals(frame1, null)) && (!ReferenceEquals(frame2, null)))
+                return true;
+
+            if ((!ReferenceEquals(frame1, null)) && (ReferenceEquals(frame2, null)))
+                return true;
+
             return frame1.Left != frame2.Left
                 || frame1.Top != frame2.Top
                 || frame1.Right != frame2.Right
@@ -149,6 +158,12 @@ namespace Sifaw.Views.Kit
         /// </returns>
         public static bool operator ==(UIFrameBrush frame1, UIFrameBrush frame2)
         {
+            if ((ReferenceEquals(frame1, null)) && (!ReferenceEquals(frame2, null)))
+                return false;
+
+            if ((!ReferenceEquals(frame1, null)) && (ReferenceEquals(frame2, null)))
+                return false;
+
             return frame1.Left == frame2.Left
                 && frame1.Top == frame2.Top
                 && frame1.Right == frame2.Right

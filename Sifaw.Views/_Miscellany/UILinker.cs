@@ -40,6 +40,6 @@ namespace Sifaw.Views
 		/// Devuelve una representación concreta para el componente abstracto <c>TUIElement</c>.
 		/// </summary>
 		/// <param name="ui">Elemento de interfaz de usuario.</param>
-		void Load(out TUIElement ui);
+		void Create(out TUIElement ui);
 	}
 }

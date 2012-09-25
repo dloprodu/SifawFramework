@@ -132,15 +132,7 @@ namespace Sifaw.Controllers
 		 *  • Solo son lanzados por la controladora padre.
 		 */
 
-		/// <summary>
-		/// Se produce cuando <see cref="UIElement"/> se ha cargado.
-		/// </summary>
-		public event EventHandler UIElementLoaded;
-		private void OnUIElementLoaded(EventArgs e)
-		{
-			if (UIElementLoaded != null)
-				UIElementLoaded(this, e);
-		}
+        /* Empty */
 
 		/*
 		 * Desencadenadores protegidos.
@@ -156,23 +148,23 @@ namespace Sifaw.Controllers
 		 */
 
 		/// <summary>
-		/// Se llama al método <see cref="OnBeforeUIElementLoad"/> antes de cargar el elemento 
+		/// Se llama al método <see cref="OnBeforeUIElementCreate"/> antes de cargar el elemento 
 		/// gráfico por primera vez. El método permite que las clases derivadas 
 		/// controlen el evento sin asociar un delegado.
 		/// </summary>
 		/// <remarks>
-		/// Al reemplazar <see cref="OnBeforeUIElementLoad"/> en una clase derivada, asegúrese de llamar al
-		/// método <see cref="OnBeforeUIElementLoad"/> de la clase base para que los delegados registrados 
+		/// Al reemplazar <see cref="OnBeforeUIElementCreate"/> en una clase derivada, asegúrese de llamar al
+		/// método <see cref="OnBeforeUIElementCreate"/> de la clase base para que los delegados registrados 
 		/// reciban el evento.
 		/// </remarks>
-		protected virtual void OnBeforeUIElementLoad()
+		protected virtual void OnBeforeUIElementCreate()
 		{
 			/* Emtpy */
 		}
 
 		/// <summary>
 		/// <para>
-		/// Se llama al método <see cref="OnAfterUIElementLoad"/> después de cargar el elemento 
+		/// Se llama al método <see cref="OnAfterUIElementCreate"/> después de cargar el elemento 
 		/// gráfico por primera vez. El método permite que las clases derivadas 
 		/// controlen el evento sin asociar un delegado.
 		/// </para>
@@ -183,21 +175,47 @@ namespace Sifaw.Controllers
 		/// </summary>
 		/// <remarks>
 		/// <para>
-		/// Al reemplazar <see cref="OnAfterUIElementLoad"/> en una clase derivada, asegúrese de llamar al
-		/// método <see cref="OnAfterUIElementLoad"/> de la clase base para que los delegados registrados 
+		/// Al reemplazar <see cref="OnAfterUIElementCreate"/> en una clase derivada, asegúrese de llamar al
+		/// método <see cref="OnAfterUIElementCreate"/> de la clase base para que los delegados registrados 
 		/// reciban el evento.
 		/// </para>
 		/// </remarks>
-		protected virtual void OnAfterUIElementLoad()
+		protected virtual void OnAfterUIElementCreate()
 		{
-            /* Default Settings... */            
+            /* Subscripción a eventos del componente... */
+            UIElement.Loaded += new EventHandler(UIElement_Loaded);
+		}
+
+        /// <summary>
+        /// Se produce cuando <see cref="UIElement"/> se ha cargado.
+        /// </summary>
+        public event EventHandler UIElementLoaded;
+
+        /// <summary>
+        /// <para>
+        /// Se llama al método <see cref="OnUIElementLoaded"/> cuando el elemento de interfaz de
+        /// usuario ha sido cargado corretamente.
+        /// </para>
+        /// <para>
+        /// Este métodos permite que las clases derivadas realicen operaciones de 
+        /// configuración tales como establecer los parámetros de configuración por defecto del 
+        /// elemento de interfaz de usuario.
+        /// </para>
+        /// </summary>
+        protected void OnUIElementLoaded(EventArgs e)
+        {
+            /* Default Settings... */
             UISettings.SizeToContent = false;
             UISettings.Width = 800;
             UISettings.Height = 600;
 
-            /* Subscripción a eventos del componente... */
-		}
-        
+            /* Campos que se inicializan con la representación concreta del componente ... */
+            // UISettings.Background
+            // UISettings.Foreground 
+            // UISettings.Margin
+            // UISettings.Padding            
+        }
+
 		#endregion
 
 		#region Properties
@@ -215,13 +233,12 @@ namespace Sifaw.Controllers
 			{
 				if (_uiElement == null)
 				{
-					OnBeforeUIElementLoad();
-					Linker.Load(out _uiElement);
+					OnBeforeUIElementCreate();
+					Linker.Create(out _uiElement);
 
 					if (_uiElement != null)
 					{
-						OnAfterUIElementLoad();
-						OnUIElementLoaded(EventArgs.Empty);
+						OnAfterUIElementCreate();						
 					}
 				}
 
@@ -360,5 +377,17 @@ namespace Sifaw.Controllers
 		}
 
 		#endregion
-	}
+
+        #region UIElemen event handlers
+
+        private void UIElement_Loaded(object sender, EventArgs e)
+        {
+            OnUIElementLoaded(EventArgs.Empty);
+
+            if (UIElementLoaded != null)
+                UIElementLoaded(this, e);
+        }
+
+        #endregion
+    }
 }

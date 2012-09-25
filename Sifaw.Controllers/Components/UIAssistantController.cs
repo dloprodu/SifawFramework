@@ -260,12 +260,12 @@ namespace Sifaw.Controllers.Components
 		#region UIElement Methods
 
 		/// <summary>
-		/// Invoca al método sobrescirto <see cref="UIComponentController{TInput, TOutput, TComponent}.OnAfterUIElementLoad()"/>  y
+		/// Invoca al método sobrescirto <see cref="UIComponentController{TInput, TOutput, TComponent}.OnAfterUIElementCreate()"/>  y
 		/// posteriormente se subscribe a eventos de <see cref="AssistantComponent"/>.
 		/// </summary>
-		protected override void OnAfterUIElementLoad()
+		protected override void OnAfterUIElementCreate()
 		{
-			base.OnAfterUIElementLoad();
+			base.OnAfterUIElementCreate();
 
 			/* Subscripción a eventos del componente... */
 			UIElement.Cancel += new EventHandler(UIElement_Cancel);

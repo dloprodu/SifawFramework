@@ -2,10 +2,6 @@ REM Proyecto Sifaw.Core
 rmdir /s /q Sifaw.Core\bin
 rmdir /s /q Sifaw.Core\obj
 
-REM Proyecto Sifaw.Model
-rmdir /s /q Sifaw.Model\bin
-rmdir /s /q Sifaw.Model\obj
-
 REM Proyecto Sifaw.Controllers
 rmdir /s /q Sifaw.Controllers\bin
 rmdir /s /q Sifaw.Controllers\obj

@@ -27,6 +27,7 @@ namespace Sifaw.Views.Kit
     /// clases que heredan de <see cref="UIGradientBrush"/> describen las diferentes
     /// formas de interpretar los puntos de degradado.
     /// </summary>
+    [Serializable]
     public abstract class UIGradientBrush : UIBrush
     {
         #region Fields

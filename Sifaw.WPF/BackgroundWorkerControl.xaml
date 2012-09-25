@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              Margin="0"            
-             Width="500"
+             Width="Auto"
              Height="Auto" 
              Background="White" 
              MinWidth="300">
@@ -50,6 +50,7 @@
                 <Border BorderThickness="1" Margin="0" Padding="0" CornerRadius="0" BorderBrush="DarkGray" Background="WhiteSmoke">
                     <ScrollViewer Name="scrollViewer" Grid.Row="0" Margin="0" Padding="0">
                         <TextBox 
+                            MinHeight="400"
                             Name="textBoxDetail"
                             IsReadOnly="True"
                             Background="Transparent"

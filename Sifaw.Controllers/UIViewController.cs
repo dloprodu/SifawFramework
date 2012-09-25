@@ -78,9 +78,9 @@ namespace Sifaw.Controllers
         , TOutput
         , TView>
         , IUIViewController
-        where TInput : UIViewController<TInput, TOutput, TView>.Input
+        where TInput  : UIViewController<TInput, TOutput, TView>.Input
         where TOutput : UIViewController<TInput, TOutput, TView>.Output
-        where TView : UIView
+        where TView   : UIView
     {
         #region Input / Output
 
@@ -286,7 +286,7 @@ namespace Sifaw.Controllers
         /// <summary>
         /// Inicializa una nueva instancia de la clase <see cref="UIViewController{TInput, TOutput, TView}"/>.
         /// Establece como <see cref="UILinker{TUIElement}"/> aquel establecido por defecto a través de 
-        /// <see cref="AbstractUIProviderManager{TLinker}"/>.
+        /// <see cref="UILinkersManager"/>.
         /// </summary>
         protected UIViewController()
             : base()
@@ -342,17 +342,15 @@ namespace Sifaw.Controllers
         {
             base.OnAfterUIElementLoad();
 
+            /* Default Settings... */
+            UISettings.Header = "Sifaw Framework Application";
+            UISettings.AllowResize = true;
+
             /* Subscripción a eventos de la vista... */
             UIElement.BeforeShow += new EventHandler(UIElement_BeforeShow);
             UIElement.AfterShow += new EventHandler(UIElement_AfterShow);
             UIElement.BeforeClose += new UIFinishRequestEventHandler(UIElement_BeforeClose);
             UIElement.AfterClose += new EventHandler(UIElement_AfterClose);
-
-            /* Default Settings... */
-            UISettings.Width = 800;
-            UISettings.Height = 600;
-            UISettings.AllowResize = true;
-            UISettings.SizeToContent = false;
         }
 
         #endregion

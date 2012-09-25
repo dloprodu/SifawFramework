@@ -25,6 +25,7 @@ namespace Sifaw.Views.Kit
     /// <summary>
     /// Almacena el ancho y el alto, normalmente de un rectángulo.
     /// </summary>
+    [Serializable]
     public struct UISize : IEquatable<UISize>
     {
         /// <summary>

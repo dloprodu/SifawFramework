@@ -72,7 +72,9 @@ namespace Sifaw.Controllers
             /// Inicializa una nueva instancia de <see cref="UIShellViewController{TInput, TOutput, TGuest}.Input"/>, 
             /// estableciendo un valor a la propiedad <see cref="UIViewController{TInput, TOutput, TView}.Input.ShowView"/>.
             /// </summary>
-			protected Input(bool showView, bool isModal)
+            /// <param name="showView">Indica si se muestra la vista al iniciar la controladora.</param>
+            /// <param name="isModal">Indica si la vista es modal.</param>
+            protected Input(bool showView, bool isModal)
 				: base(showView:showView, isModal:isModal)
 			{
 			}

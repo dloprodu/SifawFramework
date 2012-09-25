@@ -26,7 +26,8 @@ namespace Sifaw.Views.Kit
 	/// Describe los pinceles para dibujar un marco situado alrededor de un rectángulo. 
     /// Cuatro valores <see cref="UIBrush"/> describen los pinceles de los lados Left, Top, Right y Bottom del rectángulo, respectivamente.
 	/// </summary>
-	public struct UIFrameBrush
+	[Serializable]
+    public struct UIFrameBrush
 	{
 		/// <summary>
 		/// Obtiene o establece el pincel del lado izquierdo del rectángulo delimitador.

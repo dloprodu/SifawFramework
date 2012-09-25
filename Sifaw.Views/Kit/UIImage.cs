@@ -26,7 +26,8 @@ namespace Sifaw.Views.Kit
     /// <summary>
     /// Clase que almacena una imagen.
     /// </summary>
-    public class UIImage : IEquatable<UIImage>
+    [Serializable]
+    public class UIImage : IEquatable<UIImage>, ICloneable
     {
         #region Fields
 
@@ -180,6 +181,15 @@ namespace Sifaw.Views.Kit
         public bool Equals(UIImage other)
         {
             return ReferenceEquals(this, other);
+        }
+
+        #endregion
+
+        #region ICloneable Members
+
+        public object Clone()
+        {
+            return new UIImage(_buffer);
         }
 
         #endregion

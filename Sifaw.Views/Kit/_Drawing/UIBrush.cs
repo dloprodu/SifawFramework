@@ -26,6 +26,7 @@ namespace Sifaw.Views.Kit
     /// Define los objetos que se utilizan para rellenar elementos de interfaz de 
     /// usuario.
     /// </summary>
+    [Serializable]
     public abstract class UIBrush
     {
         #region Constructor

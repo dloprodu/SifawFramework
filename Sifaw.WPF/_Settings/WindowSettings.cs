@@ -36,9 +36,8 @@ namespace Sifaw.WPF
     {
 		#region Fields
 
-        private UIImage _image = null;
-		private string _header = "SifaWake Application";
-		private bool _sizeToContent = false;
+        private UIImage _thumbnail = null;
+		private string _header = string.Empty;
 		private bool _alloResize = true;
 
 		#endregion
@@ -48,14 +47,14 @@ namespace Sifaw.WPF
         /// <summary>
         /// Obtiene o establece el icono de la ventana.
         /// </summary>
-        public UIImage Thumbnail
+        public virtual UIImage Thumbnail
         {
-            get { return _image; }
+            get { return _thumbnail; }
             set
             {
-                if (_image != value)
+                if (_thumbnail != value)
                 {
-                    _image = value;
+                    _thumbnail = value;
                     OnPropertyChanged(() => Thumbnail);
                 }
             }
@@ -64,7 +63,7 @@ namespace Sifaw.WPF
 		/// <summary>
 		/// Obtiene o establece la cabecera de la vista.
 		/// </summary>
-		public string Header
+        public virtual string Header
 		{
 			get { return _header; }
 			set
@@ -78,25 +77,9 @@ namespace Sifaw.WPF
 		}
 
 		/// <summary>
-		/// Obtiene o establece un valor que indica si el elemento se ha de ajustar a su contenido.
-		/// </summary>
-		public bool SizeToContent
-		{
-			get { return _sizeToContent; }
-			set
-			{
-				if (_sizeToContent != value)
-				{
-					_sizeToContent = value;
-					OnPropertyChanged(() => SizeToContent);
-				}
-			}
-		}
-
-		/// <summary>
 		/// Obtiene o establece un valor que indica si se permite redimensionar la vista.
 		/// </summary>
-		public bool AllowResize
+        public virtual bool AllowResize
 		{
 			get { return _alloResize; }
 			set
@@ -121,19 +104,22 @@ namespace Sifaw.WPF
 			this.Background = (UIBrush)SettingsOperationsManager.UIBrushToBrush.ConvertBack(window.Background, null, null, null);
 			this.Foreground = (UIBrush)SettingsOperationsManager.UIBrushToBrush.ConvertBack(window.Foreground, null, null, null);
 
-            UtilWPF.BindField(this, "Thumbnail",     window, Window.IconProperty,          BindingMode.TwoWay, SettingsOperationsManager.UIImageToImageSource);
-			UtilWPF.BindField(this, "Background",    window, Window.BackgroundProperty,    BindingMode.TwoWay, SettingsOperationsManager.UIBrushToBrush);
-			UtilWPF.BindField(this, "Foreground",    window, Window.ForegroundProperty,    BindingMode.TwoWay, SettingsOperationsManager.UIBrushToBrush);
-			UtilWPF.BindField(this, "Margin",        window, Window.MarginProperty,        BindingMode.TwoWay, SettingsOperationsManager.UIFrameToThickness);
-			UtilWPF.BindField(this, "Padding",       window, Window.PaddingProperty,       BindingMode.TwoWay, SettingsOperationsManager.UIFrameToThickness);
-			UtilWPF.BindField(this, "Height",        window, Window.HeightProperty,        BindingMode.TwoWay);
-			UtilWPF.BindField(this, "Width",         window, Window.WidthProperty,         BindingMode.TwoWay);
+            // UISettings ...
+            UtilWPF.BindField(this, "Background",    window, Window.BackgroundProperty,    BindingMode.TwoWay, SettingsOperationsManager.UIBrushToBrush);
+            UtilWPF.BindField(this, "Foreground",    window, Window.ForegroundProperty,    BindingMode.TwoWay, SettingsOperationsManager.UIBrushToBrush);
+            UtilWPF.BindField(this, "Margin",        window, Window.MarginProperty,        BindingMode.TwoWay, SettingsOperationsManager.UIFrameToThickness);
+            UtilWPF.BindField(this, "Padding",       window, Window.PaddingProperty,       BindingMode.TwoWay, SettingsOperationsManager.UIFrameToThickness);
+            UtilWPF.BindField(this, "Height",        window, Window.HeightProperty,        BindingMode.TwoWay);
+            UtilWPF.BindField(this, "Width",         window, Window.WidthProperty,         BindingMode.TwoWay);
             UtilWPF.BindField(this, "MinWidth",      window, Window.MinWidthProperty,      BindingMode.TwoWay);
             UtilWPF.BindField(this, "MaxWidth",      window, Window.MaxWidthProperty,      BindingMode.TwoWay);
             UtilWPF.BindField(this, "MinHeight",     window, Window.MinHeightProperty,     BindingMode.TwoWay);
             UtilWPF.BindField(this, "MaxHeight",     window, Window.MaxHeightProperty,     BindingMode.TwoWay);
+            UtilWPF.BindField(this, "SizeToContent", window, Window.SizeToContentProperty, BindingMode.TwoWay, SettingsOperationsManager.UIAutoSizeToSizeToContent);
+
+            // ViewSettings ...
+            UtilWPF.BindField(this, "Thumbnail",     window, Window.IconProperty,          BindingMode.TwoWay, SettingsOperationsManager.UIImageToImageSource);
             UtilWPF.BindField(this, "Header",        window, Window.TitleProperty,         BindingMode.TwoWay);
-			UtilWPF.BindField(this, "SizeToContent", window, Window.SizeToContentProperty, BindingMode.TwoWay, SettingsOperationsManager.UIAutoSizeToSizeToContent);
 			UtilWPF.BindField(this, "AllowResize",   window, Window.ResizeModeProperty,    BindingMode.TwoWay, SettingsOperationsManager.UIAllowResizeToResizeMode);
 		}
 

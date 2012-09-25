@@ -61,9 +61,9 @@ namespace Sifaw.Controllers
 	public abstract class UIElementController<TInput, TOutput, TUIElement> 
 		: Controller<TInput, TOutput>
 		, IUIElementController
-		where TInput      : UIElementController<TInput, TOutput, TUIElement>.Input
-		where TOutput     : UIElementController<TInput, TOutput, TUIElement>.Output
-		where TUIElement  : UIElement
+		where TInput     : UIElementController<TInput, TOutput, TUIElement>.Input
+		where TOutput    : UIElementController<TInput, TOutput, TUIElement>.Output
+		where TUIElement : UIElement
 	{
 		#region Input / Output
 
@@ -190,7 +190,12 @@ namespace Sifaw.Controllers
 		/// </remarks>
 		protected virtual void OnAfterUIElementLoad()
 		{
-			/* Empty */
+            /* Default Settings... */            
+            UISettings.SizeToContent = false;
+            UISettings.Width = 800;
+            UISettings.Height = 600;
+
+            /* Subscripción a eventos del componente... */
 		}
         
 		#endregion

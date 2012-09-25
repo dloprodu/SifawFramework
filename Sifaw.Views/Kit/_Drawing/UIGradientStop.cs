@@ -25,6 +25,7 @@ namespace Sifaw.Views.Kit
     /// <summary>
     ///  Describe la ubicación y el color de un punto de la transición en un degradado.
     /// </summary>
+    [Serializable]
     public struct UIGradientStop : IEquatable<UIGradientStop>
     {
         /// <summary>

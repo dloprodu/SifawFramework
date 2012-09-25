@@ -54,8 +54,8 @@ namespace Sifaw.Controllers
         , TOutput
         , TComponent>
         , IUIComponentController
-        where TInput : UIComponentController<TInput, TOutput, TComponent>.Input
-        where TOutput : UIComponentController<TInput, TOutput, TComponent>.Output
+        where TInput     : UIComponentController<TInput, TOutput, TComponent>.Input
+        where TOutput    : UIComponentController<TInput, TOutput, TComponent>.Output
         where TComponent : UIComponent
     {
         #region Input / Output
@@ -200,7 +200,7 @@ namespace Sifaw.Controllers
         /// <summary>
         /// Inicializa una nueva instancia de la clase <see cref="UIComponentController{TInput, TOutput, TComponent}"/>.
         /// Establece como <see cref="UILinker{TUIElement}"/> aquel establecido por defecto a través de 
-        /// <see cref="AbstractUIProviderManager{TLinker}"/>.
+        /// <see cref="UILinkersManager"/>.
         /// </summary>
         protected UIComponentController()
             : base()
@@ -240,6 +240,9 @@ namespace Sifaw.Controllers
         protected override void OnAfterUIElementLoad()
         {
             base.OnAfterUIElementLoad();
+
+            /* Default Settings... */
+            UISettings.Border = new UIFrame(0);
 
             /* Subscripción a eventos del componente... */
         }

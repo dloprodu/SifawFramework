@@ -25,6 +25,7 @@ namespace Sifaw.Views.Kit
     /// <summary>
     /// Define un pincel de un solo color.
     /// </summary>
+    [Serializable]
     public sealed class UISolidBrush : UIBrush
     {
         #region Fields

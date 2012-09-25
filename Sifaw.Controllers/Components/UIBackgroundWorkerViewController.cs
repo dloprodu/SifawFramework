@@ -70,7 +70,7 @@ namespace Sifaw.Controllers.Components
 			/// </summary>
 			/// <param name="worker">Paquete de ejecución</param>
 			public Input(BackgroundWorkerPack worker)
-				: this(worker, true)
+				: this(worker:worker, showView:true, isModal:true)
 			{
 			}
 
@@ -80,11 +80,22 @@ namespace Sifaw.Controllers.Components
 			/// <param name="worker">Paquete de ejecución</param>
 			/// <param name="showView">Indica si se muestra la vista al iniciar la controladora.</param>
 			public Input(BackgroundWorkerPack worker, bool showView)
-                /* Esta vista siempre se muestra como modal. */
-				: base(showView:showView, isModal:true)
+				: this(worker:worker, showView:showView, isModal:true)
 			{
-				this._worker = worker;
 			}
+
+            /// <summary>
+            /// Inicializa una nueva instancia de la clase <see cref="UIBackgroundWorkerViewController.Input"/>
+            /// </summary>
+            /// <param name="worker">Paquete de ejecución</param>
+            /// <param name="showView">Indica si se muestra la vista al iniciar la controladora.</param>
+            /// <param name="isModal">Indica si la vista es modal.</param>
+            public Input(BackgroundWorkerPack worker, bool showView, bool isModal)
+                /* Esta vista siempre se muestra como modal. */
+                : base(showView: showView, isModal: isModal)
+            {
+                this._worker = worker;
+            }
 
 			#endregion
 		}
@@ -151,6 +162,7 @@ namespace Sifaw.Controllers.Components
 				if (_uiBackgroundWorkerController == null)
 				{
 					_uiBackgroundWorkerController = new UIBackgroundWorkerController();
+                    _uiBackgroundWorkerController.RunWorkerProgressChanged += new CLRunWorkerProgressChangedEventHandler(_uiBackgroundWorkerController_RunWorkerProgressChanged);
 					_uiBackgroundWorkerController.Finished += new CLFinishedEventHandler<Components.UIBackgroundWorkerController.Output>(_uiBackgroundWorkerController_Finished);
 				}
 
@@ -237,9 +249,11 @@ namespace Sifaw.Controllers.Components
 			base.OnAfterUIElementLoad();
 
 			/* Default Setiings... */
-			UISettings.AllowResize = false;
+            UISettings.Header = "Espere ...";
+            UISettings.AllowResize = false;
 			UISettings.SizeToContent = true;
-            UISettings.MaxSize = new UISize(600, 600);
+            UISettings.MinSize = new UISize(600, 0);
+            UISettings.MaxSize = new UISize(600, 400);
 		}
 
 		/// <summary>
@@ -250,7 +264,7 @@ namespace Sifaw.Controllers.Components
 		protected override void OnBeforeUIClose(out bool cancel)
 		{
 			// Deshabilitamos el comportamiento por defecto y solicitamos la cancelación del proceso.
-			// base.OnUIFinish();
+            // base.OnBeforeUIClose(out cancel);            
 
 			// Cancelamos la finalización explicita
 			// y solicitamos la cancelación del proceso.
@@ -343,6 +357,11 @@ namespace Sifaw.Controllers.Components
 		#endregion
 
 		#region Inclusions Events Handlers
+
+        private void _uiBackgroundWorkerController_RunWorkerProgressChanged(object sender, CLRunWorkerProgressChangedEventArgs e)
+        {
+            UISettings.Header = (e.WithControl) ? Math.Round(((e.Progress / (float)e.MaxProgress) * 100.0f)).ToString().PadLeft(3) + " % completado ..." : "Espere ...";
+        }
 
 		private void _uiBackgroundWorkerController_Finished(object sender, CLFinishedEventArgs<UIBackgroundWorkerController.Output> e)
 		{

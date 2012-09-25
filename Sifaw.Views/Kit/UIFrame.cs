@@ -26,7 +26,8 @@ namespace Sifaw.Views.Kit
 	/// Describe el grosor de un marco situado alrededor de un rectángulo. 
 	/// Cuatro valores <c>Double</c> describen los lados Left, Top, Right y Bottom del rectángulo, respectivamente.
 	/// </summary>
-	public struct UIFrame : IEquatable<UIFrame>
+	[Serializable]
+    public struct UIFrame : IEquatable<UIFrame>
 	{
 		/// <summary>
 		/// Representa una estructura <see cref="UIFrame"/> con longitudes definidas a 0.

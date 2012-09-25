@@ -40,10 +40,11 @@ namespace Sifaw.WPF
 		private UIFrame _margin = UIFrame.Empty;
 		private UIFrame _padding = UIFrame.Empty;
 		// Double.NaN means in this case the same like Auto in XAML
-		private double _width = double.NaN;
-		private double _height = double.NaN;
+		private double _width = 300;
+		private double _height = 300;
 		private UISize _minSize = UISize.Empty;
         private UISize _maxSize = UISize.Infinity;
+        private bool _sizeToContent = false;
 
 		#endregion
 
@@ -52,7 +53,7 @@ namespace Sifaw.WPF
         /// <summary>
         /// Obtiene o establece una denominación al elemento.
         /// </summary>
-        public string Denomination
+        public virtual string Denomination
         {
             get { return _denomination; }
             set 
@@ -68,7 +69,7 @@ namespace Sifaw.WPF
         /// <summary>
         /// Obtiene o establece una descripción al elemento.
         /// </summary>
-        public string Description
+        public virtual string Description
         {
             get { return _description; }
             set
@@ -84,7 +85,7 @@ namespace Sifaw.WPF
 		/// <summary>
 		/// Obtiene o establece el pincel que describe el fondo del elemento.
 		/// </summary>
-		public UIBrush Background
+        public virtual UIBrush Background
 		{
 			get { return _background; }
 			set
@@ -100,7 +101,7 @@ namespace Sifaw.WPF
 		/// <summary>
 		/// Obtiene o establece el pincel que describe el color de primer plano del elemento.
 		/// </summary>
-		public UIBrush Foreground
+        public virtual UIBrush Foreground
 		{
 			get { return _foreground; }
 			set 
@@ -116,7 +117,7 @@ namespace Sifaw.WPF
 		/// <summary>
 		/// Obtiene o establece el margen exterior del elemento.
 		/// </summary>
-		public UIFrame Margin
+        public virtual UIFrame Margin
 		{
 			get { return _margin; }
 			set 
@@ -132,7 +133,7 @@ namespace Sifaw.WPF
 		/// <summary>
 		/// Obtiene o establece el relleno interior del elemento.
 		/// </summary>
-		public UIFrame Padding
+        public virtual UIFrame Padding
 		{
 			get { return _padding; }
 			set
@@ -148,7 +149,7 @@ namespace Sifaw.WPF
 		/// <summary>
 		/// Obtiene o establece el tamaño mínimo del elemento.
 		/// </summary>
-		public UISize MinSize
+        public virtual UISize MinSize
 		{
 			get { return _minSize; }
 			set
@@ -165,7 +166,7 @@ namespace Sifaw.WPF
 		/// <summary>
 		/// Obtiene o establece el tamaño máximo del elemento.
 		/// </summary>
-		public UISize MaxSize
+        public virtual UISize MaxSize
 		{
 			get { return _maxSize; }
 			set 
@@ -183,7 +184,7 @@ namespace Sifaw.WPF
 		/// Obtiene o establece el ancho del elemento. El valor por defecto es -1, lo que sifnifica
 		/// que se mantiene el ancho por defecto de la representación concreta del elemento.
 		/// </summary>
-		public double Width
+        public virtual double Width
 		{
 			get { return _width; }
 			set
@@ -200,7 +201,7 @@ namespace Sifaw.WPF
 		/// Obtiene o establece el alto del elemento. El valor por defecto es -1, lo que sifnifica
 		/// que se mantiene el alto por defecto de la representación concreta del elemento.
 		/// </summary>
-		public double Height
+        public virtual double Height
 		{
 			get { return _height; }
 			set
@@ -212,6 +213,22 @@ namespace Sifaw.WPF
                 }
             }
 		}
+        
+        /// <summary>
+        /// Obtiene o establece un valor que indica si el elemento se ha de ajustar a su contenido.
+        /// </summary>
+        public virtual bool SizeToContent
+        {
+            get { return _sizeToContent; }
+            set
+            {
+                if (_sizeToContent != value)
+                {
+                    _sizeToContent = value;
+                    OnPropertyChanged(() => SizeToContent);
+                }
+            }
+        }
 
 		#endregion
 

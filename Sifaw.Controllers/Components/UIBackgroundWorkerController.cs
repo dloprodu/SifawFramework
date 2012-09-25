@@ -96,6 +96,7 @@ namespace Sifaw.Controllers.Components
 			/// estableciendo un valor a la propiedad <see cref="WorkerPack"/>.
 			/// </summary>
 			/// <param name="worker">Paquete de ejecución</param>
+            /// <param name="finishToWorkerCompleted">Indica si se finaliza la controladora al terminar el proceso.</param>
 			public Input(BackgroundWorkerPack worker, bool finishToWorkerCompleted)
 				: base()
 			{
@@ -208,6 +209,20 @@ namespace Sifaw.Controllers.Components
 				AfterBackgroundWorker(this, e);
 		}
 
+        /// <summary>
+        /// Se produce cuando cambia el progreso del proceso pesado.
+        /// </summary>
+        public event CLRunWorkerProgressChangedEventHandler RunWorkerProgressChanged = null;
+
+        /// <summary>
+        /// Provoca el evento <see cref="RunWorkerProgressChanged"/>.
+        /// </summary>
+        private void OnRunWorkerProgressChanged(CLRunWorkerProgressChangedEventArgs e)
+        {
+            if (RunWorkerProgressChanged != null)
+                RunWorkerProgressChanged(this, e);
+        }
+
 		#endregion
 
         #region Properties
@@ -258,6 +273,9 @@ namespace Sifaw.Controllers.Components
 		{
 			base.OnAfterUIElementLoad();
 
+            /* Default Setiings... */
+            UISettings.SizeToContent = true;
+            
 			UIElement.Cancel += new EventHandler(UIElement_Cancel);
 		}
 
@@ -459,7 +477,7 @@ namespace Sifaw.Controllers.Components
             lock (Communicator)
             {
                 Tuple<ReportProgressCommands, string, object> arguments = (Tuple<ReportProgressCommands, string, object>)e.UserState;
-                
+               
                 switch (arguments.Item1)
                 {
                     case ReportProgressCommands.TextChanged:
@@ -487,6 +505,8 @@ namespace Sifaw.Controllers.Components
                         UIElement.UISettings.WithControl = (bool)arguments.Item3;
                         break;
                 }
+
+                OnRunWorkerProgressChanged(new CLRunWorkerProgressChangedEventArgs(UISettings.WithControl, UISettings.MaxProgressPercentage, e.ProgressPercentage));
 
                 Monitor.Pulse(Communicator);
             }

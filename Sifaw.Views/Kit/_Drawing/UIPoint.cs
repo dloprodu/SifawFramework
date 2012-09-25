@@ -25,6 +25,7 @@ namespace Sifaw.Views.Kit
     /// <summary>
     /// Representa un par de coordenadas x e y en un espacio bidimensional.
     /// </summary>
+    [Serializable]
     public struct UIPoint : IEquatable<UIPoint>
     {
         /// <summary>

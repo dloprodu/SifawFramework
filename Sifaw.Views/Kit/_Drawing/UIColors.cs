@@ -27,7 +27,7 @@ namespace Sifaw.Views.Kit
     /// </summary>
     /// <remarks>
     /// Para mas información consultar http://en.wikipedia.org/wiki/Web_colors.
-    /// </remarks>
+    /// </remarks>    
     public static class UIColors
     {
 		/// <summary>

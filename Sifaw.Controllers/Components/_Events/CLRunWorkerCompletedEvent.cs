@@ -34,7 +34,7 @@ namespace Sifaw.Controllers.Components
         private readonly bool Cancelled;
 
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="CLSateChangedEventArgs"/>.
+        /// Inicializa una nueva instancia de la clase <see cref="CLRunWorkerCompletedEventArgs"/>.
         /// </summary>
         public CLRunWorkerCompletedEventArgs(object result, bool cancelled)
             : base()

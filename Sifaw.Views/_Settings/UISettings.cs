@@ -62,7 +62,7 @@ namespace Sifaw.Views
 		/// Obtiene o establece el relleno interior del elemento.
 		/// </summary>
 		UIFrame Padding { get; set; }
-
+                
 		/// <summary>
 		/// Obtiene o establece el tamaño mínimo del elemento.
 		/// </summary>
@@ -84,5 +84,10 @@ namespace Sifaw.Views
 		/// que se mantiene el alto por defecto de la representación concreta del elemento.
 		/// </summary>
 		double Height { get; set; }
+
+        /// <summary>
+        /// Obtiene o establece un valor que indica si se debe ajustar el tamaño del elemento a su contenido.
+        /// </summary>
+        bool SizeToContent { get; set; }
 	}
 }

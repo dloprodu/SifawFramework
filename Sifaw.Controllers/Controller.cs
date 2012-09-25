@@ -530,13 +530,17 @@ namespace Sifaw.Controllers
             // Realizamos la búsqueda
             foreach (PropertyInfo property in properties)
             {
-                // Obtenemos el valor
-                object v = property.GetValue(this, null);
-
-                // comprobamos si se corresponde con una controladora
-                if (v != null && v is IController)
+                // Antes de acceder al valor y provocar algun Lazy Load se debe 
+                // verificar que se trata de una controladora.
+                if (Array.IndexOf(property.PropertyType.GetInterfaces(), typeof(IController)) >= 0)
                 {
-                    list.Add((IController)property.GetValue(this, null));
+                    // Obtenemos el valor
+                    IController child = (IController)property.GetValue(this, null);
+                                        
+                    if (child != null)
+                    {
+                        list.Add(child);
+                    }
                 }
             }
 
@@ -762,7 +766,7 @@ namespace Sifaw.Controllers
                     return;
 
                 // Finalizamos inclusiones ...			
-                List<IController> children = GetControllers(GetAllProperty());
+                List<IController> children = GetControllers();
 
                 OnProgressChanged(new CLProgressChangedEventArgs(5, "Finalizando inclusiones..."));
                 OnBeforeFinishControllers(children);
@@ -824,15 +828,16 @@ namespace Sifaw.Controllers
         /// </remarks>
         private void ResetFields(List<FieldInfo> fields)
         {
-            // Realizamos la búsqueda
+            // Realizamos la búsqueda.
             foreach (FieldInfo field in fields)
             {
-                // Obtenemos el valor
-                object v = field.GetValue(this);
-
-                if (v != null && v is IController)
-                    // Corresponde con una controladora
+                // Antes de acceder al valor y provocar algun Lazy Load se debe 
+                // verificar que se trata de una controladora.
+                if (Array.IndexOf(field.FieldType.GetInterfaces(), typeof(IController)) >= 0)
+                {
+                    // Corresponde con una controladora.
                     field.SetValue(this, null);
+                }
                 else
                 {
                     // Sólo reseteamos aquellos campos que se han marcado para ello.

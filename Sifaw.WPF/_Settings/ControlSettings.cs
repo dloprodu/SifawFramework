@@ -37,7 +37,7 @@ namespace Sifaw.WPF
     {
 		#region Fields
 
-		private UIFrame _border = new UIFrame(1);
+		private UIFrame _border = new UIFrame(0);
 		private UIFrameBrush _borderBrush = new UIFrameBrush(new UISolidBrush(UIColors.GrayColors.LightGray));
 		private UIHorizontalAlignment _horizontalAlignment = UIHorizontalAlignment.Fill;
 		private UIVerticalAlignment _verticalAlignment = UIVerticalAlignment.Fill;
@@ -49,7 +49,7 @@ namespace Sifaw.WPF
 		/// <summary>
 		/// Obtiene o establece el grosor del borde del componente.
 		/// </summary>
-		public UIFrame Border
+        public virtual UIFrame Border
 		{
 			get { return _border; }
 			set
@@ -65,7 +65,7 @@ namespace Sifaw.WPF
 		/// <summary>
 		/// Obtiene o establece un pincel que describe el fondo del borde del componente.
 		/// </summary>
-		public UIFrameBrush BorderBrush
+        public virtual UIFrameBrush BorderBrush
 		{
 			get { return _borderBrush; }
 			set
@@ -82,7 +82,7 @@ namespace Sifaw.WPF
 		/// Obtiene o establece la alineación horizontal que se aplican a este elemento
 		/// cuando se aloja dentro de un elemento primario.
 		/// </summary>
-		public UIHorizontalAlignment HorizontalAlignment
+        public virtual UIHorizontalAlignment HorizontalAlignment
 		{
 			get { return _horizontalAlignment; }
 			set
@@ -99,7 +99,7 @@ namespace Sifaw.WPF
 		/// Obtiene o establece la alineación vertical que se aplican a este elemento
 		/// cuando se aloja dentro de un elemento primario.
 		/// </summary>
-		public UIVerticalAlignment VerticalAlignment
+        public virtual UIVerticalAlignment VerticalAlignment
 		{
 			get { return _verticalAlignment; }
 			set
@@ -112,32 +112,51 @@ namespace Sifaw.WPF
 			}
 		}
 
-		#endregion
+        /// <summary>
+        /// Obtiene o establece un valor que indica si el elemento se ha de ajustar a su contenido.
+        /// </summary>
+        public override bool SizeToContent
+        {
+            get { return (Width.Equals(double.NaN)) && (Height.Equals(double.NaN)); }
+            set
+            {
+                if (value)
+                {
+                    Width = double.NaN;
+                    Height = double.NaN;
+                }
+            }
+        }
 
-		#region Constructor
+        #endregion
 
-		public ControlSettings(Control control)
+        #region Constructor
+
+        public ControlSettings(Control control)
         {
 			/* Initial values */
 			this.Margin = (UIFrame)SettingsOperationsManager.UIFrameToThickness.ConvertBack(control.Margin, null, null, null);
 			this.Padding = (UIFrame)SettingsOperationsManager.UIFrameToThickness.ConvertBack(control.Padding, null, null, null);
 			this.Background = (UIBrush)SettingsOperationsManager.UIBrushToBrush.ConvertBack(control.Background, null, null, null);
 			this.Foreground = (UIBrush)SettingsOperationsManager.UIBrushToBrush.ConvertBack(control.Foreground, null, null, null);
-            
+
+            // UISettings ...
 			UtilWPF.BindField(this, "Background",          control, Control.BackgroundProperty,          BindingMode.TwoWay, SettingsOperationsManager.UIBrushToBrush);
 			UtilWPF.BindField(this, "Foreground",          control, Control.ForegroundProperty,          BindingMode.TwoWay, SettingsOperationsManager.UIBrushToBrush);
-			UtilWPF.BindField(this, "BorderBrush",         control, Control.BorderBrushProperty,         BindingMode.TwoWay, SettingsOperationsManager.UIFrameBrushToBorderBrush);
 			UtilWPF.BindField(this, "Margin",              control, Control.MarginProperty,              BindingMode.TwoWay, SettingsOperationsManager.UIFrameToThickness);
 			UtilWPF.BindField(this, "Padding",             control, Control.PaddingProperty,             BindingMode.TwoWay, SettingsOperationsManager.UIFrameToThickness);
-			UtilWPF.BindField(this, "Border",              control, Control.BorderThicknessProperty,     BindingMode.TwoWay, SettingsOperationsManager.UIFrameToThickness);
 			UtilWPF.BindField(this, "Height",              control, Control.HeightProperty,              BindingMode.TwoWay);
 			UtilWPF.BindField(this, "Width",               control, Control.WidthProperty,               BindingMode.TwoWay);
-			UtilWPF.BindField(this, "HorizontalAlignment", control, Control.HorizontalAlignmentProperty, BindingMode.TwoWay, SettingsOperationsManager.UIHAlignToHAlign);
-			UtilWPF.BindField(this, "VerticalAlignment",   control, Control.VerticalAlignmentProperty,   BindingMode.TwoWay, SettingsOperationsManager.UIVAlignToVAlign);
             UtilWPF.BindField(this, "MinWidth",            control, Control.MinWidthProperty,            BindingMode.TwoWay);
             UtilWPF.BindField(this, "MaxWidth",            control, Control.MaxWidthProperty,            BindingMode.TwoWay);
             UtilWPF.BindField(this, "MinHeight",           control, Control.MinHeightProperty,           BindingMode.TwoWay);
             UtilWPF.BindField(this, "MaxHeight",           control, Control.MaxHeightProperty,           BindingMode.TwoWay);			
+
+            // ComponentSettings ...
+            UtilWPF.BindField(this, "Border",              control, Control.BorderThicknessProperty,     BindingMode.TwoWay, SettingsOperationsManager.UIFrameToThickness);
+            UtilWPF.BindField(this, "BorderBrush",         control, Control.BorderBrushProperty,         BindingMode.TwoWay, SettingsOperationsManager.UIFrameBrushToBorderBrush);
+            UtilWPF.BindField(this, "HorizontalAlignment", control, Control.HorizontalAlignmentProperty, BindingMode.TwoWay, SettingsOperationsManager.UIHAlignToHAlign);
+            UtilWPF.BindField(this, "VerticalAlignment",   control, Control.VerticalAlignmentProperty,   BindingMode.TwoWay, SettingsOperationsManager.UIVAlignToVAlign);
 		}
 
         #endregion

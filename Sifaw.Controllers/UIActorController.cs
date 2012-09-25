@@ -296,6 +296,18 @@ namespace Sifaw.Controllers
             base.OnUIElementLoaded();
 
             /* Default Settings... */
+            _descriptors = GetDescriptors();
+            _guest = GetGuestAt(_key);
+
+            UIElement.Descriptors = _descriptors;
+
+            //_guest.UISettings.Height = double.NaN;
+            //_guest.UISettings.Width = double.NaN;
+            _guest.UISettings.VerticalAlignment = Views.Kit.UIVerticalAlignment.Fill;
+            _guest.UISettings.HorizontalAlignment = Views.Kit.UIHorizontalAlignment.Fill;
+            _guest.UISettings.Margin = Sifaw.Views.Kit.UIFrame.Empty;
+
+            UIElement.Update(_guest, _key);
         }
 
 		#endregion
@@ -308,19 +320,6 @@ namespace Sifaw.Controllers
 		protected override void OnAfterStartController()
 		{
 			base.OnAfterStartController();
-
-			_descriptors = GetDescriptors();
-			_guest = GetGuestAt(_key);
-
-			UIElement.Descriptors = _descriptors;
-
-            //_guest.UISettings.Height = double.NaN;
-            //_guest.UISettings.Width = double.NaN;
-            _guest.UISettings.VerticalAlignment = Views.Kit.UIVerticalAlignment.Fill;
-            _guest.UISettings.HorizontalAlignment = Views.Kit.UIHorizontalAlignment.Fill;
-            _guest.UISettings.Margin = Sifaw.Views.Kit.UIFrame.Empty;
-
-			UIElement.Update(_guest, _key);
 		}
 
 		#endregion

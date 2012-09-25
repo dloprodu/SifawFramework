@@ -106,9 +106,31 @@ namespace Sifaw.WPF.Test
 
 		#endregion
 
-		#region Default Input / Output
+        #region UIElement load
 
-		public override UIAssistantTestController.Input GetDefaultInput()
+        protected override void OnUIElementLoaded()
+        {
+            base.OnUIElementLoaded();
+
+            Controller1.UISettings.WithControl = false;
+            Controller1.UISettings.AllowCancel = false;
+            Controller1.UISettings.Denomination = "Vista 1...";
+            Controller1.UISettings.Description = "Descripción Vista 1 Descripción Vista 1 Descripción Vista 1 Descripción Vista 1 Descripción Vista 1 Descripción Vista 1 Descripción Vista 1 Descripción Vista 1 Descripción Vista 1 Descripción Vista 1 Descripción Vista 1 Descripción Vista 1 Descripción Vista 1...";
+
+            Controller2.UISettings.WithControl = false;
+            Controller2.UISettings.Denomination = "Vista 2...";
+            Controller2.UISettings.Description = "Descripción Vista 2...";
+
+            Controller3.UISettings.WithControl = false;
+            Controller3.UISettings.Denomination = "Vista 3...";
+            Controller3.UISettings.Description = "Descripción Vista 3...";
+        }
+
+        #endregion
+        
+        #region Default Input / Output
+
+        public override UIAssistantTestController.Input GetDefaultInput()
 		{
 			return new Input();			
 		}
@@ -190,20 +212,10 @@ namespace Sifaw.WPF.Test
 
         protected override void StartController()
 		{
-            Controller1.UISettings.WithControl = false;
-            Controller1.UISettings.AllowCancel = false;
-			Controller1.UISettings.Denomination = "Vista 1...";
-			Controller1.UISettings.Description = "Descripción Vista 1 Descripción Vista 1 Descripción Vista 1 Descripción Vista 1 Descripción Vista 1 Descripción Vista 1 Descripción Vista 1 Descripción Vista 1 Descripción Vista 1 Descripción Vista 1 Descripción Vista 1 Descripción Vista 1 Descripción Vista 1...";
 			Controller1.Start(new UIBackgroundWorkerController.Input(new BackgroundWorkerPack(TestBackGroundWorker1, null), false));
 
-            Controller2.UISettings.WithControl = false;
-            Controller2.UISettings.Denomination = "Vista 2...";
-            Controller2.UISettings.Description = "Descripción Vista 2...";
             Controller2.Start(new UIBackgroundWorkerController.Input(new BackgroundWorkerPack(TestBackGroundWorker2, null), false));
 
-            Controller3.UISettings.WithControl = false;
-            Controller3.UISettings.Denomination = "Vista 3...";
-            Controller3.UISettings.Description = "Descripción Vista 3...";
             Controller3.Start(new UIBackgroundWorkerController.Input(new BackgroundWorkerPack(TestBackGroundWorker3, null), false));
 		}
 

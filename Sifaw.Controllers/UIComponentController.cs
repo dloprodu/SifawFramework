@@ -255,7 +255,7 @@ namespace Sifaw.Controllers
             /* Default Settings... */
             UISettings.HorizontalAlignment = UIHorizontalAlignment.Fill;
             UISettings.VerticalAlignment = UIVerticalAlignment.Fill;
-
+            
             /* Campos que se inicializan con la representación concreta del componente ... */
             // UISettings.Border
             // UISettings.BorderBrush

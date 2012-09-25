@@ -47,12 +47,13 @@ namespace Sifaw.WPF
 		#endregion
 
 		#region Events Handlers
-
+                
 		private void Window_Loaded(object sender, RoutedEventArgs e)
 		{
 			// Cuando una ventana se abre por primera vez, se producen los eventos Loaded y ContentRendered una vez que se produce el evento Activated. 
 			// Con esta perspectiva, una ventana puede considerarse abierta cuando se produce ContentRendered.
 			OnAfterShow(EventArgs.Empty);
+            OnUILoaded(EventArgs.Empty);
 		}
 
 		private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -63,12 +64,18 @@ namespace Sifaw.WPF
 			e.Cancel = args.Cancel;
 		}
 
-		private void Window_Closed(object sender, EventArgs e)
-		{
-			OnAfterClose(EventArgs.Empty);
-		}
-
 		#endregion
+
+        #region Methods sobreescritos
+
+        protected override void OnClosed(EventArgs e)
+        {
+            base.OnClosed(e);
+
+            OnAfterClose(EventArgs.Empty);
+        }
+
+        #endregion
 
 		#region UIShell Members
 
@@ -195,6 +202,13 @@ namespace Sifaw.WPF
 			shell.Focus();
 		}
 
+        public event EventHandler UILoaded;
+        private void OnUILoaded(EventArgs e)
+        {
+            if (UILoaded != null)
+                UILoaded(this as ShellView, e);
+        }
+
 		#endregion
 
 		#region UISettings
@@ -217,5 +231,5 @@ namespace Sifaw.WPF
 		}
 
 		#endregion
-	}
+    }
 }

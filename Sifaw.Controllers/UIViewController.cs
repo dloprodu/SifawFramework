@@ -19,17 +19,6 @@
  *      • Implementar un ViewDispatcher que proporciones servicios para administrar mensajes 
  *        de las vistas en el proceso principal.
  *        
- *	3. ¿Como gestionar lo vistas modales, empotradas? 
- *	   ¿Seguir el esquema de 3 niveles (1º ppal, 2º sub, 3º edición)?
- *	    • En eKade ...
- *	      If TopLevel 
- *	         if Modal -> Cuadro de dialogo que no permite la interacción con otra vista
- *	            Show(vistaActiva)
- *	         else -> Si no es modal lo obligamos
- *	            ShowDialog(vistaActiva)
- *	      else -> No es un form de nivel superior
- *	         Show(vistaActiva)
- *	    • En Sifaw ...
  */
 
 
@@ -342,15 +331,24 @@ namespace Sifaw.Controllers
         {
             base.OnAfterUIElementCreate();
 
-            /* Default Settings... */
-            UISettings.Header = "Sifaw Framework Application";
-            UISettings.AllowResize = true;
-
             /* Subscripción a eventos de la vista... */
             UIElement.BeforeShow += new EventHandler(UIElement_BeforeShow);
             UIElement.AfterShow += new EventHandler(UIElement_AfterShow);
             UIElement.BeforeClose += new UIFinishRequestEventHandler(UIElement_BeforeClose);
             UIElement.AfterClose += new EventHandler(UIElement_AfterClose);
+        }
+
+        /// <summary>
+        /// Invoca al método sobrescirto <see cref="UIElementController{TInput, TOutput, TView}.OnUIElementLoaded()"/> y
+        /// posteriormente aplica la configuración por defecto al objeto <see cref="UIView"/>.
+        /// </summary>
+        protected override void OnUIElementLoaded()
+        {
+            base.OnUIElementLoaded();
+
+            /* Default Settings... */
+            UISettings.Header = "Sifaw Framework Application";
+            UISettings.AllowResize = true;
         }
 
         #endregion

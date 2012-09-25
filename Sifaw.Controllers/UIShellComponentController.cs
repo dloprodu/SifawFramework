@@ -125,6 +125,32 @@ namespace Sifaw.Controllers
 
 		#endregion
 
+        #region UIElement Methods
+
+        /// <summary>
+        /// Invoca al método sobrescirto <see cref="UIComponentController{TInput, TOutput, TComponent}.OnAfterUIElementCreate()"/> y
+        /// posteriormente se subscribe a eventos de <see cref="UIView"/>.
+        /// </summary>
+        protected override void OnAfterUIElementCreate()
+        {
+            base.OnAfterUIElementCreate();
+
+            /* Subscripción a eventos de la vista... */
+        }
+
+        /// <summary>
+        /// Invoca al método sobrescirto <see cref="UIComponentController{TInput, TOutput, TComponent}.OnUIElementLoaded()"/> y
+        /// posteriormente aplica la configuración por defecto al objeto <see cref="UIView"/>.
+        /// </summary>
+        protected override void OnUIElementLoaded()
+        {
+            base.OnUIElementLoaded();
+
+            /* Default Settings... */
+        }
+
+        #endregion
+
 		#region Abstract Methods
 
 		/// <summary>

@@ -48,6 +48,17 @@ namespace Sifaw.WPF
 
 		#endregion
 
+        #region Methods sobreescritos
+
+        protected override void OnInitialized(EventArgs e)
+        {
+            base.OnInitialized(e);
+
+            OnUILoaded(EventArgs.Empty);
+        }
+
+        #endregion
+
 		#region Helpers
 
 		private GridLength GetGridLength(double length, UIShellLengthModes mode)
@@ -147,6 +158,13 @@ namespace Sifaw.WPF
 		{
 			grid.Focus();
 		}
+
+        public event EventHandler UILoaded;
+        private void OnUILoaded(EventArgs e)
+        {
+            if (UILoaded != null)
+                UILoaded(this as ShellView, e);
+        }
 
 		#endregion
 

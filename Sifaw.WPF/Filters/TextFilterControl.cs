@@ -79,6 +79,13 @@ namespace Sifaw.WPF.Filters
 
 		#region Overrides Methods
 
+        protected override void OnInitialized(EventArgs e)
+        {
+            base.OnInitialized(e);
+
+            OnUILoaded(EventArgs.Empty);
+        }
+
 		/// <summary>
 		/// Último filtro válido aplicado.
 		/// </summary>
@@ -149,6 +156,13 @@ namespace Sifaw.WPF.Filters
 		{
 			Focus();
 		}
+
+        public event EventHandler UILoaded;
+        private void OnUILoaded(EventArgs e)
+        {
+            if (UILoaded != null)
+                UILoaded(this as ShellView, e);
+        }
 
 		#endregion
 

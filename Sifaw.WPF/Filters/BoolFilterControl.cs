@@ -73,6 +73,13 @@ namespace Sifaw.WPF.Filters
 
 		#region Methods sobreescritos
 
+        protected override void OnInitialized(EventArgs e)
+        {
+            base.OnInitialized(e);
+
+            OnUILoaded(EventArgs.Empty);
+        }
+
 		protected override void OnChecked(RoutedEventArgs e)
 		{
 			base.OnChecked(e);
@@ -173,6 +180,13 @@ namespace Sifaw.WPF.Filters
 		{
 			Focus();
 		}
+
+        public event EventHandler UILoaded;
+        private void OnUILoaded(EventArgs e)
+        {
+            if (UILoaded != null)
+                UILoaded(this as ShellView, e);
+        }
 
 		#endregion
 

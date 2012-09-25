@@ -63,7 +63,7 @@ namespace Sifaw.Views
         /// <summary>
         /// Se produce cuando el elemento está inicializado correctamente.
         /// </summary>
-        event EventHandler Loaded;
+        event EventHandler UILoaded;
 
         #endregion
     }

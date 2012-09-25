@@ -243,17 +243,26 @@ namespace Sifaw.Controllers.Components
 		#region UIElement Methods
 
 		/// <summary>
-        /// Invoca al método sobrescirto <see cref="UIElementController{TInput, TOutput, UIComponent}.OnAfterUIElementCreate()"/>.
+        /// Invoca al método sobrescirto <see cref="UIShellComponentController{TInput, TOutput, UIComponent}.OnAfterUIElementCreate()"/>.
 		/// </summary>
 		protected override void OnAfterUIElementCreate()
 		{
 			base.OnAfterUIElementCreate();
 
-            /* Default settings.. */
-            UISettings.Border = new Views.Kit.UIFrame(1);
-
 			/* Subscripción a eventos del componente... */		
 		}
+
+        /// <summary>
+        /// Invoca al método sobrescirto <see cref="UIShellComponentController{TInput, TOutput, TComponent, TGuest}.OnUIElementLoaded()"/> y
+        /// posteriormente aplica la configuración por defecto al objeto <see cref="UIComponent"/>.
+        /// </summary>
+        protected override void OnUIElementLoaded()
+        {
+            base.OnUIElementLoaded();
+
+            /* Default settings.. */
+            UISettings.Border = new Views.Kit.UIFrame(1);
+        }
 
 		#endregion
 

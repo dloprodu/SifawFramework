@@ -44,14 +44,14 @@ namespace Sifaw.WPF.Converters
 
 		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
 		{
-			UIBrush brush = null;
+			UIFrameBrush fbrush = null;
 
 			if (value != null)
 			{
-				brush = (UIBrush)SettingsOperationsManager.UIBrushToBrush.ConvertBack((Brush)value, null, null, null);
+                fbrush = new UIFrameBrush((UIBrush)SettingsOperationsManager.UIBrushToBrush.ConvertBack((Brush)value, null, null, null));
 			}
 
-			return brush;
+            return fbrush;
 		}
 
 		#endregion

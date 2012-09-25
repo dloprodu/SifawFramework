@@ -154,9 +154,20 @@ namespace Sifaw.WPF
 
 		#endregion
 
-		#region Methods auxiliares
+        #region Methods sobreescritos
 
-		private double Rango(int value, ProgressBar barra)
+        protected override void OnInitialized(EventArgs e)
+        {
+            base.OnInitialized(e);
+
+            OnUILoaded(EventArgs.Empty);
+        }
+
+        #endregion
+
+        #region Methods auxiliares
+
+        private double Rango(int value, ProgressBar barra)
 		{
 			if (value < barra.Minimum) 
 				return barra.Minimum;
@@ -314,6 +325,13 @@ namespace Sifaw.WPF
 		{
 			expanderDetail.Focus();
 		}
+
+        public event EventHandler UILoaded;
+        private void OnUILoaded(EventArgs e)
+        {
+            if (UILoaded != null)
+                UILoaded(this as ShellView, e);
+        }
 
 		#endregion		
 

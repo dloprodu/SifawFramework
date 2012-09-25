@@ -58,6 +58,17 @@ namespace Sifaw.WPF
 		
 		#endregion
 
+        #region Methods sobreescritos
+
+        protected override void OnInitialized(EventArgs e)
+        {
+            base.OnInitialized(e);
+
+            OnUILoaded(EventArgs.Empty);
+        }
+
+        #endregion
+
 		#region Override Methods
 
 		protected override void OnSelectionChanged(SelectionChangedEventArgs e)
@@ -160,6 +171,13 @@ namespace Sifaw.WPF
 		{
 			Focus();
 		}
+
+        public event EventHandler UILoaded;
+        private void OnUILoaded(EventArgs e)
+        {
+            if (UILoaded != null)
+                UILoaded(this as ShellView, e);
+        }
 
 		#endregion
 

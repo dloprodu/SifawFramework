@@ -183,7 +183,7 @@ namespace Sifaw.Controllers
 		protected virtual void OnAfterUIElementCreate()
 		{
             /* Subscripción a eventos del componente... */
-            UIElement.Loaded += new EventHandler(UIElement_Loaded);
+            UIElement.UILoaded += new EventHandler(UIElement_UILoaded);
 		}
 
         /// <summary>
@@ -202,7 +202,7 @@ namespace Sifaw.Controllers
         /// elemento de interfaz de usuario.
         /// </para>
         /// </summary>
-        protected void OnUIElementLoaded(EventArgs e)
+        protected virtual void OnUIElementLoaded()
         {
             /* Default Settings... */
             UISettings.SizeToContent = false;
@@ -380,9 +380,9 @@ namespace Sifaw.Controllers
 
         #region UIElemen event handlers
 
-        private void UIElement_Loaded(object sender, EventArgs e)
+        private void UIElement_UILoaded(object sender, EventArgs e)
         {
-            OnUIElementLoaded(EventArgs.Empty);
+            OnUIElementLoaded();
 
             if (UIElementLoaded != null)
                 UIElementLoaded(this, e);

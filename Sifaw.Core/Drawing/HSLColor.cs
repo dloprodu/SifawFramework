@@ -152,6 +152,9 @@ namespace Sifaw.Core.Drawing
 
         #region IEquatable<HSLColor> Members
 
+        /// <summary>
+        /// Determina si un objeto <see cref="HSLColor"/> proporcionado es equivalente al objeto <see cref="HSLColor"/> actual.
+        /// </summary>
         public bool Equals(HSLColor other)
         {
             return h.Equals(other.h)

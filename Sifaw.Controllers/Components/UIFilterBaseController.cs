@@ -216,19 +216,28 @@ namespace Sifaw.Controllers.Components
 		#region UIElement Methods
 
 		/// <summary>
-		/// Invoca al método sobrescirto <see cref="UIElementController{TInput, TOutput, TComponent}.OnAfterUIElementCreate()"/> y
+        /// Invoca al método sobrescirto <see cref="UIComponentController{TInput, TOutput, TComponent}.OnAfterUIElementCreate()"/> y
 		/// posteriormente se subscribe a los eventos del componente <see cref="FilterBaseComponent{TFilter}"/>.
 		/// </summary>
 		protected override void OnAfterUIElementCreate()
 		{
 			base.OnAfterUIElementCreate();
-
-            /* Default settings.. */
-            UISettings.Border = new Views.Kit.UIFrame(1);
-                        
+                  
 			/* Subscripción a eventos del componente... */
 			UIElement.FilterChanged += new UIFilterChangedEventHandler(UIElement_FilterChanged);
 		}
+
+        /// <summary>
+        /// Invoca al método sobrescirto <see cref="UIComponentController{TInput, TOutput, TComponent}.OnUIElementLoaded()"/> y
+        /// posteriormente aplica la configuración por defecto al objeto <see cref="UIView"/>.
+        /// </summary>
+        protected override void OnUIElementLoaded()
+        {
+            base.OnUIElementLoaded();
+
+            /* Default settings.. */
+            //UISettings.Border = new Views.Kit.UIFrame(1);
+        }
 
 		#endregion
 

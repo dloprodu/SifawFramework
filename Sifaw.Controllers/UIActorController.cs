@@ -277,7 +277,7 @@ namespace Sifaw.Controllers
 		#region UIElement Methods
 
 		/// <summary>
-		/// Invoca al método sobrescirto <see cref="UIElementController{TInput, TOutput, TComponent}.OnAfterUIElementCreate()"/>.
+        /// Invoca al método sobrescirto <see cref="UIComponentController{TInput, TOutput, TComponent}.OnAfterUIElementCreate()"/>.
 		/// </summary>
 		protected override void OnAfterUIElementCreate()
 		{
@@ -286,6 +286,17 @@ namespace Sifaw.Controllers
 			/* Subscripción a eventos del componente... */
 			UIElement.GuestSelecting += new UIGuestSelectingEventHandler(UIElement_UpdateGuest);
 		}
+
+        /// <summary>
+        /// Invoca al método sobrescirto <see cref="UIComponentController{TInput, TOutput, TComponent}.OnUIElementLoaded()"/> y
+        /// posteriormente aplica la configuración por defecto al objeto <see cref="UIView"/>.
+        /// </summary>
+        protected override void OnUIElementLoaded()
+        {
+            base.OnUIElementLoaded();
+
+            /* Default Settings... */
+        }
 
 		#endregion
 

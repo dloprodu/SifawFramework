@@ -41,42 +41,42 @@ namespace Sifaw.WPF
 			ui = new ShellControl();
 		}
 
-		public void Load(out BackgroundWorkerComponent ui)
+		public void Create(out BackgroundWorkerComponent ui)
 		{
 			ui = new BackgroundWorkerControl();
 		}
 
-		public void Load(out TabHostComponent ui)
+		public void Create(out TabHostComponent ui)
 		{
 			ui = new TabHostControl();
 		}
 
-		public void Load(out AssistantComponent ui)
+		public void Create(out AssistantComponent ui)
 		{
 			ui = new AssistantControl();
 		}
 
-		public void Load(out TextFilterComponent ui)
+		public void Create(out TextFilterComponent ui)
 		{
 			ui = new TextFilterControl();
 		}
 
-		public void Load(out BoolFilterComponent ui)
+		public void Create(out BoolFilterComponent ui)
 		{
 			ui = new BoolFilterControl();
 		}
 
-		public void Load(out ListFilterComponent ui)
+		public void Create(out ListFilterComponent ui)
 		{
 			ui = new ListFilterControl();
 		}
 
-		public void Load(out EnumFilterComponent ui)
+		public void Create(out EnumFilterComponent ui)
 		{			
 			ui = new EnumFilterControl();
 		}
 
-		public void Load(out DropDownListFilterComponent ui)
+		public void Create(out DropDownListFilterComponent ui)
 		{
 			ui = new DropDownListFilterControl();
 		}
@@ -85,7 +85,7 @@ namespace Sifaw.WPF
 
 		#region Vistas
 
-		public void Load(out ShellView ui)
+		public void Create(out ShellView ui)
 		{
 			ui = new ShellWindow();
 		}

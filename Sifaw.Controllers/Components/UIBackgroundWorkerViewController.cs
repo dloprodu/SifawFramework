@@ -241,20 +241,31 @@ namespace Sifaw.Controllers.Components
 		#region UIElement Methods
 
 		/// <summary>
-		/// Invoca al método sobrescirto <see cref="UIElementController{TInput, TOutput, TView}.OnAfterUIElementCreate()"/> y
+        /// Invoca al método sobrescirto <see cref="UIShellViewController{TInput, TOutput, TGuest}.OnAfterUIElementCreate()"/> y
 		/// posteriormente establece una configuración por defecto a la vista.
 		/// </summary>
 		protected override void OnAfterUIElementCreate()
 		{
 			base.OnAfterUIElementCreate();
+        
+            /* Subscripción a eventos del componente... */
+        }
+        
+        /// <summary>
+        /// Invoca al método sobrescirto <see cref="UIShellViewController{TInput, TOutput, TGuest}.OnUIElementLoaded()"/> y
+        /// posteriormente aplica la configuración por defecto al objeto <see cref="UIView"/>.
+        /// </summary>
+        protected override void OnUIElementLoaded()
+        {
+            base.OnUIElementLoaded();
 
-			/* Default Setiings... */
+            /* Default Setiings... */
             UISettings.Header = "Espere ...";
             UISettings.AllowResize = false;
-			UISettings.SizeToContent = true;
+            UISettings.SizeToContent = true;
             UISettings.MinSize = new UISize(600, 0);
             UISettings.MaxSize = new UISize(600, 400);
-		}
+        }
 
 		/// <summary>
 		/// Invoca al método sobrescirto <see cref="UIViewController{TInput, TOutput, TUIView}.OnBeforeUIClose(out bool)"/> y

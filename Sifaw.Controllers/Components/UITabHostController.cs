@@ -128,7 +128,7 @@ namespace Sifaw.Controllers.Components
 		#region UIElement Methods
 
 		/// <summary>
-		/// Invoca al método sobrescirto <see cref="UIElementController{TInput, TOutput, TComponent}.OnAfterUIElementCreate()"/>.
+        /// Invoca al método sobrescirto <see cref="UIActorController{TInput, TOutput, TComponent, TGuest}.OnAfterUIElementCreate()"/>.
 		/// </summary>
 		protected override void OnAfterUIElementCreate()
 		{
@@ -136,6 +136,17 @@ namespace Sifaw.Controllers.Components
 
 			/* Subscripción a eventos del componente... */			
 		}
+
+        /// <summary>
+        /// Invoca al método sobrescirto <see cref="UIActorController{TInput, TOutput, TComponent, TGuest}.OnUIElementLoaded()"/> y
+        /// posteriormente aplica la configuración por defecto al objeto <see cref="UIComponent"/>.
+        /// </summary>
+        protected override void OnUIElementLoaded()
+        {
+            base.OnUIElementLoaded();
+
+            /* Default Settings... */            
+        }
 
 		#endregion
 

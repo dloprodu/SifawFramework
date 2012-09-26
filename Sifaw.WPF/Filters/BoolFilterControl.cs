@@ -50,6 +50,21 @@ namespace Sifaw.WPF.Filters
 			DefaultStyleKeyProperty.OverrideMetadata(typeof(BoolFilterControl), new FrameworkPropertyMetadata(typeof(BoolFilterControl)));
 		}
 
+        public BoolFilterControl()
+            : base()
+        {
+            Loaded += new RoutedEventHandler(BoolFilterControl_Loaded);
+        }
+
+        #endregion
+
+        #region Event Hanlders
+
+        private void BoolFilterControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            OnUILoaded(EventArgs.Empty);
+        }
+
 		#endregion
 
 		#region Helpers
@@ -72,13 +87,6 @@ namespace Sifaw.WPF.Filters
 		#endregion
 
 		#region Methods sobreescritos
-
-        protected override void OnInitialized(EventArgs e)
-        {
-            base.OnInitialized(e);
-
-            OnUILoaded(EventArgs.Empty);
-        }
 
 		protected override void OnChecked(RoutedEventArgs e)
 		{
@@ -185,7 +193,7 @@ namespace Sifaw.WPF.Filters
         private void OnUILoaded(EventArgs e)
         {
             if (UILoaded != null)
-                UILoaded(this as ShellView, e);
+                UILoaded(this as BoolFilterComponent, e);
         }
 
 		#endregion

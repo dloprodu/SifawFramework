@@ -90,8 +90,19 @@ namespace Sifaw.WPF
 				if (_horizontalAlignment != value)
 				{
 					_horizontalAlignment = value;
+
 					OnPropertyChanged(() => HorizontalAlignment);
 				}
+
+                switch (value)
+                {
+                    case UIHorizontalAlignment.Fill:
+                        Width = double.NaN;
+                        break;
+
+                    default:
+                        break;
+                }
 			}
 		}
 
@@ -107,8 +118,19 @@ namespace Sifaw.WPF
 				if (_verticalAlignment != value)
 				{
 					_verticalAlignment = value;
+
 					OnPropertyChanged(() => VerticalAlignment);
 				}
+
+                switch (value)
+                {
+                    case UIVerticalAlignment.Fill:
+                        Height = double.NaN;
+                        break;
+
+                    default:
+                        break;
+                }
 			}
 		}
 

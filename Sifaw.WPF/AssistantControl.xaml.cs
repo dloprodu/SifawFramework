@@ -49,18 +49,12 @@ namespace Sifaw.WPF
 
 		#endregion
 
-        #region Methods sobreescritos
+		#region Events Handlers
 
-        protected override void OnInitialized(EventArgs e)
+        private void AssistantControl_Loaded(object sender, RoutedEventArgs e)
         {
-            base.OnInitialized(e);
-
             OnUILoaded(EventArgs.Empty);
         }
-
-        #endregion
-
-		#region Events Handlers
 
 		private void buttonAnterior_Click(object sender, RoutedEventArgs e)
 		{
@@ -222,7 +216,7 @@ namespace Sifaw.WPF
         private void OnUILoaded(EventArgs e)
         {
             if (UILoaded != null)
-                UILoaded(this as ShellView, e);
+                UILoaded(this as AssistantComponent, e);
         }
 
         #endregion

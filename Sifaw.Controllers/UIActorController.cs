@@ -22,6 +22,7 @@ using System.Text;
 
 using Sifaw.Views;
 using Sifaw.Views.Components;
+using Sifaw.Views.Kit;
 
 
 namespace Sifaw.Controllers
@@ -191,7 +192,12 @@ namespace Sifaw.Controllers
 		/// </remarks>
 		protected virtual void OnAfterUpdateGuest()
 		{
-			/* Emtpy */
+            if (_guest != null)
+            {
+                _guest.UISettings.VerticalAlignment = UIVerticalAlignment.Fill;
+                _guest.UISettings.HorizontalAlignment = UIHorizontalAlignment.Fill;
+                _guest.UISettings.Margin = UIFrame.Empty;
+            }
 		}	
 
 		#endregion
@@ -295,19 +301,7 @@ namespace Sifaw.Controllers
         {
             base.OnUIElementLoaded();
 
-            /* Default Settings... */
-            _descriptors = GetDescriptors();
-            _guest = GetGuestAt(_key);
-
-            UIElement.Descriptors = _descriptors;
-
-            //_guest.UISettings.Height = double.NaN;
-            //_guest.UISettings.Width = double.NaN;
-            _guest.UISettings.VerticalAlignment = Views.Kit.UIVerticalAlignment.Fill;
-            _guest.UISettings.HorizontalAlignment = Views.Kit.UIHorizontalAlignment.Fill;
-            _guest.UISettings.Margin = Sifaw.Views.Kit.UIFrame.Empty;
-
-            UIElement.Update(_guest, _key);
+            /* Default Settings... */            
         }
 
 		#endregion
@@ -315,18 +309,28 @@ namespace Sifaw.Controllers
 		#region Start Methods
 
 		/// <summary>
-		/// Invoca al método sobrescirto <see cref="Controller{TInput, TOutput}.OnBeforeStartController()"/>.
+        /// Invoca al método sobrescirto <see cref="Controller{TInput, TOutput}.OnAfterStartController()"/>.
 		/// </summary>
 		protected override void OnAfterStartController()
-		{
-			base.OnAfterStartController();
+        {
+            base.OnAfterStartController();
+
+            _descriptors = GetDescriptors();
+            _guest = GetGuestAt(_key);
+            
+            UIElement.Descriptors = _descriptors;
+
+            OnBeforeUpdateGuest();
+            UIElement.Update(_guest, _key);
+            OnAfterUpdateGuest();
+            OnGuestChanged(new CLComponentChangedEventArgs(_key));
 		}
 
 		#endregion
 
-		#region UIElement Event Handlers
+        #region UIElement Event Handlers
 
-		private void UIElement_UpdateGuest(object sender, UIGuestSelectingEventArgs e)
+        private void UIElement_UpdateGuest(object sender, UIGuestSelectingEventArgs e)
 		{
 			CLComponentChangingEventArgs args = new CLComponentChangingEventArgs(e.Key);
 			OnGuestChanging(args);
@@ -338,13 +342,7 @@ namespace Sifaw.Controllers
 
 				if (new_guest != null)
 				{
-					OnBeforeUpdateGuest();
-
-                    //new_guest.UISettings.Height = double.NaN;
-                    //new_guest.UISettings.Width = double.NaN;
-                    new_guest.UISettings.VerticalAlignment = Views.Kit.UIVerticalAlignment.Fill;
-                    new_guest.UISettings.HorizontalAlignment = Views.Kit.UIHorizontalAlignment.Fill;
-                    new_guest.UISettings.Margin = Sifaw.Views.Kit.UIFrame.Empty;
+                    OnBeforeUpdateGuest();
 
 					UIElement.Update(new_guest, e.Key);
 

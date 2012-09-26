@@ -271,15 +271,17 @@ namespace Sifaw.WPF.Test
         {
             base.OnUIElementLoaded();
 
-            TextFilter.UISettings.Margin = new UIFrame(0);
+            TextFilter.UISettings.Margin = new UIFrame(3);
             TextFilter.UISettings.Placeholder = "Introduzca un texto...";
             TextFilter.UISettings.InstantSearch = true;
             
             BoolFilter.UISettings.Margin = new UIFrame(3);
             BoolFilter.UISettings.TextDisplay = "Mostrar algo al chequear ...";
 
+            EnumFilter.UISettings.Height = 100;
             EnumFilter.UISettings.Margin = new UIFrame(3);
 
+            ListFilter.UISettings.Height = 100;
             ListFilter.UISettings.Margin = new UIFrame(3);
 
             DropDownListFilter.UISettings.Margin = new UIFrame(3);
@@ -335,8 +337,8 @@ namespace Sifaw.WPF.Test
 		protected override void GetRowSettings(uint row, out double height, out UIShellLengthModes mode)
 		{
 			// Todas las filas se ajustan al contenido.
-			height = 0;
-			mode = UIShellLengthModes.Auto;
+			height = 100;
+            mode = UIShellLengthModes.Auto;
 		}
 
 		protected override void GetRowCellSettings(uint row, uint cell, out double width, out UIShellLengthModes mode, out UIComponent guest)

@@ -53,8 +53,18 @@ namespace Sifaw.WPF.Filters
 		public TextFilterControl()
 			: base()
 		{
-			this.Mode = SearchMode.Delayed;
+			Mode = SearchMode.Delayed;
+            Loaded += new RoutedEventHandler(TextFilterControl_Loaded);
 		}
+
+        #endregion
+
+        #region Event Handlers
+
+        private void TextFilterControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            OnUILoaded(EventArgs.Empty);
+        }
 
 		#endregion
 
@@ -78,13 +88,6 @@ namespace Sifaw.WPF.Filters
 		#endregion
 
 		#region Overrides Methods
-
-        protected override void OnInitialized(EventArgs e)
-        {
-            base.OnInitialized(e);
-
-            OnUILoaded(EventArgs.Empty);
-        }
 
 		/// <summary>
 		/// Último filtro válido aplicado.
@@ -161,7 +164,7 @@ namespace Sifaw.WPF.Filters
         private void OnUILoaded(EventArgs e)
         {
             if (UILoaded != null)
-                UILoaded(this as ShellView, e);
+                UILoaded(this as TextFilterComponent, e);
         }
 
 		#endregion

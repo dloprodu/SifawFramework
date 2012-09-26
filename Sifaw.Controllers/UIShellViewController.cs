@@ -18,6 +18,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Collections.ObjectModel;
 
 using Sifaw.Views;
 using Sifaw.Views.Kit;
@@ -102,6 +103,16 @@ namespace Sifaw.Controllers
 
 		#endregion
 
+        #region Fields
+
+        /// <summary>
+        /// Lista de componetnes <see cref="Sifaw.Views.UIComponent"/> embebidos en la shell.
+        /// </summary>
+        [CLReseteable(null)]
+        protected ReadOnlyCollection<TGuest> Guests = null;
+
+        #endregion
+
 		#region Constructors
 
         /// <summary>
@@ -149,6 +160,12 @@ namespace Sifaw.Controllers
             base.OnUIElementLoaded();
 
             /* Default Settings... */
+            foreach (TGuest guest in Guests)
+            {
+                guest.UISettings.HorizontalAlignment = UIHorizontalAlignment.Fill;
+                guest.UISettings.VerticalAlignment = UIVerticalAlignment.Fill;
+                guest.UISettings.Margin = UIFrame.Empty;
+            }
         }
 
         #endregion
@@ -196,12 +213,27 @@ namespace Sifaw.Controllers
         protected override void OnBeforeStartController()
 		{
 			base.OnBeforeStartController();
-			
-			UIElement.SetLayout(ShellOperationsManager.BuildLayout<TGuest>(
-				  GetNumberOfRows
-				, GetNumberOfCellsAt
-				, GetRowSettings
-				, GetRowCellSettings));
+
+            UIShellRow[] rows = ShellOperationsManager.BuildLayout<TGuest>(
+                  GetNumberOfRows
+                , GetNumberOfCellsAt
+                , GetRowSettings
+                , GetRowCellSettings);
+
+            List<TGuest> guests = new List<TGuest>();
+
+            foreach (UIShellRow row in rows)
+            {
+                foreach (UIShellRowCell cell in row.Cells)
+                {
+                    if (cell.Content != null)
+                        guests.Add((TGuest)cell.Content);
+                }
+            }
+
+            Guests = guests.AsReadOnly();
+
+            UIElement.SetLayout(rows);
 		}
 
 		#endregion

@@ -48,6 +48,21 @@ namespace Sifaw.WPF.Filters
 			DefaultStyleKeyProperty.OverrideMetadata(typeof(ListFilterControl), new FrameworkPropertyMetadata(typeof(ListFilterControl)));
 		}
 
+        public ListFilterControl()
+            : base()
+        {
+            Loaded += new RoutedEventHandler(ListFilterControl_Loaded);
+        }
+
+        #endregion
+
+        #region Event Handlers
+
+        private void ListFilterControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            OnUILoaded(EventArgs.Empty);
+        }
+
 		#endregion
 
 		#region Helpers
@@ -70,13 +85,6 @@ namespace Sifaw.WPF.Filters
 		#endregion
 		
 		#region Override Methods
-
-        protected override void OnInitialized(EventArgs e)
-        {
-            base.OnInitialized(e);
-
-            OnUILoaded(EventArgs.Empty);
-        }
 
 		/// <summary>
 		/// Último filtro válido aplicado.
@@ -172,7 +180,7 @@ namespace Sifaw.WPF.Filters
         private void OnUILoaded(EventArgs e)
         {
             if (UILoaded != null)
-                UILoaded(this as ShellView, e);
+                UILoaded(this as ListFilterComponent, e);
         }
 
 		#endregion

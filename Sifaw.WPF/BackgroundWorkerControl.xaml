@@ -7,7 +7,8 @@
              Width="Auto"
              Height="Auto" 
              Background="White" 
-             MinWidth="300">
+             MinWidth="300"
+             Loaded="BackgroundWorkerControl_Loaded">
     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />

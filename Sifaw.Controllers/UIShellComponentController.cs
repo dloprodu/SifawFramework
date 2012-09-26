@@ -147,6 +147,12 @@ namespace Sifaw.Controllers
             base.OnUIElementLoaded();
 
             /* Default Settings... */
+            foreach (TGuest guest in Guests)
+            {
+                guest.UISettings.HorizontalAlignment = UIHorizontalAlignment.Fill;
+                guest.UISettings.VerticalAlignment = UIVerticalAlignment.Fill;
+                guest.UISettings.Margin = UIFrame.Empty;
+            }
         }
 
         #endregion
@@ -207,14 +213,16 @@ namespace Sifaw.Controllers
 			{
 				foreach (UIShellRowCell cell in row.Cells)
 				{
-					if (cell.Content != null)
-						guests.Add((TGuest)cell.Content);
+                    if (cell.Content != null)
+                    {
+                        guests.Add((TGuest)cell.Content);
+                    }
 				}
 			}
 
 			Guests = guests.AsReadOnly();
 			
-			UIElement.SetSettings(rows);
+			UIElement.SetLayout(rows);
 		}
 
 		#endregion

@@ -123,6 +123,9 @@ namespace Sifaw.Controllers
         [CLReseteable(null)]
         private TUIElement _uiElement = default(TUIElement);
 
+        [CLReseteable(false)]
+        private bool _uiIsLoaded = false;
+
 		#endregion
 
 		#region Events
@@ -289,6 +292,14 @@ namespace Sifaw.Controllers
 			get { return UIElement.UISettings; }
 		}
 
+        /// <summary>
+        /// Devuelve un valor que indica si el elemento de UI ha sido cargado.
+        /// </summary>
+        public bool UIIsLoaded
+        {
+            get { return _uiIsLoaded; }
+        }
+
 		#endregion
 
 		#region Constructors
@@ -382,6 +393,8 @@ namespace Sifaw.Controllers
 
         private void UIElement_UILoaded(object sender, EventArgs e)
         {
+            _uiIsLoaded = true;
+
             OnUIElementLoaded();
 
             if (UIElementLoaded != null)

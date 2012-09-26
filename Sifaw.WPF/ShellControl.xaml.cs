@@ -46,18 +46,16 @@ namespace Sifaw.WPF
 			InitializeComponent();
 		}
 
-		#endregion
+        #endregion
 
-        #region Methods sobreescritos
-
-        protected override void OnInitialized(EventArgs e)
+        #region Evnt Hanlders
+                
+        private void ShellControl_Loaded(object sender, RoutedEventArgs e)
         {
-            base.OnInitialized(e);
-
             OnUILoaded(EventArgs.Empty);
         }
 
-        #endregion
+		#endregion
 
 		#region Helpers
 
@@ -91,7 +89,7 @@ namespace Sifaw.WPF
 
 		#region UIShell Members
 
-		public void SetSettings(UIShellRow[] rows)
+		public void SetLayout(UIShellRow[] rows)
 		{
 			Reset();
 
@@ -163,7 +161,7 @@ namespace Sifaw.WPF
         private void OnUILoaded(EventArgs e)
         {
             if (UILoaded != null)
-                UILoaded(this as ShellView, e);
+                UILoaded(this as ShellComponent, e);
         }
 
 		#endregion

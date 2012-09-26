@@ -154,17 +154,6 @@ namespace Sifaw.WPF
 
 		#endregion
 
-        #region Methods sobreescritos
-
-        protected override void OnInitialized(EventArgs e)
-        {
-            base.OnInitialized(e);
-
-            OnUILoaded(EventArgs.Empty);
-        }
-
-        #endregion
-
         #region Methods auxiliares
 
         private double Rango(int value, ProgressBar barra)
@@ -245,6 +234,11 @@ namespace Sifaw.WPF
 		#endregion
 
 		#region Events Handlers
+        
+        private void BackgroundWorkerControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            OnUILoaded(EventArgs.Empty);
+        }
 
 		private void buttonCancelar_Click(object sender, RoutedEventArgs e)
 		{
@@ -330,7 +324,7 @@ namespace Sifaw.WPF
         private void OnUILoaded(EventArgs e)
         {
             if (UILoaded != null)
-                UILoaded(this as ShellView, e);
+                UILoaded(this as BackgroundWorkerComponent, e);
         }
 
 		#endregion		

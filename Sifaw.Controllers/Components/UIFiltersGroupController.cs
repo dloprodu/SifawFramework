@@ -22,6 +22,7 @@ using Sifaw.Core.Utilities;
 
 using Sifaw.Views;
 using Sifaw.Views.Components;
+using Sifaw.Views.Kit;
 
 
 namespace Sifaw.Controllers.Components
@@ -243,7 +244,7 @@ namespace Sifaw.Controllers.Components
 		#region UIElement Methods
 
 		/// <summary>
-        /// Invoca al método sobrescirto <see cref="UIShellComponentController{TInput, TOutput, UIComponent}.OnAfterUIElementCreate()"/>.
+        /// Invoca al método sobrescirto <see cref="UIShellComponentController{TInput, TOutput, TGuest}.OnAfterUIElementCreate()"/>.
 		/// </summary>
 		protected override void OnAfterUIElementCreate()
 		{
@@ -253,7 +254,7 @@ namespace Sifaw.Controllers.Components
 		}
 
         /// <summary>
-        /// Invoca al método sobrescirto <see cref="UIShellComponentController{TInput, TOutput, TComponent, TGuest}.OnUIElementLoaded()"/> y
+        /// Invoca al método sobrescirto <see cref="UIShellComponentController{TInput, TOutput, TGuest}.OnUIElementLoaded()"/> y
         /// posteriormente aplica la configuración por defecto al objeto <see cref="UIComponent"/>.
         /// </summary>
         protected override void OnUIElementLoaded()
@@ -261,7 +262,7 @@ namespace Sifaw.Controllers.Components
             base.OnUIElementLoaded();
 
             /* Default settings.. */
-            UISettings.Border = new Views.Kit.UIFrame(1);
+            UISettings.Border = new UIFrame(1);
         }
 
 		#endregion

@@ -48,6 +48,21 @@ namespace Sifaw.WPF.Filters
 			DefaultStyleKeyProperty.OverrideMetadata(typeof(DropDownListFilterControl), new FrameworkPropertyMetadata(typeof(DropDownListFilterControl)));
 		}
 
+        public DropDownListFilterControl()
+            : base()
+        {
+            Loaded += new RoutedEventHandler(DropDownListFilterControl_Loaded);
+        }
+
+        #endregion
+
+        #region Events Handlers
+
+        private void DropDownListFilterControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            OnUILoaded(EventArgs.Empty);
+        }
+
 		#endregion
 
 		#region Helpers
@@ -70,13 +85,6 @@ namespace Sifaw.WPF.Filters
 		#endregion
 		
 		#region Override Methods
-
-        protected override void OnInitialized(EventArgs e)
-        {
-            base.OnInitialized(e);
-
-            OnUILoaded(EventArgs.Empty);
-        }
 
 		/// <summary>
 		/// Último filtro válido aplicado.
@@ -163,7 +171,7 @@ namespace Sifaw.WPF.Filters
         private void OnUILoaded(EventArgs e)
         {
             if (UILoaded != null)
-                UILoaded(this as ShellView, e);
+                UILoaded(this as DropDownListFilterComponent, e);
         }
 
 		#endregion       

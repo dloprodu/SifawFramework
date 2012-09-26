@@ -278,7 +278,7 @@ namespace Sifaw.Controllers.Components
 		}
 
         /// <summary>
-        /// Invoca al método sobrescirto <see cref="UIComponentController{TInput, TOutput, TFilter, TComponent}.OnUIElementLoaded()"/> y
+        /// Invoca al método sobrescirto <see cref="UIComponentController{TInput, TOutput, TComponent}.OnUIElementLoaded()"/> y
         /// posteriormente aplica la configuración por defecto al objeto <see cref="UIView"/>.
         /// </summary>
         protected override void OnUIElementLoaded()

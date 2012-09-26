@@ -81,7 +81,7 @@ namespace Sifaw.WPF
 
 		public void SetLayout(UIShellRow[] rows)
 		{
-			shell.SetSettings(rows);
+			shell.SetLayout(rows);
 		}
 
 		#endregion

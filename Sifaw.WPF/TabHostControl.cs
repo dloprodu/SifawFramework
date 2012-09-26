@@ -55,19 +55,23 @@ namespace Sifaw.WPF
 		{			
 			DefaultStyleKeyProperty.OverrideMetadata(typeof(TabHostControl), new FrameworkPropertyMetadata(typeof(TabHostControl)));
 		}
-		
-		#endregion
 
-        #region Methods sobreescritos
-
-        protected override void OnInitialized(EventArgs e)
+        public TabHostControl()
+            : base()
         {
-            base.OnInitialized(e);
-
-            OnUILoaded(EventArgs.Empty);
+            Loaded += new RoutedEventHandler(TabHostControl_Loaded);
         }
 
         #endregion
+
+        #region Event Handlers
+
+        private void TabHostControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            OnUILoaded(EventArgs.Empty);
+        }
+
+		#endregion
 
 		#region Override Methods
 
@@ -176,7 +180,7 @@ namespace Sifaw.WPF
         private void OnUILoaded(EventArgs e)
         {
             if (UILoaded != null)
-                UILoaded(this as ShellView, e);
+                UILoaded(this as TabHostComponent, e);
         }
 
 		#endregion

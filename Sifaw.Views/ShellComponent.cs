@@ -39,7 +39,7 @@ namespace Sifaw.Views
 		/// de la shell.
 		/// </summary>
 		/// <param name="rows">Array de filas de la Shell.</param>
-		void SetSettings(UIShellRow[] rows);
+		void SetLayout(UIShellRow[] rows);
 
 		#endregion
 	}

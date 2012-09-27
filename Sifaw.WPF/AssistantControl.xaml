@@ -6,7 +6,6 @@
              xmlns:my="clr-namespace:Sifaw.WPF.CCL;assembly=Sifaw.WPF.CCL"
              MinWidth="300"
              MinHeight="300"
-             Loaded="AssistantControl_Loaded"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="364" FontWeight="Normal">
     <UserControl.Resources>

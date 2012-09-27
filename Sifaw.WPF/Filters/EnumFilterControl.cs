@@ -75,19 +75,9 @@ namespace Sifaw.WPF.Filters
         public EnumFilterControl()
             : base()
         {
-            Loaded += new RoutedEventHandler(EnumFilterControl_Loaded);
         }
 
         #endregion
-
-        #region Event Handlers
-
-        private void EnumFilterControl_Loaded(object sender, RoutedEventArgs e)
-        {
-            OnUILoaded(EventArgs.Empty);
-        }
-
-		#endregion
 
 		#region Helpers
 
@@ -191,13 +181,6 @@ namespace Sifaw.WPF.Filters
 		{
 			Focus();
 		}
-
-        public event EventHandler UILoaded;
-        private void OnUILoaded(EventArgs e)
-        {
-            if (UILoaded != null)
-                UILoaded(this as EnumFilterComponent, e);
-        }
 
 		#endregion
 

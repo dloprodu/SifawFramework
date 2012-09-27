@@ -48,15 +48,6 @@ namespace Sifaw.WPF
 
         #endregion
 
-        #region Evnt Hanlders
-                
-        private void ShellControl_Loaded(object sender, RoutedEventArgs e)
-        {
-            OnUILoaded(EventArgs.Empty);
-        }
-
-		#endregion
-
 		#region Helpers
 
 		private GridLength GetGridLength(double length, UIShellLengthModes mode)
@@ -156,13 +147,6 @@ namespace Sifaw.WPF
 		{
 			grid.Focus();
 		}
-
-        public event EventHandler UILoaded;
-        private void OnUILoaded(EventArgs e)
-        {
-            if (UILoaded != null)
-                UILoaded(this as ShellComponent, e);
-        }
 
 		#endregion
 

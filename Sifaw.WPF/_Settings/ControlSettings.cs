@@ -156,6 +156,12 @@ namespace Sifaw.WPF
 
         public ControlSettings(Control control)
         {
+            try
+            {
+                control.Style = (Style)control.FindResource(control.GetType());
+            }
+            catch { /* No se encontró el estilo. */ }
+
             /* Initial values */
             this.Border = (UIFrame)SettingsOperationsManager.UIFrameToThickness.ConvertBack(control.BorderThickness, null, null, null);
             this.BorderBrush = (UIFrameBrush)SettingsOperationsManager.UIFrameBrushToBorderBrush.ConvertBack(control.BorderBrush, null, null, null);

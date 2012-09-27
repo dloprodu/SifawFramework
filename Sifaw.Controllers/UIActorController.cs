@@ -293,17 +293,6 @@ namespace Sifaw.Controllers
 			UIElement.GuestSelecting += new UIGuestSelectingEventHandler(UIElement_UpdateGuest);
 		}
 
-        /// <summary>
-        /// Invoca al método sobrescirto <see cref="UIComponentController{TInput, TOutput, TComponent}.OnUIElementLoaded()"/> y
-        /// posteriormente aplica la configuración por defecto al objeto <see cref="UIView"/>.
-        /// </summary>
-        protected override void OnUIElementLoaded()
-        {
-            base.OnUIElementLoaded();
-
-            /* Default Settings... */            
-        }
-
 		#endregion
 
 		#region Start Methods

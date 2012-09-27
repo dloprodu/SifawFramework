@@ -134,19 +134,10 @@ namespace Sifaw.Controllers.Components
 		{
 			base.OnAfterUIElementCreate();
 
+            /* Default Settings... */            
+
 			/* Subscripción a eventos del componente... */			
 		}
-
-        /// <summary>
-        /// Invoca al método sobrescirto <see cref="UIActorController{TInput, TOutput, TComponent, TGuest}.OnUIElementLoaded()"/> y
-        /// posteriormente aplica la configuración por defecto al objeto <see cref="UIComponent"/>.
-        /// </summary>
-        protected override void OnUIElementLoaded()
-        {
-            base.OnUIElementLoaded();
-
-            /* Default Settings... */            
-        }
 
 		#endregion
 

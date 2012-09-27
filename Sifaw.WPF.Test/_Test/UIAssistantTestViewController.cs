@@ -133,18 +133,13 @@ namespace Sifaw.WPF.Test
 
 		protected override void OnAfterUIElementCreate()
 		{
-			base.OnAfterUIElementCreate();			
-		}
-
-        protected override void OnUIElementLoaded()
-        {
-            base.OnUIElementLoaded();
+			base.OnAfterUIElementCreate();
 
             UISettings.SizeToContent = false;
             UISettings.AllowResize = false;
             UISettings.Width = 800;
             UISettings.Height = 600;
-        }
+		}
 
 		protected override void OnAfterUIShow()
 		{

@@ -51,19 +51,9 @@ namespace Sifaw.WPF.Filters
         public DropDownListFilterControl()
             : base()
         {
-            Loaded += new RoutedEventHandler(DropDownListFilterControl_Loaded);
         }
 
         #endregion
-
-        #region Events Handlers
-
-        private void DropDownListFilterControl_Loaded(object sender, RoutedEventArgs e)
-        {
-            OnUILoaded(EventArgs.Empty);
-        }
-
-		#endregion
 
 		#region Helpers
 
@@ -166,13 +156,6 @@ namespace Sifaw.WPF.Filters
 		{
 			Focus();
 		}
-
-        public event EventHandler UILoaded;
-        private void OnUILoaded(EventArgs e)
-        {
-            if (UILoaded != null)
-                UILoaded(this as DropDownListFilterComponent, e);
-        }
 
 		#endregion       
 

@@ -151,23 +151,6 @@ namespace Sifaw.Controllers
             /* Subscripción a eventos de la vista... */
         }
 
-        /// <summary>
-        /// Invoca al método sobrescirto <see cref="UIViewController{TInput, TOutput, TView}.OnUIElementLoaded()"/> y
-        /// posteriormente aplica la configuración por defecto al objeto <see cref="UIView"/>.
-        /// </summary>
-        protected override void OnUIElementLoaded()
-        {
-            base.OnUIElementLoaded();
-
-            /* Default Settings... */
-            foreach (TGuest guest in Guests)
-            {
-                guest.UISettings.HorizontalAlignment = UIHorizontalAlignment.Fill;
-                guest.UISettings.VerticalAlignment = UIVerticalAlignment.Fill;
-                guest.UISettings.Margin = UIFrame.Empty;
-            }
-        }
-
         #endregion
 
 		#region Abstract Methods
@@ -227,7 +210,14 @@ namespace Sifaw.Controllers
                 foreach (UIShellRowCell cell in row.Cells)
                 {
                     if (cell.Content != null)
+                    {
                         guests.Add((TGuest)cell.Content);
+
+                        /* Default Settings... */
+                        cell.Content.UISettings.HorizontalAlignment = UIHorizontalAlignment.Fill;
+                        cell.Content.UISettings.VerticalAlignment = UIVerticalAlignment.Fill;
+                        cell.Content.UISettings.Margin = UIFrame.Empty;
+                    }
                 }
             }
 

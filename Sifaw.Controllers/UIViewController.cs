@@ -331,24 +331,15 @@ namespace Sifaw.Controllers
         {
             base.OnAfterUIElementCreate();
 
+            /* Default Settings... */
+            UISettings.Header = "Sifaw Framework Application";
+            UISettings.AllowResize = true;
+
             /* Subscripción a eventos de la vista... */
             UIElement.BeforeShow += new EventHandler(UIElement_BeforeShow);
             UIElement.AfterShow += new EventHandler(UIElement_AfterShow);
             UIElement.BeforeClose += new UIFinishRequestEventHandler(UIElement_BeforeClose);
             UIElement.AfterClose += new EventHandler(UIElement_AfterClose);
-        }
-
-        /// <summary>
-        /// Invoca al método sobrescirto <see cref="UIElementController{TInput, TOutput, TView}.OnUIElementLoaded()"/> y
-        /// posteriormente aplica la configuración por defecto al objeto <see cref="UIView"/>.
-        /// </summary>
-        protected override void OnUIElementLoaded()
-        {
-            base.OnUIElementLoaded();
-
-            /* Default Settings... */
-            UISettings.Header = "Sifaw Framework Application";
-            UISettings.AllowResize = true;
         }
 
         #endregion

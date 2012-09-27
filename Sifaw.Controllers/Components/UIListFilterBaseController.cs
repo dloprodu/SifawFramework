@@ -175,18 +175,9 @@ namespace Sifaw.Controllers.Components
         {
             base.OnAfterUIElementCreate();
 
+            /* Default settings... */
+
             /* Subscripción a eventos del componente... */
-        }
-
-        /// <summary>
-        /// Invoca al método sobrescirto <see cref="UIFilterBaseController{TInput, TOutput, TFilter, TComponent}.OnUIElementLoaded()"/> y
-        /// posteriormente aplica la configuración por defecto al objeto <see cref="UIView"/>.
-        /// </summary>
-        protected override void OnUIElementLoaded()
-        {
-            base.OnUIElementLoaded();
-
-            /* Default settings.. */
         }
 
         #endregion

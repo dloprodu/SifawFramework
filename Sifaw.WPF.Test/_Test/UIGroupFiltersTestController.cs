@@ -265,30 +265,6 @@ namespace Sifaw.WPF.Test
 
 		#endregion
 
-        #region UIElement Load
-
-        protected override void OnUIElementLoaded()
-        {
-            base.OnUIElementLoaded();
-
-            TextFilter.UISettings.Margin = new UIFrame(3);
-            TextFilter.UISettings.Placeholder = "Introduzca un texto...";
-            TextFilter.UISettings.InstantSearch = true;
-            
-            BoolFilter.UISettings.Margin = new UIFrame(3);
-            BoolFilter.UISettings.TextDisplay = "Mostrar algo al chequear ...";
-
-            EnumFilter.UISettings.Height = 100;
-            EnumFilter.UISettings.Margin = new UIFrame(3);
-
-            ListFilter.UISettings.Height = 100;
-            ListFilter.UISettings.Margin = new UIFrame(3);
-
-            DropDownListFilter.UISettings.Margin = new UIFrame(3);
-        }
-
-        #endregion
-
         #region Input / Output
 
         public override Input GetDefaultInput()
@@ -380,18 +356,28 @@ namespace Sifaw.WPF.Test
 
 		protected override void StartController()
 		{
+            TextFilter.UISettings.Margin = new UIFrame(3);
+            TextFilter.UISettings.Placeholder = "Introduzca un texto...";
+            TextFilter.UISettings.InstantSearch = true;
 			TextFilter.Start(new UITextFilterController.Input("prueba"));
 
+            BoolFilter.UISettings.Margin = new UIFrame(3);
+            BoolFilter.UISettings.TextDisplay = "Mostrar algo al chequear ...";
 			BoolFilter.Start(new UIBoolFilterController.Input(true));
 
+            EnumFilter.UISettings.Height = 100;
+            EnumFilter.UISettings.Margin = new UIFrame(3);
 			EnumFilter.Start(new UIEnumFilterController.Input(
                   new Filterable[] { Filters.Filter1, Filters.Filter2, Filters.Filter3, Filters.Filter4 }
                 , Filters.Filter2));
 
+            ListFilter.UISettings.Height = 100;
+            ListFilter.UISettings.Margin = new UIFrame(3);
 			ListFilter.Start(new UIListFilterController.Input(
                   new Filterable[] { Filters.Filter1, Filters.Filter2, Filters.Filter3, Filters.Filter4 }
                 , new Filterable[] { Filters.Filter1, Filters.Filter2 }));
 
+            DropDownListFilter.UISettings.Margin = new UIFrame(3);
 			DropDownListFilter.Start(new UIDropDownListFilterController.Input(
                   new Filterable[] { Filters.Filter1, Filters.Filter2, Filters.Filter3, Filters.Filter4 }
                 , Filters.Filter3));

@@ -51,19 +51,9 @@ namespace Sifaw.WPF.Filters
         public ListFilterControl()
             : base()
         {
-            Loaded += new RoutedEventHandler(ListFilterControl_Loaded);
         }
 
         #endregion
-
-        #region Event Handlers
-
-        private void ListFilterControl_Loaded(object sender, RoutedEventArgs e)
-        {
-            OnUILoaded(EventArgs.Empty);
-        }
-
-		#endregion
 
 		#region Helpers
 
@@ -175,13 +165,6 @@ namespace Sifaw.WPF.Filters
 		{
 			Focus();
 		}
-
-        public event EventHandler UILoaded;
-        private void OnUILoaded(EventArgs e)
-        {
-            if (UILoaded != null)
-                UILoaded(this as ListFilterComponent, e);
-        }
 
 		#endregion
 

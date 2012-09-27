@@ -235,11 +235,6 @@ namespace Sifaw.WPF
 
 		#region Events Handlers
         
-        private void BackgroundWorkerControl_Loaded(object sender, RoutedEventArgs e)
-        {
-            OnUILoaded(EventArgs.Empty);
-        }
-
 		private void buttonCancelar_Click(object sender, RoutedEventArgs e)
 		{
 			OnCancel(EventArgs.Empty);
@@ -319,13 +314,6 @@ namespace Sifaw.WPF
 		{
 			expanderDetail.Focus();
 		}
-
-        public event EventHandler UILoaded;
-        private void OnUILoaded(EventArgs e)
-        {
-            if (UILoaded != null)
-                UILoaded(this as BackgroundWorkerComponent, e);
-        }
 
 		#endregion		
 

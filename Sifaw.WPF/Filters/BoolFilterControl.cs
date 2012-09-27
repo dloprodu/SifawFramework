@@ -53,19 +53,9 @@ namespace Sifaw.WPF.Filters
         public BoolFilterControl()
             : base()
         {
-            Loaded += new RoutedEventHandler(BoolFilterControl_Loaded);
         }
 
         #endregion
-
-        #region Event Hanlders
-
-        private void BoolFilterControl_Loaded(object sender, RoutedEventArgs e)
-        {
-            OnUILoaded(EventArgs.Empty);
-        }
-
-		#endregion
 
 		#region Helpers
 
@@ -188,13 +178,6 @@ namespace Sifaw.WPF.Filters
 		{
 			Focus();
 		}
-
-        public event EventHandler UILoaded;
-        private void OnUILoaded(EventArgs e)
-        {
-            if (UILoaded != null)
-                UILoaded(this as BoolFilterComponent, e);
-        }
 
 		#endregion
 

@@ -98,6 +98,12 @@ namespace Sifaw.WPF
 
         public WindowSettings(Window window)
         {
+            try
+            {
+                window.Style = (Style)window.FindResource(window.GetType());
+            }
+            catch { /* No se encontró el estilo. */ }
+
 			/* Initial values */
 			this.Margin = (UIFrame)SettingsOperationsManager.UIFrameToThickness.ConvertBack(window.Margin, null, null, null);
 			this.Padding = (UIFrame)SettingsOperationsManager.UIFrameToThickness.ConvertBack(window.Padding, null, null, null);

@@ -51,11 +51,6 @@ namespace Sifaw.WPF
 
 		#region Events Handlers
 
-        private void AssistantControl_Loaded(object sender, RoutedEventArgs e)
-        {
-            OnUILoaded(EventArgs.Empty);
-        }
-
 		private void buttonAnterior_Click(object sender, RoutedEventArgs e)
 		{
 			OnGuestSelecting(new UIGuestSelectingEventArgs(assistantProgressBar.Value - 2));
@@ -209,17 +204,6 @@ namespace Sifaw.WPF
 		}
 
 		#endregion
-
-        #region Eventos
-
-        public event EventHandler UILoaded;
-        private void OnUILoaded(EventArgs e)
-        {
-            if (UILoaded != null)
-                UILoaded(this as AssistantComponent, e);
-        }
-
-        #endregion
 
         #endregion
 

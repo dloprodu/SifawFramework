@@ -123,9 +123,6 @@ namespace Sifaw.Controllers
         [CLReseteable(null)]
         private TUIElement _uiElement = default(TUIElement);
 
-        [CLReseteable(false)]
-        private bool _uiIsLoaded = false;
-
 		#endregion
 
 		#region Events
@@ -185,28 +182,6 @@ namespace Sifaw.Controllers
 		/// </remarks>
 		protected virtual void OnAfterUIElementCreate()
 		{
-            /* Subscripción a eventos del componente... */
-            UIElement.UILoaded += new EventHandler(UIElement_UILoaded);
-		}
-
-        /// <summary>
-        /// Se produce cuando <see cref="UIElement"/> se ha cargado.
-        /// </summary>
-        public event EventHandler UIElementLoaded;
-
-        /// <summary>
-        /// <para>
-        /// Se llama al método <see cref="OnUIElementLoaded"/> cuando el elemento de interfaz de
-        /// usuario ha sido cargado corretamente.
-        /// </para>
-        /// <para>
-        /// Este métodos permite que las clases derivadas realicen operaciones de 
-        /// configuración tales como establecer los parámetros de configuración por defecto del 
-        /// elemento de interfaz de usuario.
-        /// </para>
-        /// </summary>
-        protected virtual void OnUIElementLoaded()
-        {
             /* Default Settings... */
             UISettings.SizeToContent = false;
             UISettings.Width = 800;
@@ -216,8 +191,10 @@ namespace Sifaw.Controllers
             // UISettings.Background
             // UISettings.Foreground 
             // UISettings.Margin
-            // UISettings.Padding            
-        }
+            // UISettings.Padding    
+
+            /* Subscripción a eventos del componente... */
+		}
 
 		#endregion
 
@@ -291,14 +268,6 @@ namespace Sifaw.Controllers
 		{
 			get { return UIElement.UISettings; }
 		}
-
-        /// <summary>
-        /// Devuelve un valor que indica si el elemento de UI ha sido cargado.
-        /// </summary>
-        public bool UIIsLoaded
-        {
-            get { return _uiIsLoaded; }
-        }
 
 		#endregion
 
@@ -387,20 +356,6 @@ namespace Sifaw.Controllers
 			// controladora
 		}
 
-		#endregion
-
-        #region UIElemen event handlers
-
-        private void UIElement_UILoaded(object sender, EventArgs e)
-        {
-            _uiIsLoaded = true;
-
-            OnUIElementLoaded();
-
-            if (UIElementLoaded != null)
-                UIElementLoaded(this, e);
-        }
-
-        #endregion
+		#endregion        
     }
 }

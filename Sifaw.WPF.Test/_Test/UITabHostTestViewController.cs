@@ -115,15 +115,10 @@ namespace Sifaw.WPF.Test
 		protected override void OnAfterUIElementCreate()
 		{
 			base.OnAfterUIElementCreate();
-		}
-
-        protected override void OnUIElementLoaded()
-        {
-            base.OnUIElementLoaded();
 
             UISettings.SizeToContent = false;
             UISettings.AllowResize = true;
-        }
+		}
 
 		#endregion
 
@@ -157,7 +152,8 @@ namespace Sifaw.WPF.Test
         #region Start Methods
 
         protected override void StartController()
-		{			
+		{
+            UITabHostTestController.UISettings.Margin = new UIFrame(6);
 			UITabHostTestController.Start();
 		}
 

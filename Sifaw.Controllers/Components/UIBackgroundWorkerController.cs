@@ -273,21 +273,12 @@ namespace Sifaw.Controllers.Components
 		{
 			base.OnAfterUIElementCreate();
 
+            /* Default Setiings... */
+            UISettings.SizeToContent = true;
+
             /* Subscripción a eventos del componente... */
 			UIElement.Cancel += new EventHandler(UIElement_Cancel);
 		}
-
-        /// <summary>
-        /// Invoca al método sobrescirto <see cref="UIComponentController{TInput, TOutput, TComponent}.OnUIElementLoaded()"/> y
-        /// posteriormente aplica la configuración por defecto al objeto <see cref="UIView"/>.
-        /// </summary>
-        protected override void OnUIElementLoaded()
-        {
-            base.OnUIElementLoaded();
-
-            /* Default Setiings... */
-            UISettings.SizeToContent = true;
-        }
 
 		#endregion
 

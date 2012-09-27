@@ -227,18 +227,6 @@ namespace Sifaw.Controllers.Components
 			UIElement.FilterChanged += new UIFilterChangedEventHandler(UIElement_FilterChanged);
 		}
 
-        /// <summary>
-        /// Invoca al método sobrescirto <see cref="UIComponentController{TInput, TOutput, TComponent}.OnUIElementLoaded()"/> y
-        /// posteriormente aplica la configuración por defecto al objeto <see cref="UIView"/>.
-        /// </summary>
-        protected override void OnUIElementLoaded()
-        {
-            base.OnUIElementLoaded();
-
-            /* Default settings.. */
-            //UISettings.Border = new Views.Kit.UIFrame(1);
-        }
-
 		#endregion
 
 		#region Start Methods

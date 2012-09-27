@@ -247,17 +247,6 @@ namespace Sifaw.Controllers.Components
 		protected override void OnAfterUIElementCreate()
 		{
 			base.OnAfterUIElementCreate();
-        
-            /* Subscripción a eventos del componente... */
-        }
-        
-        /// <summary>
-        /// Invoca al método sobrescirto <see cref="UIShellViewController{TInput, TOutput, TGuest}.OnUIElementLoaded()"/> y
-        /// posteriormente aplica la configuración por defecto al objeto <see cref="UIView"/>.
-        /// </summary>
-        protected override void OnUIElementLoaded()
-        {
-            base.OnUIElementLoaded();
 
             /* Default Setiings... */
             UISettings.Header = "Espere ...";
@@ -265,8 +254,10 @@ namespace Sifaw.Controllers.Components
             UISettings.SizeToContent = true;
             UISettings.MinSize = new UISize(600, 0);
             UISettings.MaxSize = new UISize(600, 400);
-        }
 
+            /* Subscripción a eventos del componente... */
+        }
+        
 		/// <summary>
 		/// Invoca al método sobrescirto <see cref="UIViewController{TInput, TOutput, TUIView}.OnBeforeUIClose(out bool)"/> y
 		/// posteriormente solicita la cancelación del proceso al componente <see cref="UIBackgroundWorkerController"/>.

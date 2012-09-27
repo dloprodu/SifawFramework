@@ -241,24 +241,15 @@ namespace Sifaw.Controllers
         {
             base.OnAfterUIElementCreate();
 
-            /* Subscripción a eventos del componente... */
-        }
-
-        /// <summary>
-        /// Invoca al método sobrescirto <see cref="UIElementController{TInput, TOutput, TView}.OnUIElementLoaded()"/> y
-        /// posteriormente aplica la configuración por defecto al objeto <see cref="UIComponent"/>.
-        /// </summary>
-        protected override void OnUIElementLoaded()
-        {
-            base.OnUIElementLoaded();
-
             /* Default Settings... */
             UISettings.HorizontalAlignment = UIHorizontalAlignment.Fill;
             UISettings.VerticalAlignment = UIVerticalAlignment.Fill;
-            
+
             /* Campos que se inicializan con la representación concreta del componente ... */
             // UISettings.Border
             // UISettings.BorderBrush
+
+            /* Subscripción a eventos del componente... */
         }
 
         #endregion

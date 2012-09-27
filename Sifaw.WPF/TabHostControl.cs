@@ -59,19 +59,9 @@ namespace Sifaw.WPF
         public TabHostControl()
             : base()
         {
-            Loaded += new RoutedEventHandler(TabHostControl_Loaded);
         }
 
         #endregion
-
-        #region Event Handlers
-
-        private void TabHostControl_Loaded(object sender, RoutedEventArgs e)
-        {
-            OnUILoaded(EventArgs.Empty);
-        }
-
-		#endregion
 
 		#region Override Methods
 
@@ -175,13 +165,6 @@ namespace Sifaw.WPF
 		{
 			Focus();
 		}
-
-        public event EventHandler UILoaded;
-        private void OnUILoaded(EventArgs e)
-        {
-            if (UILoaded != null)
-                UILoaded(this as TabHostComponent, e);
-        }
 
 		#endregion
 

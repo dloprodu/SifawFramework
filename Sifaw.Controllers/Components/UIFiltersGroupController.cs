@@ -250,20 +250,20 @@ namespace Sifaw.Controllers.Components
 		{
 			base.OnAfterUIElementCreate();
 
+            /* Default settings... */
+            UISettings.Border = new UIFrame(1);
+            UISettings.BorderBrush = new UIFrameBrush(new UISolidBrush(UIColors.GrayColors.Gainsboro));
+            
+            UILinearGradientBrush brush = new UILinearGradientBrush();
+            brush.Angle = 90.0f;
+            brush.GradientStops.Add(new UIGradientStop(UIColor.FromArgb(120, UIColors.WhiteColors.White), 0.0f));
+            brush.GradientStops.Add(new UIGradientStop(UIColor.FromArgb(120, UIColors.GrayColors.LightGray), 0.1f));
+            brush.GradientStops.Add(new UIGradientStop(UIColor.FromArgb(120, UIColors.GrayColors.LightGray), 0.9f));
+            brush.GradientStops.Add(new UIGradientStop(UIColor.FromArgb(120, UIColors.GrayColors.Silver), 1.0f));
+            UISettings.Background = brush;
+
 			/* Subscripción a eventos del componente... */		
 		}
-
-        /// <summary>
-        /// Invoca al método sobrescirto <see cref="UIShellComponentController{TInput, TOutput, TGuest}.OnUIElementLoaded()"/> y
-        /// posteriormente aplica la configuración por defecto al objeto <see cref="UIComponent"/>.
-        /// </summary>
-        protected override void OnUIElementLoaded()
-        {
-            base.OnUIElementLoaded();
-
-            /* Default settings.. */
-            UISettings.Border = new UIFrame(1);
-        }
 
 		#endregion
 

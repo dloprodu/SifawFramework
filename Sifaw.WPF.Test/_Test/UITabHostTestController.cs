@@ -210,19 +210,6 @@ namespace Sifaw.WPF.Test
 
 		#endregion
 
-        #region UIElement Methods
-
-        protected override void OnUIElementLoaded()
-        {
-            base.OnUIElementLoaded();
-
-            EnumFilter.UISettings.Margin = new UIFrame(3);
-
-            ListFilter.UISettings.Margin = new UIFrame(3);
-        }
-
-        #endregion
-
         #region UITabHost Methods
 
         protected override string[] GetDescriptors()
@@ -280,10 +267,12 @@ namespace Sifaw.WPF.Test
 		{
 			GroupFilterTest.Start();
 
+            EnumFilter.UISettings.Margin = new UIFrame(3);
 			EnumFilter.Start(new UIEnumFilterController.Input(
                   new Filterable[] { Filters.Filter1, Filters.Filter2, Filters.Filter3, Filters.Filter4, Filters.Filter5, Filters.Filter6 }
                 , Filters.Filter2));
 
+            ListFilter.UISettings.Margin = new UIFrame(3);
 			ListFilter.Start(new UIListFilterController.Input(
                   new Filterable[] { Filters.Filter1, Filters.Filter2, Filters.Filter3, Filters.Filter4, Filters.Filter5, Filters.Filter6 }
                 , new Filterable[] { Filters.Filter1, Filters.Filter2 }));

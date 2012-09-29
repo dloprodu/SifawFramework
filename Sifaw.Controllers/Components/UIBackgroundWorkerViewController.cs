@@ -152,6 +152,13 @@ namespace Sifaw.Controllers.Components
 
 		#endregion
 
+        #region Fields
+
+        [CLDateTimeReseteable(true)]
+        private DateTime startTime = DateTime.MinValue;
+
+        #endregion
+
         #region Inclusions
 
         private UIBackgroundWorkerController _uiBackgroundWorkerController = null;
@@ -282,6 +289,7 @@ namespace Sifaw.Controllers.Components
 		{
 			base.OnAfterUIShow();
 
+            startTime = DateTime.Now;
 			UIBackgroundWorkerController.RunWorker();
 		}
 
@@ -358,11 +366,28 @@ namespace Sifaw.Controllers.Components
 
 		#endregion
 
-		#region Inclusions Events Handlers
+        #region Helpers
+
+        private string GetTimeRemaining(int progress, int maxProgress)
+        {
+            TimeSpan timespent = DateTime.Now - startTime;
+
+            int secondsremaining = (int)(timespent.TotalSeconds / progress * (maxProgress - progress));
+
+            TimeSpan remaining = TimeSpan.FromSeconds(secondsremaining);
+
+            return (string.Format("{0:D2}h:{1:D2}m:{2:D2}s", remaining.Hours, remaining.Minutes, remaining.Seconds));
+        }
+
+        #endregion
+
+        #region Inclusions Events Handlers
 
         private void _uiBackgroundWorkerController_RunWorkerProgressChanged(object sender, CLRunWorkerProgressChangedEventArgs e)
         {
-            UISettings.Header = (e.WithControl) ? Math.Round(((e.Progress / (float)e.MaxProgress) * 100.0f)).ToString().PadLeft(3) + " % completado ..." : "Espere ...";
+            UISettings.Header = (e.WithControl) ? 
+                Math.Round(((e.Progress / (float)e.MaxProgress) * 100.0f)).ToString().PadLeft(3) + " % completado ... " + "(" + GetTimeRemaining(e.Progress, e.MaxProgress) + ")" :
+                "Espere ...";
         }
 
 		private void _uiBackgroundWorkerController_Finished(object sender, CLFinishedEventArgs<UIBackgroundWorkerController.Output> e)

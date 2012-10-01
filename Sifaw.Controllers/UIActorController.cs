@@ -306,13 +306,18 @@ namespace Sifaw.Controllers
 
             _descriptors = GetDescriptors();
             _guest = GetGuestAt(_key);
-            
-            UIElement.Descriptors = _descriptors;
 
-            OnBeforeUpdateGuest();
-            UIElement.Update(_guest, _key);
-            OnAfterUpdateGuest();
-            OnGuestChanged(new CLComponentChangedEventArgs(_key));
+            lock (UIElement)
+            {
+                UIElement.Descriptors = _descriptors;
+
+                OnBeforeUpdateGuest();
+
+                UIElement.Update(_guest, _key);
+                
+                OnAfterUpdateGuest();
+                OnGuestChanged(new CLComponentChangedEventArgs(_key));
+            }
 		}
 
 		#endregion
@@ -331,15 +336,18 @@ namespace Sifaw.Controllers
 
 				if (new_guest != null)
 				{
-                    OnBeforeUpdateGuest();
+                    lock (UIElement)
+                    {
+                        OnBeforeUpdateGuest();
 
-					UIElement.Update(new_guest, e.Key);
+                        UIElement.Update(new_guest, e.Key);
 
-					_guest = new_guest;
-					_key = e.Key;					
+                        _guest = new_guest;
+                        _key = e.Key;
 
-					OnAfterUpdateGuest();
-					OnGuestChanged(new CLComponentChangedEventArgs(e.Key));
+                        OnAfterUpdateGuest();
+                        OnGuestChanged(new CLComponentChangedEventArgs(e.Key));
+                    }
 				}
 			}
 		}

@@ -187,6 +187,9 @@ namespace Sifaw.Views.Kit
 
         #region ICloneable Members
 
+        /// <summary>
+        /// Crea un nuevo objeto copiado de la instancia actual.
+        /// </summary>
         public object Clone()
         {
             return new UIImage(_buffer);

@@ -50,7 +50,7 @@ namespace Sifaw.Views.Kit
         #region Constructor
 
         /// <summary>
-        /// Inicializa una nueva instancia de la estructura <see cref="UIImage"/>.
+        /// Inicializa una nueva instancia de la clase <see cref="UIImage"/>.
         /// </summary>
         /// <param name="path">Fichero que almacena la imagen.</param>
         public UIImage(string path)

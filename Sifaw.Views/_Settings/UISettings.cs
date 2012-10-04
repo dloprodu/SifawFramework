@@ -43,6 +43,11 @@ namespace Sifaw.Views
         /// </summary>
 		string Description { get; set; }
 
+        /// <summary>
+        /// Obtiene o establece la fuente del elemento.
+        /// </summary>
+        UIFont Font { get; set; }
+
 		/// <summary>
 		/// Obtiene o establece el pincel que describe el fondo del elemento.
 		/// </summary>

@@ -75,6 +75,9 @@
     <Compile Include="Components\_Settings\BackgroundWorkerSettings.cs" />
     <Compile Include="Components\_Settings\BoolFilterSettings.cs" />
     <Compile Include="Components\_Settings\TextFilterSettings.cs" />
+    <Compile Include="Kit\UIFont.cs" />
+    <Compile Include="Kit\UIFonts.cs" />
+    <Compile Include="Kit\UIFontStyles.cs" />
     <Compile Include="Kit\UIImage.cs" />
     <Compile Include="Kit\_Drawing\UISize.cs" />
     <Compile Include="UIViewManager.cs" />

@@ -169,7 +169,11 @@ namespace Sifaw.WPF
             this.Padding = (UIFrame)SettingsOperationsManager.UIFrameToThickness.ConvertBack(control.Padding, null, null, null);
             this.Background = (UIBrush)SettingsOperationsManager.UIBrushToBrush.ConvertBack(control.Background, null, null, null);
             this.Foreground = (UIBrush)SettingsOperationsManager.UIBrushToBrush.ConvertBack(control.Foreground, null, null, null);
-
+            this.FontFamily = (string)SettingsOperationsManager.UIFontFamilyToFontFamily.ConvertBack(control.FontFamily, null, null, null);
+            this.FontSize = control.FontSize;
+            this.FontStyle = (UIFontStyles)SettingsOperationsManager.UIFontStyleToFontStyle.ConvertBack(control.FontStyle, null, null, null);
+            this.FontWeight = (UIFontWeights)SettingsOperationsManager.UIFontWeightToFontWeight.ConvertBack(control.FontWeight, null, null, null); 
+            
             // UISettings ...
 			UtilWPF.BindField(this, "Background",          control, Control.BackgroundProperty,          BindingMode.TwoWay, SettingsOperationsManager.UIBrushToBrush);
 			UtilWPF.BindField(this, "Foreground",          control, Control.ForegroundProperty,          BindingMode.TwoWay, SettingsOperationsManager.UIBrushToBrush);
@@ -180,7 +184,11 @@ namespace Sifaw.WPF
             UtilWPF.BindField(this, "MinWidth",            control, Control.MinWidthProperty,            BindingMode.TwoWay);
             UtilWPF.BindField(this, "MaxWidth",            control, Control.MaxWidthProperty,            BindingMode.TwoWay);
             UtilWPF.BindField(this, "MinHeight",           control, Control.MinHeightProperty,           BindingMode.TwoWay);
-            UtilWPF.BindField(this, "MaxHeight",           control, Control.MaxHeightProperty,           BindingMode.TwoWay);			
+            UtilWPF.BindField(this, "MaxHeight",           control, Control.MaxHeightProperty,           BindingMode.TwoWay);
+            UtilWPF.BindField(this, "FontFamily",          control, Control.FontFamilyProperty,          BindingMode.TwoWay, SettingsOperationsManager.UIFontFamilyToFontFamily);
+            UtilWPF.BindField(this, "FontSize",            control, Control.FontSizeProperty,            BindingMode.TwoWay);
+            UtilWPF.BindField(this, "FontStyle",           control, Control.FontStyleProperty,           BindingMode.TwoWay, SettingsOperationsManager.UIFontStyleToFontStyle);
+            UtilWPF.BindField(this, "FontWeight",          control, Control.FontWeightProperty,          BindingMode.TwoWay, SettingsOperationsManager.UIFontWeightToFontWeight);
 
             // ComponentSettings ...
             UtilWPF.BindField(this, "Border",              control, Control.BorderThicknessProperty,     BindingMode.TwoWay, SettingsOperationsManager.UIFrameToThickness);

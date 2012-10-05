@@ -25,8 +25,6 @@ namespace Sifaw.WPF.Test
 		public MainWindow()
 		{
 			InitializeComponent();
-
-
 		}
 	}
 }

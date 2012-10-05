@@ -80,6 +80,7 @@
     <Compile Include="Kit\UIFontStyles.cs" />
     <Compile Include="Kit\UIImage.cs" />
     <Compile Include="Kit\_Drawing\UISize.cs" />
+    <Compile Include="Kit\UIFontWeights.cs" />
     <Compile Include="UIViewManager.cs" />
     <Compile Include="_Settings\ViewSettings.cs" />
     <Compile Include="_Settings\ComponentSettings.cs" />

@@ -170,6 +170,42 @@ namespace Sifaw.WPF
             }
         }
 
+        private static UIFontStyleToFontStyle _uiFontStyleToFontStyle = null;
+        public static UIFontStyleToFontStyle UIFontStyleToFontStyle
+        {
+            get
+            {
+                if (_uiFontStyleToFontStyle == null)
+                    _uiFontStyleToFontStyle = new UIFontStyleToFontStyle();
+
+                return _uiFontStyleToFontStyle;
+            }
+        }
+
+        private static UIFontWeightToFontWeight _uiFontWeightToFontWeight = null;
+        public static UIFontWeightToFontWeight UIFontWeightToFontWeight
+        {
+            get
+            {
+                if (_uiFontWeightToFontWeight == null)
+                    _uiFontWeightToFontWeight = new UIFontWeightToFontWeight();
+
+                return _uiFontWeightToFontWeight;
+            }
+        }
+
+        private static UIFontFamilyToFontFamily _uiFontFamilyToFontFamily = null;
+        public static UIFontFamilyToFontFamily UIFontFamilyToFontFamily
+        {
+            get
+            {
+                if (_uiFontFamilyToFontFamily == null)
+                    _uiFontFamilyToFontFamily = new UIFontFamilyToFontFamily();
+
+                return _uiFontFamilyToFontFamily;
+            }
+        }
+
 		#endregion
     }
 }

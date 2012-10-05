@@ -33,7 +33,8 @@ namespace Sifaw.Views.Kit
 
         private string _name = "Verdana";
         private double _size = 7.25;
-        private UIFontStyles _style = UIFontStyles.Regular;
+        private UIFontStyles _style = UIFontStyles.Normal;
+        private UIFontWeights _weight = UIFontWeights.Normal;
 
         #endregion
 
@@ -63,6 +64,14 @@ namespace Sifaw.Views.Kit
             get { return _style; }
         }
 
+        /// <summary>
+        /// Obtiene la información de grosor de esta <see cref="UIFont"/>.
+        /// </summary>
+        public UIFontWeights Weight
+        {
+            get { return _weight; }
+        }
+
         #endregion
 
         #region Constructors
@@ -73,7 +82,7 @@ namespace Sifaw.Views.Kit
         /// <param name="name">Tipo de letra.</param>
         /// <param name="size">Tamñao de la letra.</param>
         public UIFont(string name, double size)
-            : this(name, size, UIFontStyles.Regular)
+            : this(name, size, UIFontStyles.Normal, UIFontWeights.Normal)
         {
         }
 
@@ -84,10 +93,23 @@ namespace Sifaw.Views.Kit
         /// <param name="size">Tamñao de la letra.</param>
         /// <param name="style">Estilo a aplicar a la letra.</param>
         public UIFont(string name, double size, UIFontStyles style)
+            : this(name, size, style, UIFontWeights.Normal)
+        {
+        }
+
+        /// <summary>
+        /// Inicializa una nueva instancia de la clase <see cref="UIImage"/>.
+        /// </summary>
+        /// <param name="name">Tipo de letra.</param>
+        /// <param name="size">Tamñao de la letra.</param>
+        /// <param name="style">Estilo a aplicar a la letra.</param>
+        /// <param name="weight">Anchura a aplicar a la letra.</param>
+        public UIFont(string name, double size, UIFontStyles style, UIFontWeights weight)
         {
             this._name = name;
             this._size = size;
             this._style = style;
+            this._weight = weight;
         }
 
         #endregion
@@ -99,7 +121,11 @@ namespace Sifaw.Views.Kit
         /// </summary>
         public override string ToString()
         {
-            return string.Format("{0} : {1} : {2}", Name, Size, Style.ToString());
+            return string.Format("Font-Family: {0}; Size: {1}; Style: {2}; Weight: {3}"
+                , Name
+                , Size
+                , Style.ToString()
+                , Weight.ToString());
         }
 
         /// <summary>
@@ -118,7 +144,8 @@ namespace Sifaw.Views.Kit
 
             return string.Equals(Name, ((UIFont)obj).Name)
                 && Size.Equals(((UIFont)obj).Size)
-                && Style.Equals(((UIFont)obj).Style);
+                && Style.Equals(((UIFont)obj).Style)
+                && Weight.Equals(((UIFont)obj).Weight);
         }
 
         /// <summary>
@@ -128,7 +155,8 @@ namespace Sifaw.Views.Kit
         {
             return Name.GetHashCode() 
                 ^ Size.GetHashCode() 
-                ^ Style.GetHashCode();
+                ^ Style.GetHashCode()
+                ^ Weight.GetHashCode();
         }
 
         #endregion
@@ -143,12 +171,13 @@ namespace Sifaw.Views.Kit
             if (other == null)
                 return false;
 
-            if (ReferenceEquals(this, obj))
+            if (ReferenceEquals(this, other))
                 return true;
 
             return string.Equals(Name, other.Name)
                 && Size.Equals(other.Size)
-                && Style.Equals(other.Style);
+                && Style.Equals(other.Style)
+                && Weight.Equals(other.Weight);
         }
 
         #endregion

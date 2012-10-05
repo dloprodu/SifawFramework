@@ -6,7 +6,7 @@
  * 
  * ===============================================================================================
  * Historial de versiones:
- *   - 04/10/2012: Creación de la clase.
+ *   - 05/10/2012: Creación de la clase.
  * ===============================================================================================
  * Observaciones:
  * 
@@ -24,24 +24,24 @@ using System.Threading.Tasks;
 namespace Sifaw.Views.Kit
 {
     /// <summary>
-    /// Especifica la información de estilo que se aplica al texto.
+    /// Especifica de la anchura que se aplica a la letra.
     /// </summary>
     [Flags]
-    public enum UIFontStyles
+    public enum UIFontWeights
     {
         /// <summary>
-        /// Texto normal.
+        /// Especifica un grosor de fuente normal.
         /// </summary>
         Normal = 0,
 
         /// <summary>
-        /// Texto en cursiva.
+        /// Especifica un grosor de fuente negrita.
         /// </summary>
-        Italic = 1,
+        Bold = 1,
 
         /// <summary>
-        /// Texto en obliquo.
+        /// Especifica un grosor de fuente fino.
         /// </summary>
-        Oblique = 2
+        Thin = 2,
     }
 }

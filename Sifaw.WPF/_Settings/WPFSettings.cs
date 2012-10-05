@@ -35,6 +35,7 @@ namespace Sifaw.WPF
 
         private string _denomination = string.Empty;
         private string _description = string.Empty;
+        private UIFont _font = UIFonts.Sans_Serif.Verdana;
         private UIBrush _background = null;
 		private UIBrush _foreground = new UISolidBrush(UIColors.GrayColors.Black);
 		private UIFrame _margin = UIFrame.Empty;
@@ -78,6 +79,25 @@ namespace Sifaw.WPF
                 {
                     _description = value;
                     OnPropertyChanged(() => Description);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Obtiene o establece la fuente.
+        /// </summary>
+        public virtual UIFont Font
+        {
+            get { return _font; }
+            set
+            {
+                if (_font != value)
+                {
+                    _font = value;
+                    OnPropertyChanged(() => FontFamily);
+                    OnPropertyChanged(() => FontSize);
+                    OnPropertyChanged(() => FontStyle);
+                    OnPropertyChanged(() => FontWeight);
                 }
             }
         }
@@ -232,7 +252,7 @@ namespace Sifaw.WPF
 
 		#endregion
 
-        #region WPF Properties
+        #region WPF Properties MinWidth, MaxWidth, MinHeight, MaxHeight
 
         /// <summary>
         /// Obtiene o establece el ancho mínimo.
@@ -294,6 +314,74 @@ namespace Sifaw.WPF
                 {
                     MaxSize = new UISize(MaxSize.Width, value);
                     OnPropertyChanged(() => MaxHeight);
+                }
+            }
+        }
+
+        #endregion
+
+        #region WPF Font
+
+        /// <summary>
+        /// Obtiene o establece el tipo de letra.
+        /// </summary>
+        public string FontFamily
+        {
+            get { return Font.Name; }
+            set
+            {
+                if (Font.Name != value)
+                {
+                    Font = new UIFont(value, FontSize, FontStyle, FontWeight);
+                    OnPropertyChanged(() => FontFamily);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Obtiene o establece el tamaño de la letra.
+        /// </summary>
+        public double FontSize
+        {
+            get { return Font.Size; }
+            set
+            {
+                if (Font.Size != value)
+                {
+                    Font = new UIFont(FontFamily, value, FontStyle, FontWeight);
+                    OnPropertyChanged(() => FontSize);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Obtiene o establece el estilo de la letra.
+        /// </summary>
+        public UIFontStyles FontStyle
+        {
+            get { return Font.Style; }
+            set
+            {
+                if (Font.Style != value)
+                {
+                    Font = new UIFont(FontFamily, FontSize, value, FontWeight);
+                    OnPropertyChanged(() => FontStyle);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Obtiene o establece el grosor de la letra.
+        /// </summary>
+        public UIFontWeights FontWeight
+        {
+            get { return Font.Weight; }
+            set
+            {
+                if (Font.Weight != value)
+                {
+                    Font = new UIFont(FontFamily, FontSize, FontStyle, value);
+                    OnPropertyChanged(() => FontWeight);
                 }
             }
         }

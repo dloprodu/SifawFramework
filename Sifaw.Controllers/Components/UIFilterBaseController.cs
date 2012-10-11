@@ -264,9 +264,24 @@ namespace Sifaw.Controllers.Components
 
 		#endregion
 
-		#region UIElement Events Handler
+        #region Finshis Methods
 
-		private void UIElement_FilterChanged(object sender, UIFilterChangedEventArgs e)
+        /// <summary>
+        /// Invoca al método sobrescirto <see cref="UIElementController{TInput, TOutput, TComponent}.OnBeforeFinishControllers(List{IController})"/> y
+        /// posteriormente, si no ha sido cerrada ya, cierra la vista.
+        /// </summary>
+        protected override void OnBeforeFinishControllers(List<IController> children)
+        {
+            UIElement.FilterChanged -= new UIFilterChangedEventHandler(UIElement_FilterChanged);
+            
+            base.OnBeforeFinishControllers(children);
+        }
+
+        #endregion
+
+        #region UIElement Events Handler
+
+        private void UIElement_FilterChanged(object sender, UIFilterChangedEventArgs e)
 		{
 			CLFilterChangedEventArgs<TFilter> args = new CLFilterChangedEventArgs<TFilter>(UIElement.Filter);
 

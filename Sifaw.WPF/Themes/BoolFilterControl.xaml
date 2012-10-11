@@ -8,7 +8,8 @@
     
     <Style TargetType="{x:Type local:BoolFilterControl}"
            BasedOn="{StaticResource {x:Type CheckBox}}">
-
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        
         <!-- Empty -->
 
     </Style>

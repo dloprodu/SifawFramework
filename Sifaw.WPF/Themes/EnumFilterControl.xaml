@@ -29,6 +29,7 @@
                                         Background="Transparent">
                                     <RadioButton Focusable="False"
                                                  IsHitTestVisible="False"
+                                                 VerticalContentAlignment="Center"
                                                  IsChecked="{TemplateBinding IsSelected}">
                                         <ContentPresenter />
                                     </RadioButton>

@@ -5,8 +5,8 @@
         Height="529" Width="556" 
         xmlns:local="clr-namespace:Sifaw.WPF;assembly=Sifaw.WPF"
         xmlns:ccl="clr-namespace:Sifaw.WPF.CCL;assembly=Sifaw.WPF.CCL" xmlns:my="clr-namespace:Sifaw.WPF.Filters;assembly=Sifaw.WPF">
-
-        <!--<Border BorderBrush="Black" BorderThickness="3">
+    
+    <!--<Border BorderBrush="Black" BorderThickness="3">
             <ScrollViewer CanContentScroll="True" Height="200" BorderBrush="Black">
                 <my1:DataTableRowsPresenter RowHeight="32">
                     <Button>0</Button>
@@ -25,10 +25,4 @@
                 </my1:DataTableRowsPresenter >
             </ScrollViewer>
         </Border>-->
-
-    <Border BorderBrush="Black" BorderThickness="3" >
-        <!--<ccl:DataTable >
-            
-        </ccl:DataTable>-->
-    </Border>
 </Window>

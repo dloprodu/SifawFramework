@@ -190,13 +190,10 @@ namespace Sifaw.Controllers
         #region Start Methods
 
         /// <summary>
-        /// Invoca al método sobrescirto <see cref="UIViewController{TInput, TOutput, TView}.OnBeforeStartController()"/> y
-        /// posteriormente aplica la configuración de la shell, configuración como el número de filas, celdas por fila y componentes embebidos.
+        /// Método que inyecta los componentes de interfaz en la shell.
         /// </summary>
-        protected override void OnBeforeStartController()
-		{
-			base.OnBeforeStartController();
-
+        protected void BuildLayout()
+        {
             UIShellRow[] rows = ShellOperationsManager.BuildLayout<TGuest>(
                   GetNumberOfRows
                 , GetNumberOfCellsAt
@@ -224,6 +221,17 @@ namespace Sifaw.Controllers
             Guests = guests.AsReadOnly();
 
             UIElement.SetLayout(rows);
+        }
+
+        /// <summary>
+        /// Invoca al método sobrescirto <see cref="UIViewController{TInput, TOutput, TView}.OnBeforeStartController()"/> y
+        /// posteriormente aplica la configuración de la shell, configuración como el número de filas, celdas por fila y componentes embebidos.
+        /// </summary>
+        protected override void OnBeforeStartController()
+		{
+			base.OnBeforeStartController();
+
+            BuildLayout();
 		}
 
 		#endregion

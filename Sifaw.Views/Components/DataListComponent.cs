@@ -39,6 +39,12 @@ namespace Sifaw.Views.Components
         /// <param name="list"></param>
         void SetDataList(IList<IListable<TValue>> list);
 
+        /// <summary>
+        /// Selecciona el item con valor indicado.
+        /// </summary>
+        /// <param name="value">Valor del item a seleccionar.</param>
+        void SelectListableItem(TValue value);
+
         #endregion
 
         #region Events
@@ -54,5 +60,5 @@ namespace Sifaw.Views.Components
         event SFValueEventHandler<TValue> SelectedValueChanged;
 
         #endregion
-	}
+    }
 }

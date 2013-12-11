@@ -311,6 +311,7 @@ namespace Sifaw.Controllers.Components
 					}
 					catch
 					{
+                        /* El huésped no es un Filtro           */
 						/* throw new NotValidFilterException(); */
 					}
 				}

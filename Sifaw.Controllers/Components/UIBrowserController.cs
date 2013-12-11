@@ -204,6 +204,12 @@ namespace Sifaw.Controllers.Components
         /// <returns>Lista de <see cref="IListable{TValue}"/>.</returns>
         protected abstract IList<IListable<TValue>> GetList();
 
+        /// <summary>
+        /// Devuelve el valor del item que debe aparecer seleccionado inicialmente.
+        /// </summary>
+        /// <returns></returns>
+        protected abstract TValue GetInitialSelectedValue();
+
         #endregion
 
         #region Protected Methods
@@ -216,9 +222,32 @@ namespace Sifaw.Controllers.Components
             return (FilterableList.GetUIComponent() as DataListComponent<TValue>);
         }
 
+        /// <summary>
+        /// Selecciona el item con el valor indicado.
+        /// </summary>
+        /// <remarks>
+        /// Para invocar este método la controladora ha de estar iniciada, 
+        /// en otro caso, devolverá una excepcion.
+        /// </remarks>
+        /// <exception cref="NotValidStateException">La controladora no está iniciada.</exception>
+        /// <param name="value">Valor del item a seleccionar.</param>
+        protected void SelectListableItem(TValue value)
+        {
+            CheckState(CLStates.Started);
+            FilterableList.SelectListableItem(value);
+        }
+
         #endregion
 
         #region Start Methods
+
+        /// <summary>
+        /// Invoca al método sobrescirto <see cref="UIFiltersGroupController{TInput, TOutput, TFilter}.OnBeforeStartController()"/>.
+        /// </summary>
+        protected override void OnBeforeStartController()
+        {
+            base.OnBeforeStartController();
+        }
 
 		/// <summary>
         /// Invoca al método sobrescirto <see cref="Controller{TInput, TOutput}.OnAfterStartController()"/>.
@@ -227,7 +256,15 @@ namespace Sifaw.Controllers.Components
         {
             base.OnAfterStartController();
 
-            FilterableList.Start(new UIDataListController<TValue>.Input(GetList()));
+            FilterableList.Start(new UIDataListController<TValue>.Input(GetList(), GetInitialSelectedValue()));
+        }
+
+        /// <summary>
+        /// Invoca al método sobrescirto <see cref="Controller{TInput, TOutput}.OnBeforeResetController()"/>.
+        /// </summary>
+        protected override void OnBeforeResetController()
+        {
+            base.OnBeforeResetController();
         }
 
         /// <summary>
@@ -237,7 +274,7 @@ namespace Sifaw.Controllers.Components
         {
             base.OnAfterResetController();
 
-            FilterableList.Reset(new UIDataListController<TValue>.Input(GetList()));
+            FilterableList.Reset(new UIDataListController<TValue>.Input(GetList(), GetInitialSelectedValue()));
         }
 
         #endregion

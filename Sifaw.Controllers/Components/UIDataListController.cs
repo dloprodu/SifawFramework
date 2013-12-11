@@ -53,11 +53,20 @@ namespace Sifaw.Controllers.Components
 		{
             #region Fields
 
+            private TValue _selectedValue = default(TValue);
             private IList<IListable<TValue>> _list;
 
             #endregion
 
             #region Properties
+
+            /// <summary>
+            /// Devuelve el valor del elemento a seleccionar.
+            /// </summary>
+            public TValue SelectedValue
+            {
+                get { return _selectedValue; }
+            }
 
             /// <summary>
             /// Devuelve la lista a aplicar al iniciar la controladora.
@@ -79,6 +88,17 @@ namespace Sifaw.Controllers.Components
 			{
                 this._list = list;
 			}
+
+            /// <summary>
+            /// Inicializa una nueva instancia de la clase <see cref="UIDataListController{TValue}.Input"/>.
+            /// </summary>
+            /// <param name="list">Listado de <see cref="IListable{TValue}"/>.</param>
+            /// <param name="selected">Valor del item a seleccionar.</param>
+            public Input(IList<IListable<TValue>> list, TValue selected)
+                : this(list)
+            {
+                this._selectedValue = selected;
+            }
 
 			#endregion
 		}
@@ -257,9 +277,21 @@ namespace Sifaw.Controllers.Components
             UIElement.SetDataList(DataList);
         }
 
-        #endregion
-
-        #region Abstract Methods
+        /// <summary>
+        /// Selecciona el item con el valor indicado.
+        /// </summary>
+        /// <remarks>
+        /// Para invocar este método la controladora ha de estar iniciada, 
+        /// en otro caso, devolverá una excepcion.
+        /// </remarks>
+        /// <exception cref="NotValidStateException">La controladora no está iniciada.</exception>
+        /// <param name="value">Valor del item a seleccionar.</param>
+        public void SelectListableItem(TValue value)
+        {
+            CheckState(CLStates.Started);
+            UIElement.SelectListableItem(value);
+        }
+        
         #endregion
 
         #region UIElement Methods
@@ -274,8 +306,6 @@ namespace Sifaw.Controllers.Components
 			/* Subscripción a eventos del componente... */
             UIElement.SelectedIndexChanged += UIElement_SelectedIndexChanged;
             UIElement.SelectedValueChanged += UIElement_SelectedValueChanged;
-
-            
 		}
 
 		#endregion
@@ -316,6 +346,7 @@ namespace Sifaw.Controllers.Components
         protected override void StartController()
         {
             SetDataList(Parameters.List);
+            UIElement.SelectListableItem(Parameters.SelectedValue);
         }
 
         /// <summary>
@@ -323,7 +354,8 @@ namespace Sifaw.Controllers.Components
         /// </summary>
         protected override void ResetController()
         {
-            /* Empty */
+            SetDataList(Parameters.List);
+            UIElement.SelectListableItem(Parameters.SelectedValue);
         }
 
         /// <summary>

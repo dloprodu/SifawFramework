@@ -70,12 +70,21 @@ namespace Sifaw.WPF
             InitializeComponent();
 
             listView.ItemsSource = list;
+            listView.SelectedValuePath = "ValueItem";
 
             CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(listView.ItemsSource);
             PropertyGroupDescription groupDescription = new PropertyGroupDescription("GroupKey");
 
             if (view != null)
                 view.GroupDescriptions.Add(groupDescription);
+        }
+
+        public void SelectListableItem(int value)
+        {
+            listView.SelectedValue = value;
+
+            if ((listView.SelectedIndex < 0) && (listView.HasItems))
+                listView.SelectedIndex = 0;
         }
 
         #endregion

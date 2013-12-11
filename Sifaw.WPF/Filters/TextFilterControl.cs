@@ -121,7 +121,12 @@ namespace Sifaw.WPF.Filters
 		public string Filter
 		{
 			get { return Text; }
-			set { Text = value; }
+			set 
+            {
+                SuspendTimeDelay = true;
+                Text = value;
+                SuspendTimeDelay = false;
+            }
 		}
 
 		public event UIFilterChangedEventHandler FilterChanged;

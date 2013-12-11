@@ -11,7 +11,7 @@
         </Style>
     </UserControl.Resources>
     <Grid Name="grid">
-        <ListView x:Name="listView" SelectionChanged="listView_SelectionChanged">
+        <ListView x:Name="listView" SelectionMode="Single" SelectionChanged="listView_SelectionChanged">
             <ListView.View>
                 <GridView AllowsColumnReorder="False" ColumnHeaderContainerStyle="{StaticResource headerStyle}">
                     <GridViewColumn Header="Name" Width="Auto" DisplayMemberBinding="{Binding DisplayItem}" />

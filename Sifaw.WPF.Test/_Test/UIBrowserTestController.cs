@@ -314,6 +314,11 @@ namespace Sifaw.WPF.Test
             return items;
         }
 
+        protected override string GetInitialSelectedValue()
+        {
+            return "3";
+        }
+
         public class MyItem : IListable<string>
         {
             public string DisplayItem

@@ -81,6 +81,13 @@ namespace Sifaw.WPF.CCL
 					new Duration(new TimeSpan(0, 0, 0, 0, 500)),
 					new PropertyChangedCallback(OnInstantSearchTimeDelayChanged)));
 
+        public static DependencyProperty SuspendTimeDelayProperty =
+            DependencyProperty.Register(
+                "SuspendTimeDelay",
+                typeof(bool),
+                typeof(SearchTextField),
+                new FrameworkPropertyMetadata(false));
+
 		private static DependencyPropertyKey HasTextPropertyKey =
 			DependencyProperty.RegisterReadOnly(
 				"HasText",
@@ -123,6 +130,17 @@ namespace Sifaw.WPF.CCL
 			get { return (Duration)GetValue(InstantSearchTimeDelayProperty); }
 			set { SetValue(InstantSearchTimeDelayProperty, value); }
 		}
+
+        /// <summary>
+        /// Obtiene o establece un valor que permite suspender el tiempo de retardo en el desencadenamiento de eventos
+        /// <see cref="Search"/> en el modo de búsqueda Instant.
+        /// </summary>
+        [Category("Common")]
+        public bool SuspendTimeDelay
+        {
+            get { return (bool)GetValue(SuspendTimeDelayProperty); }
+            set { SetValue(SuspendTimeDelayProperty, value); }
+        }
 
 		/// <summary>
 		/// Obtiene un valor que indica si el control tiene una cadena de búsqueda.
@@ -218,8 +236,15 @@ namespace Sifaw.WPF.CCL
 			switch (Mode)
 			{
 				case SearchMode.Instant:
-					instantSearchTimer.Stop();
-					instantSearchTimer.Start();
+                    if (!SuspendTimeDelay)
+                    {
+                        instantSearchTimer.Stop();
+                        instantSearchTimer.Start();
+                    }
+                    else
+                    {
+                        OnSearch(new RoutedEventArgs(SearchEvent));
+                    }
 					break;
 
 				case SearchMode.Delayed:

@@ -81,6 +81,21 @@ namespace Sifaw.WPF
 			ui = new DropDownListFilterControl();
 		}
 
+        public void Create(out DataListComponent<Guid> ui)
+        {
+            ui = new DataListGuidValueControl();
+        }
+
+        public void Create(out DataListComponent<string> ui)
+        {
+            ui = new DataListStringValueControl();
+        }
+
+        public void Create(out DataListComponent<int> ui)
+        {
+            ui = new DataListIntValueControl();
+        }
+
 		#endregion
 
 		#region Vistas
@@ -91,5 +106,5 @@ namespace Sifaw.WPF
 		}
 
 		#endregion
-	}
+    }
 }

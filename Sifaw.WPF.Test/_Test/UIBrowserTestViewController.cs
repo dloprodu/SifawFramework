@@ -11,9 +11,9 @@ using Sifaw.Views.Kit;
 
 namespace Sifaw.WPF.Test
 {
-	public class UIGroupFiltersTestViewController : UIShellViewController
-		< UIGroupFiltersTestViewController.Input
-		, UIGroupFiltersTestViewController.Output
+	public class UIBrowserTestViewController : UIShellViewController
+        < UIBrowserTestViewController.Input
+        , UIBrowserTestViewController.Output
 		, ShellComponent>
 	{
 		#region Input / Output
@@ -59,17 +59,17 @@ namespace Sifaw.WPF.Test
 
 		#region Inclusions
 
-		private UIGroupFiltersTestController _groupFilterTest = null;
-		private UIGroupFiltersTestController GroupFilterTest
+        private UIBrowserTestController _browserTest = null;
+        private UIBrowserTestController BrowserTest
 		{
 			get
 			{
-				if (_groupFilterTest == null)
+				if (_browserTest == null)
 				{
-					_groupFilterTest = new UIGroupFiltersTestController();
+                    _browserTest = new UIBrowserTestController();
 				}
 
-				return _groupFilterTest;
+				return _browserTest;
 			}
 		}
 
@@ -77,12 +77,12 @@ namespace Sifaw.WPF.Test
 
 		#region Constructors
 
-		public UIGroupFiltersTestViewController()
+		public UIBrowserTestViewController()
 			: base()
 		{
 		}
 
-		public UIGroupFiltersTestViewController(UILinker<ShellView> linker)
+        public UIBrowserTestViewController(UILinker<ShellView> linker)
 			: base(linker)
 		{
 		}
@@ -103,15 +103,15 @@ namespace Sifaw.WPF.Test
 
 		protected override void GetRowSettings(uint row, out double height, out UIShellLengthModes mode)
 		{
-			height = 0;
-			mode = UIShellLengthModes.Auto;
+			height = 800;
+			mode = UIShellLengthModes.WeightedProportion;
 		}
 
 		protected override void GetRowCellSettings(uint row, uint cell, out double width, out UIShellLengthModes mode, out ShellComponent guest)
 		{
-			width = 0;
-			mode = UIShellLengthModes.Auto;
-			guest = GroupFilterTest.GetUIComponent() as ShellComponent;
+			width = 600;
+            mode = UIShellLengthModes.WeightedProportion;
+			guest = BrowserTest.GetUIComponent() as ShellComponent;
 		}
 
 		#endregion
@@ -141,9 +141,11 @@ namespace Sifaw.WPF.Test
 		{
 			base.OnAfterUIElementCreate();
 
-            UISettings.SizeToContent = true;
-            UISettings.AllowResize = false;
-            UISettings.Header = "Group Filter Test";
+            UISettings.SizeToContent = false;
+            UISettings.AllowResize = true;
+            UISettings.Width = 800;
+            UISettings.Height = 600;
+            UISettings.Header = "Browser Test";
 		}
 
 		#endregion
@@ -152,7 +154,7 @@ namespace Sifaw.WPF.Test
 
 		protected override void StartController()
 		{
-			GroupFilterTest.Start();
+			BrowserTest.Start();
 		}
 
 		protected override void OnAfterStartController()
@@ -167,7 +169,7 @@ namespace Sifaw.WPF.Test
 
 		protected override void ResetController()
 		{
-			GroupFilterTest.Reset();
+			BrowserTest.Reset();
 		}
 
 		#endregion

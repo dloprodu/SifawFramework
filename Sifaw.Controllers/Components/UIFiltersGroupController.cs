@@ -183,7 +183,12 @@ namespace Sifaw.Controllers.Components
 		/// filtros alojados en la shell.
 		/// </summary>
 		public event CLFilterChangedEventHandler<TFilter> FilterChanged;
-		private void OnFilterChanged(CLFilterChangedEventArgs<TFilter> e)
+
+        /// <summary>
+        /// Provoca el evento <see cref="FilterChanged"/>.
+        /// </summary>
+        /// <param name="e"><see cref="Sifaw.Controllers.Components.CLFilterChangedEventArgs{TFilter}"/> que contiene los datos del evento.</param>
+		protected virtual void OnFilterChanged(CLFilterChangedEventArgs<TFilter> e)
 		{
 			if (FilterChanged != null)
 				FilterChanged(this, e);
@@ -306,7 +311,7 @@ namespace Sifaw.Controllers.Components
 					}
 					catch
 					{
-						throw new NotValidFilterException();
+						/* throw new NotValidFilterException(); */
 					}
 				}
 			}

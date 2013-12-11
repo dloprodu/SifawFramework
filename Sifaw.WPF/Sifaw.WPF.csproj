@@ -65,6 +65,15 @@
     <Compile Include="BackgroundWorkerControl.xaml.cs">
       <DependentUpon>BackgroundWorkerControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DataListStringValueControl.xaml.cs">
+      <DependentUpon>DataListStringValueControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DataListIntValueControl.xaml.cs">
+      <DependentUpon>DataListIntValueControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DataListGuidValueControl.xaml.cs">
+      <DependentUpon>DataListGuidValueControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Filters\BoolFilterControl.cs" />
     <Compile Include="Commands\DelegateCommand.cs" />
     <Compile Include="Filters\DropDownListFilterControl.cs" />
@@ -142,6 +151,18 @@
     <Page Include="BackgroundWorkerControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DataListStringValueControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="DataListIntValueControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="DataListGuidValueControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="ShellControl.xaml">
       <SubType>Designer</SubType>

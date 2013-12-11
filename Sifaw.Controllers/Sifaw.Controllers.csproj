@@ -101,6 +101,8 @@
   <ItemGroup>
     <Compile Include="Components\Filters\TODO.cs" />
     <Compile Include="Components\TODO.cs" />
+    <Compile Include="Components\UIBrowserController.cs" />
+    <Compile Include="Components\UIDataListController.cs" />
     <Compile Include="Components\UIListFilterBaseController.cs" />
     <Compile Include="Components\Filters\UIDropDownListFilterController.cs" />
     <Compile Include="Components\Filters\UIBoolFilterController.cs" />

@@ -118,6 +118,7 @@ namespace Sifaw.WPF.Test
 
             UISettings.SizeToContent = false;
             UISettings.AllowResize = true;
+            UISettings.Header = "Tab Host Test";
 		}
 
 		#endregion

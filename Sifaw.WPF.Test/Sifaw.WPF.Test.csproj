@@ -113,6 +113,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resource.resx</DependentUpon>
     </Compile>
+    <Compile Include="_Test\UIBrowserTestController.cs" />
+    <Compile Include="_Test\UIBrowserTestViewController.cs" />
     <Compile Include="_Test\UITabHostTestViewController.cs" />
     <Compile Include="_Test\UIAssistantTestController.cs" />
     <Compile Include="_Test\UIAssistantTestViewController.cs" />

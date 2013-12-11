@@ -64,6 +64,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Components\DataListComponent.cs" />
     <Compile Include="Components\TabHostComponent.cs" />
     <Compile Include="Components\FilterBaseComponent.cs" />
     <Compile Include="Components\ListFilterBaseComponent.cs" />
@@ -72,6 +73,7 @@
     <Compile Include="Components\Filters\ListFilterComponent.cs" />
     <Compile Include="Components\Filters\TextFilterComponent.cs" />
     <Compile Include="Components\Filters\EnumFilterComponent.cs" />
+    <Compile Include="Components\_Miscellany\IListable.cs" />
     <Compile Include="Components\_Settings\BackgroundWorkerSettings.cs" />
     <Compile Include="Components\_Settings\BoolFilterSettings.cs" />
     <Compile Include="Components\_Settings\TextFilterSettings.cs" />

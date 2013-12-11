@@ -139,6 +139,7 @@ namespace Sifaw.WPF.Test
             UISettings.AllowResize = false;
             UISettings.Width = 800;
             UISettings.Height = 600;
+            UISettings.Header = "Assistant Test";
 		}
 
 		protected override void OnAfterUIShow()

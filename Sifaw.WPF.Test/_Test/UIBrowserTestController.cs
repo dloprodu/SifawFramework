@@ -372,10 +372,6 @@ namespace Sifaw.WPF.Test
         protected override void OnAfterUIElementCreate()
         {
             base.OnAfterUIElementCreate();
-
-            UISettings.SizeToContent = false;
-            UISettings.Width = 800;
-            UISettings.Height = 600;
         }
 
         #endregion

@@ -51,6 +51,16 @@ namespace Sifaw.Views
 		/// </summary>
 		void Close();
 
+        /// <summary>
+        /// Inicia un estado de espera.
+        /// </summary>
+        void BeginWaitState();
+
+        /// <summary>
+        /// Finaliza un estado de espera.
+        /// </summary>
+        void FinalizeWaitState();
+
 		/// <summary>
 		/// Muestra un message al usuario.
 		/// </summary>

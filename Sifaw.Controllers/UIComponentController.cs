@@ -113,6 +113,36 @@ namespace Sifaw.Controllers
          */
 
         /// <summary>
+        /// Se produce cuando la controladora solicita mostrar un estado de espera.
+        /// </summary>
+        public event EventHandler BeginWaitState;
+
+        /// <summary>
+        /// Provoca el evento <see cref="BeginWaitState"/>.
+        /// </summary>
+        /// <param name="e"><see cref="EventArgs"/> que contiene los datos del evento.</param>
+        protected void OnBeginWaitState(EventArgs e)
+        {
+            if (BeginWaitState != null)
+                BeginWaitState(this, e);
+        }
+
+        /// <summary>
+        /// Se produce cuando la controladora solicita finalizar el estado de espera.
+        /// </summary>
+        public event EventHandler FinalizeWaitState;
+
+        /// <summary>
+        /// Provoca el evento <see cref="FinalizeWaitState"/>.
+        /// </summary>
+        /// <param name="e"><see cref="EventArgs"/> que contiene los datos del evento.</param>
+        protected void OnFinalizeWaitState(EventArgs e)
+        {
+            if (FinalizeWaitState != null)
+                FinalizeWaitState(this, e);
+        }
+
+        /// <summary>
         /// Se produce cuando la controladora solicita mostrar un mensaje al usuario.
         /// </summary>
         public event CLShowInfoEventHandler ShowMessage;

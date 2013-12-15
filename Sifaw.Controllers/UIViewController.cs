@@ -160,6 +160,9 @@ namespace Sifaw.Controllers
         [CLReseteable(false)]
         private bool autoClosing = false;
 
+        [CLReseteable(0)]
+        private int waiteStates = 0;
+
         #endregion
 
         #region Events
@@ -361,6 +364,8 @@ namespace Sifaw.Controllers
             {
                 if (controller is IUIComponentController)
                 {
+                    (controller as IUIComponentController).BeginWaitState += new EventHandler(UIViewController_BeginWaitSate);
+                    (controller as IUIComponentController).FinalizeWaitState += new EventHandler(UIViewController_FinalizeWaitSate);
                     (controller as IUIComponentController).ShowMessage += new CLShowInfoEventHandler(UIComponentController_ShowMessage);
                     (controller as IUIComponentController).ShowWarning += new CLShowWarningEventHandler(UIComponentController_ShowWarning);
                     (controller as IUIComponentController).ShowError += new CLShowErrorEventHandler(UIComponentController_ShowError);
@@ -456,6 +461,23 @@ namespace Sifaw.Controllers
         #endregion
 
         #region Controllers Events Handler
+
+        private void UIViewController_BeginWaitSate(object sender, EventArgs e)
+        {
+            this.waiteStates++;
+            UIElement.BeginWaitState();
+        }
+
+        private void UIViewController_FinalizeWaitSate(object sender, EventArgs e)
+        {
+            if (this.waiteStates > 0)
+            {
+                this.waiteStates--;
+                return;
+            }
+
+            UIElement.FinalizeWaitState();
+        }
 
         private void UIComponentController_ConfirmMessage(object sender, CLConfirmMessageEventArgs e)
         {

@@ -36,10 +36,10 @@ namespace Sifaw.WPF
 	/// Interaction logic for Shell.xaml
 	/// </summary>
 	public partial class ShellWindow : Window, ShellView
-	{
-		#region Constructors
+    {
+        #region Constructors
 
-		public ShellWindow()
+        public ShellWindow()
 		{
 			InitializeComponent();			
 		}
@@ -107,6 +107,16 @@ namespace Sifaw.WPF
 			this.Closing -= new System.ComponentModel.CancelEventHandler(Window_Closing);
 			base.Close();
 		}
+
+        public void BeginWaitState()
+        {
+            Cursor = Cursors.Wait;
+        }
+
+        public void FinalizeWaitState()
+        {
+            Cursor = Cursors.Arrow;
+        }
 
 		public void ShowMessage(string message)
 		{

@@ -44,6 +44,16 @@ namespace Sifaw.Controllers
 
 		#region Events
 
+        /// <summary>
+        /// Evento para comunicar la solicitud mostrar un estado de espera.
+        /// </summary>
+        event EventHandler BeginWaitState;
+
+        /// <summary>
+        /// Evento para comunicar la solicitud finalizar el estado de espera.
+        /// </summary>
+        event EventHandler FinalizeWaitState;
+
 		/// <summary>
 		/// Evento para comunicar que se debe mostrar un mensaje.
 		/// </summary>

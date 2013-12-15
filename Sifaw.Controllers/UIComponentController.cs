@@ -120,11 +120,10 @@ namespace Sifaw.Controllers
         /// <summary>
         /// Provoca el evento <see cref="BeginWaitState"/>.
         /// </summary>
-        /// <param name="e"><see cref="EventArgs"/> que contiene los datos del evento.</param>
-        protected void OnBeginWaitState(EventArgs e)
+        protected void OnBeginWaitState()
         {
             if (BeginWaitState != null)
-                BeginWaitState(this, e);
+                BeginWaitState(this, EventArgs.Empty);
         }
 
         /// <summary>
@@ -135,11 +134,10 @@ namespace Sifaw.Controllers
         /// <summary>
         /// Provoca el evento <see cref="FinalizeWaitState"/>.
         /// </summary>
-        /// <param name="e"><see cref="EventArgs"/> que contiene los datos del evento.</param>
-        protected void OnFinalizeWaitState(EventArgs e)
+        protected void OnFinalizeWaitState()
         {
             if (FinalizeWaitState != null)
-                FinalizeWaitState(this, e);
+                FinalizeWaitState(this, EventArgs.Empty);
         }
 
         /// <summary>

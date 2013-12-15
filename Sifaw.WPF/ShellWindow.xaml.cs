@@ -110,12 +110,12 @@ namespace Sifaw.WPF
 
         public void BeginWaitState()
         {
-            Cursor = Cursors.Wait;
+            Mouse.OverrideCursor = Cursors.Wait;
         }
 
         public void FinalizeWaitState()
         {
-            Cursor = Cursors.Arrow;
+            Mouse.OverrideCursor = null;
         }
 
 		public void ShowMessage(string message)

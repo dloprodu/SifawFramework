@@ -517,7 +517,7 @@ namespace Sifaw.Controllers
         /// <summary>
         /// Devuelve las controladoras instanciadas.
         /// </summary>
-        protected List<IController> GetControllers()
+        public List<IController> GetControllers()
         {
             return GetControllers(GetAllProperty());
         }

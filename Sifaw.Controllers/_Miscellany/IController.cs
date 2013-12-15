@@ -61,6 +61,12 @@ namespace Sifaw.Controllers
 		/// </summary>
 		bool Finish();
 
+        /// <summary>
+        /// Devuelve la lista de controladoras hijas.
+        /// </summary>
+        /// <returns></returns>
+        List<IController> GetControllers();
+
 		#endregion
 
 		#region Events

@@ -324,6 +324,31 @@ namespace Sifaw.Controllers
 
         #endregion
 
+        #region Helpers
+
+        private void SetChildsSettings(List<IController> childs)
+        {
+            // Nos enganchamos a eventos de la controladoras hijas para propagarlos.
+            // • Los eventos ShowMessage, ShowWarning, ShowError y ConfirmMessage han de ser propagados hasta que sean
+            //   capturados por una controladora UIViewController que los gestione.
+            foreach (IController controller in childs)
+            {
+                if (controller is IUIComponentController)
+                {
+                    (controller as IUIComponentController).BeginWaitState += new EventHandler(UIViewController_BeginWaitSate);
+                    (controller as IUIComponentController).FinalizeWaitState += new EventHandler(UIViewController_FinalizeWaitSate);
+                    (controller as IUIComponentController).ShowMessage += new CLShowInfoEventHandler(UIComponentController_ShowMessage);
+                    (controller as IUIComponentController).ShowWarning += new CLShowWarningEventHandler(UIComponentController_ShowWarning);
+                    (controller as IUIComponentController).ShowError += new CLShowErrorEventHandler(UIComponentController_ShowError);
+                    (controller as IUIComponentController).ConfirmMessage += new CLConfirmMessageEventHandler(UIComponentController_ConfirmMessage);
+                }
+
+                SetChildsSettings(controller.GetControllers());
+            }
+        }
+
+        #endregion
+
         #region UIElement Methods
 
         /// <summary>
@@ -357,21 +382,7 @@ namespace Sifaw.Controllers
         {
             base.OnBeforeStartController();
 
-            // Nos enganchamos a eventos de la controladoras hijas para propagarlos.
-            // • Los eventos ShowMessage, ShowWarning, ShowError y ConfirmMessage han de ser propagados hasta que sean
-            //   capturados por una controladora UIViewController que los gestione.
-            foreach (IController controller in GetControllers())
-            {
-                if (controller is IUIComponentController)
-                {
-                    (controller as IUIComponentController).BeginWaitState += new EventHandler(UIViewController_BeginWaitSate);
-                    (controller as IUIComponentController).FinalizeWaitState += new EventHandler(UIViewController_FinalizeWaitSate);
-                    (controller as IUIComponentController).ShowMessage += new CLShowInfoEventHandler(UIComponentController_ShowMessage);
-                    (controller as IUIComponentController).ShowWarning += new CLShowWarningEventHandler(UIComponentController_ShowWarning);
-                    (controller as IUIComponentController).ShowError += new CLShowErrorEventHandler(UIComponentController_ShowError);
-                    (controller as IUIComponentController).ConfirmMessage += new CLConfirmMessageEventHandler(UIComponentController_ConfirmMessage);
-                }
-            }
+            SetChildsSettings(GetControllers());
         }
 
         /// <summary>
@@ -470,12 +481,13 @@ namespace Sifaw.Controllers
 
         private void UIViewController_FinalizeWaitSate(object sender, EventArgs e)
         {
-            if (this.waiteStates > 0)
+            if (this.waiteStates > 1)
             {
                 this.waiteStates--;
                 return;
             }
 
+            this.waiteStates--;
             UIElement.FinalizeWaitState();
         }
 

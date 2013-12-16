@@ -40,6 +40,11 @@ namespace Sifaw.Views.Components
 		/// </summary>
 		string DisplayFilter { get; }
 
+        /// <summary>
+        /// Obtiene el orden de presentación del filtro.
+        /// </summary>
+        int? Order { get; }
+
 		/// <summary>
 		/// Determina si un objeto <see cref="IFilterable"/> proporcionado es equivalente al objeto <see cref="IFilterable"/> actual.
 		/// </summary>

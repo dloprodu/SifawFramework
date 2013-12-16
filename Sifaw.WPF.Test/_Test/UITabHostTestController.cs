@@ -76,6 +76,11 @@ namespace Sifaw.WPF.Test
 				get { return Value; }
 			}
 
+            public int? Order
+            {
+                get { return null; }
+            }
+
 			#endregion
 
 			#region IComparable Members
@@ -126,7 +131,7 @@ namespace Sifaw.WPF.Test
 			}
 
 			#endregion
-		}
+        }
 
 		public static class Filters
 		{

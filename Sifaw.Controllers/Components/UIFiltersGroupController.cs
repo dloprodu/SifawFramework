@@ -328,5 +328,116 @@ namespace Sifaw.Controllers.Components
 		}
 
 		#endregion
-	}
+
+        #region Internal class
+
+        /// <summary>
+        /// Clase que implementa la interfaz <see cref="IFilterable"/> y sirve de apoyo a la
+        /// construcción de filtros.
+        /// </summary>
+        [Serializable]
+        public class Filterable : IFilterable
+        {
+            private string _value;
+            private int? _order = null;
+
+            #region Constructors
+
+            /// <summary>
+            /// Inicializa una nueva instancia de <see cref="Filterable"/>.
+            /// </summary>
+            /// <param name="value">Valor del filtro</param>
+            public Filterable(string value)
+            {
+                _value = value;
+            }
+
+            /// <summary>
+            /// Inicializa una nueva instancia de <see cref="Filterable"/>.
+            /// </summary>
+            /// <param name="value">Valor del filtro</param>
+            /// <param name="order">Orden del filtro</param>
+            public Filterable(string value, int order)
+            {
+                _value = value;
+                _order = order;
+            }
+
+            #endregion
+
+            #region IFilterable Members
+
+            /// <summary>
+            /// Valor del filtro.
+            /// </summary>
+            public string DisplayFilter
+            {
+                get { return _value; }
+            }
+
+            /// <summary>
+            /// Orden del filtro.
+            /// </summary>
+            public int? Order
+            {
+                get { return _order; }
+            }
+
+            #endregion
+
+            #region IComparable Members
+
+            public int CompareTo(object obj)
+            {
+                return CompareTo(obj as IFilterable);
+            }
+
+            #endregion
+
+            #region IComparable<IFilterable> Members
+
+            public int CompareTo(IFilterable other)
+            {
+                if (this._order.HasValue && other.Order.HasValue)
+                    return _order.Value.CompareTo(other.Order.Value);
+
+                return DisplayFilter.CompareTo(other.DisplayFilter);
+            }
+
+            #endregion
+
+            #region IEquatable<IFilterable> Members
+
+            public bool Equals(IFilterable other)
+            {
+                return DisplayFilter.Equals(other.DisplayFilter);
+            }
+
+            #endregion
+
+            #region System Override
+
+            public override bool Equals(object obj)
+            {
+                if (obj is Filterable)
+                    return Equals(obj as Filterable);
+                else
+                    return false;
+            }
+
+            public override int GetHashCode()
+            {
+                return DisplayFilter.GetHashCode();
+            }
+
+            public override string ToString()
+            {
+                return DisplayFilter;
+            }
+
+            #endregion
+        }
+
+        #endregion
+    }
 }

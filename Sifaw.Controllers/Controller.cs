@@ -836,7 +836,7 @@ namespace Sifaw.Controllers
                 if (Array.IndexOf(field.FieldType.GetInterfaces(), typeof(IController)) >= 0)
                 {
                     // Corresponde con una controladora.
-                    field.SetValue(this, null);
+                    // field.SetValue(this, null);
                 }
                 else
                 {

@@ -27,9 +27,8 @@
                                         <Expander IsExpanded="True">
                                             <Expander.Header>
                                                 <StackPanel Orientation="Horizontal">
-                                                    <TextBlock Text="{Binding Name}" Foreground="Gray" FontSize="16" VerticalAlignment="Bottom" />
+                                                    <TextBlock Text="{Binding Name}" Foreground="DodgerBlue" FontSize="16" VerticalAlignment="Bottom" />
                                                     <TextBlock Text="{Binding ItemCount}" FontSize="16" FontWeight="Bold" FontStyle="Italic" Margin="10,0,0,0" VerticalAlignment="Bottom" />
-                                                    <TextBlock Text=" item(s)" FontSize="16" Foreground="Silver" FontStyle="Italic" VerticalAlignment="Bottom" />
                                                 </StackPanel>
                                             </Expander.Header>
                                             <ItemsPresenter />

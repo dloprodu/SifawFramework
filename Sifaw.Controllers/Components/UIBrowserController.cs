@@ -110,16 +110,10 @@ namespace Sifaw.Controllers.Components
         /// <summary>
         /// Devuelve el valor del elemento seleccionado.
         /// </summary>
-        /// <remarks>
-        /// Para acceder a la propiedad la controladora ha de estar iniciada, 
-        /// en otro caso, devolverá una excepcion.
-        /// </remarks>
-        /// <exception cref="NotValidStateException">La controladora no está iniciada.</exception>
         public TValue SelectedValue
         {
             get
             {
-                CheckState(CLStates.Started);
                 return FilterableList.SelectedValue;
             }
         }

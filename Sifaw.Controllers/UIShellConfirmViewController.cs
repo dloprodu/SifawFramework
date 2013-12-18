@@ -121,11 +121,21 @@ namespace Sifaw.Controllers
 		 *  • Solo son lanzados por la controladora padre.
 		 */
 
+        /*
+         * Desencadenadores protegidos.
+         *  • Pueden ser lanzados por controladoras hijas.
+         */
+
         /// <summary>
         /// Se produce cuando se quiere confirmar una operación.
         /// </summary>
         public event SFCancelEventHandler Confirm;
-        private void OnConfirm(SFCancelEventArgs e)
+
+        /// <summary>
+        /// Provoca el evento <see cref="Confirm"/>.
+        /// </summary>
+        /// <param name="e"><see cref="Sifaw.Core.SFCancelEventArgs"/> que contiene los datos del evento.</param>
+        protected virtual void OnConfirm(SFCancelEventArgs e)
         {
             if (Confirm != null)
                 Confirm(this, e);
@@ -135,7 +145,12 @@ namespace Sifaw.Controllers
         /// Se produce cuando se va a cancelar una operación.
         /// </summary>
         public event SFCancelEventHandler Cancel;
-        private void OnCancel(SFCancelEventArgs e)
+
+        /// <summary>
+        /// Provoca el evento <see cref="Cancel"/>.
+        /// </summary>
+        /// <param name="e"><see cref="Sifaw.Core.SFCancelEventArgs"/> que contiene los datos del evento.</param>
+        protected virtual void OnCancel(SFCancelEventArgs e)
         {
             if (Cancel != null)
                 Cancel(this, e);

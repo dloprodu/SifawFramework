@@ -65,6 +65,12 @@
     <Compile Include="BackgroundWorkerControl.xaml.cs">
       <DependentUpon>BackgroundWorkerControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ShellConfirmWindow.xaml.cs">
+      <DependentUpon>ShellConfirmWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ShellConfirmControl.xaml.cs">
+      <DependentUpon>ShellConfirmControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DataListStringValueControl.xaml.cs">
       <DependentUpon>DataListStringValueControl.xaml</DependentUpon>
     </Compile>
@@ -151,6 +157,14 @@
     <Page Include="BackgroundWorkerControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ShellConfirmWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ShellConfirmControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="DataListStringValueControl.xaml">
       <Generator>MSBuild:Compile</Generator>

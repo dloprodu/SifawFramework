@@ -41,6 +41,11 @@ namespace Sifaw.WPF
 			ui = new ShellControl();
 		}
 
+        public void Create(out ShellConfirmComponent ui)
+        {
+            ui = new ShellConfirmControl();
+        }
+
 		public void Create(out BackgroundWorkerComponent ui)
 		{
 			ui = new BackgroundWorkerControl();
@@ -104,6 +109,11 @@ namespace Sifaw.WPF
 		{
 			ui = new ShellWindow();
 		}
+
+        public void Create(out ShellConfirmView ui)
+        {
+            ui = new ShellConfirmWindow();
+        }
 
 		#endregion
     }

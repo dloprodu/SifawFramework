@@ -77,6 +77,8 @@
     <Compile Include="Components\_Settings\BackgroundWorkerSettings.cs" />
     <Compile Include="Components\_Settings\BoolFilterSettings.cs" />
     <Compile Include="Components\_Settings\TextFilterSettings.cs" />
+    <Compile Include="ShellConfirmView.cs" />
+    <Compile Include="ShellConfirmComponent.cs" />
     <Compile Include="Kit\UIFont.cs" />
     <Compile Include="Kit\UIFonts.cs" />
     <Compile Include="Kit\UIFontStyles.cs" />

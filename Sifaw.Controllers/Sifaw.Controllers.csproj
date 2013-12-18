@@ -117,6 +117,8 @@
     <Compile Include="Components\_Events\CLRunWorkerCompletedEvent.cs" />
     <Compile Include="Components\_Events\CLRunWorkerProgressChangedEvent.cs" />
     <Compile Include="Components\_Miscellany\BackgroundWorkerPack.cs" />
+    <Compile Include="UIShellConfirmViewController.cs" />
+    <Compile Include="UIShellConfirmComponentController.cs" />
     <Compile Include="UIShellComponentController.cs" />
     <Compile Include="UIActorController.cs" />
     <Compile Include="UIViewManagerExtension.cs" />

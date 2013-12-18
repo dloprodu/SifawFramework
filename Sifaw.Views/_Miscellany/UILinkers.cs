@@ -38,6 +38,7 @@ namespace Sifaw.Views
 		/****************************************************************/	
 		// • Componentes 
 		: UILinker<ShellComponent>
+        , UILinker<ShellConfirmComponent>
 		, UILinker<BackgroundWorkerComponent>
 		, UILinker<TabHostComponent>
 		, UILinker<AssistantComponent>
@@ -52,6 +53,7 @@ namespace Sifaw.Views
 						
 		// • Vistas 		 
 		, UILinker<ShellView>
+        , UILinker<ShellConfirmView>
 	{
 		/* Empty */
 	}

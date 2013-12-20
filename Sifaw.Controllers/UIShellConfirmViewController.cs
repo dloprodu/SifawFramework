@@ -90,13 +90,36 @@ namespace Sifaw.Controllers
 		[Serializable]
         public abstract new class Output : UIViewController<TInput, TOutput, ShellConfirmView>.Output
 		{
+            #region Fields
+
+            private bool _confirmed;
+
+            #endregion
+
+            #region Properties
+
+            /// <summary>
+            /// Flag que indica si la operación ha sido confirmada.
+            /// </summary>
+            public bool Confirmed
+            {
+                get
+                {
+                    return _confirmed;
+                }
+            }
+
+            #endregion
+
             #region Constructor
 
             /// <summary>
             /// Inicializa una nueva instancia de la clase <see cref="UIShellViewController{TInput, TOutput, TGuest}.Output"/>.
             /// </summary>
-            protected Output()
+            /// <param name="confirmed">Flag que indica si se ha confirmado la acción.</param>
+            protected Output(bool confirmed)
             {
+                _confirmed = confirmed;
             }
 
             #endregion
@@ -111,6 +134,12 @@ namespace Sifaw.Controllers
         /// </summary>
         [CLReseteable(null)]
         protected ReadOnlyCollection<TGuest> Guests = null;
+
+        /// <summary>
+        /// Flag que se activa cuando la operación ha sido confirmada.
+        /// </summary>
+        [CLReseteable(false)]
+        protected bool Confirmed = false;
 
         #endregion
 
@@ -196,6 +225,15 @@ namespace Sifaw.Controllers
             /* Subscripción a eventos de la vista... */
             UIElement.Confirm += UIElement_Confirm;
             UIElement.Cancel += UIElement_Cancel;
+        }
+
+        /// <summary>
+        /// Invoca al método sobrescirto <see cref="UIViewController{TInput, TOutput, TView}.OnBeforeUIClose(out bool)"/> y
+        /// posteriormente se subscribe a eventos de <see cref="UIView"/>.
+        /// </summary>
+        protected override void OnBeforeUIClose(out bool cancel)
+        {
+            base.OnBeforeUIClose(out cancel);
         }
 
         #endregion
@@ -290,7 +328,9 @@ namespace Sifaw.Controllers
             SFCancelEventArgs args = new SFCancelEventArgs();
             OnConfirm(args);
 
-            if (!args.Cancel)
+            Confirmed = !args.Cancel;
+
+            if (Confirmed)
                 Finish();
         }
 

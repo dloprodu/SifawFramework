@@ -77,13 +77,37 @@ namespace Sifaw.Controllers
 		[Serializable]
         public abstract new class Output : UIComponentController<TInput, TOutput, ShellConfirmComponent>.Output
 		{
+            #region Fields
+
+            private bool _confirmed;
+
+            #endregion
+
+            #region Properties
+
+            /// <summary>
+            /// Flag que indica si la operación ha sido confirmada.
+            /// </summary>
+            public bool Confirmed
+            {
+                get
+                {
+                    return _confirmed;
+                }
+            }
+
+            #endregion
+
             #region Constructor
 
             /// <summary>
-            /// Inicializa una nueva instancia de la clase <see cref="UIShellComponentController{TInput, TOutput, TGuest}.Output"/>.
+            /// Inicializa una nueva instancia de la clase <see cref="UIShellConfirmComponentController{TInput, TOutput, TGuest}.Output"/>.
             /// </summary>
-            protected Output()
+            /// <param name="confirmed">Flag que indica si se ha confirmado la acción.</param>
+            protected Output(bool confirmed) 
+                :base()
             {
+                _confirmed = confirmed;
             }
 
             #endregion
@@ -98,6 +122,12 @@ namespace Sifaw.Controllers
         /// </summary>
         [CLReseteable(null)]
         protected ReadOnlyCollection<TGuest> Guests = null;
+
+        /// <summary>
+        /// Flag que se activa cuando la operación ha sido confirmada.
+        /// </summary>
+        [CLReseteable(false)]
+        protected bool Confirmed = false;
 
         #endregion
 
@@ -117,6 +147,11 @@ namespace Sifaw.Controllers
         /// Se produce cuando se quiere confirmar una operación.
         /// </summary>
         public event SFCancelEventHandler Confirm;
+
+        /// <summary>
+        /// Provoca el evento <see cref="Confirm"/>.
+        /// </summary>
+        /// <param name="e"><see cref="Sifaw.Core.SFCancelEventArgs"/> que contiene los datos del evento.</param>
         protected virtual void OnConfirm(SFCancelEventArgs e)
         {
             if (Confirm != null)
@@ -127,6 +162,11 @@ namespace Sifaw.Controllers
         /// Se produce cuando se va a cancelar una operación.
         /// </summary>
         public event SFCancelEventHandler Cancel;
+
+        /// <summary>
+        /// Provoca el evento <see cref="Cancel"/>.
+        /// </summary>
+        /// <param name="e"><see cref="Sifaw.Core.SFCancelEventArgs"/> que contiene los datos del evento.</param>
         protected virtual void OnCancel(SFCancelEventArgs e)
         {
             if (Cancel != null)
@@ -259,7 +299,9 @@ namespace Sifaw.Controllers
             SFCancelEventArgs args = new SFCancelEventArgs();
             OnConfirm(args);
 
-            if (!args.Cancel)
+            Confirmed = !args.Cancel;
+
+            if (Confirmed)
                 Finish();
         }
 

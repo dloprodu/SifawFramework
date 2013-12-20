@@ -246,7 +246,7 @@ namespace Sifaw.Controllers.Components
         /// </remarks>
         /// <exception cref="NotValidStateException">La controladora no está iniciada.</exception>
         /// <param name="value">Valor del item a seleccionar.</param>
-        protected void SelectListableItem(TValue value)
+        public void SelectListableItem(TValue value)
         {
             CheckState(CLStates.Started);
             FilterableList.SelectListableItem(value);

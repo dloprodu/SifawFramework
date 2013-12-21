@@ -40,12 +40,21 @@ namespace Sifaw.WPF.Converters
 
 		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
 		{
+            if (value == null)
+                return null;
+
+            if (string.IsNullOrEmpty((string)value))
+                return null;
+
             DateTime date;
 
             if (DateTime.TryParse((string)value, culture.DateTimeFormat, DateTimeStyles.None, out date))
-                return date;
-            else
-                return null;
+            {
+                if ((date != DateTime.MinValue) && (date != DateTime.MaxValue))
+                    return date;
+            }
+
+            return null;
 		}
 
 		#endregion

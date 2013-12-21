@@ -33,7 +33,7 @@ namespace Sifaw.WPF.Converters
 		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
 		{
             if ((value != null) && (((DateTime)value) != DateTime.MinValue)  && (((DateTime)value) != DateTime.MaxValue)) 
-                return ((DateTime)value).ToString(culture.DateTimeFormat.ShortDatePattern);
+                return ((DateTime)value).ToString("dd/MM/yyyy");
 
             return string.Empty;
 		}

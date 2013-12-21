@@ -48,7 +48,7 @@ namespace Sifaw.WPF.Converters
 
             DateTime date;
 
-            if (DateTime.TryParse((string)value, culture.DateTimeFormat, DateTimeStyles.None, out date))
+            if (DateTime.TryParse((string)value, out date))
             {
                 if ((date != DateTime.MinValue) && (date != DateTime.MaxValue))
                     return date;

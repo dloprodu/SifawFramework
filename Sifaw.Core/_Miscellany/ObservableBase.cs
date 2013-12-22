@@ -46,6 +46,16 @@ namespace Sifaw.Core
         }
 
         /// <summary>
+        /// Provoca el evento <see cref="PropertyChanged"/>.
+        /// </summary>
+        /// <param name="propertyName">Property name</param>
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        /// <summary>
         /// Get the string name for the property
         /// </summary>
         protected string GetPropertyName<T>(Expression<Func<T>> expression)

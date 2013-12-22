@@ -26,26 +26,26 @@ using Sifaw.Views.Kit;
 
 namespace Sifaw.WPF.Converters
 {
-    public class DateTimeToString : IValueConverter
+    public class IntToString : IValueConverter
 	{
 		#region IValueConverter Members
 
 		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
 		{
-            if ((value != null) && (((DateTime)value) != DateTime.MinValue)  && (((DateTime)value) != DateTime.MaxValue)) 
-                return ((DateTime)value).ToString("dd/MM/yyyy");
+            if (value != null)
+                return ((int)value).ToString();
 
             return string.Empty;
 		}
 
 		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            DateTime date = DateTime.MinValue;
+            int result = 0;
 
             if (value != null)
-                DateTime.TryParse((string)value, out date);
+                Int32.TryParse((string)value, out result);
 
-            return date;
+            return result;
 		}
 
 		#endregion

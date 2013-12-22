@@ -108,6 +108,7 @@
     <Compile Include="TabHostControl.cs" />
     <Compile Include="WPFLinkers.cs" />
     <Compile Include="_Settings\ControlSettings.cs" />
+    <Compile Include="_Settings\Converters\BufferToImageSource.cs" />
     <Compile Include="_Settings\Converters\DateTimeToString.cs" />
     <Compile Include="_Settings\Converters\UIBoolToSearchMode.cs" />
     <Compile Include="_Settings\Converters\UIFontFamilyToFontFamily.cs" />

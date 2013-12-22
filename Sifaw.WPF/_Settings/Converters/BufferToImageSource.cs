@@ -28,7 +28,7 @@ using Sifaw.Views.Kit;
 
 namespace Sifaw.WPF.Converters
 {
-    public class UIImageToImageSource : IValueConverter
+    public class BufferToImageSource : IValueConverter
 	{
 		#region IValueConverter Members
 
@@ -36,12 +36,12 @@ namespace Sifaw.WPF.Converters
 		{
             BitmapImage image = null;
             
-            if ((value != null) && ((value as UIImage).Buffer != null))
+            if (value != null)
             {
                 image = new BitmapImage();                
                 image.BeginInit();
                 //image.CacheOption = BitmapCacheOption.OnLoad;
-                image.StreamSource = new MemoryStream((value as UIImage).Buffer);
+                image.StreamSource = new MemoryStream( (byte[]) value );
                 image.EndInit();
             }
 
@@ -50,7 +50,7 @@ namespace Sifaw.WPF.Converters
 
 		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
 		{
-            UIImage image = null;
+            byte[] image = null;
 
             if (value != null)
             {
@@ -59,7 +59,7 @@ namespace Sifaw.WPF.Converters
                 using (MemoryStream ms = new MemoryStream())
                 {
                     encoder.Save(ms);
-                    image =  new UIImage( ms );
+                    image = ms.ToArray();
                 }
             }
 

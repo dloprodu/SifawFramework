@@ -8,6 +8,7 @@
         <ResourceDictionary Source="/Sifaw.WPF.CCL;component/Themes/AssistantProgressBar.xaml" />        
         <ResourceDictionary Source="/Sifaw.WPF.CCL;component/Themes/TextField.xaml" />
         <ResourceDictionary Source="/Sifaw.WPF.CCL;component/Themes/SearchTextField.xaml" />
+        <ResourceDictionary Source="/Sifaw.WPF.CCL;component/Themes/CustomButton.xaml" />
     </ResourceDictionary.MergedDictionaries>   
-    
+
 </ResourceDictionary>

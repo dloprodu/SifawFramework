@@ -32,7 +32,16 @@ namespace Sifaw.Views
 	/// </para>
 	/// </summary>
     public interface ShellConfirmView : ShellView
-	{
+    {
+        #region Properties
+
+        /// <summary>
+        /// Flag que permite indicar si se muestra la opción de cancelar la operación.
+        /// </summary>
+        bool IsCancelable { get; set; }
+
+        #endregion
+
         #region Events
 
         /// <summary>

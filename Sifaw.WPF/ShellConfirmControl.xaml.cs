@@ -94,6 +94,17 @@ namespace Sifaw.WPF
 
 		#region UIShell Members
 
+        public bool IsCancelable
+        {
+            get { return (buttonCancel.Visibility == System.Windows.Visibility.Visible); }
+            set
+            {
+                buttonCancel.Visibility = (value)
+                    ? System.Windows.Visibility.Visible
+                    : System.Windows.Visibility.Collapsed;
+            }
+        }
+
 		public void SetLayout(UIShellRow[] rows)
 		{
 			Reset();

@@ -75,7 +75,7 @@ namespace Sifaw.WPF
 
 		#endregion
 
-        #region Methods sobreescritos
+        #region Overrides Methods
 
         protected override void OnClosed(EventArgs e)
         {
@@ -87,6 +87,12 @@ namespace Sifaw.WPF
         #endregion
 
 		#region UIShell Members
+
+        public bool IsCancelable
+        {
+            get { return shell.IsCancelable; }
+            set { shell.IsCancelable = value; }
+        }
 
 		public void SetLayout(UIShellRow[] rows)
 		{

@@ -211,6 +211,66 @@ namespace Sifaw.Controllers.Components
 
 		#endregion
 
+        #region Public methods
+
+        /// <summary>
+        /// Activa la selección múltiple.
+        /// </summary>
+        /// <remarks>
+        /// Para invocar este método la controladora ha de estar iniciada, 
+        /// en otro caso, devolverá una excepcion.
+        /// </remarks>
+        /// <exception cref="NotValidStateException">La controladora no está iniciada.</exception>
+        public void EnableMultiSelection()
+        {
+            CheckState(CLStates.Started);
+            FilterableList.EnableMultiSelection();
+        }
+
+        /// <summary>
+        /// Desactiva la selección múltiple.
+        /// </summary>
+        /// <remarks>
+        /// Para invocar este método la controladora ha de estar iniciada, 
+        /// en otro caso, devolverá una excepcion.
+        /// </remarks>
+        /// <exception cref="NotValidStateException">La controladora no está iniciada.</exception>
+        public void DisableMultiSelection()
+        {
+            CheckState(CLStates.Started);
+            FilterableList.DisableMultiSelection();
+        }
+
+        /// <summary>
+        /// Devuelve la lista de elementos seleccionados.
+        /// </summary>
+        /// <remarks>
+        /// Para invocar este método la controladora ha de estar iniciada, 
+        /// en otro caso, devolverá una excepcion.
+        /// </remarks>
+        /// <exception cref="NotValidStateException">La controladora no está iniciada.</exception>
+        public IList<TValue> GetSelection()
+        {
+            CheckState(CLStates.Started);
+            return FilterableList.GetSelection();
+        }
+
+        /// <summary>
+        /// Limpia la selección.
+        /// </summary>
+        /// <remarks>
+        /// Para invocar este método la controladora ha de estar iniciada, 
+        /// en otro caso, devolverá una excepcion.
+        /// </remarks>
+        /// <exception cref="NotValidStateException">La controladora no está iniciada.</exception>
+        public void ClearSelection()
+        {
+            CheckState(CLStates.Started);
+            FilterableList.ClearSelection();
+        }
+
+        #endregion
+
         #region Abstract Methods
 
         /// <summary>

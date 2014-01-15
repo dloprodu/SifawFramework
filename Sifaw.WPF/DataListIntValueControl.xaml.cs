@@ -63,6 +63,24 @@ namespace Sifaw.WPF
 
         #region DataListComponent
 
+        #region Properties
+
+        public bool MultiSelection
+        {
+            get
+            {
+                return (listView.SelectionMode != SelectionMode.Single);
+            }
+            set
+            {
+                listView.SelectionMode = (value)
+                    ? SelectionMode.Extended
+                    : SelectionMode.Single;
+            }
+        }
+
+        #endregion
+
         #region Methods
 
         public void SetDataList(IList<IListable<int>> list)
@@ -85,6 +103,21 @@ namespace Sifaw.WPF
 
             if ((listView.SelectedIndex < 0) && (listView.HasItems))
                 listView.SelectedIndex = 0;
+        }
+
+        public IList<int> GetSelection()
+        {
+            List<int> selection = new List<int>();
+
+            foreach (object item in listView.SelectedItems)
+                selection.Add(((IListable<int>)item).ValueItem);
+
+            return selection;
+        }
+
+        public void ClearSelection()
+        {
+            listView.SelectedItems.Clear();
         }
 
         #endregion

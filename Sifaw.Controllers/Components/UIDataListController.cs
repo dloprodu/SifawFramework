@@ -300,7 +300,63 @@ namespace Sifaw.Controllers.Components
             CheckState(CLStates.Started);
             UIElement.SelectListableItem(value);
         }
-        
+
+        /// <summary>
+        /// Activa la selección múltiple.
+        /// </summary>
+        /// <remarks>
+        /// Para invocar este método la controladora ha de estar iniciada, 
+        /// en otro caso, devolverá una excepcion.
+        /// </remarks>
+        /// <exception cref="NotValidStateException">La controladora no está iniciada.</exception>
+        public void EnableMultiSelection()
+        {
+            CheckState(CLStates.Started);
+            UIElement.MultiSelection = true;
+        }
+
+        /// <summary>
+        /// Desactiva la selección múltiple.
+        /// </summary>
+        /// <remarks>
+        /// Para invocar este método la controladora ha de estar iniciada, 
+        /// en otro caso, devolverá una excepcion.
+        /// </remarks>
+        /// <exception cref="NotValidStateException">La controladora no está iniciada.</exception>
+        public void DisableMultiSelection()
+        {
+            CheckState(CLStates.Started);
+            UIElement.MultiSelection = false;
+        }
+
+        /// <summary>
+        /// Devuelve la lista de elementos seleccionados.
+        /// </summary>
+        /// <remarks>
+        /// Para invocar este método la controladora ha de estar iniciada, 
+        /// en otro caso, devolverá una excepcion.
+        /// </remarks>
+        /// <exception cref="NotValidStateException">La controladora no está iniciada.</exception>
+        public IList<TValue> GetSelection()
+        {
+            CheckState(CLStates.Started);
+            return UIElement.GetSelection();
+        }
+
+        /// <summary>
+        /// Limpia la selección.
+        /// </summary>
+        /// <remarks>
+        /// Para invocar este método la controladora ha de estar iniciada, 
+        /// en otro caso, devolverá una excepcion.
+        /// </remarks>
+        /// <exception cref="NotValidStateException">La controladora no está iniciada.</exception>
+        public void ClearSelection()
+        {
+            CheckState(CLStates.Started);
+            UIElement.ClearSelection();
+        }
+
         #endregion
 
         #region UIElement Methods
@@ -311,6 +367,8 @@ namespace Sifaw.Controllers.Components
 		protected override void OnAfterUIElementCreate()
 		{
 			base.OnAfterUIElementCreate();
+
+            UIElement.MultiSelection = false;
 
 			/* Subscripción a eventos del componente... */
             UIElement.SelectedIndexChanged += UIElement_SelectedIndexChanged;

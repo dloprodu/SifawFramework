@@ -30,7 +30,20 @@ namespace Sifaw.Views.Components
     /// <see cref="IListable{TValue}"/>.
 	/// </summary>
     public interface DataListComponent<TValue> : UIComponent
-	{
+    {
+        #region Properties
+
+        /// <summary>
+        /// Determina se si permite seleccionar un solo elemento o múltiples.
+        /// </summary>
+        bool MultiSelection
+        {
+            get;
+            set;
+        }
+
+        #endregion
+
         #region Methods
 
         /// <summary>
@@ -44,6 +57,17 @@ namespace Sifaw.Views.Components
         /// </summary>
         /// <param name="value">Valor del item a seleccionar.</param>
         void SelectListableItem(TValue value);
+
+        /// <summary>
+        /// Devuelve la lista de elementos seleccionados.
+        /// </summary>
+        /// <returns>Elementos seleccionados.</returns>
+        IList<TValue> GetSelection();
+
+        /// <summary>
+        /// Limpia la selección.
+        /// </summary>
+        void ClearSelection();
 
         #endregion
 

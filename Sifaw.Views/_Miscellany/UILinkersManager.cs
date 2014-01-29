@@ -18,6 +18,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
+using Sifaw.Views.Kit;
+
 
 namespace Sifaw.Views
 {

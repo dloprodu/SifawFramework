@@ -20,6 +20,7 @@ using System.Linq;
 using System.Text;
 
 using Sifaw.Views;
+using Sifaw.Views.Kit;
 
 
 namespace Sifaw.Views
@@ -40,7 +41,21 @@ namespace Sifaw.Views
         /// Almacena la refenrencia de la vista por defecto de la aplicación.
         /// </summary>
         private static UIView Default = null;
-        
+
+        private static UIImage _thumbnail = null;
+
+        #endregion
+
+        #region Properties
+
+        /// <summary>
+        /// Devuelve la miniatura por defecto para las vistas.
+        /// </summary>
+        public static UIImage Thumbnail
+        {
+            get { return _thumbnail; }
+        }
+
         #endregion
 
         #region Constructor
@@ -82,6 +97,15 @@ namespace Sifaw.Views
         public static UIView GetCurrentView()
         {
             return Views.Peek();
+        }
+
+        /// <summary>
+        /// Establece el thumbnail por defecto para las vistas.
+        /// </summary>
+        /// <param name="thumbnail">Imagen</param>
+        public static void SetDefaultThumbnail(UIImage thumbnail)
+        {
+            _thumbnail = thumbnail;
         }
 
         #endregion

@@ -337,6 +337,7 @@ namespace Sifaw.Controllers
             /* Default Settings... */
             UISettings.Header = "Sifaw Framework Application";
             UISettings.AllowResize = true;
+            UISettings.Thumbnail = UIViewManagerExtension.Thumbnail;
 
             /* Subscripción a eventos de la vista... */
             UIElement.BeforeShow += new EventHandler(UIElement_BeforeShow);

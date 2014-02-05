@@ -637,7 +637,7 @@ namespace Sifaw.Controllers
                     throw new ArgumentNullException();
 
                 if (!CanStart())
-                    throw new NotCanStartException();
+                    throw new NotCanStartException(BrokenPreconditions.GetErrors());
 
                 // Establecemos el estado de inicio
                 State = CLStates.Started;
@@ -712,7 +712,7 @@ namespace Sifaw.Controllers
                 throw new ArgumentNullException();
 
             if (!CanStart())
-                throw new NotCanStartException();
+                throw new NotCanStartException(BrokenPreconditions.GetErrors());
 
             // Ejecutamos los comando de reinicio de la controladora
             OnBeforeResetController();

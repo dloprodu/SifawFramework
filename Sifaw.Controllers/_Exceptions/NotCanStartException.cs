@@ -28,12 +28,18 @@ namespace Sifaw.Controllers
 	/// </summary>
 	public class NotCanStartException : Exception
 	{
+        /// <summary>
+        /// Devuelve la lista de errores por los que no se puede iniciar la controladora.
+        /// </summary>
+        public readonly List<string> Errors;
+
 		/// <summary>
 		/// Inicializa una nueva instancia de la clase <see cref="NotCanStartException"/>.
 		/// </summary>
-		public NotCanStartException()
+		public NotCanStartException(List<string> errors)
 			: base("La controladora no cumple las condiciones necesarias para su inicio.")
 		{
+            Errors = new List<string>(errors);
 		}
 	}
 }

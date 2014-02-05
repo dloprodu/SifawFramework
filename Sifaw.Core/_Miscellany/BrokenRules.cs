@@ -16,6 +16,7 @@
 
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Text;
 
 
@@ -537,6 +538,24 @@ namespace Sifaw.Core
 			return ((index > -1) && (_rules[index].Severity == RuleSeverities.Error));
 		}
 
+        /// <summary>
+        /// Return errors list.
+        /// </summary>
+        /// <returns>Errors list.</returns>
+        public List<string> GetErrors()
+        {
+            List<string> errors = new List<string>();
+            foreach (Rule rule in BrokenRulesCollection)
+            {
+                if (rule.Severity == RuleSeverities.Error)
+                {
+                    errors.Add(rule.Description);
+                }
+            }
+
+            return errors;
+        }
+
 		#endregion
-	}
+    }
 }

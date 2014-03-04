@@ -179,6 +179,24 @@ namespace Sifaw.Controllers.Components
 
 		#endregion
 
+        #region Events
+
+        /// <summary>
+        /// Se produce cuando cambia el progreso del proceso pesado.
+        /// </summary>
+        public event CLRunWorkerProgressChangedEventHandler RunWorkerProgressChanged = null;
+
+        /// <summary>
+        /// Provoca el evento <see cref="RunWorkerProgressChanged"/>.
+        /// </summary>
+        private void OnRunWorkerProgressChanged(CLRunWorkerProgressChangedEventArgs e)
+        {
+            if (RunWorkerProgressChanged != null)
+                RunWorkerProgressChanged(this, e);
+        }
+
+        #endregion
+
 		#region Properties
 
 		/// <summary>
@@ -388,6 +406,8 @@ namespace Sifaw.Controllers.Components
             UISettings.Header = (e.WithControl) ? 
                 Math.Round(((e.Progress / (float)e.MaxProgress) * 100.0f)).ToString().PadLeft(3) + " % completado ... " + "(" + GetTimeRemaining(e.Progress, e.MaxProgress) + ")" :
                 "Espere ...";
+
+            OnRunWorkerProgressChanged(e);
         }
 
 		private void _uiBackgroundWorkerController_Finished(object sender, CLFinishedEventArgs<UIBackgroundWorkerController.Output> e)

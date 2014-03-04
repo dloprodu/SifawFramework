@@ -63,9 +63,9 @@
         </my:AssistantProgressBar>
         <DockPanel Grid.Row="1"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <Label Name="labelStep" Style="{StaticResource RoundLabelStyle}" Margin="12,0,0,0" DockPanel.Dock="Left" FontSize="24" FontWeight="Bold" Foreground="CornflowerBlue" Width="42" Height="42">1</Label>
-            <TextBlock DockPanel.Dock="Right" Margin="12,0,12,0" Name="textBlockTitle" TextTrimming="CharacterEllipsis" TextAlignment="Justify" VerticalAlignment="Center" FontSize="15" FontStretch="Normal" TextWrapping="Wrap" FontWeight="Bold">Título</TextBlock>
+            <TextBlock DockPanel.Dock="Right" Foreground="CornflowerBlue" Margin="12,0,12,0" Name="textBlockTitle" TextTrimming="CharacterEllipsis" TextAlignment="Justify" VerticalAlignment="Center" FontSize="28" FontStretch="Normal" TextWrapping="Wrap" FontWeight="Medium" FontStyle="Italic">Título</TextBlock>
         </DockPanel>
-        <TextBlock Grid.Row="2" Margin="12,0,12,0" Name="textBlockDescription" TextTrimming="CharacterEllipsis" TextAlignment="Justify" VerticalAlignment="Center" TextWrapping="Wrap">Descripción</TextBlock>
+        <TextBlock Grid.Row="2" Foreground="Crimson" Margin="66,0,12,12" Name="textBlockDescription" TextTrimming="CharacterEllipsis" TextAlignment="Justify" VerticalAlignment="Center" TextWrapping="Wrap" FontSize="14" FontWeight="ExtraLight">Descripción</TextBlock>
         <Grid Grid.Row="3">
             <Grid.Background>
                 <LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">

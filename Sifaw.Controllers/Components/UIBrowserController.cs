@@ -118,6 +118,17 @@ namespace Sifaw.Controllers.Components
             }
         }
 
+        /// <summary>
+        /// Devuelve la lista de datos.
+        /// </summary>
+        public IList<IListable<TValue>> DataList
+        {
+            get
+            {
+                return FilterableList.DataList;
+            }
+        }
+
         #endregion
 
         #region Events

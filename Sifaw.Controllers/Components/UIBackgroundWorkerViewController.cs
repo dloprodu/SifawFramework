@@ -22,6 +22,7 @@ using System.Text;
 using Sifaw.Views;
 using Sifaw.Views.Components;
 using Sifaw.Views.Kit;
+using Sifaw.Core;
 
 
 namespace Sifaw.Controllers.Components

@@ -172,7 +172,33 @@ namespace Sifaw.Controllers
 		 *  • Solo son lanzados por la controladora padre.
 		 */
 
-        /* Empty */
+        /// <summary>
+        /// Se produce cuando el usuario solicita desde la
+        /// interfaz de usuario finalizar la controladora
+        /// </summary>
+        public event SFCancelEventHandler BeforeUIClose;
+
+        /// <summary>
+        /// <para>
+        /// Se llama al método <see cref="OnBeforeUIClose"/> cuando el usuario solicita desde la
+        /// interfaz de usuario finalizar la controladora. El método permite que las clases derivadas 
+        /// controlen el evento sin asociar un delegado.
+        /// </para>
+        /// <para>
+        /// El comportamiento por defecto no cancela la finalización de la controladora.
+        /// </para>
+        /// </summary>
+        /// <remarks>
+        /// Al reemplazar <see cref="OnBeforeUIClose"/> en una clase derivada, asegúrese de llamar al
+        /// método <see cref="OnBeforeUIClose"/> de la clase base para que los delegados registrados 
+        /// reciban el evento si desea mantener el comportamiento por defecto.
+        /// </remarks>
+        /// <param name="e">Valor que indica si la solicitud de finalización es cancelada.</param>
+        private void OnBeforeUIClose(SFCancelEventArgs e)
+        {
+            if (BeforeUIClose != null)
+                BeforeUIClose(this, e);
+        }
 
         /*
          * Desencadenadores protegidos.
@@ -447,7 +473,12 @@ namespace Sifaw.Controllers
 
         private void UIElement_BeforeClose(object sender, UIFinishRequestEventArgs e)
         {
-            OnBeforeUIClose(out e.Cancel);
+            SFCancelEventArgs args = new SFCancelEventArgs();
+            OnBeforeUIClose(args);
+            bool cancel = false;
+            OnBeforeUIClose(out cancel);
+
+            e.Cancel = args.Cancel || cancel;
 
             if (!e.Cancel)
             {

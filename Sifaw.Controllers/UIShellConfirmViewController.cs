@@ -139,7 +139,20 @@ namespace Sifaw.Controllers
         /// Flag que se activa cuando la operación ha sido confirmada.
         /// </summary>
         [CLReseteable(false)]
-        protected bool Confirmed = false;
+        private bool _confirmed = false;
+
+        #endregion
+
+        #region Properties
+
+        /// <summary>
+        /// Devuelve un valor que indica si se ha confirmado o cancelado la acción.
+        /// </summary>
+        protected bool Confirmed
+        {
+            get { return _confirmed;  }
+            private set { _confirmed = value; }
+        }
 
         #endregion
 
@@ -228,7 +241,7 @@ namespace Sifaw.Controllers
         }
 
         /// <summary>
-        /// Invoca al método sobrescirto <see cref="UIViewController{TInput, TOutput, TView}.OnBeforeUIClose(out bool)"/> y
+        /// Invoca al método sobrescirto <see cref="UIViewController{TInput, TOutput, TView}.OnBeforeUIClose(SFCancelEventArgs)"/> y
         /// posteriormente se subscribe a eventos de <see cref="UIView"/>.
         /// </summary>
         protected override void OnBeforeUIClose(out bool cancel)

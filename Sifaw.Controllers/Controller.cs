@@ -812,8 +812,12 @@ namespace Sifaw.Controllers
         private void FinishControllers(List<IController> children)
         {
             foreach (IController child in children)
+            {
                 if ((child != null) && (child.State.Equals(CLStates.Started)))
+                {
                     child.Finish();
+                }
+            }
         }
 
         /// <summary>

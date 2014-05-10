@@ -206,6 +206,18 @@ namespace Sifaw.WPF
             }
         }
 
+        private static StringToObject _stringToObject = null;
+        public static StringToObject StringToObject
+        {
+            get
+            {
+                if (_stringToObject == null)
+                    _stringToObject = new StringToObject();
+
+                return _stringToObject;
+            }
+        }
+
 		#endregion
     }
 }

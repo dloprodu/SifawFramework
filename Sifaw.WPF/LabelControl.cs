@@ -32,7 +32,6 @@ using Sifaw.Views.Components;
 using Sifaw.Views;
 using Sifaw.Views.Components.Filters;
 using Sifaw.Views.Kit;
-
 using Sifaw.WPF.CCL;
 
 
@@ -48,11 +47,6 @@ namespace Sifaw.WPF
 		static LabelControl()
 		{
             DefaultStyleKeyProperty.OverrideMetadata(typeof(LabelControl), new FrameworkPropertyMetadata(typeof(LabelControl)));
-		}
-
-        public LabelControl()
-			: base()
-		{
 		}
 
         #endregion
@@ -138,7 +132,10 @@ namespace Sifaw.WPF
             public LabelControlSettings(LabelControl control)
                 : base(control)
             {
-                UtilWPF.BindField(this, "Label", control, LabelControl.ContentProperty, BindingMode.TwoWay);
+                /* Initial values */
+                this.Label = (string)SettingsOperationsManager.StringToObject.ConvertBack(control.Content, null, null, null);
+
+                UtilWPF.BindField(this, "Label", control, LabelControl.ContentProperty, BindingMode.TwoWay, SettingsOperationsManager.StringToObject);
             }
 
             #endregion

@@ -4,6 +4,7 @@
     xmlns:local="clr-namespace:Sifaw.WPF">
 
     <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/Sifaw.WPF;component/Themes/LabelControl.xaml" />
         <ResourceDictionary Source="/Sifaw.WPF;component/Themes/TextFilterControl.xaml" />
         <ResourceDictionary Source="/Sifaw.WPF;component/Themes/BoolFilterControl.xaml" />
         <ResourceDictionary Source="/Sifaw.WPF;component/Themes/ListFilterControl.xaml" />

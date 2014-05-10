@@ -111,6 +111,7 @@
     <Compile Include="_Settings\ControlSettings.cs" />
     <Compile Include="_Settings\Converters\BufferToImageSource.cs" />
     <Compile Include="_Settings\Converters\CollapsedIfStringEmptyConverter.cs" />
+    <Compile Include="_Settings\Converters\StringToObject.cs" />
     <Compile Include="_Settings\Converters\CurrencyToString.cs" />
     <Compile Include="_Settings\Converters\DecimalToString.cs" />
     <Compile Include="_Settings\Converters\VisibleIfStringEmptyConverter.cs" />
@@ -194,6 +195,10 @@
     <Page Include="Themes\BoolFilterControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\LabelControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Themes\DropDownListFilterControl.xaml">
       <SubType>Designer</SubType>

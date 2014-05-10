@@ -45,16 +45,16 @@ namespace Sifaw.WPF.Test
 
             // (new MainWindow()).Show();			
 			
-			//(new UIGroupFiltersTestViewController()).Start();
+			(new UIGroupFiltersTestViewController()).Start();
             //(new UIAssistantTestViewController()).Start();
             //(new UITabHostTestViewController()).Start();
             //(new UIBrowserTestViewController()).Start();
 
-            UIAssistantTestViewController test = new UIAssistantTestViewController();
-            test.UISettings.Thumbnail = image;// new UIImage(buffer);
-            test.Start();            
+            //UIAssistantTestViewController test = new UIAssistantTestViewController();
+            //test.UISettings.Thumbnail = image;// new UIImage(buffer);
+            //test.Start();            
 
-           // (new UIBackgroundWorkerViewController()).Start(new UIBackgroundWorkerViewController.Input(new BackgroundWorkerPack(TestBackGroundWorker, null), true));
+            //(new UIBackgroundWorkerViewController()).Start(new UIBackgroundWorkerViewController.Input(new BackgroundWorkerPack(TestBackGroundWorker, null), true));
 		}
 
         private static object TestBackGroundWorker(BackgroundWorkerCommunicator com, object[] args)

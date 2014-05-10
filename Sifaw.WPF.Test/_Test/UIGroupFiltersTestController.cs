@@ -63,6 +63,20 @@ namespace Sifaw.WPF.Test
 
 		#region Inclusions
 
+        private UILabelController _groupLabel = null;
+        private UILabelController GroupLabel
+        {
+            get
+            {
+                if (_groupLabel == null)
+                {
+                    _groupLabel = new UILabelController();
+                }
+
+                return _groupLabel;
+            }
+        }
+
 		private UITextFilterController _textFilter = null;
 		private UITextFilterController TextFilter
 		{
@@ -229,7 +243,7 @@ namespace Sifaw.WPF.Test
 
 		protected override uint GetNumberOfRows()
 		{
-			return 5;
+			return 6;
 		}
 
 		protected override uint GetNumberOfCellsAt(uint row)
@@ -252,23 +266,27 @@ namespace Sifaw.WPF.Test
 
 			switch (row)
 			{
-				case 0:
+                case 0:
+                    guest = GroupLabel.GetUIComponent();
+                    break;
+
+				case 1:
 					guest = TextFilter.GetUIComponent();
 					break;
 
-				case 1:
+				case 2:
 					guest = EnumFilter.GetUIComponent();
 					break;
 
-				case 2:
+				case 3:
 					guest = ListFilter.GetUIComponent();
 					break;
 
-				case 3:
+				case 4:
 					guest = BoolFilter.GetUIComponent();
 					break;
 
-				case 4:
+				case 5:
 					guest = DropDownListFilter.GetUIComponent();
 					break;
 
@@ -282,7 +300,15 @@ namespace Sifaw.WPF.Test
 		#region Start Members
 
 		protected override void StartController()
-		{
+        {
+            GroupLabel.UISettings.Label = "Datos de contacto";
+            GroupLabel.UISettings.Width = 120;
+            GroupLabel.UISettings.Height = 21;
+            GroupLabel.UISettings.Border = new UIFrame(0, 0, 0, 3);
+            GroupLabel.UISettings.Background = new UISolidBrush(UIColors.GrayColors.Silver);
+            GroupLabel.UISettings.BorderBrush = new UIFrameBrush(new UISolidBrush(UIColors.BlueColors.DodgerBlue));
+            GroupLabel.Start();
+
             TextFilter.UISettings.Margin = new UIFrame(3);
             TextFilter.UISettings.Placeholder = "Introduzca un texto...";
             TextFilter.UISettings.InstantSearch = true;

@@ -163,7 +163,7 @@ namespace Sifaw.Views.Kit
             return frame1.Left != frame2.Left
                 || frame1.Top != frame2.Top
                 || frame1.Right != frame2.Right
-                || frame1.Right != frame2.Right;
+                || frame1.Bottom != frame2.Bottom;
         }
 
         /// <summary>

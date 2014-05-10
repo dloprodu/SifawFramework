@@ -302,9 +302,7 @@ namespace Sifaw.WPF.Test
 		protected override void StartController()
         {
             GroupLabel.UISettings.Label = "Datos de contacto";
-            GroupLabel.UISettings.Width = 120;
-            GroupLabel.UISettings.Height = 21;
-            GroupLabel.UISettings.Border = new UIFrame(0, 0, 0, 3);
+            GroupLabel.UISettings.Border = new UIFrame(0, 0, 0, 5);
             GroupLabel.UISettings.Background = new UISolidBrush(UIColors.GrayColors.Silver);
             GroupLabel.UISettings.BorderBrush = new UIFrameBrush(new UISolidBrush(UIColors.BlueColors.DodgerBlue));
             GroupLabel.Start();

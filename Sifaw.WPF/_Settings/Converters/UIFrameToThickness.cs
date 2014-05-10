@@ -32,10 +32,14 @@ namespace Sifaw.WPF.Converters
 
 		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
 		{
-			if (value != null)
-				return new Thickness(((UIFrame)value).Left, ((UIFrame)value).Top, ((UIFrame)value).Right, ((UIFrame)value).Bottom);
+            Thickness thicness = new Thickness(0);
 
-			return new Thickness(0);
+            if (value != null)
+            {
+                thicness = new Thickness(((UIFrame)value).Left, ((UIFrame)value).Top, ((UIFrame)value).Right, ((UIFrame)value).Bottom);
+            }
+
+			return thicness;
 		}
 
 		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

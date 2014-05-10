@@ -45,8 +45,8 @@ namespace Sifaw.WPF.Test
 
             // (new MainWindow()).Show();			
 			
-			//(new UIGroupFiltersTestViewController()).Start();
-            (new UIAssistantTestViewController()).Start();
+			(new UIGroupFiltersTestViewController()).Start();
+            //(new UIAssistantTestViewController()).Start();
             //(new UITabHostTestViewController()).Start();
             //(new UIBrowserTestViewController()).Start();
 

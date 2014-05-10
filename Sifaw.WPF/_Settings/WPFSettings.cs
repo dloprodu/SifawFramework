@@ -41,8 +41,8 @@ namespace Sifaw.WPF
 		private UIFrame _margin = UIFrame.Empty;
 		private UIFrame _padding = UIFrame.Empty;
 		// Double.NaN means in this case the same like Auto in XAML
-		private double _width = 300;
-		private double _height = 300;
+        private double _width = Double.NaN;
+        private double _height = Double.NaN;
 		private UISize _minSize = UISize.Empty;
         private UISize _maxSize = UISize.Infinity;
         private bool _sizeToContent = false;

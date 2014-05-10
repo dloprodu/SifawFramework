@@ -172,8 +172,10 @@ namespace Sifaw.WPF
             this.FontFamily = (string)SettingsOperationsManager.UIFontFamilyToFontFamily.ConvertBack(control.FontFamily, null, null, null);
             this.FontSize = control.FontSize;
             this.FontStyle = (UIFontStyles)SettingsOperationsManager.UIFontStyleToFontStyle.ConvertBack(control.FontStyle, null, null, null);
-            this.FontWeight = (UIFontWeights)SettingsOperationsManager.UIFontWeightToFontWeight.ConvertBack(control.FontWeight, null, null, null); 
-            
+            this.FontWeight = (UIFontWeights)SettingsOperationsManager.UIFontWeightToFontWeight.ConvertBack(control.FontWeight, null, null, null);
+            this.Height = control.Height;
+            this.Width = control.Width;
+
             // UISettings ...
 			UtilWPF.BindField(this, "Background",          control, Control.BackgroundProperty,          BindingMode.TwoWay, SettingsOperationsManager.UIBrushToBrush);
 			UtilWPF.BindField(this, "Foreground",          control, Control.ForegroundProperty,          BindingMode.TwoWay, SettingsOperationsManager.UIBrushToBrush);

@@ -180,7 +180,7 @@ namespace Sifaw.Controllers
 
         /// <summary>
         /// <para>
-        /// Se llama al método <see cref="OnBeforeUIClose"/> cuando el usuario solicita desde la
+        /// Se llama al método <see cref="OnBeforeUIClose(SFCancelEventArgs)"/> cuando el usuario solicita desde la
         /// interfaz de usuario finalizar la controladora. El método permite que las clases derivadas 
         /// controlen el evento sin asociar un delegado.
         /// </para>
@@ -189,8 +189,8 @@ namespace Sifaw.Controllers
         /// </para>
         /// </summary>
         /// <remarks>
-        /// Al reemplazar <see cref="OnBeforeUIClose"/> en una clase derivada, asegúrese de llamar al
-        /// método <see cref="OnBeforeUIClose"/> de la clase base para que los delegados registrados 
+        /// Al reemplazar <see cref="OnBeforeUIClose(SFCancelEventArgs)"/> en una clase derivada, asegúrese de llamar al
+        /// método <see cref="OnBeforeUIClose(SFCancelEventArgs)"/> de la clase base para que los delegados registrados 
         /// reciban el evento si desea mantener el comportamiento por defecto.
         /// </remarks>
         /// <param name="e">Valor que indica si la solicitud de finalización es cancelada.</param>
@@ -247,7 +247,7 @@ namespace Sifaw.Controllers
 
         /// <summary>
         /// <para>
-        /// Se llama al método <see cref="OnBeforeUIClose"/> cuando el usuario solicita desde la
+        /// Se llama al método <see cref="OnBeforeUIClose(out bool)"/> cuando el usuario solicita desde la
         /// interfaz de usuario finalizar la controladora. El método permite que las clases derivadas 
         /// controlen el evento sin asociar un delegado.
         /// </para>
@@ -256,8 +256,8 @@ namespace Sifaw.Controllers
         /// </para>
         /// </summary>
         /// <remarks>
-        /// Al reemplazar <see cref="OnBeforeUIClose"/> en una clase derivada, asegúrese de llamar al
-        /// método <see cref="OnBeforeUIClose"/> de la clase base para que los delegados registrados 
+        /// Al reemplazar <see cref="OnBeforeUIClose(out bool)"/> en una clase derivada, asegúrese de llamar al
+        /// método <see cref="OnBeforeUIClose(out bool)"/> de la clase base para que los delegados registrados 
         /// reciban el evento si desea mantener el comportamiento por defecto.
         /// </remarks>
         /// <param name="cancel">Valor que indica si la solicitud de finalización es cancelada.</param>

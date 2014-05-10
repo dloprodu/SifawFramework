@@ -38,8 +38,8 @@ namespace Sifaw.WPF
 	/// Representa un control que permite definir una shell personalizada.
 	/// </summary>
 	public partial class ShellConfirmControl : UserControl, ShellConfirmComponent
-	{
-		#region Constructors
+    {
+        #region Constructors
 
         public ShellConfirmControl()
 		{
@@ -75,6 +75,21 @@ namespace Sifaw.WPF
 
 			return gLength;
 		}
+
+        private void ClearGrid(Grid grid)
+        {
+            foreach (FrameworkElement child in grid.Children)
+            {
+                if (child is Grid)
+                {
+                    ClearGrid(child as Grid);
+                }
+            }
+
+            grid.Children.Clear();
+            grid.RowDefinitions.Clear();
+            grid.ColumnDefinitions.Clear();
+        }
 
 		#endregion
 
@@ -177,9 +192,7 @@ namespace Sifaw.WPF
 
 		public void Reset()
 		{
-			grid.Children.Clear();
-			grid.RowDefinitions.Clear();
-			grid.ColumnDefinitions.Clear();
+            ClearGrid(grid);
 		}
 
 		public void SetLikeActive()

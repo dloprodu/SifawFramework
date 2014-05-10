@@ -76,6 +76,21 @@ namespace Sifaw.WPF
 			return gLength;
 		}
 
+        private void ClearGrid(Grid grid)
+        {
+            foreach (FrameworkElement child in grid.Children)
+            {
+                if (child is Grid)
+                {
+                    ClearGrid(child as Grid);
+                }
+            }
+
+            grid.Children.Clear();
+            grid.RowDefinitions.Clear();
+            grid.ColumnDefinitions.Clear();
+        }
+
 		#endregion
 
 		#region UIShell Members
@@ -118,7 +133,7 @@ namespace Sifaw.WPF
                         content.Margin = new Thickness(0);
 
 						Grid.SetColumn(content, cell);
-						gCells.Children.Add(content);
+                        gCells.Children.Add(content);
 					}
 				}
 
@@ -138,9 +153,7 @@ namespace Sifaw.WPF
 
 		public void Reset()
 		{
-			grid.Children.Clear();
-			grid.RowDefinitions.Clear();
-			grid.ColumnDefinitions.Clear();
+            ClearGrid(grid);
 		}
 
 		public void SetLikeActive()

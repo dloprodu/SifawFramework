@@ -163,11 +163,6 @@ namespace Sifaw.Controllers
 		 *  • Solo son lanzados por la controladora padre.
 		 */
 
-        /*
-         * Desencadenadores protegidos.
-         *  • Pueden ser lanzados por controladoras hijas.
-         */
-
         /// <summary>
         /// Se produce cuando se quiere confirmar una operación.
         /// </summary>
@@ -177,7 +172,7 @@ namespace Sifaw.Controllers
         /// Provoca el evento <see cref="Confirm"/>.
         /// </summary>
         /// <param name="e"><see cref="Sifaw.Core.SFCancelEventArgs"/> que contiene los datos del evento.</param>
-        protected virtual void OnConfirm(SFCancelEventArgs e)
+        private void OnConfirm(SFCancelEventArgs e)
         {
             if (Confirm != null)
                 Confirm(this, e);
@@ -192,10 +187,33 @@ namespace Sifaw.Controllers
         /// Provoca el evento <see cref="Cancel"/>.
         /// </summary>
         /// <param name="e"><see cref="Sifaw.Core.SFCancelEventArgs"/> que contiene los datos del evento.</param>
-        protected virtual void OnCancel(SFCancelEventArgs e)
+        private void OnCancel(SFCancelEventArgs e)
         {
             if (Cancel != null)
                 Cancel(this, e);
+        }
+
+        /*
+         * Desencadenadores protegidos.
+         *  • Pueden ser lanzados por controladoras hijas.
+         */
+
+        /// <summary>
+        /// Provoca el evento <see cref="Confirm"/>.
+        /// </summary>
+        /// <param name="cancel">Flag que indica si la confirmación se cancela.</param>
+        protected virtual void OnConfirm(out bool cancel)
+        {
+            cancel = false;
+        }
+
+        /// <summary>
+        /// Provoca el evento <see cref="Cancel"/>.
+        /// </summary>
+        /// <param name="cancel">Flag que indica si la cancelación se cancela.</param>
+        protected virtual void OnCancel(out bool cancel)
+        {
+            cancel = false;
         }
 
         #endregion
@@ -341,7 +359,10 @@ namespace Sifaw.Controllers
             SFCancelEventArgs args = new SFCancelEventArgs();
             OnConfirm(args);
 
-            Confirmed = !args.Cancel;
+            bool cancel = false;
+            OnConfirm(out cancel);
+
+            Confirmed = !args.Cancel && !cancel;
 
             if (Confirmed)
                 Finish();
@@ -352,7 +373,10 @@ namespace Sifaw.Controllers
             SFCancelEventArgs args = new SFCancelEventArgs();
             OnCancel(args);
 
-            if (!args.Cancel)
+            bool cancel = false;
+            OnCancel(out cancel);
+
+            if (!args.Cancel && !cancel)
                 Finish();
         }
 

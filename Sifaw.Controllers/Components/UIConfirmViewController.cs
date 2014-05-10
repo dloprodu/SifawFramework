@@ -30,13 +30,14 @@ namespace Sifaw.Controllers.Components
 	/// Controladora de vista que provee de la infraestructura para embeber un compontente
     /// <see cref="UIComponentController{TInput, TOutput, TComponent}"/>.
 	/// </summary>
-    public class UIConfirmViewController<GInput, GOutput, GComponent> : UIShellConfirmViewController
-        < UIConfirmViewController<GInput, GOutput, GComponent>.Input
-        , UIConfirmViewController<GInput, GOutput, GComponent>.Output
+    public class UIConfirmViewController<TGuestController, TGuestInput, TGuestOutput, TGuestComponent> : UIShellConfirmViewController
+        < UIConfirmViewController<TGuestController, TGuestInput, TGuestOutput, TGuestComponent>.Input
+        , UIConfirmViewController<TGuestController, TGuestInput, TGuestOutput, TGuestComponent>.Output
 		, UIComponent>
-        where GInput     : UIComponentController<GInput, GOutput, GComponent>.Input
-        where GOutput    : UIComponentController<GInput, GOutput, GComponent>.Output
-        where GComponent : UIComponent
+        where TGuestController : UIComponentController<TGuestInput, TGuestOutput, TGuestComponent>, new()
+        where TGuestInput      : UIComponentController<TGuestInput, TGuestOutput, TGuestComponent>.Input
+        where TGuestOutput     : UIComponentController<TGuestInput, TGuestOutput, TGuestComponent>.Output
+        where TGuestComponent  : UIComponent
 	{
 		#region Input / Output
 
@@ -48,43 +49,44 @@ namespace Sifaw.Controllers.Components
         {
             #region Fields
 
-            private ShellPack<GInput, GOutput, GComponent> _shellPack = null;
+            private TGuestInput _gInput = default(TGuestInput);
 
             #endregion
 
-            #region Properties
-
-            /// <summary>
-            /// Información del compomente embebido.
-            /// </summary>
-            public ShellPack<GInput, GOutput, GComponent> ShellPack
+            public TGuestInput GInput
             {
-                get { return _shellPack; }
+                get { return _gInput; }
             }
-
-            #endregion
 
             #region Constructors
 
             /// <summary>
-            /// Inicializa una nueva instancia de la clase <see cref="UIConfirmViewController{GInput, GOutput, GComponent}.Input"/>.
+            /// Inicializa una nueva instancia de la clase <see cref="UIConfirmViewController{TGuestController, TGuestInput, TGuestOutput, TGuestComponent}.Input"/>.
             /// </summary>
-            /// <param name="shellPack">Componente de interfaz que se va a alojar.</param>
-            public Input(ShellPack<GInput, GOutput, GComponent> shellPack)
-				: this(shellPack, true, true)
+            public Input()
+                : this(default(TGuestInput))
+            {
+            }
+
+            /// <summary>
+            /// Inicializa una nueva instancia de la clase <see cref="UIConfirmViewController{TGuestController, TGuestInput, TGuestOutput, TGuestComponent}.Input"/>.
+            /// </summary>
+            /// <param name="input">Guest input.</param>
+            public Input(TGuestInput input)
+				: this(input, true, true)
 			{
 			}
 
             /// <summary>
-            /// Inicializa una nueva instancia de <see cref="UIConfirmViewController{GInput, GOutput, GComponent}.Input"/>
+            /// Inicializa una nueva instancia de <see cref="UIConfirmViewController{TGuestController, TGuestInput, TGuestOutput, TGuestComponent}.Input"/>
             /// </summary>
-            /// <param name="shellPack">Información del componente de interfaz que se va a embeber.</param>
+            /// <param name="input">Guest input.</param>
             /// <param name="showView">Indica si se muestra la vista al iniciar la controladora.</param>
             /// <param name="isModal">Indica si la vista es modal.</param>
-            public Input(ShellPack<GInput, GOutput, GComponent> shellPack, bool showView, bool isModal)
+            public Input(TGuestInput input, bool showView, bool isModal)
                 : base(showView: showView, isModal: isModal)
             {
-                this._shellPack = shellPack;
+                _gInput = input;
             }
 
 			#endregion
@@ -99,7 +101,7 @@ namespace Sifaw.Controllers.Components
             #region Constructor
 
             /// <summary>
-            /// Inicializa una nueva instancia de la clase <see cref="UIConfirmViewController{GInput, GOutput, GComponent}.Output"/>.
+            /// Inicializa una nueva instancia de la clase <see cref="UIConfirmViewController{TGuestController}.Output"/>.
             /// </summary>
             /// <param name="confirmed">Flag que indica si se ha confirmado la acción.</param>
             public Output(bool confirmed) 
@@ -112,10 +114,28 @@ namespace Sifaw.Controllers.Components
 
 		#endregion
 
-		#region Constructors
+        #region Inclusions
+
+        private TGuestController _guest = default(TGuestController);
+        private TGuestController Guest
+        {
+            get
+            {
+                if (_guest == null)
+                {
+                    _guest = new TGuestController();
+                }
+
+                return _guest;
+            }
+        }
+
+        #endregion
+
+        #region Constructors
 
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="UIConfirmViewController{GInput, GOutput, GComponent}"/>.
+        /// Inicializa una nueva instancia de la clase <see cref="UIConfirmViewController{TGuestController}"/>.
         /// Establece como <see cref="UILinker{TUIElement}"/> aquel establecido por defecto a través de 
         /// <see cref="UILinkersManager"/>.
         /// </summary>
@@ -125,7 +145,7 @@ namespace Sifaw.Controllers.Components
 		}
 
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="UIConfirmViewController{GInput, GOutput, GComponent}"/>, 
+        /// Inicializa una nueva instancia de la clase <see cref="UIConfirmViewController{TGuestController}"/>, 
 		/// estableciendo el <see cref="UILinker{TUIElement}"/> especificado como valor de la propiedad 
 		/// <see cref="UIElementController{TInput, TOutput, TUIElement}.Linker"/>
 		/// donde <c>TUIElement</c> implementa <see cref="ShellView"/>.
@@ -161,7 +181,7 @@ namespace Sifaw.Controllers.Components
 
         public override Input GetDefaultInput()
         {
-            return new Input(null);
+            return new Input();
         }
 
         public override Input GetResetInput()
@@ -193,7 +213,7 @@ namespace Sifaw.Controllers.Components
         {
             width = 400;
             mode = UIShellLengthModes.WeightedProportion;
-            component = Parameters.ShellPack.Guest.GetUIComponent();
+            component = Guest.GetUIComponent();
         }
 
         #endregion
@@ -202,35 +222,12 @@ namespace Sifaw.Controllers.Components
 
         #region Start Methods
 
-        protected override void OnBeforeStartController()
-        {
-            base.OnBeforeStartController();
-
-            if (Parameters.ShellPack == null)
-            {
-                return;
-            }
-
-            Parameters.ShellPack.Guest.Finished += (object sender, CLFinishedEventArgs<GOutput> e) =>
-            {
-                if (this.State == CLStates.Started)
-                {
-                    Finish();
-                }
-            };
-        }
-
         protected override void StartController()
         {
-            if (Parameters.ShellPack == null)
-            {
-                return;
-            }
-
-            if (Parameters.ShellPack.Input != null)
-                Parameters.ShellPack.Guest.Start(Parameters.ShellPack.Input);
+            if (Parameters.GInput != default(TGuestInput))
+                Guest.Start(Parameters.GInput);
             else
-                Parameters.ShellPack.Guest.Start();
+                Guest.Start();
         }
 
         protected override bool AllowReset()

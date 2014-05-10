@@ -114,6 +114,7 @@
     <Compile Include="Components\UIFiltersGroupController.cs" />
     <Compile Include="Components\UIConfirmViewController.cs" />
     <Compile Include="Components\UITabHostController.cs" />
+    <Compile Include="Components\UILabelController.cs" />
     <Compile Include="Components\_Delegates\BackgroundWorkerDelegate.cs" />
     <Compile Include="Components\_Events\CLRunWorkerCompletedEvent.cs" />
     <Compile Include="Components\_Events\CLRunWorkerProgressChangedEvent.cs" />

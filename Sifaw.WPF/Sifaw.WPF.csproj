@@ -106,6 +106,7 @@
       <DependentUpon>ShellWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="TabHostControl.cs" />
+    <Compile Include="LabelControl.cs" />
     <Compile Include="WPFLinkers.cs" />
     <Compile Include="_Settings\ControlSettings.cs" />
     <Compile Include="_Settings\Converters\BufferToImageSource.cs" />

@@ -40,6 +40,7 @@ namespace Sifaw.Views
 		: UILinker<ShellComponent>
         , UILinker<ShellConfirmComponent>
 		, UILinker<BackgroundWorkerComponent>
+        , UILinker<LabelComponent>
 		, UILinker<TabHostComponent>
 		, UILinker<AssistantComponent>
 		, UILinker<TextFilterComponent>

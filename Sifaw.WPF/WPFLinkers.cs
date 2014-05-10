@@ -101,6 +101,11 @@ namespace Sifaw.WPF
             ui = new DataListIntValueControl();
         }
 
+        public void Create(out LabelComponent ui)
+        {
+            ui = new LabelControl();
+        }
+
 		#endregion
 
 		#region Vistas

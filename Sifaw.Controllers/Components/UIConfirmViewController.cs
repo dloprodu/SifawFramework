@@ -30,14 +30,11 @@ namespace Sifaw.Controllers.Components
 	/// Controladora de vista que provee de la infraestructura para embeber un compontente
     /// <see cref="UIComponentController{TInput, TOutput, TComponent}"/>.
 	/// </summary>
-    public class UIConfirmViewController<TGuestController, TGuestInput, TGuestOutput, TGuestComponent> : UIShellConfirmViewController
-        < UIConfirmViewController<TGuestController, TGuestInput, TGuestOutput, TGuestComponent>.Input
-        , UIConfirmViewController<TGuestController, TGuestInput, TGuestOutput, TGuestComponent>.Output
+    public class UIConfirmViewController<TGuestController> : UIShellConfirmViewController
+        < UIConfirmViewController<TGuestController>.Input
+        , UIConfirmViewController<TGuestController>.Output
 		, UIComponent>
-        where TGuestController : UIComponentController<TGuestInput, TGuestOutput, TGuestComponent>, new()
-        where TGuestInput      : UIComponentController<TGuestInput, TGuestOutput, TGuestComponent>.Input
-        where TGuestOutput     : UIComponentController<TGuestInput, TGuestOutput, TGuestComponent>.Output
-        where TGuestComponent  : UIComponent
+        where TGuestController : IUIComponentController, new()
 	{
 		#region Input / Output
 
@@ -49,44 +46,46 @@ namespace Sifaw.Controllers.Components
         {
             #region Fields
 
-            private TGuestInput _gInput = default(TGuestInput);
+            private StartGuestDelegate<TGuestController> _startGuestDelegate = null;
 
             #endregion
 
-            public TGuestInput GInput
+            #region Properties
+
+            /// <summary>
+            /// Delegado encargado de la inicialización del huésped.
+            /// </summary>
+            public StartGuestDelegate<TGuestController> StartGuestDelegate
             {
-                get { return _gInput; }
+                get
+                {
+                    return _startGuestDelegate;
+                }
             }
+
+            #endregion
 
             #region Constructors
 
             /// <summary>
-            /// Inicializa una nueva instancia de la clase <see cref="UIConfirmViewController{TGuestController, TGuestInput, TGuestOutput, TGuestComponent}.Input"/>.
+            /// Inicializa una nueva instancia de la clase <see cref="UIConfirmViewController{TGuestController}.Input"/>.
             /// </summary>
-            public Input()
-                : this(default(TGuestInput))
-            {
-            }
-
-            /// <summary>
-            /// Inicializa una nueva instancia de la clase <see cref="UIConfirmViewController{TGuestController, TGuestInput, TGuestOutput, TGuestComponent}.Input"/>.
-            /// </summary>
-            /// <param name="input">Guest input.</param>
-            public Input(TGuestInput input)
-				: this(input, true, true)
+            /// <param name="startGuest">Delegado encargado de la inicialización del huésped. Si no se especifica se inicializa el huésped en el modo por defecto.</param>
+            public Input(StartGuestDelegate<TGuestController> startGuest)
+				: this(startGuest, true, true)
 			{
 			}
 
             /// <summary>
-            /// Inicializa una nueva instancia de <see cref="UIConfirmViewController{TGuestController, TGuestInput, TGuestOutput, TGuestComponent}.Input"/>
+            /// Inicializa una nueva instancia de <see cref="UIConfirmViewController{TGuestController}.Input"/>
             /// </summary>
-            /// <param name="input">Guest input.</param>
+            /// <param name="startGuest">Delegado encargado de la inicialización del huésped.</param>
             /// <param name="showView">Indica si se muestra la vista al iniciar la controladora.</param>
             /// <param name="isModal">Indica si la vista es modal.</param>
-            public Input(TGuestInput input, bool showView, bool isModal)
+            public Input(StartGuestDelegate<TGuestController> startGuest, bool showView, bool isModal)
                 : base(showView: showView, isModal: isModal)
             {
-                _gInput = input;
+                this._startGuestDelegate = startGuest;
             }
 
 			#endregion
@@ -139,7 +138,7 @@ namespace Sifaw.Controllers.Components
         /// Establece como <see cref="UILinker{TUIElement}"/> aquel establecido por defecto a través de 
         /// <see cref="UILinkersManager"/>.
         /// </summary>
-		protected UIConfirmViewController()
+		public UIConfirmViewController()
 			: base()
 		{
 		}
@@ -150,7 +149,7 @@ namespace Sifaw.Controllers.Components
 		/// <see cref="UIElementController{TInput, TOutput, TUIElement}.Linker"/>
 		/// donde <c>TUIElement</c> implementa <see cref="ShellView"/>.
         /// </summary>
-        protected UIConfirmViewController(UILinker<ShellConfirmView> linker)
+        public UIConfirmViewController(UILinker<ShellConfirmView> linker)
 			: base(linker)
 		{
 		}
@@ -181,7 +180,7 @@ namespace Sifaw.Controllers.Components
 
         public override Input GetDefaultInput()
         {
-            return new Input();
+            return new Input(default(StartGuestDelegate<TGuestController>));
         }
 
         public override Input GetResetInput()
@@ -217,15 +216,13 @@ namespace Sifaw.Controllers.Components
         }
 
         #endregion
-        
-        #region Start Methods
 
         #region Start Methods
 
         protected override void StartController()
         {
-            if (Parameters.GInput != default(TGuestInput))
-                Guest.Start(Parameters.GInput);
+            if (Parameters.StartGuestDelegate != null)
+                Parameters.StartGuestDelegate(Guest);
             else
                 Guest.Start();
         }
@@ -239,8 +236,6 @@ namespace Sifaw.Controllers.Components
         {
             /* Empty */
         }
-
-        #endregion
 
 		#endregion
 	}

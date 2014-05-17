@@ -27,9 +27,11 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.ComponentModel;
 
 using Sifaw.Views;
 using Sifaw.Views.Kit;
+using Sifaw.WPF.CCL;
 
 
 namespace Sifaw.WPF
@@ -39,6 +41,34 @@ namespace Sifaw.WPF
 	/// </summary>
 	public partial class ShellConfirmControl : UserControl, ShellConfirmComponent
     {
+        #region Dependecy Properties
+
+        public static DependencyProperty IsCancelableProperty =
+            DependencyProperty.Register(
+                "IsCancelable",
+                typeof(bool),
+                typeof(ShellConfirmControl),
+                new FrameworkPropertyMetadata(
+                    false,
+                    new PropertyChangedCallback(OnIsCancelableChanged)));
+
+        #endregion
+
+        #region Properties
+
+        /// <summary>
+        /// Obtiene o establecela duración de tiempo en el desencadenamiento de eventos
+        /// <see cref="Search"/> en el modo de búsqueda Instant.
+        /// </summary>
+        [Category("Common")]
+        public bool IsCancelable
+        {
+            get { return (bool)GetValue(IsCancelableProperty); }
+            set { SetValue(IsCancelableProperty, value); }
+        }
+
+        #endregion
+
         #region Constructors
 
         public ShellConfirmControl()
@@ -93,6 +123,22 @@ namespace Sifaw.WPF
 
 		#endregion
 
+        #region Methods de factoria
+
+        private static void OnIsCancelableChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
+        {
+            ShellConfirmControl confirm = o as ShellConfirmControl;
+
+            if (confirm != null)
+            {
+                confirm.buttonCancel.Visibility = ((bool)e.NewValue)
+                    ? System.Windows.Visibility.Visible
+                    : System.Windows.Visibility.Collapsed;
+            }
+        }
+
+        #endregion
+
         #region Gestión de eventos
 
         private void buttonConfirm_Click(object sender, RoutedEventArgs e)
@@ -108,17 +154,6 @@ namespace Sifaw.WPF
         #endregion
 
 		#region UIShell Members
-
-        public bool IsCancelable
-        {
-            get { return (buttonCancel.Visibility == System.Windows.Visibility.Visible); }
-            set
-            {
-                buttonCancel.Visibility = (value)
-                    ? System.Windows.Visibility.Visible
-                    : System.Windows.Visibility.Collapsed;
-            }
-        }
 
 		public void SetLayout(UIShellRow[] rows)
 		{
@@ -204,21 +239,70 @@ namespace Sifaw.WPF
 
         #region UISettings
 
-        private ComponentSettings _uiSettings = null;
-        public ComponentSettings UISettings
+        private ShellConfirmSettings _uiSettings = null;
+        public ShellConfirmSettings UISettings
         {
             get
             {
                 if (_uiSettings == null)
-                    _uiSettings = new ControlSettings(this);
+                    _uiSettings = new ShellControlSettings(this);
 
                 return _uiSettings;
             }
         }
 
+        ComponentSettings Views.UIComponent.UISettings
+        {
+            get { return UISettings; }
+        }
+
         UISettings Views.UIElement.UISettings
         {
             get { return UISettings; }
+        }
+
+        #endregion
+
+        #region Miscellany
+
+        [Serializable]
+        public class ShellControlSettings : ControlSettings, ShellConfirmSettings
+        {
+            #region Fields
+
+            private bool _isCancelable = true;
+
+            #endregion
+
+            #region Properties
+
+            /// <summary>
+            /// Flag que indica si el control es cancelable.
+            /// </summary>
+            public bool IsCancelable
+            {
+                get { return _isCancelable; }
+                set
+                {
+                    if (_isCancelable != value)
+                    {
+                        _isCancelable = value;
+                        OnPropertyChanged(() => IsCancelable);
+                    }
+                }
+            }
+
+            #endregion
+
+            #region Constructor
+
+            public ShellControlSettings(ShellConfirmControl control)
+                : base(control)
+            {
+                UtilWPF.BindField(this, "IsCancelable", control, ShellConfirmControl.IsCancelableProperty, BindingMode.TwoWay);
+            }
+
+            #endregion
         }
 
         #endregion

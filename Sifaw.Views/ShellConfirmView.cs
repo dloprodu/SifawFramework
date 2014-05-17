@@ -36,9 +36,9 @@ namespace Sifaw.Views
         #region Properties
 
         /// <summary>
-        /// Flag que permite indicar si se muestra la opción de cancelar la operación.
+        /// Obtiene el <see cref="ShellConfirmViewSettings"/> del <see cref="ShellConfirmView"/>.
         /// </summary>
-        bool IsCancelable { get; set; }
+        new ShellConfirmViewSettings UISettings { get; }
 
         #endregion
 

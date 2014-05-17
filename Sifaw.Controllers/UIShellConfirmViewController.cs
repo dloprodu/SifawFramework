@@ -146,6 +146,15 @@ namespace Sifaw.Controllers
         #region Properties
 
         /// <summary>
+        /// Devuelve el contenedor de ajustes del elemento de interfaz a través
+        /// del cual se puede modificar la configuración predeterminada.
+        /// </summary>
+        public new ShellConfirmViewSettings UISettings
+        {
+            get { return UIElement.UISettings; }
+        }
+
+        /// <summary>
         /// Devuelve un valor que indica si se ha confirmado o cancelado la acción.
         /// </summary>
         protected bool Confirmed

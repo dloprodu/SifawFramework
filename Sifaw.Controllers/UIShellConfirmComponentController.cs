@@ -175,6 +175,19 @@ namespace Sifaw.Controllers
 
         #endregion
 
+        #region Properties
+
+        /// <summary>
+        /// Devuelve el contenedor de ajustes del elemento de interfaz a través
+        /// del cual se puede modificar la configuración predeterminada.
+        /// </summary>
+        public new ShellConfirmSettings UISettings
+        {
+            get { return UIElement.UISettings; }
+        }
+
+        #endregion
+
 		#region Constructors
 
         /// <summary>

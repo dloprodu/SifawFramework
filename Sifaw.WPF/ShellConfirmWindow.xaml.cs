@@ -26,8 +26,10 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.ComponentModel;
 
 using Sifaw.Views;
+using Sifaw.WPF.CCL;
 
 
 namespace Sifaw.WPF
@@ -37,6 +39,34 @@ namespace Sifaw.WPF
 	/// </summary>
 	public partial class ShellConfirmWindow : Window, ShellConfirmView
     {
+        #region Dependecy Properties
+
+        public static DependencyProperty IsCancelableProperty =
+            DependencyProperty.Register(
+                "IsCancelable",
+                typeof(bool),
+                typeof(ShellConfirmWindow),
+                new FrameworkPropertyMetadata(
+                    false,
+                    new PropertyChangedCallback(OnIsCancelableChanged)));
+
+        #endregion
+
+        #region Properties
+
+        /// <summary>
+        /// Obtiene o establecela duración de tiempo en el desencadenamiento de eventos
+        /// <see cref="Search"/> en el modo de búsqueda Instant.
+        /// </summary>
+        [Category("Common")]
+        public bool IsCancelable
+        {
+            get { return (bool)GetValue(IsCancelableProperty); }
+            set { SetValue(IsCancelableProperty, value); }
+        }
+
+        #endregion
+
         #region Constructors
 
         public ShellConfirmWindow()
@@ -45,6 +75,20 @@ namespace Sifaw.WPF
 		}
 
 		#endregion
+
+        #region Methods de factoria
+
+        private static void OnIsCancelableChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
+        {
+            ShellConfirmWindow confirm = o as ShellConfirmWindow;
+
+            if (confirm != null)
+            {
+                confirm.shell.IsCancelable = ((bool)e.NewValue);
+            }
+        }
+
+        #endregion
 
 		#region Events Handlers
                 
@@ -87,12 +131,6 @@ namespace Sifaw.WPF
         #endregion
 
 		#region UIShell Members
-
-        public bool IsCancelable
-        {
-            get { return shell.IsCancelable; }
-            set { shell.IsCancelable = value; }
-        }
 
 		public void SetLayout(UIShellRow[] rows)
 		{
@@ -245,16 +283,21 @@ namespace Sifaw.WPF
 
 		#region UISettings
 
-		private ViewSettings _uiSettings = null;
-		public ViewSettings UISettings
-		{
-			get
-			{
-				if (_uiSettings == null)
-					_uiSettings = new WindowSettings(this);
+        private ShellConfirmViewSettings _uiSettings = null;
+        public ShellConfirmViewSettings UISettings
+        {
+            get
+            {
+                if (_uiSettings == null)
+                    _uiSettings = new ShellConfirmWindowSettings(this);
 
-				return _uiSettings;
-			}
+                return _uiSettings;
+            }
+        }
+
+		ViewSettings Views.UIView.UISettings
+		{
+            get { return UISettings; }
 		}
 
 		UISettings Views.UIElement.UISettings
@@ -263,5 +306,49 @@ namespace Sifaw.WPF
 		}
 
 		#endregion
+
+        #region Miscellany
+
+        [Serializable]
+        public class ShellConfirmWindowSettings : WindowSettings, ShellConfirmViewSettings
+        {
+            #region Fields
+
+            private bool _isCancelable = true;
+
+            #endregion
+
+            #region Properties
+
+            /// <summary>
+            /// Flag que indica si el control es cancelable.
+            /// </summary>
+            public bool IsCancelable
+            {
+                get { return _isCancelable; }
+                set
+                {
+                    if (_isCancelable != value)
+                    {
+                        _isCancelable = value;
+                        OnPropertyChanged(() => IsCancelable);
+                    }
+                }
+            }
+
+            #endregion
+
+            #region Constructor
+
+            public ShellConfirmWindowSettings(ShellConfirmWindow control)
+                : base(control)
+            {
+                UtilWPF.BindField(this, "IsCancelable", control, ShellConfirmWindow.IsCancelableProperty, BindingMode.TwoWay);
+            }
+
+            #endregion
+        }
+
+        #endregion
     }
 }

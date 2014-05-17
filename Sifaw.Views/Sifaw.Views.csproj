@@ -77,6 +77,8 @@
     <Compile Include="Components\_Miscellany\IListable.cs" />
     <Compile Include="Components\_Settings\BackgroundWorkerSettings.cs" />
     <Compile Include="Components\_Settings\BoolFilterSettings.cs" />
+    <Compile Include="_Settings\ShellConfirmViewSettings.cs" />
+    <Compile Include="_Settings\ShellConfirmSettings.cs" />
     <Compile Include="Components\_Settings\LabelSettings.cs" />
     <Compile Include="Components\_Settings\TextFilterSettings.cs" />
     <Compile Include="ShellConfirmView.cs" />

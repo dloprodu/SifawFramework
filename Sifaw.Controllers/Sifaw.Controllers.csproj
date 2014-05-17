@@ -99,6 +99,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Components\UISingleViewController.cs" />
     <Compile Include="Components\Filters\TODO.cs" />
     <Compile Include="Components\TODO.cs" />
     <Compile Include="Components\UIBrowserController.cs" />
@@ -115,6 +116,7 @@
     <Compile Include="Components\UIConfirmViewController.cs" />
     <Compile Include="Components\UITabHostController.cs" />
     <Compile Include="Components\UILabelController.cs" />
+    <Compile Include="Components\_Delegates\GetResultControllerDelegate.cs" />
     <Compile Include="Components\_Delegates\StartGuestControllerDelegate.cs" />
     <Compile Include="Components\_Delegates\BackgroundWorkerDelegate.cs" />
     <Compile Include="Components\_Events\CLRunWorkerCompletedEvent.cs" />

@@ -30,9 +30,9 @@ namespace Sifaw.Controllers.Components
 	/// Controladora de vista que provee de la infraestructura para embeber un compontente
     /// <see cref="UIComponentController{TInput, TOutput, TComponent}"/>.
 	/// </summary>
-    public class UIConfirmViewController<TGuestController> : UIShellConfirmViewController
-        < UIConfirmViewController<TGuestController>.Input
-        , UIConfirmViewController<TGuestController>.Output
+    public class UISingleViewController<TGuestController> : UIShellViewController
+        < UISingleViewController<TGuestController>.Input
+        , UISingleViewController<TGuestController>.Output
 		, UIComponent>
         where TGuestController : IUIComponentController, new()
 	{
@@ -42,7 +42,7 @@ namespace Sifaw.Controllers.Components
 		/// Parámetros de entrada de las controladora.
 		/// </summary>
 		[Serializable]
-        public new class Input : UIShellConfirmViewController<Input, Output, UIComponent>.Input
+        public new class Input : UIShellViewController<Input, Output, UIComponent>.Input
         {
             #region Fields
 
@@ -80,7 +80,7 @@ namespace Sifaw.Controllers.Components
             #region Constructors
 
             /// <summary>
-            /// Inicializa una nueva instancia de la clase <see cref="UIConfirmViewController{TGuestController}.Input"/>.
+            /// Inicializa una nueva instancia de la clase <see cref="UISingleViewController{TGuestController}.Input"/>.
             /// </summary>
             /// <param name="startGuest">Delegado encargado de la inicialización del huésped. Si no se especifica se inicializa el huésped en el modo por defecto.</param>
             public Input(StartGuestDelegate<TGuestController> startGuest)
@@ -89,7 +89,7 @@ namespace Sifaw.Controllers.Components
 			}
 
             /// <summary>
-            /// Inicializa una nueva instancia de la clase <see cref="UIConfirmViewController{TGuestController}.Input"/>.
+            /// Inicializa una nueva instancia de la clase <see cref="UISingleViewController{TGuestController}.Input"/>.
             /// </summary>
             /// <param name="startGuest">Delegado encargado de la inicialización del huésped. Si no se especifica se inicializa el huésped en el modo por defecto.</param>
             /// <param name="getResultGuest">Delegado encargado de construir el resultado del huésped.</param>
@@ -99,7 +99,7 @@ namespace Sifaw.Controllers.Components
             }
 
             /// <summary>
-            /// Inicializa una nueva instancia de <see cref="UIConfirmViewController{TGuestController}.Input"/>
+            /// Inicializa una nueva instancia de <see cref="UISingleViewController{TGuestController}.Input"/>
             /// </summary>
             /// <param name="startGuest">Delegado encargado de la inicialización del huésped.</param>
             /// <param name="getResultGuest">Delegado encargado de construir el resultado del huésped.</param>
@@ -119,7 +119,7 @@ namespace Sifaw.Controllers.Components
 		/// Parámetros de retorno de la controladora.
 		/// </summary>
 		[Serializable]
-        public new class Output : UIShellConfirmViewController<Input, Output, UIComponent>.Output
+        public new class Output : UIShellViewController<Input, Output, UIComponent>.Output
 		{
             #region Fields
 
@@ -145,21 +145,19 @@ namespace Sifaw.Controllers.Components
             #region Constructor
 
             /// <summary>
-            /// Inicializa una nueva instancia de la clase <see cref="UIConfirmViewController{TGuestController}.Output"/>.
+            /// Inicializa una nueva instancia de la clase <see cref="UISingleViewController{TGuestController}.Output"/>.
             /// </summary>
-            /// <param name="confirmed">Flag que indica si se ha confirmado la acción.</param>
-            public Output(bool confirmed)
-                : this(confirmed, null)
+            public Output()
+                : this(null)
             {
             }
 
             /// <summary>
-            /// Inicializa una nueva instancia de la clase <see cref="UIConfirmViewController{TGuestController}.Output"/>.
+            /// Inicializa una nueva instancia de la clase <see cref="UISingleViewController{TGuestController}.Output"/>.
             /// </summary>
             /// <param name="result">Resultado de la controladora.</param>
-            /// <param name="confirmed">Flag que indica si se ha confirmado la acción.</param>
-            public Output(bool confirmed, object result) 
-                : base(confirmed)
+            public Output(object result) 
+                : base()
             {
                 this._result = result;
             }
@@ -186,7 +184,7 @@ namespace Sifaw.Controllers.Components
                               Guest
                             , "Finished"
                             , this
-                            , typeof(UIConfirmViewController<TGuestController>)
+                            , typeof(UISingleViewController<TGuestController>)
                             , "GuestComponentes_Finished"
                             , (Delegate)null);
                     }
@@ -205,22 +203,22 @@ namespace Sifaw.Controllers.Components
         #region Constructors
 
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="UIConfirmViewController{TGuestController}"/>.
+        /// Inicializa una nueva instancia de la clase <see cref="UISingleViewController{TGuestController}"/>.
         /// Establece como <see cref="UILinker{TUIElement}"/> aquel establecido por defecto a través de 
         /// <see cref="UILinkersManager"/>.
         /// </summary>
-		public UIConfirmViewController()
+		public UISingleViewController()
 			: base()
 		{
 		}
 
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="UIConfirmViewController{TGuestController}"/>, 
+        /// Inicializa una nueva instancia de la clase <see cref="UISingleViewController{TGuestController}"/>, 
 		/// estableciendo el <see cref="UILinker{TUIElement}"/> especificado como valor de la propiedad 
 		/// <see cref="UIElementController{TInput, TOutput, TUIElement}.Linker"/>
 		/// donde <c>TUIElement</c> implementa <see cref="ShellView"/>.
         /// </summary>
-        public UIConfirmViewController(UILinker<ShellConfirmView> linker)
+        public UISingleViewController(UILinker<ShellView> linker)
 			: base(linker)
 		{
 		}
@@ -246,7 +244,7 @@ namespace Sifaw.Controllers.Components
 
         protected override Output GetDefaultOutput()
         {
-            return (Parameters.GetResultGuestDelegate != null ? new Output(Confirmed, Parameters.GetResultGuestDelegate(Guest)) : new Output(Confirmed));
+            return (Parameters.GetResultGuestDelegate != null ? new Output(Parameters.GetResultGuestDelegate(Guest)) : new Output());
         }
 
         public override Input GetDefaultInput()

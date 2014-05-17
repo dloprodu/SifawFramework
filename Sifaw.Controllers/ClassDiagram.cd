@@ -1,0 +1,561 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Sifaw.Controllers.CLDateTimeReseteable" Collapsed="true">
+    <Position X="8.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>_Attributes\CLDateTimeReseteable.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sifaw.Controllers.CLGuidReseteable" Collapsed="true">
+    <Position X="10.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>_Attributes\CLGuidReseteable.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sifaw.Controllers.CLReseteable" Collapsed="true">
+    <Position X="9.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>_Attributes\CLReseteable.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sifaw.Controllers.CLComponentChangedEventArgs" Collapsed="true">
+    <Position X="35" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>_Events\CLComponentChangedEvent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sifaw.Controllers.CLComponentChangingEventArgs" Collapsed="true">
+    <Position X="36.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>_Events\CLComponentChangingEvent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sifaw.Controllers.CLConfirmMessageEventArgs" Collapsed="true">
+    <Position X="38.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>_Events\CLConfirmMessageEvent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sifaw.Controllers.CLFinishedEventArgs&lt;T&gt;" Collapsed="true">
+    <Position X="33.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>_Events\CLFinishedEvent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sifaw.Controllers.CLProgressChangedEventArgs" Collapsed="true">
+    <Position X="35" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAA=</HashCode>
+      <FileName>_Events\CLProgressChangedEvent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sifaw.Controllers.CLSateChangedEventArgs" Collapsed="true">
+    <Position X="40.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>_Events\CLSateChangedEvent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sifaw.Controllers.CLShowErrorEventArgs" Collapsed="true">
+    <Position X="0.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>_Events\CLShowErrorEvent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sifaw.Controllers.CLShowInfoEventArgs" Collapsed="true">
+    <Position X="2.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>_Events\CLShowInfoEvent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sifaw.Controllers.CLShowMessageEventArgs" Collapsed="true">
+    <Position X="2.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAEAAAAAAAAAAAAAAAAABAAAAAAAAAAA=</HashCode>
+      <FileName>_Events\CLShowMessageEvent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sifaw.Controllers.CLShowWarningEventArgs" Collapsed="true">
+    <Position X="5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>_Events\CLShowWarningEvent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sifaw.Controllers.CLThrowEventArgs" Collapsed="true">
+    <Position X="33.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAEBAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>_Events\CLThrowEvent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sifaw.Controllers.NotAllowResetException" Collapsed="true">
+    <Position X="35" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>_Exceptions\NotAllowResetException.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sifaw.Controllers.NotCanStartException" Collapsed="true">
+    <Position X="36.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>_Exceptions\NotCanStartException.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sifaw.Controllers.NotValidStateException" Collapsed="true">
+    <Position X="40.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>_Exceptions\NotValidStateException.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sifaw.Controllers.UIElementNullException" Collapsed="true">
+    <Position X="35" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>_Exceptions\UIElementNullException.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sifaw.Controllers.UILinkerNullException" Collapsed="true">
+    <Position X="36.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>_Exceptions\UILinkerNullException.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sifaw.Controllers.UISettingsNullException" Collapsed="true">
+    <Position X="38.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>_Exceptions\UISettingsNullException.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sifaw.Controllers.ShellOperationsManager" Collapsed="true">
+    <Position X="33.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAA=</HashCode>
+      <FileName>_Miscellany\ShellOperationsManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sifaw.Controllers.Controller&lt;TInput, TOutput&gt;" Collapsed="true">
+    <Position X="16.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gCAhEAYAliEkRFBAApQgjKAAoAExCIAAgIIAhoBAAig=</HashCode>
+      <FileName>Controller.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Sifaw.Controllers.UIActorController&lt;TInput, TOutput, TComponent, TGuest&gt;" Collapsed="true">
+    <Position X="23" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABACAAIAAAAAAgQAAACAACAAAAIAACQCAAgAQAAAABg=</HashCode>
+      <FileName>UIActorController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sifaw.Controllers.UIComponentController&lt;TInput, TOutput, TComponent&gt;" Collapsed="true">
+    <Position X="14" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAChAiCAiEAAEACQAxAEQAQAAYQAIAAAAAAAgAAAAA=</HashCode>
+      <FileName>UIComponentController.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Sifaw.Controllers.UIElementController&lt;TInput, TOutput, TUIElement&gt;" Collapsed="true">
+    <Position X="16.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAABAAgAAiAAAAAAAAACEAAACAIAAIAAAAAAAgAAAAA=</HashCode>
+      <FileName>UIElementController.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Sifaw.Controllers.UIShellComponentController&lt;TInput, TOutput, TGuest&gt;" Collapsed="true">
+    <Position X="3.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAEAgAAACAAAAAAAAIAAAAAAQAAAgAAAAg=</HashCode>
+      <FileName>UIShellComponentController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sifaw.Controllers.UIShellConfirmComponentController&lt;TInput, TOutput, TGuest&gt;" Collapsed="true">
+    <Position X="6" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgCAAQAIUAgAIACAAAAAAAAIAAAAAAQAgAgAAAAg=</HashCode>
+      <FileName>UIShellConfirmComponentController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sifaw.Controllers.UIShellConfirmViewController&lt;TInput, TOutput, TGuest&gt;" Collapsed="true">
+    <Position X="28.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIgCAAQAIUAgAIACAAAAAAAAIIAAAAEQAgAgAAAAg=</HashCode>
+      <FileName>UIShellConfirmViewController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sifaw.Controllers.UIShellViewController&lt;TInput, TOutput, TGuest&gt;" Collapsed="true">
+    <Position X="30.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAEAgAAACAAAAAAAAIAAAAAEQAAAgAAAAg=</HashCode>
+      <FileName>UIShellViewController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sifaw.Controllers.UIViewController&lt;TInput, TOutput, TView&gt;" Collapsed="true">
+    <Position X="29.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIBAYiACFABAEAQBgAAAAQEAYEAoAQAAAAAgAACAA=</HashCode>
+      <FileName>UIViewController.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Sifaw.Controllers.UIViewManagerExtension" Collapsed="true">
+    <Position X="40.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAACAACAAAAAAAAAA=</HashCode>
+      <FileName>UIViewManagerExtension.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sifaw.Controllers.Components.CLFilterChangedEventArgs&lt;TFilter&gt;" Collapsed="true">
+    <Position X="40.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Components\_Events\CLFilterChangedEvent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sifaw.Controllers.Components.CLRunWorkerCompletedEventArgs" Collapsed="true">
+    <Position X="36.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Components\_Events\CLRunWorkerCompletedEvent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sifaw.Controllers.Components.CLRunWorkerProgressChangedEventArgs" Collapsed="true">
+    <Position X="38.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAQACAAAAAAACAAAA=</HashCode>
+      <FileName>Components\_Events\CLRunWorkerProgressChangedEvent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sifaw.Controllers.Components.NotValidFilterException" Collapsed="true">
+    <Position X="38.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Components\_Exceptions\NotValidFilterException.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sifaw.Controllers.Components.BackgroundWorkerPack" Collapsed="true">
+    <Position X="33.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAACAABgAAQAAAAAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>Components\_Miscellany\BackgroundWorkerPack.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sifaw.Controllers.Components.UIAssistantController&lt;TInput, TOutput, TGuest&gt;" Collapsed="true">
+    <Position X="21.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAIIAAIAAAAgAQAAACAAAAIAAAAAgAgAAAAAgAA=</HashCode>
+      <FileName>Components\UIAssistantController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sifaw.Controllers.Components.UIBackgroundWorkerController" Collapsed="true">
+    <Position X="1.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACABQABAICIQABBCBQAIBCAAAAIaAIAIgAAAgAAAAAA=</HashCode>
+      <FileName>Components\UIBackgroundWorkerController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sifaw.Controllers.Components.UIBackgroundWorkerViewController" Collapsed="true">
+    <Position X="30.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAIAgAAAAAEAhBAASAgBCCAAAICBAAQBQQAgAAAAEA=</HashCode>
+      <FileName>Components\UIBackgroundWorkerViewController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sifaw.Controllers.Components.UIBrowserController&lt;TInput, TOutput, TFilter, TValue&gt;" Collapsed="true">
+    <Position X="3.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAcCAAAAAABAAgAIAAgAAAEAAAAAAABQAgAEAoM=</HashCode>
+      <FileName>Components\UIBrowserController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sifaw.Controllers.Components.UIConfirmViewController&lt;TGuestController&gt;" Collapsed="true">
+    <Position X="28.5" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ADAAAAAAAAAEAhBAACAABCAAAAIAAAAAAQAAgAAAAAg=</HashCode>
+      <FileName>Components\UIConfirmViewController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sifaw.Controllers.Components.UIDataListController&lt;TValue&gt;" Collapsed="true">
+    <Position X="8.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAACAkCAAAAABBAAAAIBCBAQAMBCAAEAIBQgAAEAoA=</HashCode>
+      <FileName>Components\UIDataListController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sifaw.Controllers.Components.UIFilterBaseController&lt;TInput, TOutput, TFilter, TComponent&gt;" Collapsed="true">
+    <Position X="15" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAABAAgAAACAAABIAAIAAAAEAAAAAAAA=</HashCode>
+      <FileName>Components\UIFilterBaseController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sifaw.Controllers.Components.UIFiltersGroupController&lt;TInput, TOutput, TFilter&gt;" Collapsed="true">
+    <Position X="3.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAABBAABAAIAAAABIAAAAAAAAAAgAAAAA=</HashCode>
+      <FileName>Components\UIFiltersGroupController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sifaw.Controllers.Components.UILabelController" Collapsed="true">
+    <Position X="26.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAACAAABBAAAAABCAAAAIAAAAAAAAAgAAAAAA=</HashCode>
+      <FileName>Components\UILabelController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sifaw.Controllers.Components.UIListFilterBaseController&lt;TInput, TOutput, TFilter, TSource, TComponent&gt;" Collapsed="true">
+    <Position X="12.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAAAAAgAAAAAAAAIAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Components\UIListFilterBaseController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sifaw.Controllers.Components.UITabHostController&lt;TInput, TOutput, TGuest&gt;" Collapsed="true">
+    <Position X="24" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAACAAAAIAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Components\UITabHostController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sifaw.Controllers.Components.Filters.UIBoolFilterController" Collapsed="true">
+    <Position X="17.25" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAACAAABBAAAAABAAAAAIAAAAAAAAAgAAAAAA=</HashCode>
+      <FileName>Components\Filters\UIBoolFilterController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sifaw.Controllers.Components.Filters.UIDropDownListFilterController" Collapsed="true">
+    <Position X="10.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAAAAABBAAAAABAAAAAIAAAAAAAAAgAAAAAA=</HashCode>
+      <FileName>Components\Filters\UIDropDownListFilterController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sifaw.Controllers.Components.Filters.UIEnumFilterController" Collapsed="true">
+    <Position X="12.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAAAAABBAAAAABAAAAAIAAAAAAAAAgAAAAAA=</HashCode>
+      <FileName>Components\Filters\UIEnumFilterController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sifaw.Controllers.Components.Filters.UIListFilterController" Collapsed="true">
+    <Position X="15" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAAAAABBAAAAABAAAAAIAAAAAAAAAgAAAAAA=</HashCode>
+      <FileName>Components\Filters\UIListFilterController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sifaw.Controllers.Components.Filters.UITextFilterController" Collapsed="true">
+    <Position X="19.5" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAACAAABBAAAAABAAAAAIAAAAAAAAAgAAAAAA=</HashCode>
+      <FileName>Components\Filters\UITextFilterController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="Sifaw.Controllers.CLInformation" Collapsed="true">
+    <Position X="33.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAAAAAAIAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>_Miscellany\CLInformation.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Interface Name="Sifaw.Controllers.IController" Collapsed="true">
+    <Position X="2.75" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgEAAAECEABAAAAAAAAAAAAAEAAAAAAAAABABAACg=</HashCode>
+      <FileName>_Miscellany\IController.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Sifaw.Controllers.IController&lt;TInput, TOutput&gt;" Collapsed="true">
+    <Position X="0.5" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAABAAAAAQAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>_Miscellany\IController.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Sifaw.Controllers.IUIComponentController" Collapsed="true">
+    <Position X="2.75" Y="12.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAiAAgAAAAAAAARAEAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>_Miscellany\IUIComponentController.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Sifaw.Controllers.IUIElementController" Collapsed="true">
+    <Position X="3.75" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>_Miscellany\IUIElementController.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Sifaw.Controllers.IUIViewController" Collapsed="true">
+    <Position X="5" Y="12.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>_Miscellany\IUIViewController.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="Sifaw.Controllers.CLStates" Collapsed="true">
+    <Position X="33.25" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>_Miscellany\CLStates.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Delegate Name="Sifaw.Controllers.GetNumberOfCellsAtShellCallback" Collapsed="true">
+    <Position X="33.25" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>_Delegates\GetNumberOfCellsAtShellCallback.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Delegate Name="Sifaw.Controllers.GetNumberOfRowsShellCallback" Collapsed="true">
+    <Position X="35" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>_Delegates\GetNumberOfRowsShellCallback.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Delegate Name="Sifaw.Controllers.GetRowCellSettingsShellCallback&lt;TGuest&gt;" Collapsed="true">
+    <Position X="36.75" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAAAAAABAAAAAAEAAAAAAAABAAAAAAAAAAAAA=</HashCode>
+      <FileName>_Delegates\GetRowCellSettingsShellCallback.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Delegate Name="Sifaw.Controllers.GetRowSettingsShellCallback" Collapsed="true">
+    <Position X="38.5" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAEAAAAAAAABgAAAAAAAAAAAA=</HashCode>
+      <FileName>_Delegates\GetRowSettingsShellCallback.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Delegate Name="Sifaw.Controllers.CLComponentChangedEventHandler" Collapsed="true">
+    <Position X="35" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQQAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>_Events\CLComponentChangedEvent.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Delegate Name="Sifaw.Controllers.CLComponentChangingEventHandler" Collapsed="true">
+    <Position X="36.75" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAIAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>_Events\CLComponentChangingEvent.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Delegate Name="Sifaw.Controllers.CLConfirmMessageEventHandler" Collapsed="true">
+    <Position X="38.5" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>_Events\CLConfirmMessageEvent.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Delegate Name="Sifaw.Controllers.CLFinishedEventHandler&lt;T&gt;" Collapsed="true">
+    <Position X="33.25" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>_Events\CLFinishedEvent.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Delegate Name="Sifaw.Controllers.CLProgressChangedEventHandler" Collapsed="true">
+    <Position X="35" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>_Events\CLProgressChangedEvent.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Delegate Name="Sifaw.Controllers.CLStateChangedEventHandler" Collapsed="true">
+    <Position X="38.5" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAgAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>_Events\CLSateChangedEvent.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Delegate Name="Sifaw.Controllers.CLShowErrorEventHandler" Collapsed="true">
+    <Position X="40.25" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAAAAAAAQAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>_Events\CLShowErrorEvent.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Delegate Name="Sifaw.Controllers.CLShowInfoEventHandler" Collapsed="true">
+    <Position X="33.25" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>_Events\CLShowInfoEvent.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Delegate Name="Sifaw.Controllers.CLShowMessageEventHandler" Collapsed="true">
+    <Position X="35" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAEAAAAAAAAQAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>_Events\CLShowMessageEvent.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Delegate Name="Sifaw.Controllers.CLShowWarningEventHandler" Collapsed="true">
+    <Position X="36.75" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>_Events\CLShowWarningEvent.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Delegate Name="Sifaw.Controllers.CLThrowEventHandler" Collapsed="true">
+    <Position X="40.25" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAACAAAAAAA=</HashCode>
+      <FileName>_Events\CLThrowEvent.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Delegate Name="Sifaw.Controllers.Components.BackgroundWorkerDelegate" Collapsed="true">
+    <Position X="33.25" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Components\_Delegates\BackgroundWorkerDelegate.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Delegate Name="Sifaw.Controllers.Components.StartGuestDelegate&lt;TGuestController&gt;" Collapsed="true">
+    <Position X="40.25" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAA=</HashCode>
+      <FileName>Components\_Delegates\StartGuestControllerDelegate.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Delegate Name="Sifaw.Controllers.Components.CLFilterChangedEventHandler&lt;TFiler&gt;" Collapsed="true">
+    <Position X="40.25" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Components\_Events\CLFilterChangedEvent.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Delegate Name="Sifaw.Controllers.Components.CLRunWorkerCompletedEventHandler" Collapsed="true">
+    <Position X="36.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Components\_Events\CLRunWorkerCompletedEvent.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Delegate Name="Sifaw.Controllers.Components.CLRunWorkerProgressChangedEventHandler" Collapsed="true">
+    <Position X="38.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAEAQAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Components\_Events\CLRunWorkerProgressChangedEvent.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

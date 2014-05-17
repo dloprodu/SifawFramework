@@ -312,7 +312,7 @@ namespace Sifaw.Controllers.Components
 
         private void GuestComponentes_Finished(object sender, EventArgs e)
         {
-            /* Empty */
+            Finish();
         }
 
         #endregion

@@ -192,7 +192,7 @@ namespace Sifaw.Controllers.Components
                     }
                     catch
                     {
-                        throw new Exception("El huésped no es una controladora válida.");
+                        throw new NotValidGuestException();
                     }
                 }
 

@@ -280,6 +280,21 @@ namespace Sifaw.Controllers.Components
             FilterableList.ClearSelection();
         }
 
+        /// <summary>
+        /// Selecciona el item con el valor indicado.
+        /// </summary>
+        /// <remarks>
+        /// Para invocar este método la controladora ha de estar iniciada, 
+        /// en otro caso, devolverá una excepcion.
+        /// </remarks>
+        /// <exception cref="NotValidStateException">La controladora no está iniciada.</exception>
+        /// <param name="value">Valor del item a seleccionar.</param>
+        public void SelectListableItem(TValue value)
+        {
+            CheckState(CLStates.Started);
+            FilterableList.SelectListableItem(value);
+        }
+
         #endregion
 
         #region Abstract Methods
@@ -306,21 +321,6 @@ namespace Sifaw.Controllers.Components
         protected DataListComponent<TValue> GetUIDataListComponent()
         {
             return (FilterableList.GetUIComponent() as DataListComponent<TValue>);
-        }
-
-        /// <summary>
-        /// Selecciona el item con el valor indicado.
-        /// </summary>
-        /// <remarks>
-        /// Para invocar este método la controladora ha de estar iniciada, 
-        /// en otro caso, devolverá una excepcion.
-        /// </remarks>
-        /// <exception cref="NotValidStateException">La controladora no está iniciada.</exception>
-        /// <param name="value">Valor del item a seleccionar.</param>
-        public void SelectListableItem(TValue value)
-        {
-            CheckState(CLStates.Started);
-            FilterableList.SelectListableItem(value);
         }
 
         #endregion

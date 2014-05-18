@@ -152,10 +152,10 @@ namespace Sifaw.Controllers
         /// No llegaa entrar en un bucle de finalización porque en la segunda llamda ya sus controladoras hijas están finalizadas.
         /// </para>
         /// <para>
-        /// Con el flag <see cref="isFinishing"/> ignoramos esta posible segunda llamada.
+        /// Con el flag <see cref="_isFinishing"/> ignoramos esta posible segunda llamada.
         /// </para>
         /// </remarks>
-        private bool isFinishing = false;
+        private bool _isFinishing = false;
 
         /*
          * Reseteables
@@ -426,6 +426,14 @@ namespace Sifaw.Controllers
         protected BrokenRules BrokenPreconditions
         {
             get { return _brokenPreconditions; }
+        }
+
+        /// <summary>
+        /// Flag que indica si la finalización ya ha sido iniciada.
+        /// </summary>
+        protected bool IsFinishing
+        {
+            get { return _isFinishing; }
         }
 
         #endregion
@@ -734,6 +742,9 @@ namespace Sifaw.Controllers
         /// <returns>Valor que indica si la controladora se finalizó correctamente.</returns>
         public bool Finish()
         {
+            if (_isFinishing)
+                return false;
+
             // --------------------------------------------------------------
             // Finalizamos las controladora
             // --------------------------------------------------------------
@@ -750,10 +761,10 @@ namespace Sifaw.Controllers
         /// </summary>
         protected void FinishController(TOutput output)
         {
-            if (isFinishing)
+            if (_isFinishing)
                 return;
 
-            isFinishing = true;
+            _isFinishing = true;
 
             try
             {
@@ -802,7 +813,7 @@ namespace Sifaw.Controllers
             }
             finally
             {
-                isFinishing = false;
+                _isFinishing = false;
             }
         }
 

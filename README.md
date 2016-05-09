@@ -1,12 +1,12 @@
 # Sifaw Framework ![alt text](https://raw.githubusercontent.com/dloprodu/SifawFramework/master/Resources/SffIco32x32.png "Logo Title Text 1")
-
-## Información general
+---
+## 1. Información general
 
 *Sifaw Framework*, a partir de ahora *SF*, es una interpretación del patrón MVC para apliacaciones de escritorio en C# .NET, tanto **Windows Form** como **WPF**. Su objetivo es mantener el código organizado, reutilizable, escalable y mantenible.
 
-> *SF* aporta una solución a la hora de definir controladores, sus vistas y como estos interactuan entre si. El modelo y acceso a datos queda fuera de su ámbido pudiendo usar cualquier otro framework o como *EntityFramework*.
+> *SF* aporta una solución a la hora de definir controladores, sus vistas y como estos interactuan entre si. El modelo y acceso a datos queda fuera de su ámbido pudiendo usar cualquier otro framework como *EntityFramework*.
 
-*SF* pone el foco en las controladoras y sus vistas y en el desarrollo de componentes aislados y reutilizables. Un **componente** no es mas que una pequeña pieza de nuestra aplicación con una función bien definida y formado por un controlador y su vista.
+*SF* pone el foco en los controladores, sus vistas y en el desarrollo de componentes aislados y reutilizables. Un **componente** no es mas que una pequeña pieza de nuestra aplicación con una función bien definida y formado por un controlador y su vista.
 
 > En una aplicación de gestión de clientes, por ejemplo, un componente sería aquel que se encarga de cargar y mostrar un listado de clientes, permitiendo realizar filtros por nombre, roles, fecha de alta, etc. Este componente tendría, por un lado, el controlador que se encarga de acceder al modelo y cargar y manipular los datos, y por otro lado, la vista que se encarga de presentar los datos.
 
@@ -16,25 +16,37 @@ En *SF* un componente pude alojar otros componentes. Esta característica promuev
 
 > En nuestra aplicación de gestión de clientes podríamos tener otro componente cuyo fin es la generación de informes. Este componente puede alojar y hacer uso del componente que muestra la lista de clientes, de modo que, el usuario pueda filtrar y seleccionar que clientes van a aparecer en un informe.
 
-## Empieza 
+## 2. Empieza 
+
+Con una sencilla aplicación, para la gestión de socios de un club automovilístico (*XiCar*), veremos los pasos y conceptos necesarios para poder crear una applicación con *SF*.
+
+Lo primero, necesitamos al menos, cuatro proyectos:
+- Un proyecto como punto de arranque de nuestra aplicación. **XiCar.App** en nuestro ejemplo.
+- Un proyecto para nuestros controladores. **XiCar.Controllers** en nuesto ejemplo.
+- Un proyecto con la implementación concreta de los componentes (controles y/o ventanas **WPF** o **Windows Form**). **XiCar.WPF** en nuestro ejemplo.
+- Un proyecto para las interfaces de comunicación entre los controladores y sus componentes gráficos. **XiCar.Views** en nuesto ejemplo. Se trata de una capa de abstracción entre los componentes de intefaz que están implementados en una tecnología concreta (**WPF** por ejemplo) y su controlador. Esto permite que la UI de un componente pueda estar implementado en varias tecnologías, es más, un compomente puede tener varias implementaciones a nivel de UI. Esta capa está basada en el patrón de diseño *Abstract Factory*.
 
 ![alt text](https://raw.githubusercontent.com/dloprodu/SifawFramework/master/Resources/00.png "Esquema")
 
+Exceptuando al proyecto de inicio, pueden haber más de un proyecto destinados a controladores, vistas abstractas o implementación concreta de UI.
+
+## 3. Proyecto de inicio
+
 ![alt text](https://raw.githubusercontent.com/dloprodu/SifawFramework/master/Resources/01.png "Proyecto de inicio")
 
-## El controlador
+## 4. Controladores
 
-### El controlador - Parámetros de entrada
+### 4.1. Parámetros de entrada
 
-### El controlador - Parámetros de salida
+### 4.2. Parámetros de salida
 
-## La Vista
+## 5. Representación abstracta de componentes de UI
 
-### La Vista - Vistas huésped (guest)
+### 5.1 Vistas huésped (guest)
+ 
+### 5.2 Controles
 
-### La Vista - Controles
-
-## Componentes definidos
+## 6. Componentes definidos
 
 
 

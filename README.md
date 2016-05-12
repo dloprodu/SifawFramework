@@ -40,9 +40,20 @@ MainViewController controller = new MainViewController();
 controller.Start();
 ````
 
-Dado que los constroladores están desacopladas de su representación concreta de UI, debido a que podrían haber múltiples implementaciones, es en este punto donde debemos indicar a *SF* con que UI va a usar. Para este fin tenemos la factoria `UILinkersManager`.
+Dado que los constroladores están desacopladas de su representación concreta de UI es en este punto donde debemos indicar a *SF* que UI va a usar. Para este fin tenemos la factoria `UILinkersManager`.
 
+Un controlador sólo puede estar vinculado a un elemento de UI y este vínculo queda represetnado por un `UILinker`. Un `UILinker` es una interfaz que define el método para instanciar un elemente de UI. Entonces cada proyecto, WPF o Windows Form, que implementa elementos UI de controladores debe implementar estas interfaces. Veremos esto más en detalle en los apartados siguientes.
 
+Entonces usamos `UILinkersManager` para registrar las implementaciones concretas de los `UILinker`.
+
+En nuestra aplicación tenemos el proyecto **XiCar.WPF** para implementar nuestros elementos de UI. Además tenemos los elementos de UI predefinidos por *SF*. Por lo tanto el registo queda como sigue:
+
+```C#
+UILinkersManager.SetUIElementLinker(new Sifaw.WPF.WPFLinkers());
+UILinkersManager.SetUIElementLinker(new XiCar.WPF.WPFLinkers());
+```
+
+Por último establecemos algunos valores por defecto como el icono a usar en la aplicación o la vista principal. 
 
 ![alt text](https://raw.githubusercontent.com/dloprodu/SifawFramework/master/Resources/01.png "Proyecto de inicio")
 
@@ -57,7 +68,10 @@ Dado que los constroladores están desacopladas de su representación concreta de 
 ## 5. Representación abstracta de componentes de UI
 
 ### 5.1 Vistas huésped (guest)
+ 
+### 5.2 Controles
 
+## 6. Componentes definidos
 
 
 

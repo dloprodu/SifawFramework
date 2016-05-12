@@ -2,7 +2,7 @@
 ---
 ## 1. Información general
 
-*Sifaw Framework*, a partir de ahora *SF*, es una interpretación del patrón MVC para apliacaciones de escritorio en C# .NET, tanto **Windows Form** como **WPF**. Su objetivo es mantener el código organizado, reutilizable, escalable y mantenible.
+*Sifaw Framework*, a partir de ahora *SF*, es una interpretación del patrón MVC para aplicaciones de escritorio en C# .NET, tanto **Windows Form** como **WPF**. Su objetivo es mantener el código organizado, reutilizable, escalable y mantenible.
 
 > *SF* aporta una solución a la hora de definir controladores, sus vistas y como estos interactuan entre si. El modelo y acceso a datos queda fuera de su ámbido pudiendo usar cualquier otro framework como *EntityFramework*.
 

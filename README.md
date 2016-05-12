@@ -32,6 +32,18 @@ Exceptuando al proyecto de inicio, pueden haber más de un proyecto destinados a 
 
 ## 3. Proyecto de inicio
 
+El proyecto de inicio es el punto de arranque de nuestra aplicación y básicamente lo que debe hacer es instanciar el controlador principal de nuestra applicación e iniciarlo llamando a su método `Start`.
+
+```C#
+MainViewController controller = new MainViewController();
+...
+controller.Start();
+````
+
+Dado que los constroladores están desacopladas de su representación concreta de UI, debido a que podrían haber múltiples implementaciones, es en este punto donde debemos indicar a *SF* con que UI va a usar. Para este fin tenemos la factoria `UILinkersManager`.
+
+
+
 ![alt text](https://raw.githubusercontent.com/dloprodu/SifawFramework/master/Resources/01.png "Proyecto de inicio")
 
 ## 4. Controladores
@@ -40,13 +52,11 @@ Exceptuando al proyecto de inicio, pueden haber más de un proyecto destinados a 
 
 ### 4.2. Parámetros de salida
 
+### 4.3 Estados
+
 ## 5. Representación abstracta de componentes de UI
 
 ### 5.1 Vistas huésped (guest)
- 
-### 5.2 Controles
-
-## 6. Componentes definidos
 
 
 

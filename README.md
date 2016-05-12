@@ -1,4 +1,4 @@
-# Sifaw Framework ![alt text](https://raw.githubusercontent.com/dloprodu/SifawFramework/master/Resources/SffIco32x32.png "Logo Title Text 1")
+# **Sifaw Framework** ![alt text](https://raw.githubusercontent.com/dloprodu/SifawFramework/master/Resources/SffIco32x32.png "Logo") *WPF & Windows Form MVC*
 ---
 ## 1. Información general
 
@@ -6,25 +6,25 @@
 
 > *SF* aporta una solución a la hora de definir controladores, sus vistas y como estos interactuan entre si. El modelo y acceso a datos queda fuera de su ámbido pudiendo usar cualquier otro framework como *EntityFramework*.
 
-*SF* pone el foco en los controladores, sus vistas y en el desarrollo de componentes aislados y reutilizables. Un **componente** no es mas que una pequeña pieza de nuestra aplicación con una función bien definida y formado por un controlador y su vista.
+*SF* pone el foco en los controladores, sus vistas y en el desarrollo de componentes aislados y reutilizables. Un **componente** no es mas que una pequeña pieza de nuestra aplicación con una función bien definida. Un componente está formado por un controlador y su vista.
 
-> En una aplicación de gestión de clientes, por ejemplo, un componente sería aquel que se encarga de cargar y mostrar un listado de clientes, permitiendo realizar filtros por nombre, roles, fecha de alta, etc. Este componente tendría, por un lado, el controlador que se encarga de acceder al modelo y cargar y manipular los datos, y por otro lado, la vista que se encarga de presentar los datos.
+> En una aplicación de gestión de clientes, por ejemplo, un componente sería aquel que se encarga de cargar y mostrar un listado de clientes. Este componente podría permitir realizar filtros por nombre, roles, fecha de alta, etc. Este componente tendría, por un lado, el controlador que se encarga de acceder al modelo y cargar y manipular los datos, y por otro lado, la vista que se encarga de presentar los datos.
 
-El **controlador** de la vista debe asumir todo el peso de la lógica gestión de datos quedando solo para la **vista** la representación de esos datos.
+El **controlador** de la vista debe asumir todo el peso de la lógica gestión de datos quedando solo para la **vista** la presentación de esos datos.
 
-En *SF* un componente pude alojar otros componentes. Esta característica promueve la reutilización y el principio de responsabilidad única. Un componente complejo podría estar formado por otros componentes aislados que interacturan entre si estando alojados en el componente huésped.
+En *SF* un componente pude alojar otros componentes. Esta característica promueve la reutilización y el **principio de responsabilidad única**. Un componente complejo podría estar formado por otros componentes aislados que interacturan entre si estando alojados en el componente huésped.
 
 > En nuestra aplicación de gestión de clientes podríamos tener otro componente cuyo fin es la generación de informes. Este componente puede alojar y hacer uso del componente que muestra la lista de clientes, de modo que, el usuario pueda filtrar y seleccionar que clientes van a aparecer en un informe.
 
 ## 2. Empieza 
 
-Con una sencilla aplicación, para la gestión de socios de un club automovilístico (*XiCar*), veremos los pasos y conceptos necesarios para poder crear una applicación con *SF*.
+Supongamos una aplicación, para la gestión de socios de un club automovilístico, llamada **XiCar**. Con *XiCar* veremos los pasos y conceptos necesarios para poder crear una applicación con *SF*.
 
 Lo primero, necesitamos al menos, cuatro proyectos:
-- Un proyecto como punto de arranque de nuestra aplicación. **XiCar.App** en nuestro ejemplo.
-- Un proyecto para nuestros controladores. **XiCar.Controllers** en nuesto ejemplo.
-- Un proyecto con la implementación concreta de los componentes (controles y/o ventanas **WPF** o **Windows Form**). **XiCar.WPF** en nuestro ejemplo.
-- Un proyecto para las interfaces de comunicación entre los controladores y sus componentes gráficos. **XiCar.Views** en nuesto ejemplo. Se trata de una capa de abstracción entre los componentes de intefaz que están implementados en una tecnología concreta (**WPF** por ejemplo) y su controlador. Esto permite que la UI de un componente pueda estar implementado en varias tecnologías, es más, un compomente puede tener varias implementaciones a nivel de UI. Esta capa está basada en el patrón de diseño *Abstract Factory*.
+- **XiCar.App**: Un proyecto como punto de arranque de nuestra aplicación.
+- **XiCar.Controllers**: Un proyecto para nuestros controladores.
+- **XiCar.WPF**: Un proyecto con la implementación concreta de los componentes (controles y/o ventanas **WPF** o **Windows Form**).
+- **XiCar.Views**: Un proyecto para las interfaces de comunicación entre los controladores y sus componentes gráficos. Se trata de una capa de abstracción entre los componentes de intefaz que están implementados en una tecnología concreta (**WPF** por ejemplo) y su controlador. Esto permite que la UI de un componente pueda estar implementado en varias tecnologías, es más, un compomente puede tener varias implementaciones a nivel de UI. Esta capa está basada en el patrón de diseño *Abstract Factory*. En esta capa de nuestra solución también se puede definir los modelos de vistas (MVVM).
 
 ![alt text](https://raw.githubusercontent.com/dloprodu/SifawFramework/master/Resources/00.png "Esquema")
 

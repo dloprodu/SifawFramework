@@ -40,13 +40,13 @@ MainViewController controller = new MainViewController();
 controller.Start();
 ````
 
-Dado que los constroladores están desacopladas de su representación concreta de UI es en este punto donde debemos indicar a *SF* que UI va a usar. Para este fin tenemos la factoria `UILinkersManager`.
+Dado que los constroladores están desacoplados de su representación concreta de UI, es en este punto donde debemos indicar a *SF* que UI va a usar. Para este fin tenemos la factoria `UILinkersManager`.
 
 Un controlador sólo puede estar vinculado a un elemento de UI y este vínculo queda represetnado por un `UILinker`. Un `UILinker` es una interfaz que define el método para instanciar un elemente de UI. Entonces cada proyecto, WPF o Windows Form, que implementa elementos UI de controladores debe implementar estas interfaces. Veremos esto más en detalle en los apartados siguientes.
 
 Entonces usamos `UILinkersManager` para registrar las implementaciones concretas de los `UILinker`.
 
-En nuestra aplicación tenemos el proyecto **XiCar.WPF** para implementar nuestros elementos de UI. Además tenemos los elementos de UI predefinidos por *SF*. Por lo tanto el registo queda como sigue:
+En nuestra aplicación tenemos el proyecto **XiCar.WPF** para implementar nuestros elementos de UI. Además tenemos los componentes predefinidos por *SF*. Por lo tanto el registo queda como sigue:
 
 ```C#
 UILinkersManager.SetUIElementLinker(new Sifaw.WPF.WPFLinkers());

@@ -34,7 +34,7 @@ Exceptuando al proyecto de inicio, pueden haber más de un proyecto destinados a 
 
 El proyecto de inicio es el punto de arranque de nuestra aplicación y básicamente lo que debe hacer es instanciar el controlador principal de nuestra applicación e iniciarlo llamando a su método `Start`.
 
-```C#
+```csharp
 MainViewController controller = new MainViewController();
 ...
 controller.Start();
@@ -48,7 +48,7 @@ Entonces usamos `UILinkersManager` para registrar las implementaciones concretas
 
 En nuestra aplicación tenemos el proyecto **XiCar.WPF** para implementar nuestros elementos de UI. Además tenemos los componentes predefinidos por *SF*. Por lo tanto el registo queda como sigue:
 
-```C#
+```csharp
 UILinkersManager.SetUIElementLinker(new Sifaw.WPF.WPFLinkers());
 UILinkersManager.SetUIElementLinker(new XiCar.WPF.WPFLinkers());
 ```

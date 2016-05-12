@@ -74,7 +74,8 @@ Por último establecemos algunos valores por defecto como el icono a usar en la a
 ## 6. Componentes definidos
 
 
-
+Author:      David López Rodríguez  
+Date:        May 12, 2016  
 
 
 

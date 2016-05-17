@@ -61,7 +61,7 @@ Por último establecemos algunos valores por defecto como el icono a usar en la a
 
 ## 4. Controladores
 
-Antes de empezar a trabajar en nuestro primer controllador `MainViewController` vamos a identificar los tipos de controladoras en *SF*.
+Antes de empezar a trabajar en nuestro primer controllador `MainViewController` vamos a enumerar los principales tipos de controladores definidos en *SF* de los que van a heredar la mayoría de nuestros componentes:
 
 1. **UIViewController**: Controlador base que provee de un patrón e infraestructura común a aquellos controladores donde intervienen una vista. La vistas (*ventanas* Windows Form o WPF) solo deben actuar a modo de contenedor de componentes `UIComponentController`. 
 2. **UIComponentController**: Controlador base que provee de un patrón e infraestructura común a aquellos controladores donde interviene un componente de interfaz de usuario. Un componente de interfaz de usuario (*control* Windows Form o WPF) no puede mostrarse por si solo, en su lugar, ha de ser embebido por un `UIViewController`.
@@ -70,9 +70,12 @@ Esto implica que un `UIViewController` actúa a modo de shell sobre uno o varios 
 
 Tanto `UIViewController` como `UIComponentController` heredan de `UIElementController` el cual provee de toda la lógica común para aquellos controladores donde interviene un elemento de interfaz de usuario.
 
+![alt text](https://raw.githubusercontent.com/dloprodu/SifawFramework/master/Resources/03.png "ShellView")
+
 *SF* ofrece una serie de componentes dentro del grupo de controladores de vistas que facilitan las tareas más comunes. Uno de estos componentes es `UIShellViewController` que junto a su vista `SellView` nos aporta las funciones necesaria para alojar otros componentes dentro de ella.
 
 ![alt text](https://raw.githubusercontent.com/dloprodu/SifawFramework/master/Resources/02.png "ShellView")
+
 
 
 ### 4.1. Ciclo de vida de una controladora
@@ -109,4 +112,3 @@ Tanto `UIViewController` como `UIComponentController` heredan de `UIElementContr
 
 Author:      David López Rodríguez  
 Date:        May 12, 2016  
-

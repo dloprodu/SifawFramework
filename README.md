@@ -1,3 +1,5 @@
+[![Gitter](https://badges.gitter.im/dloprodu/SifawFramework.svg)](https://gitter.im/dloprodu/SifawFramework?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+
 # **Sifaw Framework** ![alt text](https://raw.githubusercontent.com/dloprodu/SifawFramework/master/Resources/SffIco32x32.png "Logo") *WPF & Windows Form MVC*
 ---
 ## 1. Información general
@@ -12,7 +14,7 @@
 
 El **controlador** de la vista debe asumir todo el peso de la lógica gestión de datos quedando solo para la **vista** la presentación de esos datos.
 
-En *SF* un componente pude alojar otros componentes. Esta característica promueve la reutilización y el **principio de responsabilidad única**. Un componente complejo podría estar formado por otros componentes aislados que interacturan entre si estando alojados en el componente huésped.
+En *SF* un componente pude alojar otros componentes. Esta característica promueve la reutilización y el **principio de responsabilidad única**. Un componente complejo podría estar formado por otros componentes aislados que interacturan entre si.
 
 > En nuestra aplicación de gestión de clientes podríamos tener otro componente cuyo fin es la generación de informes. Este componente puede alojar y hacer uso del componente que muestra la lista de clientes, de modo que, el usuario pueda filtrar y seleccionar que clientes van a aparecer en un informe.
 
@@ -72,21 +74,39 @@ Tanto `UIViewController` como `UIComponentController` heredan de `UIElementContr
 
 ![alt text](https://raw.githubusercontent.com/dloprodu/SifawFramework/master/Resources/02.png "ShellView")
 
-### 4.1. Parámetros de entrada
 
-### 4.2. Parámetros de salida
+### 4.1. Ciclo de vida de una controladora
 
-### 4.3 Estados
+*...under construction...*
+
+### 4.2. Parámetros de entrada
+
+*...under construction...*
+
+### 4.3. Parámetros de salida
+
+*...under construction...*
+
+### 4.4. Estados
+
+*...under construction...*
 
 ## 5. Representación abstracta de componentes de UI
 
+*...under construction...*
+
 ### 5.1 Vistas huésped (guest)
- 
+
+*...under construction...*
+
 ### 5.2 Controles
+
+*...under construction...*
 
 ## 6. Componentes definidos
 
+*...under construction...*
+
 Author:      David López Rodríguez  
 Date:        May 12, 2016  
-
 
